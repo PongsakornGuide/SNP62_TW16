@@ -119,15 +119,16 @@ class homeViewController: UIViewController {
 //        view.addSubview(activity)
         pastelBackground()
         
-        WelcomeTilteLabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 200, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 0)
+        WelcomeTilteLabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 150, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 0)
         
-        footerLabel.anchor(nil, left: view.leftAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 40, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 0)
-      
-        registerApplication.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 560, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 60)
+        registerApplication.anchor(nil, left: view.leftAnchor, right: view.rightAnchor, bottom: signInApplication.safeAreaLayoutGuide.topAnchor, topConstant: 0, bottomConstant: 25, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 60)
         
-        signInApplication.anchor(registerApplication.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 60)
+        signInApplication.anchor(nil, left: view.leftAnchor, right: view.rightAnchor, bottom: footerLabel.safeAreaLayoutGuide.topAnchor, topConstant: 0, bottomConstant: 20, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 60)
         
-//        activity.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 200, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 0)
+          
+          footerLabel.anchor(nil, left: view.leftAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 30, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 0)
+        
+        
     }
     
     fileprivate func pastelBackground(){
