@@ -1,0 +1,6 @@
+framework module Pods_SNP_TW16 {
+  umbrella header "Pods-SNP_TW16-umbrella.h"
+
+  export *
+  module * { export * }
+}
