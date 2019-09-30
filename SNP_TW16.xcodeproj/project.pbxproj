@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6540E61D2341A64C001A3F3E /* TestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540E61C2341A64C001A3F3E /* TestController.swift */; };
-		6540E61F2341AAF2001A3F3E /* test2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540E61E2341AAF2001A3F3E /* test2Controller.swift */; };
-		6540E6212341AB36001A3F3E /* ffff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540E6202341AB36001A3F3E /* ffff.swift */; };
 		6560B41223332EFF00F53D26 /* otpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6560B41123332EFF00F53D26 /* otpViewController.swift */; };
 		6560B4152333F4CC00F53D26 /* mobileOtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6560B4142333F4CC00F53D26 /* mobileOtpViewController.swift */; };
 		6580BEB8232D380500B6C621 /* registerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6580BEB7232D380500B6C621 /* registerViewController.swift */; };
@@ -27,9 +24,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6540E61C2341A64C001A3F3E /* TestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestController.swift; sourceTree = "<group>"; };
-		6540E61E2341AAF2001A3F3E /* test2Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test2Controller.swift; sourceTree = "<group>"; };
-		6540E6202341AB36001A3F3E /* ffff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ffff.swift; sourceTree = "<group>"; };
 		6560B41123332EFF00F53D26 /* otpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otpViewController.swift; sourceTree = "<group>"; };
 		6560B4142333F4CC00F53D26 /* mobileOtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mobileOtpViewController.swift; sourceTree = "<group>"; };
 		6580BEB7232D380500B6C621 /* registerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerViewController.swift; sourceTree = "<group>"; };
@@ -110,9 +104,6 @@
 				659EB1C3232CEF6E00BF433B /* LaunchScreen.storyboard */,
 				659EB1C6232CEF6E00BF433B /* Info.plist */,
 				659EB1CC232CF05E00BF433B /* Extensions.swift */,
-				6540E61C2341A64C001A3F3E /* TestController.swift */,
-				6540E61E2341AAF2001A3F3E /* test2Controller.swift */,
-				6540E6202341AB36001A3F3E /* ffff.swift */,
 			);
 			path = SNP_TW16;
 			sourceTree = "<group>";
@@ -254,9 +245,6 @@
 				659EB1BB232CEF6D00BF433B /* AppDelegate.swift in Sources */,
 				6560B41223332EFF00F53D26 /* otpViewController.swift in Sources */,
 				6580BEB8232D380500B6C621 /* registerViewController.swift in Sources */,
-				6540E61F2341AAF2001A3F3E /* test2Controller.swift in Sources */,
-				6540E61D2341A64C001A3F3E /* TestController.swift in Sources */,
-				6540E6212341AB36001A3F3E /* ffff.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
