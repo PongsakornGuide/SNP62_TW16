@@ -13,7 +13,7 @@ class EmergencyViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
               return 2
-          }
+    }
              
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
               if section == 0 {
