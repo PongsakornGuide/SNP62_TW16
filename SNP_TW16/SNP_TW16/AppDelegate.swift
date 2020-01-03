@@ -22,9 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window?.rootViewController = LoginViewController()
         window?.rootViewController = UINavigationController(rootViewController: EmergencyViewController())
         
-
-        
-        
 //        var pageControl = ActivityPageControl(collectionViewLayout: UICollectionViewFlowLayout())
 //        window?.rootViewController = pageControl
         

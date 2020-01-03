@@ -27,7 +27,7 @@ class DetailEmergencyView: UITableViewCell {
     
     let bgEmergency : UIView = {
        let bg = UIView()
-       bg.backgroundColor = UIColor.green
+       bg.backgroundColor = UIColor.white
        bg.layer.cornerRadius = 32
        bg.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
        bg.layer.shadowOpacity = 0.1
@@ -40,26 +40,33 @@ class DetailEmergencyView: UITableViewCell {
     let num : UILabel = {
        let title = UILabel()
         title.text = "161"
+        title.font = UIFont.PoppinsBold(size: 35)
         return title
     }()
     
     let title : UILabel = {
        let title = UILabel()
         title.text = "ตำรวจ 191"
+        title.font = UIFont.PoppinsBold(size: 20)
         return title
     }()
 
     let btnCell : UIButton = {
           let bg = UIButton()
-          bg.backgroundColor = UIColor.purple
+          bg.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
           bg.layer.cornerRadius = 20
           bg.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
           bg.layer.shadowOpacity = 0.1
           bg.layer.shadowOffset = CGSize(width: 0, height: 0)
           bg.layer.shadowRadius = 10
           bg.layer.shouldRasterize = true
+        bg.addTarget(self, action: #selector(open), for: .touchUpInside)
           return bg
     }()
+    
+    @objc func open(){
+        print("5555")
+    }
 
     func setLayout(){
         addSubview(bgActivitity)
@@ -71,9 +78,9 @@ class DetailEmergencyView: UITableViewCell {
         
         bgEmergency.anchor(bgActivitity.topAnchor, left: leftAnchor, right: btnCell.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 100, widthConstant: 0, heightConstant: 80)
         
-        num.anchor(bgEmergency.topAnchor, left: leftAnchor, right: num.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 30, leftConstant: 50, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        num.anchor(bgEmergency.topAnchor, left: leftAnchor, right: num.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 20, leftConstant: 50, rightConstant: 0, widthConstant: 0, heightConstant: 0)
                
-        title.anchor(bgEmergency.topAnchor, left: num.leftAnchor, right: rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 30, leftConstant: 50, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        title.anchor(bgEmergency.topAnchor, left: num.leftAnchor, right: rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 65, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         btnCell.anchor(bgActivitity.topAnchor, left: nil, right: rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 0, rightConstant: 20, widthConstant: 80, heightConstant: 80)
         

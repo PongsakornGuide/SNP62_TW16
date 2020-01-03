@@ -45,7 +45,6 @@
 		65BC21742351006200638EA7 /* ImageCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BC21732351006200638EA7 /* ImageCell3.swift */; };
 		65BC21762351157C00638EA7 /* ImageCell4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BC21752351157C00638EA7 /* ImageCell4.swift */; };
 		65BC21782351159300638EA7 /* Items3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BC21772351159300638EA7 /* Items3.swift */; };
-		65CF5F6523ACF2A70002ECDF /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CF5F6423ACF2A70002ECDF /* GuideViewController.swift */; };
 		65DD3CD823AD43C6008C5EA5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD3CD723AD43C6008C5EA5 /* SearchViewController.swift */; };
 		65DD3CDA23AD45B9008C5EA5 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD3CD923AD45B9008C5EA5 /* SearchTableViewCell.swift */; };
 		65DD3CDC23AD8FDB008C5EA5 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD3CDB23AD8FDB008C5EA5 /* Search.swift */; };
@@ -105,7 +104,6 @@
 		65BC21732351006200638EA7 /* ImageCell3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell3.swift; sourceTree = "<group>"; };
 		65BC21752351157C00638EA7 /* ImageCell4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell4.swift; sourceTree = "<group>"; };
 		65BC21772351159300638EA7 /* Items3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items3.swift; sourceTree = "<group>"; };
-		65CF5F6423ACF2A70002ECDF /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideViewController.swift; path = ../../../../../../Downloads/GuideViewController.swift; sourceTree = "<group>"; };
 		65DD3CD723AD43C6008C5EA5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		65DD3CD923AD45B9008C5EA5 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		65DD3CDB23AD8FDB008C5EA5 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
@@ -375,7 +373,6 @@
 			children = (
 				65B0163F23AAF95200EBB76A /* AcivityListTableViewCell.swift */,
 				6506942723ACC5E700A045E6 /* DetailActivityViewController.swift */,
-				65CF5F6423ACF2A70002ECDF /* GuideViewController.swift */,
 				65811B4123B8FB4300351DA9 /* ActivityPageViewController.swift */,
 			);
 			path = View;
@@ -633,7 +630,6 @@
 				65F50ACB234F71D8006A1767 /* tabBarViewController.swift in Sources */,
 				65F50B0823506FC6006A1767 /* activityCollectionViewCell.swift in Sources */,
 				6580828423BDF3F70092B0D6 /* ProfileVIewController.swift in Sources */,
-				65CF5F6523ACF2A70002ECDF /* GuideViewController.swift in Sources */,
 				657C548A23BA837D00B32EC6 /* DetailEmergencyView.swift in Sources */,
 				65F50ACD234F9165006A1767 /* activityViewController.swift in Sources */,
 				6560B41223332EFF00F53D26 /* OtpViewController.swift in Sources */,

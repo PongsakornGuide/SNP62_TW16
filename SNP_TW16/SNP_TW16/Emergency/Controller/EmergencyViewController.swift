@@ -19,7 +19,7 @@ class EmergencyViewController: UITableViewController {
               if section == 0 {
                   return 1
               }else {
-                  return 10
+                  return 3
               }
     }
     
@@ -27,11 +27,13 @@ class EmergencyViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             if indexPath.section == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! EmergencyView
+                cell.selectionStyle = .none
                 return cell
                 
             } else {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! DetailEmergencyView
+                cell.selectionStyle = .none
                 return cell
             }
         }
