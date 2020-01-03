@@ -49,6 +49,7 @@
 		65DD3CDA23AD45B9008C5EA5 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD3CD923AD45B9008C5EA5 /* SearchTableViewCell.swift */; };
 		65DD3CDC23AD8FDB008C5EA5 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD3CDB23AD8FDB008C5EA5 /* Search.swift */; };
 		65E156D723AA091700CC3856 /* MainActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E156D623AA091700CC3856 /* MainActivityViewController.swift */; };
+		65E4E09D23BFA99E00D0F108 /* AddTelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4E09C23BFA99E00D0F108 /* AddTelView.swift */; };
 		65F50ACB234F71D8006A1767 /* tabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F50ACA234F71D8006A1767 /* tabBarViewController.swift */; };
 		65F50ACD234F9165006A1767 /* activityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F50ACC234F9165006A1767 /* activityViewController.swift */; };
 		65F50AD0234F933B006A1767 /* articleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F50ACF234F933B006A1767 /* articleViewController.swift */; };
@@ -108,6 +109,7 @@
 		65DD3CD923AD45B9008C5EA5 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		65DD3CDB23AD8FDB008C5EA5 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		65E156D623AA091700CC3856 /* MainActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainActivityViewController.swift; sourceTree = "<group>"; };
+		65E4E09C23BFA99E00D0F108 /* AddTelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTelView.swift; sourceTree = "<group>"; };
 		65F50ACA234F71D8006A1767 /* tabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarViewController.swift; sourceTree = "<group>"; };
 		65F50ACC234F9165006A1767 /* activityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = activityViewController.swift; sourceTree = "<group>"; };
 		65F50ACF234F933B006A1767 /* articleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = articleViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			children = (
 				657C548723BA82FF00B32EC6 /* EmergencyView.swift */,
 				657C548923BA837D00B32EC6 /* DetailEmergencyView.swift */,
+				65E4E09C23BFA99E00D0F108 /* AddTelView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				65BC21742351006200638EA7 /* ImageCell3.swift in Sources */,
 				65DD3CDA23AD45B9008C5EA5 /* SearchTableViewCell.swift in Sources */,
 				65B0164A23AB6C3B00EBB76A /* CreateViewController.swift in Sources */,
+				65E4E09D23BFA99E00D0F108 /* AddTelView.swift in Sources */,
 				65F50B0C23506FED006A1767 /* listCollectionViewCell.swift in Sources */,
 				65F50B1B2350D9DE006A1767 /* ImageCell2.swift in Sources */,
 				65F50B192350CEA5006A1767 /* Items.swift in Sources */,

@@ -8,7 +8,8 @@
 
 import UIKit
 class DetailEmergencyView: UITableViewCell {
-         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
          super.init(style: style, reuseIdentifier: reuseIdentifier)
          setLayout()
      }
@@ -60,15 +61,16 @@ class DetailEmergencyView: UITableViewCell {
           bg.layer.shadowOffset = CGSize(width: 0, height: 0)
           bg.layer.shadowRadius = 10
           bg.layer.shouldRasterize = true
-        bg.addTarget(self, action: #selector(open), for: .touchUpInside)
+          bg.addTarget(self, action: #selector(open), for: .touchUpInside)
           return bg
     }()
     
     @objc func open(){
         print("5555")
     }
-
+    
     func setLayout(){
+        backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         addSubview(bgActivitity)
         addSubview(bgEmergency)
         addSubview(btnCell)
