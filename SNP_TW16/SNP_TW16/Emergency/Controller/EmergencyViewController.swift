@@ -11,7 +11,6 @@ class EmergencyViewController: UITableViewController {
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     private var cellId2 = "Cell2"
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
@@ -20,7 +19,7 @@ class EmergencyViewController: UITableViewController {
               if section == 0 {
                   return 1
               }else if section == 1{
-                  return 4
+                  return 3
               }else{
                   return 1
               }
@@ -89,6 +88,7 @@ class EmergencyViewController: UITableViewController {
     @objc func open(){
         print("ปุ่มโทร")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // refresh
@@ -97,7 +97,6 @@ class EmergencyViewController: UITableViewController {
         }else{
             tableView.addSubview(refresher)
         }
-        
         
         tableView.register(EmergencyView.self, forCellReuseIdentifier: cellId)
         tableView.rowHeight = UITableView.automaticDimension
