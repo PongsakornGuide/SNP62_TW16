@@ -54,6 +54,8 @@ class DetailEmergencyView: UITableViewCell {
 
     let btnCell : UIButton = {
           let bg = UIButton()
+          let icon = UIImage(named: "Iconcall") as UIImage?
+          bg.setImage(icon, for: .normal)
           bg.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
           bg.layer.cornerRadius = 20
           bg.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
@@ -64,6 +66,7 @@ class DetailEmergencyView: UITableViewCell {
           bg.addTarget(self, action: #selector(open), for: .touchUpInside)
           return bg
     }()
+    
     
     @objc func open(){
         print("5555")
