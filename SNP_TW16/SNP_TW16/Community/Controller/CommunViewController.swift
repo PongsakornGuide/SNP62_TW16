@@ -75,21 +75,26 @@ class CommunViewController: UITableViewController{
 
     }
 
-//        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//              let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! AcivityListTableViewCell
-//              let DvC = DetailActivityViewController()
-//              let act:Activity
-//              act = activity[indexPath.row]
-//              DvC.getname = act.username ?? "NULL"
-//              DvC.gettime = act.time ?? "NULL"
-//              DvC.gettitle = act.titlePost ?? "NULL"
-//              DvC.getLike = act.like ?? "NULL"
-//              DvC.getimage = "http://localhost/alder_iosapp/\(act.imagePost!)"
-//              DvC.getProfile = "http://localhost/alder_iosapp/\(act.imageProfile!)"
-//
-//            self.navigationController?.pushViewController(DvC, animated: true)
-//        }
+        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+            if indexPath.section == 0 {
+//                print("555")
+            }else {
+//                let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! AcivityListTableViewCell
+                             let DvC = DetailActivityViewController()
+                             let act:Activity
+                             act = activity[indexPath.row]
+                             DvC.getname = act.username ?? "NULL"
+                             DvC.gettime = act.time ?? "NULL"
+                             DvC.gettitle = act.titlePost ?? "NULL"
+                             DvC.getLike = act.like ?? "NULL"
+                             DvC.getimage = "http://localhost/alder_iosapp/\(act.imagePost!)"
+                             DvC.getProfile = "http://localhost/alder_iosapp/\(act.imageProfile!)"
+
+                           self.navigationController?.pushViewController(DvC, animated: true)
+            }
+             
+        }
     
        override func viewDidLoad() {
                  super.viewDidLoad()

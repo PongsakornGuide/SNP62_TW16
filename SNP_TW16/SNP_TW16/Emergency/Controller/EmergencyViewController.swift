@@ -101,6 +101,7 @@ class EmergencyViewController: UITableViewController {
             tableView.addSubview(refresher)
         }
         
+        
         tableView.register(EmergencyView.self, forCellReuseIdentifier: cellId)
         tableView.register(DetailEmergencyView.self, forCellReuseIdentifier: cellId1)
         tableView.register(AddTelView.self, forCellReuseIdentifier: cellId2)

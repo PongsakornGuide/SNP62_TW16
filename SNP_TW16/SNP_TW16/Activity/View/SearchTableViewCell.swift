@@ -98,3 +98,4 @@ class SearchTableViewCell: UITableViewCell {
             fatalError("init(coder:) has not been implemented")
         }
 }
+

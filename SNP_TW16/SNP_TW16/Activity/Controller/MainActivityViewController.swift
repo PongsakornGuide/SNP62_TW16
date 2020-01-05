@@ -28,6 +28,8 @@ class MainActivityViewController: UITableViewController {
         override func numberOfSections(in tableView: UITableView) -> Int {
             return 2
         }
+    
+
            
         override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
   
@@ -52,10 +54,14 @@ class MainActivityViewController: UITableViewController {
             
             if indexPath.section == 0 {
                        let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
+                cell.selectionStyle = .none
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                        return cell
                    
             }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
+                cell.selectionStyle = .none
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 return cell
         }
             
@@ -90,12 +96,17 @@ class MainActivityViewController: UITableViewController {
 //                    }
     
         }
-//    
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
+//    func customInit(continentIndex: Int,title: String){
+//        self.continentIndex = continentIndex
+//        self.title = title
 //    }
-//    
     
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       let DvC = TableCheck()
+       self.navigationController?.pushViewController(DvC, animated: true)
+    }
+
     @objc func handelSetting(){
                     UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
                     UserDefaults.standard.synchronize()
