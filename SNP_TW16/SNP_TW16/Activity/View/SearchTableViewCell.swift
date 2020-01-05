@@ -15,14 +15,7 @@ class SearchTableViewCell: UITableViewCell {
             backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         }
         
-        let bgActivitity:UIImageView = {
-            let image = UIImageView()
-            image.image = UIImage(named: "older-americans-moth1")
-            image.contentMode = .scaleAspectFill
-            image.layer.masksToBounds = true
-            image.layer.cornerRadius = 20
-            return image
-        }()
+     
 
         let profileImage: UIView = {
               let background = UIView()
@@ -36,61 +29,68 @@ class SearchTableViewCell: UITableViewCell {
                  return background
         }()
 
+    let bgActivitity:UIImageView = {
+             let image = UIImageView()
+             image.image = UIImage(named: "maeMuUnu")
+             image.contentMode = .scaleAspectFill
+             image.layer.masksToBounds = true
+             image.layer.cornerRadius = 20
+             return image
+    }()
     
     var titleFullname: UILabel = {
            let label = UILabel()
-                   label.text = "Cannot see activity on alder"
+                   label.text = "แซนวิสเพื่อสุขภาพ"
                    label.textColor = UIColor.black
-                   label.font = UIFont.PoppinsMedium(size: 18)
+                   label.font = UIFont.PoppinsBold(size: 20)
                    label.numberOfLines = 1
            return label
         }()
     
-    
         let line: UIView = {
             let view = UIView()
-            view.backgroundColor = UIColor.blackAlpha(alpha: 0.1)
+            view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 252)
             return view
         }()
     
         let supportName: UILabel = {
             let label = UILabel()
-            label.text = "Admin"
+            label.text = "โดย ไกด์ ฐิติวัฒน์"
             label.textColor = UIColor.blackAlpha(alpha: 0.3)
-            label.font = UIFont.PoppinsMedium(size: 14)
+            label.font = UIFont.PoppinsMedium(size: 16)
              return label
           }()
     
         let supportTime: UILabel = {
           let label = UILabel()
-          label.text = "xxxx"
+          label.text = "14 สิงหาคม 2562"
           label.textColor = UIColor.blackAlpha(alpha: 0.8)
-          label.font = UIFont.PoppinsMedium(size: 14)
-           return label
+          label.font = UIFont.PoppinsMedium(size: 16)
+          return label
         }()
     
         func setupViewCell(){
             
-            addSubview(bgActivitity)
+            
             addSubview(profileImage)
+            addSubview(bgActivitity)
             addSubview(titleFullname)
             addSubview(line)
             addSubview(supportName)
             addSubview(supportTime)
 
-            bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 60, heightConstant: 280)
+            profileImage.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 280)
+//
+            bgActivitity.anchor(profileImage.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 150)
 
-            profileImage.anchor(bgActivitity.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 160, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 125)
+            titleFullname.anchor(bgActivitity.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 50, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 
-            titleFullname.anchor(profileImage.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 60, rightConstant: 30, widthConstant: 0, heightConstant: 0)
+            line.anchor(titleFullname.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 1.1)
+            
+            supportName.anchor(line.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 20, widthConstant: 0, heightConstant: 80)
 
-            line.anchor(titleFullname.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 1.5)
-            
-            supportName.anchor(line.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 50, rightConstant: 20, widthConstant: 0, heightConstant: 80)
-            
-            supportTime.anchor(line.topAnchor, left: supportName.leftAnchor, right: rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 120, rightConstant: 20, widthConstant: 0, heightConstant: 80)
-            
-            
+            supportTime.anchor(line.bottomAnchor, left: nil, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 50, widthConstant: 0, heightConstant: 80)
+        
         }
         
         

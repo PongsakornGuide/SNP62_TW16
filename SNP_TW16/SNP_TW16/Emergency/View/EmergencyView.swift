@@ -25,7 +25,6 @@ class EmergencyView: UITableViewCell {
         return background
     }()
     
-    
     let bgImage : UIImageView = {
                   let image = UIImageView()
                   image.image = UIImage(named: "Intersection 4")

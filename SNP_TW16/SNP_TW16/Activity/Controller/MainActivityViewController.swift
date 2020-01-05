@@ -32,21 +32,11 @@ class MainActivityViewController: UITableViewController {
 
            
         override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-  
-            if section == 0 {
-                return 1
-            }else{
-                return 5
-            }
-            
-            
-//            if section == 0 {
-//                           return 1
-//                       }else if section == 1{
-//                           return search.count
-//                       }else{
-//                           return 5
-//                       }
+                if section == 0 {
+                    return 1
+                }else{
+                    return 5
+                }
         }
     
         override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,7 +53,7 @@ class MainActivityViewController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 return cell
-        }
+           }
             
  
             
@@ -103,8 +93,13 @@ class MainActivityViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       let DvC = TableCheck()
-       self.navigationController?.pushViewController(DvC, animated: true)
+        if indexPath.section == 0 {
+            
+        }else{
+            let DvC = TableCheck()
+            self.navigationController?.pushViewController(DvC, animated: true)
+                   
+        }
     }
 
     @objc func handelSetting(){
@@ -187,22 +182,8 @@ class MainActivityViewController: UITableViewController {
         let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
         settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
         navigationItem.rightBarButtonItem = settings
-        
-    
-//
-//        view.addSubview(nameLabel)
-//        view.addSubview(helloLabel)
-//
-//        helloLabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 12, bottomConstant: 0, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 50)
-//
-//        nameLabel.anchor(helloLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 8, bottomConstant: 0, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 50)
-//
-//
-//        imageView.anchor(view.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200
-//        )
-        
         navigationItem.title = "Alder"
-//        navigationController?.navigationBar.isHidden = true
+        
         let backButton = UIBarButtonItem(title: " ", style: UIBarButtonItem.Style.plain, target: navigationController, action: nil)
         navigationItem.leftBarButtonItem = backButton
         
