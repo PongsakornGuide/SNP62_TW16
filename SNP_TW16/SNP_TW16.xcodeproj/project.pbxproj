@@ -11,6 +11,7 @@
 		652DDEE623A9BB2B00AF79D3 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652DDEE523A9BB2B00AF79D3 /* RecordViewController.swift */; };
 		652DDEE823A9C91900AF79D3 /* ImpressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652DDEE723A9C91900AF79D3 /* ImpressViewController.swift */; };
 		654936A823C1CDF600B190A1 /* TableCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654936A723C1CDF600B190A1 /* TableCheck.swift */; };
+		654936AA23C1EAA000B190A1 /* ContentActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654936A923C1EAA000B190A1 /* ContentActivityViewController.swift */; };
 		654E850A23C1007E001E2508 /* HeaderActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654E850923C1007E001E2508 /* HeaderActivity.swift */; };
 		6560B41223332EFF00F53D26 /* OtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6560B41123332EFF00F53D26 /* OtpViewController.swift */; };
 		6560B4152333F4CC00F53D26 /* MobileOtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6560B4142333F4CC00F53D26 /* MobileOtpViewController.swift */; };
@@ -71,6 +72,7 @@
 		652DDEE523A9BB2B00AF79D3 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		652DDEE723A9C91900AF79D3 /* ImpressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressViewController.swift; sourceTree = "<group>"; };
 		654936A723C1CDF600B190A1 /* TableCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCheck.swift; sourceTree = "<group>"; };
+		654936A923C1EAA000B190A1 /* ContentActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentActivityViewController.swift; sourceTree = "<group>"; };
 		654E850923C1007E001E2508 /* HeaderActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderActivity.swift; sourceTree = "<group>"; };
 		655799BC234E50540047BAC3 /* SwiftSMS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SwiftSMS; sourceTree = "<group>"; };
 		6560B41123332EFF00F53D26 /* OtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewController.swift; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 			children = (
 				65E156D623AA091700CC3856 /* MainActivityViewController.swift */,
 				65DD3CD723AD43C6008C5EA5 /* SearchViewController.swift */,
+				654936A923C1EAA000B190A1 /* ContentActivityViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -643,6 +646,7 @@
 				65F50B0823506FC6006A1767 /* activityCollectionViewCell.swift in Sources */,
 				6580828423BDF3F70092B0D6 /* ProfileVIewController.swift in Sources */,
 				657C548A23BA837D00B32EC6 /* DetailEmergencyView.swift in Sources */,
+				654936AA23C1EAA000B190A1 /* ContentActivityViewController.swift in Sources */,
 				65F50ACD234F9165006A1767 /* activityViewController.swift in Sources */,
 				6560B41223332EFF00F53D26 /* OtpViewController.swift in Sources */,
 				65E156D723AA091700CC3856 /* MainActivityViewController.swift in Sources */,
