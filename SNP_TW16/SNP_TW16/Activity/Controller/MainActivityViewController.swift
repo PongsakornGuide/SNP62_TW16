@@ -23,6 +23,7 @@ class MainActivityViewController: UITableViewController {
     
         private var cellId = "Cell"
         private var cellId1 = "Cell1"
+        private var cellId2 = "Cell2"
     
         override func numberOfSections(in tableView: UITableView) -> Int {
             return 2
@@ -32,9 +33,18 @@ class MainActivityViewController: UITableViewController {
   
             if section == 0 {
                 return 1
-            }else {
-                return search.count
+            }else{
+                return 5
             }
+            
+            
+//            if section == 0 {
+//                           return 1
+//                       }else if section == 1{
+//                           return search.count
+//                       }else{
+//                           return 5
+//                       }
         }
     
         override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -44,29 +54,47 @@ class MainActivityViewController: UITableViewController {
                        let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
                        return cell
                    
-            } else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! SearchTableViewCell
-                        
-                        let check:Search
-                        check = search[indexPath.row]
-                        cell.titleFullname.text = check.titlename
-                        cell.supportName.text = check.caption
-                        cell.supportTime.text = check.time
-
-                        Alamofire.request("http://localhost/alder_iosapp/" + (check.image ?? "0")!).responseImage { response in
-
-                            if let image = response.result.value {
-                                    cell.bgActivitity.image = image
-                            }
-                        }
-                
-                        cell.selectionStyle = .none
-                        self.tableView.separatorStyle = .none
-                        return cell
-            }
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
+                return cell
+        }
+            
+ 
+            
+//            if indexPath.section == 0 {
+//                               let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
+//                               return cell
+//
+//                    } else if indexPath.section == 1 {
+//                            let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! SearchTableViewCell
+//
+//                                let check:Search
+//                                check = search[indexPath.row]
+//                                cell.titleFullname.text = check.titlename
+//                                cell.supportName.text = check.caption
+//                                cell.supportTime.text = check.time
+//
+//                                Alamofire.request("http://localhost/alder_iosapp/" + (check.image ?? "0")!).responseImage { response in
+//
+//                                    if let image = response.result.value {
+//                                            cell.bgActivitity.image = image
+//                                    }
+//                                }
+//
+//                                cell.selectionStyle = .none
+//                                self.tableView.separatorStyle = .none
+//                                return cell
+//                    }else{
+//                        let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
+//                        return cell
+//                    }
     
         }
-    
+//    
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//    }
+//    
     
     @objc func handelSetting(){
                     UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
@@ -75,15 +103,36 @@ class MainActivityViewController: UITableViewController {
                     self.navigationController?.pushViewController(loginViewController, animated: true)
                     self.dismiss(animated: false, completion: nil)
    }
+    
+   // refresh
+      lazy var refresher: UIRefreshControl = {
+           let refreshControl = UIRefreshControl()
+           refreshControl.tintColor = .black
+           refreshControl.addTarget(self, action: #selector(requestData), for: .valueChanged)
+           return refreshControl
+      }()
+      
+      // action refresh
+      @objc func requestData(){
+          print("requestData for tableView")
+          let RefreshLine = DispatchTime.now() + .milliseconds(500)
+          DispatchQueue.main.asyncAfter(deadline: RefreshLine) {
+              self.refresher.endRefreshing()
+          }
+      }
            
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+        if #available(iOS 12.1 , *) {
+                 tableView.refreshControl = refresher
+             }else{
+                 tableView.addSubview(refresher)
+        }
         
           tableView.register(TitleTableViewCell.self, forCellReuseIdentifier: cellId1)
-          tableView.rowHeight = UITableView.automaticDimension
-          tableView.estimatedRowHeight = 50
-        
-          tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId)
+//          tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId)
+          tableView.register(HeaderActivity.self, forCellReuseIdentifier: cellId2)
           tableView.rowHeight = UITableView.automaticDimension
           tableView.estimatedRowHeight = 50
         

@@ -10,6 +10,7 @@
 		6506942823ACC5E700A045E6 /* DetailActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6506942723ACC5E700A045E6 /* DetailActivityViewController.swift */; };
 		652DDEE623A9BB2B00AF79D3 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652DDEE523A9BB2B00AF79D3 /* RecordViewController.swift */; };
 		652DDEE823A9C91900AF79D3 /* ImpressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652DDEE723A9C91900AF79D3 /* ImpressViewController.swift */; };
+		654E850A23C1007E001E2508 /* HeaderActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654E850923C1007E001E2508 /* HeaderActivity.swift */; };
 		6560B41223332EFF00F53D26 /* OtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6560B41123332EFF00F53D26 /* OtpViewController.swift */; };
 		6560B4152333F4CC00F53D26 /* MobileOtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6560B4142333F4CC00F53D26 /* MobileOtpViewController.swift */; };
 		657C547B23BA770500B32EC6 /* ActivityPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657C547A23BA770500B32EC6 /* ActivityPageControl.swift */; };
@@ -68,6 +69,7 @@
 		6506942723ACC5E700A045E6 /* DetailActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailActivityViewController.swift; sourceTree = "<group>"; };
 		652DDEE523A9BB2B00AF79D3 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		652DDEE723A9C91900AF79D3 /* ImpressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressViewController.swift; sourceTree = "<group>"; };
+		654E850923C1007E001E2508 /* HeaderActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderActivity.swift; sourceTree = "<group>"; };
 		655799BC234E50540047BAC3 /* SwiftSMS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SwiftSMS; sourceTree = "<group>"; };
 		6560B41123332EFF00F53D26 /* OtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewController.swift; sourceTree = "<group>"; };
 		6560B4142333F4CC00F53D26 /* MobileOtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileOtpViewController.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 			children = (
 				65DD3CD923AD45B9008C5EA5 /* SearchTableViewCell.swift */,
 				657C547D23BA7CE600B32EC6 /* TitleTableViewCell.swift */,
+				654E850923C1007E001E2508 /* HeaderActivity.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 				65BC21762351157C00638EA7 /* ImageCell4.swift in Sources */,
 				65B0164023AAF95200EBB76A /* AcivityListTableViewCell.swift in Sources */,
 				65B0164423AB152600EBB76A /* Activity.swift in Sources */,
+				654E850A23C1007E001E2508 /* HeaderActivity.swift in Sources */,
 				659EB1BD232CEF6D00BF433B /* HomeViewController.swift in Sources */,
 				65F50AD0234F933B006A1767 /* articleViewController.swift in Sources */,
 				65BC21782351159300638EA7 /* Items3.swift in Sources */,

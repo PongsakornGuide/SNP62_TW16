@@ -74,7 +74,7 @@ class CommunViewController: UITableViewController{
         }
 
     }
-//
+
 //        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //
 //              let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! AcivityListTableViewCell

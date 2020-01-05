@@ -19,12 +19,13 @@ class EmergencyViewController: UITableViewController {
               if section == 0 {
                   return 1
               }else if section == 1{
-                  return 3
+                  return 4
               }else{
                   return 1
               }
     }
-    
+//    heightForHeaderInSection
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             if indexPath.section == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! EmergencyView
@@ -44,6 +45,9 @@ class EmergencyViewController: UITableViewController {
                 return cell
             }
         }
+  
+
+    
     
     
     func animateTable() {
@@ -91,7 +95,6 @@ class EmergencyViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // refresh
         if #available(iOS 12.1 , *) {
             tableView.refreshControl = refresher
         }else{
@@ -99,16 +102,12 @@ class EmergencyViewController: UITableViewController {
         }
         
         tableView.register(EmergencyView.self, forCellReuseIdentifier: cellId)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
-        
         tableView.register(DetailEmergencyView.self, forCellReuseIdentifier: cellId1)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
-        
         tableView.register(AddTelView.self, forCellReuseIdentifier: cellId2)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
+        view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+        
         
         animateTable()
     }

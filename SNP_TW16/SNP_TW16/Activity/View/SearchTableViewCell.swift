@@ -8,7 +8,6 @@
 
 import UIKit
 class SearchTableViewCell: UITableViewCell {
-    
 //        var id_user = String()
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -18,7 +17,7 @@ class SearchTableViewCell: UITableViewCell {
         
         let bgActivitity:UIImageView = {
             let image = UIImageView()
-//            image.image = UIImage(named: "older-americans-moth1")
+            image.image = UIImage(named: "older-americans-moth1")
             image.contentMode = .scaleAspectFill
             image.layer.masksToBounds = true
             image.layer.cornerRadius = 20
@@ -56,7 +55,7 @@ class SearchTableViewCell: UITableViewCell {
     
         let supportName: UILabel = {
             let label = UILabel()
-            label.text = "Admin : "
+            label.text = "Admin"
             label.textColor = UIColor.blackAlpha(alpha: 0.3)
             label.font = UIFont.PoppinsMedium(size: 14)
              return label
@@ -70,10 +69,6 @@ class SearchTableViewCell: UITableViewCell {
            return label
         }()
     
-    
-        
-
-        
         func setupViewCell(){
             
             addSubview(bgActivitity)
@@ -82,8 +77,6 @@ class SearchTableViewCell: UITableViewCell {
             addSubview(line)
             addSubview(supportName)
             addSubview(supportTime)
-
-
 
             bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 60, heightConstant: 280)
 

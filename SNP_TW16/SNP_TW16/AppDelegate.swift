@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 //        window?.rootViewController = LoginViewController()
-        window?.rootViewController = UINavigationController(rootViewController: EmergencyViewController())
+        window?.rootViewController = UINavigationController(rootViewController: MainActivityViewController())
         
 //        var pageControl = ActivityPageControl(collectionViewLayout: UICollectionViewFlowLayout())
 //        window?.rootViewController = pageControl
