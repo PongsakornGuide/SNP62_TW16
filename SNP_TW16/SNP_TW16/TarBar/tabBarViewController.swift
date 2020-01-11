@@ -20,9 +20,9 @@ class tabBarViewController: UITabBarController ,UITabBarControllerDelegate {
         let communityController = tabBarNavigation(unselectedImage: UIImage(named: "community"), selectedImage: UIImage(named: "community"), title: "Community", badgeValue: "8", colorValue: .red,rootViewController: CommunViewController())
 
 
-//        let otherController = tabBarNavigation(unselectedImage: UIImage(named: "other"), selectedImage: UIImage(named: "other"), title: "Other", badgeValue: nil, colorValue: .red,rootViewController: aboutViewController())
+        let emergencyController = tabBarNavigation(unselectedImage: UIImage(named: "other"), selectedImage: UIImage(named: "Emergency"), title: "Other", badgeValue: nil, colorValue: .red,rootViewController: EmergencyViewController())
 
-        viewControllers = [activityController,communityController]
+        viewControllers = [activityController,communityController,emergencyController]
         
         }
     fileprivate func tabBarNavigation(unselectedImage: UIImage?, selectedImage: UIImage?, title: String?, badgeValue: String?, colorValue: UIColor? ,rootViewController: UIViewController = UIViewController())-> UINavigationController {

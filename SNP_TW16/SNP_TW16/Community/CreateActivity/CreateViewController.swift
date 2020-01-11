@@ -176,7 +176,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         
 //          let backButton = UIBarButtonItem(title: "back", style: UIBarButtonItem.Style.plain, target: navigationController, action: nil)
 //         navigationItem.leftBarButtonItem = backButton
-        view.addSubview(btnBack)
+//        view.addSubview(btnBack)
         
         if let name = defaultValues.string(forKey: "userName") {
             username = name
@@ -209,12 +209,12 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         view.backgroundColor = .white
         
 //        navigationItem.title = "Create Activity"
-        navigationController?.navigationBar.isHidden = true
+//        navigationController?.navigationBar.isHidden = true
         
-        btnBack.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 20, heightConstant: 20
-                   )
-        
-        Imagelabel.anchor(btnBack.bottomAnchor, left: view.leftAnchor, right: namelabel.rightAnchor, bottom: nil, topConstant: 60, bottomConstant: 0, leftConstant: 40, rightConstant: 240, widthConstant: 120, heightConstant: 100)
+//        btnBack.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 20, heightConstant: 20
+//                   )
+//
+        Imagelabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: namelabel.rightAnchor, bottom: nil, topConstant: 60, bottomConstant: 0, leftConstant: 40, rightConstant: 240, widthConstant: 120, heightConstant: 100)
                
                 namelabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: Imagelabel.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 70, bottomConstant: 0, leftConstant: 120, rightConstant: 40, widthConstant: 220, heightConstant: 50)
 

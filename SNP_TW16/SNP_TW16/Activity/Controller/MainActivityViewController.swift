@@ -19,6 +19,7 @@ class MainActivityViewController: UITableViewController {
     var imageView = String()
     var typecheck = String()
     var search = [Search]()
+    var header = [Header]()
     
     
         private var cellId = "Cell"
@@ -35,7 +36,7 @@ class MainActivityViewController: UITableViewController {
                 if section == 0 {
                     return 1
                 }else{
-                    return 5
+                    return header.count
                 }
         }
     
@@ -49,47 +50,23 @@ class MainActivityViewController: UITableViewController {
                        return cell
                    
             }else{
+                
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
+                  
+                let headerActivity:Header
+                  headerActivity = header[indexPath.row]
+                   cell.titleType.text = headerActivity.textHeader
+                   Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity.imageIcon ?? "0")!).responseImage { response in
+                if let image = response.result.value {
+                    cell.iconImage.image = image
+                    }
+                }
+                self.tableView.separatorStyle = .none
                 cell.selectionStyle = .none
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 return cell
            }
-            
- 
-            
-//            if indexPath.section == 0 {
-//                               let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
-//                               return cell
-//
-//                    } else if indexPath.section == 1 {
-//                            let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! SearchTableViewCell
-//
-//                                let check:Search
-//                                check = search[indexPath.row]
-//                                cell.titleFullname.text = check.titlename
-//                                cell.supportName.text = check.caption
-//                                cell.supportTime.text = check.time
-//
-//                                Alamofire.request("http://localhost/alder_iosapp/" + (check.image ?? "0")!).responseImage { response in
-//
-//                                    if let image = response.result.value {
-//                                            cell.bgActivitity.image = image
-//                                    }
-//                                }
-//
-//                                cell.selectionStyle = .none
-//                                self.tableView.separatorStyle = .none
-//                                return cell
-//                    }else{
-//                        let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
-//                        return cell
-//                    }
-    
         }
-//    func customInit(continentIndex: Int,title: String){
-//        self.continentIndex = continentIndex
-//        self.title = title
-//    }
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -98,7 +75,6 @@ class MainActivityViewController: UITableViewController {
         }else{
             let DvC = TableCheck()
             self.navigationController?.pushViewController(DvC, animated: true)
-                   
         }
     }
 
@@ -129,6 +105,7 @@ class MainActivityViewController: UITableViewController {
            
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.reloadData()
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         if #available(iOS 12.1 , *) {
                  tableView.refreshControl = refresher
@@ -162,15 +139,11 @@ class MainActivityViewController: UITableViewController {
         Alamofire.request(URL_USER_ID + "?id=\(typecheck)", method: .post,parameters: parameters).responseJSON { response in
             if let json = response.result.value {
                 print(response)
-                let searchMatch : NSArray = json as! NSArray
-                for i in 0..<searchMatch.count
-                {self.search.append(Search(
-                    
-                    titlename: (searchMatch[i] as AnyObject).value(forKey:"title") as? String ?? "Cannot see activity on Alder",
-                    caption: (searchMatch[i] as AnyObject).value(forKey:"caption") as? String ?? "Admin : ",
-                    image: (searchMatch[i] as AnyObject).value(forKey:"img") as? String ?? "0",
-                    time: (searchMatch[i] as AnyObject).value(forKey:"created_at") as? String ?? "Find events soon"
-                    
+                let headerActivity : NSArray = json as! NSArray
+                for i in 0..<headerActivity.count
+                {self.header.append(Header(
+                    imageIcon: (headerActivity[i] as AnyObject).value(forKey: "ssss") as? String ?? "csdsa",
+                    textHeader: (headerActivity[i] as AnyObject).value(forKey: "activity_type_name") as? String ?? "none"
                     ))
                 }
                 self.tableView.reloadData()

@@ -9,14 +9,18 @@
 /* Begin PBXBuildFile section */
 		6506942823ACC5E700A045E6 /* DetailActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6506942723ACC5E700A045E6 /* DetailActivityViewController.swift */; };
 		6508F0E023C272D00034F355 /* ActivityHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6508F0DF23C272D00034F355 /* ActivityHeaderViewCell.swift */; };
+		6511645F23C7A44A008FA771 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6511645E23C7A44A008FA771 /* Header.swift */; };
 		652DDEE623A9BB2B00AF79D3 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652DDEE523A9BB2B00AF79D3 /* RecordViewController.swift */; };
 		652DDEE823A9C91900AF79D3 /* ImpressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652DDEE723A9C91900AF79D3 /* ImpressViewController.swift */; };
 		654936A823C1CDF600B190A1 /* TableCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654936A723C1CDF600B190A1 /* TableCheck.swift */; };
 		654936AA23C1EAA000B190A1 /* ContentActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654936A923C1EAA000B190A1 /* ContentActivityViewController.swift */; };
 		654E850A23C1007E001E2508 /* HeaderActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654E850923C1007E001E2508 /* HeaderActivity.swift */; };
+		654F378C23C96238009259A3 /* AssessVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654F378B23C96238009259A3 /* AssessVIewController.swift */; };
+		654F378F23C96AF4009259A3 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654F378E23C96AF4009259A3 /* Checkbox.swift */; };
+		654F379723C9976B009259A3 /* InsideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654F379623C9976B009259A3 /* InsideViewController.swift */; };
+		654F379923C9A1F9009259A3 /* CommentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654F379823C9A1F9009259A3 /* CommentTableView.swift */; };
 		6560B41223332EFF00F53D26 /* OtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6560B41123332EFF00F53D26 /* OtpViewController.swift */; };
 		6560B4152333F4CC00F53D26 /* MobileOtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6560B4142333F4CC00F53D26 /* MobileOtpViewController.swift */; };
-		657C547B23BA770500B32EC6 /* ActivityPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657C547A23BA770500B32EC6 /* ActivityPageControl.swift */; };
 		657C547E23BA7CE600B32EC6 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657C547D23BA7CE600B32EC6 /* TitleTableViewCell.swift */; };
 		657C548623BA827E00B32EC6 /* EmergencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657C548523BA827E00B32EC6 /* EmergencyViewController.swift */; };
 		657C548823BA82FF00B32EC6 /* EmergencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657C548723BA82FF00B32EC6 /* EmergencyView.swift */; };
@@ -71,15 +75,20 @@
 /* Begin PBXFileReference section */
 		6506942723ACC5E700A045E6 /* DetailActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailActivityViewController.swift; sourceTree = "<group>"; };
 		6508F0DF23C272D00034F355 /* ActivityHeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityHeaderViewCell.swift; sourceTree = "<group>"; };
+		6511645E23C7A44A008FA771 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		652DDEE523A9BB2B00AF79D3 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		652DDEE723A9C91900AF79D3 /* ImpressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressViewController.swift; sourceTree = "<group>"; };
 		654936A723C1CDF600B190A1 /* TableCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCheck.swift; sourceTree = "<group>"; };
 		654936A923C1EAA000B190A1 /* ContentActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentActivityViewController.swift; sourceTree = "<group>"; };
 		654E850923C1007E001E2508 /* HeaderActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderActivity.swift; sourceTree = "<group>"; };
+		654F378B23C96238009259A3 /* AssessVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessVIewController.swift; sourceTree = "<group>"; };
+		654F378E23C96AF4009259A3 /* Checkbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Checkbox.swift; path = "../../../../Downloads/SimpleCheckbox-master/checkbox/Checkbox.swift"; sourceTree = "<group>"; };
+		654F379123C96D07009259A3 /* SimpleCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleCheckbox.h; sourceTree = "<group>"; };
+		654F379623C9976B009259A3 /* InsideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsideViewController.swift; sourceTree = "<group>"; };
+		654F379823C9A1F9009259A3 /* CommentTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableView.swift; sourceTree = "<group>"; };
 		655799BC234E50540047BAC3 /* SwiftSMS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SwiftSMS; sourceTree = "<group>"; };
 		6560B41123332EFF00F53D26 /* OtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewController.swift; sourceTree = "<group>"; };
 		6560B4142333F4CC00F53D26 /* MobileOtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileOtpViewController.swift; sourceTree = "<group>"; };
-		657C547A23BA770500B32EC6 /* ActivityPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPageControl.swift; sourceTree = "<group>"; };
 		657C547D23BA7CE600B32EC6 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		657C548523BA827E00B32EC6 /* EmergencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyViewController.swift; sourceTree = "<group>"; };
 		657C548723BA82FF00B32EC6 /* EmergencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyView.swift; sourceTree = "<group>"; };
@@ -162,6 +171,23 @@
 				C583B26937BC0D763C2E1701 /* Pods_SNP_TW16.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		654F378D23C96AC0009259A3 /* checkbox */ = {
+			isa = PBXGroup;
+			children = (
+				654F378E23C96AF4009259A3 /* Checkbox.swift */,
+			);
+			path = checkbox;
+			sourceTree = "<group>";
+		};
+		654F379023C96D07009259A3 /* SimpleCheckbox */ = {
+			isa = PBXGroup;
+			children = (
+				654F379123C96D07009259A3 /* SimpleCheckbox.h */,
+			);
+			name = SimpleCheckbox;
+			path = "../../../Downloads/SimpleCheckbox-master/SimpleCheckbox";
 			sourceTree = "<group>";
 		};
 		655799BB234E503A0047BAC3 /* Sources */ = {
@@ -306,6 +332,7 @@
 		659EB1B9232CEF6D00BF433B /* SNP_TW16 */ = {
 			isa = PBXGroup;
 			children = (
+				654F378D23C96AC0009259A3 /* checkbox */,
 				6580827F23BDF11F0092B0D6 /* Profile */,
 				657C548423BA823A00B32EC6 /* Delete */,
 				657C547F23BA817400B32EC6 /* Emergency */,
@@ -318,6 +345,7 @@
 				65B0163423AA7C8B00EBB76A /* Activity */,
 				655799E1234F0EE20047BAC3 /* Register */,
 				659EB1CE232CF06500BF433B /* Fonts */,
+				654F379023C96D07009259A3 /* SimpleCheckbox */,
 				659EB1BA232CEF6D00BF433B /* AppDelegate.swift */,
 				659EB1C1232CEF6E00BF433B /* Assets.xcassets */,
 				659EB1C3232CEF6E00BF433B /* LaunchScreen.storyboard */,
@@ -385,6 +413,7 @@
 				65B0163F23AAF95200EBB76A /* AcivityListTableViewCell.swift */,
 				6506942723ACC5E700A045E6 /* DetailActivityViewController.swift */,
 				65811B4123B8FB4300351DA9 /* ActivityPageViewController.swift */,
+				654F379823C9A1F9009259A3 /* CommentTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -393,7 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				65F50AD1234F9385006A1767 /* CommunViewController.swift */,
-				657C547A23BA770500B32EC6 /* ActivityPageControl.swift */,
+				654F379623C9976B009259A3 /* InsideViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -427,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				65DD3CDB23AD8FDB008C5EA5 /* Search.swift */,
+				6511645E23C7A44A008FA771 /* Header.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -449,6 +479,7 @@
 				65DD3CD723AD43C6008C5EA5 /* SearchViewController.swift */,
 				654936A923C1EAA000B190A1 /* ContentActivityViewController.swift */,
 				654936A723C1CDF600B190A1 /* TableCheck.swift */,
+				654F378B23C96238009259A3 /* AssessVIewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -612,12 +643,12 @@
 				6506942823ACC5E700A045E6 /* DetailActivityViewController.swift in Sources */,
 				65BC21762351157C00638EA7 /* ImageCell4.swift in Sources */,
 				65B0164023AAF95200EBB76A /* AcivityListTableViewCell.swift in Sources */,
+				654F378C23C96238009259A3 /* AssessVIewController.swift in Sources */,
 				65B0164423AB152600EBB76A /* Activity.swift in Sources */,
 				654E850A23C1007E001E2508 /* HeaderActivity.swift in Sources */,
 				659EB1BD232CEF6D00BF433B /* HomeViewController.swift in Sources */,
 				65F50AD0234F933B006A1767 /* articleViewController.swift in Sources */,
 				65BC21782351159300638EA7 /* Items3.swift in Sources */,
-				657C547B23BA770500B32EC6 /* ActivityPageControl.swift in Sources */,
 				659EB1CD232CF05E00BF433B /* Extensions.swift in Sources */,
 				65BC21742351006200638EA7 /* ImageCell3.swift in Sources */,
 				65DD3CDA23AD45B9008C5EA5 /* SearchTableViewCell.swift in Sources */,
@@ -628,6 +659,7 @@
 				65F50B192350CEA5006A1767 /* Items.swift in Sources */,
 				6560B4152333F4CC00F53D26 /* MobileOtpViewController.swift in Sources */,
 				65DD3CDC23AD8FDB008C5EA5 /* Search.swift in Sources */,
+				654F379723C9976B009259A3 /* InsideViewController.swift in Sources */,
 				65B0164723AB2BCC00EBB76A /* LoginViewController.swift in Sources */,
 				654936A823C1CDF600B190A1 /* TableCheck.swift in Sources */,
 				65B0163723AA7EED00EBB76A /* ComViewController.swift in Sources */,
@@ -635,6 +667,7 @@
 				65B0163923AA935700EBB76A /* PageControlController.swift in Sources */,
 				65F50AD4234F93BD006A1767 /* aboutViewController.swift in Sources */,
 				65F50AD2234F9385006A1767 /* CommunViewController.swift in Sources */,
+				654F379923C9A1F9009259A3 /* CommentTableView.swift in Sources */,
 				65F50B0A23506FDB006A1767 /* newActivityCollectionViewCell.swift in Sources */,
 				657C548623BA827E00B32EC6 /* EmergencyViewController.swift in Sources */,
 				659EB1BB232CEF6D00BF433B /* AppDelegate.swift in Sources */,
@@ -645,9 +678,11 @@
 				65B0163C23AA989A00EBB76A /* PageControl.swift in Sources */,
 				65811B4023B7ADD100351DA9 /* LikeAnimator.swift in Sources */,
 				6580827E23BCA3650092B0D6 /* Emergency.swift in Sources */,
+				654F378F23C96AF4009259A3 /* Checkbox.swift in Sources */,
 				65F50ACB234F71D8006A1767 /* tabBarViewController.swift in Sources */,
 				6508F0E023C272D00034F355 /* ActivityHeaderViewCell.swift in Sources */,
 				65F50B0823506FC6006A1767 /* activityCollectionViewCell.swift in Sources */,
+				6511645F23C7A44A008FA771 /* Header.swift in Sources */,
 				6580828423BDF3F70092B0D6 /* ProfileVIewController.swift in Sources */,
 				657C548A23BA837D00B32EC6 /* DetailEmergencyView.swift in Sources */,
 				654936AA23C1EAA000B190A1 /* ContentActivityViewController.swift in Sources */,

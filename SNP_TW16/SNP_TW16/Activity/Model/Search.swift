@@ -7,17 +7,18 @@
 //
 
 import UIKit
-struct Search {
+struct Search : Codable {
     
     var titlename : String?
     var caption : String?
     var image : String?
     var time : String?
+    var userId : String?
     
-    init(titlename: String?,caption: String?,image: String?, time: String?) {
-        self.titlename = titlename
-        self.caption = caption
-        self.image = image
-        self.time = time
-    }
+//    init(titlename: String?,caption: String?,image: String?, time: String?) {
+//        self.titlename = titlename
+//        self.caption = caption
+//        self.image = image
+//        self.time = time
+//    }
 }

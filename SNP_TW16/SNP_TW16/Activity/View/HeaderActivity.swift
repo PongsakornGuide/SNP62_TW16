@@ -18,6 +18,8 @@ class HeaderActivity: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+   
+    
     let bgActivitity:UIView = {
         let background = UIView()
 //        background.backgroundColor = .purple
@@ -52,6 +54,7 @@ class HeaderActivity: UITableViewCell {
     }()
     
     func setupViewCell(){
+
         addSubview(bgActivitity)
         addSubview(bgEmergency)
         addSubview(iconImage)

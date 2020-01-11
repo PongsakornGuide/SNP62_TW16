@@ -95,6 +95,7 @@ class EmergencyViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if #available(iOS 12.1 , *) {
             tableView.refreshControl = refresher
         }else{

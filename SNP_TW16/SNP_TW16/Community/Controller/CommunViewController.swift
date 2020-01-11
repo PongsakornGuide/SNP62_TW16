@@ -14,6 +14,7 @@ class CommunViewController: UITableViewController{
     let datalist1 = ["firstCell1" , "firstCell2" , "firstCell3" , "firstCell4"]
     var User_Name = String()
     var User_ID = String()
+    var cc = UILabel()
     var pagety = [PageView]()
     var activity = [Activity]()
     let URL_GET_DATA = "http://localhost/alder_iosapp/v1/show.php"
@@ -78,49 +79,83 @@ class CommunViewController: UITableViewController{
         override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
             if indexPath.section == 0 {
-//                print("555")
             }else {
+                
+                
+                let DvC = InsideViewController()
+                self.navigationController?.pushViewController(DvC, animated: true)
 //                let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! AcivityListTableViewCell
-                             let DvC = DetailActivityViewController()
-                             let act:Activity
-                             act = activity[indexPath.row]
-                             DvC.getname = act.username ?? "NULL"
-                             DvC.gettime = act.time ?? "NULL"
-                             DvC.gettitle = act.titlePost ?? "NULL"
-                             DvC.getLike = act.like ?? "NULL"
-                             DvC.getimage = "http://localhost/alder_iosapp/\(act.imagePost!)"
-                             DvC.getProfile = "http://localhost/alder_iosapp/\(act.imageProfile!)"
-
-                           self.navigationController?.pushViewController(DvC, animated: true)
+//
+//                let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! InsideViewController
+//                let DvC = DetailActivityViewController()
+//                let act:Activity
+//                act = activity[indexPath.row]
+                
+                
+//                             let DvC = DetailActivityViewController()
+//                             let act:Activity
+//                             act = activity[indexPath.row]
+//                             DvC.getname = act.username ?? "NULL"
+//                             DvC.gettime = act.time ?? "NULL"
+//                             DvC.gettitle = act.titlePost ?? "NULL"
+//                             DvC.getLike = act.like ?? "NULL"
+//                             DvC.getimage = "http://localhost/alder_iosapp/\(act.imagePost!)"
+//                             DvC.getProfile = "http://localhost/alder_iosapp/\(act.imageProfile!)"
+//
+//                           self.navigationController?.pushViewController(DvC, animated: true)
             }
              
         }
+    // refresh
+         lazy var refresher: UIRefreshControl = {
+              let refreshControl = UIRefreshControl()
+              refreshControl.tintColor = .black
+              refreshControl.addTarget(self, action: #selector(requestData), for: .valueChanged)
+              return refreshControl
+         }()
+         
+         // action refresh
+         @objc func requestData(){
+             print("requestData for tableView")
+
+             let RefreshLine = DispatchTime.now() + .milliseconds(500)
+             DispatchQueue.main.asyncAfter(deadline: RefreshLine) {
+                 self.refresher.endRefreshing()
+                 self.tableView.reloadData()
+             }
+         }
+   
     
        override func viewDidLoad() {
-                 super.viewDidLoad()
-        navigationItem.title = "Community"
-               navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.PoppinsRegular(size: 20), NSAttributedString.Key.foregroundColor: UIColor.emerald]
-                  navigationController?.navigationBar.prefersLargeTitles = true
-                  navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.PoppinsMedium(size: 35), NSAttributedString.Key.foregroundColor: UIColor.emerald]
+       super.viewDidLoad()
+                if #available(iOS 12.1 , *) {
+                            tableView.refreshControl = refresher
+                    
+                        }else{
+                            tableView.addSubview(refresher)
+                }
 
-                let settings = UIBarButtonItem(image: UIImage(named: "threepoint"), style: .plain, target: self, action: #selector(handelSetting))
-                settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
-                navigationItem.rightBarButtonItem = settings
+        let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
+        
+            settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
+            navigationItem.rightBarButtonItem = settings
+            navigationItem.title = "Alder"
               
+            tableView.register(ActivityPageViewController.self, forCellReuseIdentifier: cellId1)
+            tableView.tableFooterView = UIView()
+            tableView.rowHeight = UITableView.automaticDimension
+            tableView.estimatedRowHeight = 50
         
-                tableView.register(ActivityPageViewController.self, forCellReuseIdentifier: cellId1)
-                tableView.tableFooterView = UIView()
-                tableView.rowHeight = UITableView.automaticDimension
-                tableView.estimatedRowHeight = 50
+        
+            tableView.register(AcivityListTableViewCell.self, forCellReuseIdentifier: cellId)
+            tableView.tableFooterView = UIView()
+            tableView.rowHeight = UITableView.automaticDimension
+            tableView.estimatedRowHeight = 50
         
         
-                tableView.register(AcivityListTableViewCell.self, forCellReuseIdentifier: cellId)
-                tableView.tableFooterView = UIView()
-                tableView.rowHeight = UITableView.automaticDimension
-                tableView.estimatedRowHeight = 50
-        
-        view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+            view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
                        Alamofire.request(URL_GET_DATA).responseJSON { response in
+                        
                                 if let json = response.result.value {
                                     let comArray : NSArray = json as! NSArray
                 //                    print(response)

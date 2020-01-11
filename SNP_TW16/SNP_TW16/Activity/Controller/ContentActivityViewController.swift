@@ -8,6 +8,7 @@
 
 import UIKit
 class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINavigationControllerDelegate{
+//    let num : Int = 0631921545
              let screenSizeX: CGFloat = UIScreen.main.bounds.width
              let screenSizeY: CGFloat = UIScreen.main.bounds.height
              
@@ -112,12 +113,25 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                  button.setTitle("เข้าร่วมกิจกรรม", for: .normal)
                  button.setTitleColor(.white, for: .normal)
                  button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-//                 button.addTarget(self, action: #selector(pushto), for: .touchUpInside)
+                 button.addTarget(self, action: #selector(activity_active), for: .touchUpInside)
                  return button
          }()
+
+        @objc func activity_active(){
+//            if let url = NSURL(string: "tel://\(num)"), UIApplication.shared.canOpenURL(url as URL) {
+//                UIApplication.shared.openURL(url as URL)
+//            }
+            print("5555")
+            let passData = AssessVIewController()
+            self.navigationController?.pushViewController(passData, animated: true)
+                         
+        }
+    
+
     
              override func viewDidLoad() {
                  super.viewDidLoad()
+             
                  view.backgroundColor = UIColor.white
                  navigationItem.title = "กิจกรรม"
                  view.addSubview(viewScroll)
