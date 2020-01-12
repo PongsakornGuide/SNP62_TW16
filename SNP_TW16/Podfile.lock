@@ -2,12 +2,14 @@ PODS:
   - Alamofire (4.8.2)
   - AlamofireImage (3.5.2):
     - Alamofire (~> 4.8)
+  - ObjectMapper (3.5.1)
   - Pastel (0.5.1)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
+  - ObjectMapper (~> 3.4)
   - Pastel
   - SwiftyJSON
 
@@ -17,14 +19,16 @@ SPEC REPOS:
     - Pastel
   trunk:
     - AlamofireImage
+    - ObjectMapper
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
+  ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   Pastel: b3dd5b8d612dac06ae7c63c97c45c900829bc139
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: fbea5f9915dda881f45dc9420797fab00d5050ff
+PODFILE CHECKSUM: 7401913a26392f22cf63f4a6f6d12fc80f918b98
 
 COCOAPODS: 1.8.4

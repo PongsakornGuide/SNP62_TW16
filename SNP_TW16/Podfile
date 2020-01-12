@@ -10,4 +10,5 @@ target 'SNP_TW16' do
   pod 'Alamofire'
   pod 'AlamofireImage'
   pod 'SwiftyJSON'
+  pod 'ObjectMapper', '~> 3.4'
 end

@@ -8,8 +8,8 @@
 //
 import UIKit
 import Alamofire
+import ObjectMapper
 class MainActivityViewController: UITableViewController {
-    
     
     let URL_USER_ID = "http://localhost/alder_iosapp/v1/showactivity.php"
     let defaultValues = UserDefaults.standard
@@ -18,8 +18,8 @@ class MainActivityViewController: UITableViewController {
     var Labelname = String()
     var imageView = String()
     var typecheck = String()
-    var search = [Search]()
-    var header = [Header]()
+    
+    var header: [ActivityType]?
     
     
         private var cellId = "Cell"
@@ -36,7 +36,7 @@ class MainActivityViewController: UITableViewController {
                 if section == 0 {
                     return 1
                 }else{
-                    return header.count
+                    return header?.count ?? 0
                 }
         }
     
@@ -53,10 +53,10 @@ class MainActivityViewController: UITableViewController {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
                   
-                let headerActivity:Header
-                  headerActivity = header[indexPath.row]
-                   cell.titleType.text = headerActivity.textHeader
-                   Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity.imageIcon ?? "0")!).responseImage { response in
+                let headerActivity = header?[indexPath.row]
+                //FIXME: Add Image URL
+                cell.titleType.text = headerActivity?.activityTypeName
+                Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.imageIcon ?? "0")!).responseImage { response in
                 if let image = response.result.value {
                     cell.iconImage.image = image
                     }
@@ -73,8 +73,10 @@ class MainActivityViewController: UITableViewController {
         if indexPath.section == 0 {
             
         }else{
-            let DvC = TableCheck()
-            self.navigationController?.pushViewController(DvC, animated: true)
+            let dvc = SubActivityTypeTableViewController()
+            let activityType = header?[indexPath.row]
+            dvc.activityList = activityType?.list
+            self.navigationController?.pushViewController(dvc, animated: true)
         }
     }
 
@@ -134,20 +136,28 @@ class MainActivityViewController: UITableViewController {
                            //send back to login view controller
              }
         
+//        let parameters: Parameters = ["userId":typecheck]
+//
+//        Alamofire.request(URL_USER_ID + "?id=\(typecheck)", method: .post,parameters: parameters).responseJSON { response in
+//            if let json = response.result.value {
+//                print(response)
+//                let headerActivity : NSArray = json as! NSArray
+//                for i in 0..<headerActivity.count
+//                {self.header.append(Header(
+//                    imageIcon: (headerActivity[i] as AnyObject).value(forKey: "ssss") as? String ?? "csdsa",
+//                    textHeader: (headerActivity[i] as AnyObject).value(forKey: "activity_type_name") as? String ?? "none"
+//                    ))
+//                }
+//                self.tableView.reloadData()
+//            }
+//        }
+
         let parameters: Parameters = ["userId":typecheck]
         
-        Alamofire.request(URL_USER_ID + "?id=\(typecheck)", method: .post,parameters: parameters).responseJSON { response in
-            if let json = response.result.value {
-                print(response)
-                let headerActivity : NSArray = json as! NSArray
-                for i in 0..<headerActivity.count
-                {self.header.append(Header(
-                    imageIcon: (headerActivity[i] as AnyObject).value(forKey: "ssss") as? String ?? "csdsa",
-                    textHeader: (headerActivity[i] as AnyObject).value(forKey: "activity_type_name") as? String ?? "none"
-                    ))
-                }
-                self.tableView.reloadData()
-            }
+        let url = URL_USER_ID + "?id=\(typecheck)"
+        Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
+            self?.header = Mapper<ActivityType>().mapArray(JSONObject: resData.result.value)
+            self?.tableView.reloadData()
         }
         
         

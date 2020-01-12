@@ -11,6 +11,7 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 class CommunViewController: UITableViewController{
+    let defaultValues = UserDefaults.standard
     let datalist1 = ["firstCell1" , "firstCell2" , "firstCell3" , "firstCell4"]
     var User_Name = String()
     var User_ID = String()
@@ -79,11 +80,23 @@ class CommunViewController: UITableViewController{
         override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
             if indexPath.section == 0 {
+                
             }else {
+//
+                    let DvC = Testlayout()
+                             let act:Activity
+                             act = activity[indexPath.row]
+                             DvC.getname = act.username ?? "NULL"
+                             DvC.gettime = act.time ?? "NULL"
+                             DvC.gettitle = act.titlePost ?? "NULL"
+                             DvC.getLike = act.like ?? "NULL"
+                             DvC.getimage = "http://localhost/alder_iosapp/\(act.imagePost!)"
+                             DvC.getProfile = "http://localhost/alder_iosapp/\(act.imageProfile!)"
+                             self.navigationController?.pushViewController(DvC, animated: true)
+//                    self.navigationController?.pushViewController(DvC, animated: true)
+//                
                 
                 
-                let DvC = InsideViewController()
-                self.navigationController?.pushViewController(DvC, animated: true)
 //                let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! AcivityListTableViewCell
 //
 //                let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! InsideViewController
@@ -101,8 +114,21 @@ class CommunViewController: UITableViewController{
 //                             DvC.getLike = act.like ?? "NULL"
 //                             DvC.getimage = "http://localhost/alder_iosapp/\(act.imagePost!)"
 //                             DvC.getProfile = "http://localhost/alder_iosapp/\(act.imageProfile!)"
-//
-//                           self.navigationController?.pushViewController(DvC, animated: true)
+//                             self.navigationController?.pushViewController(DvC, animated: true)
+                
+                
+//                let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! InsideViewController
+//                let Dvc = DetailActivityViewController()
+//                let act:Activity
+//                act = activity[indexPath.row]
+//                DvC.getname = act.username ?? "NULL"
+//                DvC.gettime = act.time ?? "NULL"
+//                DvC.gettitle = act.titlePost ?? "NULL"
+//                DvC.getLike = act.like ?? "NULL"
+//                DvC.getimage = "http://localhost/alder_iosapp/\(act.imagePost!)"
+//                DvC.getProfile = "http://localhost/alder_iosapp/\(act.imageProfile!)"
+//                self.navigationController?.pushViewController(DvC, animated: true)
+                
             }
              
         }
@@ -158,7 +184,7 @@ class CommunViewController: UITableViewController{
                         
                                 if let json = response.result.value {
                                     let comArray : NSArray = json as! NSArray
-                //                    print(response)
+                                print(response)
                                 for i in 0..<comArray.count {
                                     self.activity.append(Activity(
                                         
@@ -174,7 +200,9 @@ class CommunViewController: UITableViewController{
                                 }
                                 self.tableView.reloadData()
                                 }
+                     
                  }
+                    
         
                 let defaultValues = UserDefaults.standard
                        if let name = defaultValues.string(forKey: "userId") {
@@ -182,14 +210,14 @@ class CommunViewController: UITableViewController{
                             User_ID = name
                        }else {
                      //send back to login view controller
-                  }
+                }
                      if let name = defaultValues.string(forKey: "userName") {
                                  //setting the name to label
                                 User_Name = name
                                 print(User_Name)
                            }else {
                          //send back to login view controller
-                      }
+                }
 
        }
     

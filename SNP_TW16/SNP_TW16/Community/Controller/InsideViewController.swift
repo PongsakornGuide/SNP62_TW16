@@ -8,8 +8,11 @@
 
 import UIKit
 class InsideViewController: UITableViewController{
+    let defaultValues = UserDefaults.standard
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
+    
+    var check = String()
     
     override func numberOfSections(in tableView: UITableView) -> Int {
          return 2
@@ -51,6 +54,7 @@ class InsideViewController: UITableViewController{
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
+
     }
     
     

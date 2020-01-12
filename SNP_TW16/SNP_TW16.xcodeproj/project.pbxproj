@@ -12,7 +12,10 @@
 		6511645F23C7A44A008FA771 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6511645E23C7A44A008FA771 /* Header.swift */; };
 		652DDEE623A9BB2B00AF79D3 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652DDEE523A9BB2B00AF79D3 /* RecordViewController.swift */; };
 		652DDEE823A9C91900AF79D3 /* ImpressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652DDEE723A9C91900AF79D3 /* ImpressViewController.swift */; };
-		654936A823C1CDF600B190A1 /* TableCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654936A723C1CDF600B190A1 /* TableCheck.swift */; };
+		6543824D23CACB1A0062399D /* Testlayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6543824C23CACB1A0062399D /* Testlayout.swift */; };
+		6543825123CAF23C0062399D /* AssessAfterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6543825023CAF23C0062399D /* AssessAfterController.swift */; };
+		6543825323CB3A030062399D /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6543825223CB3A030062399D /* ActivityType.swift */; };
+		654936A823C1CDF600B190A1 /* SubActivityTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654936A723C1CDF600B190A1 /* SubActivityTypeTableViewController.swift */; };
 		654936AA23C1EAA000B190A1 /* ContentActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654936A923C1EAA000B190A1 /* ContentActivityViewController.swift */; };
 		654E850A23C1007E001E2508 /* HeaderActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654E850923C1007E001E2508 /* HeaderActivity.swift */; };
 		654F378C23C96238009259A3 /* AssessVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654F378B23C96238009259A3 /* AssessVIewController.swift */; };
@@ -78,7 +81,10 @@
 		6511645E23C7A44A008FA771 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		652DDEE523A9BB2B00AF79D3 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		652DDEE723A9C91900AF79D3 /* ImpressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressViewController.swift; sourceTree = "<group>"; };
-		654936A723C1CDF600B190A1 /* TableCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCheck.swift; sourceTree = "<group>"; };
+		6543824C23CACB1A0062399D /* Testlayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testlayout.swift; sourceTree = "<group>"; };
+		6543825023CAF23C0062399D /* AssessAfterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessAfterController.swift; sourceTree = "<group>"; };
+		6543825223CB3A030062399D /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityType.swift; sourceTree = "<group>"; };
+		654936A723C1CDF600B190A1 /* SubActivityTypeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubActivityTypeTableViewController.swift; sourceTree = "<group>"; };
 		654936A923C1EAA000B190A1 /* ContentActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentActivityViewController.swift; sourceTree = "<group>"; };
 		654E850923C1007E001E2508 /* HeaderActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderActivity.swift; sourceTree = "<group>"; };
 		654F378B23C96238009259A3 /* AssessVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessVIewController.swift; sourceTree = "<group>"; };
@@ -171,6 +177,22 @@
 				C583B26937BC0D763C2E1701 /* Pods_SNP_TW16.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6543824E23CAF2170062399D /* Assess */ = {
+			isa = PBXGroup;
+			children = (
+				6543824F23CAF2260062399D /* Controller */,
+			);
+			path = Assess;
+			sourceTree = "<group>";
+		};
+		6543824F23CAF2260062399D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6543825023CAF23C0062399D /* AssessAfterController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		654F378D23C96AC0009259A3 /* checkbox */ = {
@@ -370,6 +392,7 @@
 		65B0163423AA7C8B00EBB76A /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				6543824E23CAF2170062399D /* Assess */,
 				65DD3CD623AD429D008C5EA5 /* Controller */,
 				65DD3CD523AD4292008C5EA5 /* View */,
 				65DD3CD423AD4289008C5EA5 /* Model */,
@@ -414,6 +437,7 @@
 				6506942723ACC5E700A045E6 /* DetailActivityViewController.swift */,
 				65811B4123B8FB4300351DA9 /* ActivityPageViewController.swift */,
 				654F379823C9A1F9009259A3 /* CommentTableView.swift */,
+				6543824C23CACB1A0062399D /* Testlayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -455,6 +479,7 @@
 		65DD3CD423AD4289008C5EA5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6543825223CB3A030062399D /* ActivityType.swift */,
 				65DD3CDB23AD8FDB008C5EA5 /* Search.swift */,
 				6511645E23C7A44A008FA771 /* Header.swift */,
 			);
@@ -478,7 +503,7 @@
 				65E156D623AA091700CC3856 /* MainActivityViewController.swift */,
 				65DD3CD723AD43C6008C5EA5 /* SearchViewController.swift */,
 				654936A923C1EAA000B190A1 /* ContentActivityViewController.swift */,
-				654936A723C1CDF600B190A1 /* TableCheck.swift */,
+				654936A723C1CDF600B190A1 /* SubActivityTypeTableViewController.swift */,
 				654F378B23C96238009259A3 /* AssessVIewController.swift */,
 			);
 			path = Controller;
@@ -639,7 +664,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6543825323CB3A030062399D /* ActivityType.swift in Sources */,
 				657C548823BA82FF00B32EC6 /* EmergencyView.swift in Sources */,
+				6543824D23CACB1A0062399D /* Testlayout.swift in Sources */,
 				6506942823ACC5E700A045E6 /* DetailActivityViewController.swift in Sources */,
 				65BC21762351157C00638EA7 /* ImageCell4.swift in Sources */,
 				65B0164023AAF95200EBB76A /* AcivityListTableViewCell.swift in Sources */,
@@ -661,11 +688,12 @@
 				65DD3CDC23AD8FDB008C5EA5 /* Search.swift in Sources */,
 				654F379723C9976B009259A3 /* InsideViewController.swift in Sources */,
 				65B0164723AB2BCC00EBB76A /* LoginViewController.swift in Sources */,
-				654936A823C1CDF600B190A1 /* TableCheck.swift in Sources */,
+				654936A823C1CDF600B190A1 /* SubActivityTypeTableViewController.swift in Sources */,
 				65B0163723AA7EED00EBB76A /* ComViewController.swift in Sources */,
 				65BC21722351000B00638EA7 /* ltens2.swift in Sources */,
 				65B0163923AA935700EBB76A /* PageControlController.swift in Sources */,
 				65F50AD4234F93BD006A1767 /* aboutViewController.swift in Sources */,
+				6543825123CAF23C0062399D /* AssessAfterController.swift in Sources */,
 				65F50AD2234F9385006A1767 /* CommunViewController.swift in Sources */,
 				654F379923C9A1F9009259A3 /* CommentTableView.swift in Sources */,
 				65F50B0A23506FDB006A1767 /* newActivityCollectionViewCell.swift in Sources */,

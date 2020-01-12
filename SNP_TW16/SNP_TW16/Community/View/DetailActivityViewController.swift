@@ -82,12 +82,13 @@ class DetailActivityViewController: UITableViewCell {
               return label
       }()
     
-//    var getname: String = ""
-//    var gettime: String = ""
-//    var gettitle: String = ""
-//    var getimage: String = ""
-//    var getProfile: String = ""
-//    var getLike: String = ""
+    var getname: String = ""
+    var gettime: String = ""
+    var gettitle: String = ""
+    var getimage: String = ""
+    var getProfile: String = ""
+    var getLike: String = ""
+    
 //
 //    let screenSizeX: CGFloat = UIScreen.main.bounds.width
 //       let screenSizeY: CGFloat = UIScreen.main.bounds.height

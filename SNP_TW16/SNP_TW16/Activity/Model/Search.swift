@@ -22,3 +22,4 @@ struct Search : Codable {
 //        self.time = time
 //    }
 }
+
