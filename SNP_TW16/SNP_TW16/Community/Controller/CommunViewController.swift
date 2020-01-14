@@ -9,15 +9,14 @@
 import UIKit
 import Alamofire
 import AlamofireImage
-import SwiftyJSON
+import ObjectMapper
 class CommunViewController: UITableViewController{
     let defaultValues = UserDefaults.standard
     let datalist1 = ["firstCell1" , "firstCell2" , "firstCell3" , "firstCell4"]
     var User_Name = String()
     var User_ID = String()
     var cc = UILabel()
-    var pagety = [PageView]()
-    var activity = [Activity]()
+    var activityList: [allList]?
     let URL_GET_DATA = "http://localhost/alder_iosapp/v1/show.php"
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
@@ -27,9 +26,7 @@ class CommunViewController: UITableViewController{
         let CreateView = CreateViewController()
         navigationController?.pushViewController(CreateView, animated: true)
     }
-    
-    
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -39,7 +36,7 @@ class CommunViewController: UITableViewController{
         if section == 0 {
             return 1
         }else{
-            return activity.count
+            return activityList?.count ?? 0
         }
     }
        
@@ -47,32 +44,31 @@ class CommunViewController: UITableViewController{
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! ActivityPageViewController
             return cell
-        
         }else{
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! AcivityListTableViewCell
-
-                                let act:Activity
-                                act = activity[indexPath.row]
-                                cell.id_user = "\(act.id_Ad)"
-                                cell.userFullname.text = act.username
-                                cell.messageTextLabel.text = act.titlePost
-                                cell.timeTextLabel.text = act.time
-                                cell.numCount.text = act.like
-                                cell.numCom.text = act.comment
-
-
-                                Alamofire.request("http://localhost/alder_iosapp/" + (act.imagePost ?? "0")!).responseImage { response in
-                                    if let image = response.result.value{
-                                        cell.postImage.image = image
-                                    }
-                                }
-
-                                Alamofire.request("http://localhost/alder_iosapp/" + (act.imageProfile ?? "0")!).responseImage { response in
-                                         if let image2 = response.result.value {
-                                               cell.profileImage.image = image2
-                                        }
-                                }
-                                   return cell
+            let headerActivity = activityList?[indexPath.row]
+            cell.userFullname.text = headerActivity?.username
+            cell.messageTextLabel.text = headerActivity?.caption
+            cell.timeTextLabel.text = headerActivity?.createdAt
+            cell.numCount.text = "\(headerActivity?.like ?? 1)"
+            cell.numCom.text = "\(headerActivity?.comment ?? 1)"
+            Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.img ?? "0")!).responseImage { response in
+                            if let image = response.result.value{
+                            cell.postImage.image = image
+                }
+            }
+            
+            Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.photo ?? "0")!).responseImage { response in
+                            if let image2 = response.result.value {
+                            cell.profileImage.image = image2
+                }
+            }
+            
+            self.tableView.separatorStyle = .none
+            cell.selectionStyle = .none
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+            return cell
+        
         }
 
     }
@@ -82,56 +78,13 @@ class CommunViewController: UITableViewController{
             if indexPath.section == 0 {
                 
             }else {
-//
-                    let DvC = Testlayout()
-                             let act:Activity
-                             act = activity[indexPath.row]
-                             DvC.getname = act.username ?? "NULL"
-                             DvC.gettime = act.time ?? "NULL"
-                             DvC.gettitle = act.titlePost ?? "NULL"
-                             DvC.getLike = act.like ?? "NULL"
-                             DvC.getimage = "http://localhost/alder_iosapp/\(act.imagePost!)"
-                             DvC.getProfile = "http://localhost/alder_iosapp/\(act.imageProfile!)"
-                             self.navigationController?.pushViewController(DvC, animated: true)
-//                    self.navigationController?.pushViewController(DvC, animated: true)
-//                
-                
-                
-//                let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! AcivityListTableViewCell
-//
-//                let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! InsideViewController
-//                let DvC = DetailActivityViewController()
-//                let act:Activity
-//                act = activity[indexPath.row]
-                
-                
-//                             let DvC = DetailActivityViewController()
-//                             let act:Activity
-//                             act = activity[indexPath.row]
-//                             DvC.getname = act.username ?? "NULL"
-//                             DvC.gettime = act.time ?? "NULL"
-//                             DvC.gettitle = act.titlePost ?? "NULL"
-//                             DvC.getLike = act.like ?? "NULL"
-//                             DvC.getimage = "http://localhost/alder_iosapp/\(act.imagePost!)"
-//                             DvC.getProfile = "http://localhost/alder_iosapp/\(act.imageProfile!)"
-//                             self.navigationController?.pushViewController(DvC, animated: true)
-                
-                
-//                let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! InsideViewController
-//                let Dvc = DetailActivityViewController()
-//                let act:Activity
-//                act = activity[indexPath.row]
-//                DvC.getname = act.username ?? "NULL"
-//                DvC.gettime = act.time ?? "NULL"
-//                DvC.gettitle = act.titlePost ?? "NULL"
-//                DvC.getLike = act.like ?? "NULL"
-//                DvC.getimage = "http://localhost/alder_iosapp/\(act.imagePost!)"
-//                DvC.getProfile = "http://localhost/alder_iosapp/\(act.imageProfile!)"
-//                self.navigationController?.pushViewController(DvC, animated: true)
-                
+                let vc = InsideViewController()
+                vc.check = activityList?[indexPath.row]
+//                    vc.check = activityList
+                self.navigationController?.pushViewController(vc, animated: true)
             }
-             
         }
+    
     // refresh
          lazy var refresher: UIRefreshControl = {
               let refreshControl = UIRefreshControl()
@@ -154,6 +107,7 @@ class CommunViewController: UITableViewController{
     
        override func viewDidLoad() {
        super.viewDidLoad()
+       self.tableView.reloadData()
                 if #available(iOS 12.1 , *) {
                             tableView.refreshControl = refresher
                     
@@ -172,52 +126,32 @@ class CommunViewController: UITableViewController{
             tableView.rowHeight = UITableView.automaticDimension
             tableView.estimatedRowHeight = 50
         
-        
             tableView.register(AcivityListTableViewCell.self, forCellReuseIdentifier: cellId)
             tableView.tableFooterView = UIView()
             tableView.rowHeight = UITableView.automaticDimension
             tableView.estimatedRowHeight = 50
-        
-        
             view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-                       Alamofire.request(URL_GET_DATA).responseJSON { response in
-                        
-                                if let json = response.result.value {
-                                    let comArray : NSArray = json as! NSArray
-                                print(response)
-                                for i in 0..<comArray.count {
-                                    self.activity.append(Activity(
-                                        
-                                        id_Ad: (comArray[i] as AnyObject).value(forKey:"id") as? Int ?? 0,
-                                        imageProfile: (comArray[i] as AnyObject).value(forKey:"photo") as? String ?? "0",
-                                        username: ((comArray[i] as AnyObject).value(forKey:"username") as? String) ?? "0",
-                                        time: (comArray[i] as AnyObject).value(forKey:"created_at") as? String ?? "0",
-                                        titlePost: (comArray[i] as AnyObject).value(forKey:"caption") as? String ?? "0",
-                                        imagePost: (comArray[i] as AnyObject).value(forKey:"img") as? String ?? "0" ,
-                                        like: (comArray[i] as AnyObject).value(forKey:"like") as? String ?? "0",
-                                        comment: (comArray[i] as AnyObject).value(forKey:"comment")  as? String ?? "0"
-                                    ))
-                                }
-                                self.tableView.reloadData()
-                                }
-                     
-                 }
-                    
         
-                let defaultValues = UserDefaults.standard
+            Alamofire.request(URL_GET_DATA).responseJSON { [weak self](resData) in
+                self?.activityList = Mapper<allList>().mapArray(JSONObject: resData.result.value)
+                self?.tableView.reloadData()
+            }
+        
+            let defaultValues = UserDefaults.standard
                        if let name = defaultValues.string(forKey: "userId") {
                              //setting the name to label
                             User_ID = name
                        }else {
                      //send back to login view controller
-                }
-                     if let name = defaultValues.string(forKey: "userName") {
+            }
+            
+            if let name = defaultValues.string(forKey: "userName") {
                                  //setting the name to label
                                 User_Name = name
                                 print(User_Name)
                            }else {
-                         //send back to login view controller
-                }
+                    //send back to login view controller
+            }
 
        }
     

@@ -20,8 +20,6 @@ class MainActivityViewController: UITableViewController {
     var typecheck = String()
     
     var header: [ActivityType]?
-    
-    
         private var cellId = "Cell"
         private var cellId1 = "Cell1"
         private var cellId2 = "Cell2"
@@ -56,6 +54,7 @@ class MainActivityViewController: UITableViewController {
                 let headerActivity = header?[indexPath.row]
                 //FIXME: Add Image URL
                 cell.titleType.text = headerActivity?.activityTypeName
+                
                 Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.imageIcon ?? "0")!).responseImage { response in
                 if let image = response.result.value {
                     cell.iconImage.image = image
@@ -107,6 +106,7 @@ class MainActivityViewController: UITableViewController {
            
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tableView.reloadData()
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         if #available(iOS 12.1 , *) {
@@ -116,7 +116,7 @@ class MainActivityViewController: UITableViewController {
         }
         
           tableView.register(TitleTableViewCell.self, forCellReuseIdentifier: cellId1)
-//          tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId)
+
           tableView.register(HeaderActivity.self, forCellReuseIdentifier: cellId2)
           tableView.rowHeight = UITableView.automaticDimension
           tableView.estimatedRowHeight = 50
@@ -153,8 +153,8 @@ class MainActivityViewController: UITableViewController {
 //        }
 
         let parameters: Parameters = ["userId":typecheck]
-        
         let url = URL_USER_ID + "?id=\(typecheck)"
+        
         Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
             self?.header = Mapper<ActivityType>().mapArray(JSONObject: resData.result.value)
             self?.tableView.reloadData()
@@ -170,17 +170,5 @@ class MainActivityViewController: UITableViewController {
         let backButton = UIBarButtonItem(title: " ", style: UIBarButtonItem.Style.plain, target: navigationController, action: nil)
         navigationItem.leftBarButtonItem = backButton
         
-        
-        
-    
-        
-        
-        
-        
-//        let parameters: Parameters = ["userId":typecheck]
-//        Alamofire.request(URL_USER_ID + "?id=\(typecheck)", method: .post,parameters: parameters).responseJSON { response in
-//                               print(response)
-//                               print(parameters)
-//        }
     }
 }

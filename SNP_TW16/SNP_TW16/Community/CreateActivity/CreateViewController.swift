@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 class CreateViewController: UIViewController , UINavigationControllerDelegate , UIImagePickerControllerDelegate{
-        var activity = [Activity]()
+//        var activity = [Activity]()
         var username = String()
         var user_id = String()
     

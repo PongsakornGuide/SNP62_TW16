@@ -14,7 +14,8 @@ class ActivityType: Mappable {
     var activityTypeName: String?
     var imageIcon: String?
     var list:[AcivityData]?
-
+    
+    
     required init?(map: Map) {
 
     }
@@ -28,14 +29,10 @@ class ActivityType: Mappable {
     }
 }
 
-
 class AcivityData: Mappable {
     var dataId:Int?
     var actId:String?
     var caption:String?
-//    var title:String?
-//    var activityUserApps:String?
-//    var activityName:String?
     var imagePost:String?
     
     required init?(map: Map) {
@@ -48,10 +45,6 @@ class AcivityData: Mappable {
         actId  <- map["title"]
         caption <- map["aption "]
         imagePost <- map["img"]
-        
-//        title  <- map["act_id"]
-//        activityUserApps  <- map["activity_user_apps"]
-//        activityName  <- map["activity_name"]
     }
 }
 

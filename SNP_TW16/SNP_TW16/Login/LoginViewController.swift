@@ -195,8 +195,8 @@ class LoginViewController: UIViewController {
                     }
                 }
                  if self.defaultValues.string(forKey:"userName") != nil {
-                                                self.view.window?.rootViewController = tabBarViewController()
-                                                self.view.window?.makeKeyAndVisible()
+                        self.view.window?.rootViewController = tabBarViewController()
+                        self.view.window?.makeKeyAndVisible()
                }
             }
         }

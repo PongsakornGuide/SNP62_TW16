@@ -129,6 +129,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
             let passData = AssessVIewController()
             let parameters: Parameters = ["user_id":typecheck,"post_timeline_id":activityData?.dataId ?? 0]
             
+//            print(activityData?.caption)
             
                 Alamofire.request(URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
                                            print(response)

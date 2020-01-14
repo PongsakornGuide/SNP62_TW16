@@ -16,7 +16,6 @@ class SubActivityTypeTableViewController: UITableViewController {
     var typecheck = String()
     var activityList : [AcivityData]?
     
-    
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     
@@ -35,7 +34,7 @@ class SubActivityTypeTableViewController: UITableViewController {
         return 1
     }else{
         return activityList?.count ?? 0
-    }
+        }
     }
         
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -60,8 +59,6 @@ class SubActivityTypeTableViewController: UITableViewController {
                    cell.selectionStyle = .none
                    self.tableView.separatorStyle = .none
                    return cell
-//                    
-                    
                     
                 }
 
@@ -75,7 +72,6 @@ class SubActivityTypeTableViewController: UITableViewController {
         }else{
             let vc = ContentActivityViewController()
             vc.activityData = activityList?[indexPath.row]
-            
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
