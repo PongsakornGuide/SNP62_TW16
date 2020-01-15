@@ -16,8 +16,8 @@ class InsideViewController: UITableViewController{
     let defaultValues = UserDefaults.standard
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
-
     var check : allList?
+    var comment: [CommentList]?
 
 
     override func viewWillAppear(_ animated: Bool){
@@ -34,9 +34,8 @@ class InsideViewController: UITableViewController{
          if section == 0 {
             return 1
          }else{
-            return 1
+            return comment?.count ?? 0
          }
-        
      }
     
     
@@ -47,7 +46,6 @@ class InsideViewController: UITableViewController{
               cell.date.text = check?.createdAt
               cell.comment.text = check?.caption
               cell.numCount.text = "\(check?.like ?? 0)"
-            
             Alamofire.request("http://localhost/alder_iosapp/" + (check?.photo ?? "0")!).responseImage { response in
                      if let image = response.result.value {
                         cell.profile.image = image
@@ -59,26 +57,39 @@ class InsideViewController: UITableViewController{
                         cell.imagePost.image = image
                     }
             }
-            
+              cell.selectionStyle = .none
               return cell
           }else{
-          let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! CommentTableView
-            cell.selectionStyle = .none
+           let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! CommentTableView
+            
+            let commentActivity = comment?[indexPath.row]
+            cell.date.text = commentActivity?.created
+            cell.comment.text = commentActivity?.post
+            cell.username.text = commentActivity?.userName
+            cell.numCount.text = "\(commentActivity?.like ?? 0)"
+            Alamofire.request("http://localhost/alder_iosapp/" + (commentActivity?.imageView ?? "0")!).responseImage { response in
+                    if let image = response.result.value{
+                            cell.profile.image = image
+                }
+            }
+
+                cell.selectionStyle = .none
                 return cell
           }
     }
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Alder"
         print(check?.id ?? 0)
         let url = URL_GET_COMMENT + "?id=\(check?.id ?? 0)"
-              
-        Alamofire.request(url, method: .post).responseJSON { [weak self](resData) in
+        Alamofire.request(url).responseJSON { [weak self](resData) in
             print(resData)
+            self?.comment = Mapper<CommentList>().mapArray(JSONObject: resData.result.value)
+            self?.tableView.reloadData()
         }
-        
+
         tableView.register(DetailActivityViewController.self, forCellReuseIdentifier: cellId)  
         tableView.register(CommentTableView.self, forCellReuseIdentifier: cellId1)
         tableView.tableFooterView = UIView()

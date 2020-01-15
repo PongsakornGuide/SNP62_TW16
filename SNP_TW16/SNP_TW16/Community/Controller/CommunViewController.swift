@@ -20,11 +20,24 @@ class CommunViewController: UITableViewController{
     let URL_GET_DATA = "http://localhost/alder_iosapp/v1/show.php"
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
+    var idcontent = Int()
+
+    
+//      override func viewWillAppear(_ animated: Bool) {
+    //    super.viewWillAppear(animated)
+    //    self.tableView.reloadData()
+    //    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
     
     
     @objc func handelSetting(){
         let CreateView = CreateViewController()
         navigationController?.pushViewController(CreateView, animated: true)
+//         present(CreateView, animated: true, completion: nil)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -40,6 +53,7 @@ class CommunViewController: UITableViewController{
         }
     }
        
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! ActivityPageViewController
@@ -72,6 +86,7 @@ class CommunViewController: UITableViewController{
         }
 
     }
+  
 
         override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
@@ -80,7 +95,6 @@ class CommunViewController: UITableViewController{
             }else {
                 let vc = InsideViewController()
                 vc.check = activityList?[indexPath.row]
-//                    vc.check = activityList
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
@@ -96,15 +110,14 @@ class CommunViewController: UITableViewController{
          // action refresh
          @objc func requestData(){
              print("requestData for tableView")
-
              let RefreshLine = DispatchTime.now() + .milliseconds(500)
              DispatchQueue.main.asyncAfter(deadline: RefreshLine) {
                  self.refresher.endRefreshing()
-                 self.tableView.reloadData()
+//                 self.tableView.reloadData()
+                
              }
-         }
-   
-    
+      }
+
        override func viewDidLoad() {
        super.viewDidLoad()
        self.tableView.reloadData()
@@ -114,13 +127,12 @@ class CommunViewController: UITableViewController{
                         }else{
                             tableView.addSubview(refresher)
                 }
-
+        
         let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
         
             settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
             navigationItem.rightBarButtonItem = settings
             navigationItem.title = "Alder"
-              
             tableView.register(ActivityPageViewController.self, forCellReuseIdentifier: cellId1)
             tableView.tableFooterView = UIView()
             tableView.rowHeight = UITableView.automaticDimension

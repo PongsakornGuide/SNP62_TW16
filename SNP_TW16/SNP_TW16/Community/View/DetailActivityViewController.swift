@@ -79,13 +79,22 @@ class DetailActivityViewController: UITableViewCell {
               let label = UILabel()
               label.text = "0"
               label.textColor = UIColor.blackAlpha(alpha: 0.5)
-              label.font = UIFont.PoppinsRegular(size: 22)
+              label.font = UIFont.PoppinsRegular(size: 20)
               label.numberOfLines = 0
               return label
       }()
+    
+    let buttomComment : UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = .red
+        btn.setTitle("Summit", for: .normal)
+        btn.setTitleColor(UIColor.white,for: .normal)
+        return btn
+    }()
 
     
     func setupViewCell(){
+        addSubview(buttomComment)
         addSubview(pageView)
         addSubview(profile)
         addSubview(username)
@@ -93,11 +102,10 @@ class DetailActivityViewController: UITableViewCell {
         addSubview(imagePost)
         addSubview(comment)
         addSubview(contrainer)
-        
         addSubview(iconImageLike)
         addSubview(numCount)
         
-        pageView.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom:bottomAnchor, topConstant: 30, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: screenSizeY - 380)
+        pageView.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom:bottomAnchor, topConstant: 30, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: screenSizeY - 340)
         
         
         profile.anchor(pageView.topAnchor, left: pageView.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 70, heightConstant: 60)
@@ -113,11 +121,14 @@ class DetailActivityViewController: UITableViewCell {
         
         contrainer.anchor(imagePost.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: pageView.bottomAnchor, topConstant: 100, bottomConstant: 20, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 40)
         
-        iconImageLike.anchor(contrainer.topAnchor, left: contrainer.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 40, heightConstant: 40)
+        iconImageLike.anchor(contrainer.topAnchor, left: contrainer.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 30, heightConstant: 30)
             
         
-        numCount.anchor(contrainer.topAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 10, leftConstant: 60, rightConstant: 10, widthConstant: 40, heightConstant: 40)
+        numCount.anchor(contrainer.topAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 60, rightConstant: 10, widthConstant: 40, heightConstant: 40)
 
+        buttomComment.anchor(pageView.topAnchor, left:nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 130)
+        
+        
     }
     
     required init?(coder: NSCoder) {

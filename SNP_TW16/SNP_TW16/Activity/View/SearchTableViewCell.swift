@@ -52,12 +52,12 @@ class SearchTableViewCell: UITableViewCell {
             return view
         }()
     
-         let Labelid: UILabel = {
-              let view = UILabel()
-//              view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 252)
-                view.text = "1"
-              return view
-          }()
+//         let Labelid: UILabel = {
+//              let view = UILabel()
+////              view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 252)
+//                view.text = "1"
+//              return view
+//          }()
     
         let supportName: UILabel = {
             let label = UILabel()
@@ -84,7 +84,7 @@ class SearchTableViewCell: UITableViewCell {
             addSubview(line)
             addSubview(supportName)
             addSubview(supportTime)
-            addSubview(Labelid)
+//            addSubview(Labelid)
 
             profileImage.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 280)
 //
@@ -95,9 +95,9 @@ class SearchTableViewCell: UITableViewCell {
             line.anchor(titleFullname.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 1.1)
             
             
-            Labelid.anchor(line.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 20, widthConstant: 0, heightConstant: 80)
+//            Labelid.anchor(line.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 20, widthConstant: 0, heightConstant: 80)
             
-            supportName.anchor(Labelid.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 20, widthConstant: 0, heightConstant: 80)
+            supportName.anchor(line.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 20, widthConstant: 0, heightConstant: 80)
 
             supportTime.anchor(line.bottomAnchor, left: nil, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 50, widthConstant: 0, heightConstant: 80)
         

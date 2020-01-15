@@ -34,6 +34,9 @@ class AcivityData: Mappable {
     var actId:String?
     var caption:String?
     var imagePost:String?
+    var content:String?
+    var imgact:String?
+    var imgtime:String?
     
     required init?(map: Map) {
 
@@ -43,8 +46,11 @@ class AcivityData: Mappable {
     func mapping(map: Map) {
         dataId   <- map["id"]
         actId  <- map["title"]
-        caption <- map["aption "]
+        caption <- map["caption"]
         imagePost <- map["img"]
+        content <- map["content"]
+        imgact <- map["imgact"]
+        imgtime <- map["imgtime"]
     }
 }
 

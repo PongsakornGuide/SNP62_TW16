@@ -47,6 +47,7 @@ class SubActivityTypeTableViewController: UITableViewController {
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! SearchTableViewCell
                     let activity = activityList?[indexPath.row]
+                    
                     cell.titleFullname.text = activity?.actId
                     cell.supportName.text = activity?.caption
 

@@ -66,7 +66,7 @@ class HeaderActivity: UITableViewCell {
              
         iconImage.anchor(bgEmergency.topAnchor, left: bgEmergency.leftAnchor, right: titleType.rightAnchor, bottom: nil, topConstant: 45, bottomConstant: 20, leftConstant: 0, rightConstant: 160, widthConstant: 0, heightConstant: 0)
                     
-        titleType.anchor(bgEmergency.topAnchor, left: iconImage.leftAnchor, right: bgEmergency.rightAnchor, bottom: nil, topConstant: 55, bottomConstant: 20, leftConstant: 200, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        titleType.anchor(bgEmergency.topAnchor, left: iconImage.leftAnchor, right: bgEmergency.rightAnchor, bottom: nil, topConstant: 55, bottomConstant: 20, leftConstant: 150, rightConstant: 0, widthConstant: 0, heightConstant: 0)
              
     }
     

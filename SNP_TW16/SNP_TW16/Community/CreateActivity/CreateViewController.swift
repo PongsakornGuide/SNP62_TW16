@@ -128,9 +128,8 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
                case .failure(_):
                    print("fail")
                }
-               let ContentView = CommunViewController()
-                  self.navigationController?.pushViewController(ContentView, animated: true)
-                  
+
+            self.navigationController?.popViewController(animated: true)
          }
     }
     

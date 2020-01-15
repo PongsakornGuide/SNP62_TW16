@@ -27,41 +27,13 @@ class allList: Mappable{
         userAppId  <- map["user_app_id"]
         caption <- map["caption"]
         img  <- map["img"]
-        like    <- map["like"]
+        like    <- map["likePost"]
         comment  <- map["comment"]
         createdAt <- map["created_at"]
         username  <- map["username"]
         photo <- map["photo"]
-//        listAct <- map["hh"]
     }
 
 }
 
 
-//class allAct: Mappable {
-//    var id: String?
-//    var userAppId: String?
-//    var caption: String?
-//    var img: String?
-//    var like: Int?
-//    var comment: Int?
-//    var createdAt: String?
-//    var username: String?
-//    var photo: String?
-//    
-//    required init?(map: Map) {
-//
-//    }
-//       // Mappable
-//    func mapping(map: Map) {
-//               id  <- map["id"]
-//               userAppId  <- map["user_app_id"]
-//               caption <- map["caption"]
-//               img  <- map["img"]
-//               like    <- map["like"]
-//               comment  <- map["comment"]
-//               createdAt <- map["created_at"]
-//               username  <- map["username"]
-//               photo <- map["photo"]
-//    }
-//}

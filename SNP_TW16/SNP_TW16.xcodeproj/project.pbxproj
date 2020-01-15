@@ -50,7 +50,7 @@
 		65B0163923AA935700EBB76A /* PageControlController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0163823AA935700EBB76A /* PageControlController.swift */; };
 		65B0163C23AA989A00EBB76A /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0163B23AA989A00EBB76A /* PageControl.swift */; };
 		65B0164023AAF95200EBB76A /* AcivityListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0163F23AAF95200EBB76A /* AcivityListTableViewCell.swift */; };
-		65B0164423AB152600EBB76A /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0164323AB152600EBB76A /* Activity.swift */; };
+		65B0164423AB152600EBB76A /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0164323AB152600EBB76A /* Comment.swift */; };
 		65B0164723AB2BCC00EBB76A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0164623AB2BCC00EBB76A /* LoginViewController.swift */; };
 		65B0164A23AB6C3B00EBB76A /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0164923AB6C3B00EBB76A /* CreateViewController.swift */; };
 		65BC21722351000B00638EA7 /* ltens2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BC21712351000B00638EA7 /* ltens2.swift */; };
@@ -123,7 +123,7 @@
 		65B0163823AA935700EBB76A /* PageControlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControlController.swift; sourceTree = "<group>"; };
 		65B0163B23AA989A00EBB76A /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		65B0163F23AAF95200EBB76A /* AcivityListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcivityListTableViewCell.swift; sourceTree = "<group>"; };
-		65B0164323AB152600EBB76A /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		65B0164323AB152600EBB76A /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		65B0164623AB2BCC00EBB76A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		65B0164923AB6C3B00EBB76A /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		65BC21712351000B00638EA7 /* ltens2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ltens2.swift; sourceTree = "<group>"; };
@@ -456,7 +456,7 @@
 		65B0164223AB150300EBB76A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				65B0164323AB152600EBB76A /* Activity.swift */,
+				65B0164323AB152600EBB76A /* Comment.swift */,
 				65811B4323B9029E00351DA9 /* PageView.swift */,
 				6535A3F523CD6A8A0005027F /* Community.swift */,
 			);
@@ -674,7 +674,7 @@
 				65BC21762351157C00638EA7 /* ImageCell4.swift in Sources */,
 				65B0164023AAF95200EBB76A /* AcivityListTableViewCell.swift in Sources */,
 				654F378C23C96238009259A3 /* AssessVIewController.swift in Sources */,
-				65B0164423AB152600EBB76A /* Activity.swift in Sources */,
+				65B0164423AB152600EBB76A /* Comment.swift in Sources */,
 				654E850A23C1007E001E2508 /* HeaderActivity.swift in Sources */,
 				659EB1BD232CEF6D00BF433B /* HomeViewController.swift in Sources */,
 				65F50AD0234F933B006A1767 /* articleViewController.swift in Sources */,

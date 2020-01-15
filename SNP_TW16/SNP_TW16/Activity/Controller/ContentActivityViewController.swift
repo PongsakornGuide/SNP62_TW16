@@ -11,7 +11,9 @@ import Alamofire
 class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINavigationControllerDelegate{
     let defaultValues = UserDefaults.standard
     var activityData: AcivityData?
-     var typecheck = String()
+    
+    var typecheck = String()
+    
     let URL_USER_ID = "http://localhost/alder_iosapp/v1/join.php"
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
@@ -146,6 +148,10 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
              override func viewDidLoad() {
                  super.viewDidLoad()
 //                textHeader.text = activityData?.actId
+                titleLabel.text = activityData?.caption
+                print("555")
+                print("ข้อมูล :: \(activityData?.caption ?? "5")")
+                print("555")
                 if let name2 = defaultValues.string(forKey: "userId") {
                                                    typecheck = name2
                               }else{

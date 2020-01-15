@@ -8,6 +8,7 @@
 
 import UIKit
 class tabBarViewController: UITabBarController ,UITabBarControllerDelegate {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
@@ -20,7 +21,7 @@ class tabBarViewController: UITabBarController ,UITabBarControllerDelegate {
         let communityController = tabBarNavigation(unselectedImage: UIImage(named: "community"), selectedImage: UIImage(named: "community"), title: "Community", badgeValue: "8", colorValue: .red,rootViewController: CommunViewController())
 
 
-        let emergencyController = tabBarNavigation(unselectedImage: UIImage(named: "other"), selectedImage: UIImage(named: "Emergency"), title: "Other", badgeValue: nil, colorValue: .red,rootViewController: EmergencyViewController())
+        let emergencyController = tabBarNavigation(unselectedImage: UIImage(named: "threepoint"), selectedImage: UIImage(named: "Emergency"), title: "Emergency", badgeValue: nil, colorValue: .red,rootViewController: EmergencyViewController())
 
         viewControllers = [activityController,communityController,emergencyController]
         

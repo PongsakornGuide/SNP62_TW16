@@ -116,7 +116,6 @@ class MainActivityViewController: UITableViewController {
         }
         
           tableView.register(TitleTableViewCell.self, forCellReuseIdentifier: cellId1)
-
           tableView.register(HeaderActivity.self, forCellReuseIdentifier: cellId2)
           tableView.rowHeight = UITableView.automaticDimension
           tableView.estimatedRowHeight = 50

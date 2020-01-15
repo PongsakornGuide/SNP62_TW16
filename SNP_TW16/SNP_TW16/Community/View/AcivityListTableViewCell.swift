@@ -88,8 +88,15 @@ class AcivityListTableViewCell: UITableViewCell{
         image.setImage(imagelike, for: .normal)
         image.contentMode = .scaleAspectFill
         image.layer.masksToBounds = true
+        image.addTarget(self, action: #selector(likePost), for: .touchUpInside)
         return image
     }()
+    
+    
+    @objc func likePost(){
+        iconImageLike.backgroundColor = .red
+    }
+    
     
     let iconImageComment: UIButton = {
         let image = UIButton()
@@ -131,17 +138,6 @@ class AcivityListTableViewCell: UITableViewCell{
         button.tintColor = UIColor.whiteAlpha(alpha: 0.8)
         return button
     }()
-    
-//    let hoverLike : UIImageView = {
-//        let image = UIImageView()
-//        image.image = UIImage(named: "like") as UIImage?
-//        image.tintColor = .white
-//        image.backgroundColor = .white
-//        return image
-//    }()
-//
-//
-    
     
     func setupViewCell(){
         addSubview(bgActivitity)
