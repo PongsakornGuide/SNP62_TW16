@@ -11,9 +11,7 @@ import Alamofire
 class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINavigationControllerDelegate{
     let defaultValues = UserDefaults.standard
     var activityData: AcivityData?
-    
     var typecheck = String()
-    
     let URL_USER_ID = "http://localhost/alder_iosapp/v1/join.php"
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
@@ -89,27 +87,16 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
     let contentImage: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "conImage")
+        view.contentMode = .scaleAspectFit
         return view
     }()
 
     let timeImage: UIImageView = {
            let view = UIImageView()
            view.image = UIImage(named: "dateTime")
+           view.contentMode = .scaleAspectFit
            return view
        }()
-
-        
-     
-      
-      let uploadImage: UIButton = {
-          let image = UIImage(named: "Group 1093") as UIImage?
-          let button = UIButton()
-          button.setImage(image, for: .normal)
-          button.layer.masksToBounds = true
-    //              button.addTarget(self, action: #selector(upload), for: .touchUpInside)
-          return button
-      }()
-
 
       
      let nextButton: UIButton = {
@@ -124,19 +111,11 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
      }()
 
         @objc func activity_active(){
-//            if let url = NSURL(string: "tel://\(num)"), UIApplication.shared.canOpenURL(url as URL) {
-//                UIApplication.shared.openURL(url as URL)
-//            }
-            print("5555")
             let passData = AssessVIewController()
             let parameters: Parameters = ["user_id":typecheck,"post_timeline_id":activityData?.dataId ?? 0]
             
-//            print(activityData?.caption)
-            
                 Alamofire.request(URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
-                                           print(response)
-                                           print(parameters)
-                    print("555")
+                        print(response)
                 }
             
             self.navigationController?.pushViewController(passData, animated: true)
@@ -148,15 +127,26 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
              override func viewDidLoad() {
                  super.viewDidLoad()
 //                textHeader.text = activityData?.actId
-                titleLabel.text = activityData?.caption
-                print("555")
-                print("ข้อมูล :: \(activityData?.caption ?? "5")")
-                print("555")
+                titleLabel.text = activityData?.actId
+                nameLabel.text = activityData?.caption
+                timeLabel.text = activityData?.created
+                contentLabel.text = activityData?.content
+                Alamofire.request((activityData?.imgact ?? "0")!).responseImage { response in
+                            if let image = response.result.value {
+                                self.contentImage.image = image
+                            }
+                }
+                Alamofire.request((activityData?.imgtime ?? "0")!).responseImage { response in
+                        if let image = response.result.value {
+                        self.timeImage.image = image
+                    }
+                }
+                
                 if let name2 = defaultValues.string(forKey: "userId") {
-                                                   typecheck = name2
-                              }else{
-                                                   //send back to login view controller
+                        typecheck = name2
+                    }else{
                  }
+                
                  view.backgroundColor = UIColor.white
                  navigationItem.title = "กิจกรรม"
                  view.addSubview(viewScroll)

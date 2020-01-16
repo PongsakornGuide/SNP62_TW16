@@ -37,6 +37,7 @@ class AcivityData: Mappable {
     var content:String?
     var imgact:String?
     var imgtime:String?
+    var created:String?
     
     required init?(map: Map) {
 
@@ -51,6 +52,7 @@ class AcivityData: Mappable {
         content <- map["content"]
         imgact <- map["imgact"]
         imgtime <- map["imgtime"]
+        created <- map["created_at"]
     }
 }
 

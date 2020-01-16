@@ -18,13 +18,10 @@ class DetailEmergencyView: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-
     let bgActivitity:UIView = {
         let background = UIView()
-//        background.backgroundColor = .purple
         return background
     }()
-    
     
     let bgEmergency : UIView = {
        let bg = UIView()
@@ -66,7 +63,6 @@ class DetailEmergencyView: UITableViewCell {
           bg.addTarget(self, action: #selector(open), for: .touchUpInside)
           return bg
     }()
-    
     
     @objc func open(){
         print("5555")

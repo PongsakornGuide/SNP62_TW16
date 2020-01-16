@@ -27,9 +27,7 @@ class MainActivityViewController: UITableViewController {
         override func numberOfSections(in tableView: UITableView) -> Int {
             return 2
         }
-    
 
-           
         override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 if section == 0 {
                     return 1
@@ -50,9 +48,7 @@ class MainActivityViewController: UITableViewController {
             }else{
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
-                  
                 let headerActivity = header?[indexPath.row]
-                //FIXME: Add Image URL
                 cell.titleType.text = headerActivity?.activityTypeName
                 
                 Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.imageIcon ?? "0")!).responseImage { response in

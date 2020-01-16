@@ -47,9 +47,9 @@ class SubActivityTypeTableViewController: UITableViewController {
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! SearchTableViewCell
                     let activity = activityList?[indexPath.row]
-                    
                     cell.titleFullname.text = activity?.actId
                     cell.supportName.text = activity?.caption
+                    cell.supportTime.text = activity?.created
 
                    Alamofire.request("http://localhost/alder_iosapp/" + (activity?.imagePost ?? "0")!).responseImage { response in
                    if let image = response.result.value {

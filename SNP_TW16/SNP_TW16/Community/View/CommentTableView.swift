@@ -13,8 +13,6 @@ class CommentTableView: UITableViewCell {
            setupViewCell()
     }
     
-   
-    
     let bgActivitity:UIView = {
         let background = UIView()
         return background

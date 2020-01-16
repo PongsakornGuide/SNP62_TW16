@@ -169,8 +169,6 @@ class AcivityListTableViewCell: UITableViewCell{
       
         postImage.anchor(messageTextLabel.bottomAnchor, left: safeAreaLayoutGuide.leftAnchor, right: rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 30, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 250)
         
-//        hoverLike.anchor(postImage.topAnchor, left: postImage.leftAnchor, right: postImage.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 100, rightConstant: 100, widthConstant: 0, heightConstant: 100)
-
         iconImageLike.anchor(postImage.bottomAnchor, left: leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 30, leftConstant: 60, rightConstant: 0, widthConstant: 30, heightConstant: 30)
         
         numCount.anchor(postImage.bottomAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 38, leftConstant: 40, rightConstant: 0, widthConstant: 30, heightConstant: 30)

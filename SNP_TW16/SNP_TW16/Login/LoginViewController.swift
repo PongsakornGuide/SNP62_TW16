@@ -18,9 +18,7 @@ class LoginViewController: UIViewController {
           super.viewWillAppear(animated)
           navigationController?.navigationBar.isHidden = true
     }
-    
-    
-     //Change color on Tab
+
      override var preferredStatusBarStyle: UIStatusBarStyle{
          return .lightContent
      }
@@ -43,9 +41,6 @@ class LoginViewController: UIViewController {
             let label = UILabel()
             let title = "ยินดีต้อนรับ Alder"
             let text = "\n \n ใส่เบอร์มือถือสำหรับเข้าสู่ระบบ"
-//            let style = NSMutableParagraphStyle()
-//            style.alignment = NSTextAlignment.center
-//            NSAttributedString.Key.paragraphStyle:style,
             let attributedText = NSMutableAttributedString(string: title,
             attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 30),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
 
@@ -66,14 +61,8 @@ class LoginViewController: UIViewController {
             textField.layer.cornerRadius = 15
             textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             textField.leftViewMode = UITextField.ViewMode.always
-
-//            textField.addTarget(self, action: #selector(checkNumber), for: .editingChanged)
             return textField
         }()
-
-//        @objc func checkNumber(){
-
-//        }
 
         let submitButton : UIButton = {
             let submit = UIButton(type: UIButton.ButtonType.system)
@@ -89,7 +78,6 @@ class LoginViewController: UIViewController {
             return submit
         }()
     
-
     let otpTextField : UITextField = {
        let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "กรอก otp ",attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
@@ -125,7 +113,7 @@ class LoginViewController: UIViewController {
         Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
                     print(response)
             if let otp = response.result.value {
-                 self.OTP_check = "\(otp)"
+                self.OTP_check = "\(otp)"
                     let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
                              let twilioSecret = "a74824968da571b8afac81506f84acf2"
                              //Note replace + = %2B , for To and From phone number
@@ -171,7 +159,6 @@ class LoginViewController: UIViewController {
             print("OTP NOT REGISTER")
         }else{
             print("USE REGISTER SUCCECT")
-            
             let parameters = ["tel" : numberTextField.text!,"otp": otpTextField.text!]
             Alamofire.request(URL_USER_LOGIN, method: .post,parameters: parameters).responseJSON { response in
                 print(response)
@@ -182,7 +169,7 @@ class LoginViewController: UIViewController {
                                    let userId = user.value(forKey: "id") as! Int
                                    let userName = user.value(forKey: "username") as! String
                                    let tel = user.value(forKey: "tel") as! String
-                                                                              //saving user
+                                   //saving user
                                    let image = user.value(forKey: "photo") as! String
                                    self.defaultValues.set(userId, forKey: "userId")
                                    self.defaultValues.set(userName, forKey: "userName")
@@ -200,7 +187,6 @@ class LoginViewController: UIViewController {
                }
             }
         }
-        
     }
 
          let regButton : UIButton = {
@@ -212,13 +198,11 @@ class LoginViewController: UIViewController {
                 submit.layer.shadowOffset = CGSize(width: 0, height: 0)
                 submit.layer.shadowRadius = 10
                 submit.setTitle("สมัครสมาชิก", for: .normal)
-            submit.setTitleColor(UIColor.blackAlpha(alpha: 0.7),for: .normal)
+                submit.setTitleColor(UIColor.blackAlpha(alpha: 0.7),for: .normal)
                 submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-        //        submit.isUserInteractionEnabled = false
                 submit.addTarget(self, action: #selector(pushToReigster), for: .touchUpInside)
                 return submit
             }()
-
 
         @objc func pushToReigster(){
             let Register = MobileOtpViewController()
@@ -226,28 +210,22 @@ class LoginViewController: UIViewController {
             
         }
     
-    
         func pushiduser(){
             let nextToOtp = OtpViewController()
             nextToOtp.idUserLabelText = numberTextField.text ?? "0"
             self.navigationController?.pushViewController(nextToOtp, animated: true)
         }
 
-
-
         let checkError : UILabel = {
              let check = UILabel()
              let showText = "Phone number error message."
              let style = NSMutableParagraphStyle()
              style.alignment = NSTextAlignment.center
-            let attributedText = NSMutableAttributedString(string: showText,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 12),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 255, green: 0, blue: 0)])
-
-
+             let attributedText = NSMutableAttributedString(string: showText,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 12),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 255, green: 0, blue: 0)])
              check.attributedText = attributedText
              check.numberOfLines = 0
              return check
          }()
-
 
         let line: UIView = {
             let lineView = UIView()
@@ -267,44 +245,33 @@ class LoginViewController: UIViewController {
             return view
         }()
 
-
         override func viewDidLoad() {
             super.viewDidLoad()
-            
             if self.defaultValues.string(forKey:"userId") != nil {
-                                                    
-                                                self.view.window?.rootViewController = tabBarViewController()
-                                                    self.view.window?.makeKeyAndVisible()
-                
+                    self.view.window?.rootViewController = tabBarViewController()
+                    self.view.window?.makeKeyAndVisible()
             }
-            
             tabBarController?.tabBar.isHidden = true
-
             let stackView = UIStackView(arrangedSubviews: [otpView])
             stackView.distribution = .fillEqually
             stackView.spacing = 10
             stackView.axis = .vertical
-            
             view.addSubview(stackView)
             view.backgroundColor = .white
             view.addSubview(imageView)
-            
             otpView.addSubview(imageIcon)
             otpView.addSubview(line)
             otpView.addSubview(numberTextField)
-
             view.addSubview(textHeader)
             view.addSubview(submitButton)
             view.addSubview(checkError)
             view.addSubview(regButton)
             view.addSubview(otpTextField)
             view.addSubview(submitLogin)
-            
             checkError.isHidden = true
             otpTextField.isHidden = true
             submitLogin.isHidden = true
             
-         
             imageView.anchor(view.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200
             )
 
@@ -316,22 +283,15 @@ class LoginViewController: UIViewController {
 
             line.anchor(otpView.safeAreaLayoutGuide.topAnchor, left: imageIcon.rightAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0,  leftConstant: 20, rightConstant: 0, widthConstant: 1.5, heightConstant: 80)
 
-
             numberTextField.anchor(otpView.topAnchor, left: line.rightAnchor, right: otpView.rightAnchor, bottom: nil, topConstant: 26, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 0)
-
-
 
             submitButton.anchor(otpView.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
             
-            
             otpTextField.anchor(submitButton.bottomAnchor, left: otpView.leftAnchor, right: otpView.rightAnchor, bottom: nil, topConstant: 26, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 80)
-
-            
             
             submitLogin.anchor(otpTextField.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
 
             regButton.anchor(submitLogin.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
-
             
             checkError.anchor(regButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 50)
         }

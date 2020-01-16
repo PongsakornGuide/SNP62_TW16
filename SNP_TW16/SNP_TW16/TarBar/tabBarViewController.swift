@@ -13,10 +13,7 @@ class tabBarViewController: UITabBarController ,UITabBarControllerDelegate {
         super.viewDidLoad()
         self.delegate = self
         
-        
         let activityController = tabBarNavigation(unselectedImage: UIImage(named: "activity"), selectedImage: UIImage(named: "activity"), title: "Activity", badgeValue: "1", colorValue: .red,rootViewController: MainActivityViewController())
-
-//        let articleController = tabBarNavigation(unselectedImage: UIImage(named: "article"), selectedImage: UIImage(named: "article"), title: "Article", badgeValue: nil, colorValue: .red,rootViewController: articleViewController())
 
         let communityController = tabBarNavigation(unselectedImage: UIImage(named: "community"), selectedImage: UIImage(named: "community"), title: "Community", badgeValue: "8", colorValue: .red,rootViewController: CommunViewController())
 
@@ -24,7 +21,6 @@ class tabBarViewController: UITabBarController ,UITabBarControllerDelegate {
         let emergencyController = tabBarNavigation(unselectedImage: UIImage(named: "threepoint"), selectedImage: UIImage(named: "Emergency"), title: "Emergency", badgeValue: nil, colorValue: .red,rootViewController: EmergencyViewController())
 
         viewControllers = [activityController,communityController,emergencyController]
-        
         }
     fileprivate func tabBarNavigation(unselectedImage: UIImage?, selectedImage: UIImage?, title: String?, badgeValue: String?, colorValue: UIColor? ,rootViewController: UIViewController = UIViewController())-> UINavigationController {
         let navController = UINavigationController(rootViewController: rootViewController)
@@ -35,21 +31,5 @@ class tabBarViewController: UITabBarController ,UITabBarControllerDelegate {
         navController.tabBarItem.badgeColor = colorValue
         navController.tabBarItem.badgeValue = badgeValue
         return navController
+        }
     }
-
-//    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-//
-//        let index = viewControllers?.lastIndex(of: viewController)
-//
-//        if index == 1 {
-//            let photoController = articleViewController()
-//            self.navigationController?.pushViewController(photoController, animated: true)
-////            let photoController = UINavigationController(rootViewController: MainActivityViewController())
-////            present(photoController, animated: true, completion: nil)
-//        }
-//
-//        return true
-    }
-
-        
-//}

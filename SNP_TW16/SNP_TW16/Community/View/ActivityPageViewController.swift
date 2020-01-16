@@ -8,24 +8,6 @@
 
 import UIKit
 class ActivityPageViewController: UITableViewCell {
-////    override init(frame: CGRect) {
-////        super.init(frame: frame)
-////        setup()
-////    }
-////
-//           override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-//             super.init(style: style, reuseIdentifier: reuseIdentifier)
-//             setup()
-//         }
-//    func setup(){
-//        backgroundColor = .red
-//    }
-//
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
          super.init(style: style, reuseIdentifier: reuseIdentifier)

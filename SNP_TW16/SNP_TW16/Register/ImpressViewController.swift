@@ -10,25 +10,15 @@ import UIKit
 import Alamofire
 class ImpressViewController: UIViewController, UITextFieldDelegate ,UINavigationControllerDelegate ,UIPickerViewDelegate,UIPickerViewDataSource{
     
-    
     let URL_USER_REGISTER = "http://localhost/alder_iosapp/v1/add_disease_activity.php"
-    
     var disease = ["1","2","3","4"]
     var activity = ["1","2","3","5"]
-    
-    
-//    let disease: [(String, Int)] = [("A", 1), ("B", 2), ("C", 3)]
-//    let activity: [(String, Int)] = [("A", 1), ("B", 2), ("C", 3)]
-    
     let defaultValues = UserDefaults.standard
     let activityPickerView = UIPickerView()
     let diseasePickerView = UIPickerView()
-    
-    
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
-    
-    
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -94,57 +84,6 @@ class ImpressViewController: UIViewController, UITextFieldDelegate ,UINavigation
                    view.layer.cornerRadius = 20
                    return view
                }()
-//
-//
-//                let checkBox: UIButton = {
-//                     let button = UIButton(type: .system)
-//                     button.backgroundColor = .blue
-//                     button.layer.cornerRadius = 20
-////                     button.setTitle("CHECK1", for: .normal)
-//                    button.imageView?.image = UIImage(named: "user")
-////                     button.setTitleColor(.white, for: .normal)
-//                     button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-//                     button.addTarget(self, action: #selector(checkbox), for: .touchUpInside)
-//                     return button
-//                 }()
-//
-//                    let checkBox2: UIButton = {
-//                        let button = UIButton(type: .system)
-//                        button.backgroundColor = .blue
-//                        button.layer.cornerRadius = 20
-//                        button.setTitle("grid", for: .normal)
-//
-//                        button.setTitleColor(.white, for: .normal)
-//                        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-//                        button.addTarget(self, action: #selector(checkbox2), for: .touchUpInside)
-//                        return button
-//                    }()
-//
-//    @objc func checkbox(){
-//        if checkBox.isSelected{
-//            checkBox.isSelected = false
-//            checkBox2.isSelected = true
-//            print("1")
-//        }else{
-//            checkBox2.isSelected = true
-//            print("0")
-//        }
-//
-//    }
-//
-//    @objc func checkbox2(){
-//        if checkBox2.isSelected{
-//            checkBox2.isSelected = false
-//            checkBox.isSelected = true
-//            print("1")
-//        }else{
-//            checkBox.isSelected = true
-//            print("0")
-//        }
-//
-//    }
-    //                                viewScroll.addSubview(checkBox)
-    //                                viewScroll.addSubview(checkBox2)
             
  //-----------------------------------------------------------------------------------------------
                let nextButton: UIButton = {

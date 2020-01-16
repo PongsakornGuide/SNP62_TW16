@@ -244,10 +244,6 @@ class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationCo
             }()
         //-----------------------------------------------------------------------------------------------
         
-       
-    
-    
-    
     let nextButton: UIButton = {
                      let button = UIButton(type: .system)
                      button.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
@@ -260,22 +256,11 @@ class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationCo
    }()
 
             @objc func activity_active(){
-////                print("5555")
-//                if (btncheck5.valueChanged != nil){
-////                    nextButton.isEnabled = true
-//                    print("6666")
-//                }else{
-//                    print("5555")
-//                }
-                
                 let alert = UIAlertController(title: "คุณเข้าร่วมกิจกรรมสำเร็จ", message: "แล้วพบกันในเร็วๆ นี้ :-)", preferredStyle: UIAlertController.Style.alert)
-                    // add the actions (buttons)
-                alert.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: nil))
-                    // show the alert
-                    self.present(alert, animated: true, completion: nil)
-                
-                
-                
+                alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { action in
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
         
 
