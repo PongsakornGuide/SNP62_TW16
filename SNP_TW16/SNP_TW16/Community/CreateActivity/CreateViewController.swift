@@ -12,10 +12,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
 //        var activity = [Activity]()
         var username = String()
         var user_id = String()
-    
         var imageViewPro = String()
-    
-    
         let defaultValues = UserDefaults.standard
         let URL_USER_CreatePost = "http://localhost/alder_iosapp/v1/create_post.php"
     
@@ -121,15 +118,14 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
                }
            }, to: URL_USER_CreatePost ,method: .post ,headers: header) { (res) in
                switch res{
-               case .success(let request, _, _): break
+               case .success(let request, _, _): 
                request.responseJSON(completionHandler: { (resJson) in
                    print(resJson.value ?? "0")
+                   self.navigationController?.popViewController(animated: true)
                })
                case .failure(_):
                    print("fail")
                }
-
-            self.navigationController?.popViewController(animated: true)
          }
     }
     
@@ -142,15 +138,18 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
            return btn
        }()
        
-       @objc func performSegueToReturnBack()  {
+    @objc func performSegueToReturnBack()  {
            if let nav = self.navigationController {
                nav.popToRootViewController(animated: true)
            } else {
                self.dismiss(animated: true, completion: nil)
            }
-       }
+    }
     
-    
+    ////hide keyborad
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+          self.view.endEditing(true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

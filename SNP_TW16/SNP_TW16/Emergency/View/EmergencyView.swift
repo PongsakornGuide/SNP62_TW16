@@ -80,9 +80,9 @@ class EmergencyView: UITableViewCell {
              style.alignment = NSTextAlignment.center
         
              let attributedText = NSMutableAttributedString(string: title,
-            attributes: [ NSAttributedString.Key.font : UIFont.PoppinsBold(size: 24),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 33, green: 64, blue: 154)])
+             attributes: [ NSAttributedString.Key.font : UIFont.PoppinsBold(size: 24),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 33, green: 64, blue: 154)])
              label.attributedText = attributedText
-             label.numberOfLines = 0
+             label.numberOfLines = 2
               return label
     }()
 
@@ -94,17 +94,17 @@ class EmergencyView: UITableViewCell {
         addSubview(titleLabel)
         addSubview(lineborder)
         
-        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 450)
+        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 420)
 
         bgImage.anchor(bgActivitity.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200)
         
         textHeader.anchor(bgImage.topAnchor, left: bgImage.leftAnchor, right: bgImage.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 
-        btnEmergency.anchor(bgImage.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: -50, bottomConstant: 0, leftConstant: 90, rightConstant: 90, widthConstant: 100, heightConstant: 190)
+        btnEmergency.anchor(bgImage.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: -50, bottomConstant: 0, leftConstant: 110, rightConstant: 110, widthConstant: 190, heightConstant: 190)
         
-        lineborder.anchor(btnEmergency.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 100, rightConstant: 100, widthConstant: 0, heightConstant: 170)
+        lineborder.anchor(btnEmergency.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 120, rightConstant: 120, widthConstant: 170, heightConstant: 170)
 
-        titleLabel.anchor(btnEmergency.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 100)
+        titleLabel.anchor(btnEmergency.bottomAnchor, left: bgActivitity.leftAnchor, right:bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 100)
 
     }
 }

@@ -49,11 +49,11 @@ class AddTelView: UITableViewCell {
         bg.setTitle("+", for: .normal)
         bg.titleLabel?.font = UIFont.PoppinsMedium(size: 65)
         bg.setTitleColor(UIColor.rgb(red: 33, green: 64, blue: 154), for: .normal)
-        bg.addTarget(self, action: #selector(check), for: .touchUpInside)
+        bg.addTarget(self, action: #selector(addTelUserRelative), for: .touchUpInside)
         return bg
     }()
     
-    @objc func check(){
+    @objc func addTelUserRelative(){
 //        print("555")
     }
     

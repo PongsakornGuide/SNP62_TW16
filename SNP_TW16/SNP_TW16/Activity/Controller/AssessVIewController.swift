@@ -10,7 +10,7 @@ import UIKit
 //import SimpleCheckbox
 class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationControllerDelegate {
     //    let num : Int = 0631921545
-    
+                var delegate:UIViewController?
     
                  let screenSizeX: CGFloat = UIScreen.main.bounds.width
                  let screenSizeY: CGFloat = UIScreen.main.bounds.height
@@ -119,6 +119,7 @@ class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationCo
         
         let btncheck : Checkbox = {
             let tickBox = Checkbox()
+            tickBox.tag = 0;
             tickBox.borderStyle = .square
             tickBox.checkmarkStyle = .tick
             tickBox.checkmarkSize = 0.7
@@ -258,7 +259,14 @@ class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationCo
             @objc func activity_active(){
                 let alert = UIAlertController(title: "คุณเข้าร่วมกิจกรรมสำเร็จ", message: "แล้วพบกันในเร็วๆ นี้ :-)", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { action in
-                    self.navigationController?.popViewController(animated: true)
+                    
+                    if let delegate = self.delegate as? ContentActivityViewController {
+                        delegate.nextButton.setTitle("เข่าร่วมกิจกรรมแล้ว",for: .normal)
+                        delegate.nextButton.isEnabled = true
+                        delegate.nextButton.backgroundColor = .black
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    
                 }))
                 self.present(alert, animated: true, completion: nil)
             }

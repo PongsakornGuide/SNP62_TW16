@@ -11,4 +11,5 @@ target 'SNP_TW16' do
   pod 'AlamofireImage'
   pod 'SwiftyJSON'
   pod 'ObjectMapper', '~> 3.4'
+  pod 'IQKeyboardManagerSwift', '6.3.0'
 end

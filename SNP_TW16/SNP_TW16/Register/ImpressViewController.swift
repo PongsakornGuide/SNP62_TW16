@@ -19,6 +19,12 @@ class ImpressViewController: UIViewController, UITextFieldDelegate ,UINavigation
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
 
+    
+    ////hide keyborad
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -200,7 +206,7 @@ class ImpressViewController: UIViewController, UITextFieldDelegate ,UINavigation
                       textField.textColor = .black
                       //textField.addTarget(self, action: #selector(handelemailCheckValid), for: .editingChanged)
                       textField.font = UIFont.boldSystemFont(ofSize: 15)
-                      textField.keyboardType = .emailAddress
+//                      textField.keyboardType = .emailAddress
                       return textField
                   }()
                   let diseaseDetailTextFieldLine: UIView = {
@@ -255,7 +261,6 @@ class ImpressViewController: UIViewController, UITextFieldDelegate ,UINavigation
                activityPickerView.delegate = self
                activityPickerView.dataSource = self
                activityTextField.inputView = activityPickerView
-
 
                diseasePickerView.delegate = self
                diseasePickerView.dataSource = self

@@ -7,12 +7,20 @@
 //
 
 import UIKit
-struct Emergency {
-    var numTel : String?
-    var titleName : String?
-    
-    init(numTel: String?,titleName: String?){
-        self.numTel = numTel
-        self.titleName = titleName
+import ObjectMapper
+class allListTel: Mappable{
+    var emergencyId: Int?
+    var emergencyName: String?
+    var emergencyCall: Int?
+    required init?(map: Map) {
+
+    }
+    // Mappable
+    func mapping(map: Map) {
+        emergencyId  <- map["id"]
+        emergencyName  <- map["name"]
+        emergencyCall <- map["tel"]
     }
 }
+
+

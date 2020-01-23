@@ -29,6 +29,10 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
     var AddressLabelText = String()
     var GenderLabelText = String()
     
+    ////hide keyborad
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
            
            var viewScroll: UIScrollView = {
                let view = UIScrollView()

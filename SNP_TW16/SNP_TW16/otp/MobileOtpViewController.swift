@@ -11,6 +11,7 @@ import Foundation
 import Alamofire
 
 class MobileOtpViewController: UIViewController {
+    
     let URL_USER_USE_OTP = "http://localhost/alder_iosapp/v1/select_otp.php"
     let defaultValues = UserDefaults.standard
     var Tel_user = String()
@@ -46,7 +47,6 @@ class MobileOtpViewController: UIViewController {
         label.numberOfLines = 0
         return label
     }()
-    
     
     
     let otpTextField: UITextField = {
@@ -194,24 +194,20 @@ class MobileOtpViewController: UIViewController {
     }()
     
     
+   ////hide keyborad
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-//        view.addGestureRecognizer(tap)
-        
-        
         let stackView = UIStackView(arrangedSubviews: [otpView])
         stackView.distribution = .fillEqually
         stackView.spacing = 10
         stackView.axis = .vertical
-//        self.navigationItem(visible: false, duration: 0.3, animated: true)
         self.tabBarController?.tabBar.isHidden = true
         self.extendedLayoutIncludesOpaqueBars = true
-//        let backButton = UIBarButtonItem(title: "back", style: UIBarButtonItem.Style.plain, target: navigationController, action: nil)
-//        navigationItem.leftBarButtonItem = backButton
-//        navigationItem.hidesBackButton = true
-//        navigationItem.setHidesBackButton(true, animated:true);
-        
 
         view.addSubview(stackView)
         view.backgroundColor = .white

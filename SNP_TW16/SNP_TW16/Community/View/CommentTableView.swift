@@ -12,12 +12,11 @@ class CommentTableView: UITableViewCell {
            super.init(style: style, reuseIdentifier: reuseIdentifier)
            setupViewCell()
     }
-    
     let bgActivitity:UIView = {
         let background = UIView()
         return background
     }()
-    
+
     let contrainer:UIView = {
        let view = UIView()
 //        view.backgroundColor = .red
@@ -105,7 +104,7 @@ class CommentTableView: UITableViewCell {
 
         iconImageLike.anchor(comment.bottomAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 10, rightConstant: 10, widthConstant: 30, heightConstant: 30)
 
-        numCount.anchor(comment.bottomAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 40, rightConstant: 10, widthConstant: 20, heightConstant: 20)
+        numCount.anchor(comment.bottomAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 40, rightConstant: 10, widthConstant: 20, heightConstant: 20)
         
 //             numCount.anchor(contrainer.topAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 10, leftConstant: 60, rightConstant: 10, widthConstant: 40, heightConstant: 40)
         

@@ -10,11 +10,12 @@ import UIKit
 import Alamofire
 import ObjectMapper
 class SubActivityTypeTableViewController: UITableViewController {
-  
+//  ActivityDetail
     let URL_USER_ID = "http://localhost/alder_iosapp/v1/showactivity.php/"
     let defaultValues = UserDefaults.standard
     var typecheck = String()
-    var activityList : [AcivityData]?
+    var activityList : [ActivityDetail]?
+//    var header: [ActivityType]?
     
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
@@ -78,36 +79,19 @@ class SubActivityTypeTableViewController: UITableViewController {
     }
     
     
-    override func viewDidLoad() {
-    super.viewDidLoad()
-    navigationItem.title = "Alder"
-    tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId)
-    tableView.register(ActivityHeaderViewCell.self, forCellReuseIdentifier: cellId1)
-    tableView.rowHeight = UITableView.automaticDimension
-    tableView.estimatedRowHeight = 50
-        
-        
-        
-        
+        override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.title = "Alder"
+        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(ActivityHeaderViewCell.self, forCellReuseIdentifier: cellId1)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
         
         if let name2 = defaultValues.string(forKey: "userId") {
-                                          typecheck = name2
-            print("777jkjkjk")
-                                   print("id ===== \(typecheck)")
-             print("777jkjkjk")
-            
-                     }else{
-                                          //send back to login view controller
+            typecheck = name2
+        }else{
+            //send back to login view controller
         }
-        
-        //TODO: -
-//        let parameters: Parameters = ["userId":typecheck]
-//        let url = URL_USER_ID + "?id=\(typecheck)"
-//        Alamofire.request(url, method: .post,parameters: parameters).responseJSON { (resData) in
-//
-//            let timeline = Mapper<ActivityType>().mapArray(JSONObject: resData.result.value)
-//
-//        }
 
     }
         

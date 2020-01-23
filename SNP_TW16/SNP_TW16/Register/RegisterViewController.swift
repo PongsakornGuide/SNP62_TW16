@@ -16,9 +16,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
         var imageTy: UIImage!
         private var datePicker : UIDatePicker?
     
-//        private var genPicker : UIDatePicker?
-    
-    
         var religionPicker = UIPickerView()
         var genPicker = UIPickerView()
         var centerPicker = UIPickerView()
@@ -28,7 +25,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
         var picker1 = UIPickerView()
     
     
-
             func numberOfComponents(in pickerView: UIPickerView) -> Int {
                return 1
            }
@@ -77,16 +73,15 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
                                 self.view.endEditing(false)
                             }
            }
-        
-    
     
        let screenSizeX: CGFloat = UIScreen.main.bounds.width
        let screenSizeY: CGFloat = UIScreen.main.bounds.height
-       
        var viewScroll: UIScrollView = {
            let view = UIScrollView()
            return view
        }()
+    
+    
        let stepView: UIImageView = {
            let view = UIImageView()
            view.image = UIImage(named: "Step1")
@@ -134,11 +129,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    
        let BGView: UIView = {
            let view = UIView()
-           view.backgroundColor = .white
+           view.backgroundColor = .red
            view.layer.cornerRadius = 20
            return view
        }()
@@ -175,7 +168,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
                let textField = UITextField()
                textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
-               //textField.addTarget(self, action: #selector(checkOnClick), for: .editingChanged)
                textField.font = UIFont.boldSystemFont(ofSize: 15)
                return textField
            }()
@@ -189,9 +181,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
                let textField = UITextField()
                textField.attributedPlaceholder = NSAttributedString(string: "นามสกุล",attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
-               //textField.addTarget(self, action: #selector(handelemailCheckValid), for: .editingChanged)
                textField.font = UIFont.boldSystemFont(ofSize: 15)
-               textField.keyboardType = .emailAddress
                return textField
            }()
            let surnameTextFieldLine: UIView = {
@@ -204,8 +194,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
                let textField = UITextField()
                textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
-               //textField.addTarget(self, action: #selector(handlepasswordCheckValid), for: .editingChanged)
-//               textField.isSecureTextEntry = true
                textField.font = UIFont.boldSystemFont(ofSize: 15)
                return textField
            }()
@@ -220,8 +208,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
                let textField = UITextField()
                textField.attributedPlaceholder = NSAttributedString(string: "ปี / เดือน / วัน", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
-               //textField.addTarget(self, action: #selector(handleconfirmpasswordCheckValid), for: .editingChanged)
-//               textField.isSecureTextEntry = true
                textField.font = UIFont.boldSystemFont(ofSize: 15)
                return textField
            }()
@@ -237,8 +223,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
                   let textField = UITextField()
                   textField.attributedPlaceholder = NSAttributedString(string: "เพศ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                   textField.textColor = .black
-                  //textField.addTarget(self, action: #selector(handleconfirmpasswordCheckValid), for: .editingChanged)
-//                  textField.isSecureTextEntry = true
                   textField.font = UIFont.boldSystemFont(ofSize: 15)
                   return textField
               }()
@@ -254,8 +238,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
                       let textField = UITextField()
                       textField.attributedPlaceholder = NSAttributedString(string: "ศาสนา", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                       textField.textColor = .black
-                      textField.addTarget(self, action: #selector(CheckPicker), for: .editingChanged)
-    //                  textField.isSecureTextEntry = true
                       textField.font = UIFont.boldSystemFont(ofSize: 15)
                       return textField
                   }()
@@ -264,17 +246,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
                       view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
                       return view
                   }()
-    @objc func CheckPicker(){
-//        pickerReg()
-    }
     
     //-----------------------------------------------------------------------------------------------
                   let addressTextField: UITextField = {
                       let textField = UITextField()
                       textField.attributedPlaceholder = NSAttributedString(string: "ศูนย์ที่อยู่อาศัย", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                       textField.textColor = .black
-                      //textField.addTarget(self, action: #selector(handleconfirmpasswordCheckValid), for: .editingChanged)
-    //                  textField.isSecureTextEntry = true
                       textField.font = UIFont.boldSystemFont(ofSize: 15)
                       return textField
                   }()
@@ -296,12 +273,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
         }
     
         func pushData(){
-            
-//            let puchToReg = RegisterViewController ()
-//            puchToReg.NumberPhoneLabelText = self.idTextField.text ?? "0"
-//            self.navigationController?.pushViewController(puchToReg, animated: true)
-            
-                
                 let passData = RecordViewController()
                 passData.NameLabelText = nameTextField.text ?? "0"
                 passData.SernameLabelText = surnameTextField.text ?? "0"
@@ -332,40 +303,39 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
          }
      }
     
+
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
        override func viewDidLoad() {
-           super.viewDidLoad()
-        
-        
-view.addSubview(btnBack)
-        
-                genPicker.delegate = self
-                genPicker.dataSource = self
-                genTextField.inputView = genPicker
+       super.viewDidLoad()
+       view.addSubview(btnBack)
+       genPicker.delegate = self
+       genPicker.dataSource = self
+       genTextField.inputView = genPicker
 
-
-                religionPicker.delegate = self
-                religionPicker.dataSource = self
-                cultTextField.inputView = religionPicker
+       religionPicker.delegate = self
+       religionPicker.dataSource = self
+       cultTextField.inputView = religionPicker
                 
-                centerPicker.delegate = self
-                centerPicker.dataSource = self
-                addressTextField.inputView = centerPicker
-        
+       centerPicker.delegate = self
+       centerPicker.dataSource = self
+       addressTextField.inputView = centerPicker
         //picker
-        datePicker = UIDatePicker()
-        datePicker?.datePickerMode = .date
-        dateTextField.inputView = datePicker
-        datePicker?.addTarget(self, action: #selector(RegisterViewController.dateChanged(datePicker: )), for: .valueChanged)
+       datePicker = UIDatePicker()
+       datePicker?.datePickerMode = .date
+       dateTextField.inputView = datePicker
+        
+       datePicker?.addTarget(self, action: #selector(RegisterViewController.dateChanged(datePicker: )), for: .valueChanged)
         let TapGesture = UITapGestureRecognizer(target: self, action: #selector(RegisterViewController.viewTapped(gestureRecognizer:)))
         
             phoneTextField.text = NumberPhoneLabelText
-//        print("phone : \(NumberPhoneLabelText)")
-        
+
             view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
            navigationItem.title = "ข้อมูลส่วนตัว"
-//           ,surnameTextField,phoneTextField
-//           ,dateTextField,genTextField,cultTextField,addressTextField
            let stacView = UIStackView(arrangedSubviews: [nameTextField,surnameTextField,phoneTextField,dateTextField,genTextField,cultTextField,addressTextField])
            stacView.distribution = .fillEqually
            stacView.spacing = 0
@@ -380,77 +350,57 @@ view.addSubview(btnBack)
            self.addressTextField.delegate = self
      
            
-           view.addSubview(viewScroll)
-           viewScroll.addSubview(stepView)
-           viewScroll.addSubview(BGView)
-           viewScroll.addSubview(imgView)
-           viewScroll.addSubview(uploadImage)
-        
-//           viewScroll.addSubview(iconCamera)
-        
-           viewScroll.addSubview(titleLabel)
-        
-           viewScroll.addSubview(stacView)
-           viewScroll.addSubview(nextButton)
-        
-           viewScroll.addSubview(nameTextFieldLine)
-           viewScroll.addSubview(surnameTextFieldLine)
-           viewScroll.addSubview(phoneTextFieldLine)
-        
-           viewScroll.addSubview(dateTextFieldLine)
-
+            view.addSubview(viewScroll)
+            viewScroll.addSubview(stepView)
+            viewScroll.addSubview(BGView)
+            viewScroll.addSubview(imgView)
+            viewScroll.addSubview(uploadImage)
+            viewScroll.addSubview(titleLabel)
+            viewScroll.addSubview(stacView)
+            viewScroll.addSubview(nextButton)
+            viewScroll.addSubview(nameTextFieldLine)
+            viewScroll.addSubview(surnameTextFieldLine)
+            viewScroll.addSubview(phoneTextFieldLine)
+            viewScroll.addSubview(dateTextFieldLine)
             viewScroll.addSubview(genTextFieldTextFieldLine)
-
             viewScroll.addSubview(cultTextFieldTextFieldLine)
-
             viewScroll.addSubview(addressTextFieldTextFieldLine)
-        
-       
+    
            
         viewScroll.anchor(view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        btnBack.anchor(viewScroll.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 20, heightConstant: 20
-               )
-           
+//     viewUIView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+            
+//        btnBack.anchor(viewScroll.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 20, heightConstant: 20
+//               )
+//
         stepView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX - 0, heightConstant: 115)
-           
+
         imgView.anchor(BGView.topAnchor, left: nil, right: nil, bottom: nil, topConstant: -60, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 100, heightConstant: 100)
             imgView.centerXAnchor.constraint(equalTo: BGView.centerXAnchor).isActive = true
-        
+
         uploadImage.anchor(imgView.topAnchor, left: nil, right: imgView.rightAnchor, bottom: nil, topConstant: 45, bottomConstant: 0, leftConstant: 0, rightConstant: -15, widthConstant: 50, heightConstant: 50)
-//        imgView.centerXAnchor.constraint(equalTo: BGView.centerXAnchor).isActive = true
-        
-//         iconCamera.anchor(uploadImage.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 17, bottomConstant: 0, leftConstant: 0, rightConstant: -15, widthConstant: 20, heightConstant: 20)
-//        iconCamera.centerXAnchor.constraint(equalTo: uploadImage.centerXAnchor).isActive = true
-        
-        
-           
+
         BGView.anchor(stepView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nextButton.topAnchor, topConstant: 100, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 40, heightConstant: screenSizeY)
 
         stacView.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 100, bottomConstant: 50, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 100, heightConstant: 700)
-           //stacView.widthAnchor.constraint(lessThanOrEqualToConstant: 200).isActive = true
-            
-        
-        
+
         titleLabel.anchor(BGView.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: stacView.topAnchor, topConstant: 50, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
-        
-        
+
         nameTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nameTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
-            
+
         surnameTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: surnameTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
         phoneTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: phoneTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
         dateTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: dateTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
-            genTextFieldTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: genTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
+        genTextFieldTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: genTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
         cultTextFieldTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: cultTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
         addressTextFieldTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: addressTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
-//
-//
-           
+
         nextButton.anchor(BGView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 80, rightConstant: 80, widthConstant: screenSizeX - 160, heightConstant: 50)
            // Do any additional setup after loading the view.
        }

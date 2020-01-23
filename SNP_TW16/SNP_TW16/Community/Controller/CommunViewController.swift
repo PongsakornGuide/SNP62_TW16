@@ -11,6 +11,7 @@ import Alamofire
 import AlamofireImage
 import ObjectMapper
 class CommunViewController: UITableViewController{
+
     let defaultValues = UserDefaults.standard
     let datalist1 = ["firstCell1" , "firstCell2" , "firstCell3" , "firstCell4"]
     var User_Name = String()
@@ -23,21 +24,15 @@ class CommunViewController: UITableViewController{
     var idcontent = Int()
 
     
-//      override func viewWillAppear(_ animated: Bool) {
-    //    super.viewWillAppear(animated)
-    //    self.tableView.reloadData()
-    //    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getActivty()
         self.tableView.reloadData()
     }
-    
     
     @objc func handelSetting(){
         let CreateView = CreateViewController()
         navigationController?.pushViewController(CreateView, animated: true)
-//         present(CreateView, animated: true, completion: nil)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -59,6 +54,7 @@ class CommunViewController: UITableViewController{
             let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! ActivityPageViewController
             return cell
         }else{
+            
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! AcivityListTableViewCell
             let headerActivity = activityList?[indexPath.row]
             cell.userFullname.text = headerActivity?.username
@@ -113,25 +109,43 @@ class CommunViewController: UITableViewController{
              let RefreshLine = DispatchTime.now() + .milliseconds(500)
              DispatchQueue.main.asyncAfter(deadline: RefreshLine) {
                  self.refresher.endRefreshing()
+                 self.getActivty()
 //                 self.tableView.reloadData()
-                
              }
       }
+    
+    
+      func getActivty(){
+           Alamofire.request(URL_GET_DATA).responseJSON { [weak self](resData) in
+                      self?.activityList = Mapper<allList>().mapArray(JSONObject: resData.result.value)
+                      self?.tableView.reloadData()
+              }
+      }
+    
+      let submitBtn : UIButton = {
+              let submit = UIButton(type: .system)
+              submit.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
+              submit.layer.borderWidth = 2
+              submit.backgroundColor =  UIColor.rgb(red: 33, green: 120, blue: 174)
+              submit.layer.cornerRadius = 45
+              submit.setTitle("โพสต์", for: .normal)
+              submit.setTitleColor(UIColor.white,for: .normal)
+              submit.addTarget(self, action: #selector(handelSetting), for: .touchUpInside)
+              submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+              return submit
+      }()
 
        override func viewDidLoad() {
        super.viewDidLoad()
-       self.tableView.reloadData()
+        view.addSubview(submitBtn)
+        submitBtn.anchor(view.safeAreaLayoutGuide.topAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 320, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 90, heightConstant: 90)
+        
                 if #available(iOS 12.1 , *) {
                             tableView.refreshControl = refresher
-                    
                         }else{
                             tableView.addSubview(refresher)
                 }
         
-        let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
-        
-            settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
-            navigationItem.rightBarButtonItem = settings
             navigationItem.title = "Alder"
             tableView.register(ActivityPageViewController.self, forCellReuseIdentifier: cellId1)
             tableView.tableFooterView = UIView()
@@ -144,10 +158,7 @@ class CommunViewController: UITableViewController{
             tableView.estimatedRowHeight = 50
             view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         
-            Alamofire.request(URL_GET_DATA).responseJSON { [weak self](resData) in
-                self?.activityList = Mapper<allList>().mapArray(JSONObject: resData.result.value)
-                self?.tableView.reloadData()
-            }
+         
         
             let defaultValues = UserDefaults.standard
                        if let name = defaultValues.string(forKey: "userId") {

@@ -140,7 +140,7 @@ class LoginViewController: UIViewController {
         }
 
     }
-    
+
     @objc func submitBtn(){
         let checkNum = numberTextField.text?.count ?? 0 >= 5
         if !checkNum {
@@ -151,6 +151,14 @@ class LoginViewController: UIViewController {
             checkError.isHidden = true
             send_to_otp()
         }
+//        let content = UNMutableNotificationContent()
+//                   content.title = "The 5 seconds are up!"
+//                   content.subtitle = "they are up now!"
+//                   content.body = "The 5 seconds are really up!"
+//                   content.badge = 1
+//                   let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//                   let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
+//                   UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
     @objc func loginToApp(){
@@ -244,7 +252,11 @@ class LoginViewController: UIViewController {
             view.layer.shadowOpacity = 0.1
             return view
         }()
-
+    ////hide keyborad
+      override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+          self.view.endEditing(true)
+      }
+    
         override func viewDidLoad() {
             super.viewDidLoad()
             if self.defaultValues.string(forKey:"userId") != nil {

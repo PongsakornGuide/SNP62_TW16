@@ -5,7 +5,6 @@
 //  Created by Guide on 19/9/2562 BE.
 //  Copyright © 2562 guide. All rights reserved.
 //
-
 import UIKit
 import Pastel
 import Foundation
@@ -16,7 +15,6 @@ class OtpViewController: UIViewController {
     var idUserLabelText = String()
     let URL_USER_OtpPost = "http://localhost/alder_iosapp/v1/otp.php?otp"
     let defaultValues = UserDefaults.standard
-    
     let textTure : UILabel = {
         let label = UILabel()
         let title = "Verification Code,"
@@ -25,7 +23,6 @@ class OtpViewController: UIViewController {
         style.alignment = NSTextAlignment.center
         let attributedText = NSMutableAttributedString(string: title,
         attributes: [ NSAttributedString.Key.font : UIFont.PoppinsBold(size: 26),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 47, green: 58, blue: 243)])
-        
         attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.PoppinsMediumItalic(size: 14),NSMutableAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.4)]))
         label.attributedText = attributedText
         label.numberOfLines = 0
@@ -42,8 +39,6 @@ class OtpViewController: UIViewController {
         textField.layer.cornerRadius = 5
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         textField.leftViewMode = UITextField.ViewMode.always
-//        textField.keyboardType = UIKeyboardType.numberPad
-//        textField.keyboardType = UIKeyboardType.
         textField.addTarget(self, action: #selector(checkField), for: .editingChanged)
         return textField
     }()
@@ -125,14 +120,12 @@ class OtpViewController: UIViewController {
     }()
     
     @objc func clickCheck(){
-        if otpTextField.text?.count ?? 0 == 5{
+            if otpTextField.text?.count ?? 0 == 5{
             otpTextField.layer.borderColor = UIColor.green.cgColor
             successLabel.isHidden = false
             errorLabel.isHidden = true
             showLabel.isHidden = true
-            
-                 
-              let parameters = ["otp" : otpTextField.text!]
+            let parameters = ["otp" : otpTextField.text!]
                                      Alamofire.request(URL_USER_OtpPost, method: .post,parameters: parameters).responseJSON
                                        { response in
                                                print(response)
@@ -195,6 +188,10 @@ class OtpViewController: UIViewController {
         }
     }
     
+   ////hide keyborad
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -214,13 +211,10 @@ class OtpViewController: UIViewController {
         self.successLabel.isHidden = true
         self.showLabel.isHidden = true
         
-       
-        
         btnBack.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 20, heightConstant: 20
         )
         
         textTure.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 180)
-        
         
         imageIcon.anchor(textTure.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: -50, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 200, heightConstant: 200)
         

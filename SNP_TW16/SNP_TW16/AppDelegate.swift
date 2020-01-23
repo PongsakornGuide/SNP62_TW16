@@ -7,20 +7,21 @@
 //
 
 import UIKit
+//import IQKeyboardManagerSwift
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//        IQKeyboardManager.shared.enable = true
+        self.SetupPushNotification(application: application)
         // Override point for customization after application launch.
-
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 //        window?.rootViewController = MainActivityViewController()
-        window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+        window?.rootViewController = UINavigationController(rootViewController: EmergencyViewController())
         
 //        var pageControl = ActivityPageControl(collectionViewLayout: UICollectionViewFlowLayout())
 //        window?.rootViewController = pageControl
@@ -28,6 +29,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+ // Setup appdelegate for push notifications
+    func SetupPushNotification(application: UIApplication) -> () {
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge])
+        {(granted,error) in
+            if granted{
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+            } else {
+                print("User Notification permission denied: \(error?.localizedDescription ?? "error")")
+            }
+        }
+    }
+    
+    //  MARK: UNUserNotificationCenter Delegate methods
+    
+    
+    // Method: 1 -  Will register app on apns to receieve token
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        print("Successful registration. Token is:")
+        print(tokenString(deviceToken)) // this method will convert token "Data" to string formate
+    }
+    
+    
+    // Method: 2 - Failed registration. Explain why.
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register for remote notifications: \(error.localizedDescription)")
+    }
+    
+    
+    // Method: 3 - In this method app will receive notifications in [userInfo]
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        print(userInfo)
+        
+    }
+    
+    
+    //code to make a token string
+    func tokenString(_ deviceToken:Data) -> String{
+        let bytes = [UInt8](deviceToken)
+        var token = ""
+        for byte in bytes{
+            token += String(format: "%02x",byte)
+        }
+        return token //  this token will be passed to your backend that can be written in php, js, .net etc.
+    }
+    
+    
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

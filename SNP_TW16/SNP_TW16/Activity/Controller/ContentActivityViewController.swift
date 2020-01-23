@@ -10,9 +10,10 @@ import UIKit
 import Alamofire
 class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINavigationControllerDelegate{
     let defaultValues = UserDefaults.standard
-    var activityData: AcivityData?
+    var activityData: ActivityDetail?
     var typecheck = String()
     let URL_USER_ID = "http://localhost/alder_iosapp/v1/join.php"
+    let URL_CHECK_JOIN = "http://localhost/alder_iosapp/v1/checkjoin.php"
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
              
@@ -111,41 +112,58 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
      }()
 
         @objc func activity_active(){
+            
             let passData = AssessVIewController()
             let parameters: Parameters = ["user_id":typecheck,"post_timeline_id":activityData?.dataId ?? 0]
-            
-                Alamofire.request(URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
+            print("666")
+            print(typecheck)
+            print("555")
+            passData.delegate = self
+            print(activityData?.dataId ?? 0)
+            Alamofire.request(URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
                         print(response)
-                }
-            
-            self.navigationController?.pushViewController(passData, animated: true)
-                         
+                    self.navigationController?.pushViewController(passData, animated: true)
+            }
         }
     
 
     
              override func viewDidLoad() {
-                 super.viewDidLoad()
-//                textHeader.text = activityData?.actId
-                titleLabel.text = activityData?.actId
-                nameLabel.text = activityData?.caption
-                timeLabel.text = activityData?.created
-                contentLabel.text = activityData?.content
-                Alamofire.request((activityData?.imgact ?? "0")!).responseImage { response in
-                            if let image = response.result.value {
-                                self.contentImage.image = image
-                            }
-                }
-                Alamofire.request((activityData?.imgtime ?? "0")!).responseImage { response in
-                        if let image = response.result.value {
-                        self.timeImage.image = image
-                    }
-                }
+                super.viewDidLoad()
+//                titleLabel.text = activityData?.actId
+//                nameLabel.text = activityData?.caption
+//                timeLabel.text = activityData?.created
+//                contentLabel.text = activityData?.content
+//                Alamofire.request((activityData?.imgact ?? "0")!).responseImage { response in
+//                            if let image = response.result.value {
+//                                self.contentImage.image = image
+//                            }
+//                }
+//                Alamofire.request((activityData?.imgtime ?? "0")!).responseImage { response in
+//                        if let image = response.result.value {
+//                        self.timeImage.image = image
+//                    }
+//                }
                 
-                if let name2 = defaultValues.string(forKey: "userId") {
+                 if let name2 = defaultValues.string(forKey: "userId") {
                         typecheck = name2
+                    print(typecheck)
                     }else{
                  }
+                
+                
+                let parameters: Parameters = ["user_id":typecheck,"post_timeline_id":activityData?.dataId ?? 0]
+                    Alamofire.request(URL_CHECK_JOIN, method: .post,parameters: parameters).responseJSON { response in
+                            print(response)
+                        guard let json = response.value as? [String:Bool], let status = json["error"] else { return }
+//                        status.Bool
+                        if !status {
+                            self.nextButton.backgroundColor = .red
+                        }else{
+                            self.nextButton.backgroundColor = .blue
+                        }
+                            print("5555")
+                    }
                 
                  view.backgroundColor = UIColor.white
                  navigationItem.title = "กิจกรรม"

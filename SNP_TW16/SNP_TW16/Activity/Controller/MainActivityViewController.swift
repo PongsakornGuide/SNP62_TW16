@@ -9,8 +9,9 @@
 import UIKit
 import Alamofire
 import ObjectMapper
+import UserNotifications
 class MainActivityViewController: UITableViewController {
-    
+//    var ExerciseList: [Exercise] = []
     let URL_USER_ID = "http://localhost/alder_iosapp/v1/showactivity.php"
     let defaultValues = UserDefaults.standard
     var num1 = String()
@@ -18,8 +19,10 @@ class MainActivityViewController: UITableViewController {
     var Labelname = String()
     var imageView = String()
     var typecheck = String()
-    
     var header: [ActivityType]?
+    
+//    var detail: [AcivityData]?
+    
         private var cellId = "Cell"
         private var cellId1 = "Cell1"
         private var cellId2 = "Cell2"
@@ -33,6 +36,7 @@ class MainActivityViewController: UITableViewController {
                     return 1
                 }else{
                     return header?.count ?? 0
+//                    return test?.count ?? 0
                 }
         }
     
@@ -48,31 +52,48 @@ class MainActivityViewController: UITableViewController {
             }else{
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
-                let headerActivity = header?[indexPath.row]
-                cell.titleType.text = headerActivity?.activityTypeName
                 
-                Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.imageIcon ?? "0")!).responseImage { response in
-                if let image = response.result.value {
-                    cell.iconImage.image = image
-                    }
-                }
-                self.tableView.separatorStyle = .none
-                cell.selectionStyle = .none
-                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
-                return cell
+                              let headerActivity = header?[indexPath.row]
+                              cell.titleType.text = headerActivity?.activityTypeName
+
+                    Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.imageIcon ?? "0")!).responseImage { response in
+                              if let image = response.result.value {
+                                  cell.iconImage.image = image
+                                  }
+                              }
+                              self.tableView.separatorStyle = .none
+                              cell.selectionStyle = .none
+                              cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+                              return cell
+//
+                
+//                let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
+//                let headerActivity = test?[indexPath.row]
+////                cell.titleType.text = headerActivity?.activityType
+//                cell.titleType.text = headerActivity?.activityType
+//                Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.iconImage ?? "0")!).responseImage { response in
+//                if let image = response.result.value {
+//                    cell.iconImage.image = image
+//                    }
+//                }
+//
+//                self.tableView.separatorStyle = .none
+//                cell.selectionStyle = .none
+//                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+//                return cell
            }
         }
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            
+
         }else{
             let dvc = SubActivityTypeTableViewController()
             let activityType = header?[indexPath.row]
             dvc.activityList = activityType?.list
             self.navigationController?.pushViewController(dvc, animated: true)
-        }
+       }
     }
 
     @objc func handelSetting(){
@@ -81,6 +102,15 @@ class MainActivityViewController: UITableViewController {
                     let loginViewController = LoginViewController()
                     self.navigationController?.pushViewController(loginViewController, animated: true)
                     self.dismiss(animated: false, completion: nil)
+//        let content = UNMutableNotificationContent()
+//            content.title = "The 5 seconds are up!"
+//            content.subtitle = "they are up now!"
+//            content.body = "The 5 seconds are really up!"
+//            content.badge = 1
+//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//            let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
+//            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            
    }
     
    // refresh
@@ -102,7 +132,6 @@ class MainActivityViewController: UITableViewController {
            
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.tableView.reloadData()
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         if #available(iOS 12.1 , *) {
@@ -120,43 +149,36 @@ class MainActivityViewController: UITableViewController {
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
              if let name = defaultValues.string(forKey: "userName") {
                  Labelname = name
-//                 nameLabel.text = "\(Labelname)"
                  print(Labelname)
              }
 
              if let name2 = defaultValues.string(forKey: "userId") {
                            typecheck = name2
-                    print("id ===== \(typecheck)")
               }else{
                            //send back to login view controller
              }
-        
-//        let parameters: Parameters = ["userId":typecheck]
-//
-//        Alamofire.request(URL_USER_ID + "?id=\(typecheck)", method: .post,parameters: parameters).responseJSON { response in
-//            if let json = response.result.value {
-//                print(response)
-//                let headerActivity : NSArray = json as! NSArray
-//                for i in 0..<headerActivity.count
-//                {self.header.append(Header(
-//                    imageIcon: (headerActivity[i] as AnyObject).value(forKey: "ssss") as? String ?? "csdsa",
-//                    textHeader: (headerActivity[i] as AnyObject).value(forKey: "activity_type_name") as? String ?? "none"
-//                    ))
-//                }
-//                self.tableView.reloadData()
-//            }
-//        }
 
+        
         let parameters: Parameters = ["userId":typecheck]
         let url = URL_USER_ID + "?id=\(typecheck)"
-        
         Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
-            self?.header = Mapper<ActivityType>().mapArray(JSONObject: resData.result.value)
+//            self?.header = Mapper<ActivityType>().mapArray(JSONObject: resData.result.value)
+//            self?.tableView.reloadData()
+//            print(resData)
+            guard let json = resData.value as? NSDictionary else { return }
+            var header: [ActivityType] = []
+            
+            for key in json.allKeys {
+                guard let item = json[key] as? [String:Any], let map = Mapper<ActivityType>().map(JSON: item) else { return }
+                header.append(map)
+//                map.list?[0].listDetail
+                
+            }
+            self?.header = header
             self?.tableView.reloadData()
         }
         
         
-
         let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
         settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
         navigationItem.rightBarButtonItem = settings

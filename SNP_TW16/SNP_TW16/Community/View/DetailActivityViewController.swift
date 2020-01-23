@@ -13,7 +13,6 @@ class DetailActivityViewController: UITableViewCell {
            super.init(style: style, reuseIdentifier: reuseIdentifier)
            setupViewCell()
     }
-    
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
     
@@ -84,17 +83,10 @@ class DetailActivityViewController: UITableViewCell {
               return label
       }()
     
-    let buttomComment : UIButton = {
-        let btn = UIButton()
-        btn.backgroundColor = .red
-        btn.setTitle("Summit", for: .normal)
-        btn.setTitleColor(UIColor.white,for: .normal)
-        return btn
-    }()
+
 
     
     func setupViewCell(){
-        addSubview(buttomComment)
         addSubview(pageView)
         addSubview(profile)
         addSubview(username)
@@ -124,10 +116,9 @@ class DetailActivityViewController: UITableViewCell {
         iconImageLike.anchor(contrainer.topAnchor, left: contrainer.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 30, heightConstant: 30)
             
         
-        numCount.anchor(contrainer.topAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 60, rightConstant: 10, widthConstant: 40, heightConstant: 40)
+        numCount.anchor(contrainer.topAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: -5, bottomConstant: 0, leftConstant: 40, rightConstant: 10, widthConstant: 40, heightConstant: 40)
 
-        buttomComment.anchor(pageView.topAnchor, left:nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 130)
-        
+       
         
     }
     

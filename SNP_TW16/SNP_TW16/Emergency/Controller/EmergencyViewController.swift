@@ -7,25 +7,49 @@
 //
 
 import UIKit
+import Alamofire
+import ObjectMapper
 class EmergencyViewController: UITableViewController {
+    let defaultValues = UserDefaults.standard
+    var user_id = String()
+    let URL_GET_TEL = "http://localhost/alder_iosapp/v1/emergency.php"
+    let URL_GET_TEL_RELATIVE = "http://localhost/alder_iosapp/v1/showTel.php"
+    let URL_GET_TEL_RELATIVE_ADD = "http://localhost/alder_iosapp/v1/showTelRelative.php"
+    
+     var relativeList: [listRelative]?
+     var emergencyList: [allListTel]?
+    var userRelavite: [addRelative]?
+    
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     private var cellId2 = "Cell2"
+    private var cellId3 = "Cell3"
+    
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           getRelative()
+           getList()
+           getUserRelative()
+           self.tableView.reloadData()
+       }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
              
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
               if section == 0 {
-                  return 1
+                  return relativeList?.count ?? 0
               }else if section == 1{
-                  return 4
+                  return emergencyList?.count ?? 0
+              }else if section == 2{
+                  return userRelavite?.count ?? 0
               }else{
-                  return 1
+                    return 1
               }
     }
+    
 //    heightForHeaderInSection
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             if indexPath.section == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! EmergencyView
@@ -34,8 +58,23 @@ class EmergencyViewController: UITableViewController {
                 return cell
             } else if indexPath.section == 1{
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! DetailEmergencyView
+                let Emergency = emergencyList?[indexPath.row]
+                        cell.num.text = "\(Emergency?.emergencyCall ?? 0)"
+                        cell.title.text = Emergency?.emergencyName ?? "5555"
+                        cell.selectionStyle = .none
+                        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+                self.tableView.separatorStyle = .none
+                return cell
+                
+            }else if indexPath.section == 2{
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellId3,for: indexPath) as! ListRelatuveView
+                let ListRelative = userRelavite?[indexPath.row]
+                cell.num.text = "\(ListRelative?.telphone ?? 0)"
+                cell.title.text = ListRelative?.username
                 cell.selectionStyle = .none
-                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+                  cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+                self.tableView.separatorStyle = .none
                 return cell
             }else{
                 
@@ -45,15 +84,74 @@ class EmergencyViewController: UITableViewController {
                 return cell
             }
         }
-  
+    
+    //Func call phone
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0{
+                let callRelative = self.relativeList?[indexPath.row]
 
+              if let url = URL(string: "tel://\(callRelative?.relativeTel ?? 0631921545)"), UIApplication.shared.canOpenURL(url){
+                                  if #available(iOS 10, *) {
+                                      UIApplication.shared.open(url)
+                                  } else {
+                                      UIApplication.shared.openURL(url)
+                                  }
+                        }
+        }else if indexPath.section == 1{
+                let callEmergency = self.emergencyList?[indexPath.row]
+
+                  if let url = URL(string: "tel://\(callEmergency?.emergencyCall ?? 0)"), UIApplication.shared.canOpenURL(url) {
+                            if #available(iOS 10, *) {
+                                UIApplication.shared.open(url)
+                            } else {
+                                UIApplication.shared.openURL(url)
+                            }
+            }
+        }else if indexPath.section == 2{
+            let callAddRelative = self.userRelavite?[indexPath.row]
+            if let url = URL(string: "tel://\(callAddRelative?.telphone ?? 0)"), UIApplication.shared.canOpenURL(url) {
+                      if #available(iOS 10, *) {
+                          UIApplication.shared.open(url)
+                      } else {
+                          UIApplication.shared.openURL(url)
+                      }
+            }
+        }else{
+            print("section3")
+        }
+    }
     
+    func getRelative(){
+        let parameters: Parameters = ["userId":user_id]
+        let url = URL_GET_TEL_RELATIVE + "?id=\(user_id)"
+        print(url)
+        Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
+             self?.relativeList = Mapper<listRelative>().mapArray(JSONObject: dataRes.result.value)
+             self?.tableView.reloadData()
+             print(dataRes)
+        }
+    }
     
+    func getList(){
+           Alamofire.request(URL_GET_TEL).responseJSON { [weak self](resData) in
+            self?.emergencyList = Mapper<allListTel>().mapArray(JSONObject: resData.result.value)
+            self?.tableView.reloadData()
+            }
+    }
     
-    func animateTable() {
+    func getUserRelative(){
+        let parameters: Parameters = ["userId":user_id]
+        let url = URL_GET_TEL_RELATIVE_ADD + "?id=\(user_id)"
+        Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](TelData)
+            in
+            self?.userRelavite = Mapper<addRelative>().mapArray(JSONObject: TelData.result.value)
+            self?.tableView.reloadData()
+        }
+    }
+    
+    func animateTable(){
         tableView.reloadData()
         let cells = tableView.visibleCells
-        
         let tableViewHeight = tableView.bounds.size.height
         for cell in cells {
             cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
@@ -65,7 +163,6 @@ class EmergencyViewController: UITableViewController {
                 }, completion: nil)
             delayCounter += 1
         }
-        
     }
     
     // refresh
@@ -82,35 +179,39 @@ class EmergencyViewController: UITableViewController {
         let RefreshLine = DispatchTime.now() + .milliseconds(500)
         DispatchQueue.main.asyncAfter(deadline: RefreshLine) {
             self.refresher.endRefreshing()
+            self.getRelative()
+            self.getList()
+            self.getUserRelative()
         }
     }
     
-    @objc func check(){
-        print("แอดเบอร์")
-    }
-    
-    @objc func open(){
-        print("ปุ่มโทร")
+    @objc func addTelUserRelative(){
+        let createRelative = CreateRelativeTelView()
+        navigationController?.pushViewController(createRelative, animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.navigationBar.isHidden = true
         if #available(iOS 12.1 , *) {
             tableView.refreshControl = refresher
         }else{
             tableView.addSubview(refresher)
         }
-        
+        if let user = defaultValues.string(forKey: "userId") {
+                    user_id = user
+         }else{
+                      //send back to login view controller
+        }
         
         tableView.register(EmergencyView.self, forCellReuseIdentifier: cellId)
         tableView.register(DetailEmergencyView.self, forCellReuseIdentifier: cellId1)
         tableView.register(AddTelView.self, forCellReuseIdentifier: cellId2)
+        tableView.register(ListRelatuveView.self, forCellReuseIdentifier: cellId3)
+        
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-        
-        
         animateTable()
     }
 }
