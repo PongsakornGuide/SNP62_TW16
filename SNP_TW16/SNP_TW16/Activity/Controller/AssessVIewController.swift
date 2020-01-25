@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import Alamofire
 //import SimpleCheckbox
 class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationControllerDelegate {
     //    let num : Int = 0631921545
                 var delegate:UIViewController?
-    
+                var activityData: ActivityDetail?
                  let screenSizeX: CGFloat = UIScreen.main.bounds.width
                  let screenSizeY: CGFloat = UIScreen.main.bounds.height
                  
@@ -203,7 +204,7 @@ class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationCo
                  tickBox.checkmarkStyle = .tick
                  tickBox.checkmarkSize = 0.7
                  tickBox.valueChanged = { (value) in
-                          print("tickBox value change: \(value)")
+                    print("tickBox value change: \(value)")
                  }
                  return tickBox
              }()
@@ -245,16 +246,16 @@ class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationCo
             }()
         //-----------------------------------------------------------------------------------------------
         
-    let nextButton: UIButton = {
+            let nextButton: UIButton = {
                      let button = UIButton(type: .system)
                      button.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
                      button.layer.cornerRadius = 20
-                     button.setTitle("เข้าร่วมกิจกรรม", for: .normal)
+                     button.setTitle("ส่งคำตอบ", for: .normal)
                      button.setTitleColor(.white, for: .normal)
                      button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
                      button.addTarget(self, action: #selector(activity_active), for: .touchUpInside)
                      return button
-   }()
+            }()
 
             @objc func activity_active(){
                 let alert = UIAlertController(title: "คุณเข้าร่วมกิจกรรมสำเร็จ", message: "แล้วพบกันในเร็วๆ นี้ :-)", preferredStyle: UIAlertController.Style.alert)
@@ -262,8 +263,8 @@ class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationCo
                     
                     if let delegate = self.delegate as? ContentActivityViewController {
                         delegate.nextButton.setTitle("เข่าร่วมกิจกรรมแล้ว",for: .normal)
-                        delegate.nextButton.isEnabled = true
-                        delegate.nextButton.backgroundColor = .black
+                        delegate.enableButton.isHidden = false
+                        delegate.nextButton.isHidden = true
                         self.navigationController?.popViewController(animated: true)
                     }
                     
@@ -275,7 +276,19 @@ class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationCo
         
                  override func viewDidLoad() {
                      super.viewDidLoad()
-                 
+                    
+//                     titleLabel.text = activityData?.actId
+//                     nameLabel.text = activityData?.caption
+//                     timeLabel.text = activityData?.created
+//                     contentLabel.text = activityData?.content
+////                     print(activityData?.imagePost ?? "notImage")
+//                    Alamofire.request((activityData?.imagePost ?? "0")!).responseImage { response in
+//                        if let image = response.result.value {
+//                                                self.stepView.image = image
+//                                        }
+//                    }
+                    
+                    
                      view.backgroundColor = UIColor.white
                      navigationItem.title = "กิจกรรม"
                      view.addSubview(viewScroll)
@@ -350,7 +363,7 @@ class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationCo
                     
                     bgcheck.anchor(alertTilte.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 50)
                     
-                    btncheck.anchor(bgcheck.topAnchor, left: bgcheck.leftAnchor, right: bgcheck.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 260, widthConstant: screenSizeX, heightConstant: 30)
+                    btncheck.anchor(bgcheck.topAnchor, left: bgcheck.leftAnchor, right: bgcheck.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 300, widthConstant: screenSizeX, heightConstant: 30)
 
                     titleCheck.anchor(bgcheck.topAnchor, left: btncheck.leftAnchor, right: nil, bottom: nil, topConstant: 18, bottomConstant: 0, leftConstant: 50, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 40)
                     
@@ -358,14 +371,14 @@ class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationCo
                     
                     bgcheck2.anchor(bgcheck.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 50)
                     
-                    btncheck2.anchor(bgcheck2.topAnchor, left: bgcheck2.leftAnchor, right: bgcheck2.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 260, widthConstant: screenSizeX, heightConstant: 30)
+                    btncheck2.anchor(bgcheck2.topAnchor, left: bgcheck2.leftAnchor, right: bgcheck2.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 300, widthConstant: screenSizeX, heightConstant: 30)
 
                     titleCheck2.anchor(bgcheck2.topAnchor, left: bgcheck2.leftAnchor, right: nil, bottom: nil, topConstant: 18, bottomConstant: 0, leftConstant: 90, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 40)
                     //
                     
                     bgcheck3.anchor(bgcheck2.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 50)
                     
-                    btncheck3.anchor(bgcheck3.topAnchor, left: bgcheck3.leftAnchor, right: bgcheck3.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 260, widthConstant: screenSizeX, heightConstant: 30)
+                    btncheck3.anchor(bgcheck3.topAnchor, left: bgcheck3.leftAnchor, right: bgcheck3.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 300, widthConstant: screenSizeX, heightConstant: 30)
 
                     titleCheck3.anchor(bgcheck3.topAnchor, left: bgcheck3.leftAnchor, right: nil, bottom: nil, topConstant: 18, bottomConstant: 0, leftConstant: 90, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 40)
                     
@@ -374,7 +387,7 @@ class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationCo
                     
                     bgcheck4.anchor(bgcheck3.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 50)
                     
-                    btncheck4.anchor(bgcheck4.topAnchor, left: bgcheck4.leftAnchor, right: bgcheck4.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 260, widthConstant: screenSizeX, heightConstant: 30)
+                    btncheck4.anchor(bgcheck4.topAnchor, left: bgcheck4.leftAnchor, right: bgcheck4.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 300, widthConstant: screenSizeX, heightConstant: 30)
 
                     titleCheck4.anchor(bgcheck4.topAnchor, left: bgcheck4.leftAnchor, right: nil, bottom: nil, topConstant: 18, bottomConstant: 0, leftConstant: 90, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 40)
                     //
@@ -382,7 +395,7 @@ class AssessVIewController: UIViewController,UITextFieldDelegate ,UINavigationCo
                     
                     bgcheck5.anchor(bgcheck4.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 50)
                     
-                    btncheck5.anchor(bgcheck5.topAnchor, left: bgcheck5.leftAnchor, right: bgcheck5.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 260, widthConstant: screenSizeX, heightConstant: 30)
+                    btncheck5.anchor(bgcheck5.topAnchor, left: bgcheck5.leftAnchor, right: bgcheck5.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 300, widthConstant: screenSizeX, heightConstant: 30)
 
                     titleCheck5.anchor(bgcheck5.topAnchor, left: bgcheck5.leftAnchor, right: nil, bottom: nil, topConstant: 18, bottomConstant: 0, leftConstant: 90, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 40)
                     

@@ -13,7 +13,7 @@ class ActivityType: Mappable {
     var id: String?
     var activityTypeName: String?
     var imageIcon: String?
-    var list:[ActivityDetail]?
+    var list:[ActivityImpress]?
     
     required init?(map: Map) {
 
@@ -25,7 +25,24 @@ class ActivityType: Mappable {
         activityTypeName <- map["activity_type_name"]
         imageIcon <- map["iconImage"]
         
-        list <- map["data"]
+        list <- map["activities"]
+    }
+}
+
+
+class ActivityImpress: Mappable {
+    var activityTypeName: String?
+    var activityIcon: String?
+    var listDetail:[ActivityDetail]?
+    required init?(map: Map) {
+
+    }
+    
+    // Mappable
+    func mapping(map: Map) {
+        activityTypeName <- map["activity_name"]
+        activityIcon <- map["imgActivity"]
+        listDetail <- map["posts"]
     }
 }
 
@@ -38,11 +55,11 @@ class ActivityDetail: Mappable {
     var imgact:String?
     var imgtime:String?
     var created:String?
-    
+
     required init?(map: Map) {
 
     }
-    
+
     // Mappable
     func mapping(map: Map) {
         dataId   <- map["id"]

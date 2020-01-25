@@ -12,7 +12,6 @@ class tabBarViewController: UITabBarController ,UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-        
         let activityController = tabBarNavigation(unselectedImage: UIImage(named: "activity"), selectedImage: UIImage(named: "activity"), title: "Activity", badgeValue: "1", colorValue: .red,rootViewController: MainActivityViewController())
 
         let communityController = tabBarNavigation(unselectedImage: UIImage(named: "community"), selectedImage: UIImage(named: "community"), title: "Community", badgeValue: "8", colorValue: .red,rootViewController: CommunViewController())
@@ -20,7 +19,9 @@ class tabBarViewController: UITabBarController ,UITabBarControllerDelegate {
 
         let emergencyController = tabBarNavigation(unselectedImage: UIImage(named: "threepoint"), selectedImage: UIImage(named: "Emergency"), title: "Emergency", badgeValue: nil, colorValue: .red,rootViewController: EmergencyViewController())
 
-        viewControllers = [activityController,communityController,emergencyController]
+        let profileController = tabBarNavigation(unselectedImage: UIImage(named: "article"), selectedImage: UIImage(named: "article"), title: "Profile", badgeValue: nil, colorValue: .red,rootViewController: ProfileVIewController())
+
+        viewControllers = [activityController,communityController,emergencyController,profileController]
         }
     fileprivate func tabBarNavigation(unselectedImage: UIImage?, selectedImage: UIImage?, title: String?, badgeValue: String?, colorValue: UIColor? ,rootViewController: UIViewController = UIViewController())-> UINavigationController {
         let navController = UINavigationController(rootViewController: rootViewController)

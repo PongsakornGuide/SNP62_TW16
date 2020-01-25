@@ -11,7 +11,6 @@ import Alamofire
 import ObjectMapper
 import UserNotifications
 class MainActivityViewController: UITableViewController {
-//    var ExerciseList: [Exercise] = []
     let URL_USER_ID = "http://localhost/alder_iosapp/v1/showactivity.php"
     let defaultValues = UserDefaults.standard
     var num1 = String()
@@ -21,11 +20,14 @@ class MainActivityViewController: UITableViewController {
     var typecheck = String()
     var header: [ActivityType]?
     
-//    var detail: [AcivityData]?
-    
         private var cellId = "Cell"
         private var cellId1 = "Cell1"
         private var cellId2 = "Cell2"
+    
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            self.tableView.reloadData()
+        }
     
         override func numberOfSections(in tableView: UITableView) -> Int {
             return 2
@@ -89,9 +91,13 @@ class MainActivityViewController: UITableViewController {
         if indexPath.section == 0 {
 
         }else{
-            let dvc = SubActivityTypeTableViewController()
+//            let dvc = SubActivityTypeTableViewController()
+//            let activityType = header?[indexPath.row]
+//            dvc.activityList = activityType?.list
+//            self.navigationController?.pushViewController(dvc, animated: true)
+            let dvc = ActivityTypeTableViewController()
             let activityType = header?[indexPath.row]
-            dvc.activityList = activityType?.list
+            dvc.activityTypeList = activityType?.list
             self.navigationController?.pushViewController(dvc, animated: true)
        }
     }
@@ -127,6 +133,7 @@ class MainActivityViewController: UITableViewController {
           let RefreshLine = DispatchTime.now() + .milliseconds(500)
           DispatchQueue.main.asyncAfter(deadline: RefreshLine) {
               self.refresher.endRefreshing()
+              self.tableView.reloadData()
           }
       }
            
@@ -184,8 +191,8 @@ class MainActivityViewController: UITableViewController {
         navigationItem.rightBarButtonItem = settings
         navigationItem.title = "Alder"
         
-        let backButton = UIBarButtonItem(title: " ", style: UIBarButtonItem.Style.plain, target: navigationController, action: nil)
-        navigationItem.leftBarButtonItem = backButton
+//        let backButton = UIBarButtonItem(title: " ", style: UIBarButtonItem.Style.plain, target: navigationController, action: nil)
+//        navigationItem.leftBarButtonItem = backButton
         
     }
 }

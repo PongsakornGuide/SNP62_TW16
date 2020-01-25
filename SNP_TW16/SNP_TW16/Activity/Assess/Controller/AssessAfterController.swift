@@ -8,7 +8,7 @@
 
 import UIKit
 //import SimpleCheckbox
-class AssessAfterController: UIViewController,UITextFieldDelegate ,UINavigationControllerDelegate {
+class ปก: UIViewController,UITextFieldDelegate ,UINavigationControllerDelegate {
     
                  let screenSizeX: CGFloat = UIScreen.main.bounds.width
                  let screenSizeY: CGFloat = UIScreen.main.bounds.height

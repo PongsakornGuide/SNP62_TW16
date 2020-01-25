@@ -52,7 +52,7 @@ class SubActivityTypeTableViewController: UITableViewController {
                     cell.supportName.text = activity?.caption
                     cell.supportTime.text = activity?.created
 
-                   Alamofire.request("http://localhost/alder_iosapp/" + (activity?.imagePost ?? "0")!).responseImage { response in
+                   Alamofire.request((activity?.imagePost ?? "0")!).responseImage { response in
                    if let image = response.result.value {
                     cell.bgActivitity.image = image
                        }
@@ -81,6 +81,7 @@ class SubActivityTypeTableViewController: UITableViewController {
     
         override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         navigationItem.title = "Alder"
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.register(ActivityHeaderViewCell.self, forCellReuseIdentifier: cellId1)

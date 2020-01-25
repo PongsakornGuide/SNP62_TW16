@@ -20,7 +20,7 @@ class CreateRelativeTelView: UIViewController {
          return background
      }()
      
-    let textHeader : UILabel = {
+      let textHeader : UILabel = {
         let label = UILabel()
         let title = "เพิ่มเบอร์ติดต่อฉุกเฉิน"
         let attributedText = NSMutableAttributedString(string: title,
@@ -28,7 +28,7 @@ class CreateRelativeTelView: UIViewController {
         label.attributedText = attributedText
         label.numberOfLines = 1
         return label
-    }()
+      }()
     
     //-----------------------------------------------------------------------------------------------
        let nameTextField: UITextField = {
@@ -45,21 +45,21 @@ class CreateRelativeTelView: UIViewController {
            }()
     //-----------------------------------------------------------------------------------------------
 
-          let telTextField: UITextField = {
+       let telTextField: UITextField = {
                   let textField = UITextField()
                   textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                   textField.textColor = .black
                   textField.font = UIFont.boldSystemFont(ofSize: 15)
                   return textField
               }()
-              let telTextFieldLine: UIView = {
+       let telTextFieldLine: UIView = {
                      let view = UIView()
                      view.backgroundColor = UIColor.rgb(red: 167, green: 169, blue: 172)
                      return view
               }()
-       //-----------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------
        
-     let addTel : UIButton = {
+       let addTel : UIButton = {
             let submit = UIButton(type: UIButton.ButtonType.system)
             submit.backgroundColor = UIColor.rgb(red: 27, green: 71, blue: 147)
             submit.layer.cornerRadius = 30
@@ -75,9 +75,8 @@ class CreateRelativeTelView: UIViewController {
         }()
 
     @objc func pushToRelatvie(){
-        let parameters: Parameters = ["user_id":user_id,"name":nameTextField.text ?? "NULL","tel":telTextField.text ?? "NULL"]
+    let parameters: Parameters = ["user_id":user_id,"name":nameTextField.text ?? "NULL","tel":telTextField.text ?? "NULL"]
             
-        
         Alamofire.request(URL_ADD_RELATIVE, method: .post,parameters: parameters).responseJSON { response in
                 print(response)
             if let nav = self.navigationController {
@@ -99,22 +98,21 @@ class CreateRelativeTelView: UIViewController {
         view.addSubview(telTextField)
         view.addSubview(telTextFieldLine)
         view.addSubview(addTel)
-
+        
         if let user = defaultValues.string(forKey: "userId") {
                          user_id = user
                         print(user_id)
               }else{
                            //send back to login view controller
-             }
+        }
         
         bgActivitity.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 200)
        
         textHeader.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 80, bottomConstant: 0, leftConstant: 25, rightConstant: 25, widthConstant: 0, heightConstant: 0)
         
+        nameTextField.anchor(textHeader.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 80, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
         
-         nameTextField.anchor(textHeader.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 80, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
-        
-          nameTextFieldLine.anchor(nameTextField.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
+        nameTextFieldLine.anchor(nameTextField.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
          
         
         telTextField.anchor(nameTextFieldLine.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 80, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)

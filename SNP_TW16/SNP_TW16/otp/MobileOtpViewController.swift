@@ -15,6 +15,7 @@ class MobileOtpViewController: UIViewController {
     let URL_USER_USE_OTP = "http://localhost/alder_iosapp/v1/select_otp.php"
     let defaultValues = UserDefaults.standard
     var Tel_user = String()
+    
     let imageView : UIImageView = {
            let image = UIImageView(frame: UIScreen.main.bounds)
            image.image = UIImage(named: "bg")
@@ -115,7 +116,7 @@ class MobileOtpViewController: UIViewController {
         Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
                     print(response)
             if let otp = response.result.value {
-                self.Tel_user = "\(otp)"
+                              self.Tel_user = "\(otp)"
                               let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
                               let twilioSecret = "a74824968da571b8afac81506f84acf2"
                               //Note replace + = %2B , for To and From phone number
@@ -126,7 +127,6 @@ class MobileOtpViewController: UIViewController {
                              let request = NSMutableURLRequest(url: URL(string:"https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/SMS/Messages")!)
                              request.httpMethod = "POST"
                              request.httpBody = "From=\(fromNumber)&To=\(toNumber)&Body=\(message)".data(using: .utf8)
-
                              // Build the completion block and send the request
                              URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
                                  print("Finished")
@@ -209,12 +209,13 @@ class MobileOtpViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         self.extendedLayoutIncludesOpaqueBars = true
 
+        
         view.addSubview(stackView)
         view.backgroundColor = .white
         view.addSubview(imageView)
         view.insertSubview(imageView, at: 0)
         
-        
+    
         otpView.addSubview(imageIcon)
         otpView.addSubview(line)
         otpView.addSubview(otpTextField)

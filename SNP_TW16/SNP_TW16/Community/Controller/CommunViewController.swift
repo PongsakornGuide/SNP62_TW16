@@ -27,6 +27,7 @@ class CommunViewController: UITableViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getActivty()
+        self.tabBarController?.tabBar.isHidden = false
         self.tableView.reloadData()
     }
     
@@ -127,7 +128,7 @@ class CommunViewController: UITableViewController{
               submit.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
               submit.layer.borderWidth = 2
               submit.backgroundColor =  UIColor.rgb(red: 33, green: 120, blue: 174)
-              submit.layer.cornerRadius = 45
+              submit.layer.cornerRadius = 40
               submit.setTitle("โพสต์", for: .normal)
               submit.setTitleColor(UIColor.white,for: .normal)
               submit.addTarget(self, action: #selector(handelSetting), for: .touchUpInside)
@@ -138,7 +139,10 @@ class CommunViewController: UITableViewController{
        override func viewDidLoad() {
        super.viewDidLoad()
         view.addSubview(submitBtn)
-        submitBtn.anchor(view.safeAreaLayoutGuide.topAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 320, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 90, heightConstant: 90)
+        
+//        submitBtn.anchor(view.safeAreaLayoutGuide.topAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 320, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 90, heightConstant: 90)
+        
+          submitBtn.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -100, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 80, heightConstant: 80)
         
                 if #available(iOS 12.1 , *) {
                             tableView.refreshControl = refresher
@@ -146,12 +150,8 @@ class CommunViewController: UITableViewController{
                             tableView.addSubview(refresher)
                 }
         
-            navigationItem.title = "Alder"
+//            navigationItem.title = "Alder"
             tableView.register(ActivityPageViewController.self, forCellReuseIdentifier: cellId1)
-            tableView.tableFooterView = UIView()
-            tableView.rowHeight = UITableView.automaticDimension
-            tableView.estimatedRowHeight = 50
-        
             tableView.register(AcivityListTableViewCell.self, forCellReuseIdentifier: cellId)
             tableView.tableFooterView = UIView()
             tableView.rowHeight = UITableView.automaticDimension

@@ -87,6 +87,7 @@ class ConfirmViewController: UIViewController,UITextFieldDelegate ,UINavigationC
                  tickBox.checkmarkSize = 0.7
                  tickBox.valueChanged = { (value) in
                           print("tickBox value change: \(value)")
+                    
                  }
                  return tickBox
              }()

@@ -24,7 +24,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
     
     let stepView: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: "maeMuUnu")
+//        view.image = UIImage(named: "maeMuUnu")
         return view
     }()
     
@@ -54,7 +54,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
       let titleLabel : UILabel = {
            let title = UILabel()
            title.text = "แซนวิสเพื่อสุขภาพ"
-            title.font = UIFont.PoppinsBold(size: 28)
+           title.font = UIFont.PoppinsBold(size: 28)
            return title
       }()
      
@@ -110,40 +110,70 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
              button.addTarget(self, action: #selector(activity_active), for: .touchUpInside)
              return button
      }()
+    
+    let enableButton: UIButton = {
+               let button = UIButton(type: .system)
+               button.backgroundColor = UIColor.black
+               button.layer.cornerRadius = 20
+               button.setTitle("คุณเข้าร่วมกิจกรรมแล้ว", for: .normal)
+               button.setTitleColor(.white, for: .normal)
+               button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+               button.isHidden = true
+               button.isEnabled = true
+               return button
+       }()
 
         @objc func activity_active(){
             
             let passData = AssessVIewController()
             let parameters: Parameters = ["user_id":typecheck,"post_timeline_id":activityData?.dataId ?? 0]
-            print("666")
-            print(typecheck)
-            print("555")
             passData.delegate = self
-            print(activityData?.dataId ?? 0)
             Alamofire.request(URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
-                        print(response)
+                    print(response)
+                passData.titleLabel.text = self.titleLabel.text ?? "NULL"
                     self.navigationController?.pushViewController(passData, animated: true)
+                    
             }
         }
-    
+//    func pushData(){
+//        let passData = RecordViewController()
+//        passData.NameLabelText = nameTextField.text ?? "0"
+//        passData.SernameLabelText = surnameTextField.text ?? "0"
+//        passData.MobileLabelText = phoneTextField.text ?? "0"
+//        passData.PhotoLabelText = imageTy
+//                   passData.BirthLabelText = dateTextField.text ?? "0"
+//                   passData.RegligionLabelText = cultTextField.text ?? "0"
+//                   passData.AddressLabelText = addressTextField.text ?? "0"
+//                   passData.GenderLabelText = genTextField.text ?? "0"
+//                   self.navigationController?.pushViewController(passData, animated: true)
+//    }
 
-    
              override func viewDidLoad() {
                 super.viewDidLoad()
-//                titleLabel.text = activityData?.actId
-//                nameLabel.text = activityData?.caption
-//                timeLabel.text = activityData?.created
-//                contentLabel.text = activityData?.content
-//                Alamofire.request((activityData?.imgact ?? "0")!).responseImage { response in
-//                            if let image = response.result.value {
-//                                self.contentImage.image = image
-//                            }
-//                }
-//                Alamofire.request((activityData?.imgtime ?? "0")!).responseImage { response in
-//                        if let image = response.result.value {
-//                        self.timeImage.image = image
-//                    }
-//                }
+                
+                titleLabel.text = activityData?.actId
+                nameLabel.text = activityData?.caption
+                timeLabel.text = activityData?.created
+                contentLabel.text = activityData?.content
+                print(activityData?.imagePost ?? "notImage")
+               
+                Alamofire.request((activityData?.imagePost ?? "0")!).responseImage { response in
+                            if let image = response.result.value {
+                            self.stepView.image = image
+                    }
+                }
+            
+                
+                Alamofire.request((activityData?.imgact ?? "0")!).responseImage { response in
+                            if let image = response.result.value {
+                                self.contentImage.image = image
+                            }
+                }
+                Alamofire.request((activityData?.imgtime ?? "0")!).responseImage { response in
+                        if let image = response.result.value {
+                        self.timeImage.image = image
+                    }
+                }
                 
                  if let name2 = defaultValues.string(forKey: "userId") {
                         typecheck = name2
@@ -156,13 +186,14 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                     Alamofire.request(URL_CHECK_JOIN, method: .post,parameters: parameters).responseJSON { response in
                             print(response)
                         guard let json = response.value as? [String:Bool], let status = json["error"] else { return }
-//                        status.Bool
                         if !status {
-                            self.nextButton.backgroundColor = .red
+//                            self.nextButton.backgroundColor = .black
+//                            self.nextButton.setTitle("เข่าร่วมกิจกรรมแล้ว",for: .normal)
+                            self.enableButton.isHidden = false
+                            self.nextButton.isHidden = true
                         }else{
                             self.nextButton.backgroundColor = .blue
                         }
-                            print("5555")
                     }
                 
                  view.backgroundColor = UIColor.white
@@ -179,14 +210,14 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                  viewScroll.addSubview(contentImage)
                  viewScroll.addSubview(timeImage)
                  viewScroll.addSubview(nextButton)
-              
+                 viewScroll.addSubview(enableButton)
               viewScroll.anchor(view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
               
-              stepView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX - 0, heightConstant: 200)
+              stepView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX - 0, heightConstant: 250)
                  
               BGView.anchor(stepView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: -20, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX , heightConstant: screenSizeY)
               
-              header.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 20, rightConstant: 180, widthConstant: screenSizeX, heightConstant: 40)
+              header.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 20, rightConstant: 220, widthConstant: screenSizeX, heightConstant: 40)
                 
                 
               textHeader.anchor(header.topAnchor, left: header.leftAnchor, right: header.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 45, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 0)
@@ -206,6 +237,8 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                 timeImage.anchor(contentImage.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 200)
 
                 nextButton.anchor(timeImage.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 40, bottomConstant: 30, leftConstant: 100, rightConstant: 100, widthConstant: screenSizeX, heightConstant: 70)
+                
+                enableButton.anchor(timeImage.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 40, bottomConstant: 30, leftConstant: 100, rightConstant: 100, widthConstant: screenSizeX, heightConstant: 70)
 
             }
 

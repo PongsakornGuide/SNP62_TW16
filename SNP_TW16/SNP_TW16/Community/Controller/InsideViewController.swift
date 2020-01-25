@@ -10,6 +10,23 @@ import UIKit
 import Alamofire
 import ObjectMapper
 class InsideViewController: UITableViewController{
+    
+     let URL_GET_DATA = "http://localhost/alder_iosapp/v1/show.php"
+     let URL_GET_COMMENT = "http://localhost/alder_iosapp/v1/showcomment.php"
+     let URL_POST_COMMENT = "http://localhost/alder_iosapp/v1/comment.php"
+     let defaultValues = UserDefaults.standard
+     private var cellId = "Cell"
+     private var cellId1 = "Cell1"
+     private var cellId2 = "Cell2"
+     var check : allList?
+     var comment: [CommentList]?
+     var userid = String()
+
+     override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+        tableView.reloadData()
+    }
     let bgActivitity:UIView = {
         let background = UIView()
         background.backgroundColor = UIColor.rgb(red: 222, green: 222, blue: 222)
@@ -60,26 +77,6 @@ class InsideViewController: UITableViewController{
           submit.addTarget(self, action: #selector(sendData), for: .touchUpInside)
           return submit
     }()
-    
-    
-    
-             
-    let URL_GET_DATA = "http://localhost/alder_iosapp/v1/show.php"
-    let URL_GET_COMMENT = "http://localhost/alder_iosapp/v1/showcomment.php"
-    let URL_POST_COMMENT = "http://localhost/alder_iosapp/v1/comment.php"
-    let defaultValues = UserDefaults.standard
-    private var cellId = "Cell"
-    private var cellId1 = "Cell1"
-    private var cellId2 = "Cell2"
-    var check : allList?
-    var comment: [CommentList]?
-    var userid = String()
-
-
-    override func viewWillAppear(_ animated: Bool){
-           super.viewWillAppear(animated)
-           tableView.reloadData()
-    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
          return 2
@@ -155,21 +152,20 @@ class InsideViewController: UITableViewController{
         view.addSubview(submitBtn)
         view.addSubview(imgView)
         view.addSubview(uploadImage)
-        view.addSubview(commentTextField)
-        view.addSubview(submitBtn)
         
         bgActivitity.anchor(nil, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: -35, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 80)
                    
-                    imgView.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 80)
+                    imgView.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 80)
                     
                     uploadImage.anchor(imgView.topAnchor, left: imgView.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 60)
                 
-                    commentTextField.anchor(imgView.topAnchor, left: uploadImage.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 70, rightConstant: 0, widthConstant: 210, heightConstant: 60)
+                    commentTextField.anchor(imgView.topAnchor, left: uploadImage.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 70, rightConstant: 0, widthConstant: 260, heightConstant: 60)
                
-                    submitBtn.anchor(imgView.topAnchor, left: commentTextField.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 220, rightConstant: 10, widthConstant: 60, heightConstant: 60)
+                    submitBtn.anchor(imgView.topAnchor, left: commentTextField.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 270, rightConstant: 10, widthConstant: 60, heightConstant: 60)
         
         tableView.delegate = self
-        navigationItem.title = "Alder"
+//        navigationItem.title = "Alder"
+       
         print(check?.id ?? 0)
         let url = URL_GET_COMMENT + "?id=\(check?.id ?? 0)"
         Alamofire.request(url).responseJSON { [weak self](resData) in
