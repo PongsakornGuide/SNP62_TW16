@@ -26,6 +26,7 @@ class InsideViewController: UITableViewController{
            super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
         tableView.reloadData()
+        self.navigationController?.navigationBar.isHidden = false
     }
     let bgActivitity:UIView = {
         let background = UIView()
@@ -33,23 +34,23 @@ class InsideViewController: UITableViewController{
         return background
     }()
     
-    let imgView: UIView = {
-           let view = UIImageView()
-           return view
-    }()
+//    let imgView: UIView = {
+//           let view = UIImageView()
+//           return view
+//    }()
+//
+//    let uploadImage: UIButton = {
+//        let image = UIImage(named: "Group 1093") as UIImage?
+//        let button = UIButton()
+//        button.setImage(image, for: .normal)
+//        button.layer.masksToBounds = true
+//        button.addTarget(self, action: #selector(upload), for: .touchUpInside)
+//        return button
+//    }()
     
-    let uploadImage: UIButton = {
-        let image = UIImage(named: "Group 1093") as UIImage?
-        let button = UIButton()
-        button.setImage(image, for: .normal)
-        button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(upload), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func upload (){
-        print("5555")
-    }
+//    @objc func upload (){
+//        print("5555")
+//    }
     
     let commentTextField: UITextField = {
            let textField = UITextField()
@@ -112,7 +113,8 @@ class InsideViewController: UITableViewController{
               cell.selectionStyle = .none
               return cell
           }else{
-           let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! CommentTableView
+           let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as!
+            CommentTableView
             
             let commentActivity = comment?[indexPath.row]
             cell.date.text = commentActivity?.created
@@ -124,23 +126,31 @@ class InsideViewController: UITableViewController{
                             cell.profile.image = image
                 }
             }
-                cell.selectionStyle = .none
+                        self.tableView.separatorStyle = .none
+                    cell.selectionStyle = .none
+                    cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 return cell
         }
     }
     
     @objc func sendData (){
-        let parameters: Parameters = ["ad_post_timeline_id":check?.id ?? 0,"user_id":userid,"post":commentTextField.text!]
-        print(commentTextField.text!)
-        let url = URL_POST_COMMENT
-
-        Alamofire.request(url, method: .post,parameters: parameters).responseJSON { response in
-                print(response)
-             if let nav = self.navigationController {
-                nav.popToRootViewController(animated: true)
-                    } else {
-                self.dismiss(animated: true, completion: nil)
-            }
+        
+        let isCheckValid = commentTextField.text?.count ?? 0 > 0
+        
+        if isCheckValid{
+               let parameters: Parameters = ["ad_post_timeline_id":check?.id ?? 0,"user_id":userid,"post":commentTextField.text!]
+                  print(commentTextField.text!)
+                  let url = URL_POST_COMMENT
+                  Alamofire.request(url, method: .post,parameters: parameters).responseJSON { response in
+                          print(response)
+                       if let nav = self.navigationController {
+                          nav.popToRootViewController(animated: true)
+                              } else {
+                          self.dismiss(animated: true, completion: nil)
+                      }
+                  }
+        }else{
+//              print("5555")
         }
     }
 
@@ -150,18 +160,18 @@ class InsideViewController: UITableViewController{
         view.addSubview(bgActivitity)
         view.addSubview(commentTextField)
         view.addSubview(submitBtn)
-        view.addSubview(imgView)
-        view.addSubview(uploadImage)
+//        view.addSubview(imgView)
+//        view.addSubview(uploadImage)
         
         bgActivitity.anchor(nil, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: -35, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 80)
                    
-                    imgView.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 80)
-                    
-                    uploadImage.anchor(imgView.topAnchor, left: imgView.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 60)
-                
-                    commentTextField.anchor(imgView.topAnchor, left: uploadImage.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 70, rightConstant: 0, widthConstant: 260, heightConstant: 60)
+//                    imgView.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 80)
+//
+//                    uploadImage.anchor(imgView.topAnchor, left: imgView.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 60)
+//
+        commentTextField.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: submitBtn.leftAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 20, rightConstant: 10, widthConstant: 0, heightConstant: 60)
                
-                    submitBtn.anchor(imgView.topAnchor, left: commentTextField.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 270, rightConstant: 10, widthConstant: 60, heightConstant: 60)
+        submitBtn.anchor(bgActivitity.topAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 270, rightConstant: 20, widthConstant: 60, heightConstant: 60)
         
         tableView.delegate = self
 //        navigationItem.title = "Alder"
@@ -188,7 +198,7 @@ class InsideViewController: UITableViewController{
 //        tableView.register(SendCommentView.self, forCellReuseIdentifier: cellId2)
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
+        tableView.estimatedRowHeight = 150
     }
 
     

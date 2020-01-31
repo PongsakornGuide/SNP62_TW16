@@ -20,39 +20,49 @@ class CommentTableView: UITableViewCell {
 
     let contrainer:UIView = {
        let view = UIView()
-//        view.backgroundColor = .red
+//        view.backgroundColor = .purple
         return view
     }()
     
     let profile: UIImageView = {
        let image = UIImageView()
-        image.image = UIImage(named: "tiko")
-        image.contentMode = .scaleAspectFill
+          image.image = UIImage(named: "tiko")
+               image.contentMode = .scaleAspectFill
+               image.layer.masksToBounds = true
+               image.layer.cornerRadius = 60/2
        return image
     }()
     
     let username : UILabel = {
        let name = UILabel()
        name.text = "Pongsakorn"
-        name.font = UIFont.PoppinsBold(size: 18)
+        name.font = UIFont.PoppinsBold(size: 16)
        return name
     }()
     
     let date : UILabel = {
           let timer = UILabel()
           timer.text = "12 ตุลาคม 2562 เวลา 15: 20"
-          timer.font = UIFont.PoppinsMedium(size: 14)
+          timer.font = UIFont.PoppinsMedium(size: 12)
           timer.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
           return timer
     }()
     
-    let comment:UILabel = {
-            let comment = UILabel()
-            comment.text = "สวัสดีวันจันทร์นะคะ คุณสมเกียรติ"
-            comment.font = UIFont.PoppinsMedium(size: 18)
-            comment.textColor = UIColor.black
-            return comment
+    let contrainerComment:UIView = {
+           let view = UIView()
+        view.backgroundColor = UIColor.rgb(red: 236, green: 243, blue: 253)
+            view.layer.cornerRadius = 20/2
+            return view
     }()
+    
+    
+    let comment:UILabel = {
+             let comment = UILabel()
+             comment.text = "สวัสดีวันจันทร์นะคะ คุณสมเกียรติ"
+             comment.font = UIFont.PoppinsMedium(size: 16)
+             comment.textColor = UIColor.black
+             return comment
+     }()
     
     
     let imagePost: UIImageView = {
@@ -75,8 +85,8 @@ class CommentTableView: UITableViewCell {
     let numCount: UILabel = {
             let label = UILabel()
             label.text = "0"
-            label.textColor = UIColor.blackAlpha(alpha: 0.5)
-            label.font = UIFont.PoppinsRegular(size: 20)
+            label.textColor = UIColor.black
+            label.font = UIFont.PoppinsBold(size: 12)
             label.numberOfLines = 0
             return label
     }()
@@ -84,6 +94,7 @@ class CommentTableView: UITableViewCell {
     func setupViewCell(){
         addSubview(bgActivitity)
         addSubview(contrainer)
+        addSubview(contrainerComment)
         addSubview(profile)
         addSubview(username)
         addSubview(date)
@@ -91,24 +102,24 @@ class CommentTableView: UITableViewCell {
         addSubview(iconImageLike)
         addSubview(numCount)
         
-        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 60, heightConstant: 200)
+        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 20, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 60, heightConstant: 120)
         
         contrainer.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 5, rightConstant: 0, widthConstant: 70, heightConstant: 100)
 //
-        profile.anchor(contrainer.topAnchor, left: contrainer.leftAnchor, right: nil, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 55, heightConstant: 20)
+        profile.anchor(contrainer.topAnchor, left: contrainer.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 60)
 //
-        username.anchor(contrainer.topAnchor, left: profile.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 80, rightConstant: 0, widthConstant: 0, heightConstant: 20)
-
-        date.anchor(username.bottomAnchor, left: profile.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 80, rightConstant: 0, widthConstant: 0, heightConstant: 20)
-//
-        comment.anchor(contrainer.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 40)
-
-        iconImageLike.anchor(comment.bottomAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 10, rightConstant: 10, widthConstant: 30, heightConstant: 30)
-
-        numCount.anchor(comment.bottomAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 40, rightConstant: 10, widthConstant: 20, heightConstant: 20)
+        contrainerComment.anchor(contrainer.topAnchor, left: profile.rightAnchor, right: contrainer.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 90)
         
-//             numCount.anchor(contrainer.topAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 10, leftConstant: 60, rightConstant: 10, widthConstant: 40, heightConstant: 40)
+        username.anchor(contrainerComment.topAnchor, left: contrainerComment.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 20)
+
+        date.anchor(contrainerComment.bottomAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 80, rightConstant: 0, widthConstant: 0, heightConstant: 20)
         
+        comment.anchor(username.bottomAnchor, left: contrainerComment.leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 40)
+
+        numCount.anchor(contrainerComment.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 20, heightConstant: 20)
+
+        iconImageLike.anchor(contrainerComment.bottomAnchor, left: nil, right: numCount.leftAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 20, heightConstant: 20)
+
     }
     required init?(coder: NSCoder) {
            fatalError("init(coder:) has not been implemented")

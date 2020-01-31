@@ -11,9 +11,10 @@ import Foundation
 import Alamofire
 
 class OtpViewController: UIViewController {
-    
+//    http://localhost/alder_iosapp/v1/select_otp.php
     var idUserLabelText = String()
-    let URL_USER_OtpPost = "http://localhost/alder_iosapp/v1/otp.php?otp"
+    var OTP = String()
+    let URL_USER_OtpPost = "http://localhost/alder_iosapp/v1/otp.php"
     let defaultValues = UserDefaults.standard
     let textTure : UILabel = {
         let label = UILabel()
@@ -129,20 +130,17 @@ class OtpViewController: UIViewController {
                                      Alamofire.request(URL_USER_OtpPost, method: .post,parameters: parameters).responseJSON
                                        { response in
                                                print(response)
-                                                     if let result = response.result.value {
-                                                               let jsonData = result as? Bool ?? true
-
+                            if let result = response.result.value {
+                                let jsonData = result as? Bool ?? true
                                 if(jsonData == false) {
                                     let otpId = ("otp") as! NSObject
                                     self.defaultValues.set(otpId, forKey: "otp")
                                  let puchToReg = RegisterViewController ()
                                  puchToReg.NumberPhoneLabelText = self.idTextField.text ?? "0"
                                  self.navigationController?.pushViewController(puchToReg, animated: true)
-            //                                                     alertTextfield.isHidden = true
                                                                  self.errorLabel.text = "OTP สามารถใช้งานได้"
                                                                  
                                                              } else {
-            //                                                     self.alertTextfield.isHidden = false
                                                                   self.errorLabel.text = "รหัสไม่ถูกต้อง"
                                                              }
 
@@ -206,7 +204,8 @@ class OtpViewController: UIViewController {
         view.addSubview(imageIcon)
         view.addSubview(showLabel)
         view.addSubview(btnBack)
-        
+        otpTextField.text = OTP
+        print(OTP)
         self.errorLabel.isHidden = true
         self.successLabel.isHidden = true
         self.showLabel.isHidden = true

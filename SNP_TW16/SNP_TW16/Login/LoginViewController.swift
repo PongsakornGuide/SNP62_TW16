@@ -12,10 +12,6 @@ import ObjectMapper
 class LoginViewController: UIViewController {
     var OTP_check = String()
     var OTP = String()
-//    var otpList : [OtpView]?
-//    var otpLists : OtpView?
-//    var otpListShow : [ShowData]?
-    
     let defaultValues = UserDefaults.standard
     let URL_USER_LOGIN = "http://localhost/alder_iosapp/v1/login.php"
     let URL_USER_USE_OTP = "http://localhost/alder_iosapp/v1/select_otp.php"
@@ -159,6 +155,7 @@ class LoginViewController: UIViewController {
             otpTextField.isHidden = false
             submitLogin.isHidden = false
             checkError.isHidden = true
+            regButton.isHidden = true
             send_to_otp()
         }
 //        let content = UNMutableNotificationContent()
@@ -172,39 +169,41 @@ class LoginViewController: UIViewController {
     }
     
     @objc func loginToApp(){
-//        let checkOTP = otpTextField.text?.count ?? 0 <= 5
-//        if !checkOTP{
-//            print("OTP NOT REGISTER")
-//        }else{
-//            print("USE REGISTER SUCCECT")
-//            let parameters = ["tel" : numberTextField.text!,"otp": otpTextField.text!]
-//            Alamofire.request(URL_USER_LOGIN, method: .post,parameters: parameters).responseJSON { response in
-//                   print(response)
-//                   if let result = response.result.value {
-//                    let jsonData = result as! NSDictionary
-//                    if(!(jsonData.value(forKey: "error") as! Bool)){
-//                              let user = jsonData.value(forKey: "user") as! NSDictionary
-//                                   let userId = user.value(forKey: "id") as! Int
-//                                   let userName = user.value(forKey: "username") as! String
-//                                   let tel = user.value(forKey: "tel") as! String
-//                                   //saving user
-//                                   let image = user.value(forKey: "photo") as! String
-//                                   self.defaultValues.set(userId, forKey: "userId")
-//                                   self.defaultValues.set(userName, forKey: "userName")
-//                                   self.defaultValues.set(tel, forKey: "tel")
-//                                   self.defaultValues.set(image, forKey: "ImageUser")
-//                                   self.dismiss(animated: false, completion: nil)
-//                    } else {
-//                                  self.checkError.isHidden = false
-//                                  self.checkError.text = "Invalid username or password"
-//                    }
-//                }
-//                 if self.defaultValues.string(forKey:"userName") != nil {
-//                        self.view.window?.rootViewController = tabBarViewController()
-//                        self.view.window?.makeKeyAndVisible()
-//               }
-//            }
-//        }
+        let checkOTP = otpTextField.text?.count ?? 0 <= 5
+        if !checkOTP{
+            print("OTP NOT REGISTER")
+        }else{
+            print("USE REGISTER SUCCECT")
+            let parameters = ["tel" : numberTextField.text!,"otp": otpTextField.text!]
+            Alamofire.request(URL_USER_LOGIN, method: .post,parameters: parameters).responseJSON { response in
+                   print(response)
+                   if let result = response.result.value {
+                    let jsonData = result as! NSDictionary
+                    if(!(jsonData.value(forKey: "error") as! Bool)){
+                              let user = jsonData.value(forKey: "user") as! NSDictionary
+                                   let userId = user.value(forKey: "id") as! Int
+                                   let userName = user.value(forKey: "username") as! String
+                                   let tel = user.value(forKey: "tel") as! String
+                                   //saving user
+                                   let image = user.value(forKey: "photo") as! String
+                        
+                        
+                                   self.defaultValues.set(userId, forKey: "userId")
+                                   self.defaultValues.set(userName, forKey: "userName")
+                                   self.defaultValues.set(tel, forKey: "tel")
+                                   self.defaultValues.set(image, forKey: "ImageUser")
+                                   self.dismiss(animated: false, completion: nil)
+                    } else {
+                                  self.checkError.isHidden = false
+                                  self.checkError.text = "Invalid username or password"
+                    }
+                }
+                 if self.defaultValues.string(forKey:"userName") != nil {
+                        self.view.window?.rootViewController = tabBarViewController()
+                        self.view.window?.makeKeyAndVisible()
+               }
+            }
+        }
     }
 
          let regButton : UIButton = {
@@ -313,7 +312,7 @@ class LoginViewController: UIViewController {
             
             submitLogin.anchor(otpTextField.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
 
-            regButton.anchor(submitLogin.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
+            regButton.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: -130, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
             
             checkError.anchor(regButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 50)
         }

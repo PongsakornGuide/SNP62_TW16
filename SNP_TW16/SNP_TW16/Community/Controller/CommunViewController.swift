@@ -23,13 +23,16 @@ class CommunViewController: UITableViewController{
     private var cellId1 = "Cell1"
     var idcontent = Int()
 
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getActivty()
         self.tabBarController?.tabBar.isHidden = false
         self.tableView.reloadData()
+//        self.navigationController?.navigationBar.isHidden = true
+//        self.navigationController?.hidesBarsOnTap = true
     }
+ 
     
     @objc func handelSetting(){
         let CreateView = CreateViewController()
@@ -49,7 +52,12 @@ class CommunViewController: UITableViewController{
         }
     }
        
-
+    @objc func likePost(){
+//        let cell = AcivityListTableViewCell()
+//        cell.iconImageLike.backgroundColor = .red
+    }
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! ActivityPageViewController
@@ -111,7 +119,6 @@ class CommunViewController: UITableViewController{
              DispatchQueue.main.asyncAfter(deadline: RefreshLine) {
                  self.refresher.endRefreshing()
                  self.getActivty()
-//                 self.tableView.reloadData()
              }
       }
     
@@ -140,17 +147,14 @@ class CommunViewController: UITableViewController{
        super.viewDidLoad()
         view.addSubview(submitBtn)
         
-//        submitBtn.anchor(view.safeAreaLayoutGuide.topAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 320, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 90, heightConstant: 90)
-        
           submitBtn.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -100, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 80, heightConstant: 80)
         
-                if #available(iOS 12.1 , *) {
+        if #available(iOS 12.1 , *) {
                             tableView.refreshControl = refresher
                         }else{
                             tableView.addSubview(refresher)
-                }
+        }
         
-//            navigationItem.title = "Alder"
             tableView.register(ActivityPageViewController.self, forCellReuseIdentifier: cellId1)
             tableView.register(AcivityListTableViewCell.self, forCellReuseIdentifier: cellId)
             tableView.tableFooterView = UIView()

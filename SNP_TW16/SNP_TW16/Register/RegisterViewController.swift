@@ -13,7 +13,7 @@ import Alamofire
 class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigationControllerDelegate , UIImagePickerControllerDelegate ,UIPickerViewDelegate,UIPickerViewDataSource{
 
         var NumberPhoneLabelText = String()
-        var imageTy: UIImage!
+        var imageTy = UIImage()
         private var datePicker : UIDatePicker?
     
         var religionPicker = UIPickerView()
@@ -131,7 +131,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
     
        let BGView: UIView = {
            let view = UIView()
-           view.backgroundColor = .red
+           view.backgroundColor = .white
            view.layer.cornerRadius = 20
            return view
        }()
@@ -330,6 +330,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
        dateTextField.inputView = datePicker
         
        datePicker?.addTarget(self, action: #selector(RegisterViewController.dateChanged(datePicker: )), for: .valueChanged)
+        
         let TapGesture = UITapGestureRecognizer(target: self, action: #selector(RegisterViewController.viewTapped(gestureRecognizer:)))
         
             phoneTextField.text = NumberPhoneLabelText
@@ -374,12 +375,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
 //        btnBack.anchor(viewScroll.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 20, heightConstant: 20
 //               )
 //
-        stepView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX - 0, heightConstant: 115)
+        stepView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX - 0, heightConstant: 120)
 
-        imgView.anchor(BGView.topAnchor, left: nil, right: nil, bottom: nil, topConstant: -60, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 100, heightConstant: 100)
+        imgView.anchor(BGView.topAnchor, left: nil, right: nil, bottom: nil, topConstant: -60, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 150, heightConstant: 150)
             imgView.centerXAnchor.constraint(equalTo: BGView.centerXAnchor).isActive = true
 
-        uploadImage.anchor(imgView.topAnchor, left: nil, right: imgView.rightAnchor, bottom: nil, topConstant: 45, bottomConstant: 0, leftConstant: 0, rightConstant: -15, widthConstant: 50, heightConstant: 50)
+        uploadImage.anchor(imgView.topAnchor, left: nil, right: imgView.rightAnchor, bottom: nil, topConstant: 75, bottomConstant: 0, leftConstant: 0, rightConstant: -15, widthConstant: 70, heightConstant: 70)
 
         BGView.anchor(stepView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nextButton.topAnchor, topConstant: 100, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 40, heightConstant: screenSizeY)
 
@@ -401,7 +402,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
 
         addressTextFieldTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: addressTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
-        nextButton.anchor(BGView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 80, rightConstant: 80, widthConstant: screenSizeX - 160, heightConstant: 50)
+        nextButton.anchor(BGView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 80, rightConstant: 80, widthConstant: screenSizeX - 160, heightConstant: 70)
            // Do any additional setup after loading the view.
        }
 

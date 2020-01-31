@@ -47,7 +47,7 @@ class ListRelatuveView: UITableViewCell {
        let title : UILabel = {
           let title = UILabel()
            title.text = "ตำรวจ 191"
-           title.font = UIFont.PoppinsBold(size: 18)
+           title.font = UIFont.PoppinsBold(size: 22)
            return title
        }()
 
@@ -77,16 +77,16 @@ class ListRelatuveView: UITableViewCell {
            addSubview(bgEmergency)
            addSubview(btnCell)
            addSubview(title)
-           addSubview(num)
+//           addSubview(num)
            addSubview(iconImgae)
            
            bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 100)
            
            bgEmergency.anchor(bgActivitity.topAnchor, left: leftAnchor, right: btnCell.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 80, widthConstant: 0, heightConstant: 75)
            
-           num.anchor(bgEmergency.topAnchor, left: leftAnchor, right: num.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 20, leftConstant: 50, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-                  
-           title.anchor(bgEmergency.topAnchor, left: num.leftAnchor, right: rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 75, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+//           num.anchor(bgEmergency.topAnchor, left: leftAnchor, right: num.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 20, leftConstant: 50, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+//
+        title.anchor(bgEmergency.topAnchor, left: bgEmergency.leftAnchor, right: bgEmergency.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 100, rightConstant: 0, widthConstant: 0, heightConstant: 0)
            
            btnCell.anchor(bgActivitity.topAnchor, left: nil, right: rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 0, rightConstant: 20, widthConstant: 70, heightConstant: 75)
            

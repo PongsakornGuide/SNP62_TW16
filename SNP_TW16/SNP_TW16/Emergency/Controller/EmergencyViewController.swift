@@ -51,7 +51,8 @@ class EmergencyViewController: UITableViewController {
     
 //    heightForHeaderInSection
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            if indexPath.section == 0 {
+            
+        if indexPath.section == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! EmergencyView
                 cell.selectionStyle = .none
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
@@ -59,8 +60,16 @@ class EmergencyViewController: UITableViewController {
             } else if indexPath.section == 1{
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! DetailEmergencyView
                 let Emergency = emergencyList?[indexPath.row]
-                        cell.num.text = "\(Emergency?.emergencyCall ?? 0)"
+//                        cell.num.text = "\(Emergency?.emergencyCall ?? 0)"
                         cell.title.text = Emergency?.emergencyName ?? "5555"
+                
+                
+                Alamofire.request((Emergency?.emergencyIcon ?? "0")!).responseImage { response in
+                       if let image = response.result.value {
+                            cell.ImageView.image = image
+                       }
+                }
+                
                         cell.selectionStyle = .none
                         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 self.tableView.separatorStyle = .none
@@ -70,8 +79,8 @@ class EmergencyViewController: UITableViewController {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId3,for: indexPath) as! ListRelatuveView
                 let ListRelative = userRelavite?[indexPath.row]
-                cell.num.text = "\(ListRelative?.telphone ?? 0)"
-                cell.title.text = ListRelative?.username
+//                cell.num.text = "\(ListRelative?.telphone ?? 0)"
+                cell.title.text = "คุณ : \(ListRelative?.username ?? "nil")"
                 cell.selectionStyle = .none
                   cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 self.tableView.separatorStyle = .none
@@ -89,8 +98,8 @@ class EmergencyViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0{
                 let callRelative = self.relativeList?[indexPath.row]
-
-              if let url = URL(string: "tel://\(callRelative?.relativeTel ?? 0631921545)"), UIApplication.shared.canOpenURL(url){
+            var TelUser = "\(0)\(callRelative?.relativeTel ?? 0)"
+              if let url = URL(string: "tel://\(TelUser)"), UIApplication.shared.canOpenURL(url){
                                   if #available(iOS 10, *) {
                                       UIApplication.shared.open(url)
                                   } else {
@@ -109,7 +118,8 @@ class EmergencyViewController: UITableViewController {
             }
         }else if indexPath.section == 2{
             let callAddRelative = self.userRelavite?[indexPath.row]
-            if let url = URL(string: "tel://\(callAddRelative?.telphone ?? 0)"), UIApplication.shared.canOpenURL(url) {
+            var TelDecide = "\(0)\(callAddRelative?.telphone ?? 0)"
+            if let url = URL(string: "tel://\(TelDecide)"), UIApplication.shared.canOpenURL(url) {
                       if #available(iOS 10, *) {
                           UIApplication.shared.open(url)
                       } else {
@@ -175,7 +185,6 @@ class EmergencyViewController: UITableViewController {
     
     // action refresh
     @objc func requestData(){
-        print("requestData for tableView")
         let RefreshLine = DispatchTime.now() + .milliseconds(500)
         DispatchQueue.main.asyncAfter(deadline: RefreshLine) {
             self.refresher.endRefreshing()
@@ -200,6 +209,7 @@ class EmergencyViewController: UITableViewController {
         }
         if let user = defaultValues.string(forKey: "userId") {
                     user_id = user
+            print(user_id)
          }else{
                       //send back to login view controller
         }

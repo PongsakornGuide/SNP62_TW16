@@ -22,7 +22,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
             let view1 = UIImageView()
             view1.image = UIImage(named: "petr")
             view1.layer.masksToBounds = true
-            view1.layer.cornerRadius = 100/2
+            view1.layer.cornerRadius = 80/2
             return view1
         }()
         
@@ -58,14 +58,14 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
             return textField
         }()
     
-            let imageView : UIImageView = {
+        let imageView : UIImageView = {
                 let image = UIImageView()
                 image.image = UIImage(named: "input")
                 image.layer.cornerRadius = 70/2
                 image.contentMode = .scaleAspectFit
                 image.layer.masksToBounds = true
                 return image
-            }()
+        }()
         
         let btn: UIButton = {
             let btnimg = UIButton()
@@ -100,7 +100,8 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
     @objc func postContent(){
         guard let image = imageView.image else { return }
         let parameters: Parameters = ["user_app_id":user_id,"caption":contentTextField.text!]
-         let header: HTTPHeaders = ["Content-type":"multipart/form-data"]
+        print(parameters)
+        let header: HTTPHeaders = ["Content-type":"multipart/form-data"]
         let dateFormatter : DateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyyMMddHH:mm:ss"
         let date = Date()
@@ -191,7 +192,13 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         
         if let name3 = defaultValues.string(forKey: "ImageUser") {
                        imageViewPro = name3
-             print("image === ===== \(imageViewPro)")
+            
+//            ("http://localhost/alder_iosapp/" + (headerActivity?.img ?? "0")!)
+            Alamofire.request("http://localhost/alder_iosapp/" + (imageViewPro ?? "0")!).responseImage { response in
+                        if let image = response.result.value {
+                        self.Imagelabel.image = image
+                }
+            }
         }else{
                                       //send back to login view controller
             
@@ -206,19 +213,13 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
 
         view.backgroundColor = .white
         
-//        navigationItem.title = "Create Activity"
-//        navigationController?.navigationBar.isHidden = true
-        
-//        btnBack.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 20, heightConstant: 20
-//                   )
-//
-        Imagelabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: namelabel.rightAnchor, bottom: nil, topConstant: 60, bottomConstant: 0, leftConstant: 40, rightConstant: 240, widthConstant: 120, heightConstant: 100)
+        Imagelabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: namelabel.leftAnchor, bottom: nil, topConstant: 60, bottomConstant: 0, leftConstant: 30, rightConstant: 35, widthConstant: 80, heightConstant: 80)
                
-                namelabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: Imagelabel.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 70, bottomConstant: 0, leftConstant: 120, rightConstant: 40, widthConstant: 220, heightConstant: 50)
+        namelabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: Imagelabel.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 70, bottomConstant: 0, leftConstant: 115, rightConstant: 40, widthConstant: 220, heightConstant: 50)
 
-               contentTextField.anchor(Imagelabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 300, heightConstant: 50)
+        contentTextField.anchor(Imagelabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 300, heightConstant: 50)
                
-                imageView.anchor(contentTextField.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 260)
+        imageView.anchor(contentTextField.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 260)
         
         btn.anchor(imageView.topAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: imageView.bottomAnchor, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
                

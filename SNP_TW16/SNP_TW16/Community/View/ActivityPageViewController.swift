@@ -29,10 +29,10 @@ class ActivityPageViewController: UITableViewCell {
     let header:UILabel = {
        let title = UILabel()
         title.lineBreakMode = .byWordWrapping
-        title.numberOfLines = 3
-        title.text = "กิจกรรม รักษ์โลก \n เชิญชวนปลูกต้นไม้ ณ \n บริเวณท่าน้ำนนท์"
-        title.font = UIFont.PoppinsBold(size: 28)
+        title.font = UIFont.PoppinsBold(size: 25)
         title.textColor = UIColor.rgb(red: 66, green: 100, blue: 38)
+        title.numberOfLines = 5
+        title.text = "กิจกรรม รักษ์โลก \n เชิญชวนปลูกต้นไม้ ณ \n บริเวณท่าน้ำนนท์"
         return title
     }()
     
@@ -47,10 +47,10 @@ class ActivityPageViewController: UITableViewCell {
         addSubview(header)
         addSubview(backgroundImage)
 
-        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 300)
+        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 170)
 
-        header.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 200)
+        header.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 120)
 
-        backgroundImage.anchor(header.bottomAnchor, left: header.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: -60, bottomConstant: 0, leftConstant: 200, rightConstant: 0, widthConstant: 0, heightConstant: 220)
+        backgroundImage.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 20, bottomConstant: 0, leftConstant: 250, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
 }

@@ -31,16 +31,22 @@ class TitleTableViewCell: UITableViewCell {
                   image.layer.masksToBounds = true
                   return image
     }()
+    let titleHeader : UILabel = {
+                   let label = UILabel()
+                   let title = "สวัสดีวันจันทร์,"
+                   let attributedText = NSMutableAttributedString(string: title,
+                   attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+                   label.attributedText = attributedText
+                   label.numberOfLines = 0
+                   return label
+    }()
+    
     
           let textHeader : UILabel = {
                 let label = UILabel()
                 let title = "สวัสดีวันจันทร์,"
-                let text = "\n คุณรัตน์มณี"
                 let attributedText = NSMutableAttributedString(string: title,
                 attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
-
-                attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.PoppinsBold(size: 32),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
-
                 label.attributedText = attributedText
                 label.numberOfLines = 0
                 return label
@@ -51,6 +57,7 @@ class TitleTableViewCell: UITableViewCell {
     func setLayout(){
         addSubview(bgActivitity)
         addSubview(bgImage)
+        addSubview(titleHeader)
         addSubview(textHeader)
         
        
@@ -60,7 +67,9 @@ class TitleTableViewCell: UITableViewCell {
         bgImage.anchor(bgActivitity.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200
                )
         
-        textHeader.anchor(bgImage.topAnchor, left: bgImage.leftAnchor, right: bgImage.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        titleHeader.anchor(bgImage.topAnchor, left: bgImage.leftAnchor, right: bgImage.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        
+        textHeader.anchor(titleHeader.topAnchor, left: bgImage.leftAnchor, right: bgImage.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 
     }
 }

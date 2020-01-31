@@ -17,6 +17,7 @@ class CommentList: Mappable {
     var created : String?
     var like : Int?
     var imageView : String?
+    
     required init?(map: Map) {
         
     }

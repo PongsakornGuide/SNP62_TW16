@@ -12,11 +12,16 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
     let defaultValues = UserDefaults.standard
     var activityData: ActivityDetail?
     var typecheck = String()
+    var ActivityPostID = Int()
     let URL_USER_ID = "http://localhost/alder_iosapp/v1/join.php"
     let URL_CHECK_JOIN = "http://localhost/alder_iosapp/v1/checkjoin.php"
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
              
+    
+    override func viewWillAppear(_ animated: Bool) {
+        reloadData()
+    }
     var viewScroll: UIScrollView = {
         let view = UIScrollView()
         return view
@@ -24,7 +29,6 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
     
     let stepView: UIImageView = {
         let view = UIImageView()
-//        view.image = UIImage(named: "maeMuUnu")
         return view
     }()
     
@@ -41,10 +45,10 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
           view.layer.cornerRadius = 20
           return view
       }()
-
+    
       let textHeader : UILabel = {
            let title = UILabel()
-           title.text = " สันทนาการ"
+           title.text = "สันทนาการ"
            title.font = UIFont.PoppinsBold(size: 17)
            title.textColor = UIColor.white
            return title
@@ -125,59 +129,63 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
 
         @objc func activity_active(){
             
-            let passData = AssessVIewController()
-            let parameters: Parameters = ["user_id":typecheck,"post_timeline_id":activityData?.dataId ?? 0]
-            passData.delegate = self
+        let passData = DecideViewController()
+        let parameters: Parameters = ["user_id":typecheck,"post_timeline_id":activityData?.dataId ?? 0]
+//            passData.delegate = self
             Alamofire.request(URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
-                    print(response)
-                passData.titleLabel.text = self.titleLabel.text ?? "NULL"
-                    self.navigationController?.pushViewController(passData, animated: true)
-                    
-            }
+                print(response)
+                passData.actPost = self.ActivityPostID ?? 0
+//            self.navigationController?.pushViewController(passData, animated: true)
+            self.present(passData, animated: true, completion: nil)
         }
-//    func pushData(){
-//        let passData = RecordViewController()
-//        passData.NameLabelText = nameTextField.text ?? "0"
-//        passData.SernameLabelText = surnameTextField.text ?? "0"
-//        passData.MobileLabelText = phoneTextField.text ?? "0"
-//        passData.PhotoLabelText = imageTy
-//                   passData.BirthLabelText = dateTextField.text ?? "0"
-//                   passData.RegligionLabelText = cultTextField.text ?? "0"
-//                   passData.AddressLabelText = addressTextField.text ?? "0"
-//                   passData.GenderLabelText = genTextField.text ?? "0"
-//                   self.navigationController?.pushViewController(passData, animated: true)
-//    }
-
+            
+//            let passData = AssessVIewController()
+//            let parameters: Parameters = ["user_id":typecheck,"post_timeline_id":activityData?.dataId ?? 0]
+//            passData.delegate = self
+//                 Alamofire.request(URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
+//                    print(response)
+//
+//                    passData.titleLabel.text = self.titleLabel.text ?? "NULL"
+//                    passData.nameLabel.text = self.nameLabel.text ?? "NULL"
+//                    passData.actPost = self.ActivityPostID ?? 0
+//                    self.navigationController?.pushViewController(passData, animated: true)
+////                    self.present(passData, animated: true, completion: nil)
+//
+//            }
+        }
+    
+        
+        func reloadData(){
+                    ActivityPostID = activityData?.dataId ?? 0
+                     titleLabel.text = activityData?.actId
+                     nameLabel.text = activityData?.caption
+                     timeLabel.text = activityData?.created
+                     contentLabel.text = activityData?.content
+                     textHeader.text = activityData?.type
+                     Alamofire.request((activityData?.imagePost ?? "0")!).responseImage { response in
+                                 if let image = response.result.value {
+                                 self.stepView.image = image
+                         }
+                     }
+                 
+                     
+                     Alamofire.request((activityData?.imgact ?? "0")!).responseImage { response in
+                                 if let image = response.result.value {
+                                     self.contentImage.image = image
+                                 }
+                     }
+                     Alamofire.request((activityData?.imgtime ?? "0")!).responseImage { response in
+                             if let image = response.result.value {
+                             self.timeImage.image = image
+                         }
+                     }
+        }
              override func viewDidLoad() {
                 super.viewDidLoad()
-                
-                titleLabel.text = activityData?.actId
-                nameLabel.text = activityData?.caption
-                timeLabel.text = activityData?.created
-                contentLabel.text = activityData?.content
-                print(activityData?.imagePost ?? "notImage")
-               
-                Alamofire.request((activityData?.imagePost ?? "0")!).responseImage { response in
-                            if let image = response.result.value {
-                            self.stepView.image = image
-                    }
-                }
-            
-                
-                Alamofire.request((activityData?.imgact ?? "0")!).responseImage { response in
-                            if let image = response.result.value {
-                                self.contentImage.image = image
-                            }
-                }
-                Alamofire.request((activityData?.imgtime ?? "0")!).responseImage { response in
-                        if let image = response.result.value {
-                        self.timeImage.image = image
-                    }
-                }
+                reloadData()
                 
                  if let name2 = defaultValues.string(forKey: "userId") {
                         typecheck = name2
-                    print(typecheck)
                     }else{
                  }
                 
@@ -187,8 +195,6 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                             print(response)
                         guard let json = response.value as? [String:Bool], let status = json["error"] else { return }
                         if !status {
-//                            self.nextButton.backgroundColor = .black
-//                            self.nextButton.setTitle("เข่าร่วมกิจกรรมแล้ว",for: .normal)
                             self.enableButton.isHidden = false
                             self.nextButton.isHidden = true
                         }else{

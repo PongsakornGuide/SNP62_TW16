@@ -27,9 +27,6 @@ class MobileOtpViewController: UIViewController {
     let imageIcon : UIImageView = {
         let iconImage = UIImageView()
         iconImage.image = UIImage(named: "thailand")
-//        iconImage.image = UIImage(named:"thailand")?.withRenderingMode(.alwaysTemplate)
-//        iconImage.contentMode = .scaleAspectFit
-        
         return iconImage
     }()
     
@@ -93,36 +90,46 @@ class MobileOtpViewController: UIViewController {
     }()
     
     
-    func pushiduser(){
-        let nextToOtp = OtpViewController()
-        nextToOtp.idUserLabelText = otpTextField.text ?? "0"
-        self.navigationController?.pushViewController(nextToOtp, animated: true)
-    }
+//    func pushiduser(){
+//        let nextToOtp = OtpViewController()
+//        nextToOtp.idUserLabelText = otpTextField.text ?? "0"
+//        self.navigationController?.pushViewController(nextToOtp, animated: true)
+//    }
     
     
     @objc func submitBtn (){
         if otpTextField.text?.count ?? 0 == 10{
-            pushiduser()
             print("เรียบร้อย")
             check_use_otp()
+//            pushiduser()
         }else{
             print("เอาใหม่")
             checkError.isHidden = false
         }
     }
     
+//
+//    Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
+//    if let otp = response.result.value as! [String: Any]? {
+//        if let yield = otp["otp"] as? String {
+//           print(yield)
+//            self.otpTextField.text = yield
     
     func check_use_otp(){
         Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
                     print(response)
-            if let otp = response.result.value {
-                              self.Tel_user = "\(otp)"
+            if let otp = response.result.value  as! [String: Any]?  {
+                if let yield = otp["otp"] as? String {
+                              self.Tel_user = yield
+//                    self.otpTextField.text = yield
+//                nextToOtp.OTP = Tel_user ?? "NIL"
+                              
                               let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
                               let twilioSecret = "a74824968da571b8afac81506f84acf2"
                               //Note replace + = %2B , for To and From phone number
                               let fromNumber = "+12565308003"// actual number is +9999999
                               let toNumber = "+66631921545"// actual number is +9999999
-                             let message = "Your verification code is " + "\(otp)" + "of Register"
+                             let message = "Your verification code is " + "\(yield)" + "of Register"
                 
                              let request = NSMutableURLRequest(url: URL(string:"https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/SMS/Messages")!)
                              request.httpMethod = "POST"
@@ -138,7 +145,13 @@ class MobileOtpViewController: UIViewController {
                                     print("Error: \(error)")
                                  }
                              }).resume()
+                
+                        }
                 }
+            let nextToOtp = OtpViewController()
+            nextToOtp.idUserLabelText = self.otpTextField.text ?? "0"
+            nextToOtp.OTP = self.Tel_user ?? "Nil"
+            self.navigationController?.pushViewController(nextToOtp, animated: true)
         }
         
     }
@@ -234,7 +247,7 @@ class MobileOtpViewController: UIViewController {
         )
 
         
-        textHeader.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 130, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        textHeader.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 100, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 
         stackView.anchor(textHeader.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 80)
                    
@@ -243,7 +256,7 @@ class MobileOtpViewController: UIViewController {
         line.anchor(otpView.safeAreaLayoutGuide.topAnchor, left: imageIcon.rightAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0,  leftConstant: 20, rightConstant: 0, widthConstant: 1.5, heightConstant: 80)
 
         
-        otpTextField.anchor(otpView.topAnchor, left: line.rightAnchor, right: otpView.rightAnchor, bottom: nil, topConstant: 26, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        otpTextField.anchor(otpView.topAnchor, left: line.rightAnchor, right: otpView.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 50)
         
     
         

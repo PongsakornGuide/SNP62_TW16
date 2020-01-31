@@ -22,7 +22,6 @@ class HeaderActivity: UITableViewCell {
     
     let bgActivitity:UIView = {
         let background = UIView()
-//        background.backgroundColor = .purple
         return background
     }()
     
@@ -49,7 +48,8 @@ class HeaderActivity: UITableViewCell {
     let titleType : UILabel = {
        let title = UILabel()
         title.text = "กิจกรรม"
-        title.font = UIFont.PoppinsBold(size: 28)
+        title.font = UIFont.PoppinsBold(size: 25)
+        title.numberOfLines = 2
         return title
     }()
     
@@ -60,13 +60,13 @@ class HeaderActivity: UITableViewCell {
         addSubview(iconImage)
         addSubview(titleType)
         
-        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 170)
+        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 5, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 170)
         
-        bgEmergency.anchor(bgActivitity.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 150)
+        bgEmergency.anchor(bgActivitity.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 10, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 150)
              
-        iconImage.anchor(bgEmergency.topAnchor, left: bgEmergency.leftAnchor, right: nil, bottom: nil, topConstant: 45, bottomConstant: 20, leftConstant: 60, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        iconImage.anchor(bgEmergency.topAnchor, left: bgEmergency.leftAnchor, right: nil, bottom: nil, topConstant: 35, bottomConstant: 20, leftConstant: 40, rightConstant: 0, widthConstant: 80, heightConstant: 80)
                     
-        titleType.anchor(bgEmergency.topAnchor, left: iconImage.leftAnchor, right: nil, bottom: nil, topConstant: 55, bottomConstant: 20, leftConstant: 120, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        titleType.anchor(bgEmergency.topAnchor, left: iconImage.leftAnchor, right: bgEmergency.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 20, leftConstant: 120, rightConstant: 35, widthConstant: 0, heightConstant: 0)
              
     }
     

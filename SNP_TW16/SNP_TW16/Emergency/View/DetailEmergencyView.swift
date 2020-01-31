@@ -36,20 +36,28 @@ class DetailEmergencyView: UITableViewCell {
        return bg
     }()
     
-    let num : UILabel = {
-       let title = UILabel()
-        title.text = "161"
-        
-        title.font = UIFont.PoppinsBold(size: 32)
-        return title
-    }()
+//    let num : UILabel = {
+//       let title = UILabel()
+//        title.text = "161"
+//
+//        title.font = UIFont.PoppinsBold(size: 32)
+//        return title
+//    }()
     
     let title : UILabel = {
        let title = UILabel()
         title.text = "ตำรวจ 191"
-        title.font = UIFont.PoppinsBold(size: 18)
+        title.font = UIFont.PoppinsBold(size: 20)
         return title
     }()
+    
+    let ImageView : UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "Group 1094")
+        image.contentMode = .scaleAspectFill
+        return image
+    }()
+    
 
     let btnCell : UIView = {
           let bg = UIView()
@@ -77,16 +85,16 @@ class DetailEmergencyView: UITableViewCell {
         addSubview(bgEmergency)
         addSubview(btnCell)
         addSubview(title)
-        addSubview(num)
+        addSubview(ImageView)
         addSubview(iconImgae)
         
         bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 100)
         
         bgEmergency.anchor(bgActivitity.topAnchor, left: leftAnchor, right: btnCell.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 80, widthConstant: 0, heightConstant: 75)
         
-        num.anchor(bgEmergency.topAnchor, left: leftAnchor, right: num.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 20, leftConstant: 50, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        ImageView.anchor(bgEmergency.topAnchor, left: leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 20, leftConstant: 50, rightConstant: 0, widthConstant: 50, heightConstant: 50)
                
-        title.anchor(bgEmergency.topAnchor, left: num.leftAnchor, right: rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 75, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        title.anchor(bgEmergency.topAnchor, left: ImageView.leftAnchor, right: rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 95, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         btnCell.anchor(bgActivitity.topAnchor, left: nil, right: rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 0, rightConstant: 20, widthConstant: 70, heightConstant: 75)
         

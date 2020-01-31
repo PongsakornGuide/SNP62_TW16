@@ -10,13 +10,11 @@ import UIKit
 import Alamofire
 import ObjectMapper
 class SubActivityTypeTableViewController: UITableViewController {
-//  ActivityDetail
+    
     let URL_USER_ID = "http://localhost/alder_iosapp/v1/showactivity.php/"
     let defaultValues = UserDefaults.standard
     var typecheck = String()
     var activityList : [ActivityDetail]?
-//    var header: [ActivityType]?
-    
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     

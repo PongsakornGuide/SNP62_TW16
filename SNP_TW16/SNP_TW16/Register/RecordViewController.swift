@@ -9,7 +9,10 @@
 import UIKit
 import Alamofire
 class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationControllerDelegate  {
-    
+    ////hide keyborad
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     //URK
     let URL_CREATE_USER = "http://localhost/alder_iosapp/v1/register.php"
     
@@ -29,11 +32,6 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
     var AddressLabelText = String()
     var GenderLabelText = String()
     
-    ////hide keyborad
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-           
            var viewScroll: UIScrollView = {
                let view = UIScrollView()
                return view
@@ -79,7 +77,10 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
                                 "relative_name":relativeNameTextField.text!,
                                 "relative_phone":relativePhoneTextField.text!,
                                 "relative_type":relativeTypeTextField.text!]
-
+//                print(relativeNameTextField.text)
+//                print(relativePhoneTextField.text)
+//                print(relativeTypeTextField.text)
+                print("5555")
 
                         let header: HTTPHeaders = ["Content-type":"multipart/form-data"]
 
@@ -113,12 +114,14 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
                                     print(id)
                                     print(username)
                                     print(tel)
-                                    let ImpressView = ImpressViewController()
+                                    
+                                    let ImpressView = TestCheckBoxTableView()
                                     ImpressView.disease_user_id = "\(id)"
                                     ImpressView.activity_user_id = "\(id)"
                                     ImpressView.username_user = "\(username)"
                                     ImpressView.phone_number_user = "\(tel)"
-
+//                                    let ImpressView = TestCheckBoxTableView()
+                                    
                                     self.navigationController?.pushViewController(ImpressView, animated: true)
                                     
 
@@ -187,6 +190,9 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
                    view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
                    return view
                }()
+    
+    
+    
     let btnBack : UIButton = {
          let btn = UIButton()
          btn.tintColor = UIColor.black
@@ -214,6 +220,8 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
             print(RegligionLabelText)
             print(AddressLabelText)
             print(GenderLabelText)
+        
+        
             view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
             view.addSubview(btnBack)
 

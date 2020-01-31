@@ -9,7 +9,7 @@
 import UIKit
 //import SimpleCheckbox
 class ปก: UIViewController,UITextFieldDelegate ,UINavigationControllerDelegate {
-    
+                 let defaultValues = UserDefaults.standard
                  let screenSizeX: CGFloat = UIScreen.main.bounds.width
                  let screenSizeY: CGFloat = UIScreen.main.bounds.height
                  
@@ -288,7 +288,7 @@ class ปก: UIViewController,UITextFieldDelegate ,UINavigationControllerDelega
         
                  override func viewDidLoad() {
                      super.viewDidLoad()
-                 
+
                      view.backgroundColor = UIColor.white
                      navigationItem.title = "กิจกรรม"
                      view.addSubview(viewScroll)

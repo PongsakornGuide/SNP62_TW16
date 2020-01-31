@@ -56,7 +56,6 @@ class EmergencyView: UITableViewCell {
         btn.layer.shadowOpacity = 0.1
         btn.layer.shadowRadius = 10
         btn.layer.shouldRasterize = true
-//        btn.addTarget(self, action: #selector(call), for: .touchUpInside)
         return btn
     }()
 

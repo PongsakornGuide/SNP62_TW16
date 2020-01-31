@@ -8,11 +8,15 @@
 
 import UIKit
 //import IQKeyboardManagerSwift
+#if DEBUG
+import FLEX
+#endif
 
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+//    var host: String = "http://kmsupply.net/"
+////    http://kmsupply.net/alder_iosapp/v1/show.php
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 //        IQKeyboardManager.shared.enable = true
@@ -21,11 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 //        window?.rootViewController = MainActivityViewController()
-        window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
-        
-//        var pageControl = ActivityPageControl(collectionViewLayout: UICollectionViewFlowLayout())
-//        window?.rootViewController = pageControl
-        
+        window?.rootViewController = UINavigationController(rootViewController: tabBarViewController())
         return true
     }
 
@@ -43,7 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
     //  MARK: UNUserNotificationCenter Delegate methods
     
     

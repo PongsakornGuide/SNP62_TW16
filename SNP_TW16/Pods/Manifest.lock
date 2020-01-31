@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.8.2)
   - AlamofireImage (3.5.2):
     - Alamofire (~> 4.8)
+  - FLEX (3.1.2)
   - IQKeyboardManagerSwift (6.3.0)
   - ObjectMapper (3.5.1)
   - Pastel (0.5.1)
@@ -10,6 +11,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
+  - FLEX
   - IQKeyboardManagerSwift (= 6.3.0)
   - ObjectMapper (~> 3.4)
   - Pastel
@@ -21,6 +23,7 @@ SPEC REPOS:
     - Pastel
   trunk:
     - AlamofireImage
+    - FLEX
     - IQKeyboardManagerSwift
     - ObjectMapper
     - SwiftyJSON
@@ -28,11 +31,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
+  FLEX: e13e805fc3eec8732cc227d1f7508770d46e9587
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   Pastel: b3dd5b8d612dac06ae7c63c97c45c900829bc139
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 809cd2f9eada26b3d6bbd653178af9578377204e
+PODFILE CHECKSUM: 4083f71d09610714f29d43cf1b0f01039883783d
 
 COCOAPODS: 1.8.4

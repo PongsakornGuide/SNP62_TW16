@@ -12,6 +12,7 @@ class allListTel: Mappable{
     var emergencyId: Int?
     var emergencyName: String?
     var emergencyCall: Int?
+    var emergencyIcon: String?
     required init?(map: Map) {
 
     }
@@ -20,6 +21,7 @@ class allListTel: Mappable{
         emergencyId  <- map["id"]
         emergencyName  <- map["name"]
         emergencyCall <- map["tel"]
+        emergencyIcon <- map["iconImage"]
     }
 }
 
