@@ -10,7 +10,9 @@ import UIKit
 import Alamofire
 import ObjectMapper
 class listFavoriteUserTableView: UITableViewController{
-    let URL_GET_POST = "http://localhost/alder_iosapp/v1/saveActivityUser.php"
+    
+//    let URL_GET_POST = "http://localhost/alder_iosapp/v1/saveActivityUser.php"
+    let URL_GET_POST = "http://172.20.10.5/alder_iosapp/v1/saveActivityUser.php"
     var ActivityList: [ListPostUser]?
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
@@ -73,7 +75,7 @@ class listFavoriteUserTableView: UITableViewController{
           tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId1)
           tableView.rowHeight = UITableView.automaticDimension
           tableView.estimatedRowHeight = 50
-        
+        view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         if let name2 = defaultValues.string(forKey: "userId") {
                             user_id = name2
                   print("user id :: \(user_id)")

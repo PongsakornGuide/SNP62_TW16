@@ -14,7 +14,8 @@ class ActivityType: Mappable {
     var activityTypeName: String?
     var activtiyIcon: String?
     var list:[ActivityImpress]?
-    let URL_USER_ID = "http://kmsupply.net/alder_iosapp/v1/showDecide.php"
+    let URL_USER_ID = "http://172.20.10.5/alder_iosapp/v1/showDecide.php"
+//    let URL_USER_ID = "http://localhost/alder_iosapp/v1/showDecide.php"
     required init?(map: Map) {
 
     }
@@ -65,12 +66,12 @@ class ActivityDetail: Mappable {
         dataId   <- map["id"]
         actId  <- map["title"]
         type <- map["type"]
-        caption <- map["caption"]
+        caption <- map["leaderActivity"]
         imagePost <- map["img"]
         content <- map["content"]
         imgact <- map["imgact"]
         imgtime <- map["imgtime"]
-        created <- map["created_at"]
+        created <- map["startDate"]
     }
 }
 

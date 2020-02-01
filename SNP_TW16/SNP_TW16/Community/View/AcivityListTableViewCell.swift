@@ -94,7 +94,7 @@ class AcivityListTableViewCell: UITableViewCell{
     }()
     
     @objc func likePost(){
-        iconImageLike.backgroundColor = .red
+//        iconImageLike.backgroundColor = .red
     }
     
     

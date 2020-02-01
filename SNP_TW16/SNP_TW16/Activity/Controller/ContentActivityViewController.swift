@@ -13,8 +13,14 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
     var activityData: ActivityDetail?
     var typecheck = String()
     var ActivityPostID = Int()
-    let URL_USER_ID = "http://localhost/alder_iosapp/v1/join.php"
-    let URL_CHECK_JOIN = "http://localhost/alder_iosapp/v1/checkjoin.php"
+    
+    
+    
+//    let URL_USER_ID = "http://localhost/alder_iosapp/v1/join.php"
+//    let URL_CHECK_JOIN = "http://localhost/alder_iosapp/v1/checkjoin.php"
+//    
+    let URL_USER_ID = "http://172.20.10.5/alder_iosapp/v1/join.php"
+    let URL_CHECK_JOIN = "http://172.20.10.5/alder_iosapp/v1/checkjoin.php"
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
              
@@ -131,12 +137,12 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
             
         let passData = DecideViewController()
         let parameters: Parameters = ["user_id":typecheck,"post_timeline_id":activityData?.dataId ?? 0]
-//            passData.delegate = self
+            passData.delegate = self
             Alamofire.request(URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
                 print(response)
                 passData.actPost = self.ActivityPostID ?? 0
-//            self.navigationController?.pushViewController(passData, animated: true)
-            self.present(passData, animated: true, completion: nil)
+            self.navigationController?.pushViewController(passData, animated: true)
+//            self.present(passData, animated: true, completion: nil)
         }
             
 //            let passData = AssessVIewController()
@@ -223,10 +229,10 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                  
               BGView.anchor(stepView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: -20, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX , heightConstant: screenSizeY)
               
-              header.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 20, rightConstant: 220, widthConstant: screenSizeX, heightConstant: 40)
+              header.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 20, rightConstant: 170, widthConstant: screenSizeX, heightConstant: 40)
                 
                 
-              textHeader.anchor(header.topAnchor, left: header.leftAnchor, right: header.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 45, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 0)
+              textHeader.anchor(header.topAnchor, left: header.leftAnchor, right: header.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 35, rightConstant: 35, widthConstant: 0, heightConstant: 0)
                                
                 
               titleLabel.anchor(header.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 50)
@@ -244,7 +250,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
 
                 nextButton.anchor(timeImage.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 40, bottomConstant: 30, leftConstant: 100, rightConstant: 100, widthConstant: screenSizeX, heightConstant: 70)
                 
-                enableButton.anchor(timeImage.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 40, bottomConstant: 30, leftConstant: 100, rightConstant: 100, widthConstant: screenSizeX, heightConstant: 70)
+                enableButton.anchor(timeImage.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 40, bottomConstant: 30, leftConstant: 50, rightConstant: 50, widthConstant: screenSizeX, heightConstant: 70)
 
             }
 

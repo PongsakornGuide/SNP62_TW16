@@ -10,10 +10,15 @@ import UIKit
 import Alamofire
 import ObjectMapper
 class DecideViewController: UITableViewController {
-    let URL_USER_DECIDE = "http://localhost/alder_iosapp/v1/decide.php"
-    let URL_DECIDE = "http://localhost/alder_iosapp/v1/showDecide.php"
+var delegate:UIViewController?
+//    let URL_USER_DECIDE = "http://localhost/alder_iosapp/v1/decide.php"
+//    let URL_DECIDE = "http://localhost/alder_iosapp/v1/showDecide.php"
+//
+    
+    let URL_USER_DECIDE = "http://172.20.10.5/alder_iosapp/v1/decide.php"
+    let URL_DECIDE = "http://172.20.10.5/alder_iosapp/v1/showDecide.php"
     let defaultValues = UserDefaults.standard
-    var delegate:UIViewController?
+
     var actPost = Int()
     var actUserId = String()
     private var cellId = "Cell"
@@ -73,15 +78,18 @@ class DecideViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? layoutTableViewCell{
-            cell.bgImage.backgroundColor = .red
-            cell.bgImage.layer.cornerRadius = 50/2
+            
+            cell.bgImage.layer.cornerRadius = 80/2
+            cell.bgImage.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
+            cell.bgImage.layer.borderWidth = 2
         }
     }
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath){
         if let cell = tableView.cellForRow(at: indexPath) as? layoutTableViewCell{
-            cell.bgImage.backgroundColor = .white
-            cell.bgImage.layer.cornerRadius = 60/2
+            cell.bgImage.layer.cornerRadius = 80/2
+            cell.bgImage.layer.borderColor = UIColor.white.cgColor
+            cell.bgImage.layer.borderWidth = 2
         }
     }
 
@@ -91,7 +99,6 @@ class DecideViewController: UITableViewController {
          textView.font = UIFont.PoppinsRegular(size: 16)
          textView.layer.borderColor = UIColor.blackAlpha(alpha: 0.3).cgColor
          textView.layer.borderWidth = 0.5
-         textView.text = "Placeholder text goes right here..."
          textView.textColor = UIColor.lightGray
          textView.layer.cornerRadius = 5
          return textView
@@ -115,17 +122,28 @@ class DecideViewController: UITableViewController {
           let selectedIndex = tableView.indexPathsForSelectedRows
           let index = selectedIndex?.compactMap{ "\($0.row)" }
           var selectedChoice = index?.joined(separator: ",") ?? ""
-    
+          print(selectedChoice)
      
-            let alert = UIAlertController(title: "คุณเข้าร่วมกิจกรรมสำเร็จ", message: "แล้วพบกันในเร็วๆ นี้ :-)", preferredStyle: UIAlertController.Style.alert)
-                          alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { action in
-                            let parameters: Parameters = ["user_id":"\(self.actUserId)","post_timeline_id":"\(self.actPost)","feel_id[]":selectedChoice,"more":"\(self.textView.text ?? "NULL")"]
-                         Alamofire.request(self.URL_USER_DECIDE, method: .post,parameters: parameters).responseJSON { response in
-                                       print(selectedChoice)
-                                      }
-                          }))
-                          self.present(alert, animated: true, completion: nil)
-        
+        let alertController = UIAlertController(title: "คุณเข้าร่วมกิจกรรมสำเร็จ", message: "แล้วพบกันในเร็วๆ นี้ :-)", preferredStyle: .alert)
+                
+        let action1 = UIAlertAction(title: "เข้าสู่ระบบ", style: .default) { (action:UIAlertAction) in
+            let passData = ContentActivityViewController()
+            let parameters: Parameters = ["user_id":"\(self.actUserId)","post_timeline_id":"\(self.actPost)","feel_id[]":selectedChoice,"more":"\(self.textView.text ?? "NULL")"]
+//                AcitivityView.delegate = self
+                Alamofire.request(self.URL_USER_DECIDE, method: .post,parameters: parameters).responseJSON { response in
+                    if let delegate = self.delegate as? ContentActivityViewController {
+                         delegate.nextButton.setTitle("เข่าร่วมกิจกรรมแล้ว",for: .normal)
+                         delegate.enableButton.isHidden = false
+                          delegate.nextButton.isHidden = true
+                        self.navigationController?.popViewController(animated: true)
+                        
+                    }
+            }
+        }
+
+        alertController.addAction(action1)
+        self.present(alertController, animated: true, completion: nil)
+    
       }
     
       override func viewDidLoad() {
@@ -144,9 +162,9 @@ class DecideViewController: UITableViewController {
           tableView.rowHeight = UITableView.automaticDimension
           tableView.estimatedRowHeight = 50
         
-         textView.anchor(nil, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: regButton.topAnchor, topConstant: 10, bottomConstant: 50, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant:120)
+         textView.anchor(nil, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: regButton.topAnchor, topConstant: 0, bottomConstant: 20, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant:70)
         
         
-          regButton.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -90, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 55)
+          regButton.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -70, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 55)
       }
 }

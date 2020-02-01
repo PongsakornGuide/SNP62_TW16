@@ -13,8 +13,14 @@ class LoginViewController: UIViewController {
     var OTP_check = String()
     var OTP = String()
     let defaultValues = UserDefaults.standard
-    let URL_USER_LOGIN = "http://localhost/alder_iosapp/v1/login.php"
-    let URL_USER_USE_OTP = "http://localhost/alder_iosapp/v1/select_otp.php"
+    
+    
+    
+//    let URL_USER_LOGIN = "http://localhost/alder_iosapp/v1/login.php"
+//    let URL_USER_USE_OTP = "http://localhost/alder_iosapp/v1/select_otp.php"
+    
+    let URL_USER_LOGIN = "http://172.20.10.5/alder_iosapp/v1/login.php"
+    let URL_USER_USE_OTP = "http://172.20.10.5/alder_iosapp/v1/select_otp.php"
     
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
@@ -113,16 +119,24 @@ class LoginViewController: UIViewController {
 
     func send_to_otp(){
 
+//        let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
+//        let twilioSecret = "a74824968da571b8afac81506f84acf2"
+//        //Note replace + = %2B , for To and From phone number
+//        let fromNumber = "+12565308003"// actual number is +9999999
+//        let toNumber = "+66631921545"// actual number is +9999999
+        
         Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
                         if let otp = response.result.value as! [String: Any]? {
                             if let yield = otp["otp"] as? String {
                                print(yield)
                                 self.otpTextField.text = yield
-                                let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
-                                         let twilioSecret = "a74824968da571b8afac81506f84acf2"
-                                         //Note replace + = %2B , for To and From phone number
-                                         let fromNumber = "+12565308003"// actual number is +9999999
-                                         let toNumber = "+66631921545"// actual number is +9999999
+                                let twilioSID = "AC6eb59c25b1d9e5c102ff07382a033245"
+                                                            let twilioSecret = "3a776b6855e4ce991e1d0b07bdefa350"
+                                                            //Note replace + = %2B , for To and From phone number
+                                                            let fromNumber = "+14064123140"// actual number is +9999999
+                                                            let toNumber = "+66815552550"// actual number is +9999999
+                                
+                                
                                          let message = "Your verification code is \(yield) for Login"
                                          // Build the request
                                          let request = NSMutableURLRequest(url: URL(string:"https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/SMS/Messages")!)

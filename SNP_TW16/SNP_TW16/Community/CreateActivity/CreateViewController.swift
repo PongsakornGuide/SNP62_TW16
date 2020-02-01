@@ -14,8 +14,9 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         var user_id = String()
         var imageViewPro = String()
         let defaultValues = UserDefaults.standard
-        let URL_USER_CreatePost = "http://localhost/alder_iosapp/v1/create_post.php"
     
+//        let URL_USER_CreatePost = "http://localhost/alder_iosapp/v1/create_post.php"
+     let URL_USER_CreatePost = "http://172.20.10.5/alder_iosapp/v1/create_post.php"
         var ImageProfile = UIImage()
     
         let Imagelabel : UIImageView = {
@@ -54,7 +55,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
             textField.layer.cornerRadius = 15
             textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             textField.leftViewMode = UITextField.ViewMode.always
-            textField.keyboardType = UIKeyboardType.numberPad
+//            textField.keyboardType = UIKeyboardType.numberPad
             return textField
         }()
     
@@ -69,6 +70,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         
         let btn: UIButton = {
             let btnimg = UIButton()
+//            btnimg.backgroundColor = .blue
             btnimg.addTarget(self, action: #selector(uploadImage), for: .touchUpInside)
             return btnimg
         }()
@@ -87,7 +89,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
             submit.backgroundColor = UIColor.white
             submit.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
             submit.layer.borderWidth = 2
-            submit.backgroundColor =  UIColor.rgb(red: 33, green: 64, blue: 154)
+            submit.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
             submit.layer.cornerRadius = 20
             submit.setTitle("โพสต์", for: .normal)
             submit.setTitleColor(UIColor.white,for: .normal)
@@ -154,25 +156,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//                let parameters = ["ImageUser" : imageViewPro]
-        
-//
-//                Alamofire.request("http://localhost/alder_iosapp/" + imageViewPro)").responseImage { response in
-//                    print(response)
-//                                   if let image2 = response.result.value {
-//                                    self.Imagelabel.image = image2
-//                        }
-                
-        
-        
-//               let act:Activity
-//               act = activity[indexPath.row]
-//                        Alamofire.request("http://localhost/alder_iosapp/" + imageViewPro ?? "0")!).responseImage { response in
-//                            if let image2 = response.result.value {
-//                                  cell.imageViewPro.image = image2
-//                           }
-//            }
-        
+
 //          let backButton = UIBarButtonItem(title: "back", style: UIBarButtonItem.Style.plain, target: navigationController, action: nil)
 //         navigationItem.leftBarButtonItem = backButton
 //        view.addSubview(btnBack)
@@ -194,7 +178,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
                        imageViewPro = name3
             
 //            ("http://localhost/alder_iosapp/" + (headerActivity?.img ?? "0")!)
-            Alamofire.request("http://localhost/alder_iosapp/" + (imageViewPro ?? "0")!).responseImage { response in
+            Alamofire.request("http://172.20.10.5/alder_iosapp/" + (imageViewPro ?? "0")!).responseImage { response in
                         if let image = response.result.value {
                         self.Imagelabel.image = image
                 }
@@ -208,22 +192,21 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         view.addSubview(namelabel)
         view.addSubview(contentTextField)
         view.addSubview(imageView)
-        view.addSubview(submitButton)
         view.addSubview(btn)
-
+        view.addSubview(submitButton)
+        
         view.backgroundColor = .white
         
-        Imagelabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: namelabel.leftAnchor, bottom: nil, topConstant: 60, bottomConstant: 0, leftConstant: 30, rightConstant: 35, widthConstant: 80, heightConstant: 80)
+        Imagelabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: namelabel.leftAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 35, widthConstant: 80, heightConstant: 80)
                
-        namelabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: Imagelabel.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 70, bottomConstant: 0, leftConstant: 115, rightConstant: 40, widthConstant: 220, heightConstant: 50)
+        namelabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: Imagelabel.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 115, rightConstant: 40, widthConstant: 220, heightConstant: 50)
 
-        contentTextField.anchor(Imagelabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 300, heightConstant: 50)
+        contentTextField.anchor(Imagelabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 300, heightConstant: 40)
                
-        imageView.anchor(contentTextField.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 260)
+        imageView.anchor(contentTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 200)
         
-        btn.anchor(imageView.topAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: imageView.bottomAnchor, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
-               
-               submitButton.anchor(imageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 100, rightConstant: 100, widthConstant: 200, heightConstant: 70)
+        btn.anchor(imageView.topAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: imageView.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+
+        submitButton.anchor(imageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 100, rightConstant: 100, widthConstant: 200, heightConstant: 70)
     }
-        
 }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import IQKeyboardManagerSwift
+import IQKeyboardManagerSwift
 #if DEBUG
 import FLEX
 #endif
@@ -15,17 +15,16 @@ import FLEX
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-//    var host: String = "http://kmsupply.net/"
-////    http://kmsupply.net/alder_iosapp/v1/show.php
+    
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enable = true
         self.SetupPushNotification(application: application)
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 //        window?.rootViewController = MainActivityViewController()
-        window?.rootViewController = UINavigationController(rootViewController: tabBarViewController())
+        window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
         return true
     }
 

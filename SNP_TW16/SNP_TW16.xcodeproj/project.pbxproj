@@ -17,7 +17,6 @@
 		6543825323CB3A030062399D /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6543825223CB3A030062399D /* ActivityType.swift */; };
 		654936A823C1CDF600B190A1 /* SubActivityTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654936A723C1CDF600B190A1 /* SubActivityTypeTableViewController.swift */; };
 		654936AA23C1EAA000B190A1 /* ContentActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654936A923C1EAA000B190A1 /* ContentActivityViewController.swift */; };
-		654E641323DAB7EB00FFA172 /* otpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654E641223DAB7EB00FFA172 /* otpView.swift */; };
 		654E850A23C1007E001E2508 /* HeaderActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654E850923C1007E001E2508 /* HeaderActivity.swift */; };
 		654F378C23C96238009259A3 /* AssessVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654F378B23C96238009259A3 /* AssessVIewController.swift */; };
 		654F379723C9976B009259A3 /* InsideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654F379623C9976B009259A3 /* InsideViewController.swift */; };
@@ -44,7 +43,6 @@
 		6589101423E204DA007E5DF0 /* ListActTitleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589101323E204DA007E5DF0 /* ListActTitleType.swift */; };
 		6589101623E22498007E5DF0 /* TitleFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589101523E22497007E5DF0 /* TitleFavoriteView.swift */; };
 		659EB1BB232CEF6D00BF433B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659EB1BA232CEF6D00BF433B /* AppDelegate.swift */; };
-		659EB1BD232CEF6D00BF433B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659EB1BC232CEF6D00BF433B /* HomeViewController.swift */; };
 		659EB1C2232CEF6E00BF433B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 659EB1C1232CEF6E00BF433B /* Assets.xcassets */; };
 		659EB1C5232CEF6E00BF433B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659EB1C3232CEF6E00BF433B /* LaunchScreen.storyboard */; };
 		659EB1CD232CF05E00BF433B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659EB1CC232CF05E00BF433B /* Extensions.swift */; };
@@ -88,7 +86,6 @@
 		6543825223CB3A030062399D /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityType.swift; sourceTree = "<group>"; };
 		654936A723C1CDF600B190A1 /* SubActivityTypeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubActivityTypeTableViewController.swift; sourceTree = "<group>"; };
 		654936A923C1EAA000B190A1 /* ContentActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentActivityViewController.swift; sourceTree = "<group>"; };
-		654E641223DAB7EB00FFA172 /* otpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otpView.swift; sourceTree = "<group>"; };
 		654E850923C1007E001E2508 /* HeaderActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderActivity.swift; sourceTree = "<group>"; };
 		654F378B23C96238009259A3 /* AssessVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessVIewController.swift; sourceTree = "<group>"; };
 		654F379123C96D07009259A3 /* SimpleCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleCheckbox.h; sourceTree = "<group>"; };
@@ -118,7 +115,6 @@
 		6597D4D823D5A7B200C80C54 /* SNP_TW16.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SNP_TW16.entitlements; sourceTree = "<group>"; };
 		659EB1B7232CEF6D00BF433B /* SNP_TW16.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SNP_TW16.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		659EB1BA232CEF6D00BF433B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		659EB1BC232CEF6D00BF433B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		659EB1C1232CEF6E00BF433B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		659EB1C4232CEF6E00BF433B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		659EB1C6232CEF6E00BF433B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -225,14 +221,6 @@
 				655799BC234E50540047BAC3 /* SwiftSMS */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		655799DF234F0EAF0047BAC3 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				659EB1BC232CEF6D00BF433B /* HomeViewController.swift */,
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 		655799E0234F0ECB0047BAC3 /* otp */ = {
@@ -396,7 +384,6 @@
 				65B0164523AB2BBB00EBB76A /* Login */,
 				655799E0234F0ECB0047BAC3 /* otp */,
 				655799E1234F0EE20047BAC3 /* Register */,
-				655799DF234F0EAF0047BAC3 /* Home */,
 				65B0163423AA7C8B00EBB76A /* Activity */,
 				65B0163D23AAF93100EBB76A /* Community */,
 				657C547F23BA817400B32EC6 /* Emergency */,
@@ -483,7 +470,6 @@
 			isa = PBXGroup;
 			children = (
 				65B0164623AB2BCC00EBB76A /* LoginViewController.swift */,
-				654E641223DAB7EB00FFA172 /* otpView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -696,8 +682,6 @@
 				654F378C23C96238009259A3 /* AssessVIewController.swift in Sources */,
 				65B0164423AB152600EBB76A /* Comment.swift in Sources */,
 				654E850A23C1007E001E2508 /* HeaderActivity.swift in Sources */,
-				659EB1BD232CEF6D00BF433B /* HomeViewController.swift in Sources */,
-				654E641323DAB7EB00FFA172 /* otpView.swift in Sources */,
 				659EB1CD232CF05E00BF433B /* Extensions.swift in Sources */,
 				65DD3CDA23AD45B9008C5EA5 /* SearchTableViewCell.swift in Sources */,
 				65BDE0BD23D0D7B600266DEF /* ConfirmViewController.swift in Sources */,

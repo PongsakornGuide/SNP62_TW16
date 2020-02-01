@@ -49,11 +49,11 @@ class layoutTableViewCell: UITableViewCell {
         addSubview(bgImage)
         addSubview(textHeader)
         
-        bgCheck.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 20, rightConstant: 0, widthConstant: 100, heightConstant: 100)
+        bgCheck.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 20, rightConstant: 0, widthConstant: 100, heightConstant: 80)
 
         bgImage.anchor(bgCheck.topAnchor, left: bgCheck.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 80, heightConstant: 80)
 
-        textHeader.anchor(bgCheck.topAnchor, left: bgImage.leftAnchor, right: bgCheck.rightAnchor, bottom: nil, topConstant: -15, bottomConstant: 0, leftConstant: 120, rightConstant: 0, widthConstant: 50, heightConstant:100)
+        textHeader.anchor(bgCheck.topAnchor, left: bgImage.leftAnchor, right: bgCheck.rightAnchor, bottom: nil, topConstant: -15, bottomConstant: 0, leftConstant: 95, rightConstant: 0, widthConstant: 50, heightConstant:80)
         
     
     }

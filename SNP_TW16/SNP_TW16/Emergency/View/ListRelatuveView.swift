@@ -86,7 +86,7 @@ class ListRelatuveView: UITableViewCell {
            
 //           num.anchor(bgEmergency.topAnchor, left: leftAnchor, right: num.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 20, leftConstant: 50, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 //
-        title.anchor(bgEmergency.topAnchor, left: bgEmergency.leftAnchor, right: bgEmergency.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 100, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        title.anchor(bgEmergency.topAnchor, left: bgEmergency.leftAnchor, right: bgEmergency.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 70, rightConstant: 70, widthConstant: 0, heightConstant: 0)
            
            btnCell.anchor(bgActivitity.topAnchor, left: nil, right: rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 0, rightConstant: 20, widthConstant: 70, heightConstant: 75)
            

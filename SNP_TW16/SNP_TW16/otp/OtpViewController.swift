@@ -14,7 +14,10 @@ class OtpViewController: UIViewController {
 //    http://localhost/alder_iosapp/v1/select_otp.php
     var idUserLabelText = String()
     var OTP = String()
-    let URL_USER_OtpPost = "http://localhost/alder_iosapp/v1/otp.php"
+    
+//    let URL_USER_OtpPost = "http://localhost/alder_iosapp/v1/otp.php"
+    
+    let URL_USER_OtpPost = "http://172.20.10.5/alder_iosapp/v1/otp.php"
     let defaultValues = UserDefaults.standard
     let textTure : UILabel = {
         let label = UILabel()

@@ -52,7 +52,7 @@ class EmergencyView: UITableViewCell {
         btn.titleLabel?.font = UIFont.PoppinsBold(size: 30)
         btn.setTitleColor(.red, for: .normal)
         btn.backgroundColor = UIColor.white
-        btn.layer.cornerRadius = 95
+        btn.layer.cornerRadius = 190/2
         btn.layer.shadowOpacity = 0.1
         btn.layer.shadowRadius = 10
         btn.layer.shouldRasterize = true
@@ -65,7 +65,7 @@ class EmergencyView: UITableViewCell {
         let line = UIView()
         line.layer.borderWidth = 1
         line.layer.borderColor = UIColor.red.cgColor
-        line.layer.cornerRadius = 85
+        line.layer.cornerRadius = 170/2
         line.layer.shadowOpacity = 0.1
         line.layer.shadowRadius = 10
         line.layer.shouldRasterize = true
@@ -99,11 +99,11 @@ class EmergencyView: UITableViewCell {
         
         textHeader.anchor(bgImage.topAnchor, left: bgImage.leftAnchor, right: bgImage.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 
-        btnEmergency.anchor(bgImage.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: -50, bottomConstant: 0, leftConstant: 110, rightConstant: 110, widthConstant: 190, heightConstant: 190)
+        btnEmergency.anchor(bgImage.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: -50, bottomConstant: 0, leftConstant: 90, rightConstant: 90, widthConstant: 190, heightConstant: 190)
         
-        lineborder.anchor(btnEmergency.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 120, rightConstant: 120, widthConstant: 170, heightConstant: 170)
+        lineborder.anchor(btnEmergency.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 100, rightConstant: 100, widthConstant: 170, heightConstant: 170)
 
-        titleLabel.anchor(btnEmergency.bottomAnchor, left: bgActivitity.leftAnchor, right:bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 100)
+        titleLabel.anchor(btnEmergency.bottomAnchor, left: bgActivitity.leftAnchor, right:bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 100)
 
     }
 }

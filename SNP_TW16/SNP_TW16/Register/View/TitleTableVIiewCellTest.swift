@@ -29,6 +29,6 @@ class TitleTableVIiewCellTest:UITableViewCell,UITextFieldDelegate,UINavigationCo
        func setLayout(){
            addSubview(bgActivitity)
            backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-           bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 50, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 125)
+           bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 50, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 120)
        }
 }

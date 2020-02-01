@@ -12,9 +12,16 @@ import ObjectMapper
 class EmergencyViewController: UITableViewController {
     let defaultValues = UserDefaults.standard
     var user_id = String()
-    let URL_GET_TEL = "http://localhost/alder_iosapp/v1/emergency.php"
-    let URL_GET_TEL_RELATIVE = "http://localhost/alder_iosapp/v1/showTel.php"
-    let URL_GET_TEL_RELATIVE_ADD = "http://localhost/alder_iosapp/v1/showTelRelative.php"
+    
+    
+    
+//    let URL_GET_TEL = "http://localhost/alder_iosapp/v1/emergency.php"
+//    let URL_GET_TEL_RELATIVE = "http://localhost/alder_iosapp/v1/showTel.php"
+//    let URL_GET_TEL_RELATIVE_ADD = "http://localhost/alder_iosapp/v1/showTelRelative.php"
+//    
+    let URL_GET_TEL = "http://172.20.10.5/alder_iosapp/v1/emergency.php"
+    let URL_GET_TEL_RELATIVE = "http://172.20.10.5/alder_iosapp/v1/showTel.php"
+    let URL_GET_TEL_RELATIVE_ADD = "http://172.20.10.5/alder_iosapp/v1/showTelRelative.php"
     
      var relativeList: [listRelative]?
      var emergencyList: [allListTel]?
@@ -201,14 +208,15 @@ class EmergencyViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
+//        navigationController?.navigationBar.isHidden = true
+        navigationItem.title = "Alder"
         if #available(iOS 12.1 , *) {
             tableView.refreshControl = refresher
         }else{
             tableView.addSubview(refresher)
         }
         if let user = defaultValues.string(forKey: "userId") {
-                    user_id = user
+            user_id = user
             print(user_id)
          }else{
                       //send back to login view controller

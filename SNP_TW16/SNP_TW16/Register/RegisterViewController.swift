@@ -19,8 +19,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
         var religionPicker = UIPickerView()
         var genPicker = UIPickerView()
         var centerPicker = UIPickerView()
-        var religion = ["พุทธ","ฮิสลาม","คริสตย์","ไม่ระบุบ"]
-        var center = ["Chersery Home","ไม่ระบุบ"]
+        var religion = ["พุทธ","อิสลาม","คริสต์","ไม่ระบุ"]
+        var center = ["Chersery Home","อยู่นอกศูนย์","ไม่ระบุ"]
         var gender = ["ชาย","หญิง"]
         var picker1 = UIPickerView()
     
@@ -288,7 +288,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
     
     let btnBack : UIButton = {
          let btn = UIButton()
-         btn.tintColor = UIColor.black
+        btn.tintColor = UIColor.blackAlpha(alpha: 0.5)
          btn.setImage(UIImage(named: "left-arrow")?.withRenderingMode(.alwaysTemplate), for: .normal)
          btn.imageView?.contentMode = .scaleAspectFit
          btn.addTarget(self, action: #selector(performSegueToReturnBack), for: .touchUpInside)
@@ -352,6 +352,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
      
            
             view.addSubview(viewScroll)
+            viewScroll.addSubview(btnBack)
             viewScroll.addSubview(stepView)
             viewScroll.addSubview(BGView)
             viewScroll.addSubview(imgView)
@@ -372,8 +373,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
         
 //     viewUIView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
             
-//        btnBack.anchor(viewScroll.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 20, heightConstant: 20
-//               )
+        btnBack.anchor(viewScroll.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 15, rightConstant: 0, widthConstant: 20, heightConstant: 20
+               )
 //
         stepView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX - 0, heightConstant: 120)
 

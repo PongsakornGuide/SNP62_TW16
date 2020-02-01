@@ -9,6 +9,38 @@
 import UIKit
 import ObjectMapper
 
+
+class ListActivityUser: Mappable {
+    var idActivity:Int?
+    var idUserActivity: Int?
+    var captionActivity: String?
+    var imgActiivty: String?
+    var likeActivity: Int?
+    var commentActivity: Int?
+    var timeActivity: String?
+    var userPost: String?
+    var userProfile: String?
+    
+    required init?(map: Map) {
+
+        
+    }
+    
+    // Mappable
+    func mapping(map: Map) {
+        idActivity <- map["id"]
+        idUserActivity <- map["user_app_id"]
+        captionActivity <- map["caption"]
+        imgActiivty <- map["img"]
+        likeActivity <- map["likePost"]
+        commentActivity <- map["comment"]
+        timeActivity <- map["created_at"]
+        userPost <- map["username"]
+        userProfile <- map["photo"]
+    }
+}
+
+
 class ListPostUser: Mappable {
     var idUser:Int?
     var idPost: String?

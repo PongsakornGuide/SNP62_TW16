@@ -11,9 +11,13 @@ import Alamofire
 import ObjectMapper
 class InsideViewController: UITableViewController{
     
-     let URL_GET_DATA = "http://localhost/alder_iosapp/v1/show.php"
-     let URL_GET_COMMENT = "http://localhost/alder_iosapp/v1/showcomment.php"
-     let URL_POST_COMMENT = "http://localhost/alder_iosapp/v1/comment.php"
+//    let URL_GET_DATA = "http://localhost/alder_iosapp/v1/show.php"
+//    let URL_GET_COMMENT = "http://localhost/alder_iosapp/v1/showcomment.php"
+//    let URL_POST_COMMENT = "http://localhost/alder_iosapp/v1/comment.php"
+    
+     let URL_GET_DATA = "http://172.20.10.5/alder_iosapp/v1/show.php"
+     let URL_GET_COMMENT = "http://172.20.10.5/alder_iosapp/v1/showcomment.php"
+     let URL_POST_COMMENT = "http://172.20.10.5/alder_iosapp/v1/comment.php"
      let defaultValues = UserDefaults.standard
      private var cellId = "Cell"
      private var cellId1 = "Cell1"
@@ -23,35 +27,18 @@ class InsideViewController: UITableViewController{
      var userid = String()
 
      override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
         tableView.reloadData()
-        self.navigationController?.navigationBar.isHidden = false
+        
+//        self.navigationController?.navigationBar.isHidden = false
     }
     let bgActivitity:UIView = {
         let background = UIView()
         background.backgroundColor = UIColor.rgb(red: 222, green: 222, blue: 222)
         return background
     }()
-    
-//    let imgView: UIView = {
-//           let view = UIImageView()
-//           return view
-//    }()
-//
-//    let uploadImage: UIButton = {
-//        let image = UIImage(named: "Group 1093") as UIImage?
-//        let button = UIButton()
-//        button.setImage(image, for: .normal)
-//        button.layer.masksToBounds = true
-//        button.addTarget(self, action: #selector(upload), for: .touchUpInside)
-//        return button
-//    }()
-    
-//    @objc func upload (){
-//        print("5555")
-//    }
-    
+
     let commentTextField: UITextField = {
            let textField = UITextField()
            textField.attributedPlaceholder = NSAttributedString(string: "แสดงความคิดเห็น", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
@@ -99,18 +86,20 @@ class InsideViewController: UITableViewController{
               cell.date.text = check?.createdAt
               cell.comment.text = check?.caption
               cell.numCount.text = "\(check?.like ?? 0)"
-            Alamofire.request("http://localhost/alder_iosapp/" + (check?.photo ?? "0")!).responseImage { response in
+            Alamofire.request("http://172.20.10.5/alder_iosapp/" + (check?.photo ?? "0")!).responseImage { response in
                      if let image = response.result.value {
                         cell.profile.image = image
                     }
             }
             
-            Alamofire.request("http://localhost/alder_iosapp/" + (check?.img ?? "0")!).responseImage { response in
+            Alamofire.request("http://172.20.10.5/alder_iosapp/" + (check?.img ?? "0")!).responseImage { response in
                      if let image = response.result.value {
                         cell.imagePost.image = image
                     }
             }
-              cell.selectionStyle = .none
+               self.tableView.separatorStyle = .none
+                                 cell.selectionStyle = .none
+                                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
               return cell
           }else{
            let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as!
@@ -121,7 +110,7 @@ class InsideViewController: UITableViewController{
             cell.comment.text = commentActivity?.post
             cell.username.text = commentActivity?.userName
             cell.numCount.text = "\(commentActivity?.like ?? 0)"
-            Alamofire.request("http://localhost/alder_iosapp/" + (commentActivity?.imageView ?? "0")!).responseImage { response in
+            Alamofire.request("http://172.20.10.5/alder_iosapp/" + (commentActivity?.imageView ?? "0")!).responseImage { response in
                     if let image = response.result.value{
                             cell.profile.image = image
                 }
@@ -157,13 +146,16 @@ class InsideViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        navigationController?.navigationBar.isHidden = true
+        
+        
         view.addSubview(bgActivitity)
         view.addSubview(commentTextField)
         view.addSubview(submitBtn)
 //        view.addSubview(imgView)
 //        view.addSubview(uploadImage)
         
-        bgActivitity.anchor(nil, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: -35, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 80)
+        bgActivitity.anchor(nil, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 80)
                    
 //                    imgView.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 80)
 //

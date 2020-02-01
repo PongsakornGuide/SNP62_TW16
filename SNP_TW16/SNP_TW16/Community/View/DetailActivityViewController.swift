@@ -123,7 +123,7 @@ class DetailActivityViewController: UITableViewCell {
     
         comment.anchor(date.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 15, rightConstant: 10, widthConstant: 0, heightConstant: 40)
   
-        imagePost.anchor(comment.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 15, rightConstant: 15, widthConstant: 0, heightConstant:100)
+        imagePost.anchor(comment.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 15, rightConstant: 15, widthConstant: 0, heightConstant:200)
         
         contrainer.anchor(imagePost.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: pageView.bottomAnchor, topConstant: 30, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 40)
         
@@ -131,7 +131,7 @@ class DetailActivityViewController: UITableViewCell {
             
         
         numCount.anchor(contrainer.topAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: -5, bottomConstant: 0, leftConstant: 40, rightConstant: 10, widthConstant: 40, heightConstant: 40)
-        
+
         cultTextFieldTextFieldLine.anchor(iconImageLike.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1.5)
         
     }

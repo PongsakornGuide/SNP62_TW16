@@ -12,7 +12,9 @@ import ObjectMapper
 class CreateRelativeTelView: UIViewController {
     var user_id = String()
 //    var addList: [addRelative]?
-     let URL_ADD_RELATIVE = "http://localhost/alder_iosapp/v1/addTel.php"
+    
+//     let URL_ADD_RELATIVE = "http://localhost/alder_iosapp/v1/addTel.php"
+     let URL_ADD_RELATIVE = "http://172.20.10.5/alder_iosapp/v1/addTel.php"
     let defaultValues = UserDefaults.standard
     let bgActivitity:UIView = {
          let background = UIView()

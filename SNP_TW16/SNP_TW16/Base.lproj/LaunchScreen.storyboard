@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,10 +22,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="s78-1w-dPg" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="BgG-r7-gqu"/>
-                            <constraint firstAttribute="bottom" secondItem="s78-1w-dPg" secondAttribute="bottom" id="XBz-e7-bPB"/>
-                            <constraint firstItem="s78-1w-dPg" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="aDu-gh-PoJ"/>
-                            <constraint firstItem="s78-1w-dPg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="oOn-AY-yqr"/>
+                            <constraint firstAttribute="bottom" secondItem="s78-1w-dPg" secondAttribute="bottom" id="0DX-dZ-9EE"/>
+                            <constraint firstItem="s78-1w-dPg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6lt-ZH-bHW"/>
+                            <constraint firstItem="s78-1w-dPg" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="8WA-uo-VdZ"/>
+                            <constraint firstItem="s78-1w-dPg" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="BTg-bF-ceY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

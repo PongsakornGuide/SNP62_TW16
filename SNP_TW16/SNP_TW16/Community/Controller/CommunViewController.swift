@@ -18,7 +18,9 @@ class CommunViewController: UITableViewController{
     var User_ID = String()
     var cc = UILabel()
     var activityList: [allList]?
-    let URL_GET_DATA = "http://localhost/alder_iosapp/v1/show.php"
+    
+//    let URL_GET_DATA = "http://localhost/alder_iosapp/v1/show.php"
+    let URL_GET_DATA = "http://172.20.10.5/alder_iosapp/v1/show.php"
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     var idcontent = Int()
@@ -28,9 +30,7 @@ class CommunViewController: UITableViewController{
         super.viewWillAppear(animated)
         getActivty()
         self.tabBarController?.tabBar.isHidden = false
-        self.tableView.reloadData()
-//        self.navigationController?.navigationBar.isHidden = true
-//        self.navigationController?.hidesBarsOnTap = true
+//        self.tableView.reloadData()
     }
  
     
@@ -53,8 +53,7 @@ class CommunViewController: UITableViewController{
     }
        
     @objc func likePost(){
-//        let cell = AcivityListTableViewCell()
-//        cell.iconImageLike.backgroundColor = .red
+        print("555")
     }
     
     
@@ -71,13 +70,13 @@ class CommunViewController: UITableViewController{
             cell.timeTextLabel.text = headerActivity?.createdAt
             cell.numCount.text = "\(headerActivity?.like ?? 1)"
             cell.numCom.text = "\(headerActivity?.comment ?? 1)"
-            Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.img ?? "0")!).responseImage { response in
+            Alamofire.request("http://172.20.10.5/alder_iosapp/" + (headerActivity?.img ?? "0")!).responseImage { response in
                             if let image = response.result.value{
                             cell.postImage.image = image
                 }
             }
             
-            Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.photo ?? "0")!).responseImage { response in
+            Alamofire.request("http://172.20.10.5/alder_iosapp/" + (headerActivity?.photo ?? "0")!).responseImage { response in
                             if let image2 = response.result.value {
                             cell.profileImage.image = image2
                 }
@@ -145,15 +144,16 @@ class CommunViewController: UITableViewController{
 
        override func viewDidLoad() {
        super.viewDidLoad()
+//       navigationController?.navigationBar.isHidden = true
         view.addSubview(submitBtn)
-        
+        navigationItem.title = "Alder"
           submitBtn.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -100, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 80, heightConstant: 80)
         
-        if #available(iOS 12.1 , *) {
-                            tableView.refreshControl = refresher
-                        }else{
-                            tableView.addSubview(refresher)
-        }
+            if #available(iOS 12.1 , *) {
+                                tableView.refreshControl = refresher
+                            }else{
+                                tableView.addSubview(refresher)
+            }
         
             tableView.register(ActivityPageViewController.self, forCellReuseIdentifier: cellId1)
             tableView.register(AcivityListTableViewCell.self, forCellReuseIdentifier: cellId)

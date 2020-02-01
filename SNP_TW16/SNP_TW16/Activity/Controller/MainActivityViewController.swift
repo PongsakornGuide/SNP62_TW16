@@ -11,7 +11,9 @@ import Alamofire
 import ObjectMapper
 import UserNotifications
 class MainActivityViewController: UITableViewController {
-    let URL_USER_ID = "http://localhost/alder_iosapp/v1/showactivity.php"
+    
+//    let URL_USER_ID = "http://localhost/alder_iosapp/v1/showactivity.php"
+    let URL_USER_ID = "http://172.20.10.5/alder_iosapp/v1/showactivity.php"
     let defaultValues = UserDefaults.standard
     var num1 = String()
     var num2 = String()
@@ -48,10 +50,9 @@ class MainActivityViewController: UITableViewController {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
             cell.selectionStyle = .none
-            
-            cell.textHeader.text = "คุณ \(Labelname)"
-                
-            
+            cell.textHeader.text = Labelname
+            cell.textHeader.textColor = .white
+            cell.textHeader.font = UIFont.PoppinsBold(size: 32)
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
             return cell
                    
@@ -132,6 +133,8 @@ class MainActivityViewController: UITableViewController {
         }
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Alder"
+//        navigationController?.navigationBar.isHidden = true
         
         let alertController = UIAlertController(title: "ยินดีต้อนรับสู่ Alder", message: "กิจกรรมของเรา รอท่านมาร่วมสนุก :)", preferredStyle: .alert)
                                           

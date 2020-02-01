@@ -11,8 +11,13 @@ import Alamofire
 import ObjectMapper
 class TestCheckBoxTableView: UITableViewController{
 //"http://localhost/alder_iosapp/v1/add_disease_activity.php"
-    let URL_USER_REGISTER = "http://localhost/alder_iosapp/v1/user_activity.php"
-    let URL_SHOW_ACTIVITY = "http://localhost/alder_iosapp/v1/showTitleActivity.php"
+    
+    
+//    let URL_USER_REGISTER = "http://localhost/alder_iosapp/v1/user_activity.php"
+//    let URL_SHOW_ACTIVITY = "http://localhost/alder_iosapp/v1/showTitleActivity.php"
+    
+    let URL_USER_REGISTER = "http://172.20.10.5/alder_iosapp/v1/user_activity.php"
+    let URL_SHOW_ACTIVITY = "http://172.20.10.5/alder_iosapp/v1/showTitleActivity.php"
     var activityList: [ListDetailActivity]?
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
@@ -103,15 +108,18 @@ class TestCheckBoxTableView: UITableViewController{
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          if let cell = tableView.cellForRow(at: indexPath) as? CheckBoxTableViewCell{
-             cell.bgImage.backgroundColor = .red
-             cell.bgImage.layer.cornerRadius = 50/2
+            cell.bgImage.layer.cornerRadius = 80/2
+             cell.bgImage.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
+             cell.bgImage.layer.borderWidth = 2
          }
      }
      
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath){
          if let cell = tableView.cellForRow(at: indexPath) as? CheckBoxTableViewCell{
-             cell.bgImage.backgroundColor = .white
-             cell.bgImage.layer.cornerRadius = 60/2
+            cell.bgImage.layer.cornerRadius = 80/2
+            cell.bgImage.layer.borderColor = UIColor.white.cgColor
+             cell.bgImage.layer.borderWidth = 2
+            
          }
      }
     

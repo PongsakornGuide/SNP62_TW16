@@ -92,9 +92,9 @@ class DetailEmergencyView: UITableViewCell {
         
         bgEmergency.anchor(bgActivitity.topAnchor, left: leftAnchor, right: btnCell.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 80, widthConstant: 0, heightConstant: 75)
         
-        ImageView.anchor(bgEmergency.topAnchor, left: leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 20, leftConstant: 50, rightConstant: 0, widthConstant: 50, heightConstant: 50)
+        ImageView.anchor(bgEmergency.topAnchor, left: leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 20, leftConstant: 40, rightConstant: 0, widthConstant: 50, heightConstant: 50)
                
-        title.anchor(bgEmergency.topAnchor, left: ImageView.leftAnchor, right: rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 95, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        title.anchor(bgEmergency.topAnchor, left: ImageView.leftAnchor, right: bgEmergency.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 65, rightConstant: 15, widthConstant: 0, heightConstant: 0)
         
         btnCell.anchor(bgActivitity.topAnchor, left: nil, right: rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 0, rightConstant: 20, widthConstant: 70, heightConstant: 75)
         
