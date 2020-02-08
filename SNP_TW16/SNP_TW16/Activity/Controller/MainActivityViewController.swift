@@ -12,8 +12,8 @@ import ObjectMapper
 import UserNotifications
 class MainActivityViewController: UITableViewController {
     
-//    let URL_USER_ID = "http://localhost/alder_iosapp/v1/showactivity.php"
-    let URL_USER_ID = "http://172.20.10.5/alder_iosapp/v1/showactivity.php"
+    let URL_USER_ID = "http://localhost/alder_iosapp/v1/showactivity.php"
+//    let URL_USER_ID = "http://172.20.10.5/alder_iosapp/v1/showactivity.php"
     let defaultValues = UserDefaults.standard
     var num1 = String()
     var num2 = String()
@@ -32,22 +32,24 @@ class MainActivityViewController: UITableViewController {
  
         }
     
-        override func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
             return 2
-        }
+    }
 
-        override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 if section == 0 {
                     return 1
                 }else{
                     return header?.count ?? 0
                 }
-        }
+    }
     
         override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             
+    
+      
             
-        if indexPath.section == 0 {
+    if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
             cell.selectionStyle = .none
             cell.textHeader.text = Labelname
@@ -56,7 +58,7 @@ class MainActivityViewController: UITableViewController {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
             return cell
                    
-        }else{
+    }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
             let headerActivity = header?[indexPath.row]
             cell.titleType.text = headerActivity?.activityTypeName
@@ -70,8 +72,22 @@ class MainActivityViewController: UITableViewController {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
             return cell
            }
-        }
+    }
     
+    @objc func keyboardWillHide(notification: NSNotification) {
+                        if self.view.frame.origin.y != 0 {
+                            self.view.frame.origin.y = 0
+                        }
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+              if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                  if self.view.frame.origin.y == 0 {
+                   self.view.frame.origin.y -= keyboardSize.height
+                       //keyboardSize.height
+                  }
+              }
+          }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
@@ -124,6 +140,7 @@ class MainActivityViewController: UITableViewController {
               }
     }
            
+    
          @objc func handelSetting(){
                          UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
                          UserDefaults.standard.synchronize()
@@ -133,6 +150,10 @@ class MainActivityViewController: UITableViewController {
         }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         navigationItem.title = "Alder"
 //        navigationController?.navigationBar.isHidden = true
         

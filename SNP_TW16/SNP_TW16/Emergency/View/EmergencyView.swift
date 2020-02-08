@@ -25,11 +25,11 @@ class EmergencyView: UITableViewCell {
     }()
     
     let bgImage : UIImageView = {
-                  let image = UIImageView()
-                  image.image = UIImage(named: "Intersection 4")
-                  image.contentMode = .scaleAspectFill
-                  image.layer.masksToBounds = true
-                  return image
+        let image = UIImageView()
+        image.image = UIImage(named: "Intersection 4")
+        image.contentMode = .scaleAspectFill
+        image.layer.masksToBounds = true
+        return image
     }()
     
     let textHeader : UILabel = {
@@ -46,6 +46,11 @@ class EmergencyView: UITableViewCell {
                 return label
     }()
     
+    let bgButton:UIView = {
+            let background = UIView()
+            return background
+    }()
+    
     let btnEmergency : UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("โทรด่วน", for: .normal)
@@ -59,8 +64,6 @@ class EmergencyView: UITableViewCell {
         return btn
     }()
 
-    
-    
     let lineborder : UIView = {
         let line = UIView()
         line.layer.borderWidth = 1
@@ -82,28 +85,36 @@ class EmergencyView: UITableViewCell {
              attributes: [ NSAttributedString.Key.font : UIFont.PoppinsBold(size: 24),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 33, green: 64, blue: 154)])
              label.attributedText = attributedText
              label.numberOfLines = 2
+                label.textAlignment = .center
               return label
     }()
+    
+    
 
     func setLayout(){
         addSubview(bgActivitity)
         addSubview(bgImage)
         addSubview(textHeader)
+        addSubview(bgButton)
         addSubview(btnEmergency)
         addSubview(titleLabel)
         addSubview(lineborder)
         
-        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 420)
+        
+        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 420)
 
         bgImage.anchor(bgActivitity.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200)
         
         textHeader.anchor(bgImage.topAnchor, left: bgImage.leftAnchor, right: bgImage.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
-
-        btnEmergency.anchor(bgImage.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: -50, bottomConstant: 0, leftConstant: 90, rightConstant: 90, widthConstant: 190, heightConstant: 190)
         
-        lineborder.anchor(btnEmergency.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 100, rightConstant: 100, widthConstant: 170, heightConstant: 170)
+        
+        bgButton.anchor(bgImage.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: -50, bottomConstant: 0, leftConstant: 90, rightConstant: 90, widthConstant: 0, heightConstant: 200)
 
-        titleLabel.anchor(btnEmergency.bottomAnchor, left: bgActivitity.leftAnchor, right:bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 100)
+        btnEmergency.anchor(bgButton.topAnchor, left: bgButton.leftAnchor, right:bgButton.rightAnchor, bottom: bgButton.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 190, heightConstant: 190)
+        
+        lineborder.anchor(btnEmergency.topAnchor, left: btnEmergency.leftAnchor, right: btnEmergency.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 170, heightConstant: 170)
+
+        titleLabel.anchor(lineborder.bottomAnchor, left: bgActivitity.leftAnchor, right:bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 100)
 
     }
 }

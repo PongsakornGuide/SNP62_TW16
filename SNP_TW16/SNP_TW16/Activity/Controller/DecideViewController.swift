@@ -11,12 +11,12 @@ import Alamofire
 import ObjectMapper
 class DecideViewController: UITableViewController {
 var delegate:UIViewController?
-//    let URL_USER_DECIDE = "http://localhost/alder_iosapp/v1/decide.php"
-//    let URL_DECIDE = "http://localhost/alder_iosapp/v1/showDecide.php"
-//
+    let URL_USER_DECIDE = "http://localhost/alder_iosapp/v1/decide.php"
+    let URL_DECIDE = "http://localhost/alder_iosapp/v1/showDecide.php"
+
     
-    let URL_USER_DECIDE = "http://172.20.10.5/alder_iosapp/v1/decide.php"
-    let URL_DECIDE = "http://172.20.10.5/alder_iosapp/v1/showDecide.php"
+//    let URL_USER_DECIDE = "http://172.20.10.5/alder_iosapp/v1/decide.php"
+//    let URL_DECIDE = "http://172.20.10.5/alder_iosapp/v1/showDecide.php"
     let defaultValues = UserDefaults.standard
 
     var actPost = Int()
@@ -29,6 +29,7 @@ var delegate:UIViewController?
         super.viewWillAppear(animated)
         reloadData()
         self.tableView.reloadData()
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     func reloadData(){

@@ -16,8 +16,8 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
     //URK
         
     
-//     let URL_CREATE_USER = "http://localhost/alder_iosapp/v1/register.php"
-    let URL_CREATE_USER = "http://172.20.10.5/alder_iosapp/v1/register.php"
+     let URL_CREATE_USER = "http://localhost/alder_iosapp/v1/register.php"
+//    let URL_CREATE_USER = "http://172.20.10.5/alder_iosapp/v1/register.php"
     
     // Default
     let defaultValues = UserDefaults.standard

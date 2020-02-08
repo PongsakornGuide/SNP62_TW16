@@ -10,14 +10,12 @@ import UIKit
 import Alamofire
 import ObjectMapper
 class TestCheckBoxTableView: UITableViewController{
-//"http://localhost/alder_iosapp/v1/add_disease_activity.php"
-    
-    
-//    let URL_USER_REGISTER = "http://localhost/alder_iosapp/v1/user_activity.php"
-//    let URL_SHOW_ACTIVITY = "http://localhost/alder_iosapp/v1/showTitleActivity.php"
-    
-    let URL_USER_REGISTER = "http://172.20.10.5/alder_iosapp/v1/user_activity.php"
-    let URL_SHOW_ACTIVITY = "http://172.20.10.5/alder_iosapp/v1/showTitleActivity.php"
+    //"http://localhost/alder_iosapp/v1/add_disease_activity.php"
+    let URL_USER_REGISTER = "http://localhost/alder_iosapp/v1/user_activity.php"
+    let URL_SHOW_ACTIVITY = "http://localhost/alder_iosapp/v1/showTitleActivity.php"
+ 
+//    let URL_USER_REGISTER = "http://172.20.10.5/alder_iosapp/v1/user_activity.php"
+//    let URL_SHOW_ACTIVITY = "http://172.20.10.5/alder_iosapp/v1/showTitleActivity.php"
     var activityList: [ListDetailActivity]?
     private var cellId = "Cell"
     private var cellId1 = "Cell1"

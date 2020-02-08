@@ -11,8 +11,8 @@ import Alamofire
 import ObjectMapper
 class listFavoriteUserTableView: UITableViewController{
     
-//    let URL_GET_POST = "http://localhost/alder_iosapp/v1/saveActivityUser.php"
-    let URL_GET_POST = "http://172.20.10.5/alder_iosapp/v1/saveActivityUser.php"
+    let URL_GET_POST = "http://localhost/alder_iosapp/v1/saveActivityUser.php"
+//    let URL_GET_POST = "http://172.20.10.5/alder_iosapp/v1/saveActivityUser.php"
     var ActivityList: [ListPostUser]?
     private var cellId = "Cell"
     private var cellId1 = "Cell1"

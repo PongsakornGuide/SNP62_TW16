@@ -11,8 +11,8 @@ import Alamofire
 import ObjectMapper
 class SubActivityTypeTableViewController: UITableViewController {
     
-//    let URL_USER_ID = "http://localhost/alder_iosapp/v1/showactivity.php/"
-    let URL_USER_ID = "http://172.20.10.5/alder_iosapp/v1/showactivity.php/"
+    let URL_USER_ID = "http://localhost/alder_iosapp/v1/showactivity.php/"
+//    let URL_USER_ID = "http://172.20.10.5/alder_iosapp/v1/showactivity.php/"
     let defaultValues = UserDefaults.standard
     var typecheck = String()
     var activityList : [ActivityDetail]?

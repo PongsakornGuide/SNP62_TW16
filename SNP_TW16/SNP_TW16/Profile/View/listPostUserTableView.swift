@@ -11,8 +11,8 @@ import Alamofire
 import ObjectMapper
 class listPostUserTableView: UITableViewController {
     
-    let URL_GET_POST = "http://172.20.10.5/alder_iosapp/v1/savePostUser.php"
-//    let URL_GET_POST = "http://localhost/alder_iosapp/v1/savePostUser.php"
+//    let URL_GET_POST = "http://172.20.10.5/alder_iosapp/v1/savePostUser.php"
+    let URL_GET_POST = "http://localhost/alder_iosapp/v1/savePostUser.php"
     var ActivityList: [ListActivityUser]?
     let defaultValues = UserDefaults.standard
     private var cellId = "Cell"

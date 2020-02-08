@@ -16,11 +16,11 @@ class LoginViewController: UIViewController {
     
     
     
-//    let URL_USER_LOGIN = "http://localhost/alder_iosapp/v1/login.php"
-//    let URL_USER_USE_OTP = "http://localhost/alder_iosapp/v1/select_otp.php"
+    let URL_USER_LOGIN = "http://localhost/alder_iosapp/v1/login.php"
+    let URL_USER_USE_OTP = "http://localhost/alder_iosapp/v1/select_otp.php"
     
-    let URL_USER_LOGIN = "http://172.20.10.5/alder_iosapp/v1/login.php"
-    let URL_USER_USE_OTP = "http://172.20.10.5/alder_iosapp/v1/select_otp.php"
+//    let URL_USER_LOGIN = "http://172.20.10.5/alder_iosapp/v1/login.php"
+//    let URL_USER_USE_OTP = "http://172.20.10.5/alder_iosapp/v1/select_otp.php"
     
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
@@ -129,7 +129,12 @@ class LoginViewController: UIViewController {
                         if let otp = response.result.value as! [String: Any]? {
                             if let yield = otp["otp"] as? String {
                                print(yield)
-                                self.otpTextField.text = yield
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+                                    // your code here
+                                      self.otpTextField.text = yield
+                                }
+                                
                                 let twilioSID = "AC6eb59c25b1d9e5c102ff07382a033245"
                                                             let twilioSecret = "3a776b6855e4ce991e1d0b07bdefa350"
                                                             //Note replace + = %2B , for To and From phone number
@@ -153,9 +158,9 @@ class LoginViewController: UIViewController {
                                                 print("Error: \(error)")
                                              }
                                          }).resume()
-                            }
+                             }
 
-                        }
+                }
             }
     }
 

@@ -19,12 +19,11 @@ class CommunViewController: UITableViewController{
     var cc = UILabel()
     var activityList: [allList]?
     
-//    let URL_GET_DATA = "http://localhost/alder_iosapp/v1/show.php"
-    let URL_GET_DATA = "http://172.20.10.5/alder_iosapp/v1/show.php"
+    let URL_GET_DATA = "http://localhost/alder_iosapp/v1/show.php"
+//    let URL_GET_DATA = "http://172.20.10.5/alder_iosapp/v1/show.php"
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     var idcontent = Int()
-
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -33,7 +32,6 @@ class CommunViewController: UITableViewController{
 //        self.tableView.reloadData()
     }
  
-    
     @objc func handelSetting(){
         let CreateView = CreateViewController()
         navigationController?.pushViewController(CreateView, animated: true)
@@ -70,13 +68,13 @@ class CommunViewController: UITableViewController{
             cell.timeTextLabel.text = headerActivity?.createdAt
             cell.numCount.text = "\(headerActivity?.like ?? 1)"
             cell.numCom.text = "\(headerActivity?.comment ?? 1)"
-            Alamofire.request("http://172.20.10.5/alder_iosapp/" + (headerActivity?.img ?? "0")!).responseImage { response in
+            Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.img ?? "0")!).responseImage { response in
                             if let image = response.result.value{
                             cell.postImage.image = image
                 }
             }
             
-            Alamofire.request("http://172.20.10.5/alder_iosapp/" + (headerActivity?.photo ?? "0")!).responseImage { response in
+            Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.photo ?? "0")!).responseImage { response in
                             if let image2 = response.result.value {
                             cell.profileImage.image = image2
                 }
@@ -97,7 +95,7 @@ class CommunViewController: UITableViewController{
             if indexPath.section == 0 {
                 
             }else {
-                let vc = InsideViewController()
+                let vc = InputCommentViewController()
                 vc.check = activityList?[indexPath.row]
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -157,6 +155,7 @@ class CommunViewController: UITableViewController{
         
             tableView.register(ActivityPageViewController.self, forCellReuseIdentifier: cellId1)
             tableView.register(AcivityListTableViewCell.self, forCellReuseIdentifier: cellId)
+           
             tableView.tableFooterView = UIView()
             tableView.rowHeight = UITableView.automaticDimension
             tableView.estimatedRowHeight = 50

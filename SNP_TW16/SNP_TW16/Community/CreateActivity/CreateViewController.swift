@@ -15,9 +15,14 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         var imageViewPro = String()
         let defaultValues = UserDefaults.standard
     
-//        let URL_USER_CreatePost = "http://localhost/alder_iosapp/v1/create_post.php"
-     let URL_USER_CreatePost = "http://172.20.10.5/alder_iosapp/v1/create_post.php"
+        let URL_USER_CreatePost = "http://localhost/alder_iosapp/v1/create_post.php"
+//     let URL_USER_CreatePost = "http://172.20.10.5/alder_iosapp/v1/create_post.php"
         var ImageProfile = UIImage()
+    
+        override func viewWillAppear(_ animated: Bool) {
+              super.viewWillAppear(animated)
+              self.tabBarController?.tabBar.isHidden = true
+        }
     
         let Imagelabel : UIImageView = {
             let view1 = UIImageView()
@@ -178,7 +183,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
                        imageViewPro = name3
             
 //            ("http://localhost/alder_iosapp/" + (headerActivity?.img ?? "0")!)
-            Alamofire.request("http://172.20.10.5/alder_iosapp/" + (imageViewPro ?? "0")!).responseImage { response in
+            Alamofire.request("http://localhost/alder_iosapp/" + (imageViewPro ?? "0")!).responseImage { response in
                         if let image = response.result.value {
                         self.Imagelabel.image = image
                 }

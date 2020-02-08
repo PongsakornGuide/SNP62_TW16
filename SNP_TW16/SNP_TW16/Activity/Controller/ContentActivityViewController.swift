@@ -16,17 +16,18 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
     
     
     
-//    let URL_USER_ID = "http://localhost/alder_iosapp/v1/join.php"
-//    let URL_CHECK_JOIN = "http://localhost/alder_iosapp/v1/checkjoin.php"
-//    
-    let URL_USER_ID = "http://172.20.10.5/alder_iosapp/v1/join.php"
-    let URL_CHECK_JOIN = "http://172.20.10.5/alder_iosapp/v1/checkjoin.php"
+    let URL_USER_ID = "http://localhost/alder_iosapp/v1/join.php"
+    let URL_CHECK_JOIN = "http://localhost/alder_iosapp/v1/checkjoin.php"
+////    
+//    let URL_USER_ID = "http://172.20.10.5/alder_iosapp/v1/join.php"
+//    let URL_CHECK_JOIN = "http://172.20.10.5/alder_iosapp/v1/checkjoin.php"
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
              
     
     override func viewWillAppear(_ animated: Bool) {
         reloadData()
+        self.tabBarController?.tabBar.isHidden = false
     }
     var viewScroll: UIScrollView = {
         let view = UIScrollView()

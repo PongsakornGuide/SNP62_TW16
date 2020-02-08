@@ -15,16 +15,16 @@ class EmergencyViewController: UITableViewController {
     
     
     
-//    let URL_GET_TEL = "http://localhost/alder_iosapp/v1/emergency.php"
-//    let URL_GET_TEL_RELATIVE = "http://localhost/alder_iosapp/v1/showTel.php"
-//    let URL_GET_TEL_RELATIVE_ADD = "http://localhost/alder_iosapp/v1/showTelRelative.php"
-//    
-    let URL_GET_TEL = "http://172.20.10.5/alder_iosapp/v1/emergency.php"
-    let URL_GET_TEL_RELATIVE = "http://172.20.10.5/alder_iosapp/v1/showTel.php"
-    let URL_GET_TEL_RELATIVE_ADD = "http://172.20.10.5/alder_iosapp/v1/showTelRelative.php"
+    let URL_GET_TEL = "http://localhost/alder_iosapp/v1/emergency.php"
+    let URL_GET_TEL_RELATIVE = "http://localhost/alder_iosapp/v1/showTel.php"
+    let URL_GET_TEL_RELATIVE_ADD = "http://localhost/alder_iosapp/v1/showTelRelative.php"
     
-     var relativeList: [listRelative]?
-     var emergencyList: [allListTel]?
+//    let URL_GET_TEL = "http://172.20.10.5/alder_iosapp/v1/emergency.php"
+//    let URL_GET_TEL_RELATIVE = "http://172.20.10.5/alder_iosapp/v1/showTel.php"
+//    let URL_GET_TEL_RELATIVE_ADD = "http://172.20.10.5/alder_iosapp/v1/showTelRelative.php"
+    
+    var relativeList: [listRelative]?
+    var emergencyList: [allListTel]?
     var userRelavite: [addRelative]?
     
     private var cellId = "Cell"
@@ -87,7 +87,7 @@ class EmergencyViewController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId3,for: indexPath) as! ListRelatuveView
                 let ListRelative = userRelavite?[indexPath.row]
 //                cell.num.text = "\(ListRelative?.telphone ?? 0)"
-                cell.title.text = "คุณ : \(ListRelative?.username ?? "nil")"
+                cell.title.text = "\(ListRelative?.username ?? "nil")"
                 cell.selectionStyle = .none
                   cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 self.tableView.separatorStyle = .none

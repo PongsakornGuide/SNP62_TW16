@@ -32,7 +32,7 @@ class ActivityPageViewController: UITableViewCell {
         title.font = UIFont.PoppinsBold(size: 25)
         title.textColor = UIColor.rgb(red: 66, green: 100, blue: 38)
         title.numberOfLines = 5
-        title.text = "กิจกรรม รักษ์โลกเชิญชวนปลูกต้นไม้ ณ บริเวณท่าน้ำนนท์"
+        title.text = "กิจกรรม รักษ์โลก \nเชิญชวนปลูกต้นไม้ \nณ บริเวณท่าน้ำนนท์"
         return title
     }()
     

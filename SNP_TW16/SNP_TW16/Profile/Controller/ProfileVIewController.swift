@@ -11,14 +11,13 @@ import Alamofire
 class ProfileVIewController: UIViewController{
     
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
-     let screenSizeY: CGFloat = UIScreen.main.bounds.height
-              
-//    let URL_GET_PROFILE = "http://localhost/alder_iosapp/v1/showProfile.php"
-    let URL_GET_PROFILE = "http://172.20.10.5/alder_iosapp/v1/showProfile.php"
+    let screenSizeY: CGFloat = UIScreen.main.bounds.height
+    
+    let URL_GET_PROFILE = "http://localhost/alder_iosapp/v1/showProfile.php"
+//    let URL_GET_PROFILE = "http://172.20.10.5/alder_iosapp/v1/showProfile.php"
     let defaultValues = UserDefaults.standard
     var getIduser = String()
     var ImageProfiles = String()
-    
     
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
@@ -36,6 +35,11 @@ class ProfileVIewController: UIViewController{
         return view
     }()
     
+    let bgImageProfile:UIView = {
+        let background = UIView()
+        background.backgroundColor = .red
+        return background
+    }()
     
     let imageView : UIImageView = {
         let image = UIImageView()
@@ -290,7 +294,7 @@ class ProfileVIewController: UIViewController{
               if let name3 = defaultValues.string(forKey: "ImageUser") {
                 ImageProfiles = name3
                 print(ImageProfiles)
-                Alamofire.request("http://172.20.10.5/alder_iosapp/" + (ImageProfiles)).responseImage { response in
+                Alamofire.request("http://localhost/alder_iosapp/" + (ImageProfiles)).responseImage { response in
                                     if let image = response.result.value {
                                     self.ImageProfile.image = image
                             }
@@ -344,6 +348,7 @@ class ProfileVIewController: UIViewController{
         viewScroll.addSubview(stepView)
         viewScroll.addSubview(imageView)
         viewScroll.addSubview(BGView)
+        viewScroll.addSubview(bgImageProfile)
 //        viewScroll.addSubview(bgImageView)
         viewScroll.addSubview(profileImageView)
         viewScroll.addSubview(ImageProfile)
@@ -376,23 +381,21 @@ class ProfileVIewController: UIViewController{
         
         BGView.anchor(stepView.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant:0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX , heightConstant: screenSizeY)
                     
+        bgImageProfile.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 130, rightConstant: 130, widthConstant: screenSizeX, heightConstant: 150)
         
-//        bgImageView.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 500)
-//
-        profileImageView.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 110, rightConstant: 110, widthConstant: screenSizeX, heightConstant: 150)
+        profileImageView.anchor(bgImageProfile.topAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 150)
 
-        ImageProfile.anchor(profileImageView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 5, bottomConstant: 5, leftConstant: 117, rightConstant: 117, widthConstant: screenSizeX, heightConstant: 140)
-
+        ImageProfile.anchor(profileImageView.topAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 5, bottomConstant: 5, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 140)
 
         editProfile.anchor(profileImageView.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 100, rightConstant: 100, widthConstant: screenSizeX, heightConstant: 100)
 
 
         dataUser.anchor(editProfile.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: screenSizeX, heightConstant: 280)
 
-        nameHeader.anchor(dataUser.topAnchor, left: dataUser.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+        nameHeader.anchor(dataUser.topAnchor, left: dataUser.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 100, rightConstant: 0, widthConstant: 0, heightConstant: 50)
 
 
-        surnameHeader.anchor(dataUser.topAnchor, left: nil, right: dataUser.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 50)
+        surnameHeader.anchor(dataUser.topAnchor, left: nil, right: dataUser.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 100, widthConstant: 0, heightConstant: 50)
 
 
         iconNursingHome.anchor(nameHeader.bottomAnchor, left: dataUser.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 85, rightConstant: 0, widthConstant: 0, heightConstant: 0)

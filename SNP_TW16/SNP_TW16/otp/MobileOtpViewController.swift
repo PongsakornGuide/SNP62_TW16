@@ -12,8 +12,8 @@ import Alamofire
 
 class MobileOtpViewController: UIViewController {
     
-//    let URL_USER_USE_OTP = "http://localhost/alder_iosapp/v1/select_otp.php"
-    let URL_USER_USE_OTP = "http://172.20.10.5/alder_iosapp/v1/select_otp.php"
+    let URL_USER_USE_OTP = "http://localhost/alder_iosapp/v1/select_otp.php"
+//    let URL_USER_USE_OTP = "http://172.20.10.5/alder_iosapp/v1/select_otp.php"
     let defaultValues = UserDefaults.standard
     var Tel_user = String()
     
@@ -127,10 +127,13 @@ class MobileOtpViewController: UIViewController {
                     print(response)
             if let otp = response.result.value  as! [String: Any]?  {
                 if let yield = otp["otp"] as? String {
-                              self.Tel_user = yield
+                              
 //                    self.otpTextField.text = yield
 //                nextToOtp.OTP = Tel_user ?? "NIL"
                             
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+                                                       self.Tel_user = yield
+                              }
                               let twilioSID = "AC6eb59c25b1d9e5c102ff07382a033245"
                               let twilioSecret = "3a776b6855e4ce991e1d0b07bdefa350"
                               //Note replace + = %2B , for To and From phone number
