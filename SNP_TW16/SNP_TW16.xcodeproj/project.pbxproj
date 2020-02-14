@@ -58,6 +58,7 @@
 		65B9171723D783F200F13190 /* Relative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9171623D783F200F13190 /* Relative.swift */; };
 		65B9171923D9A46100F13190 /* CreateRelativeTelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9171823D9A46100F13190 /* CreateRelativeTelView.swift */; };
 		65B9171B23D9C28500F13190 /* ListRelatuveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9171A23D9C28500F13190 /* ListRelatuveView.swift */; };
+		65BADF5A23F2ACBD00DAEAD1 /* editProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BADF5923F2ACBD00DAEAD1 /* editProfileView.swift */; };
 		65BDE0BD23D0D7B600266DEF /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BDE0BC23D0D7B600266DEF /* ConfirmViewController.swift */; };
 		65D0708123DC482E00A41ABA /* grapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D0708023DC482E00A41ABA /* grapViewController.swift */; };
 		65DB237223DA16ED00E71500 /* ActivityTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DB237123DA16ED00E71500 /* ActivityTypeTableViewController.swift */; };
@@ -130,6 +131,7 @@
 		65B9171623D783F200F13190 /* Relative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relative.swift; sourceTree = "<group>"; };
 		65B9171823D9A46100F13190 /* CreateRelativeTelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRelativeTelView.swift; sourceTree = "<group>"; };
 		65B9171A23D9C28500F13190 /* ListRelatuveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRelatuveView.swift; sourceTree = "<group>"; };
+		65BADF5923F2ACBD00DAEAD1 /* editProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editProfileView.swift; sourceTree = "<group>"; };
 		65BDE0BC23D0D7B600266DEF /* ConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		65D0708023DC482E00A41ABA /* grapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = grapViewController.swift; sourceTree = "<group>"; };
 		65DB237123DA16ED00E71500 /* ActivityTypeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTypeTableViewController.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 				65DBB64C23E42A230081F9BE /* listFavoriteViewCell.swift */,
 				65DBB64E23E442CF0081F9BE /* titleListActivityViewCell.swift */,
 				65DBB65223E447210081F9BE /* titleListPostViewCell.swift */,
+				65BADF5923F2ACBD00DAEAD1 /* editProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				65E4E09D23BFA99E00D0F108 /* AddTelView.swift in Sources */,
 				6560B4152333F4CC00F53D26 /* MobileOtpViewController.swift in Sources */,
 				65DBB64F23E442CF0081F9BE /* titleListActivityViewCell.swift in Sources */,
+				65BADF5A23F2ACBD00DAEAD1 /* editProfileView.swift in Sources */,
 				654F379723C9976B009259A3 /* InsideViewController.swift in Sources */,
 				65B0164723AB2BCC00EBB76A /* LoginViewController.swift in Sources */,
 				6589101623E22498007E5DF0 /* TitleFavoriteView.swift in Sources */,

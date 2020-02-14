@@ -18,6 +18,7 @@ class MainActivityViewController: UITableViewController {
     var num1 = String()
     var num2 = String()
     var Labelname = String()
+    var day = String()
     var imageView = String()
     var typecheck = String()
     var header: [ActivityType]?
@@ -52,6 +53,7 @@ class MainActivityViewController: UITableViewController {
     if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
             cell.selectionStyle = .none
+            cell.titleHeader.text = day
             cell.textHeader.text = Labelname
             cell.textHeader.textColor = .white
             cell.textHeader.font = UIFont.PoppinsBold(size: 32)
@@ -150,6 +152,19 @@ class MainActivityViewController: UITableViewController {
         }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        
+        let currentDate = NSDate()
+        
+        let dateFormatter = DateFormatter()
+    
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "EEEE"
+        let formattedDate = format.string(from: date)
+        day = formattedDate
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)

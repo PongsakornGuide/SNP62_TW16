@@ -130,7 +130,11 @@ class MobileOtpViewController: UIViewController {
                               
 //                    self.otpTextField.text = yield
 //                nextToOtp.OTP = Tel_user ?? "NIL"
-                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+                                                               // your code here
+                                   self.otpTextField.text = yield
+                            }
+                    
                             DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
                                                        self.Tel_user = yield
                               }

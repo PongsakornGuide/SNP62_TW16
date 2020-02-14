@@ -26,7 +26,6 @@ class AcivityListTableViewCell: UITableViewCell{
     let bgActivitity:UIView = {
         let background = UIView()
         background.backgroundColor = UIColor.white
-//        background.layer.cornerRadius = 30
         background.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
         background.layer.shadowOpacity = 0.1
         background.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -47,10 +46,10 @@ class AcivityListTableViewCell: UITableViewCell{
     
     let userFullname: UILabel = {
        let label = UILabel()
-         label.text = "Dorothy Puscas"
-               label.textColor = UIColor.black
-               label.font = UIFont.PoppinsBold(size: 16)
-               label.numberOfLines = 1
+        label.text = "Dorothy Puscas"
+         label.textColor = UIColor.black
+         label.font = UIFont.PoppinsBold(size: 16)
+         label.numberOfLines = 1
        return label
     }()
     

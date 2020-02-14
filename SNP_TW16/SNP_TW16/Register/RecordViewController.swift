@@ -8,15 +8,32 @@
 
 import UIKit
 import Alamofire
-class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationControllerDelegate  {
+class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationControllerDelegate ,UIImagePickerControllerDelegate ,UIPickerViewDelegate,UIPickerViewDataSource {
     ////hide keyborad
+    var friendPicker = UIPickerView()
+    var friend = ["ผู้ปกครอง","ญาติ","ไม่ระบุ"]
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    //URK
+     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+     }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return friend.count
+    }
+       
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+       return friend[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
+          relativeTypeTextField.text = friend[row]
+          self.view.endEditing(false)
+    }
         
     
-     let URL_CREATE_USER = "http://localhost/alder_iosapp/v1/register.php"
+    let URL_CREATE_USER = "http://localhost/alder_iosapp/v1/register.php"
 //    let URL_CREATE_USER = "http://172.20.10.5/alder_iosapp/v1/register.php"
     
     // Default
@@ -94,8 +111,6 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
 
                              Alamofire.upload(multipartFormData: { (formData) in
 
-
-
                                 if let imageData = self.PhotoLabelText.jpegData(compressionQuality: 0.5){
                                      formData.append(imageData, withName: "image" ,fileName: dateString,mimeType: "image/jpg")
 
@@ -114,9 +129,9 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
                                      print(resJson.value ?? "0")
                                     guard let json = resJson.value as? [String:Any]
                                         , let id = json["id"]  , let username = json["username"] , let tel = json["tel"] else { return }
-                                    print(id)
-                                    print(username)
-                                    print(tel)
+//                                    print(id)
+//                                    print(username)
+//                                    print(tel)
                                     
                                     let ImpressView = TestCheckBoxTableView()
                                     ImpressView.disease_user_id = "\(id)"
@@ -224,6 +239,9 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
             print(AddressLabelText)
             print(GenderLabelText)
         
+              friendPicker.delegate = self
+              friendPicker.dataSource = self
+              relativeTypeTextField.inputView = friendPicker
         
             view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
             view.addSubview(btnBack)

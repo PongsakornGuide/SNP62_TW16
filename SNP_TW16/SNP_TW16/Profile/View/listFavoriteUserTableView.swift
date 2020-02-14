@@ -14,6 +14,9 @@ class listFavoriteUserTableView: UITableViewController{
     let URL_GET_POST = "http://localhost/alder_iosapp/v1/saveActivityUser.php"
 //    let URL_GET_POST = "http://172.20.10.5/alder_iosapp/v1/saveActivityUser.php"
     var ActivityList: [ListPostUser]?
+    
+
+    
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     var user_id = String()
@@ -23,7 +26,8 @@ class listFavoriteUserTableView: UITableViewController{
         getRelative()
         self.tableView.reloadData()
     }
-       
+    
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
           return 2
     }
@@ -36,9 +40,11 @@ class listFavoriteUserTableView: UITableViewController{
         }
     }
        
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! titleListActivityViewCell
+            self.tableView.separatorStyle = .none
             cell.selectionStyle = .none
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
             return cell
@@ -53,6 +59,7 @@ class listFavoriteUserTableView: UITableViewController{
                     cell.bgActivitity.image = image
                 }
             }
+            self.tableView.separatorStyle = .none
             cell.selectionStyle = .none
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
             return cell
@@ -71,10 +78,10 @@ class listFavoriteUserTableView: UITableViewController{
      }
     override func viewDidLoad(){
           super.viewDidLoad()
-          tableView.register(titleListActivityViewCell.self, forCellReuseIdentifier: cellId)
-          tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId1)
-          tableView.rowHeight = UITableView.automaticDimension
-          tableView.estimatedRowHeight = 50
+        tableView.register(titleListActivityViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId1)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         if let name2 = defaultValues.string(forKey: "userId") {
                             user_id = name2

@@ -20,8 +20,7 @@ class titleListActivityViewCell: UITableViewCell {
 
     let bgActivitity:UIView = {
         let background = UIView()
-        background.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-        
+        background.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
         return background
     }()
     
@@ -29,7 +28,7 @@ class titleListActivityViewCell: UITableViewCell {
                    let label = UILabel()
                    let title = "กิจกรรมที่เข้าร่วม"
                    let attributedText = NSMutableAttributedString(string: title,
-                   attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                   attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
                    label.attributedText = attributedText
                    label.numberOfLines = 0
                    return label

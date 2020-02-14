@@ -107,13 +107,14 @@ class EmergencyView: UITableViewCell {
         
         textHeader.anchor(bgImage.topAnchor, left: bgImage.leftAnchor, right: bgImage.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
         
-        
         bgButton.anchor(bgImage.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: -50, bottomConstant: 0, leftConstant: 90, rightConstant: 90, widthConstant: 0, heightConstant: 200)
 
-        btnEmergency.anchor(bgButton.topAnchor, left: bgButton.leftAnchor, right:bgButton.rightAnchor, bottom: bgButton.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 190, heightConstant: 190)
+        btnEmergency.anchor(bgButton.topAnchor, left: nil, right: nil, bottom: bgButton.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 190, heightConstant: 190)
+        btnEmergency.centerXAnchor.constraint(equalTo: bgActivitity.centerXAnchor).isActive = true
+               
+        lineborder.anchor(btnEmergency.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 170, heightConstant: 170)
+        lineborder.centerXAnchor.constraint(equalTo: bgActivitity.centerXAnchor).isActive = true
         
-        lineborder.anchor(btnEmergency.topAnchor, left: btnEmergency.leftAnchor, right: btnEmergency.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 170, heightConstant: 170)
-
         titleLabel.anchor(lineborder.bottomAnchor, left: bgActivitity.leftAnchor, right:bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 100)
 
     }

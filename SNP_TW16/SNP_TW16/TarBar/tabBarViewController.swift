@@ -29,10 +29,10 @@ class tabBarViewController: UITabBarController ,UITabBarControllerDelegate{
         navController.tabBarItem.image = unselectedImage
         navController.tabBarItem.selectedImage = selectedImage
         navController.tabBarItem.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: -4, right: 0)
-        navController.title = title
-        navigationItem.title = "Alder"
-        navController.tabBarItem.badgeColor = colorValue
-        navController.tabBarItem.badgeValue = badgeValue
+//        navController.title = title
+//        navigationItem.title = "Alder"
+//        navController.tabBarItem.badgeColor = colorValue
+//        navController.tabBarItem.badgeValue = badgeValue
         return navController
         }
     }

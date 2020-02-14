@@ -25,6 +25,16 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
           navigationController?.navigationBar.isHidden = true
+        
+//                    if self.defaultValues.string(forKey:"userId") != nil {
+//                            self.view.window?.rootViewController = tabBarViewController()
+//                            self.view.window?.makeKeyAndVisible()
+//                    }
+//
+//                    if self.defaultValues.string(forKey:"userName") != nil {
+//                                          self.view.window?.rootViewController = tabBarViewController()
+//                                          self.view.window?.makeKeyAndVisible()
+//                    }
     }
 
      override var preferredStatusBarStyle: UIStatusBarStyle{
@@ -121,7 +131,6 @@ class LoginViewController: UIViewController {
 
 //        let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
 //        let twilioSecret = "a74824968da571b8afac81506f84acf2"
-//        //Note replace + = %2B , for To and From phone number
 //        let fromNumber = "+12565308003"// actual number is +9999999
 //        let toNumber = "+66631921545"// actual number is +9999999
         
@@ -134,13 +143,16 @@ class LoginViewController: UIViewController {
                                     // your code here
                                       self.otpTextField.text = yield
                                 }
-                                
-                                let twilioSID = "AC6eb59c25b1d9e5c102ff07382a033245"
-                                                            let twilioSecret = "3a776b6855e4ce991e1d0b07bdefa350"
-                                                            //Note replace + = %2B , for To and From phone number
-                                                            let fromNumber = "+14064123140"// actual number is +9999999
-                                                            let toNumber = "+66815552550"// actual number is +9999999
-                                
+                                        let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
+                                        let twilioSecret = "a74824968da571b8afac81506f84acf2"
+                                        let fromNumber = "+12565308003"// actual number is +9999999
+                                        let toNumber = "+66631921545"// actual number is +9999999
+//                                let twilioSID = "AC6eb59c25b1d9e5c102ff07382a033245"
+//                                let twilioSecret = "3a776b6855e4ce991e1d0b07bdefa350"
+//                                                            //Note replace + = %2B , for To and From phone number
+//                                let fromNumber = "+14064123140"// actual number is +9999999
+//                                let toNumber = "+66815552550"// actual number is +9999999
+//
                                 
                                          let message = "Your verification code is \(yield) for Login"
                                          // Build the request
@@ -287,10 +299,9 @@ class LoginViewController: UIViewController {
     
         override func viewDidLoad() {
             super.viewDidLoad()
-            if self.defaultValues.string(forKey:"userId") != nil {
-                    self.view.window?.rootViewController = tabBarViewController()
-                    self.view.window?.makeKeyAndVisible()
-            }
+            
+        
+             
             tabBarController?.tabBar.isHidden = true
             let stackView = UIStackView(arrangedSubviews: [otpView])
             stackView.distribution = .fillEqually

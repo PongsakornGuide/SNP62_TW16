@@ -25,7 +25,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
         var picker1 = UIPickerView()
     
     
-            func numberOfComponents(in pickerView: UIPickerView) -> Int {
+           func numberOfComponents(in pickerView: UIPickerView) -> Int {
                return 1
            }
            func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -99,14 +99,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
        }()
     
     
-    let uploadImage: UIButton = {
-        let image = UIImage(named: "Group 1093") as UIImage?
-        let button = UIButton()
-        button.setImage(image, for: .normal)
-        button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(upload), for: .touchUpInside)
-        return button
-    }()
+        let uploadImage: UIButton = {
+            let image = UIImage(named: "Group 1093") as UIImage?
+            let button = UIButton()
+            button.setImage(image, for: .normal)
+            button.layer.masksToBounds = true
+            button.addTarget(self, action: #selector(upload), for: .touchUpInside)
+            return button
+        }()
 
     
     

@@ -9,7 +9,6 @@
 import UIKit
 import ObjectMapper
 
-
 class ListActivityUser: Mappable {
     var idActivity:Int?
     var idUserActivity: Int?
@@ -58,7 +57,6 @@ class ListPostUser: Mappable {
     required init?(map: Map) {
 
     }
-
     // Mappable
     func mapping(map: Map) {
         idUser <- map["id"]
