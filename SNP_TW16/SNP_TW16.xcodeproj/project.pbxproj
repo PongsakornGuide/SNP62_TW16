@@ -42,6 +42,7 @@
 		6589100F23E186A8007E5DF0 /* CheckBoxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589100E23E186A8007E5DF0 /* CheckBoxTableViewCell.swift */; };
 		6589101423E204DA007E5DF0 /* ListActTitleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589101323E204DA007E5DF0 /* ListActTitleType.swift */; };
 		6589101623E22498007E5DF0 /* TitleFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589101523E22497007E5DF0 /* TitleFavoriteView.swift */; };
+		6589B41223F828C70047DC9E /* InviteActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589B41123F828C70047DC9E /* InviteActivityViewController.swift */; };
 		659EB1BB232CEF6D00BF433B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659EB1BA232CEF6D00BF433B /* AppDelegate.swift */; };
 		659EB1C2232CEF6E00BF433B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 659EB1C1232CEF6E00BF433B /* Assets.xcassets */; };
 		659EB1C5232CEF6E00BF433B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659EB1C3232CEF6E00BF433B /* LaunchScreen.storyboard */; };
@@ -112,6 +113,7 @@
 		6589100E23E186A8007E5DF0 /* CheckBoxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxTableViewCell.swift; sourceTree = "<group>"; };
 		6589101323E204DA007E5DF0 /* ListActTitleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListActTitleType.swift; sourceTree = "<group>"; };
 		6589101523E22497007E5DF0 /* TitleFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFavoriteView.swift; sourceTree = "<group>"; };
+		6589B41123F828C70047DC9E /* InviteActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteActivityViewController.swift; sourceTree = "<group>"; };
 		6597D4D823D5A7B200C80C54 /* SNP_TW16.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SNP_TW16.entitlements; sourceTree = "<group>"; };
 		659EB1B7232CEF6D00BF433B /* SNP_TW16.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SNP_TW16.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		659EB1BA232CEF6D00BF433B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				65DBB64E23E442CF0081F9BE /* titleListActivityViewCell.swift */,
 				65DBB65223E447210081F9BE /* titleListPostViewCell.swift */,
 				65BADF5923F2ACBD00DAEAD1 /* editProfileView.swift */,
+				6589B41123F828C70047DC9E /* InviteActivityViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6589B41223F828C70047DC9E /* InviteActivityViewController.swift in Sources */,
 				6543825323CB3A030062399D /* ActivityType.swift in Sources */,
 				657C548823BA82FF00B32EC6 /* EmergencyView.swift in Sources */,
 				6506942823ACC5E700A045E6 /* DetailActivityViewController.swift in Sources */,

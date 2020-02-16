@@ -251,7 +251,7 @@ class ProfileVIewController: UIViewController{
          image.layer.shadowOffset = CGSize(width: 0, height: 0)
          image.layer.shadowRadius = 10
          image.layer.shouldRasterize = true
-         image.setTitle("โพสต์ของฉัน", for: .normal)
+         image.setTitle("กระทู้ของฉัน", for: .normal)
          image.contentVerticalAlignment = .bottom
          image.setTitleColor(UIColor.black,for: .normal)
          image.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
@@ -298,7 +298,7 @@ class ProfileVIewController: UIViewController{
             image.layer.shadowOffset = CGSize(width: 0, height: 0)
             image.layer.shadowRadius = 10
             image.layer.shouldRasterize = true
-            image.setTitle("ประวัติกิจกรรม", for: .normal)
+            image.setTitle("กิจกรรมของฉัน", for: .normal)
             image.contentVerticalAlignment = .bottom
             image.setTitleColor(UIColor.black,for: .normal)
             image.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
@@ -327,10 +327,12 @@ class ProfileVIewController: UIViewController{
               Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
                         print(resData)
                         if let user = resData.result.value as! [String: Any]? {
+                            print(user)
                                 if let yield = user["username"] as? String{
                                     self?.nameHeader.text = yield
                                     self?.nameHeader.font = UIFont.PoppinsBold(size: 20)
                                 }
+                            
                                 if let yield = user["surname"] as? String{
                                     self?.surnameHeader.text = yield
                                     self?.surnameHeader.font = UIFont.PoppinsBold(size: 20)
@@ -367,18 +369,17 @@ class ProfileVIewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let heartButton = MultiDegreeLikeButton(imageStyle: .heart)
-            heartButton.completionWithLikeDegree = { _, degree in
-            heartButton.translatesAutoresizingMaskIntoConstraints = true
-
-        }
+//        let heartButton = MultiDegreeLikeButton(imageStyle: .heart)
+//            heartButton.completionWithLikeDegree = { _, degree in
+//            heartButton.translatesAutoresizingMaskIntoConstraints = true
+//
+//        }
         
         view.backgroundColor = UIColor.rgb(red: 247, green: 250, blue: 255)
         view.addSubview(viewScroll)
         viewScroll.addSubview(stepView)
         viewScroll.addSubview(imageView)
         viewScroll.addSubview(BGView)
-        
         viewScroll.addSubview(bgImageProfile)
         viewScroll.addSubview(profileImageView)
         viewScroll.addSubview(ImageProfile)
@@ -387,7 +388,6 @@ class ProfileVIewController: UIViewController{
         viewScroll.addSubview(viewName)
         viewScroll.addSubview(nameHeader)
         viewScroll.addSubview(surnameHeader)
-        
         viewScroll.addSubview(postUser)
         viewScroll.addSubview(activityUser)
         viewScroll.addSubview(iconNursingHome)
@@ -401,7 +401,7 @@ class ProfileVIewController: UIViewController{
         
         viewScroll.addSubview(iconPost)
         viewScroll.addSubview(iconActivity)
-        viewScroll.addSubview(heartButton)
+//        viewScroll.addSubview(heartButton)
         navigationController?.navigationBar.isHidden = true
         
         viewScroll.anchor(view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
@@ -461,8 +461,8 @@ class ProfileVIewController: UIViewController{
         activityUser.anchor(dataUser.bottomAnchor, left: nil, right: viewName.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 0, rightConstant: 0, widthConstant: 170, heightConstant: 120)
 
         iconActivity.anchor(activityUser.topAnchor, left: activityUser.leftAnchor, right:activityUser.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: iconActivity.frame.size.width , heightConstant: iconActivity.frame.size.height )
-        
-        heartButton.anchor(iconActivity.bottomAnchor, left: nil, right: viewName.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+//
+//        heartButton.anchor(iconActivity.bottomAnchor, left: nil, right: viewName.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
     
         if let name = defaultValues.string(forKey: "userId") {

@@ -12,11 +12,10 @@ class SearchTableViewCell: UITableViewCell {
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             setupViewCell()
-            backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         }
         
      
-        let profileImage: UIView = {
+    let profileImage: UIView = {
               let background = UIView()
                  background.backgroundColor = UIColor.white
                  background.layer.cornerRadius = 20
@@ -26,7 +25,7 @@ class SearchTableViewCell: UITableViewCell {
                  background.layer.shadowRadius = 10
                  background.layer.shouldRasterize = true
                  return background
-        }()
+    }()
 
     let bgActivitity:UIImageView = {
              let image = UIImageView()
@@ -46,46 +45,47 @@ class SearchTableViewCell: UITableViewCell {
            return label
         }()
     
-        let line: UIView = {
+    let line: UIView = {
             let view = UIView()
             view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 252)
             return view
-        }()
+    }()
     
-//         let Labelid: UILabel = {
-//              let view = UILabel()
-////              view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 252)
-//                view.text = "1"
-//              return view
-//          }()
-    
-        let supportName: UILabel = {
+    let supportName: UILabel = {
             let label = UILabel()
             label.text = "โดย ไกด์ ฐิติวัฒน์"
             label.textColor = UIColor.blackAlpha(alpha: 0.3)
             label.font = UIFont.PoppinsMedium(size: 16)
              return label
-          }()
+    }()
     
-        let supportTime: UILabel = {
+    let maxUser: UILabel = {
+        let label = UILabel()
+        label.text = "0"
+        label.textColor = UIColor.blackAlpha(alpha: 0.3)
+        label.font = UIFont.PoppinsMedium(size: 16)
+        return label
+    }()
+    
+    let supportTime: UILabel = {
           let label = UILabel()
           label.text = "14 สิงหาคม 2562"
           label.textColor = UIColor.blackAlpha(alpha: 0.8)
           label.font = UIFont.PoppinsMedium(size: 16)
           return label
-        }()
+    }()
     
         func setupViewCell(){
-            
             
             addSubview(profileImage)
             addSubview(bgActivitity)
             addSubview(titleFullname)
             addSubview(line)
+            addSubview(maxUser)
             addSubview(supportName)
             addSubview(supportTime)
 //            addSubview(Labelid)
-
+            backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
             profileImage.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 280)
 //
             bgActivitity.anchor(profileImage.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 150)
@@ -94,13 +94,12 @@ class SearchTableViewCell: UITableViewCell {
 
             line.anchor(titleFullname.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 1.1)
             
-            
-//            Labelid.anchor(line.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 20, widthConstant: 0, heightConstant: 80)
-            
             supportName.anchor(line.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 20, widthConstant: 0, heightConstant: 80)
 
             supportTime.anchor(line.bottomAnchor, left: nil, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 50, widthConstant: 0, heightConstant: 80)
-        
+            
+            maxUser.anchor(bgActivitity.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 20)
+            
         }
         
         

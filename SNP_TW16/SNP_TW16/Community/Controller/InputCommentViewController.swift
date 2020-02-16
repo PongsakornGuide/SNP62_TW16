@@ -89,6 +89,8 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
          }
     }
     
+    
+    
         let bgActivitity:UIView = {
             let background = UIView()
             background.backgroundColor = UIColor.rgb(red: 222, green: 222, blue: 222)

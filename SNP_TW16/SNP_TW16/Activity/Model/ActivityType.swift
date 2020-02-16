@@ -56,7 +56,9 @@ class ActivityDetail: Mappable {
     var imgact:String?
     var imgtime:String?
     var created:String?
-
+    var join:Int?
+    var invite:Int?
+    
     required init?(map: Map) {
 
     }
@@ -72,6 +74,8 @@ class ActivityDetail: Mappable {
         imgact <- map["imgact"]
         imgtime <- map["imgtime"]
         created <- map["startDate"]
+        join <- map["maxJoin"]
+        invite <- map["invaite"]
     }
 }
 

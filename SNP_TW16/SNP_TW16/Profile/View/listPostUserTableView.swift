@@ -13,8 +13,8 @@ class listPostUserTableView: UITableViewController {
     
 //    let URL_GET_POST = "http://172.20.10.5/alder_iosapp/v1/savePostUser.php"
     let URL_GET_POST = "http://localhost/alder_iosapp/v1/savePostUser.php"
-    var ActivityList: [ListActivityUser]?
-    
+//    var ActivityList: [ListActivityUser]?
+    var ActivityList: [allList]?
     
     let defaultValues = UserDefaults.standard
     private var cellId = "Cell"
@@ -25,6 +25,7 @@ class listPostUserTableView: UITableViewController {
             super.viewWillAppear(animated)
             getData()
             self.tableView.reloadData()
+            self.tabBarController?.tabBar.isHidden = false
         }
            
         override func numberOfSections(in tableView: UITableView) -> Int {
@@ -48,25 +49,26 @@ class listPostUserTableView: UITableViewController {
                 return cell
             }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! AcivityListTableViewCell
+                
    
                 let listActivity = ActivityList?[indexPath.row]
-                cell.userFullname.text = listActivity?.userPost
-                cell.timeTextLabel.text = listActivity?.timeActivity
-                cell.numCount.text = "\(listActivity?.likeActivity ?? 0)"
-                cell.numCom.text = "\(listActivity?.commentActivity ?? 0)"
-                cell.messageTextLabel.text = listActivity?.captionActivity
+                cell.userFullname.text = listActivity?.username
+                cell.timeTextLabel.text = listActivity?.createdAt
+                cell.numCount.text = "\(listActivity?.like ?? 0)"
+                cell.numCom.text = "\(listActivity?.comment ?? 0)"
+                cell.messageTextLabel.text = listActivity?.caption
                 
-                Alamofire.request("http://172.20.10.5/alder_iosapp/" + (listActivity?.imgActiivty ?? "0")!).responseImage { response in
-                    if let image = response.result.value{
-                        cell.postImage.image = image
-                    }
-                }
-                
-                Alamofire.request("http://172.20.10.5/alder_iosapp/" + (listActivity?.userProfile ?? "0")!).responseImage { response in
-                                   if let image = response.result.value{
-                                   cell.profileImage.image = image
-                              }
-                }
+                   Alamofire.request("http://localhost/alder_iosapp/" + (listActivity?.img ?? "0")!).responseImage { response in
+                                         if let image = response.result.value{
+                                         cell.postImage.image = image
+                             }
+                         }
+                         
+                         Alamofire.request("http://localhost/alder_iosapp/" + (listActivity?.photo ?? "0")!).responseImage { response in
+                                         if let image2 = response.result.value {
+                                         cell.profileImage.image = image2
+                             }
+                         }
                 
                 self.tableView.separatorStyle = .none
                 cell.selectionStyle = .none
@@ -75,16 +77,53 @@ class listPostUserTableView: UITableViewController {
             }
                
         }
+    
+            override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                if  indexPath.section == 0{
+                    
+                }else {
+                   let vc = InputCommentViewController()
+                   vc.check = ActivityList?[indexPath.row]
+                   self.navigationController?.pushViewController(vc, animated: true)
+               }
+           }
  
     
         func getData(){
              let parameters: Parameters = ["userId":user_id]
              let url = URL_GET_POST + "?id=\(user_id)"
              Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
-                self?.ActivityList = Mapper<ListActivityUser>().mapArray(JSONObject: dataRes.result.value)
+                self?.ActivityList = Mapper<allList>().mapArray(JSONObject: dataRes.result.value)
                 self?.tableView.reloadData()
              }
          }
+    
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .normal, title: "Delete") {
+            (action, view , completionHandler) in
+            print("Delete..")
+            completionHandler(true)
+        }
+        
+        let edit = UIContextualAction(style: .normal, title: "Edit") {
+                  (action, view , completionHandler) in
+                  print("Email..")
+                completionHandler(true)
+        }
+        
+        let configuration = UISwipeActionsConfiguration(actions: [delete, edit])
+        
+        delete.backgroundColor = UIColor.rgb(red: 255, green: 51, blue: 101)
+        delete.image = UIImage(named: "bin")
+        
+//        image.contentMode = .scaleAspectFill
+        
+        
+        edit.backgroundColor = UIColor.emerald
+        edit.image = UIImage(named: "edit")
+        return configuration
+    }
         
         override func viewDidLoad(){
             super.viewDidLoad()

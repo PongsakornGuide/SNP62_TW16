@@ -207,7 +207,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                         }else{
                             self.nextButton.backgroundColor = .blue
                         }
-                    }
+                }
                 
                  view.backgroundColor = UIColor.white
                  navigationItem.title = "กิจกรรม"

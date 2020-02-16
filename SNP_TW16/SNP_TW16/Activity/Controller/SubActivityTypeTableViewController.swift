@@ -13,9 +13,13 @@ class SubActivityTypeTableViewController: UITableViewController {
     
     let URL_USER_ID = "http://localhost/alder_iosapp/v1/showactivity.php/"
 //    let URL_USER_ID = "http://172.20.10.5/alder_iosapp/v1/showactivity.php/"
+    
+    let URL_CHECK_INVITE = "http://localhost/alder_iosapp/v1/inviteActivity.php"
+    
     let defaultValues = UserDefaults.standard
     var typecheck = String()
     var activityList : [ActivityDetail]?
+    var invait = Int()
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     
@@ -44,26 +48,68 @@ class SubActivityTypeTableViewController: UITableViewController {
                         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                                     return cell
                  }else{
-                    
                     let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! SearchTableViewCell
                     let activity = activityList?[indexPath.row]
                     cell.titleFullname.text = activity?.actId
                     cell.supportName.text = activity?.caption
                     cell.supportTime.text = activity?.created
-
+                    
+                    
                    Alamofire.request((activity?.imagePost ?? "0")!).responseImage { response in
                    if let image = response.result.value {
                     cell.bgActivitity.image = image
                        }
                    }
-
+                    
+                    invait = activity?.dataId ?? 0
+//                    print("กิจกรรมลำดับที่ = \(invait)")
+                    
+                    let parameters: Parameters = ["id": invait]
+//                    print(parameters)
+                    let url = URL_CHECK_INVITE + "?id=\(invait)"
+                     Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
+                        
+//                            print("แล้วมีคนเข้าร่วม = \(resData)")
+//                        cell.maxUser.text = "\(resData) / \(activity?.join ?? 0) คน "
+                        
+                        if let user = resData.result.value as! [String: Any]? {
+                          
+                            
+                            if let yield = user["invaite"] as? Int{
+//                                self?.birthday.text = yield
+                                print("55555")
+                                print(yield)
+                                cell.maxUser.text = " \(yield) / \(activity?.join ?? 0) คน"
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    
+                  
                    cell.selectionStyle = .none
                    self.tableView.separatorStyle = .none
                    return cell
-                    
                 }
-
     }
+    
+//    func reloadData(){
+//        let parameters: Parameters = ["id": activityList?.]
+////                let url = URL_CHECK_INVITE + "?id=\(typecheck)"
+//                Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
+//                    print(resData)
+////                    guard let json = resData.value as? NSDictionary else { return }
+////                    var header: [ActivityType] = []
+////                    for key in json.allKeys {
+////                        guard let item = json[key] as? [String:Any], let map = Mapper<ActivityType>().map(JSON: item) else { return }
+////                        header.append(map)
+////                    }
+////                    self?.header = header
+////                    self?.tableView.reloadData()
+//                }
+//    }
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -92,6 +138,7 @@ class SubActivityTypeTableViewController: UITableViewController {
         }else{
             //send back to login view controller
         }
+            
 
     }
         
