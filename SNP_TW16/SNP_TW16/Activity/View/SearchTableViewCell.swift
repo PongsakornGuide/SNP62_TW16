@@ -56,12 +56,12 @@ class SearchTableViewCell: UITableViewCell {
             label.text = "โดย ไกด์ ฐิติวัฒน์"
             label.textColor = UIColor.blackAlpha(alpha: 0.3)
             label.font = UIFont.PoppinsMedium(size: 16)
-             return label
+            return label
     }()
     
     let maxUser: UILabel = {
         let label = UILabel()
-        label.text = "0"
+        label.text = " "
         label.textColor = UIColor.blackAlpha(alpha: 0.3)
         label.font = UIFont.PoppinsMedium(size: 16)
         return label

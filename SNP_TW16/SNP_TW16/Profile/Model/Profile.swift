@@ -63,7 +63,7 @@ class ListPostUser: Mappable {
         idPost <- map["user_id"]
         titlePost <- map["title"]
         typePost <- map["type"]
-        captionPost <- map["caption"]
+        captionPost <- map["leaderActivity"]
         contentPost <- map["content"]
         imgPost <- map["img"]
         imgactPost <- map["imgact"]
