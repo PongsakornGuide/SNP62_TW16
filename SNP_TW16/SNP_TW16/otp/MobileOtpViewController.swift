@@ -14,9 +14,9 @@ class MobileOtpViewController: UIViewController {
     
     let URL_USER_USE_OTP = "\(AppDelegate.link)alder_iosapp/v1/select_otp.php"
     let defaultValues = UserDefaults.standard
-    lazy var Tel_user = String()
+    var Tel_user = String()
     
-    lazy var imageView : UIImageView = {
+     var imageView : UIImageView = {
            let image = UIImageView(frame: UIScreen.main.bounds)
            image.image = UIImage(named: "bg")
            image.contentMode = .scaleAspectFill
@@ -24,13 +24,13 @@ class MobileOtpViewController: UIViewController {
            return image
        }()
     
-    lazy var imageIcon : UIImageView = {
+     var imageIcon : UIImageView = {
         let iconImage = UIImageView()
         iconImage.image = UIImage(named: "thailand")
         return iconImage
     }()
     
-    lazy var textHeader : UILabel = {
+     var textHeader : UILabel = {
         let label = UILabel()
         let title = "กรุณาลงทะเบียน"
         let text = "\n \n โปรดใส่เบอร์มือถือสำหรับการลงทะเบียน"
@@ -47,7 +47,7 @@ class MobileOtpViewController: UIViewController {
     }()
     
     
-    lazy var otpTextField: UITextField = {
+    var otpTextField: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "กรอกเบอร์โทรศัพท์มือถือ", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
         textField.font = UIFont.PoppinsRegular(size:18)
@@ -89,62 +89,28 @@ class MobileOtpViewController: UIViewController {
         return submit
     }()
     
-    
-//    func pushiduser(){
-//        let nextToOtp = OtpViewController()
-//        nextToOtp.idUserLabelText = otpTextField.text ?? "0"
-//        self.navigationController?.pushViewController(nextToOtp, animated: true)
-//    }
-    
-    
-    @objc func submitBtn (){
-        if otpTextField.text?.count ?? 0 == 10{
-            print("เรียบร้อย")
-            check_use_otp()
-//            pushiduser()
-        }else{
-            print("เอาใหม่")
-            checkError.isHidden = false
-        }
-    }
-    
-//
-//    Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
-//    if let otp = response.result.value as! [String: Any]? {
-//        if let yield = otp["otp"] as? String {
-//           print(yield)
-//            self.otpTextField.text = yield
-    
-//    let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
-//    let twilioSecret = "a74824968da571b8afac81506f84acf2"
-//    //Note replace + = %2B , for To and From phone number
-//    let fromNumber = "+12565308003"// actual number is +9999999
-//    let toNumber = "+66631921545"// actual number is +9999999
-    
     func check_use_otp(){
         Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
                     print(response)
             if let otp = response.result.value  as! [String: Any]?  {
                 if let yield = otp["otp"] as? String {
-                              
-//                    self.otpTextField.text = yield
-//                nextToOtp.OTP = Tel_user ?? "NIL"
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-                                                               // your code here
-                                   self.otpTextField.text = yield
-                            }
-                    
+                                self.Tel_user = yield
+                                let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
+                                let twilioSecret = "a74824968da571b8afac81506f84acf2"
+                                //Note replace + = %2B , for To and From phone number
+                                let fromNumber = "+12565308003"// actual number is +9999999
+                                let toNumber = "+66631921545"// actual number is +9999999
+
 //                            DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
 //                                                       self.Tel_user = yield
 //                              }
-                              let twilioSID = "AC6eb59c25b1d9e5c102ff07382a033245"
-                              let twilioSecret = "3a776b6855e4ce991e1d0b07bdefa350"
-                              //Note replace + = %2B , for To and From phone number
-                    
-                              let fromNumber = "+14064123140"// actual number is +9999999
-                              let toNumber = "+66815552550"// actual number is +9999999
+                              //    let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
+                              //    let twilioSecret = "a74824968da571b8afac81506f84acf2"
+                              //    //Note replace + = %2B , for To and From phone number
+                              //    let fromNumber = "+12565308003"// actual number is +9999999
+                              //    let toNumber = "+66631921545"// actual number is +9999999
                              let message = "Your verification code is " + "\(yield)" + "of Register"
-                
+
                              let request = NSMutableURLRequest(url: URL(string:"https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/SMS/Messages")!)
                              request.httpMethod = "POST"
                              request.httpBody = "From=\(fromNumber)&To=\(toNumber)&Body=\(message)".data(using: .utf8)
@@ -157,7 +123,7 @@ class MobileOtpViewController: UIViewController {
                                     print("Error: \(error)")
                                  }
                              }).resume()
-                
+
                         }
                 }
             let nextToOtp = OtpViewController()
@@ -166,6 +132,16 @@ class MobileOtpViewController: UIViewController {
             self.navigationController?.pushViewController(nextToOtp, animated: true)
         }
         
+    }
+    
+    @objc func submitBtn (){
+        if otpTextField.text?.count ?? 0 == 10{
+            print("เรียบร้อย")
+            check_use_otp()
+        }else{
+            print("เอาใหม่")
+            checkError.isHidden = false
+        }
     }
     
     

@@ -12,14 +12,13 @@ import Alamofire
 
 class OtpViewController: UIViewController {
 //    http://localhost/alder_iosapp/v1/select_otp.php
-    lazy var idUserLabelText = String()
-    lazy var OTP = String()
+    var idUserLabelText = String()
+    var OTP = String()
     
     let URL_USER_OtpPost = "\(AppDelegate.link)alder_iosapp/v1/otp.php"
-    
-//    let URL_USER_OtpPost = "http://172.20.10.5/alder_iosapp/v1/otp.php"
-    lazy var defaultValues = UserDefaults.standard
-    lazy var textTure : UILabel = {
+
+     var defaultValues = UserDefaults.standard
+     var textTure : UILabel = {
         let label = UILabel()
         let title = "Verification Code,"
         let text = "\n \n Please type the verification code sent \n \n to +49 157 706816306."
@@ -33,7 +32,7 @@ class OtpViewController: UIViewController {
         return label
     }()
     
-    lazy var otpTextField: UITextField = {
+    let otpTextField: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "Full Name", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
         textField.font = UIFont.PoppinsRegular(size: 16)
@@ -51,7 +50,7 @@ class OtpViewController: UIViewController {
 //           view.addGestureRecognizer(tap)
 //    }
     
-   lazy var idTextField: UITextField = {
+   var idTextField: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "id", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
         textField.font = UIFont.PoppinsRegular(size: 16)
@@ -81,7 +80,7 @@ class OtpViewController: UIViewController {
         }
     }
     
-    lazy var errorLabel : UILabel = {
+    var errorLabel : UILabel = {
         let error = UILabel()
         let errorText = "You have problem with OTP ?"
         let style = NSMutableParagraphStyle()
@@ -94,7 +93,7 @@ class OtpViewController: UIViewController {
         return error
     }()
     
-    lazy var successLabel : UILabel = {
+    var successLabel : UILabel = {
         let success = UILabel()
         let successText = "OTP have compute."
         let style = NSMutableParagraphStyle()
@@ -107,7 +106,7 @@ class OtpViewController: UIViewController {
     }()
     
     
-    lazy var showLabel : UILabel = {
+    var showLabel : UILabel = {
         let show = UILabel()
         let showText = "Error of OTP you can input otp new."
         let attributedText = NSMutableAttributedString(string: showText,attributes: [NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 12),NSMutableAttributedString.Key.foregroundColor : UIColor.red])
@@ -116,7 +115,7 @@ class OtpViewController: UIViewController {
         return show
     }()
 
-    lazy var imageIcon : UIImageView = {
+    var imageIcon : UIImageView = {
         let iconImage = UIImageView()
         iconImage.image = UIImage(named:"smartphone")
         iconImage.contentMode = .scaleAspectFit
@@ -124,6 +123,7 @@ class OtpViewController: UIViewController {
     }()
     
     @objc func clickCheck(){
+        
             if otpTextField.text?.count ?? 0 == 5{
             otpTextField.layer.borderColor = UIColor.green.cgColor
             successLabel.isHidden = false
@@ -159,7 +159,7 @@ class OtpViewController: UIViewController {
         }
     }
     
-    lazy var submitButton : UIButton = {
+    var submitButton : UIButton = {
         let submit = UIButton()
         submit.backgroundColor = UIColor.rgb(red: 47, green: 58, blue: 243)
         submit.layer.borderColor = UIColor.rgb(red: 47, green: 58, blue: 243).cgColor
@@ -198,7 +198,7 @@ class OtpViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         idTextField.text = idUserLabelText
-        print(idUserLabelText)
+        otpTextField.text = OTP
         view.addSubview(textTure)
         view.addSubview(otpTextField)
         view.addSubview(submitButton)
@@ -207,8 +207,6 @@ class OtpViewController: UIViewController {
         view.addSubview(imageIcon)
         view.addSubview(showLabel)
         view.addSubview(btnBack)
-        otpTextField.text = OTP
-        print(OTP)
         self.errorLabel.isHidden = true
         self.successLabel.isHidden = true
         self.showLabel.isHidden = true
