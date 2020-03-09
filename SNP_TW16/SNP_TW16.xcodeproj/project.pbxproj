@@ -514,7 +514,6 @@
 				654E850923C1007E001E2508 /* HeaderActivity.swift */,
 				6508F0DF23C272D00034F355 /* ActivityHeaderViewCell.swift */,
 				65DB237323DA21C300E71500 /* TypeActivityView.swift */,
-				20EC777F2415019900A1B6BA /* TextFieldTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -527,6 +526,7 @@
 				654936A723C1CDF600B190A1 /* SubActivityTypeTableViewController.swift */,
 				654936A923C1EAA000B190A1 /* ContentActivityViewController.swift */,
 				6574B2E523DD6113005E82DF /* DecideViewController.swift */,
+				20EC777F2415019900A1B6BA /* TextFieldTableViewCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

@@ -102,6 +102,8 @@ class CommunViewController: UITableViewController{
                             cell.profileImage.image = image2
                 }
             }
+            
+            
             cell.iconImageLike.titleLabel?.tag = headerActivity?.id ?? 0
             self.tableView.separatorStyle = .none
             cell.selectionStyle = .none

@@ -79,7 +79,7 @@ class TestCheckBoxTableView: UITableViewController{
               Alamofire.request((headerActivity?.activtiyIcon ?? "0")!).responseImage { response in
                            if let image = response.result.value {
                                cell.bgImage.image = image
-                           }}
+            }}
               cell.selectionStyle = .none
               cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                     return cell
@@ -100,42 +100,47 @@ class TestCheckBoxTableView: UITableViewController{
                 }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         if let cell = tableView.cellForRow(at: indexPath) as? CheckBoxTableViewCell{
-            cell.bgImage.layer.cornerRadius = 80/2
-             cell.bgImage.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
-             cell.bgImage.layer.borderWidth = 2
-         }
-     }
-     
+    
+   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? CheckBoxTableViewCell{
+            cell.bgImage.layer.cornerRadius = 90/2
+            cell.bgImage.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
+            cell.bgImage.layer.borderWidth = 5
+            cell.backgroundColor = UIColor.blackAlpha(alpha: 0.1)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath){
-         if let cell = tableView.cellForRow(at: indexPath) as? CheckBoxTableViewCell{
-            cell.bgImage.layer.cornerRadius = 80/2
-            cell.bgImage.layer.borderColor = UIColor.white.cgColor
-             cell.bgImage.layer.borderWidth = 2
-            
-         }
-     }
+            if let cell = tableView.cellForRow(at: indexPath) as? CheckBoxTableViewCell{
+                cell.bgImage.layer.cornerRadius = 90/2
+                cell.bgImage.layer.borderColor = UIColor.white.cgColor
+                cell.bgImage.layer.borderWidth = 5
+                cell.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+                
+        }
+    }
+    
     
     @objc func psuhCheckBox(){
+        guard let cell = DiseaseTableViewCell.diseaseDetailTextField.text else { return }
         let selectedIndex = tableView.indexPathsForSelectedRows
         let index = selectedIndex?.compactMap{ " \( 1 + $0.row)" }
         var selectedChoice = index?.joined(separator: ",") ?? ""
         print(selectedChoice)
         
-        let parameters: Parameters = ["activity_user_apps":activity_user_id,"activity_name":selectedChoice,"disease_id": "1",
-        "disease_detail": "test","disease_user_apps":disease_user_id,"tel":phone_number_user]
+        let parameters: Parameters = ["activity_user_apps":activity_user_id,"activity_name":selectedChoice,"disease_id":
+            
+            DiseaseTableViewCell.diseaseNameTextField.tag,"disease_detail" : cell,"disease_user_apps":disease_user_id,"tel":phone_number_user]
         
-       print(parameters)
-    Alamofire.request(URL_USER_REGISTER, method: .post,parameters: parameters).responseJSON { response in
+        Alamofire.request(URL_USER_REGISTER, method: .post,parameters: parameters).responseJSON { response in
                 print(response)
-        
-        
+
+
                         if let result = response.result.value {
                         let jsonData = result as! NSDictionary
                         if(!(jsonData.value(forKey: "error") as! Bool )){
                             let alertController = UIAlertController(title: "สมัครสมาชิกเรียบร้อย", message: "ยินดีต้อนรับเข้าสู่ Alder", preferredStyle: .alert)
-                                    
+
                             let action1 = UIAlertAction(title: "เข้าสู่ระบบ", style: .default) { (action:UIAlertAction) in
                                  self.view.window?.rootViewController = LoginViewController()
                                  self.view.window?.makeKeyAndVisible()
