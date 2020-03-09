@@ -11,19 +11,19 @@ import IQKeyboardManagerSwift
 #if DEBUG
 import FLEX
 #endif
-
 @UIApplicationMain
-
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    
+    static let link = "http://localhost/"
+//    static let link = "http://192.168.43.145/"
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
         self.SetupPushNotification(application: application)
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-//        window?.rootViewController = MainActivityViewController()
-        window?.rootViewController = UINavigationController(rootViewController: InviteActivityViewController())
+        window?.rootViewController = UINavigationController(rootViewController: tabBarViewController())
         return true
     }
 

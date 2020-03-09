@@ -9,25 +9,32 @@
 import UIKit
 import Alamofire
 import ObjectMapper
-class InviteActivityViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
+class InviteActivityViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,UINavigationControllerDelegate {
+
+    var ActivityStart: [ActivityDetail]?
+    var ActivityList : [ActivityDetail]?
+    lazy var IdPost = Int()
+    lazy var buttonView = UIButton()
+    lazy var buttonView2 = UIButton()
+    let URL_GET_POST = "\(AppDelegate.link)alder_iosapp/v1/userActivityEnd.php"
+    let URL_GET_POST_ACTIVITY_START = "\(AppDelegate.link)alder_iosapp/v1/userActivityStart.php"
     
-    var ActivityList: [ListPostUser]?
-    var PostList: [allList]?
-    let URL_GET_POST = "http://localhost/alder_iosapp/v1/saveActivityUser.php"
-    let URL_GET_POST_ACTIVITY = "http://localhost/alder_iosapp/v1/savePostUser.php"
-    var user_id = String()
+    let URL_GET_CHECK_DECIDE = "\(AppDelegate.link)alder_iosapp/v1/checkDecide.php"
+    
+    lazy var user_id = String()
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
-    let defaultValues = UserDefaults.standard
-    
+    lazy var defaultValues = UserDefaults.standard
+     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getRelative()
         getData()
+        self.tabBarController?.tabBar.isHidden = false
         self.tableView.reloadData()
     }
     
-    let titleHeader : UILabel = {
+    lazy var titleHeader : UILabel = {
                     let label = UILabel()
                     let title = "กิจกรรมที่เข้าร่วม"
                     let attributedText = NSMutableAttributedString(string: title,
@@ -41,7 +48,7 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
          
 //        return 5
         if(self.segmentedControl.selectedSegmentIndex == 0){
-            return PostList?.count ?? 0
+            return ActivityStart?.count ?? 0
         }else{
             return ActivityList?.count ?? 0
         }
@@ -50,38 +57,33 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if(self.segmentedControl.selectedSegmentIndex == 0){
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! AcivityListTableViewCell
-                           let listActivity = PostList?[indexPath.row]
-                                    cell.userFullname.text = listActivity?.username
-                                    cell.timeTextLabel.text = listActivity?.createdAt
-                                    cell.numCount.text = "\(listActivity?.like ?? 0)"
-                                    cell.numCom.text = "\(listActivity?.comment ?? 0)"
-                                    cell.messageTextLabel.text = listActivity?.caption
-                                    
-                                       Alamofire.request("http://localhost/alder_iosapp/" + (listActivity?.img ?? "0")!).responseImage { response in
-                                                             if let image = response.result.value{
-                                                             cell.postImage.image = image
-                                                 }
-                                             }
-                                             
-                                             Alamofire.request("http://localhost/alder_iosapp/" + (listActivity?.photo ?? "0")!).responseImage { response in
-                                                             if let image2 = response.result.value {
-                                                             cell.profileImage.image = image2
-                                                 }
-                                             }
-                                    
-                                    self.tableView.separatorStyle = .none
-                                    cell.selectionStyle = .none
-                                    cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
-                                    return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! SearchTableViewCell
+                        let listActivity = ActivityStart?[indexPath.row]
+                        cell.titleFullname.text = listActivity?.actId
+                        cell.supportName.text = listActivity?.caption
+                        cell.supportTime.text = listActivity?.created
+                        
+                        Alamofire.request((listActivity?.imagePost ?? "0")!).responseImage { response in
+                                         if let image = response.result.value {
+                                             cell.bgActivitity.image = image
+                                         }
+                        }
+                        cell.CheckPoint.isHidden = true
+                        cell.decidePass.isHidden = true
+                        self.tableView.separatorStyle = .none
+                        cell.selectionStyle = .none
+                        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+            
+                        return cell
             
         }else{
               let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! SearchTableViewCell
                         let listActivity = ActivityList?[indexPath.row]
-                        cell.titleFullname.text = listActivity?.titlePost
-                        cell.supportName.text = listActivity?.captionPost
-                        cell.supportTime.text = listActivity?.createdPost
-                        Alamofire.request((listActivity?.imgPost ?? "0")!).responseImage { response in
+                        cell.titleFullname.text = listActivity?.actId
+                        cell.supportName.text = listActivity?.caption
+                        cell.supportTime.text = listActivity?.created
+            
+                        Alamofire.request((listActivity?.imagePost ?? "0")!).responseImage { response in
                                 if let image = response.result.value {
                                     cell.bgActivitity.image = image
                                 }
@@ -90,31 +92,69 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                         self.tableView.separatorStyle = .none
                         cell.selectionStyle = .none
                         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
-                        return cell
+                        IdPost =  listActivity?.dataId ?? 0
+            
+                        let parameters: Parameters = ["user_id":user_id,"post_timeline_id":IdPost]
+                        Alamofire.request(URL_GET_CHECK_DECIDE, method: .post,parameters: parameters).responseJSON { response in
+                            self.IdPost =  listActivity?.dataId ?? 0
+                            self.buttonView = cell.CheckPoint
+                            self.buttonView2 = cell.decidePass
+                            guard let json = response.value as? [String:Bool], let status = json["error"] else {
+                            return }
+                            if !status {
+                                    self.buttonView.isHidden = true
+                                    self.buttonView2.isHidden = false
+                            }else{
+                                                            
+                            }
+                           
+                    }
+             return cell
         }
 
     }
     
+
     
+    
+    @objc func ClickUser(){
+        let passData = DecideAfterViewController()
+        passData.delegate = self
+        passData.post_timeline = IdPost
+        passData.IdUser = user_id
+        self.navigationController?.pushViewController(passData, animated: true)
+        self.tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                    if self.segmentedControl.selectedSegmentIndex == 0{
+                        let vc = ContentActivityViewController()
+                        vc.activityData = ActivityStart?[indexPath.row]
+                        self.navigationController?.pushViewController(vc, animated: true)
+
+                    }else{
+//                        let vc = ContentActivityViewController()
+//                        vc.activityData = ActivityList?[indexPath.row]
+//                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+    }
+    
+    func getData(){
+              let parameters: Parameters = ["userId":user_id]
+              let url = URL_GET_POST_ACTIVITY_START + "?id=\(user_id)"
+              Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
+                 self?.ActivityStart = Mapper<ActivityDetail>().mapArray(JSONObject: dataRes.result.value)
+                 self?.tableView.reloadData()
+              }
+    }
     
     func getRelative(){
              let parameters: Parameters = ["userId":user_id]
              let url = URL_GET_POST + "?id=\(user_id)"
              Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
-                  self?.ActivityList = Mapper<ListPostUser>().mapArray(JSONObject: dataRes.result.value)
+                  self?.ActivityList = Mapper<ActivityDetail>().mapArray(JSONObject: dataRes.result.value)
                   self?.tableView.reloadData()
-                  print(dataRes)
              }
-    }
-    
-    func getData(){
-              let parameters: Parameters = ["userId":user_id]
-              let url = URL_GET_POST_ACTIVITY + "?id=\(user_id)"
-              Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
-                 self?.PostList = Mapper<allList>().mapArray(JSONObject: dataRes.result.value)
-                 self?.tableView.reloadData()
-                print(dataRes)
-              }
     }
     
     let segmentedControl: UISegmentedControl = {
@@ -124,10 +164,11 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
         return control
     }()
     
+    
     @objc fileprivate func handleSegmentChange(){
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            rowToDisplay2 = PostList
+            rowToDisplay2 = ActivityStart
             break
         default:
             rowToDisplay = ActivityList
@@ -143,31 +184,27 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
     //master array
     lazy var rowToDisplay = ActivityList
     
-    lazy var rowToDisplay2 = PostList
-    
+    lazy var rowToDisplay2 = ActivityStart
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = UIColor.black
-        view.backgroundColor = .white
-        navigationItem.title = "กิจกรรม"
-        tableView.dataSource = self
-        tableView.delegate = self
-        view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-        
-        let stackView = UIStackView(arrangedSubviews: [
-            segmentedControl, tableView
-        ])
-        
         if let name2 = defaultValues.string(forKey: "userId") {
             user_id = name2
-            print("user id :: \(user_id)")
+
         }else{
             //send back to login view controller
         }
         
+        tableView.dataSource = self
+        tableView.delegate = self
+//        view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+        view.backgroundColor = .white
+        let stackView = UIStackView(arrangedSubviews: [
+            segmentedControl, tableView
+        ])
+        
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId)
-        tableView.register(AcivityListTableViewCell.self, forCellReuseIdentifier: cellId1)
+        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId1)
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50

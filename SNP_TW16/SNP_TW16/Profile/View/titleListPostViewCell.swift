@@ -17,13 +17,13 @@ class titleListPostViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let bgActivitity:UIView = {
+    lazy var bgActivitity:UIView = {
         let background = UIView()
         background.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
         return background
     }()
     
-    let titleHeader : UILabel = {
+    lazy var titleHeader : UILabel = {
                    let label = UILabel()
                    let title = "โพสต์ของฉัน"
                    let attributedText = NSMutableAttributedString(string: title,

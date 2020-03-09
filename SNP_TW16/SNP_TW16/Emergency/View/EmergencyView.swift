@@ -18,13 +18,13 @@ class EmergencyView: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    let bgActivitity:UIView = {
+    lazy var bgActivitity:UIView = {
         let background = UIView()
         background.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         return background
     }()
     
-    let bgImage : UIImageView = {
+    lazy var bgImage : UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "Intersection 4")
         image.contentMode = .scaleAspectFill
@@ -32,7 +32,7 @@ class EmergencyView: UITableViewCell {
         return image
     }()
     
-    let textHeader : UILabel = {
+    lazy var textHeader : UILabel = {
                 let label = UILabel()
                 let title = "ต้องการความช่วยเหลือ"
                 let text = "\nโทรด่วน"
@@ -46,12 +46,12 @@ class EmergencyView: UITableViewCell {
                 return label
     }()
     
-    let bgButton:UIView = {
+    lazy var bgButton:UIView = {
             let background = UIView()
             return background
     }()
     
-    let btnEmergency : UIButton = {
+    lazy var btnEmergency : UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("โทรด่วน", for: .normal)
         btn.titleLabel?.font = UIFont.PoppinsBold(size: 30)
@@ -64,7 +64,7 @@ class EmergencyView: UITableViewCell {
         return btn
     }()
 
-    let lineborder : UIView = {
+    lazy var lineborder : UIView = {
         let line = UIView()
         line.layer.borderWidth = 1
         line.layer.borderColor = UIColor.red.cgColor
@@ -75,7 +75,7 @@ class EmergencyView: UITableViewCell {
         return line
     }()
     
-    let titleLabel : UILabel = {
+    lazy var titleLabel : UILabel = {
               let label = UILabel()
               let title = "ติดต่อญาติทันทีเพียงแค่กดปุ่ม"
                 let style = NSMutableParagraphStyle()

@@ -12,17 +12,17 @@ import Alamofire
 
 class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigationControllerDelegate , UIImagePickerControllerDelegate ,UIPickerViewDelegate,UIPickerViewDataSource{
 
-        var NumberPhoneLabelText = String()
-        var imageTy = UIImage()
+        lazy var NumberPhoneLabelText = String()
+        lazy var imageTy = UIImage()
         private var datePicker : UIDatePicker?
     
-        var religionPicker = UIPickerView()
-        var genPicker = UIPickerView()
-        var centerPicker = UIPickerView()
-        var religion = ["พุทธ","อิสลาม","คริสต์","ไม่ระบุ"]
-        var center = ["Chersery Home","อยู่นอกศูนย์","ไม่ระบุ"]
-        var gender = ["ชาย","หญิง"]
-        var picker1 = UIPickerView()
+        lazy var religionPicker = UIPickerView()
+        lazy var genPicker = UIPickerView()
+        lazy var centerPicker = UIPickerView()
+        lazy var religion = ["พุทธ","อิสลาม","คริสต์","ไม่ระบุ"]
+        lazy var center = ["Chersery Home","อยู่นอกศูนย์","ไม่ระบุ"]
+        lazy var gender = ["ชาย","หญิง"]
+        lazy var picker1 = UIPickerView()
     
     
            func numberOfComponents(in pickerView: UIPickerView) -> Int {

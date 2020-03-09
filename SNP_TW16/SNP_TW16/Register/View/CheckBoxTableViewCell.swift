@@ -17,12 +17,12 @@ class CheckBoxTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCon
            fatalError("init(coder:) has not been implemented")
        }
        
-       let bgCheck : UIView = {
+       lazy var bgCheck : UIView = {
                let image = UIImageView()
                return image
        }()
        
-       let bgImage : UIImageView = {
+       lazy var bgImage : UIImageView = {
                let image = UIImageView()
                image.image = UIImage(named: "comment")
                image.contentMode = .scaleAspectFill
@@ -30,7 +30,7 @@ class CheckBoxTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCon
                return image
        }()
        
-       let textHeader : UILabel = {
+       lazy var textHeader : UILabel = {
                    let label = UILabel()
                    let title = "check box"
                    let attributedText = NSMutableAttributedString(string: title,

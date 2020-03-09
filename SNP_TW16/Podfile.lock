@@ -20,15 +20,14 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - Alamofire
-    - Pastel
   trunk:
+    - Alamofire
     - AlamofireImage
     - FLEX
     - IQKeyboardManagerSwift
     - MultiDegreeLikeButton
     - ObjectMapper
+    - Pastel
     - SwiftyJSON
 
 SPEC CHECKSUMS:

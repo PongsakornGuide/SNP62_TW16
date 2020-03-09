@@ -15,9 +15,9 @@ class EmergencyViewController: UITableViewController {
     
     
     
-    let URL_GET_TEL = "http://localhost/alder_iosapp/v1/emergency.php"
-    let URL_GET_TEL_RELATIVE = "http://localhost/alder_iosapp/v1/showTel.php"
-    let URL_GET_TEL_RELATIVE_ADD = "http://localhost/alder_iosapp/v1/showTelRelative.php"
+    let URL_GET_TEL = "\(AppDelegate.link)alder_iosapp/v1/emergency.php"
+    let URL_GET_TEL_RELATIVE = "\(AppDelegate.link)alder_iosapp/v1/showTel.php"
+    let URL_GET_TEL_RELATIVE_ADD = "\(AppDelegate.link)alder_iosapp/v1/showTelRelative.php"
     
 //    let URL_GET_TEL = "http://172.20.10.5/alder_iosapp/v1/emergency.php"
 //    let URL_GET_TEL_RELATIVE = "http://172.20.10.5/alder_iosapp/v1/showTel.php"

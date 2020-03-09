@@ -13,7 +13,7 @@ class CreateRelativeTelView: UIViewController {
     var user_id = String()
 //    var addList: [addRelative]?
     
-     let URL_ADD_RELATIVE = "http://localhost/alder_iosapp/v1/addTel.php"
+     let URL_ADD_RELATIVE = "\(AppDelegate.link)alder_iosapp/v1/addTel.php"
 //     let URL_ADD_RELATIVE = "http://172.20.10.5/alder_iosapp/v1/addTel.php"
     let defaultValues = UserDefaults.standard
     let bgActivitity:UIView = {
@@ -22,7 +22,7 @@ class CreateRelativeTelView: UIViewController {
          return background
      }()
      
-      let textHeader : UILabel = {
+      lazy var textHeader : UILabel = {
         let label = UILabel()
         let title = "เพิ่มเบอร์ติดต่อฉุกเฉิน"
         let attributedText = NSMutableAttributedString(string: title,
@@ -33,7 +33,7 @@ class CreateRelativeTelView: UIViewController {
       }()
     
     //-----------------------------------------------------------------------------------------------
-       let nameTextField: UITextField = {
+       lazy var nameTextField: UITextField = {
                let textField = UITextField()
                textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                textField.textColor = .black
@@ -47,21 +47,21 @@ class CreateRelativeTelView: UIViewController {
            }()
     //-----------------------------------------------------------------------------------------------
 
-       let telTextField: UITextField = {
+       lazy var telTextField: UITextField = {
                   let textField = UITextField()
                   textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                   textField.textColor = .black
                   textField.font = UIFont.boldSystemFont(ofSize: 15)
                   return textField
               }()
-       let telTextFieldLine: UIView = {
+       lazy var telTextFieldLine: UIView = {
                      let view = UIView()
                      view.backgroundColor = UIColor.rgb(red: 167, green: 169, blue: 172)
                      return view
               }()
     //-----------------------------------------------------------------------------------------------
        
-       let addTel : UIButton = {
+       lazy var addTel : UIButton = {
             let submit = UIButton(type: UIButton.ButtonType.system)
             submit.backgroundColor = UIColor.rgb(red: 27, green: 71, blue: 147)
             submit.layer.cornerRadius = 30
@@ -75,17 +75,35 @@ class CreateRelativeTelView: UIViewController {
             submit.addTarget(self, action: #selector(pushToRelatvie), for: .touchUpInside)
             return submit
         }()
-
+    //----------------------------------------------------------------------------------------------
+    
+    lazy var alertLabel : UILabel = {
+        let label = UILabel()
+        label.text = "กรุณากรอกเบอร์โทรศัพท์ให้ครบ"
+        label.textColor = .red
+        label.textAlignment = .center
+        label.font = UIFont.PoppinsBold(size: 18)
+        return label
+      }()
+    
+    //-----------------------------------------------------------------------------------------------
+    
     @objc func pushToRelatvie(){
-    let parameters: Parameters = ["user_id":user_id,"name":nameTextField.text ?? "NULL","tel":telTextField.text ?? "NULL"]
-            
-        Alamofire.request(URL_ADD_RELATIVE, method: .post,parameters: parameters).responseJSON { response in
-                print(response)
-            if let nav = self.navigationController {
-                nav.popToRootViewController(animated: true)
-                 self.navigationController?.popViewController(animated: true)
-            } else {
-                self.dismiss(animated: true, completion: nil)
+        let checkTel = telTextField.text?.count ?? 0 >= 10 && nameTextField.text?.count ?? 0 >= 1
+        if !checkTel{
+            print("OTP NOT REGISTER")
+            alertLabel.isHidden = false
+        }else{
+            print("USE REGISTER SUCCECT")
+            let parameters: Parameters = ["user_id":user_id,"name":nameTextField.text ?? "NULL","tel":telTextField.text ?? "NULL"]
+                    Alamofire.request(URL_ADD_RELATIVE, method: .post,parameters: parameters).responseJSON { response in
+                            print(response)
+                        if let nav = self.navigationController {
+                            nav.popToRootViewController(animated: true)
+                             self.navigationController?.popViewController(animated: true)
+                        } else {
+                            self.dismiss(animated: true, completion: nil)
+                        }
             }
         }
     }
@@ -100,7 +118,8 @@ class CreateRelativeTelView: UIViewController {
         view.addSubview(telTextField)
         view.addSubview(telTextFieldLine)
         view.addSubview(addTel)
-        
+        view.addSubview(alertLabel)
+        alertLabel.isHidden = true
         if let user = defaultValues.string(forKey: "userId") {
                          user_id = user
                         print(user_id)
@@ -122,5 +141,7 @@ class CreateRelativeTelView: UIViewController {
                telTextFieldLine.anchor(telTextField.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
         
         addTel.anchor(telTextFieldLine.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 80)
+        
+         alertLabel.anchor(addTel.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 80)
     }
 }

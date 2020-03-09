@@ -20,13 +20,13 @@ class ActivityHeaderViewCell: UITableViewCell {
      }
 
 
-     let bgActivitity:UIView = {
+     lazy var bgActivitity:UIView = {
          let background = UIView()
          background.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
          return background
      }()
      
-     let bgImage : UIImageView = {
+     lazy var bgImage : UIImageView = {
                    let image = UIImageView()
                    image.image = UIImage(named: "Intersection 4")
                    image.contentMode = .scaleAspectFill
@@ -34,7 +34,7 @@ class ActivityHeaderViewCell: UITableViewCell {
                    return image
      }()
      
-           let textHeader : UILabel = {
+     lazy var textHeader : UILabel = {
                  let label = UILabel()
                  let title = "กิจกรรม"
                  let text = "\n สร้างสุข"
@@ -44,7 +44,7 @@ class ActivityHeaderViewCell: UITableViewCell {
                  attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.PoppinsBold(size: 32),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
 
                  label.attributedText = attributedText
-                 label.numberOfLines = 0
+                 label.numberOfLines = 1
                  return label
              }()
      
@@ -60,7 +60,7 @@ class ActivityHeaderViewCell: UITableViewCell {
          bgImage.anchor(bgActivitity.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200
                 )
          
-         textHeader.anchor(bgImage.topAnchor, left: bgImage.leftAnchor, right: bgImage.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 30, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+         textHeader.anchor(bgImage.topAnchor, left: bgImage.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 20, widthConstant: 150, heightConstant: 150)
 
      }
 }

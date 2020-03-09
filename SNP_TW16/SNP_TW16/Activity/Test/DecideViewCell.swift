@@ -9,6 +9,8 @@
 import UIKit
 class DecideViewCell: UITableViewCell,UITextFieldDelegate,UINavigationControllerDelegate {
     
+//    UIViewController ,UITableViewDelegate, UITableViewDataSource
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
          super.init(style: style, reuseIdentifier: reuseIdentifier)
          setLayout()
@@ -19,12 +21,12 @@ class DecideViewCell: UITableViewCell,UITextFieldDelegate,UINavigationController
     }
     
     
-    let bgActivitity:UIView = {
+    lazy var bgActivitity:UIView = {
          let background = UIView()
          return background
      }()
     
-    let headerText : UILabel = {
+    lazy var headerText : UILabel = {
         let header = UILabel()
         let title = "โปรดเลือกคำตอบก่อนเข้าร่วมกิจกรรม"
         let attributedText = NSMutableAttributedString(string: title,
@@ -34,7 +36,7 @@ class DecideViewCell: UITableViewCell,UITextFieldDelegate,UINavigationController
         return header
     }()
     
-    let titleText : UILabel = {
+    lazy var titleText : UILabel = {
           let header = UILabel()
           let title = "ท่านคาดหวังอย่างไรกับกิจกรรมนี้"
           let attributedText = NSMutableAttributedString(string: title,
@@ -45,7 +47,7 @@ class DecideViewCell: UITableViewCell,UITextFieldDelegate,UINavigationController
           return header
     }()
     
-    let alertText : UILabel = {
+    lazy var alertText : UILabel = {
           let header = UILabel()
           let title = "*เลือกได้มากกว่า 1 ข้อ"
           let attributedText = NSMutableAttributedString(string: title,
@@ -61,6 +63,7 @@ class DecideViewCell: UITableViewCell,UITextFieldDelegate,UINavigationController
         addSubview(headerText)
         addSubview(titleText)
         addSubview(alertText)
+        backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         
         bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 140)
         

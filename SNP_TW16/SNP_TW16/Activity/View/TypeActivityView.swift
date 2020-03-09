@@ -20,12 +20,12 @@ class TypeActivityView: UITableViewCell {
      }
 
 
-     let bgActivitity:UIView = {
+     lazy var bgActivitity:UIView = {
          let background = UIView()
          return background
      }()
      
-    let bgBorder:UIView = {
+     lazy var bgBorder:UIView = {
            let background = UIView()
                 background.backgroundColor = UIColor.white
                 background.layer.cornerRadius = 30
@@ -36,7 +36,7 @@ class TypeActivityView: UITableViewCell {
            return background
     }()
     
-     let bgImage : UIImageView = {
+     lazy var bgImage : UIImageView = {
                    let image = UIImageView()
                    image.image = UIImage(named: "val-vesa-P0F_zH39qhs-unsplash")
                    image.contentMode = .scaleAspectFill
@@ -47,7 +47,7 @@ class TypeActivityView: UITableViewCell {
                    return image
      }()
 
-           let textHeader : UILabel = {
+     lazy var textHeader : UILabel = {
                  let label = UILabel()
                  let title = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
                  let attributedText = NSMutableAttributedString(string: title,

@@ -38,14 +38,14 @@ class DiseaseTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
                 diseaseNameTextField.text = disease[row]
     }
     
-    let BGView: UIView = {
+    lazy var BGView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 20
         return view
     }()
     
-    let titleLabel : UILabel = {
+    lazy var titleLabel : UILabel = {
                 let label = UILabel()
                 let title = "โรคประจำตัว"
                 let style = NSMutableParagraphStyle()
@@ -57,28 +57,28 @@ class DiseaseTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
                 return label
    }()
     
-   let diseaseNameTextField: UITextField = {
+   lazy var diseaseNameTextField: UITextField = {
                          let textField = UITextField()
                          textField.attributedPlaceholder = NSAttributedString(string: "โรคประจำตัว", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                          textField.textColor = .black
                          textField.font = UIFont.boldSystemFont(ofSize: 15)
                          return textField
                      }()
-    let diseaseTextFieldLine: UIView = {
+    lazy var diseaseTextFieldLine: UIView = {
                             let view = UIView()
                             view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
                             return view
                      }()
        
                  //-----------------------------------------------------------------------------------------------
-    let diseaseDetailTextField: UITextField = {
+    lazy var diseaseDetailTextField: UITextField = {
             let textField = UITextField()
             textField.attributedPlaceholder = NSAttributedString(string: "รายละเอียดอื่นๆ",attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
              textField.textColor = .black
              textField.font = UIFont.boldSystemFont(ofSize: 15)
              return textField
                      }()
-    let diseaseDetailTextFieldLine: UIView = {
+    lazy var diseaseDetailTextFieldLine: UIView = {
             let view = UIView()
             view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
             return view

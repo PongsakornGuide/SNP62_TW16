@@ -18,13 +18,13 @@ class AddTelView: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let bgActivitity:UIView = {
+    lazy var bgActivitity:UIView = {
             let background = UIView()
 //            background.backgroundColor = .purple
             return background
     }()
     
-    let bgEmergency : UIView = {
+    lazy var bgEmergency : UIView = {
          let bg = UIView()
          bg.backgroundColor = UIColor.white
          bg.layer.cornerRadius = 32
@@ -36,7 +36,7 @@ class AddTelView: UITableViewCell {
          return bg
       }()
       
-    let titleLabel : UILabel = {
+    lazy var titleLabel : UILabel = {
          let title = UILabel()
           title.text = "เพิ่มเบอร์ฉุกเฉินเบอร์อื่นๆ .."
           title.font = UIFont.PoppinsBold(size: 20)
@@ -44,7 +44,7 @@ class AddTelView: UITableViewCell {
           return title
       }()
     
-    let btnCell : UIButton = {
+    var btnCell : UIButton = {
         let bg = UIButton(type: .system)
         bg.setTitle("+", for: .normal)
         bg.titleLabel?.font = UIFont.PoppinsMedium(size: 65)

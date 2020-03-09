@@ -9,40 +9,39 @@
 import UIKit
 import Alamofire
 import MultiDegreeLikeButton
-class ProfileVIewController: UIViewController{
+class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
     
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
     
-    let URL_GET_PROFILE = "http://localhost/alder_iosapp/v1/showProfile.php"
+    let URL_GET_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/showProfile.php"
 //    let URL_GET_PROFILE = "http://172.20.10.5/alder_iosapp/v1/showProfile.php"
-    let defaultValues = UserDefaults.standard
-    var getIduser = String()
-    var ImageProfiles = String()
+    lazy var defaultValues = UserDefaults.standard
+    lazy var getIduser = String()
+    lazy var ImageProfiles = String()
     
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
-//          getImage()
           reloadData()
-        
+//          navigationController?.navigationBar.isHidden = true
     }
 
-    var viewScroll: UIScrollView = {
+    lazy var viewScroll: UIScrollView = {
         let view = UIScrollView()
         return view
     }()
     
-    let stepView: UIImageView = {
+    lazy var stepView: UIImageView = {
         let view = UIImageView()
         return view
     }()
     
-    let bgImageProfile:UIView = {
+    lazy var bgImageProfile:UIView = {
         let background = UIView()
         return background
     }()
     
-    let imageView : UIImageView = {
+    lazy var imageView : UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "Intersection 4")
         image.contentMode = .scaleAspectFill
@@ -50,18 +49,18 @@ class ProfileVIewController: UIViewController{
         return image
     }()
     
-    let bgImageView : UIImageView = {
+    lazy var bgImageView : UIImageView = {
            let image = UIImageView()
            return image
     }()
     
-    let BGView: UIView = {
+    lazy var BGView: UIView = {
             let view = UIView()
             view.layer.cornerRadius = 20
             return view
     }()
     
-    let profileImageView : UIImageView = {
+    lazy var profileImageView : UIImageView = {
              let image = UIImageView()
                    image.backgroundColor = UIColor.white
                    image.layer.cornerRadius = 160/2
@@ -73,7 +72,7 @@ class ProfileVIewController: UIViewController{
              return image
     }()
     
-    let ImageProfile : UIImageView = {
+    lazy var ImageProfile : UIImageView = {
                let image = UIImageView()
                      image.backgroundColor = UIColor.black
                      image.layer.cornerRadius = 142/2
@@ -87,7 +86,8 @@ class ProfileVIewController: UIViewController{
                      image.layer.shouldRasterize = true
                return image
     }()
-   let editProfile : UIButton = {
+    
+   lazy var editProfile : UIButton = {
               let submit = UIButton(type: UIButton.ButtonType.system)
               submit.setTitle("แก้ไขข้อมูลส่วนตัว", for: .normal)
               submit.setTitleColor(UIColor.rgb(red: 167, green: 169, blue: 172),for: .normal)
@@ -101,12 +101,7 @@ class ProfileVIewController: UIViewController{
         navigationController?.pushViewController(EditVuew, animated: true)
     }
     
-    let viewName : UIView = {
-        let view = UIView()
-        return view
-    }()
-    
-    let nameHeader : UILabel = {
+    lazy var nameHeader : UILabel = {
         let label = UILabel()
         let title = "รัตน์มณี"
       let style = NSMutableParagraphStyle()
@@ -118,7 +113,7 @@ class ProfileVIewController: UIViewController{
     }()
     
     
-    let surnameHeader : UILabel = {
+    lazy var surnameHeader : UILabel = {
           let label = UILabel()
           let title = "รัตน์มณี"
         let style = NSMutableParagraphStyle()
@@ -129,27 +124,25 @@ class ProfileVIewController: UIViewController{
           return label
       }()
     
-    let viewNursing : UIView = {
+    lazy var viewNursing : UIView = {
            let view = UIView()
-//           view.backgroundColor = .green
            return view
     }()
     
-    let viewIconNursing : UIView = {
+    lazy var viewIconNursing : UIView = {
               let view = UIView()
-//              view.backgroundColor = .blue
               return view
-       }()
+    }()
     
  
             
     
-    let nursingHome : UILabel = {
+    lazy var nursingHome : UILabel = {
         let label = UILabel()
         let title = "Chersery Home"
         let style = NSMutableParagraphStyle()
         style.alignment = NSTextAlignment.center
-        let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+        let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
         label.attributedText = attributedText
         label.numberOfLines = 0
         return label
@@ -157,7 +150,7 @@ class ProfileVIewController: UIViewController{
 
  
     
-    let iconNursingHome : UIImageView = {
+    lazy var iconNursingHome : UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "locatePlace")
         image.contentMode = .scaleAspectFill
@@ -165,18 +158,18 @@ class ProfileVIewController: UIViewController{
         return image
     }()
     
-    let line: UIView = {
+    lazy var line: UIView = {
             let view = UIView()
             view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
             return view
     }() //-----------------------------------------------------------------------------------------------
     
-    let birthday : UILabel = {
+    lazy var birthday : UILabel = {
         let label = UILabel()
         let title = "28 กุมภาพันธ์ 2500"
         let style = NSMutableParagraphStyle()
         style.alignment = NSTextAlignment.center
-        let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+        let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
         label.attributedText = attributedText
         label.numberOfLines = 0
         return label
@@ -184,7 +177,7 @@ class ProfileVIewController: UIViewController{
 
     
     
-    let iconbirthday : UIImageView = {
+    lazy var iconbirthday : UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "birthdayCake")
         image.contentMode = .scaleAspectFill
@@ -193,32 +186,33 @@ class ProfileVIewController: UIViewController{
     }()
     
     
-    let tel : UILabel = {
+    lazy var tel : UILabel = {
         let label = UILabel()
         let title = "089 - 446 - 3444"
         let style = NSMutableParagraphStyle()
               style.alignment = NSTextAlignment.center
-              let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+              let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
         label.attributedText = attributedText
         return label
     }()
 
     
     
-    let icontel : UIImageView = {
+    lazy var icontel : UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "24Hourss")
         image.contentMode = .scaleAspectFill
         image.layer.masksToBounds = true
         return image
     }()
-    let viewAlige : UIView = {
-                  let view = UIView()
-        view.backgroundColor = .red
-                  return view
+    
+    lazy var viewAlige : UIView = {
+            let view = UIView()
+            view.backgroundColor = .red
+            return view
     }()
     
-    let dataUser  : UIView = {
+    lazy var dataUser  : UIView = {
            let image = UIImageView()
            image.backgroundColor = UIColor.white
            image.layer.cornerRadius = 10
@@ -231,18 +225,16 @@ class ProfileVIewController: UIViewController{
     }()
     
     
-    let iconPost : UIImageView = {
+    lazy var iconPost : UIImageView = {
           let image = UIImageView()
           image.image = UIImage(named: "surface")
           image.contentMode = .scaleAspectFit
           image.layer.masksToBounds = true
-//          image.contentMode = .scaleAspectFit
-       
           return image
     }()
       
     
-    let postUser : UIButton = {
+    lazy var postUser : UIButton = {
          let image = UIButton(type: UIButton.ButtonType.system)
          image.backgroundColor = UIColor.white
          image.layer.cornerRadius = 10
@@ -254,7 +246,7 @@ class ProfileVIewController: UIViewController{
          image.setTitle("กระทู้ของฉัน", for: .normal)
          image.contentVerticalAlignment = .bottom
          image.setTitleColor(UIColor.black,for: .normal)
-         image.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+         image.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
          image.addTarget(self, action: #selector(listUserPost), for: .touchUpInside)
          return image
     }()
@@ -276,11 +268,11 @@ class ProfileVIewController: UIViewController{
     
     
     func showActivityView(){
-            let AcitivityView = listFavoriteUserTableView()
-            navigationController?.pushViewController(AcitivityView, animated: true)
+            let ActivityView = InviteActivityViewController()
+            navigationController?.pushViewController(ActivityView, animated: true)
     }
     
-    let iconActivity : UIImageView = {
+    lazy var iconActivity : UIImageView = {
              let image = UIImageView()
              image.image = UIImage(named: "history")
              image.layer.masksToBounds = true
@@ -289,7 +281,7 @@ class ProfileVIewController: UIViewController{
     }()
          
     
-    let activityUser : UIButton = {
+    lazy var activityUser : UIButton = {
             let image = UIButton(type: UIButton.ButtonType.system)
             image.backgroundColor = UIColor.white
             image.layer.cornerRadius = 10
@@ -301,25 +293,10 @@ class ProfileVIewController: UIViewController{
             image.setTitle("กิจกรรมของฉัน", for: .normal)
             image.contentVerticalAlignment = .bottom
             image.setTitleColor(UIColor.black,for: .normal)
-            image.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+            image.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
             image.addTarget(self, action: #selector(listUserActivity), for: .touchUpInside)
             return image
     }()
-    
-//    Alamofire.request("http://172.20.10.5/alder_iosapp/" + (ImageProfiles ?? "0")!).responseImage { response in
-//    func getImage(){
-//              if let name3 = defaultValues.string(forKey: "ImageUser") {
-//                ImageProfiles = name3
-//                print(ImageProfiles)
-//                Alamofire.request("http://localhost/alder_iosapp/" + (ImageProfiles)).responseImage { response in
-//                                    if let image = response.result.value {
-//                                    self.ImageProfile.image = image
-//                            }
-//                        }
-//                 }else{
-//                    //send back to login view controller
-//                 }
-//    }
     
     func reloadData(){
         let parameters: Parameters = ["userId":getIduser]
@@ -330,12 +307,12 @@ class ProfileVIewController: UIViewController{
                             print(user)
                                 if let yield = user["username"] as? String{
                                     self?.nameHeader.text = yield
-                                    self?.nameHeader.font = UIFont.PoppinsBold(size: 20)
+                                    self?.nameHeader.font = UIFont.PoppinsBold(size: 18)
                                 }
                             
                                 if let yield = user["surname"] as? String{
                                     self?.surnameHeader.text = yield
-                                    self?.surnameHeader.font = UIFont.PoppinsBold(size: 20)
+                                    self?.surnameHeader.font = UIFont.PoppinsBold(size: 18)
                                 }
                    
                                 if let yield = user["address"] as? String{
@@ -351,7 +328,7 @@ class ProfileVIewController: UIViewController{
                                 }
                             
                                 if let yield = user["photo"] as? String{
-                                        Alamofire.request("http://localhost/alder_iosapp/" + yield).responseImage { response in
+                                        Alamofire.request("\(AppDelegate.link)alder_iosapp/" + yield).responseImage { response in
                                         if let image = response.result.value {
                                             self?.ImageProfile.image = image
                                               }
@@ -364,16 +341,33 @@ class ProfileVIewController: UIViewController{
     
 
 
-               
+               @objc func handelSetting(){
+                                  UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+                                  UserDefaults.standard.synchronize()
+                                  let loginViewController = LoginViewController()
+                                  self.navigationController?.pushViewController(loginViewController, animated: true)
+                                  self.dismiss(animated: false, completion: nil)
+                 }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Alder"
+
+//        let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
+//                settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
+//                navigationItem.rightBarButtonItem = settings
+//            view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+//            
         
-//        let heartButton = MultiDegreeLikeButton(imageStyle: .heart)
-//            heartButton.completionWithLikeDegree = { _, degree in
-//            heartButton.translatesAutoresizingMaskIntoConstraints = true
-//
-//        }
+        let stacView = UIStackView(arrangedSubviews:[nameHeader,surnameHeader])
+        stacView.distribution = .fillEqually
+        stacView.spacing = 0
+        stacView.axis = .horizontal
+        
+        let stacView2 = UIStackView(arrangedSubviews:[activityUser,postUser])
+        stacView2.distribution = .fillEqually
+        stacView2.spacing = 20
+        stacView2.axis = .horizontal
         
         view.backgroundColor = UIColor.rgb(red: 247, green: 250, blue: 255)
         view.addSubview(viewScroll)
@@ -385,26 +379,19 @@ class ProfileVIewController: UIViewController{
         viewScroll.addSubview(ImageProfile)
         viewScroll.addSubview(editProfile)
         viewScroll.addSubview(dataUser)
-        viewScroll.addSubview(viewName)
-        viewScroll.addSubview(nameHeader)
-        viewScroll.addSubview(surnameHeader)
-        viewScroll.addSubview(postUser)
-        viewScroll.addSubview(activityUser)
+        viewScroll.addSubview(stacView)
         viewScroll.addSubview(iconNursingHome)
         viewScroll.addSubview(nursingHome)
-        
         viewScroll.addSubview(line)
-        viewScroll.addSubview(birthday)
-        viewScroll.addSubview(iconbirthday)
         viewScroll.addSubview(tel)
         viewScroll.addSubview(icontel)
-        
+        viewScroll.addSubview(stacView2)
+        viewScroll.addSubview(birthday)
+        viewScroll.addSubview(iconbirthday)
         viewScroll.addSubview(iconPost)
         viewScroll.addSubview(iconActivity)
-//        viewScroll.addSubview(heartButton)
-        navigationController?.navigationBar.isHidden = true
-        
-        viewScroll.anchor(view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+
+        viewScroll.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         imageView.anchor(view.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200)
         
@@ -412,8 +399,6 @@ class ProfileVIewController: UIViewController{
         
         BGView.anchor(stepView.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant:0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX , heightConstant: screenSizeY)
                 
-        
-        
         bgImageProfile.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: editProfile.topAnchor, topConstant: 50, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 150)
         
         profileImageView.anchor(bgImageProfile.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 5, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 160, heightConstant: 160)
@@ -424,47 +409,37 @@ class ProfileVIewController: UIViewController{
         
         editProfile.anchor(bgImageProfile.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 100, rightConstant: 100, widthConstant: screenSizeX, heightConstant: 100)
 
+        dataUser.anchor(editProfile.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 15, rightConstant: 15, widthConstant: 0, heightConstant: 280)
 
-        dataUser.anchor(editProfile.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: screenSizeX, heightConstant: 280)
-
-        viewName.anchor(dataUser.topAnchor, left: dataUser.leftAnchor, right: dataUser.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        stacView.anchor(dataUser.topAnchor, left: dataUser.leftAnchor, right: dataUser.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 80)
         
-        nameHeader.anchor(viewName.topAnchor, left: viewName.leftAnchor, right: surnameHeader.leftAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 50)
+        iconNursingHome.anchor(stacView.bottomAnchor, left: nil, right: nursingHome.leftAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 
-
-        surnameHeader.anchor(viewName.topAnchor, left: nameHeader.rightAnchor, right: viewName.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 50)
-
-
-        iconNursingHome.anchor(surnameHeader.bottomAnchor, left: nursingHome.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: -15, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-
-        nursingHome.anchor(nameHeader.bottomAnchor, left:nil, right: nil, bottom: nil, topConstant: 3, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+        nursingHome.anchor(stacView.bottomAnchor, left: nil, right: nil, bottom: nil, topConstant: -15, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 50)
         nursingHome.centerXAnchor.constraint(equalTo: BGView.centerXAnchor).isActive = true
-        
-        
-        line.anchor(nursingHome.bottomAnchor, left: dataUser.leftAnchor, right: dataUser.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 10, leftConstant: 0, rightConstant: 0 , widthConstant: 0, heightConstant: 1)
 
-        iconbirthday.anchor(line.bottomAnchor, left: birthday.leftAnchor, right: nil, bottom: nil, topConstant: 28, bottomConstant: 0, leftConstant: -25, rightConstant: 0, widthConstant: 20, heightConstant: 20)
+        
+        line.anchor(nursingHome.bottomAnchor, left: dataUser.leftAnchor, right: dataUser.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 0, rightConstant: 0 , widthConstant: 0, heightConstant: 1)
 
-        birthday.anchor(line.bottomAnchor, left: nil, right: nil, bottom: nil, topConstant: 14, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+        iconbirthday.anchor(line.bottomAnchor, left: nil, right: birthday.leftAnchor, bottom: nil, topConstant: 35, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 20, heightConstant: 20)
+
+        birthday.anchor(line.bottomAnchor, left: nil, right: nil, bottom: nil, topConstant: 24, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 50)
         birthday.centerXAnchor.constraint(equalTo: BGView.centerXAnchor).isActive = true
-        
-        icontel.anchor(birthday.bottomAnchor, left: tel.leftAnchor, right: nil, bottom: dataUser.bottomAnchor, topConstant: 25, bottomConstant: 20, leftConstant: -25, rightConstant: 0, widthConstant: 20, heightConstant: 20)
 
-        tel.anchor(birthday.bottomAnchor, left: nil, right: nil, bottom: dataUser.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+
+        icontel.anchor(birthday.bottomAnchor, left: nil, right: tel.leftAnchor, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 20, heightConstant: 20)
+
+        tel.anchor(birthday.bottomAnchor, left: nil, right: nil, bottom: nil, topConstant: 4, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 50)
         tel.centerXAnchor.constraint(equalTo: BGView.centerXAnchor).isActive = true
         
-        postUser.anchor(dataUser.bottomAnchor, left: viewName.leftAnchor, right: nil, bottom: BGView.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 0, rightConstant: 10, widthConstant: 170, heightConstant: 120)
-
-        iconPost.anchor(postUser.topAnchor, left: postUser.leftAnchor, right:postUser.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 65, rightConstant: 65, widthConstant: iconActivity.frame.size.width, heightConstant: iconActivity.frame.size.height)
-
-
-        activityUser.anchor(dataUser.bottomAnchor, left: nil, right: viewName.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 0, rightConstant: 0, widthConstant: 170, heightConstant: 120)
+    
+        stacView2.anchor(dataUser.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 35, bottomConstant: 30, leftConstant: 15, rightConstant: 15, widthConstant: screenSizeX, heightConstant: 120)
 
         iconActivity.anchor(activityUser.topAnchor, left: activityUser.leftAnchor, right:activityUser.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: iconActivity.frame.size.width , heightConstant: iconActivity.frame.size.height )
-//
-//        heartButton.anchor(iconActivity.bottomAnchor, left: nil, right: viewName.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-    
+        iconPost.anchor(postUser.topAnchor, left: postUser.leftAnchor, right:postUser.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 65, rightConstant: 65, widthConstant: iconPost.frame.size.width, heightConstant: iconPost.frame.size.height)
+
+
         if let name = defaultValues.string(forKey: "userId") {
                 getIduser = name
                 print(getIduser)

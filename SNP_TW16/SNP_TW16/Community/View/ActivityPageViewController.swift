@@ -19,14 +19,14 @@ class ActivityPageViewController: UITableViewCell {
     }
 
 
-    let bgActivitity:UIView = {
+    lazy var bgActivitity:UIView = {
         let background = UIView()
         background.backgroundColor = UIColor.rgb(red: 244, green: 241, blue: 230)
         background.layer.borderColor = UIColor.rgb(red: 244, green: 241, blue: 230).cgColor
         return background
     }()
     
-    let header:UILabel = {
+    lazy var header:UILabel = {
        let title = UILabel()
         title.lineBreakMode = .byWordWrapping
         title.font = UIFont.PoppinsBold(size: 25)
@@ -36,7 +36,7 @@ class ActivityPageViewController: UITableViewCell {
         return title
     }()
     
-    let backgroundImage:UIImageView = {
+    lazy var backgroundImage:UIImageView = {
        let image = UIImageView()
         image.image = UIImage(named: "group")
        return image

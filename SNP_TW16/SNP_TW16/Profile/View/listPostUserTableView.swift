@@ -12,11 +12,11 @@ import ObjectMapper
 class listPostUserTableView: UITableViewController {
     
 //    let URL_GET_POST = "http://172.20.10.5/alder_iosapp/v1/savePostUser.php"
-    let URL_GET_POST = "http://localhost/alder_iosapp/v1/savePostUser.php"
+    let URL_GET_POST = "\(AppDelegate.link)alder_iosapp/v1/savePostUser.php"
 //    var ActivityList: [ListActivityUser]?
     var ActivityList: [allList]?
     
-    let defaultValues = UserDefaults.standard
+    lazy var defaultValues = UserDefaults.standard
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     var user_id = String()
@@ -54,17 +54,17 @@ class listPostUserTableView: UITableViewController {
                 let listActivity = ActivityList?[indexPath.row]
                 cell.userFullname.text = listActivity?.username
                 cell.timeTextLabel.text = listActivity?.createdAt
-                cell.numCount.text = "\(listActivity?.like ?? 0)"
-                cell.numCom.text = "\(listActivity?.comment ?? 0)"
+//                cell.numCount.text = "\(listActivity?.like ?? 0)"
+//                cell.numCom.text = "\(listActivity?.comment ?? 0)"
                 cell.messageTextLabel.text = listActivity?.caption
                 
-                   Alamofire.request("http://localhost/alder_iosapp/" + (listActivity?.img ?? "0")!).responseImage { response in
+                   Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (listActivity?.img ?? "0")!).responseImage { response in
                                          if let image = response.result.value{
                                          cell.postImage.image = image
                              }
                          }
                          
-                         Alamofire.request("http://localhost/alder_iosapp/" + (listActivity?.photo ?? "0")!).responseImage { response in
+                         Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (listActivity?.photo ?? "0")!).responseImage { response in
                                          if let image2 = response.result.value {
                                          cell.profileImage.image = image2
                              }
@@ -83,20 +83,20 @@ class listPostUserTableView: UITableViewController {
                     
                 }else {
                    let vc = InputCommentViewController()
-                   vc.check = ActivityList?[indexPath.row]
+//                   vc.check = ActivityList?[indexPath.row]
                    self.navigationController?.pushViewController(vc, animated: true)
                }
            }
  
     
-        func getData(){
+    func getData(){
              let parameters: Parameters = ["userId":user_id]
              let url = URL_GET_POST + "?id=\(user_id)"
              Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
                 self?.ActivityList = Mapper<allList>().mapArray(JSONObject: dataRes.result.value)
                 self?.tableView.reloadData()
              }
-         }
+    }
     
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -117,16 +117,22 @@ class listPostUserTableView: UITableViewController {
         delete.backgroundColor = UIColor.rgb(red: 255, green: 51, blue: 101)
         delete.image = UIImage(named: "bin")
         
-//        image.contentMode = .scaleAspectFill
-        
-        
         edit.backgroundColor = UIColor.emerald
         edit.image = UIImage(named: "edit")
         return configuration
     }
         
+        @objc func handleBack(){
+           print("%%%")
+       }
+    
         override func viewDidLoad(){
             super.viewDidLoad()
+            
+//            let backItem = UIBarButtonItem()
+//            backItem.title = " "
+//            navigationItem.backBarButtonItem = backItem
+//            
             view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
             tableView.register(titleListPostViewCell.self, forCellReuseIdentifier: cellId)
             tableView.register(AcivityListTableViewCell.self, forCellReuseIdentifier: cellId1)

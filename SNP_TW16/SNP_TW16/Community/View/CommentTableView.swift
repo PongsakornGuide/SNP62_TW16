@@ -13,18 +13,24 @@ class CommentTableView: UITableViewCell {
            super.init(style: style, reuseIdentifier: reuseIdentifier)
            setupViewCell()
     }
-    let bgActivitity:UIView = {
+    
+    lazy var IdUser : UILabel = {
+       let name = UILabel()
+       return name
+    }()
+    
+    lazy var bgActivitity:UIView = {
         let background = UIView()
         return background
     }()
 
-    let contrainer:UIView = {
+    lazy var contrainer:UIView = {
        let view = UIView()
 //        view.backgroundColor = .purple
         return view
     }()
     
-    let profile: UIImageView = {
+    lazy var profile: UIImageView = {
        let image = UIImageView()
           image.image = UIImage(named: "tiko")
                image.contentMode = .scaleAspectFill
@@ -33,14 +39,14 @@ class CommentTableView: UITableViewCell {
        return image
     }()
     
-    let username : UILabel = {
+    lazy var username : UILabel = {
        let name = UILabel()
        name.text = "Pongsakorn"
         name.font = UIFont.PoppinsBold(size: 16)
        return name
     }()
     
-    let date : UILabel = {
+    lazy var date : UILabel = {
           let timer = UILabel()
           timer.text = "12 ตุลาคม 2562 เวลา 15: 20"
           timer.font = UIFont.PoppinsMedium(size: 12)
@@ -48,7 +54,7 @@ class CommentTableView: UITableViewCell {
           return timer
     }()
     
-    let contrainerComment:UIView = {
+    lazy var contrainerComment:UIView = {
            let view = UIView()
         view.backgroundColor = UIColor.rgb(red: 236, green: 243, blue: 253)
             view.layer.cornerRadius = 20/2
@@ -56,7 +62,7 @@ class CommentTableView: UITableViewCell {
     }()
     
     
-    let comment:UILabel = {
+    lazy var comment:UILabel = {
              let comment = UILabel()
              comment.text = "สวัสดีวันจันทร์นะคะ คุณสมเกียรติ"
              comment.font = UIFont.PoppinsMedium(size: 16)
@@ -65,7 +71,7 @@ class CommentTableView: UITableViewCell {
      }()
     
     
-    let imagePost: UIImageView = {
+    lazy var imagePost: UIImageView = {
        let image = UIImageView()
         image.image = UIImage(named: "sam")
         image.contentMode = .scaleAspectFill
@@ -73,23 +79,28 @@ class CommentTableView: UITableViewCell {
     }()
 
     
-      let iconImageLike: UIButton = {
+    var iconImageLike: UIButton = {
             let imagelike = UIImage(named: "like") as UIImage?
             let image = UIButton()
             image.setImage(imagelike, for: .normal)
             image.contentMode = .scaleAspectFill
             image.layer.masksToBounds = true
+            image.tag = 0
+            image.addTarget(self, action: #selector(likeComment), for: .touchUpInside)
             return image
     }()
     
-    let numCount: UILabel = {
+    lazy var numCount: UILabel = {
             let label = UILabel()
             label.text = "0"
-            label.textColor = UIColor.black
+            label.textColor = UIColor.red
             label.font = UIFont.PoppinsBold(size: 12)
             label.numberOfLines = 0
             return label
     }()
+    @objc func likeComment(_sender:UIButton){
+        
+    }
     
     func setupViewCell(){
         addSubview(bgActivitity)

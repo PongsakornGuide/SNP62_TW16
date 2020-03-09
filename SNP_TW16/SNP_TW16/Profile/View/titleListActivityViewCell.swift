@@ -18,13 +18,13 @@ class titleListActivityViewCell: UITableViewCell {
     }
 
 
-    let bgActivitity:UIView = {
+    lazy var bgActivitity:UIView = {
         let background = UIView()
         background.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
         return background
     }()
     
-    let titleHeader : UILabel = {
+    lazy var titleHeader : UILabel = {
                    let label = UILabel()
                    let title = "กิจกรรมที่เข้าร่วม"
                    let attributedText = NSMutableAttributedString(string: title,

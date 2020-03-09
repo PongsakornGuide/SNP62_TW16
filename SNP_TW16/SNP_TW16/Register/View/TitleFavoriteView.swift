@@ -17,12 +17,12 @@ class TitleFavoriteView: UITableViewCell,UITextFieldDelegate,UINavigationControl
          fatalError("init(coder:) has not been implemented")
      }
      
-     let bgActivitity:UIView = {
+     lazy var bgActivitity:UIView = {
           let background = UIImageView()
           return background
       }()
     
-    let titleHeader : UILabel = {
+    lazy var titleHeader : UILabel = {
                    let label = UILabel()
                    let title = "ความสนใจ *"
                    let attributedText = NSMutableAttributedString(string: title,
@@ -32,7 +32,7 @@ class TitleFavoriteView: UITableViewCell,UITextFieldDelegate,UINavigationControl
                    return label
     }()
     
-    let Header : UILabel = {
+    lazy var Header : UILabel = {
                      let label = UILabel()
                      let title = "เลือกประเภทสิ่งที่คุณสนใจ"
                      let attributedText = NSMutableAttributedString(string: title,

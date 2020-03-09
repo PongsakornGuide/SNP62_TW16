@@ -53,7 +53,7 @@ class ListPostUser: Mappable {
     var actIdPost: String?
     var createdPost: String?
     var updatePost: String?
-    
+//    var listDetail:[ActivityDetailList]?
     required init?(map: Map) {
 
     }
@@ -73,3 +73,36 @@ class ListPostUser: Mappable {
         updatePost <- map["update_at"]
     }
 }
+
+//class ActivityDetailList: Mappable {
+//    var dataId:Int?
+//    var actId:String?
+//    var type:String?
+//    var caption:String?
+//    var imagePost:String?
+//    var content:String?
+//    var imgact:String?
+//    var imgtime:String?
+//    var created:String?
+//    var join:Int?
+//    var invite:Int?
+//
+//    required init?(map: Map) {
+//
+//    }
+//
+//    // Mappable
+//    func mapping(map: Map) {
+//        dataId   <- map["id"]
+//        actId  <- map["title"]
+//        type <- map["type"]
+//        caption <- map["leaderActivity"]
+//        imagePost <- map["img"]
+//        content <- map["content"]
+//        imgact <- map["imgact"]
+//        imgtime <- map["imgtime"]
+//        created <- map["startDate"]
+//        join <- map["maxJoin"]
+//        invite <- map["invaite"]
+//    }
+//}

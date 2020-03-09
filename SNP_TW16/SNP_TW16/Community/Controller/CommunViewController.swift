@@ -12,24 +12,31 @@ import AlamofireImage
 import ObjectMapper
 class CommunViewController: UITableViewController{
 
-    let defaultValues = UserDefaults.standard
-    let datalist1 = ["firstCell1" , "firstCell2" , "firstCell3" , "firstCell4"]
-    var User_Name = String()
-    var User_ID = String()
-    var cc = UILabel()
+    lazy var defaultValues = UserDefaults.standard
+    lazy var datalist1 = ["firstCell1" , "firstCell2" , "firstCell3" , "firstCell4"]
+    lazy var User_Name = String()
+    lazy var User_ID = String()
+    lazy var adpostId = Int()
+    lazy var adpostId2 = String()
+    lazy var commentId = Int()
     var activityList: [allList]?
     
-    let URL_GET_DATA = "http://localhost/alder_iosapp/v1/show.php"
-//    let URL_GET_DATA = "http://172.20.10.5/alder_iosapp/v1/show.php"
+    let URL_GET_DATA = "\(AppDelegate.link)alder_iosapp/v1/show.php"
+    let URL_CLICK_LIKE = "\(AppDelegate.link)alder_iosapp/v1/like_Activity.php"
+    let URL_CLICK_UNLIKE = "\(AppDelegate.link)alder_iosapp/v1/deleteLike.php"
+    let URL_CHECK_LIKE = "\(AppDelegate.link)alder_iosapp/v1/checkLike.php"
+    let URL_COUNT_LIKE = "\(AppDelegate.link)alder_iosapp/v1/countLike.php"
+    let URL_COUNT_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/countComment.php"
+    
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
-    var idcontent = Int()
+    lazy var idcontent = Int()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getActivty()
         self.tabBarController?.tabBar.isHidden = false
-//        self.tableView.reloadData()
+        self.tableView.reloadData()
     }
  
     @objc func handelSetting(){
@@ -50,10 +57,6 @@ class CommunViewController: UITableViewController{
         }
     }
        
-    @objc func likePost(){
-        print("555")
-    }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
@@ -66,31 +69,92 @@ class CommunViewController: UITableViewController{
             cell.userFullname.text = headerActivity?.username
             cell.messageTextLabel.text = headerActivity?.caption
             cell.timeTextLabel.text = headerActivity?.createdAt
-            cell.numCount.text = "\(headerActivity?.like ?? 1)"
-            cell.numCom.text = "\(headerActivity?.comment ?? 1)"
-            Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.img ?? "0")!).responseImage { response in
+            adpostId = headerActivity?.id ?? 0
+            
+            let parametersId: Parameters = ["ad_post_timeline_id":adpostId]
+            let url = URL_COUNT_LIKE + "?id=\(adpostId)"
+                Alamofire.request(url, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
+                    if let user = resData.result.value as! [String: Any]? {
+                        if let yield = user["likeActivity"] as? Int {
+                            cell.numCount.text = "\(yield)"
+                        }
+                    }
+            }
+        
+            let urlComment = URL_COUNT_COMMENT + "?id=\(adpostId)"
+                    Alamofire.request(urlComment, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
+                               if let user = resData.result.value as! [String: Any]? {
+                                   if let commentId = user["commentActivity"] as? Int {
+                                       cell.numCom.text = "\(commentId)"
+                                   }
+                }
+            }
+            
+            
+            
+            Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (headerActivity?.img ?? "0")!).responseImage { response in
                             if let image = response.result.value{
                             cell.postImage.image = image
                 }
             }
-            
-            Alamofire.request("http://localhost/alder_iosapp/" + (headerActivity?.photo ?? "0")!).responseImage { response in
+            Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (headerActivity?.photo ?? "0")!).responseImage { response in
                             if let image2 = response.result.value {
                             cell.profileImage.image = image2
                 }
             }
-            
+            cell.iconImageLike.titleLabel?.tag = headerActivity?.id ?? 0
             self.tableView.separatorStyle = .none
             cell.selectionStyle = .none
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+            
+            let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId]
+            Alamofire.request(URL_CHECK_LIKE, method: .post,parameters: parameters).responseJSON { response in
+                    guard let json = response.value as? [String:Bool], let status = json["error"] else {
+                    return }
+                        if !status {
+                            cell.iconImageLike.backgroundColor = .red
+                    }else{
+                }
+            }
             return cell
-        
         }
-
     }
-  
 
-        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func getActivty(){
+             Alamofire.request(URL_GET_DATA).responseJSON { [weak self](resData) in
+                     self?.activityList = Mapper<allList>().mapArray(JSONObject: resData.result.value)
+                     self?.tableView.reloadData()
+             }
+    }
+    
+    
+    @objc func likePost(_sender:UIButton){
+        adpostId2 = "\(_sender.titleLabel?.tag ?? 0)"
+        switch _sender.tag{
+                case 0:
+                    requestData()
+                    let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId2]
+                                    Alamofire.request(URL_CLICK_LIKE, method: .post,parameters: parameters).responseJSON { response in
+                    }
+                                        
+                    _sender.tag = 1
+                    _sender.backgroundColor = .red
+                    _sender.tintColor = .black
+                case 1:
+                    requestData()
+                    let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId2]
+                                                       Alamofire.request(URL_CLICK_UNLIKE, method: .post,parameters: parameters).responseJSON { response in
+                    }
+                    _sender.tag = 0
+                    _sender.backgroundColor = .white
+                    _sender.tintColor = .black
+            
+                default: break
+                }
+         self.tableView.reloadData()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
             if indexPath.section == 0 {
                 
@@ -102,15 +166,15 @@ class CommunViewController: UITableViewController{
         }
     
     // refresh
-         lazy var refresher: UIRefreshControl = {
+     lazy var refresher: UIRefreshControl = {
               let refreshControl = UIRefreshControl()
               refreshControl.tintColor = .black
               refreshControl.addTarget(self, action: #selector(requestData), for: .valueChanged)
               return refreshControl
-         }()
+      }()
          
          // action refresh
-         @objc func requestData(){
+      @objc func requestData(){
              print("requestData for tableView")
              let RefreshLine = DispatchTime.now() + .milliseconds(500)
              DispatchQueue.main.asyncAfter(deadline: RefreshLine) {
@@ -119,33 +183,24 @@ class CommunViewController: UITableViewController{
              }
       }
     
-    
-      func getActivty(){
-           Alamofire.request(URL_GET_DATA).responseJSON { [weak self](resData) in
-                      self?.activityList = Mapper<allList>().mapArray(JSONObject: resData.result.value)
-                      self?.tableView.reloadData()
-              }
-      }
-    
       let submitBtn : UIButton = {
               let submit = UIButton(type: .system)
               submit.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
-              submit.layer.borderWidth = 2
+              submit.layer.borderWidth = 5
               submit.backgroundColor =  UIColor.rgb(red: 33, green: 120, blue: 174)
-              submit.layer.cornerRadius = 40
+              submit.layer.cornerRadius = 45
               submit.setTitle("โพสต์", for: .normal)
               submit.setTitleColor(UIColor.white,for: .normal)
               submit.addTarget(self, action: #selector(handelSetting), for: .touchUpInside)
-              submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+              submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
               return submit
       }()
 
        override func viewDidLoad() {
        super.viewDidLoad()
-//       navigationController?.navigationBar.isHidden = true
-        view.addSubview(submitBtn)
-        navigationItem.title = "Alder"
-          submitBtn.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -100, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 80, heightConstant: 80)
+          view.addSubview(submitBtn)
+          navigationItem.title = "Alder"
+          submitBtn.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -100, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 90, heightConstant: 90)
         
             if #available(iOS 12.1 , *) {
                                 tableView.refreshControl = refresher

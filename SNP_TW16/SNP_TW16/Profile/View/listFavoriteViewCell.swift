@@ -10,20 +10,20 @@ import UIKit
 class listFavoriteViewCell: UITableViewCell {
 
 
-        var id_user = String()
+        lazy var id_user = String()
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             setupViewCell()
         }
 
-        let pageView:UIView = {
+        lazy var pageView:UIView = {
             let background = UIView()
             background.backgroundColor = UIColor.red
             return background
         }()
 
 
-        let bgActivitity:UIView = {
+        lazy var bgActivitity:UIView = {
             let background = UIView()
             background.backgroundColor = UIColor.white
     //        background.layer.cornerRadius = 30
@@ -36,7 +36,7 @@ class listFavoriteViewCell: UITableViewCell {
         }()
 
 
-        let profileImage: UIImageView = {
+        lazy var profileImage: UIImageView = {
            let image = UIImageView()
             image.image = UIImage(named: "tiko")
             image.contentMode = .scaleAspectFill
@@ -45,7 +45,7 @@ class listFavoriteViewCell: UITableViewCell {
            return image
         }()
 
-        let userFullname: UILabel = {
+        lazy var userFullname: UILabel = {
            let label = UILabel()
              label.text = "Dorothy Puscas"
                    label.textColor = UIColor.black
@@ -54,7 +54,7 @@ class listFavoriteViewCell: UITableViewCell {
            return label
         }()
 
-        let messageTextLabel: UILabel = {
+        lazy var messageTextLabel: UILabel = {
             let label = UILabel()
             label.text = "Lorem Ipsum is simply dummy text of the printing."
             label.textColor = UIColor.black
@@ -63,7 +63,7 @@ class listFavoriteViewCell: UITableViewCell {
             return label
         }()
 
-        let timeTextLabel: UILabel = {
+        lazy var timeTextLabel: UILabel = {
                let label = UILabel()
                label.text = "9:34"
                label.textColor = UIColor.blackAlpha(alpha: 0.5)
@@ -74,7 +74,7 @@ class listFavoriteViewCell: UITableViewCell {
 
 
 
-        let postImage: UIImageView = {
+        lazy var postImage: UIImageView = {
             let image = UIImageView()
             image.image = UIImage(named: "val-vesa-P0F_zH39qhs-unsplash")
             image.contentMode = .scaleAspectFill
@@ -83,7 +83,7 @@ class listFavoriteViewCell: UITableViewCell {
             return image
         }()
 
-        let iconImageLike: UIButton = {
+        lazy var iconImageLike: UIButton = {
             let imagelike = UIImage(named: "like") as UIImage?
             let image = UIButton()
             image.setImage(imagelike, for: .normal)
@@ -98,7 +98,7 @@ class listFavoriteViewCell: UITableViewCell {
         }
 
 
-        let iconImageComment: UIButton = {
+        lazy var iconImageComment: UIButton = {
             let image = UIButton()
             let imagecomment = UIImage(named: "comment") as UIImage?
             image.setImage(imagecomment, for: .normal)
@@ -107,7 +107,7 @@ class listFavoriteViewCell: UITableViewCell {
             return image
         }()
 
-        let numCount: UILabel = {
+        lazy var numCount: UILabel = {
                 let label = UILabel()
                 label.text = "2"
                 label.textColor = UIColor.blackAlpha(alpha: 0.5)
@@ -116,7 +116,7 @@ class listFavoriteViewCell: UITableViewCell {
                 return label
          }()
 
-        let typeLike: UILabel = {
+        lazy var typeLike: UILabel = {
                    let label = UILabel()
                    label.text = "ถูกใจ"
                    label.textColor = UIColor.blackAlpha(alpha: 0.5)
@@ -126,7 +126,7 @@ class listFavoriteViewCell: UITableViewCell {
         }()
 
 
-        let numCom: UILabel = {
+        lazy var numCom: UILabel = {
                let label = UILabel()
                label.text = "10"
                label.textColor = UIColor.blackAlpha(alpha: 0.5)
@@ -135,7 +135,7 @@ class listFavoriteViewCell: UITableViewCell {
                return label
         }()
 
-        let typeCom: UILabel = {
+        lazy var typeCom: UILabel = {
                      let label = UILabel()
                      label.text = "คอมเม้นต์"
                      label.textColor = UIColor.blackAlpha(alpha: 0.5)
@@ -144,7 +144,7 @@ class listFavoriteViewCell: UITableViewCell {
                      return label
           }()
 
-        let postAct  : UIButton = {
+        lazy var postAct  : UIButton = {
             let button = UIButton()
             button.backgroundColor = UIColor.whiteAlpha(alpha: 0)
             button.layer.borderColor = UIColor.white.cgColor

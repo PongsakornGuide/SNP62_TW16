@@ -18,7 +18,7 @@ class ConfirmTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
         fatalError("init(coder:) has not been implemented")
     }
     
-    let nextButton: UIButton = {
+    var nextButton: UIButton = {
                     let button = UIButton(type: .system)
                     button.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
                     button.layer.cornerRadius = 20
@@ -28,7 +28,7 @@ class ConfirmTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
                     button.addTarget(self, action: #selector(psuhCheckBox), for: .touchUpInside)
                     return button
     }()
-   let BGView: UIView = {
+   lazy var BGView: UIView = {
           let view = UIView()
           return view
       }()

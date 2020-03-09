@@ -12,12 +12,11 @@ import Alamofire
 
 class MobileOtpViewController: UIViewController {
     
-    let URL_USER_USE_OTP = "http://localhost/alder_iosapp/v1/select_otp.php"
-//    let URL_USER_USE_OTP = "http://172.20.10.5/alder_iosapp/v1/select_otp.php"
+    let URL_USER_USE_OTP = "\(AppDelegate.link)alder_iosapp/v1/select_otp.php"
     let defaultValues = UserDefaults.standard
-    var Tel_user = String()
+    lazy var Tel_user = String()
     
-    let imageView : UIImageView = {
+    lazy var imageView : UIImageView = {
            let image = UIImageView(frame: UIScreen.main.bounds)
            image.image = UIImage(named: "bg")
            image.contentMode = .scaleAspectFill
@@ -25,13 +24,13 @@ class MobileOtpViewController: UIViewController {
            return image
        }()
     
-    let imageIcon : UIImageView = {
+    lazy var imageIcon : UIImageView = {
         let iconImage = UIImageView()
         iconImage.image = UIImage(named: "thailand")
         return iconImage
     }()
     
-    let textHeader : UILabel = {
+    lazy var textHeader : UILabel = {
         let label = UILabel()
         let title = "กรุณาลงทะเบียน"
         let text = "\n \n โปรดใส่เบอร์มือถือสำหรับการลงทะเบียน"
@@ -48,7 +47,7 @@ class MobileOtpViewController: UIViewController {
     }()
     
     
-    let otpTextField: UITextField = {
+    lazy var otpTextField: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "กรอกเบอร์โทรศัพท์มือถือ", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
         textField.font = UIFont.PoppinsRegular(size:18)
@@ -130,14 +129,14 @@ class MobileOtpViewController: UIViewController {
                               
 //                    self.otpTextField.text = yield
 //                nextToOtp.OTP = Tel_user ?? "NIL"
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
                                                                // your code here
                                    self.otpTextField.text = yield
                             }
                     
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
-                                                       self.Tel_user = yield
-                              }
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+//                                                       self.Tel_user = yield
+//                              }
                               let twilioSID = "AC6eb59c25b1d9e5c102ff07382a033245"
                               let twilioSecret = "3a776b6855e4ce991e1d0b07bdefa350"
                               //Note replace + = %2B , for To and From phone number
@@ -153,10 +152,8 @@ class MobileOtpViewController: UIViewController {
                              URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
                                  print("Finished")
                                  if let data = data, let responseDetails = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
-                                     // Success
                                      print("Response: \(responseDetails)")
                                  } else {
-                                     // Failure
                                     print("Error: \(error)")
                                  }
                              }).resume()
@@ -172,7 +169,7 @@ class MobileOtpViewController: UIViewController {
     }
     
     
-    let btnBack : UIButton = {
+    lazy var btnBack : UIButton = {
         let btn = UIButton()
         btn.tintColor = UIColor.black
         btn.setImage(UIImage(named: "left-arrow")?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -189,7 +186,7 @@ class MobileOtpViewController: UIViewController {
         }
     }
     
-    let checkError : UILabel = {
+    lazy var checkError : UILabel = {
          let check = UILabel()
          let showText = "Phone number error message."
          let style = NSMutableParagraphStyle()
@@ -203,13 +200,13 @@ class MobileOtpViewController: UIViewController {
      }()
     
     
-    let line: UIView = {
+    lazy var line: UIView = {
         let lineView = UIView()
         lineView.backgroundColor = UIColor.rgb(red: 198, green: 198, blue: 198)
         return lineView
     }()
     
-    let otpView: UIView = {
+    lazy var otpView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.white
         view.layer.borderWidth = 1

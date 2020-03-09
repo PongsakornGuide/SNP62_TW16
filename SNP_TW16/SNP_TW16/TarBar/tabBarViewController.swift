@@ -12,13 +12,13 @@ class tabBarViewController: UITabBarController ,UITabBarControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-        let activityController = tabBarNavigation(unselectedImage: UIImage(named: "activity"), selectedImage: UIImage(named: "activity"), title: "Activity", badgeValue: nil, colorValue: .red,rootViewController: MainActivityViewController())
+          let activityController = tabBarNavigation(unselectedImage: UIImage(named: "activity"), selectedImage: UIImage(named: "activity"), title: "กิจกรรม", badgeValue: nil, colorValue: .red,rootViewController: MainActivityViewController())
 
-        let communityController = tabBarNavigation(unselectedImage: UIImage(named: "community"), selectedImage: UIImage(named: "community"), title: "Community", badgeValue: nil, colorValue: .red,rootViewController: CommunViewController())
+         let communityController = tabBarNavigation(unselectedImage: UIImage(named: "community"), selectedImage: UIImage(named: "community"), title: "สนทนา", badgeValue: nil, colorValue: .red,rootViewController: CommunViewController())
 
-        let emergencyController = tabBarNavigation(unselectedImage: UIImage(named: "hotLine1"), selectedImage: UIImage(named: "Emergency"), title: "Emergency", badgeValue: nil, colorValue: .red,rootViewController: EmergencyViewController())
+         let emergencyController = tabBarNavigation(unselectedImage: UIImage(named: "hotLine1"), selectedImage: UIImage(named: "Emergency"), title: "โทรด่วน", badgeValue: nil, colorValue: .red,rootViewController: EmergencyViewController())
 
-        let profileController = tabBarNavigation(unselectedImage: UIImage(named: "article"), selectedImage: UIImage(named: "article"), title: "Profile", badgeValue: nil, colorValue: .red,rootViewController: ProfileVIewController())
+         let profileController = tabBarNavigation(unselectedImage: UIImage(named: "article"), selectedImage: UIImage(named: "article"), title: "โปรไฟล์", badgeValue: nil, colorValue: .red,rootViewController: ProfileVIewController())
 
 //        grapController
     viewControllers = [activityController,communityController,emergencyController,profileController]
@@ -29,10 +29,7 @@ class tabBarViewController: UITabBarController ,UITabBarControllerDelegate{
         navController.tabBarItem.image = unselectedImage
         navController.tabBarItem.selectedImage = selectedImage
         navController.tabBarItem.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: -4, right: 0)
-//        navController.title = title
-//        navigationItem.title = "Alder"
-//        navController.tabBarItem.badgeColor = colorValue
-//        navController.tabBarItem.badgeValue = badgeValue
+        navController.title = title
         return navController
         }
     }

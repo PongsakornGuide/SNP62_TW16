@@ -7,8 +7,8 @@
 //
 
 import UIKit
+import Alamofire
 class AcivityListTableViewCell: UITableViewCell{
-    
     
     var id_user = String()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -16,14 +16,14 @@ class AcivityListTableViewCell: UITableViewCell{
         setupViewCell()
     }
     
-    let pageView:UIView = {
+    lazy var pageView:UIView = {
         let background = UIView()
         background.backgroundColor = UIColor.red
         return background
     }()
     
     
-    let bgActivitity:UIView = {
+    lazy var bgActivitity:UIView = {
         let background = UIView()
         background.backgroundColor = UIColor.white
         background.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
@@ -35,7 +35,7 @@ class AcivityListTableViewCell: UITableViewCell{
     }()
 
     
-    let profileImage: UIImageView = {
+    lazy var profileImage: UIImageView = {
        let image = UIImageView()
         image.image = UIImage(named: "tiko")
         image.contentMode = .scaleAspectFill
@@ -44,7 +44,7 @@ class AcivityListTableViewCell: UITableViewCell{
        return image
     }()
     
-    let userFullname: UILabel = {
+    lazy var userFullname: UILabel = {
        let label = UILabel()
         label.text = "Dorothy Puscas"
          label.textColor = UIColor.black
@@ -53,7 +53,7 @@ class AcivityListTableViewCell: UITableViewCell{
        return label
     }()
     
-    let messageTextLabel: UILabel = {
+    lazy var messageTextLabel: UILabel = {
         let label = UILabel()
         label.text = "Lorem Ipsum is simply dummy text of the printing."
         label.textColor = UIColor.black
@@ -62,7 +62,7 @@ class AcivityListTableViewCell: UITableViewCell{
         return label
     }()
     
-    let timeTextLabel: UILabel = {
+    lazy var timeTextLabel: UILabel = {
            let label = UILabel()
            label.text = "9:34"
            label.textColor = UIColor.blackAlpha(alpha: 0.5)
@@ -73,31 +73,29 @@ class AcivityListTableViewCell: UITableViewCell{
     
    
     
-    let postImage: UIImageView = {
+    lazy var postImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "val-vesa-P0F_zH39qhs-unsplash")
         image.contentMode = .scaleAspectFill
         image.layer.masksToBounds = true
-//        image.layer.cornerRadius = 60/2
         return image
     }()
     
-    let iconImageLike: UIButton = {
-        let imagelike = UIImage(named: "like") as UIImage?
-        let image = UIButton()
-        image.setImage(imagelike, for: .normal)
-        image.contentMode = .scaleAspectFill
-        image.layer.masksToBounds = true
-        image.addTarget(self, action: #selector(likePost), for: .touchUpInside)
-        return image
+    var iconImageLike: UIButton = {
+               let Btn =  UIButton()
+               Btn.tintColor = UIColor.blackAlpha(alpha: 1)
+               Btn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
+               Btn.imageView?.contentMode = .scaleAspectFit
+               Btn.tag = 0
+               Btn.addTarget(self, action: #selector(likePost), for: .touchUpInside)
+               return Btn
     }()
     
-    @objc func likePost(){
-//        iconImageLike.backgroundColor = .red
+    @objc func likePost(_sender:UIButton){
     }
     
     
-    let iconImageComment: UIButton = {
+    lazy var iconImageComment: UIButton = {
         let image = UIButton()
         let imagecomment = UIImage(named: "comment") as UIImage?
         image.setImage(imagecomment, for: .normal)
@@ -106,16 +104,16 @@ class AcivityListTableViewCell: UITableViewCell{
         return image
     }()
     
-    let numCount: UILabel = {
+    lazy var numCount: UILabel = {
             let label = UILabel()
-            label.text = "2"
+            label.text = "0"
             label.textColor = UIColor.blackAlpha(alpha: 0.5)
             label.font = UIFont.PoppinsRegular(size: 18)
             label.numberOfLines = 0
             return label
      }()
     
-    let typeLike: UILabel = {
+    lazy var typeLike: UILabel = {
                let label = UILabel()
                label.text = "ถูกใจ"
                label.textColor = UIColor.blackAlpha(alpha: 0.5)
@@ -125,16 +123,16 @@ class AcivityListTableViewCell: UITableViewCell{
     }()
     
     
-    let numCom: UILabel = {
+    lazy var numCom: UILabel = {
            let label = UILabel()
-           label.text = "10"
+           label.text = "0"
            label.textColor = UIColor.blackAlpha(alpha: 0.5)
            label.font = UIFont.PoppinsRegular(size: 18)
            label.numberOfLines = 0
            return label
     }()
     
-    let typeCom: UILabel = {
+    lazy var typeCom: UILabel = {
                  let label = UILabel()
                  label.text = "คอมเม้นต์"
                  label.textColor = UIColor.blackAlpha(alpha: 0.5)
@@ -143,7 +141,7 @@ class AcivityListTableViewCell: UITableViewCell{
                  return label
       }()
     
-    let postAct  : UIButton = {
+    lazy var postAct  : UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor.whiteAlpha(alpha: 0)
         button.layer.borderColor = UIColor.white.cgColor

@@ -10,52 +10,37 @@ import UIKit
 import Alamofire
 import ObjectMapper
 class LoginViewController: UIViewController {
-    var OTP_check = String()
-    var OTP = String()
-    let defaultValues = UserDefaults.standard
     
-    
-    
-    let URL_USER_LOGIN = "http://localhost/alder_iosapp/v1/login.php"
-    let URL_USER_USE_OTP = "http://localhost/alder_iosapp/v1/select_otp.php"
-    
-//    let URL_USER_LOGIN = "http://172.20.10.5/alder_iosapp/v1/login.php"
-//    let URL_USER_USE_OTP = "http://172.20.10.5/alder_iosapp/v1/select_otp.php"
+    lazy var OTP_check = String()
+    lazy var OTP = String()
+    lazy var defaultValues = UserDefaults.standard
+    let URL_USER_LOGIN = "\(AppDelegate.link)alder_iosapp/v1/login.php"
+    let URL_USER_USE_OTP = "\(AppDelegate.link)alder_iosapp/v1/select_otp.php"
     
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
           navigationController?.navigationBar.isHidden = true
-        
-//                    if self.defaultValues.string(forKey:"userId") != nil {
-//                            self.view.window?.rootViewController = tabBarViewController()
-//                            self.view.window?.makeKeyAndVisible()
-//                    }
-//
-//                    if self.defaultValues.string(forKey:"userName") != nil {
-//                                          self.view.window?.rootViewController = tabBarViewController()
-//                                          self.view.window?.makeKeyAndVisible()
-//                    }
     }
-
-     override var preferredStatusBarStyle: UIStatusBarStyle{
-         return .lightContent
-     }
     
-        let imageView : UIImageView = {
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+         return .lightContent
+    }
+    
+    lazy var imageView : UIImageView = {
                let image = UIImageView()
                image.image = UIImage(named: "Intersection 4")
                image.contentMode = .scaleAspectFill
                image.layer.masksToBounds = true
                return image
-           }()
+    }()
         
-        let imageIcon : UIImageView = {
+    lazy var imageIcon : UIImageView = {
             let iconImage = UIImageView()
             iconImage.image = UIImage(named: "thailand")
             return iconImage
-        }()
+    }()
 
-        let textHeader : UILabel = {
+    lazy var textHeader : UILabel = {
             let label = UILabel()
             let title = "ยินดีต้อนรับ Alder"
             let text = "\n \n ใส่เบอร์มือถือสำหรับเข้าสู่ระบบ"
@@ -67,9 +52,9 @@ class LoginViewController: UIViewController {
             label.attributedText = attributedText
             label.numberOfLines = 0
             return label
-        }()
+    }()
 
-        let numberTextField: UITextField = {
+    lazy var numberTextField: UITextField = {
             let textField = UITextField()
             textField.attributedPlaceholder = NSAttributedString(string: "กรอกเบอร์โทรศัพท์มือถือ", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
             textField.font = UIFont.PoppinsRegular(size:18)
@@ -80,9 +65,9 @@ class LoginViewController: UIViewController {
             textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             textField.leftViewMode = UITextField.ViewMode.always
             return textField
-        }()
+    }()
 
-        let submitButton : UIButton = {
+    lazy var submitButton : UIButton = {
             let submit = UIButton(type: UIButton.ButtonType.system)
             submit.backgroundColor = UIColor.white
             submit.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
@@ -94,9 +79,9 @@ class LoginViewController: UIViewController {
             submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
             submit.addTarget(self, action: #selector(submitBtn), for: .touchUpInside)
             return submit
-        }()
+    }()
     
-    let otpTextField : UITextField = {
+    lazy var otpTextField : UITextField = {
        let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "กรอก otp ",attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
         textField.font = UIFont.PoppinsRegular(size: 18)
@@ -113,7 +98,7 @@ class LoginViewController: UIViewController {
        return textField
     }()
     
-    let submitLogin : UIButton = {
+    lazy var submitLogin : UIButton = {
               let submit = UIButton(type: UIButton.ButtonType.system)
               submit.backgroundColor = UIColor.white
               submit.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
@@ -128,7 +113,6 @@ class LoginViewController: UIViewController {
     }()
 
     func send_to_otp(){
-
 //        let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
 //        let twilioSecret = "a74824968da571b8afac81506f84acf2"
 //        let fromNumber = "+12565308003"// actual number is +9999999
@@ -139,7 +123,7 @@ class LoginViewController: UIViewController {
                             if let yield = otp["otp"] as? String {
                                print(yield)
                                 
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                                     // your code here
                                       self.otpTextField.text = yield
                                 }
@@ -152,7 +136,7 @@ class LoginViewController: UIViewController {
 //                                                            //Note replace + = %2B , for To and From phone number
 //                                let fromNumber = "+14064123140"// actual number is +9999999
 //                                let toNumber = "+66815552550"// actual number is +9999999
-//
+
                                 
                                          let message = "Your verification code is \(yield) for Login"
                                          // Build the request
@@ -237,7 +221,7 @@ class LoginViewController: UIViewController {
         }
     }
 
-         let regButton : UIButton = {
+         lazy var regButton : UIButton = {
                 let submit = UIButton(type: UIButton.ButtonType.system)
                 submit.backgroundColor = UIColor.white
                 submit.layer.cornerRadius = 30
@@ -264,7 +248,7 @@ class LoginViewController: UIViewController {
             self.navigationController?.pushViewController(nextToOtp, animated: true)
         }
 
-        let checkError : UILabel = {
+        lazy var checkError : UILabel = {
              let check = UILabel()
              let showText = "Phone number error message."
              let style = NSMutableParagraphStyle()
@@ -275,13 +259,13 @@ class LoginViewController: UIViewController {
              return check
          }()
 
-        let line: UIView = {
+        lazy var line: UIView = {
             let lineView = UIView()
             lineView.backgroundColor = UIColor.rgb(red: 198, green: 198, blue: 198)
             return lineView
         }()
 
-        let otpView: UIView = {
+        lazy var otpView: UIView = {
             let view = UIView()
             view.backgroundColor = UIColor.white
             view.layer.borderWidth = 1
@@ -299,9 +283,6 @@ class LoginViewController: UIViewController {
     
         override func viewDidLoad() {
             super.viewDidLoad()
-            
-        
-             
             tabBarController?.tabBar.isHidden = true
             let stackView = UIStackView(arrangedSubviews: [otpView])
             stackView.distribution = .fillEqually

@@ -18,19 +18,19 @@ class ListRelatuveView: UITableViewCell {
            fatalError("init(coder:) has not been implemented")
        }
 
-       let bgActivitity:UIView = {
+       lazy var bgActivitity:UIView = {
            let background = UIView()
            return background
        }()
        
-       let ImageView : UIImageView = {
+       lazy var ImageView : UIImageView = {
             let image = UIImageView()
             image.image = UIImage(named: "doctor")
             image.contentMode = .scaleAspectFill
             return image
        }()
     
-       let bgEmergency : UIView = {
+       lazy var bgEmergency : UIView = {
           let bg = UIView()
           bg.backgroundColor = UIColor.white
           bg.layer.cornerRadius = 32
@@ -42,14 +42,14 @@ class ListRelatuveView: UITableViewCell {
           return bg
        }()
        
-       let title : UILabel = {
+       lazy var title : UILabel = {
           let title = UILabel()
            title.text = "ตำรวจ 191"
            title.font = UIFont.PoppinsBold(size: 20)
            return title
        }()
 
-       let ImageCall : UIImageView = {
+       lazy var ImageCall : UIImageView = {
              let image = UIImageView()
              image.image = UIImage(named: "call")
              image.contentMode = .scaleAspectFill

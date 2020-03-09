@@ -18,7 +18,7 @@ class TitleTableVIiewCellTest:UITableViewCell,UITextFieldDelegate,UINavigationCo
            fatalError("init(coder:) has not been implemented")
        }
        
-       let bgActivitity:UIImageView = {
+       lazy var bgActivitity:UIImageView = {
             let background = UIImageView()
             background.image = UIImage(named: "Step3")
             background.contentMode = .scaleAspectFill

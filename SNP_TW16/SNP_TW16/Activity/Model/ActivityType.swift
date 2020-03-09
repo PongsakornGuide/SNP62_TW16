@@ -15,7 +15,7 @@ class ActivityType: Mappable {
     var activtiyIcon: String?
     var list:[ActivityImpress]?
 //    let URL_USER_ID = "http://172.20.10.5/alder_iosapp/v1/showDecide.php"
-    let URL_USER_ID = "http://localhost/alder_iosapp/v1/showDecide.php"
+    let URL_USER_ID = "\(AppDelegate.link)alder_iosapp/v1/showDecide.php"
     required init?(map: Map) {
 
     }
@@ -58,7 +58,8 @@ class ActivityDetail: Mappable {
     var created:String?
     var join:Int?
     var invite:Int?
-    
+    var startTime:String?
+    var endtime:String?
     required init?(map: Map) {
 
     }
@@ -76,6 +77,8 @@ class ActivityDetail: Mappable {
         created <- map["startDate"]
         join <- map["maxJoin"]
         invite <- map["invaite"]
+        startTime <- map["startTime"]
+        endtime <- map["endTime"]
     }
 }
 

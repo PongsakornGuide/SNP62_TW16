@@ -10,8 +10,8 @@ import UIKit
 import Alamofire
 class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationControllerDelegate ,UIImagePickerControllerDelegate ,UIPickerViewDelegate,UIPickerViewDataSource {
     ////hide keyborad
-    var friendPicker = UIPickerView()
-    var friend = ["ผู้ปกครอง","ญาติ","ไม่ระบุ"]
+    lazy var friendPicker = UIPickerView()
+    lazy var friend = ["ผู้ปกครอง","ญาติ","ไม่ระบุ"]
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -33,7 +33,7 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
     }
         
     
-    let URL_CREATE_USER = "http://localhost/alder_iosapp/v1/register.php"
+    let URL_CREATE_USER = "\(AppDelegate.link)alder_iosapp/v1/register.php"
 //    let URL_CREATE_USER = "http://172.20.10.5/alder_iosapp/v1/register.php"
     
     // Default

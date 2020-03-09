@@ -9,17 +9,20 @@
 import UIKit
 import Alamofire
 import ObjectMapper
-class SubActivityTypeTableViewController: UITableViewController {
+class SubActivityTypeTableViewController: UITableViewController ,UINavigationControllerDelegate{
     
-    let URL_USER_ID = "http://localhost/alder_iosapp/v1/showactivity.php/"
+    let URL_USER_ID = "\(AppDelegate.link)alder_iosapp/v1/showactivity.php/"
 //    let URL_USER_ID = "http://172.20.10.5/alder_iosapp/v1/showactivity.php/"
     
-    let URL_CHECK_INVITE = "http://localhost/alder_iosapp/v1/inviteActivity.php"
+    let URL_CHECK_INVITE = "\(AppDelegate.link)alder_iosapp/v1/inviteActivity.php"
+    
+    let URL_LIKE_ACTIVITY = "\(AppDelegate.link)"
     
     let defaultValues = UserDefaults.standard
-    var typecheck = String()
+    lazy var typecheck = String()
+    lazy var typeAct = String()
     var activityList : [ActivityDetail]?
-    var invait = Int()
+    lazy var invait = Int()
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     
@@ -42,52 +45,28 @@ class SubActivityTypeTableViewController: UITableViewController {
     }
         
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-                if indexPath.section == 0 {
+        if indexPath.section == 0 {
                         let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! ActivityHeaderViewCell
                         cell.selectionStyle = .none
+                        cell.textHeader.text = typeAct
+                        cell.textHeader.numberOfLines = 2
                         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                                     return cell
-                 }else{
-                    let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! SearchTableViewCell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! SearchTableViewCell
+            
                     let activity = activityList?[indexPath.row]
                     cell.titleFullname.text = activity?.actId
                     cell.supportName.text = activity?.caption
                     cell.supportTime.text = activity?.created
-                    
+                    cell.CheckPoint.isHidden = true
+                    cell.decidePass.isHidden = true
                     
                    Alamofire.request((activity?.imagePost ?? "0")!).responseImage { response in
                    if let image = response.result.value {
                     cell.bgActivitity.image = image
                        }
                    }
-                    
-                    invait = activity?.dataId ?? 0
-//                    print("กิจกรรมลำดับที่ = \(invait)")
-                    
-                    let parameters: Parameters = ["id": invait]
-//                    print(parameters)
-                    let url = URL_CHECK_INVITE + "?id=\(invait)"
-                     Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
-                        
-//                            print("แล้วมีคนเข้าร่วม = \(resData)")
-//                        cell.maxUser.text = "\(resData) / \(activity?.join ?? 0) คน "
-                        
-                        if let user = resData.result.value as! [String: Any]? {
-                          
-                            
-                            if let yield = user["invaite"] as? Int{
-//                                self?.birthday.text = yield
-                                print("55555")
-                                print(yield)
-                                cell.maxUser.text = " \(yield) / \(activity?.join ?? 0) คน"
-                            }
-                            
-                        }
-                        
-                        
-                    }
-                    
-                    
                   
                    cell.selectionStyle = .none
                    self.tableView.separatorStyle = .none
@@ -124,14 +103,14 @@ class SubActivityTypeTableViewController: UITableViewController {
     }
     
     
-        override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         navigationItem.title = "Alder"
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.register(ActivityHeaderViewCell.self, forCellReuseIdentifier: cellId1)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = 350
         
         if let name2 = defaultValues.string(forKey: "userId") {
             typecheck = name2

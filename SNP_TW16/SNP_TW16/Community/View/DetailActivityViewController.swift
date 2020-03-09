@@ -16,12 +16,12 @@ class DetailActivityViewController: UITableViewCell {
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
     
-     let pageView: UIView = {
+    lazy var pageView: UIView = {
         let view = UIView()
         return view
     }()
     
-    let profile: UIImageView = {
+    lazy var profile: UIImageView = {
         let image = UIImageView()
          image.image = UIImage(named: "tiko")
          image.contentMode = .scaleAspectFill
@@ -30,14 +30,14 @@ class DetailActivityViewController: UITableViewCell {
         return image
      }()
      
-     let username : UILabel = {
+     lazy var username : UILabel = {
         let name = UILabel()
         name.text = "asdsa"
          name.font = UIFont.PoppinsBold(size: 16)
         return name
      }()
      
-     let date : UILabel = {
+     lazy var date : UILabel = {
            let timer = UILabel()
            timer.text = "9:34"
            timer.textColor = UIColor.blackAlpha(alpha: 0.5)
@@ -47,7 +47,7 @@ class DetailActivityViewController: UITableViewCell {
      }()
     
     
-    let comment:UILabel = {
+    lazy var comment:UILabel = {
         let comment = UILabel()
         comment.text = "Lorem Ipsum is simply dummy text of the printing."
         comment.textColor = UIColor.black
@@ -57,7 +57,7 @@ class DetailActivityViewController: UITableViewCell {
     }()
     
     
-    let imagePost: UIImageView = {
+    lazy var imagePost: UIImageView = {
        let image = UIImageView()
         image.image = UIImage(named: "tenor")
         image.contentMode = .scaleAspectFill
@@ -66,32 +66,54 @@ class DetailActivityViewController: UITableViewCell {
        return image
     }()
     
-    let contrainer: UIView = {
+    lazy var contrainer: UIView = {
         let box = UIView()
         return box
     }()
     
-    let iconImageLike: UIButton = {
+    var iconImageLike: UIButton = {
               let imagelike = UIImage(named: "like") as UIImage?
               let image = UIButton()
               image.setImage(imagelike, for: .normal)
               image.contentMode = .scaleAspectFill
               image.layer.masksToBounds = true
-//              image.addTarget(self, action: #selector(likePost), for: .touchUpInside)
+              image.addTarget(self, action: #selector(likePost), for: .touchUpInside)
+              image.tag = 0
               return image
-      }()
-      
+    }()
     
+    @objc func likePost(_sender:UIButton){
+        
+    }
     
-      let numCount: UILabel = {
+    lazy var numCount: UILabel = {
               let label = UILabel()
               label.text = "0"
               label.textColor = UIColor.blackAlpha(alpha: 0.5)
               label.font = UIFont.PoppinsRegular(size: 20)
               label.numberOfLines = 0
               return label
-      }()
-    let cultTextFieldTextFieldLine: UIView = {
+    }()
+    
+    lazy var iconImageComment: UIButton = {
+           let image = UIButton()
+           let imagecomment = UIImage(named: "comment") as UIImage?
+           image.setImage(imagecomment, for: .normal)
+           image.contentMode = .scaleAspectFill
+           image.layer.masksToBounds = true
+           return image
+       }()
+       
+    lazy var comCount: UILabel = {
+               let label = UILabel()
+               label.text = "0"
+               label.textColor = UIColor.blackAlpha(alpha: 0.5)
+               label.font = UIFont.PoppinsRegular(size: 20)
+               label.numberOfLines = 0
+               return label
+    }()
+    
+    lazy var cultTextFieldTextFieldLine: UIView = {
                          let view = UIView()
                          view.backgroundColor = UIColor.blackAlpha(alpha: 0.1)
                          return view
@@ -109,6 +131,8 @@ class DetailActivityViewController: UITableViewCell {
         addSubview(contrainer)
         addSubview(iconImageLike)
         addSubview(numCount)
+        addSubview(iconImageComment)
+        addSubview(comCount)
         addSubview(cultTextFieldTextFieldLine)
         
         pageView.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom:bottomAnchor, topConstant: 30, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: screenSizeY - 340)
@@ -132,6 +156,13 @@ class DetailActivityViewController: UITableViewCell {
         
         numCount.anchor(contrainer.topAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: -5, bottomConstant: 0, leftConstant: 40, rightConstant: 10, widthConstant: 40, heightConstant: 40)
 
+        
+        iconImageComment.anchor(contrainer.topAnchor, left: nil, right: comCount.leftAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 30, heightConstant: 30)
+
+        
+        comCount.anchor(contrainer.topAnchor, left: iconImageComment.rightAnchor, right: contrainer.rightAnchor, bottom: nil, topConstant: -5, bottomConstant: 0, leftConstant: 0, rightConstant: -10, widthConstant: 40, heightConstant: 40)
+
+        
         cultTextFieldTextFieldLine.anchor(iconImageLike.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1.5)
         
     }

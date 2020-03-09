@@ -16,14 +16,14 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
             
        }
     
-       let URL_GET_EDIT_PROFILE = "http://localhost/alder_iosapp/v1/showProfile.php"
-       let URL_POST_EDIT_PROFILE = "http://localhost/alder_iosapp/v1/update.php"
-       var getIduser = String()
-       let defaultValues = UserDefaults.standard
-       var NumberPhoneLabelText = String()
-       var imageTy = UIImage()
+       let URL_GET_EDIT_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/showProfile.php"
+       let URL_POST_EDIT_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/update.php"
+       lazy var getIduser = String()
+       lazy var defaultValues = UserDefaults.standard
+       lazy var NumberPhoneLabelText = String()
+       lazy var imageTy = UIImage()
        private var datePicker : UIDatePicker?
-       var picker1 = UIPickerView()
+       lazy var picker1 = UIPickerView()
        let screenSizeX: CGFloat = UIScreen.main.bounds.width
        let screenSizeY: CGFloat = UIScreen.main.bounds.height
     
@@ -32,7 +32,7 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
            return view
        }()
     
-       let imgView: UIImageView = {
+       lazy var imgView: UIImageView = {
            let view = UIImageView()
             view.image = UIImage(named: "Group 1094")
             view.layer.cornerRadius = 30/2
@@ -41,7 +41,7 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
            return view
        }()
     
-    let uploadImage: UIButton = {
+    lazy var uploadImage: UIButton = {
             let image = UIImage(named: "Group 1093") as UIImage?
             let button = UIButton()
             button.setImage(image, for: .normal)
@@ -71,14 +71,14 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
         self.dismiss(animated: true, completion: nil)
     }
     
-       let BGView: UIView = {
+       lazy var BGView: UIView = {
            let view = UIView()
            view.backgroundColor = .white
            view.layer.cornerRadius = 20
            return view
        }()
     
-       let nextButton: UIButton = {
+       lazy var nextButton: UIButton = {
            let button = UIButton(type: .system)
            button.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
            button.layer.cornerRadius = 20
@@ -125,7 +125,7 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
         
     }
 
-    let titleLabel : UILabel = {
+    lazy var titleLabel : UILabel = {
         let label = UILabel()
         let title = "ข้อมูลส่วนตัว"
         let style = NSMutableParagraphStyle()
@@ -138,33 +138,33 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
         return label
     }()
     //-----------------------------------------------------------------------------------------------
-       let nameTextField: UITextField = {
+       lazy var nameTextField: UITextField = {
                let textField = UITextField()
                textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
                textField.font = UIFont.boldSystemFont(ofSize: 15)
                return textField
            }()
-           let nameTextFieldLine: UIView = {
+           lazy var nameTextFieldLine: UIView = {
                   let view = UIView()
                   view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
                   return view
            }()
        //-----------------------------------------------------------------------------------------------
-           let surnameTextField: UITextField = {
+           lazy var surnameTextField: UITextField = {
                let textField = UITextField()
                textField.attributedPlaceholder = NSAttributedString(string: "นามสกุล",attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
                textField.font = UIFont.boldSystemFont(ofSize: 15)
                return textField
            }()
-           let surnameTextFieldLine: UIView = {
+           lazy var surnameTextFieldLine: UIView = {
                let view = UIView()
                view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
                return view
            }()
        //-----------------------------------------------------------------------------------------------
-           let phoneTextField: UITextField = {
+           lazy var phoneTextField: UITextField = {
                let textField = UITextField()
                textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
@@ -253,7 +253,7 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
                                 }
 
                                 if let yield = user["photo"] as? String{
-                                    Alamofire.request("http://localhost/alder_iosapp/" + yield).responseImage { response in
+                                    Alamofire.request("\(AppDelegate.link)alder_iosapp/" + yield).responseImage { response in
                                         if let image = response.result.value {
                                                 self?.imgView.image = image
                                             }
