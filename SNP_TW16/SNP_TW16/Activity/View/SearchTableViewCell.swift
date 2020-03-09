@@ -116,62 +116,25 @@ class SearchTableViewCell: UITableViewCell {
             addSubview(profileImage)
             profileImage.addSubview(bgActivitity)
             profileImage.addSubview(titleFullname)
-//            profileImage.addSubview(markImage)
             profileImage.addSubview(line)
-//            profileImage.addSubview(maxUser)
             profileImage.addSubview(supportName)
             profileImage.addSubview(supportTime)
-//            profileImage.addSubview(CheckPoint)
-//            profileImage.addSubview(decidePass)
-            
-//            addSubview(Labelid)
-//            backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-         
-            //            backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+
             profileImage.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: supportName.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-            //
-                        
-                        
-            //             messenger.anchor(sendMessenger.topAnchor, left: sendMessenger.leftAnchor, bottom: sendMessenger.bottomAnchor, right: sendMessenger.rightAnchor, topConstant: -10, leftConstant: -10, bottomConstant: -10, rightConstant: -10, widthConstant: 0, heightConstant: 0)
-                        
+            
             bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 150)
 
             titleFullname.anchor(bgActivitity.bottomAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 
             titleFullname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 100).isActive = true
-            
-//            markImage.anchor(titleFullname.bottomAnchor, left: titleFullname.rightAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 20, heightConstant: 20)
-//
-                        
                         
             line.anchor(titleFullname.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 0, rightConstant: 30, widthConstant: 0, heightConstant: 1.1)
                      
             supportName.anchor(line.bottomAnchor, left: bgActivitity.leftAnchor, right: rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 80)
                         
-            
             supportTime.anchor(line.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 80)
             
 
-//
-//            bgActivitity.anchor(profileImage.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 150)
-//
-//            titleFullname.anchor(bgActivitity.bottomAnchor, left: bgActivitity.leftAnchor, right: markImage.leftAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 0)
-//
-
-//
-//            CheckPoint.anchor(bgActivitity.bottomAnchor, left: titleFullname.rightAnchor, right:profileImage.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 120, heightConstant: 30)
-//
-//            decidePass.anchor(bgActivitity.bottomAnchor, left: titleFullname.rightAnchor, right:profileImage.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 120, heightConstant: 30)
-//
-//            line.anchor(titleFullname.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 1.1)
-//
-//            supportName.anchor(line.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 20, widthConstant: 0, heightConstant: 80)
-//
-//            supportTime.anchor(line.bottomAnchor, left: nil, right: rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 50, widthConstant: 0, heightConstant: 80)
-//
-//
-//            maxUser.anchor(bgActivitity.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 20)
-            
         }
         
         

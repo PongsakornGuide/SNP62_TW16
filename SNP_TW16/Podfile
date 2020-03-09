@@ -14,4 +14,5 @@ target 'SNP_TW16' do
   pod 'IQKeyboardManagerSwift', '6.3.0'
   pod 'FLEX', :configurations => ['Debug']
   pod 'MultiDegreeLikeButton'
+  pod 'KMPlaceholderTextView'
 end

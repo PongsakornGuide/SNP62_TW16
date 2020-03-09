@@ -52,7 +52,7 @@ class layoutTableViewCell: UITableViewCell {
         addSubview(bgCheck)
         addSubview(bgImage)
         addSubview(textHeader)
-        backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+        backgroundColor = .white
         
         bgCheck.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 20, widthConstant: 100, heightConstant: 120)
 

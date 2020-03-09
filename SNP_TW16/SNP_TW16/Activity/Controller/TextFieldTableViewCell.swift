@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KMPlaceholderTextView
 class  TextFieldTableViewCell :UITableViewCell,UITextFieldDelegate,UINavigationControllerDelegate {
      
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -33,15 +34,16 @@ class  TextFieldTableViewCell :UITableViewCell,UITextFieldDelegate,UINavigationC
         return header
     }()
     
-    static var textView: UITextView = {
-        let textView = UITextView()
-        let checkNum = DecideViewController()
+    static var textView: KMPlaceholderTextView = {
+        let textView = KMPlaceholderTextView()
          textView.textColor = UIColor.blackAlpha(alpha: 0.8)
          textView.font = UIFont.PoppinsRegular(size: 16)
          textView.layer.borderColor = UIColor.blackAlpha(alpha: 0.3).cgColor
          textView.layer.borderWidth = 0.5
          textView.textColor = UIColor.lightGray
          textView.layer.cornerRadius = 5
+         textView.placeholder = "เขียนข้อความ ..."
+         textView.placeholderColor = UIColor.rgb(red: 167, green: 169, blue: 172)
          return textView
     }()
     
@@ -55,10 +57,12 @@ class  TextFieldTableViewCell :UITableViewCell,UITextFieldDelegate,UINavigationC
          submit.layer.shadowRadius = 10
          submit.setTitle("เข้าร่วมกิจกรรม", for: .normal)
          submit.setTitleColor(UIColor.white,for: .normal)
-         submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+         submit.titleLabel?.font = UIFont.PoppinsBold(size: 24)
          submit.addTarget(self, action: #selector(psuhCheckBox), for: .touchUpInside)
          return submit
     }()
+    
+       
     
     @objc func psuhCheckBox(){
     }
@@ -68,7 +72,7 @@ class  TextFieldTableViewCell :UITableViewCell,UITextFieldDelegate,UINavigationC
         addSubview(headerText)
         addSubview(TextFieldTableViewCell.textView)
         addSubview(regButton)
-        backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+        backgroundColor = .white
         
         bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 300)
         

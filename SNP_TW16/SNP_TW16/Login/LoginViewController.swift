@@ -46,9 +46,7 @@ class LoginViewController: UIViewController {
             let text = "\n \n ใส่เบอร์มือถือสำหรับเข้าสู่ระบบ"
             let attributedText = NSMutableAttributedString(string: title,
             attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 30),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
-
             attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.PoppinsBold(size: 18),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
-
             label.attributedText = attributedText
             label.numberOfLines = 0
             return label
@@ -111,6 +109,20 @@ class LoginViewController: UIViewController {
               submit.addTarget(self, action: #selector(loginToApp), for: .touchUpInside)
               return submit
     }()
+    
+    lazy var cancelLogin : UIButton = {
+                 let submit = UIButton(type: UIButton.ButtonType.system)
+                 submit.backgroundColor = UIColor.white
+                 submit.layer.borderColor = UIColor.rgb(red: 241, green: 90, blue: 66).cgColor
+                 submit.layer.borderWidth = 2
+                 submit.backgroundColor = UIColor.rgb(red: 241, green: 90, blue: 66)
+                 submit.layer.cornerRadius = 30
+                 submit.setTitle("ยกเลิก", for: .normal)
+                 submit.setTitleColor(UIColor.white,for: .normal)
+                 submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+                 submit.addTarget(self, action: #selector(cancelApp), for: .touchUpInside)
+                 return submit
+    }()
 
     func send_to_otp(){
 //        let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
@@ -163,7 +175,7 @@ class LoginViewController: UIViewController {
   
 
     @objc func submitBtn(){
-        let checkNum = numberTextField.text?.count ?? 0 >= 5
+        let checkNum = numberTextField.text?.count ?? 0 >= 10
         if !checkNum {
             checkError.isHidden = false
         }else{
@@ -171,20 +183,22 @@ class LoginViewController: UIViewController {
             submitLogin.isHidden = false
             checkError.isHidden = true
             regButton.isHidden = true
+            cancelLogin.isHidden = false
             send_to_otp()
         }
-//        let content = UNMutableNotificationContent()
-//                   content.title = "The 5 seconds are up!"
-//                   content.subtitle = "they are up now!"
-//                   content.body = "The 5 seconds are really up!"
-//                   content.badge = 1
-//                   let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-//                   let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
-//                   UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
+    @objc func cancelApp(){
+        otpTextField.isHidden = true
+        submitLogin.isHidden = true
+        regButton.isHidden = false
+        cancelLogin.isHidden = true
+    }
+    
+
+    
     @objc func loginToApp(){
-        let checkOTP = otpTextField.text?.count ?? 0 <= 5
+        let checkOTP = otpTextField.text?.count ?? 0 >= 5
         if !checkOTP{
             print("OTP NOT REGISTER")
         }else{
@@ -221,7 +235,7 @@ class LoginViewController: UIViewController {
         }
     }
 
-         lazy var regButton : UIButton = {
+    lazy var regButton : UIButton = {
                 let submit = UIButton(type: UIButton.ButtonType.system)
                 submit.backgroundColor = UIColor.white
                 submit.layer.cornerRadius = 30
@@ -236,7 +250,7 @@ class LoginViewController: UIViewController {
                 return submit
             }()
 
-        @objc func pushToReigster(){
+    @objc func pushToReigster(){
             let Register = MobileOtpViewController()
             navigationController?.pushViewController(Register, animated: true)
             
@@ -300,9 +314,11 @@ class LoginViewController: UIViewController {
             view.addSubview(regButton)
             view.addSubview(otpTextField)
             view.addSubview(submitLogin)
+            view.addSubview(cancelLogin)
             checkError.isHidden = true
             otpTextField.isHidden = true
             submitLogin.isHidden = true
+            cancelLogin.isHidden = true
             
             imageView.anchor(view.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200
             )
@@ -322,8 +338,10 @@ class LoginViewController: UIViewController {
             otpTextField.anchor(submitButton.bottomAnchor, left: otpView.leftAnchor, right: otpView.rightAnchor, bottom: nil, topConstant: 26, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 80)
             
             submitLogin.anchor(otpTextField.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
-
+            
             regButton.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: -130, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
+            
+             cancelLogin.anchor(submitLogin.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
             
             checkError.anchor(regButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 50)
         }

@@ -86,18 +86,6 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
                     self?.tableview.reloadData()
             }
     }
-
-    
-//    var textView: UITextView = {
-//           let textView = UITextView()
-//            textView.textColor = UIColor.blackAlpha(alpha: 0.8)
-//            textView.font = UIFont.PoppinsRegular(size: 16)
-//            textView.layer.borderColor = UIColor.blackAlpha(alpha: 0.3).cgColor
-//            textView.layer.borderWidth = 0.5
-//            textView.textColor = UIColor.lightGray
-//            textView.layer.cornerRadius = 5
-//            return textView
-//       }()
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? layoutTableViewCell{
@@ -113,19 +101,18 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
                 cell.bgImage.layer.cornerRadius = 90/2
                 cell.bgImage.layer.borderColor = UIColor.white.cgColor
                 cell.bgImage.layer.borderWidth = 5
-                cell.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-                
+                cell.backgroundColor = .white
         }
     }
     
     lazy var tableview : UITableView = {
-                  let tableview = UITableView()
-                  tableview.delegate = self
-                  tableview.dataSource = self
-                  tableview.tableFooterView = UIView()
-                  tableview.showsVerticalScrollIndicator = false
-                  tableview.backgroundColor = .none//UIColor(white: 0.95, alpha: 1 )
-                  return tableview
+            let tableview = UITableView()
+            tableview.delegate = self
+            tableview.dataSource = self
+            tableview.tableFooterView = UIView()
+            tableview.showsVerticalScrollIndicator = false
+            tableview.backgroundColor = .none//UIColor(white: 0.95, alpha: 1 )
+            return tableview
     }()
     
     @objc func psuhCheckBox(){
@@ -153,18 +140,30 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
                 alertController.addAction(action1)
                 self.present(alertController, animated: true, completion: nil)
     }
+        @objc func keyboardWillHide(notification: NSNotification) {
+                         if self.view.frame.origin.y != 0 {
+                             self.view.frame.origin.y = 0
+                         }
+        }
+
+        @objc func keyboardWillShow(notification: NSNotification) {
+                   if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                       if self.view.frame.origin.y == 0 {
+                        self.view.frame.origin.y -= keyboardSize.height
+                            //keyboardSize.height
+                       }
+                   }
+        }
     
     
       override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-    
-        view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+        view.backgroundColor = .white
         tableview.delegate = self
         view.addSubview(tableview)
-//        view.addSubview(regButton)
-//        view.addSubview(textView)
-//        textView
         
         tableview.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor,  right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor ,topConstant: 0,  bottomConstant: 0,leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 

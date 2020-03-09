@@ -4,6 +4,7 @@ PODS:
     - Alamofire (~> 4.8)
   - FLEX (3.1.2)
   - IQKeyboardManagerSwift (6.3.0)
+  - KMPlaceholderTextView (1.4.0)
   - MultiDegreeLikeButton (0.1.0)
   - ObjectMapper (3.5.1)
   - Pastel (0.5.1)
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - AlamofireImage
   - FLEX
   - IQKeyboardManagerSwift (= 6.3.0)
+  - KMPlaceholderTextView
   - MultiDegreeLikeButton
   - ObjectMapper (~> 3.4)
   - Pastel
@@ -25,6 +27,7 @@ SPEC REPOS:
     - AlamofireImage
     - FLEX
     - IQKeyboardManagerSwift
+    - KMPlaceholderTextView
     - MultiDegreeLikeButton
     - ObjectMapper
     - Pastel
@@ -35,11 +38,12 @@ SPEC CHECKSUMS:
   AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
   FLEX: e13e805fc3eec8732cc227d1f7508770d46e9587
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
+  KMPlaceholderTextView: 2206c3df39979e9396e2d96fa9f427a8951121b0
   MultiDegreeLikeButton: 72d4e7c1988704a836c9a4a8bf77c39c6b35f659
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   Pastel: b3dd5b8d612dac06ae7c63c97c45c900829bc139
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 4bd651fd5fcf9b483543e06ae93cb033b97876d1
+PODFILE CHECKSUM: 7ef34cbbbc28512763b68413bafbbc01140d60a5
 
 COCOAPODS: 1.8.4
