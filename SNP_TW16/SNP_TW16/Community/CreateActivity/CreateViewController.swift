@@ -9,6 +9,10 @@
 import UIKit
 import Alamofire
 class CreateViewController: UIViewController , UINavigationControllerDelegate , UIImagePickerControllerDelegate{
+    
+    let screenSizeX: CGFloat = UIScreen.main.bounds.width
+    let screenSizeY: CGFloat = UIScreen.main.bounds.height
+    
 //        var activity = [Activity]()
     lazy var username = String()
     lazy var user_id = String()
@@ -21,6 +25,18 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
     }
+    
+    lazy var bgView: UIView = {
+        let background = UIView()
+        background.backgroundColor = UIColor.white
+        background.layer.cornerRadius = 20
+        background.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
+        background.layer.shadowOpacity = 0.1
+        background.layer.shadowOffset = CGSize(width: 0, height: 0)
+        background.layer.shadowRadius = 10
+        background.layer.shouldRasterize = true
+        return background
+    }()
     
     lazy var Imagelabel : UIImageView = {
         let view1 = UIImageView()
@@ -51,17 +67,17 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
     
     //-----------------------------------------------------------------------------------------------
     
-     lazy var contentTextField: UITextField = {
+    lazy var contentTextField: UITextField = {
             let textField = UITextField()
-            textField.attributedPlaceholder = NSAttributedString(string: "เพิ่มข้อความ......", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+            textField.attributedPlaceholder = NSAttributedString(string: "เพิ่มข้อความ . . .", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
             textField.font = UIFont.PoppinsRegular(size:18)
             textField.textColor = UIColor.blackAlpha(alpha: 0.7)
             textField.layer.borderColor = UIColor.whiteAlpha(alpha: 0.9).cgColor
             textField.layer.borderWidth = 1
-            textField.layer.cornerRadius = 15
+            textField.layer.cornerRadius = 10
             textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             textField.leftViewMode = UITextField.ViewMode.always
-            return textField
+    return textField
      }()
     
     //-----------------------------------------------------------------------------------------------
@@ -160,6 +176,21 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         }
     }
        
+    @objc func keyboardWillHide(notification: NSNotification) {
+                    if self.view.frame.origin.y != 0 {
+                        self.view.frame.origin.y = 0
+                    }
+                }
+
+          @objc func keyboardWillShow(notification: NSNotification) {
+              if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                  if self.view.frame.origin.y == 0 {
+                   self.view.frame.origin.y -= keyboardSize.height
+                       //keyboardSize.height
+                  }
+              }
+          }
+    
     @objc func performSegueToReturnBack()  {
            if let nav = self.navigationController {
                nav.popToRootViewController(animated: true)
@@ -178,6 +209,10 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         if let name = defaultValues.string(forKey: "userName") {
             username = name
             namelabel.text = username
@@ -200,6 +235,10 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         }
     //-----------------------------------------------------------------------------------------------
         
+        view.backgroundColor = .white
+        alertLabel.isHidden = true
+        
+        view.addSubview(bgView)
         view.addSubview(Imagelabel)
         view.addSubview(namelabel)
         view.addSubview(contentTextField)
@@ -207,21 +246,24 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         view.addSubview(btn)
         view.addSubview(submitButton)
         view.addSubview(alertLabel)
-        view.backgroundColor = .white
-        alertLabel.isHidden = true
         
-        Imagelabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: namelabel.leftAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 35, widthConstant: 80, heightConstant: 80)
-               
-        namelabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: Imagelabel.rightAnchor, right: nil, bottom: nil, topConstant: 32, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+        bgView.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        
+        Imagelabel.anchor(bgView.topAnchor, left: contentTextField.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 0, rightConstant: 30, widthConstant: 80, heightConstant: 80)
+        
+        namelabel.anchor(bgView.topAnchor, left: Imagelabel.rightAnchor, right: nil, bottom: nil, topConstant: 55, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        contentTextField.anchor(Imagelabel.bottomAnchor, left: view.leftAnchor, right:  view.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 60)
+        
+        contentTextField.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 40).isActive = true
+        
+        imageView.anchor(contentTextField.bottomAnchor, left: contentTextField.leftAnchor, right: contentTextField.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 30, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 230)
+        
+        btn.anchor(imageView.topAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: imageView.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 230)
 
-        contentTextField.anchor(Imagelabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: imageView.topAnchor, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 300, heightConstant: 40)
-               
-        imageView.anchor(contentTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 230)
-        
-        btn.anchor(imageView.topAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: imageView.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        submitButton.anchor(nil, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 70)
 
-        submitButton.anchor(imageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 100, rightConstant: 100, widthConstant: 200, heightConstant: 70)
+        alertLabel.anchor(submitButton.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: bgView.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 30)
         
-        alertLabel.anchor(submitButton.bottomAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 80)
     }
 }

@@ -106,7 +106,9 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                             guard let json = response.value as? [String:Bool], let status = json["error"] else {
                             return }
                                 if !status {
-                                    cell.iconImageLike.backgroundColor = .red
+                                   cell.iconImageLike.tag = 1
+                                   cell.iconImageLike.tintColor = UIColor.red
+                                    cell.iconImageLike.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
                             }else{
                         }
                     }
@@ -155,9 +157,12 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                                   guard let json = response.value as? [String:Bool], let status = json["error"] else {
                                   return }
                                       if !status {
-                                          cell.iconImageLike.backgroundColor = .red
+                                            cell.iconImageLike.tag = 1
+                                            cell.iconImageLike.tintColor = UIColor.red
+                                            cell.iconImageLike.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
                                   }else{
-                              }
+                                        
+                                  }
                 }
                 
                 return cell
@@ -171,6 +176,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                                  let url = URL_POST_COMMENT
                                  Alamofire.request(url, method: .post,parameters: parameters).responseJSON { response in
                                     self.tableview.reloadData()
+                                    self.navigationController?.popViewController(animated: true)
                                  }
                         
 
@@ -189,16 +195,16 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                         Alamofire.request(URL_CLICK_LIKE, method: .post,parameters: parameters).responseJSON { response in
                     }
                     _sender.tag = 1
-                    _sender.backgroundColor = .red
-                    _sender.tintColor = .black
+                     _sender.tintColor = .black
+                    _sender.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 case 1:
                     requestData()
                     let parameters: Parameters = ["user_id":userid,"ad_post_timeline_id":adpostId2]
                         Alamofire.request(URL_CLICK_UNLIKE, method: .post,parameters: parameters).responseJSON { response in
                     }
                     _sender.tag = 0
-                    _sender.backgroundColor = .white
-                    _sender.tintColor = .black
+                   _sender.tintColor = .black
+                    _sender.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 default: break
                 }
         self.tableview.reloadData()
@@ -247,15 +253,17 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                     Alamofire.request(URL_LIKE_COMMENT, method: .post,parameters: parameters).responseJSON { response in
                 }
                 _sender.tag = 1
-                _sender.backgroundColor = .red
-                _sender.tintColor = .black
+                _sender.tintColor = UIColor.red
+                _sender.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                
             case 1:
                 let parameters: Parameters = ["user_id":userid,"ad_post_timeline_id":adpostId,"comment_id":adpostId3]
                     Alamofire.request(URL_DELETE_LIKE_COMMENT, method: .post,parameters: parameters).responseJSON { response in
                 }
                 _sender.tag = 0
-                _sender.backgroundColor = .white
                 _sender.tintColor = .black
+                _sender.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                
             default: break
             }
             self.tableview.reloadData()

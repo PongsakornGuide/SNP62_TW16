@@ -9,8 +9,9 @@
 import UIKit
 import Alamofire
 import ObjectMapper
+import UserNotifications
 //UIViewController ,UITableViewDelegate, UITableViewDataSource
-class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource {
+class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate,UNUserNotificationCenterDelegate{
     
     var delegate:UIViewController?
     let URL_USER_DECIDE = "\(AppDelegate.link)alder_iosapp/v1/decide.php"
@@ -19,6 +20,7 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
     lazy var actPost = Int()
     lazy var actUserId = String()
     var textData = String()
+    var actData = String()
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     private var cellId2 = "Cell2"
@@ -114,6 +116,21 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
             tableview.backgroundColor = .none//UIColor(white: 0.95, alpha: 1 )
             return tableview
     }()
+    func NotificaitonUser(){
+             let content = UNMutableNotificationContent()
+             content.title = "ยินดีด้วยคุณได้เข้าร่วมกิจกรรมแล้ว"
+             content.subtitle = "กิจกกรม :: \(actData) พร้อมแล้วสำหรับคุณ"
+             content.badge = 1
+             content.sound = UNNotificationSound.default
+            
+             
+             let triger = UNTimeIntervalNotificationTrigger(timeInterval: 3.0, repeats: false)
+             let request = UNNotificationRequest(identifier: "Identifier", content: content, trigger: triger)
+             
+             UNUserNotificationCenter.current().add(request) { (Error) in
+                 print(Error as Any)
+             }
+         }
     
     @objc func psuhCheckBox(){
         guard let cell = TextFieldTableViewCell.textView.text else { return }
@@ -121,6 +138,8 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
         let index = selectedIndex?.compactMap{ "\($0.row+1)" }
         var selectedChoice = index?.joined(separator: ",") ?? ""
         print(selectedChoice)
+        self.NotificaitonUser()
+        UNUserNotificationCenter.current().delegate = self
           let alertController = UIAlertController(title: "คุณเข้าร่วมกิจกรรมสำเร็จ", message: "แล้วพบกันในเร็วๆ นี้ :-)", preferredStyle: .alert)
                 let action1 = UIAlertAction(title: "เข้าร่วม", style: .default) { (action:UIAlertAction) in
                     let passData = ContentActivityViewController()
@@ -131,6 +150,9 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
                                   delegate.nextButton.setTitle("เข้าร่วมกิจกรรมแล้ว",for: .normal)
                                   delegate.enableButton.isHidden = false
                                   delegate.nextButton.isHidden = true
+                               
+                                
+                                
                                 self.navigationController?.popViewController(animated: true)
                         }
 
@@ -153,11 +175,11 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
                             //keyboardSize.height
                        }
                    }
-        }
-    
+      }
     
       override func viewDidLoad() {
         super.viewDidLoad()
+        print(actData)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
@@ -186,5 +208,9 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
 
 //        regButton.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -70, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 55)
         
-      }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert,.sound,.badge])
+    }
 }

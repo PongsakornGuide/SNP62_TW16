@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import ObjectMapper
 import UserNotifications
-class MainActivityViewController: UITableViewController {
+class MainActivityViewController: UITableViewController,UNUserNotificationCenterDelegate {
     
     let URL_USER_ID = "\(AppDelegate.link)alder_iosapp/v1/showactivity.php"
     lazy var defaultValues = UserDefaults.standard
@@ -153,8 +153,46 @@ class MainActivityViewController: UITableViewController {
                          self.navigationController?.pushViewController(loginViewController, animated: true)
                          self.dismiss(animated: false, completion: nil)
         }
+    
+    
+    func NotificaitonUser(){
+         let content = UNMutableNotificationContent()
+         content.title = "สวัสดีคุณ \(Labelname)"
+         content.subtitle = "ยินดีต้อนรับเข้าสู่ ​Alder"
+         content.body = "พร้อมจะเข้าร่วมกิจกรรมหรือยัง ?"
+//         content.body = "พร้อมจะค้นหากิจกรรมกันหรือยัง"
+         content.badge = 1
+         content.sound = UNNotificationSound.default
+        
+         
+         let triger = UNTimeIntervalNotificationTrigger(timeInterval: 3.0, repeats: false)
+         let request = UNNotificationRequest(identifier: "Identifier", content: content, trigger: triger)
+         
+         UNUserNotificationCenter.current().add(request) { (Error) in
+             print(Error as Any)
+         }
+     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        if let name = defaultValues.string(forKey: "userName") {
+                Labelname = name
+            print(Labelname)
+             }
+
+        if let name2 = defaultValues.string(forKey: "userId") {
+                typecheck = name2
+            print(typecheck)
+            }else{
+        }
+        
+        
+        NotificaitonUser()
+        UNUserNotificationCenter.current().delegate = self
+        
+        
         let currentDate = NSDate()
         let dateFormatter = DateFormatter()
         let date = Date()
@@ -167,17 +205,17 @@ class MainActivityViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
-        let alertController = UIAlertController(title: "ยินดีต้อนรับสู่ Alder", message: "กิจกรรมของเรา รอท่านมาร่วมสนุก :)", preferredStyle: .alert)
-                                          
-        let action1 = UIAlertAction(title: "ยืนยัน", style: .default) { (action:UIAlertAction) in
-        }
-        
-        
-        alertController.addAction(action1)
-        self.present(alertController, animated: true, completion: nil)
+//        let alertController = UIAlertController(title: "ยินดีต้อนรับสู่ Alder", message: "กิจกรรมของเรา รอท่านมาร่วมสนุก :)", preferredStyle: .alert)
+//
+//        let action1 = UIAlertAction(title: "ยืนยัน", style: .default) { (action:UIAlertAction) in
+//        }
+//
+//
+//        alertController.addAction(action1)
+//        self.present(alertController, animated: true, completion: nil)
+//
         
         self.tableView.reloadData()
-        
         let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
             settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
             navigationItem.rightBarButtonItem = settings
@@ -194,17 +232,9 @@ class MainActivityViewController: UITableViewController {
           tableView.rowHeight = UITableView.automaticDimension
           tableView.estimatedRowHeight = 50
           view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-        
-        
-        if let name = defaultValues.string(forKey: "userName") {
-                Labelname = name
-            print(Labelname)
-             }
-
-        if let name2 = defaultValues.string(forKey: "userId") {
-                typecheck = name2
-            print(typecheck)
-            }else{
-        }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert,.sound,.badge])
     }
 }

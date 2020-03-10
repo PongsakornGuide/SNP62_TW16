@@ -1,3 +1,4 @@
+
 //
 //  communViewController.swift
 //  SNP_TW16
@@ -10,6 +11,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import ObjectMapper
+
 class CommunViewController: UITableViewController{
 
     lazy var defaultValues = UserDefaults.standard
@@ -56,7 +58,7 @@ class CommunViewController: UITableViewController{
             return activityList?.count ?? 0
         }
     }
-       
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
@@ -91,7 +93,6 @@ class CommunViewController: UITableViewController{
             }
             
             
-            
             Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (headerActivity?.img ?? "0")!).responseImage { response in
                             if let image = response.result.value{
                             cell.postImage.image = image
@@ -104,20 +105,26 @@ class CommunViewController: UITableViewController{
             }
             
             
-            cell.iconImageLike.titleLabel?.tag = headerActivity?.id ?? 0
-            self.tableView.separatorStyle = .none
-            cell.selectionStyle = .none
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+            
             
             let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId]
             Alamofire.request(URL_CHECK_LIKE, method: .post,parameters: parameters).responseJSON { response in
                     guard let json = response.value as? [String:Bool], let status = json["error"] else {
                     return }
                         if !status {
-                            cell.iconImageLike.backgroundColor = .red
+                            cell.iconImageLike.tag = 1
+                            cell.iconImageLike.tintColor = UIColor.red
+                            cell.iconImageLike.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                            
                     }else{
                 }
             }
+            
+            cell.iconImageLike.titleLabel?.tag = headerActivity?.id ?? 0
+            self.tableView.separatorStyle = .none
+            cell.selectionStyle = .none
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+            
             return cell
         }
     }
@@ -138,19 +145,17 @@ class CommunViewController: UITableViewController{
                     let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId2]
                                     Alamofire.request(URL_CLICK_LIKE, method: .post,parameters: parameters).responseJSON { response in
                     }
-                                        
                     _sender.tag = 1
-                    _sender.backgroundColor = .red
-                    _sender.tintColor = .black
+                        _sender.tintColor = UIColor.red
+                        _sender.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 case 1:
                     requestData()
                     let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId2]
                                                        Alamofire.request(URL_CLICK_UNLIKE, method: .post,parameters: parameters).responseJSON { response in
                     }
                     _sender.tag = 0
-                    _sender.backgroundColor = .white
                     _sender.tintColor = .black
-            
+                    _sender.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 default: break
                 }
          self.tableView.reloadData()
@@ -198,8 +203,10 @@ class CommunViewController: UITableViewController{
               return submit
       }()
 
+    
        override func viewDidLoad() {
        super.viewDidLoad()
+
           view.addSubview(submitBtn)
           navigationItem.title = "Alder"
           submitBtn.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -100, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 90, heightConstant: 90)
@@ -237,6 +244,4 @@ class CommunViewController: UITableViewController{
             }
 
        }
-    
-    
 }

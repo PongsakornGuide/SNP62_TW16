@@ -14,7 +14,7 @@ class SearchTableViewCell: UITableViewCell {
             setupViewCell()
         }
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
-       let screenSizeY: CGFloat = UIScreen.main.bounds.height
+    let screenSizeY: CGFloat = UIScreen.main.bounds.height
                 
         
      
@@ -114,20 +114,27 @@ class SearchTableViewCell: UITableViewCell {
         func setupViewCell(){
 
             addSubview(profileImage)
-            profileImage.addSubview(bgActivitity)
-            profileImage.addSubview(titleFullname)
-            profileImage.addSubview(line)
-            profileImage.addSubview(supportName)
-            profileImage.addSubview(supportTime)
+            addSubview(bgActivitity)
+            addSubview(titleFullname)
+            addSubview(line)
+            addSubview(supportName)
+            addSubview(supportTime)
+            addSubview(CheckPoint)
+            addSubview(decidePass)
 
             profileImage.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: supportName.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
             
             bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 150)
 
-            titleFullname.anchor(bgActivitity.bottomAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+            titleFullname.anchor(bgActivitity.bottomAnchor, left: bgActivitity.leftAnchor, right: CheckPoint.leftAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 
-            titleFullname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 100).isActive = true
+            titleFullname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 140).isActive = true
                         
+            CheckPoint.anchor(bgActivitity.bottomAnchor, left: titleFullname.rightAnchor, right:profileImage.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 30)
+            
+            decidePass.anchor(bgActivitity.bottomAnchor, left: titleFullname.rightAnchor, right:profileImage.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 30)
+            
+            
             line.anchor(titleFullname.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 0, rightConstant: 30, widthConstant: 0, heightConstant: 1.1)
                      
             supportName.anchor(line.bottomAnchor, left: bgActivitity.leftAnchor, right: rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 80)

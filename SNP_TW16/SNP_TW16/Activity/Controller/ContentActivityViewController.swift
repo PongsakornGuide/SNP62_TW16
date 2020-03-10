@@ -91,8 +91,8 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
      
      lazy var contentLabel : UILabel = {
            let title = UILabel()
-            title.lineBreakMode = .byWordWrapping
-            title.numberOfLines = 0
+           title.lineBreakMode = .byWordWrapping
+           title.numberOfLines = 0
            title.text = "เรียนรู้ขั้นตอนการจัดวางแซนวิชของตนเอง ผ่านการเลือกสรรส่วนประกอบว่ามีอะไรบ้าง มีขั้นตอนและการจัดวางอย่างไร"
            title.textColor = UIColor.black
            title.font = UIFont.PoppinsMedium(size: 24)
@@ -192,8 +192,9 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
             let parameters: Parameters = ["user_id":typecheck,"post_timeline_id":activityData?.dataId ?? 0]
                 passData.delegate = self
                 Alamofire.request(URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
-                    print(response)
-                    passData.actPost = self.ActivityPostID ?? 0
+                print(response)
+                passData.actPost = self.ActivityPostID ?? 0
+                    passData.actData = self.titleLabel.text ?? ""
                 self.navigationController?.pushViewController(passData, animated: true)
     //            self.present(passData, animated: true, completion: nil)
             }
@@ -330,7 +331,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
 
                 contentLabel.anchor(timeLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX, heightConstant: 0)
                 
-            contentLabel.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 100).isActive = true
+                contentLabel.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 100).isActive = true
 
                 Activityline.anchor(contentLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 30 , widthConstant: screenSizeX, heightConstant: 1.5)
 

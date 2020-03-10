@@ -9,13 +9,13 @@
 import UIKit
 import UserNotifications
 
-extension NotificationView : UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert,.sound,.badge])
-    }
-}
+//extension NotificationView : UNUserNotificationCenterDelegate {
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//        completionHandler([.alert,.sound,.badge])
+//    }
+//}
 
-class NotificationView: UIViewController {
+class NotificationView: UIViewController,UNUserNotificationCenterDelegate {
     
     lazy var submitButton : UIButton = {
             let submit = UIButton(type: UIButton.ButtonType.system)
@@ -51,14 +51,23 @@ class NotificationView: UIViewController {
     @objc func submitBtn(){
         print("5555")
         NotificaitonUser()
+        UNUserNotificationCenter.current().delegate = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UNUserNotificationCenter.current().delegate = self
+        
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound , .badge],
+//                    completionHandler: { didAllow, Error in
+//        })
+//        UNUserNotificationCenter.current().delegate = self
         view.addSubview(submitButton)
     
         submitButton.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 80)
     }
     
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert,.sound,.badge])
+    }
 }

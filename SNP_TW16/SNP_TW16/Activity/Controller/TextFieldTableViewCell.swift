@@ -8,7 +8,7 @@
 
 import UIKit
 import KMPlaceholderTextView
-class  TextFieldTableViewCell :UITableViewCell,UITextFieldDelegate,UINavigationControllerDelegate {
+class  TextFieldTableViewCell :UITableViewCell,UITextFieldDelegate {
      
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
          super.init(style: style, reuseIdentifier: reuseIdentifier)

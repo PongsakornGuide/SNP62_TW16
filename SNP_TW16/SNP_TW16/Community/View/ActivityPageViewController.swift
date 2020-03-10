@@ -19,11 +19,11 @@ class ActivityPageViewController: UITableViewCell {
     }
 
 
-    lazy var bgActivitity:UIView = {
-        let background = UIView()
-        background.backgroundColor = UIColor.rgb(red: 244, green: 241, blue: 230)
-        background.layer.borderColor = UIColor.rgb(red: 244, green: 241, blue: 230).cgColor
-        return background
+    lazy var bgActivitity:UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFill
+        image.image = UIImage(named: "group")
+        return image
     }()
     
     lazy var header:UILabel = {
@@ -36,21 +36,15 @@ class ActivityPageViewController: UITableViewCell {
         return title
     }()
     
-    lazy var backgroundImage:UIImageView = {
-       let image = UIImageView()
-        image.image = UIImage(named: "group")
-       return image
-    }()
+
 
     func setLayout(){
         addSubview(bgActivitity)
         addSubview(header)
-        addSubview(backgroundImage)
 
         bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 170)
 
         header.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 120)
 
-        backgroundImage.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 20, bottomConstant: 0, leftConstant: 250, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
 }
