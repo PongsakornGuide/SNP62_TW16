@@ -90,39 +90,55 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
        }()
 
     @objc func editProfile (){
-        guard let image = imgView.image else { return }
-        let url = URL_POST_EDIT_PROFILE + "?id=\(getIduser)"
-        let parameters: Parameters =
-            ["id":getIduser ,"username":nameTextField.text ?? "nil","surname":surnameTextField.text ?? "nil","photo":"\(imgView.image)",
-             "birthday" ?? "nil":dateTextField.text ?? "00-00-00"]
-        print(parameters)
-        let header: HTTPHeaders = ["Content-type":"multipart/form-data"]
-        let dateFormatter : DateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyyMMddHH:mm:ss"
-        let date = Date()
-        let dateString = dateFormatter.string(from: date)
-        Alamofire.upload(multipartFormData: { (formData) in
-               if let imageData = image.jpegData(compressionQuality: 0.5){
-                   formData.append(imageData, withName: "image" ,fileName: dateString,mimeType: "image/jpg")
-               }
-               for (key,value) in parameters {
-                   if let stringData = value as? String, let data = stringData.data(using: .utf8) {
-                       formData.append(data, withName: key)
-                   }
-
-               }
-           }, to: url ,method: .post ,headers: header) { (res) in
-               switch res{
-               case .success(let request, _, _):
-               request.responseJSON(completionHandler: { (resJson) in
-                   print(resJson.value ?? "0")
-                   self.navigationController?.popToRootViewController(animated: true)
-               })
-               case .failure(_):
-                   print("fail")
-               }
-         }
         
+//    let checkCaption = contentTextField.text?.count ?? 0 > 5 && imageView.image != nil
+        
+        let checkData = nameTextField.text?.count ?? 0 > 1 && surnameTextField.text?.count ?? 0 > 1 && dateTextField.text?.count ?? 0 > 1
+        
+        if !checkData {
+
+            print("NO")
+        }else{
+            print("OK")
+                        let alert = UIAlertController(title: "Alder", message: "ท่านแน่ใจนะ ที่จะแก้ไขข้อมูล",preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "ยกเลิก", style: UIAlertAction.Style.destructive, handler: { _ in
+                            print("Cancel")
+                        }))
+            
+                        alert.addAction(UIAlertAction(title: "แก้ไขข้อมูล",style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+                            guard let image = self.imgView.image else { return }
+                            let url = self.URL_POST_EDIT_PROFILE + "?id=\(self.getIduser)"
+                            let parameters: Parameters = ["id":self.getIduser ,"username":self.nameTextField.text ?? "nil","surname":self.surnameTextField.text ?? "nil","photo":"\(self.imgView.image)",
+                                                                                    "birthday" ?? "nil":self.dateTextField.text ?? "00-00-00"]
+                            print(parameters)
+                            let header: HTTPHeaders = ["Content-type":"multipart/form-data"]
+                            let dateFormatter : DateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "yyyyMMddHH:mm:ss"
+                            let date = Date()
+                            let dateString = dateFormatter.string(from: date)
+                                Alamofire.upload(multipartFormData: { (formData) in
+                                    if let imageData = image.jpegData(compressionQuality: 0.5){
+                                        formData.append(imageData, withName: "image" ,fileName: dateString,mimeType: "image/jpg")
+                                    }
+                                    for (key,value) in parameters {
+                                        if let stringData = value as? String, let data = stringData.data(using: .utf8) {
+                                            formData.append(data, withName: key)
+                                        }
+                                    }
+                                }, to: url ,method: .post ,headers: header) { (res) in
+                                    switch res{
+                                        case .success(let request, _, _):
+                                            request.responseJSON(completionHandler: { (resJson) in
+                                                print(resJson.value ?? "0")
+                                                self.navigationController?.popToRootViewController(animated: true)
+                                            })
+                                        case .failure(_):
+                                            print("fail")
+                                    }
+                                }
+                            }))
+                        self.present(alert, animated: true, completion: nil)
+        }
     }
 
     lazy var titleLabel : UILabel = {

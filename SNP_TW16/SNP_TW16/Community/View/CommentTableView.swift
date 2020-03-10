@@ -13,6 +13,9 @@ class CommentTableView: UITableViewCell {
            super.init(style: style, reuseIdentifier: reuseIdentifier)
            setupViewCell()
     }
+    let screenSizeX: CGFloat = UIScreen.main.bounds.width
+    let screenSizeY: CGFloat = UIScreen.main.bounds.height
+    
     
     lazy var IdUser : UILabel = {
        let name = UILabel()
@@ -26,7 +29,6 @@ class CommentTableView: UITableViewCell {
 
     lazy var contrainer:UIView = {
        let view = UIView()
-//        view.backgroundColor = .purple
         return view
     }()
     
@@ -56,9 +58,9 @@ class CommentTableView: UITableViewCell {
     
     lazy var contrainerComment:UIView = {
            let view = UIView()
-        view.backgroundColor = UIColor.rgb(red: 236, green: 243, blue: 253)
-            view.layer.cornerRadius = 20/2
-            return view
+           view.layer.cornerRadius = 20/2
+           view.layer.backgroundColor = UIColor.rgb(red: 219, green: 219, blue: 219).cgColor
+           return view
     }()
     
     
@@ -67,6 +69,7 @@ class CommentTableView: UITableViewCell {
              comment.text = "สวัสดีวันจันทร์นะคะ คุณสมเกียรติ"
              comment.font = UIFont.PoppinsMedium(size: 16)
              comment.textColor = UIColor.black
+        comment.numberOfLines = 0
              return comment
      }()
     
@@ -113,23 +116,30 @@ class CommentTableView: UITableViewCell {
         addSubview(iconImageLike)
         addSubview(numCount)
         
-        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 20, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 60, heightConstant: 120)
-        
-        contrainer.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 5, rightConstant: 0, widthConstant: 70, heightConstant: 100)
+        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 //
-        profile.anchor(contrainer.topAnchor, left: contrainer.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 60)
+//        contrainer.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+//////
+        profile.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 10, rightConstant: 0, widthConstant: 60, heightConstant: 60)
 //
-        contrainerComment.anchor(contrainer.topAnchor, left: profile.rightAnchor, right: contrainer.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 90)
-        
-        username.anchor(contrainerComment.topAnchor, left: contrainerComment.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 20)
+//
+        contrainerComment.anchor(bgActivitity.topAnchor, left: profile.rightAnchor, right: bgActivitity.rightAnchor, bottom: date.topAnchor, topConstant: 20, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 0)
 
-        date.anchor(contrainerComment.bottomAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 80, rightConstant: 0, widthConstant: 0, heightConstant: 20)
-        
-        comment.anchor(username.bottomAnchor, left: contrainerComment.leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 40)
 
-        numCount.anchor(contrainerComment.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 20, heightConstant: 20)
+        username.anchor(contrainerComment.topAnchor, left: contrainerComment.leftAnchor, right: contrainerComment.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 20)
 
-        iconImageLike.anchor(contrainerComment.bottomAnchor, left: nil, right: numCount.leftAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 20, heightConstant: 20)
+        username.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
+
+        comment.anchor(username.bottomAnchor, left: contrainerComment.leftAnchor, right: contrainerComment.rightAnchor, bottom: contrainerComment.bottomAnchor, topConstant: 10, bottomConstant: 15, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+
+        comment.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
+
+
+        date.anchor(contrainerComment.bottomAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 10, bottomConstant: 10, leftConstant: 80, rightConstant: 0, widthConstant: 0, heightConstant: 20)
+
+        numCount.anchor(contrainerComment.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 10, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 20, heightConstant: 20)
+
+        iconImageLike.anchor(contrainerComment.bottomAnchor, left: nil, right: numCount.leftAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 10, bottomConstant: 10, leftConstant: 0, rightConstant: 10, widthConstant: 20, heightConstant: 20)
 
     }
     required init?(coder: NSCoder) {

@@ -21,7 +21,6 @@ class AcivityListTableViewCell: UITableViewCell{
     
     lazy var pageView:UIView = {
         let background = UIView()
-        background.backgroundColor = UIColor.red
         return background
     }()
     
@@ -158,7 +157,9 @@ class AcivityListTableViewCell: UITableViewCell{
         return button
     }()
     
+    
     func setupViewCell(){
+        
         backgroundColor = UIColor.rgb(red: 247, green: 250, blue: 255)
         addSubview(bgActivitity)
         addSubview(profileImage)
@@ -170,15 +171,16 @@ class AcivityListTableViewCell: UITableViewCell{
         addSubview(numCount)
         addSubview(iconImageComment)
         addSubview(numCom)
-
-            
             
         bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: postImage.leftAnchor, right: postImage.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 
             
         profileImage.anchor(bgActivitity.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 60, heightConstant: 60)
             
-        userFullname.anchor(bgActivitity.topAnchor, left: profileImage.rightAnchor, right: nil, bottom: nil, topConstant: 33, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        userFullname.anchor(bgActivitity.topAnchor, left: profileImage.rightAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 33, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        
+        userFullname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
+        
             
         timeTextLabel.anchor(userFullname.bottomAnchor, left: profileImage.rightAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
             

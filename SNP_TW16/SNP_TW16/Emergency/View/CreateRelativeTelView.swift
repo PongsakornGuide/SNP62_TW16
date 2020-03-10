@@ -89,7 +89,7 @@ class CreateRelativeTelView: UIViewController {
     //-----------------------------------------------------------------------------------------------
     
     @objc func pushToRelatvie(){
-        let checkTel = telTextField.text?.count ?? 0 >= 10 && nameTextField.text?.count ?? 0 >= 1
+        let checkTel = telTextField.text?.count ?? 0 >= 10 && nameTextField.text?.count ?? 0 > 2 && nameTextField.text?.count ?? 0 < 20
         if !checkTel{
             print("OTP NOT REGISTER")
             alertLabel.isHidden = false

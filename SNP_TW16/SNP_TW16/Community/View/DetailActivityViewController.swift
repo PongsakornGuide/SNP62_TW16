@@ -33,7 +33,8 @@ class DetailActivityViewController: UITableViewCell {
      lazy var username : UILabel = {
         let name = UILabel()
         name.text = "asdsa"
-         name.font = UIFont.PoppinsBold(size: 16)
+        name.font = UIFont.PoppinsBold(size: 16)
+        name.numberOfLines = 0
         return name
      }()
      
@@ -52,7 +53,7 @@ class DetailActivityViewController: UITableViewCell {
         comment.text = "Lorem Ipsum is simply dummy text of the printing."
         comment.textColor = UIColor.black
         comment.font =  UIFont.PoppinsBold(size: 18)
-        comment.numberOfLines = 10
+        comment.numberOfLines = 0
         return comment
     }()
     
@@ -62,7 +63,7 @@ class DetailActivityViewController: UITableViewCell {
         image.image = UIImage(named: "tenor")
         image.contentMode = .scaleAspectFill
         image.layer.masksToBounds = true
-//        image.layer.cornerRadius = 25/2
+        image.layer.cornerRadius = 30/2
        return image
     }()
     
@@ -113,7 +114,7 @@ class DetailActivityViewController: UITableViewCell {
                return label
     }()
     
-    lazy var cultTextFieldTextFieldLine: UIView = {
+    lazy var lineLayout: UIView = {
                          let view = UIView()
                          view.backgroundColor = UIColor.blackAlpha(alpha: 0.1)
                          return view
@@ -133,38 +134,38 @@ class DetailActivityViewController: UITableViewCell {
         addSubview(numCount)
         addSubview(iconImageComment)
         addSubview(comCount)
-        addSubview(cultTextFieldTextFieldLine)
+        addSubview(lineLayout)
         
-        pageView.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom:bottomAnchor, topConstant: 30, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: screenSizeY - 340)
+        pageView.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom:safeAreaLayoutGuide.bottomAnchor, topConstant: 15, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        profile.anchor(pageView.topAnchor, left: pageView.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 15, rightConstant: 0, widthConstant: 60, heightConstant: 60)
+        
+        username.anchor(pageView.topAnchor, left: profile.rightAnchor, right: pageView.rightAnchor, bottom: nil, topConstant: 16, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        
+        username.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
+              
+        
+        date.anchor(username.bottomAnchor, left: profile.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 80, rightConstant: 0, widthConstant: 0, heightConstant: 20)
+        
+        comment.anchor(date.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 15, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        
+        comment.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 100).isActive = true
         
         
-        profile.anchor(pageView.topAnchor, left: pageView.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 15, rightConstant: 0, widthConstant: 60, heightConstant: 60)
-             
-        username.anchor(pageView.topAnchor, left: profile.leftAnchor, right: nil, bottom: nil, topConstant: 5, bottomConstant: 0, leftConstant: 80, rightConstant: 0, widthConstant: 0, heightConstant: 20)
-             
-        date.anchor(username.bottomAnchor, left: profile.leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 80, rightConstant: 0, widthConstant: 0, heightConstant: 20)
-             
+        imagePost.anchor(comment.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 15, rightConstant: 15, widthConstant: 0, heightConstant:230)
+        
+        
+        iconImageLike.anchor(imagePost.bottomAnchor, left: safeAreaLayoutGuide.leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 15, leftConstant: 20, rightConstant: 0, widthConstant: 30, heightConstant: 30)
+        
+        numCount.anchor(imagePost.bottomAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 15, leftConstant: 40, rightConstant: 0, widthConstant: 30, heightConstant: 30)
+        
+        
+        lineLayout.anchor(iconImageLike.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: pageView.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1.5)
+        
+        iconImageComment.anchor(imagePost.bottomAnchor, left: nil, right: comCount.leftAnchor, bottom: nil, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 10, widthConstant: 30, heightConstant: 30)
+        
+        comCount.anchor(imagePost.bottomAnchor, left: nil, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 10, widthConstant: 30, heightConstant: 30)
     
-        comment.anchor(date.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 15, rightConstant: 10, widthConstant: 0, heightConstant: 40)
-  
-        imagePost.anchor(comment.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 15, rightConstant: 15, widthConstant: 0, heightConstant:200)
-        
-        contrainer.anchor(imagePost.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: pageView.bottomAnchor, topConstant: 30, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 40)
-        
-        iconImageLike.anchor(contrainer.topAnchor, left: contrainer.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 30, heightConstant: 30)
-            
-        
-        numCount.anchor(contrainer.topAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: nil, topConstant: -5, bottomConstant: 0, leftConstant: 40, rightConstant: 10, widthConstant: 40, heightConstant: 40)
-
-        
-        iconImageComment.anchor(contrainer.topAnchor, left: nil, right: comCount.leftAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 30, heightConstant: 30)
-
-        
-        comCount.anchor(contrainer.topAnchor, left: iconImageComment.rightAnchor, right: contrainer.rightAnchor, bottom: nil, topConstant: -5, bottomConstant: 0, leftConstant: 0, rightConstant: -10, widthConstant: 40, heightConstant: 40)
-
-        
-        cultTextFieldTextFieldLine.anchor(iconImageLike.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1.5)
-        
     }
     
     required init?(coder: NSCoder) {

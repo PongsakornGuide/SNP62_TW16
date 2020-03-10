@@ -23,16 +23,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FF8A8F71-A3CF-40AE-8526-AA9F6F4A1F95"
+            uuid = "0CAA2158-181F-4BC1-86F8-762856293AE8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SNP_TW16/Profile/View/listPostUserTableView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "likePost(_sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -13,10 +13,19 @@ class listPostUserTableView: UITableViewController {
     
 //    let URL_GET_POST = "http://172.20.10.5/alder_iosapp/v1/savePostUser.php"
     let URL_GET_POST = "\(AppDelegate.link)alder_iosapp/v1/savePostUser.php"
+    let URL_GET_DATA = "\(AppDelegate.link)alder_iosapp/v1/show.php"
+    let URL_CLICK_LIKE = "\(AppDelegate.link)alder_iosapp/v1/like_Activity.php"
+    let URL_CLICK_UNLIKE = "\(AppDelegate.link)alder_iosapp/v1/deleteLike.php"
+    let URL_CHECK_LIKE = "\(AppDelegate.link)alder_iosapp/v1/checkLike.php"
+    let URL_COUNT_LIKE = "\(AppDelegate.link)alder_iosapp/v1/countLike.php"
+    let URL_COUNT_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/countComment.php"
+    
 //    var ActivityList: [ListActivityUser]?
     var ActivityList: [allList]?
     
     lazy var defaultValues = UserDefaults.standard
+    lazy var adpostId = Int()
+    lazy var adpostId2 = String()
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     var user_id = String()
@@ -27,6 +36,8 @@ class listPostUserTableView: UITableViewController {
             self.tableView.reloadData()
             self.tabBarController?.tabBar.isHidden = false
         }
+    
+    
            
         override func numberOfSections(in tableView: UITableView) -> Int {
               return 2
@@ -57,6 +68,28 @@ class listPostUserTableView: UITableViewController {
 //                cell.numCount.text = "\(listActivity?.like ?? 0)"
 //                cell.numCom.text = "\(listActivity?.comment ?? 0)"
                 cell.messageTextLabel.text = listActivity?.caption
+                adpostId = listActivity?.id ?? 0
+                print(adpostId)
+                
+                let parametersId: Parameters = ["ad_post_timeline_id":adpostId]
+                                let url = URL_COUNT_LIKE + "?id=\(adpostId)"
+                                    Alamofire.request(url, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
+                                        if let user = resData.result.value as! [String: Any]? {
+                                            if let yield = user["likeActivity"] as? Int {
+                                                cell.numCount.text = "\(yield)"
+                                            }
+                                        }
+                }
+                
+                let urlComment = URL_COUNT_COMMENT + "?id=\(adpostId)"
+                                        Alamofire.request(urlComment, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
+                                                   if let user = resData.result.value as! [String: Any]? {
+                                                       if let commentId = user["commentActivity"] as? Int {
+                                                           cell.numCom.text = "\(commentId)"
+                                                       }
+                                    }
+                }
+                
                 
                    Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (listActivity?.img ?? "0")!).responseImage { response in
                                          if let image = response.result.value{
@@ -70,6 +103,21 @@ class listPostUserTableView: UITableViewController {
                              }
                          }
                 
+
+                    
+                    let parameters: Parameters = ["user_id":user_id,"ad_post_timeline_id":adpostId]
+                    Alamofire.request(URL_CHECK_LIKE, method: .post,parameters: parameters).responseJSON { response in
+                            guard let json = response.value as? [String:Bool], let status = json["error"] else {
+                            return }
+                                if !status {
+                                    cell.iconImageLike.tag = 1
+                                    cell.iconImageLike.tintColor = UIColor.red
+                                    cell.iconImageLike.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                                    
+                            }else{
+                        }
+                    }
+                cell.iconImageLike.titleLabel?.tag = listActivity?.id ?? 0
                 self.tableView.separatorStyle = .none
                 cell.selectionStyle = .none
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
@@ -77,6 +125,15 @@ class listPostUserTableView: UITableViewController {
             }
                
         }
+    func getData(){
+             let parameters: Parameters = ["userId":user_id]
+             let url = URL_GET_POST + "?id=\(user_id)"
+             Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
+                self?.ActivityList = Mapper<allList>().mapArray(JSONObject: dataRes.result.value)
+                self?.tableView.reloadData()
+             }
+    }
+    
     
             override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                 if  indexPath.section == 0{
@@ -89,15 +146,49 @@ class listPostUserTableView: UITableViewController {
            }
  
     
-    func getData(){
-             let parameters: Parameters = ["userId":user_id]
-             let url = URL_GET_POST + "?id=\(user_id)"
-             Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
-                self?.ActivityList = Mapper<allList>().mapArray(JSONObject: dataRes.result.value)
-                self?.tableView.reloadData()
-             }
+    
+    
+    @objc func likePost(_sender:UIButton){
+        adpostId2 = "\(_sender.titleLabel?.tag ?? 0)"
+        print(adpostId2)
+        switch _sender.tag{
+                case 0:
+                    requestData()
+                    let parameters: Parameters = ["user_id":user_id,"ad_post_timeline_id":adpostId2]
+                                    Alamofire.request(URL_CLICK_LIKE, method: .post,parameters: parameters).responseJSON { response in
+                    }
+                    _sender.tag = 1
+                        _sender.tintColor = UIColor.red
+                        _sender.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                case 1:
+                    requestData()
+                    let parameters: Parameters = ["user_id":user_id,"ad_post_timeline_id":adpostId2]
+                                                       Alamofire.request(URL_CLICK_UNLIKE, method: .post,parameters: parameters).responseJSON { response in
+                    }
+                    _sender.tag = 0
+                    _sender.tintColor = .black
+                    _sender.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                default: break
+                }
+         self.tableView.reloadData()
     }
     
+    lazy var refresher: UIRefreshControl = {
+                 let refreshControl = UIRefreshControl()
+                 refreshControl.tintColor = .black
+                 refreshControl.addTarget(self, action: #selector(requestData), for: .valueChanged)
+                 return refreshControl
+         }()
+            
+            // action refresh
+         @objc func requestData(){
+                print("requestData for tableView")
+                let RefreshLine = DispatchTime.now() + .milliseconds(500)
+                DispatchQueue.main.asyncAfter(deadline: RefreshLine) {
+                    self.refresher.endRefreshing()
+                    self.getData()
+                }
+         }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "Delete") {
@@ -128,6 +219,13 @@ class listPostUserTableView: UITableViewController {
     
         override func viewDidLoad(){
             super.viewDidLoad()
+            
+            if #available(iOS 12.1 , *) {
+                                           tableView.refreshControl = refresher
+                                       }else{
+                                           tableView.addSubview(refresher)
+            }
+                   
             
 //            let backItem = UIBarButtonItem()
 //            backItem.title = " "

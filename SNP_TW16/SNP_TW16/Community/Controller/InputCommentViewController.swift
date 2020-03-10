@@ -122,12 +122,10 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
 
                  let commentActivity = comment?[indexPath.row]
                 
-                 cell.date.text = commentActivity?.created
-                 cell.comment.text = commentActivity?.post
-                 cell.username.text = commentActivity?.userName
-                 
-//               URL_COUNT_LIKE_COMMENT
-                
+                cell.date.text = "\(commentActivity?.created ?? "x") น."
+                cell.comment.text = commentActivity?.post
+                cell.username.text = commentActivity?.userName
+
                 let parametersId: Parameters = ["ad_post_timeline_id":adpostId,"commentId":commentActivity?.id ?? 0]
                 let urlComment = URL_COUNT_LIKE_COMMENT + "?id=\(adpostId)&commentId=\(commentActivity?.id ?? 0)"
                 print(urlComment)
