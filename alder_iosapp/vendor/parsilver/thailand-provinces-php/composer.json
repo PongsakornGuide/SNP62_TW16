@@ -1,0 +1,29 @@
+{
+    "name": "parsilver/thailand-provinces-php",
+    "description": "Provinces database in thailand.",
+    "keywords": ["province", "thailand", "amphure"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Parkorn Soonthornchai",
+            "email": "magician_canobi@hotmail.com"
+        }
+    ],
+
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.2.*"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "PA\\ProvinceTh\\": "src/"
+        }
+    }
+}

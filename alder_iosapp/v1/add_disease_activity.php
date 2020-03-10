@@ -7,10 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!verifyRequiredParams(array('activity_user_apps', 'activity_name','disease_user_apps','disease_id','disease_detail','tel'))) {
 
 //        $disease_user_apps, $disease_id,$disease_detail
-
-
         $tel = $_POST['tel'];
-
         $activity_user_apps = $_POST['activity_user_apps'];
         $activity_name = $_POST['activity_name'];
 
@@ -18,17 +15,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $disease_user_apps = $_POST['disease_user_apps'];
         $disease_id = $_POST['disease_id'];
         $disease_detail = $_POST['disease_detail'];
-
-
         $db = new DbOperation();
-        $response['message'] = 'User created successfully';
+//        $response['message'] = 'User created successfully';
         $result = $db->add_activity($activity_user_apps, $activity_name,$disease_user_apps,$disease_id,$disease_detail,$tel);
 
         if ($result == USER_CREATED) {
             //สำเร็จ
-            $response['error'] = false;
             $response['message'] = 'User created successfully';
             $response['user_act'] = $db->getUserByActivity($_POST['tel']);
+            $response['error'] = false;
 
         } elseif ($result == USER_ALREADY_EXIST) {
             //ซ้ำ

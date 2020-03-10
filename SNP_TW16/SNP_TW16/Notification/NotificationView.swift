@@ -31,7 +31,6 @@ class NotificationView: UIViewController,UNUserNotificationCenterDelegate {
             return submit
     }()
     
-    
     func NotificaitonUser(){
         let content = UNMutableNotificationContent()
         content.title = "title"

@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $db = new DbOperation();
         if ($db->checkOtp( $_POST['otp'])) {
-            echo "OTP Correct";
+//            echo "OTP Correct";
             $response['error'] = false;
             $response = $db->updateStatus($_POST['otp']);
         } else {

@@ -24,12 +24,11 @@ class DbOperation
         return $stmt->num_rows > 0;
     }
 
-
-
-
     //Function to create a new user
     public function createUser($username, $surname, $photo, $birthday, $gender, $tel, $address, $religion, $relative_name, $relative_phone, $relative_type)
     {
+
+
 
         if (!$this->isUserExist($username, $tel)) {
             $stmt = $this->conn->prepare("INSERT INTO user_apps (username, surname, photo, birthday, gender, tel, address, religion, relative_name, relative_phone, relative_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -134,6 +133,46 @@ class DbOperation
                 return USER_NOT_CREATED;
             }
     }
+
+
+    //Function Check status otp
+    public function checkjoin($post_timeline_id,$user_id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM join_activity WHERE post_timeline_id = ? AND user_id = ?");
+        $stmt->bind_param("ii", $post_timeline_id,$user_id);
+        $stmt->execute();
+        $stmt->store_result();
+        return $stmt->num_rows > 0;
+    }
+
+    public function checkjoin2($post_timeline_id,$user_id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM decide_after WHERE post_timeline_id = ? AND user_id = ?");
+        $stmt->bind_param("ii", $post_timeline_id,$user_id);
+        $stmt->execute();
+        $stmt->store_result();
+        return $stmt->num_rows > 0;
+    }
+
+
+    public function checkLike($ad_post_timeline_id,$user_id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM likeActivity WHERE ad_post_timeline_id = ? AND user_id = ?");
+        $stmt->bind_param("ii", $ad_post_timeline_id,$user_id);
+        $stmt->execute();
+        $stmt->store_result();
+        return $stmt->num_rows > 0;
+    }
+
+    public function checkLikeComment($user_id,$ad_post_timeline_id,$comment_id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM likeActivityComment WHERE user_id = ? AND ad_post_timeline_id = ? AND comment_id = ?");
+        $stmt->bind_param("iii", $user_id,$ad_post_timeline_id,$comment_id);
+        $stmt->execute();
+        $stmt->store_result();
+        return $stmt->num_rows > 0;
+    }
+    
 
     //Function Delete
 //    public function delete($user_app_id){

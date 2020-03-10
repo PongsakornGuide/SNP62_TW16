@@ -18,3 +18,5 @@ while ($row = $result->fetch_object()) {
 
 echo json_encode($datas, JSON_NUMERIC_CHECK);
 $conn->close();
+
+
