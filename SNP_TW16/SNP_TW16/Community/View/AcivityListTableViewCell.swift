@@ -158,12 +158,27 @@ class AcivityListTableViewCell: UITableViewCell{
     }()
     
     
+    var iconMoro: UIButton = {
+        let image = UIButton()
+        let imagecomment = UIImage(named: "bell") as UIImage?
+        image.setImage(imagecomment, for: .normal)
+        image.contentMode = .scaleAspectFill
+        image.layer.masksToBounds = true
+        image.addTarget(self, action: #selector(morePost), for: .touchUpInside)
+        return image
+    }()
+    
+    @objc func morePost(){
+        
+    }
+    
     func setupViewCell(){
         
         backgroundColor = UIColor.rgb(red: 247, green: 250, blue: 255)
         addSubview(bgActivitity)
         addSubview(profileImage)
         addSubview(userFullname)
+//        addSubview(iconMoro)
         addSubview(messageTextLabel)
         addSubview(timeTextLabel)
         addSubview(postImage)
@@ -177,10 +192,16 @@ class AcivityListTableViewCell: UITableViewCell{
             
         profileImage.anchor(bgActivitity.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 60, heightConstant: 60)
             
+        
         userFullname.anchor(bgActivitity.topAnchor, left: profileImage.rightAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 33, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        
         
         userFullname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
         
+        
+        
+//        iconMoro.anchor(bgActivitity.topAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 33, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+//
             
         timeTextLabel.anchor(userFullname.bottomAnchor, left: profileImage.rightAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
             

@@ -13,7 +13,6 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
        override func viewWillAppear(_ animated: Bool) {
               super.viewWillAppear(animated)
               reloadData()
-            
        }
     
        let URL_GET_EDIT_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/showProfile.php"
@@ -106,6 +105,7 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
                         }))
             
                         alert.addAction(UIAlertAction(title: "แก้ไขข้อมูล",style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+                            
                             guard let image = self.imgView.image else { return }
                             let url = self.URL_POST_EDIT_PROFILE + "?id=\(self.getIduser)"
                             let parameters: Parameters = ["id":self.getIduser ,"username":self.nameTextField.text ?? "nil","surname":self.surnameTextField.text ?? "nil","photo":"\(self.imgView.image)",
@@ -126,6 +126,7 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
                                         }
                                     }
                                 }, to: url ,method: .post ,headers: header) { (res) in
+                                    print(url)
                                     switch res{
                                         case .success(let request, _, _):
                                             request.responseJSON(completionHandler: { (resJson) in
@@ -136,6 +137,8 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
                                             print("fail")
                                     }
                                 }
+                            
+                            
                             }))
                         self.present(alert, animated: true, completion: nil)
         }

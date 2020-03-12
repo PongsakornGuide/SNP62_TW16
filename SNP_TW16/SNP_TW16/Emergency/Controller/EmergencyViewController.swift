@@ -124,15 +124,15 @@ class EmergencyViewController: UITableViewController {
                             }
             }
         }else if indexPath.section == 2{
-            let callAddRelative = self.userRelavite?[indexPath.row]
-            var TelDecide = "\(0)\(callAddRelative?.telphone ?? 0)"
-            if let url = URL(string: "tel://\(TelDecide)"), UIApplication.shared.canOpenURL(url) {
-                      if #available(iOS 10, *) {
-                          UIApplication.shared.open(url)
-                      } else {
-                          UIApplication.shared.openURL(url)
-                      }
-            }
+//            let callAddRelative = self.userRelavite?[indexPath.row]
+//            var TelDecide = "\(0)\(callAddRelative?.telphone ?? 0)"
+//            if let url = URL(string: "tel://\(TelDecide)"), UIApplication.shared.canOpenURL(url) {
+//                      if #available(iOS 10, *) {
+//                          UIApplication.shared.open(url)
+//                      } else {
+//                          UIApplication.shared.openURL(url)
+//                      }
+//            }
         }else{
             print("section3")
         }

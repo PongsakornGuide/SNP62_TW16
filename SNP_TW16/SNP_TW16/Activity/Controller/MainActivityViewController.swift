@@ -54,7 +54,6 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
             cell.titleHeader.text = day
             cell.titleHeader.textColor = .white
             cell.titleHeader.font = UIFont.PoppinsBold(size: 22)
-        
             cell.textHeader.text = Labelname
             cell.textHeader.textColor = .white
             cell.textHeader.font = UIFont.PoppinsBold(size: 32)
@@ -90,7 +89,7 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
                        //keyboardSize.height
                   }
               }
-          }
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
@@ -155,6 +154,7 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
         }
     
     
+    
     func NotificaitonUser(){
          let content = UNMutableNotificationContent()
          content.title = "สวัสดีคุณ \(Labelname)"
@@ -192,7 +192,6 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
         NotificaitonUser()
         UNUserNotificationCenter.current().delegate = self
         
-        
         let currentDate = NSDate()
         let dateFormatter = DateFormatter()
         let date = Date()
@@ -204,18 +203,9 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
-//        let alertController = UIAlertController(title: "ยินดีต้อนรับสู่ Alder", message: "กิจกรรมของเรา รอท่านมาร่วมสนุก :)", preferredStyle: .alert)
-//
-//        let action1 = UIAlertAction(title: "ยืนยัน", style: .default) { (action:UIAlertAction) in
-//        }
-//
-//
-//        alertController.addAction(action1)
-//        self.present(alertController, animated: true, completion: nil)
-//
         
         self.tableView.reloadData()
+        
         let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
             settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
             navigationItem.rightBarButtonItem = settings

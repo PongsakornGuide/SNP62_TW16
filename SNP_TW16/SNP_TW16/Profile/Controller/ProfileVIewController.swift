@@ -342,23 +342,22 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
 
 
                @objc func handelSetting(){
-                                  UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-                                  UserDefaults.standard.synchronize()
-                                  let loginViewController = LoginViewController()
-                                  self.navigationController?.pushViewController(loginViewController, animated: true)
-                                  self.dismiss(animated: false, completion: nil)
-                 }
+                        print("5555")
+                let notificaionView = NotificationTableView()
+                navigationController?.pushViewController(notificaionView, animated: true)
+             }
+    
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Alder"
-
-//        let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
-//                settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
-//                navigationItem.rightBarButtonItem = settings
-//            view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-//            
-        
+     
+        let settings = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(handelSetting))
+        settings.width = 0.5
+        settings.tintColor = UIColor.rgb(red: 253, green: 173, blue: 82)
+        navigationItem.rightBarButtonItem = settings
         let stacView = UIStackView(arrangedSubviews:[nameHeader,surnameHeader])
         stacView.distribution = .fillEqually
         stacView.spacing = 0
@@ -437,7 +436,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
 
         iconActivity.anchor(activityUser.topAnchor, left: activityUser.leftAnchor, right:activityUser.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: iconActivity.frame.size.width , heightConstant: iconActivity.frame.size.height )
         
-        iconPost.anchor(postUser.topAnchor, left: postUser.leftAnchor, right:postUser.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 65, rightConstant: 65, widthConstant: iconPost.frame.size.width, heightConstant: iconPost.frame.size.height)
+        iconPost.anchor(postUser.topAnchor, left: postUser.leftAnchor, right:postUser.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 75, rightConstant: 75, widthConstant: iconPost.frame.size.width, heightConstant: iconPost.frame.size.height)
 
 
         if let name = defaultValues.string(forKey: "userId") {

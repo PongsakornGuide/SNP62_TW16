@@ -19,6 +19,7 @@ class listPostUserTableView: UITableViewController {
     let URL_CHECK_LIKE = "\(AppDelegate.link)alder_iosapp/v1/checkLike.php"
     let URL_COUNT_LIKE = "\(AppDelegate.link)alder_iosapp/v1/countLike.php"
     let URL_COUNT_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/countComment.php"
+    let URL_DELETE_POST = "\(AppDelegate.link)alder_iosapp/v1/deletePostUser.php"
     
 //    var ActivityList: [ListActivityUser]?
     var ActivityList: [allList]?
@@ -29,6 +30,7 @@ class listPostUserTableView: UITableViewController {
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     var user_id = String()
+    lazy var postId = Int()
     
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
@@ -134,6 +136,33 @@ class listPostUserTableView: UITableViewController {
              }
     }
     
+//    let settingLauncher = settingsLauncher()
+    
+//
+//       let blackView = UIView()
+//    @objc func morePost(){
+//
+//        if let window = UIApplication.shared.keyWindow {
+//
+//            blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+//            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handDismiss)))
+//                   window.addSubview(blackView)
+//                   blackView.frame = view.frame
+//            blackView.alpha = 0
+//
+//            UIView.animate(withDuration: 0.5, animations: {
+//                self.blackView.alpha = 1
+//            })
+//        }
+//
+//
+//    }
+//
+//    @objc func handDismiss() {
+//        UIView.animate(withDuration: 0.5) {
+//            self.blackView.alpha = 0
+//        }
+//    }
     
             override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                 if  indexPath.section == 0{
@@ -194,12 +223,33 @@ class listPostUserTableView: UITableViewController {
         let delete = UIContextualAction(style: .normal, title: "Delete") {
             (action, view , completionHandler) in
             print("Delete..")
+            
+            
+            let PostUser = self.ActivityList?[indexPath.row]
+            self.postId = PostUser?.id ?? 0
+            print(self.postId)
+            let parameters: Parameters = ["id":self.postId,"user_app_id":self.user_id]
+            let url = self.URL_DELETE_POST
+            Alamofire.request(url, method: .post,parameters: parameters).responseJSON { response in
+                self.ActivityList?.remove(at: indexPath.row)
+                self.tableView.reloadData()
+            }
+
+            
+            
             completionHandler(true)
         }
         
         let edit = UIContextualAction(style: .normal, title: "Edit") {
                   (action, view , completionHandler) in
-                  print("Email..")
+                print("Email..")
+               let PostUser = self.ActivityList?[indexPath.row]
+               self.postId = PostUser?.id ?? 0
+                print(self.postId)
+                let view = editPostUserViewController()
+                view.post_id = self.postId
+            
+                self.navigationController?.pushViewController(view, animated: true)
                 completionHandler(true)
         }
         
