@@ -122,11 +122,15 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
             dvc.activityList = activitiesPosts
             self.navigationController?.pushViewController(dvc, animated: true)
         }else if indexPath.section == 2{
-            print("555")
+            
             let dvc = TitleStoryTableView()
             self.navigationController?.pushViewController(dvc, animated: true)
+            
         }else{
-            print("666")
+            
+            let dvc = TitleMusicTableView()
+            self.navigationController?.pushViewController(dvc, animated: true)
+            
         }
         
     }

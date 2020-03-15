@@ -135,3 +135,19 @@ class StoryUser: Mappable {
         image <- map["image"]
     }
 }
+
+class VideoUser: Mappable {
+    var id:Int?
+    var url:String?
+    var content:String?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        url <- map["url"]
+        content <- map["content"]
+    }
+}

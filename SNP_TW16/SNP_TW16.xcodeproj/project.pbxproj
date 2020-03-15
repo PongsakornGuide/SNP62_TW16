@@ -38,6 +38,10 @@
 		20F071CC241D492E005FF642 /* StroyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F071CB241D492E005FF642 /* StroyTableView.swift */; };
 		20F071CE241D5415005FF642 /* DetailReligionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F071CD241D5415005FF642 /* DetailReligionViewController.swift */; };
 		20F071D0241DC71F005FF642 /* DetailStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F071CF241DC71F005FF642 /* DetailStoryViewController.swift */; };
+		20F43247241DE06C0016F251 /* TitleMusicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F43246241DE06C0016F251 /* TitleMusicTableView.swift */; };
+		20F43249241DE56E0016F251 /* TitleMusicViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F43248241DE56E0016F251 /* TitleMusicViewCell.swift */; };
+		20F4324B241DE5C50016F251 /* MusicViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F4324A241DE5C50016F251 /* MusicViewCell.swift */; };
+		20F4326E241DFA900016F251 /* TestVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F4326D241DFA900016F251 /* TestVideoController.swift */; };
 		6506942823ACC5E700A045E6 /* DetailActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6506942723ACC5E700A045E6 /* DetailActivityViewController.swift */; };
 		6508F0E023C272D00034F355 /* ActivityHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6508F0DF23C272D00034F355 /* ActivityHeaderViewCell.swift */; };
 		652DDEE623A9BB2B00AF79D3 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652DDEE523A9BB2B00AF79D3 /* RecordViewController.swift */; };
@@ -134,6 +138,10 @@
 		20F071CB241D492E005FF642 /* StroyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StroyTableView.swift; sourceTree = "<group>"; };
 		20F071CD241D5415005FF642 /* DetailReligionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReligionViewController.swift; sourceTree = "<group>"; };
 		20F071CF241DC71F005FF642 /* DetailStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStoryViewController.swift; sourceTree = "<group>"; };
+		20F43246241DE06C0016F251 /* TitleMusicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleMusicTableView.swift; sourceTree = "<group>"; };
+		20F43248241DE56E0016F251 /* TitleMusicViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleMusicViewCell.swift; sourceTree = "<group>"; };
+		20F4324A241DE5C50016F251 /* MusicViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewCell.swift; sourceTree = "<group>"; };
+		20F4326D241DFA900016F251 /* TestVideoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoController.swift; sourceTree = "<group>"; };
 		30712429F1B664DA3DA42017 /* Pods-SNP_TW16.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SNP_TW16.debug.xcconfig"; path = "Target Support Files/Pods-SNP_TW16/Pods-SNP_TW16.debug.xcconfig"; sourceTree = "<group>"; };
 		592585A21BEB8AFA078EEE87 /* Pods-SNP_TW16.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SNP_TW16.release.xcconfig"; path = "Target Support Files/Pods-SNP_TW16/Pods-SNP_TW16.release.xcconfig"; sourceTree = "<group>"; };
 		61CC7B36A00F9D04E5572DF0 /* Pods_SNP_TW16.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SNP_TW16.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,6 +302,10 @@
 		20F071D1241DD7C6005FF642 /* Music */ = {
 			isa = PBXGroup;
 			children = (
+				20F43246241DE06C0016F251 /* TitleMusicTableView.swift */,
+				20F43248241DE56E0016F251 /* TitleMusicViewCell.swift */,
+				20F4324A241DE5C50016F251 /* MusicViewCell.swift */,
+				20F4326D241DFA900016F251 /* TestVideoController.swift */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -795,6 +807,7 @@
 				65DD3CDA23AD45B9008C5EA5 /* SearchTableViewCell.swift in Sources */,
 				20F071D0241DC71F005FF642 /* DetailStoryViewController.swift in Sources */,
 				65DBB65323E447210081F9BE /* titleListPostViewCell.swift in Sources */,
+				20F43249241DE56E0016F251 /* TitleMusicViewCell.swift in Sources */,
 				6589101423E204DA007E5DF0 /* ListActTitleType.swift in Sources */,
 				65D0708123DC482E00A41ABA /* grapViewController.swift in Sources */,
 				65B0164A23AB6C3B00EBB76A /* CreateViewController.swift in Sources */,
@@ -808,6 +821,7 @@
 				65DBB64F23E442CF0081F9BE /* titleListActivityViewCell.swift in Sources */,
 				65BADF5A23F2ACBD00DAEAD1 /* editProfileView.swift in Sources */,
 				65B0164723AB2BCC00EBB76A /* LoginViewController.swift in Sources */,
+				20F4326E241DFA900016F251 /* TestVideoController.swift in Sources */,
 				20EC77802415019900A1B6BA /* TextFieldTableViewCell.swift in Sources */,
 				6589101623E22498007E5DF0 /* TitleFavoriteView.swift in Sources */,
 				654936A823C1CDF600B190A1 /* SubActivityTypeTableViewController.swift in Sources */,
@@ -816,6 +830,7 @@
 				654F379923C9A1F9009259A3 /* CommentTableView.swift in Sources */,
 				65DBB65523E447A90081F9BE /* listPostUserTableView.swift in Sources */,
 				657C548623BA827E00B32EC6 /* EmergencyViewController.swift in Sources */,
+				20F43247241DE06C0016F251 /* TitleMusicTableView.swift in Sources */,
 				6589100823E17B61007E5DF0 /* TitleTableVIiewCellTest.swift in Sources */,
 				20E7EF842419A85100DCE89F /* editPostUserViewController.swift in Sources */,
 				20F071CA241D491B005FF642 /* ReligionTableView.swift in Sources */,
@@ -836,6 +851,7 @@
 				65F50ACB234F71D8006A1767 /* tabBarViewController.swift in Sources */,
 				6508F0E023C272D00034F355 /* ActivityHeaderViewCell.swift in Sources */,
 				65DBB64923E403120081F9BE /* Profile.swift in Sources */,
+				20F4324B241DE5C50016F251 /* MusicViewCell.swift in Sources */,
 				6580828423BDF3F70092B0D6 /* ProfileVIewController.swift in Sources */,
 				657C548A23BA837D00B32EC6 /* DetailEmergencyView.swift in Sources */,
 				20ED2C752403D6FF00EC9772 /* DecideAfterViewController.swift in Sources */,
