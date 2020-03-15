@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import ObjectMapper
+import SDWebImage
 class InputCommentViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource{
 
          let URL_GET_DATA = "\(AppDelegate.link)alder_iosapp/v1/show.php"
@@ -24,7 +25,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
          let URL_DELETE_LIKE_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/deleteLikeComment.php"
          let URL_CHECK_LIKE_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/checkLikeComment.php"
          let URL_COUNT_LIKE_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/coutLikeComment.php"
-    
+
          lazy var defaultValues = UserDefaults.standard
          lazy var adpostId = Int()
          lazy var adpostId2 = String()
@@ -35,7 +36,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
          private var cellId2 = "Cell2"
 
          var check : allList?
-    
+
          var comment: [CommentList]?
          lazy var userid = String()
 
@@ -43,6 +44,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             self.tabBarController?.tabBar.isHidden = true
+            self.getcomment()
             self.tableview.reloadData()
         }
 
@@ -62,44 +64,48 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
 
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
              if indexPath.section == 0 {
-                
+
                let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! DetailActivityViewController
                 cell.username.text = check?.username
                 cell.date.text = check?.createdAt
                 cell.comment.text = check?.caption
+                cell.numCount.text = "\(check?.likeActivity ?? 0)"
+                cell.numCount.text = "\(check?.commentsActivity ?? 0)"
                 adpostId = check?.id ?? 0
                 cell.iconImageLike.titleLabel?.tag = check?.id ?? 0
-                let parametersId: Parameters = ["ad_post_timeline_id":adpostId]
-                let url = URL_COUNT_LIKE + "?id=\(adpostId)"
-                               Alamofire.request(url, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
-                                   if let user = resData.result.value as! [String: Any]? {
-                                       if let yield = user["likeActivity"] as? Int {
-                                           cell.numCount.text = "\(yield)"
-                                       }
-                                }
-               }
+                
 
-                let urlComment = URL_COUNT_COMMENT + "?id=\(adpostId)"
-                                   Alamofire.request(urlComment, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
-                                              if let user = resData.result.value as! [String: Any]? {
-                                                  if let commentId = user["commentActivity"] as? Int {
-                                                      cell.comCount.text = "\(commentId)"
-                                                  }
-                                       }
-                }
-
-
-                 Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (check?.photo ?? "0")!).responseImage { response in
-                          if let image = response.result.value {
-                             cell.profile.image = image
-                         }
-                 }
-
-                 Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (check?.img ?? "0")!).responseImage { response in
-                          if let image = response.result.value {
-                             cell.imagePost.image = image
-                         }
-                 }
+                  let postImagePath = "\(AppDelegate.link)alder_iosapp/" + (check?.img ?? "0")
+                  let profileImagePath = "\(AppDelegate.link)alder_iosapp/" + (check?.photo ?? "0")
+                
+                  if let postImageURL = URL(string: postImagePath) {
+                    cell.imagePost.sd_setImage(with: postImageURL, completed: nil)
+                  }
+                          
+                  if let profileImageURL = URL(string: profileImagePath){
+                      cell.profile.sd_setImage(with: profileImageURL, completed: nil)
+                  }
+                
+            
+//                let parametersId: Parameters = ["ad_post_timeline_id":adpostId]
+//                let url = URL_COUNT_LIKE + "?id=\(adpostId)"
+//                               Alamofire.request(url, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
+//                                   if let user = resData.result.value as! [String: Any]? {
+//                                       if let yield = user["likeActivity"] as? Int {
+//                                           cell.numCount.text = "\(yield)"
+//                                       }
+//                                }
+//               }
+//
+//                let urlComment = URL_COUNT_COMMENT + "?id=\(adpostId)"
+//                                   Alamofire.request(urlComment, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
+//                                              if let user = resData.result.value as! [String: Any]? {
+//                                                  if let commentId = user["commentActivity"] as? Int {
+//                                                      cell.comCount.text = "\(commentId)"
+//                                                  }
+//                                       }
+//                }
+//
 
                     let parameters: Parameters = ["user_id":userid,"ad_post_timeline_id":adpostId]
                     Alamofire.request(URL_CHECK_LIKE, method: .post,parameters: parameters).responseJSON { response in
@@ -113,6 +119,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                         }
                     }
 
+                
                     cell.selectionStyle = .none
                     cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                    return cell
@@ -121,7 +128,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                  CommentTableView
 
                  let commentActivity = comment?[indexPath.row]
-                
+
                 cell.date.text = "\(commentActivity?.created ?? "x") น."
                 cell.comment.text = commentActivity?.post
                 cell.username.text = commentActivity?.userName
@@ -137,7 +144,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                                                   }
                                        }
                 }
-                
+
                  Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (commentActivity?.imageView ?? "0")!).responseImage { response in
                          if let image = response.result.value{
                                  cell.profile.image = image
@@ -147,8 +154,8 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 cell.iconImageLike.titleLabel?.tag = commentActivity?.id ?? 0
                 postComID = commentActivity?.id ?? 0
-                
-                
+
+
                 let parameters: Parameters = ["user_id":userid,"ad_post_timeline_id":adpostId,"comment_id":commentActivity?.id ?? 0]
                 print(parameters)
                           Alamofire.request(URL_CHECK_LIKE_COMMENT, method: .post,parameters: parameters).responseJSON { response in
@@ -159,31 +166,31 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                                             cell.iconImageLike.tintColor = UIColor.red
                                             cell.iconImageLike.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
                                   }else{
-                                        
+
                                   }
                 }
-                
+
                 return cell
              }
         }
-    
-    @objc func sendData(_ sender:UIButton){
+
+        @objc func sendData(_ sender:UIButton){
                        let isCheckValid = commentTextField.text?.count ?? 0 > 0
                        if isCheckValid{
+                        commentTextField.text = ""
                               let parameters: Parameters = ["ad_post_timeline_id":check?.id ?? 0,"user_id":userid,"post":commentTextField.text!]
                                  let url = URL_POST_COMMENT
                                  Alamofire.request(url, method: .post,parameters: parameters).responseJSON { response in
-                                    self.tableview.reloadData()
-                                    self.navigationController?.popViewController(animated: true)
+                                    self.getcomment()
                                  }
-                        
+
 
                        }else{
-                    
-                       }
-        
+
+        }
+
     }
-    
+
     @objc func likePost(_sender:UIButton){
         adpostId2 = "\(_sender.titleLabel?.tag ?? 0)"
         switch _sender.tag{
@@ -207,8 +214,8 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                 }
         self.tableview.reloadData()
     }
-    
-    
+
+
      func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section == 0{
             let configuration = UISwipeActionsConfiguration()
@@ -224,13 +231,13 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                     self.tableview.reloadData()
                 }
                 completionHandler(true)
-                
+
             }
-            
+
             let edit = UIContextualAction(style: .normal, title: "Edit") {(action, view , completionHandler) in
                 completionHandler(true)
             }
-            
+
             let configuration = UISwipeActionsConfiguration(actions: [delete, edit])
                 delete.backgroundColor = UIColor.rgb(red: 255, green: 51, blue: 101)
                 delete.image = UIImage(named: "bin")
@@ -238,9 +245,9 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                 edit.image = UIImage(named: "edit")
                 return configuration
         }
-        
+
     }
-    
+
         @objc func likeComment(_sender:UIButton){
             adpostId3 = "\(_sender.titleLabel?.tag ?? 0)"
             print("Like Comment Sucessue")
@@ -253,7 +260,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                 _sender.tag = 1
                 _sender.tintColor = UIColor.red
                 _sender.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                
+
             case 1:
                 let parameters: Parameters = ["user_id":userid,"ad_post_timeline_id":adpostId,"comment_id":adpostId3]
                     Alamofire.request(URL_DELETE_LIKE_COMMENT, method: .post,parameters: parameters).responseJSON { response in
@@ -261,7 +268,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                 _sender.tag = 0
                 _sender.tintColor = .black
                 _sender.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                
+
             default: break
             }
             self.tableview.reloadData()
@@ -324,14 +331,14 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                 }
             }
         }
-    
+
     lazy var refresher: UIRefreshControl = {
               let refreshControl = UIRefreshControl()
               refreshControl.tintColor = .black
               refreshControl.addTarget(self, action: #selector(requestData), for: .valueChanged)
               return refreshControl
       }()
-         
+
          // action refresh
       @objc func requestData(){
 //             print("requestData for tableView")
@@ -341,11 +348,20 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
              }
       }
     
+    
+        func getcomment(){
+            let url = URL_GET_COMMENT + "?id=\(check?.id ?? 0)"
+                Alamofire.request(url).responseJSON { [weak self](resData) in
+                    self?.comment = Mapper<CommentList>().mapArray(JSONObject: resData.result.value)
+                    self?.tableview.reloadData()
+            }
+        }
+
         override func viewDidLoad(){
             super.viewDidLoad()
-            
+
             view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-            
+
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
@@ -354,12 +370,8 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                                     }else{
                                         tableview.addSubview(refresher)
             }
-                
-            let url = URL_GET_COMMENT + "?id=\(check?.id ?? 0)"
-                Alamofire.request(url).responseJSON { [weak self](resData) in
-                    self?.comment = Mapper<CommentList>().mapArray(JSONObject: resData.result.value)
-                    self?.tableview.reloadData()
-            }
+
+            
 
             let defaultValues = UserDefaults.standard
                         if let name = defaultValues.string(forKey: "userId") {

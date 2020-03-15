@@ -15,5 +15,5 @@ target 'SNP_TW16' do
   pod 'FLEX', :configurations => ['Debug']
   pod 'MultiDegreeLikeButton'
   pod 'KMPlaceholderTextView'
- 
+  pod 'SDWebImage', '~> 5.0'
 end

@@ -12,12 +12,11 @@ class allList: Mappable{
     var userAppId: Int?
     var caption: String?
     var img: String?
-//    var like: Int?
-//    var comment: Int?
     var createdAt: String?
     var username: String?
     var photo: String?
-//    var listAct:[allAct]?
+    var likeActivity: Int?
+    var commentsActivity: Int?
     required init?(map: Map) {
 
     }
@@ -27,13 +26,11 @@ class allList: Mappable{
         userAppId  <- map["user_app_id"]
         caption <- map["caption"]
         img  <- map["img"]
-//        like    <- map["likePost"]
-//        comment  <- map["comment"]
         createdAt <- map["created_at"]
         username  <- map["username"]
         photo <- map["photo"]
+        likeActivity <- map["likeActivity"]
+        commentsActivity <- map["commentsActivity"]
     }
 
 }
-
-

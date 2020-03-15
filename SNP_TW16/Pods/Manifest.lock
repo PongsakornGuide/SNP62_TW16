@@ -8,6 +8,9 @@ PODS:
   - MultiDegreeLikeButton (0.1.0)
   - ObjectMapper (3.5.1)
   - Pastel (0.5.1)
+  - SDWebImage (5.6.1):
+    - SDWebImage/Core (= 5.6.1)
+  - SDWebImage/Core (5.6.1)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
@@ -19,6 +22,7 @@ DEPENDENCIES:
   - MultiDegreeLikeButton
   - ObjectMapper (~> 3.4)
   - Pastel
+  - SDWebImage (~> 5.0)
   - SwiftyJSON
 
 SPEC REPOS:
@@ -31,6 +35,7 @@ SPEC REPOS:
     - MultiDegreeLikeButton
     - ObjectMapper
     - Pastel
+    - SDWebImage
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -42,8 +47,9 @@ SPEC CHECKSUMS:
   MultiDegreeLikeButton: 72d4e7c1988704a836c9a4a8bf77c39c6b35f659
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   Pastel: b3dd5b8d612dac06ae7c63c97c45c900829bc139
+  SDWebImage: 7edb9c3ea661e77a66661f7f044de8c1b55d1120
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 22f968829ef29014f3b56675dcc246e46ea58757
+PODFILE CHECKSUM: c8cd3584090dbfc452c59e41b3d6c434bc7ac472
 
 COCOAPODS: 1.8.4

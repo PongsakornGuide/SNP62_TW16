@@ -130,46 +130,46 @@ class LoginViewController: UIViewController {
 //        let fromNumber = "+12565308003"// actual number is +9999999
 //        let toNumber = "+66631921545"// actual number is +9999999
         
-//        Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
-//                        if let otp = response.result.value as! [String: Any]? {
-//                            if let yield = otp["otp"] as? String {
-//                               print(yield)
-//
-//                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//                                    // your code here
-//                                      self.otpTextField.text = yield
-//                                }
-//                                        let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
-//                                        let twilioSecret = "a74824968da571b8afac81506f84acf2"
-//                                        let fromNumber = "+12565308003"// actual number is +9999999
-//                                        let toNumber = "+66631921545"// actual number is +9999999
-////                                let twilioSID = "AC6eb59c25b1d9e5c102ff07382a033245"
-////                                let twilioSecret = "3a776b6855e4ce991e1d0b07bdefa350"
-////                                                            //Note replace + = %2B , for To and From phone number
-////                                let fromNumber = "+14064123140"// actual number is +9999999
-////                                let toNumber = "+66815552550"// actual number is +9999999
-//
-//
-//                                         let message = "Your verification code is \(yield) for Login"
-//                                         // Build the request
-//                                         let request = NSMutableURLRequest(url: URL(string:"https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/SMS/Messages")!)
-//                                         request.httpMethod = "POST"
-//                                         request.httpBody = "From=\(fromNumber)&To=\(toNumber)&Body=\(message)".data(using: .utf8)
-//                                                         // Build the completion block and send the request
-//                                         URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
-//                                             print("Finished")
-//                                             if let data = data, let responseDetails = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
-//                                                 // Success
-//                                                 print("Response: \(responseDetails)")
-//                                             } else {
-//                                                 // Failure
-//                                                print("Error: \(error)")
-//                                             }
-//                                         }).resume()
-//                             }
-//
-//                }
-//            }
+        Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
+                        if let otp = response.result.value as! [String: Any]? {
+                            if let yield = otp["otp"] as? String {
+                               print(yield)
+
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                    // your code here
+                                      self.otpTextField.text = yield
+                                }
+                                        let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
+                                        let twilioSecret = "a74824968da571b8afac81506f84acf2"
+                                        let fromNumber = "+12565308003"// actual number is +9999999
+                                        let toNumber = "+66631921545"// actual number is +9999999
+//                                let twilioSID = "AC6eb59c25b1d9e5c102ff07382a033245"
+//                                let twilioSecret = "3a776b6855e4ce991e1d0b07bdefa350"
+//                                                            //Note replace + = %2B , for To and From phone number
+//                                let fromNumber = "+14064123140"// actual number is +9999999
+//                                let toNumber = "+66815552550"// actual number is +9999999
+
+
+                                         let message = "Your verification code is \(yield) for Login"
+                                         // Build the request
+                                         let request = NSMutableURLRequest(url: URL(string:"https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/SMS/Messages")!)
+                                         request.httpMethod = "POST"
+                                         request.httpBody = "From=\(fromNumber)&To=\(toNumber)&Body=\(message)".data(using: .utf8)
+                                                         // Build the completion block and send the request
+                                         URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
+                                             print("Finished")
+                                             if let data = data, let responseDetails = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
+                                                 // Success
+                                                 print("Response: \(responseDetails)")
+                                             } else {
+                                                 // Failure
+                                                print("Error: \(error)")
+                                             }
+                                         }).resume()
+                             }
+
+                }
+            }
     }
 
   

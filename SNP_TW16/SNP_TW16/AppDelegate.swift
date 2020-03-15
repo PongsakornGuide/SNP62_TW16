@@ -15,8 +15,8 @@ import FLEX
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    static let link = "http://localhost/"
-//    static let link = "http://192.168.43.145/"
+//    static let link = "http://localhost/"
+    static let link = "http://192.168.43.145/"
     
     
 //    static let link = "http://192.168.1.105/"
@@ -28,7 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: tabBarViewController())
+        window?.rootViewController = tabBarViewController()
+//        window?.rootViewController = UINavigationController(rootViewController: tabBarViewController())
         return true
     }
 

@@ -11,6 +11,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import ObjectMapper
+import SDWebImage
 
 class CommunViewController: UITableViewController{
 
@@ -72,38 +73,31 @@ class CommunViewController: UITableViewController{
             cell.userFullname.text = headerActivity?.username
             cell.messageTextLabel.text = headerActivity?.caption
             cell.timeTextLabel.text = headerActivity?.createdAt
+            cell.numCount.text = "\(headerActivity?.likeActivity ?? 0)"
+            cell.numCom.text = "\(headerActivity?.commentsActivity ?? 0)"
             adpostId = headerActivity?.id ?? 0
             
-            let parametersId: Parameters = ["ad_post_timeline_id":adpostId]
-            let url = URL_COUNT_LIKE + "?id=\(adpostId)"
-                Alamofire.request(url, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
-                    if let user = resData.result.value as! [String: Any]? {
-                        if let yield = user["likeActivity"] as? Int {
-                            cell.numCount.text = "\(yield)"
-                        }
-                    }
-            }
-        
-            let urlComment = URL_COUNT_COMMENT + "?id=\(adpostId)"
-                    Alamofire.request(urlComment, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
-                               if let user = resData.result.value as! [String: Any]? {
-                                   if let commentId = user["commentActivity"] as? Int {
-                                       cell.numCom.text = "\(commentId)"
-                                   }
-                }
+
+            
+            let postImagePath = "\(AppDelegate.link)alder_iosapp/" + (headerActivity?.img ?? "0")
+            let profileImagePath = "\(AppDelegate.link)alder_iosapp/" + (headerActivity?.photo ?? "0")
+            if let postImageURL = URL(string: postImagePath) {
+                cell.postImage.sd_setImage(with: postImageURL, completed: nil)
             }
             
-            
-            Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (headerActivity?.img ?? "0")!).responseImage { response in
-                            if let image = response.result.value{
-                            cell.postImage.image = image
-                }
+            if let profileImageURL = URL(string: profileImagePath){
+                cell.profileImage.sd_setImage(with: profileImageURL, completed: nil)
             }
-            Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (headerActivity?.photo ?? "0")!).responseImage { response in
-                            if let image2 = response.result.value {
-                            cell.profileImage.image = image2
-                }
-            }
+//            Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (headerActivity?.img ?? "0")!).responseImage { response in
+//                            if let image = response.result.value{
+//                            cell.postImage.image = image
+//                }
+//            }
+//            Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (headerActivity?.photo ?? "0")!).responseImage { response in
+//                            if let image2 = response.result.value {
+//                            cell.profileImage.image = image2
+//                }
+//            }
             
             
             

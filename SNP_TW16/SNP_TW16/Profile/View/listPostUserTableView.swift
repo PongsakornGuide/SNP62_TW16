@@ -166,9 +166,9 @@ class listPostUserTableView: UITableViewController {
                 if  indexPath.section == 0{
                     
                 }else {
-                   let vc = InputCommentViewController()
-//                   vc.check = ActivityList?[indexPath.row]
-                   self.navigationController?.pushViewController(vc, animated: true)
+//                   let vc = InputCommentViewController()
+////                   vc.check = ActivityList?[indexPath.row]
+//                   self.navigationController?.pushViewController(vc, animated: true)
                }
            }
  
