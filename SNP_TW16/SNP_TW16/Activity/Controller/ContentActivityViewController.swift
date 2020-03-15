@@ -15,6 +15,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
     lazy var typecheck = String()
     lazy var ActivityPostID = Int()
     lazy var IdActivity = Int()
+    lazy var titleCheck = String()
     var delegate:UIViewController?
     let URL_USER_ID = "\(AppDelegate.link)alder_iosapp/v1/join.php"
     let URL_CHECK_JOIN = "\(AppDelegate.link)alder_iosapp/v1/checkjoin.php"
@@ -22,6 +23,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
     
     let URL_CHECK_INVITE = "\(AppDelegate.link)alder_iosapp/v1/inviteActivity.php"
     
+    let URL_INSERT_NOTIFICATION = "\(AppDelegate.link)alder_iosapp/v1/insertNotification.php"
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
              
@@ -59,7 +61,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
       lazy var textHeader : UILabel = {
            let title = UILabel()
            title.text = "สันทนาการ"
-           title.font = UIFont.PoppinsBold(size: 17)
+           title.font = UIFont.BaiJamjureeBold(size: 17)
            title.textColor = UIColor.white
            return title
       }()
@@ -67,7 +69,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
       lazy var titleLabel : UILabel = {
            let title = UILabel()
            title.text = "แซนวิสเพื่อสุขภาพ"
-           title.font = UIFont.PoppinsBold(size: 28)
+           title.font = UIFont.BaiJamjureeBold(size: 28)
            title.numberOfLines = 0
            return title
       }()
@@ -76,7 +78,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
            let title = UILabel()
            title.text = "โดย ไกด์ ฐิติวัฒน์"
            title.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
-           title.font = UIFont.PoppinsMedium(size: 16)
+           title.font = UIFont.BaiJamjureeMedium(size: 16)
            return title
      }()
 
@@ -85,7 +87,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
       let title = UILabel()
       title.text = "วันเริ่มกิจกรรม: 14 สิงหาคม 2562"
       title.textColor = UIColor.black
-      title.font = UIFont.PoppinsMedium(size: 18)
+      title.font = UIFont.BaiJamjureeMedium(size: 18)
       return title
      }()
      
@@ -95,7 +97,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
            title.numberOfLines = 0
            title.text = "เรียนรู้ขั้นตอนการจัดวางแซนวิชของตนเอง ผ่านการเลือกสรรส่วนประกอบว่ามีอะไรบ้าง มีขั้นตอนและการจัดวางอย่างไร"
            title.textColor = UIColor.black
-           title.font = UIFont.PoppinsMedium(size: 24)
+           title.font = UIFont.BaiJamjureeMedium(size: 24)
            return title
      }()
 
@@ -134,7 +136,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
              button.layer.cornerRadius = 20
              button.setTitle("เข้าร่วมกิจกรรม", for: .normal)
              button.setTitleColor(.white, for: .normal)
-             button.titleLabel?.font = UIFont.PoppinsBold(size: 24)
+             button.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
              button.addTarget(self, action: #selector(join_Activity), for: .touchUpInside)
              return button
      }()
@@ -145,7 +147,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                button.layer.cornerRadius = 20
                button.setTitle("ยกเลิกการเข้าร่วมกิจกรรม", for: .normal)
                button.setTitleColor(.white, for: .normal)
-               button.titleLabel?.font = UIFont.PoppinsBold(size: 24)
+               button.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
                button.isHidden = true
                button.isEnabled = true
                button.addTarget(self, action: #selector(cancel_Activity), for: .touchUpInside)
@@ -156,7 +158,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
               let title = UILabel()
               title.text = "14 สิงหาคม 2562"
               title.textColor = UIColor.black
-              title.font = UIFont.PoppinsMedium(size: 20)
+              title.font = UIFont.BaiJamjureeMedium(size: 20)
               return title
      }()
     
@@ -164,7 +166,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
           let title = UILabel()
           title.text = "10:30 - 11:00"
           title.textColor = UIColor.black
-          title.font = UIFont.PoppinsMedium(size: 20)
+          title.font = UIFont.BaiJamjureeMedium(size: 20)
           return title
      }()
     
@@ -172,7 +174,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
          let title = UILabel()
          title.text = "10:30 - 11:00"
          title.textColor = UIColor.black
-         title.font = UIFont.PoppinsMedium(size: 20)
+         title.font = UIFont.BaiJamjureeMedium(size: 20)
          return title
     }()
     
@@ -180,24 +182,39 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
           let title = UILabel()
           title.text = "ผู้เข้าร่วม 20 คน"
           title.textColor = UIColor.black
-          title.font = UIFont.PoppinsMedium(size: 20)
+          title.font = UIFont.BaiJamjureeMedium(size: 20)
           return title
      }()
     
     
 
        @objc func join_Activity(){
+        
+        let alert = UIAlertController(title: "แน่ใจว่าต้องการเข้าร่วมกิจกรรม", message: "ยืนยันการเข้าร่วม",preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "ยกเลิก", style: UIAlertAction.Style.destructive, handler: { _ in
+            print("Cancel")
+        }))
+                  
+        alert.addAction(UIAlertAction(title: "เข้าร่วม",style: UIAlertAction.Style.default, handler: { _ in
             
-            let passData = DecideViewController()
-            let parameters: Parameters = ["user_id":typecheck,"post_timeline_id":activityData?.dataId ?? 0]
-                passData.delegate = self
-                Alamofire.request(URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
-                print(response)
-                passData.actPost = self.ActivityPostID ?? 0
-                    passData.actData = self.titleLabel.text ?? ""
-                self.navigationController?.pushViewController(passData, animated: true)
-    //            self.present(passData, animated: true, completion: nil)
-            }
+                    let insertNotification: Parameters = ["user_id":self.typecheck,"post_timeline_id":"\(self.activityData?.dataId ?? 0 )","contentAct":"คุณได้เข้าร่วมกิจรรมสำเร็จ",]
+                        print(insertNotification)
+                        Alamofire.request(self.URL_INSERT_NOTIFICATION, method: .post,parameters: insertNotification).responseJSON { response in
+                                     print(response)
+                        }
+            
+                    let passData = DecideViewController()
+                        let parameters: Parameters = ["user_id":self.typecheck,"post_timeline_id":self.activityData?.dataId ?? 0]
+                        passData.delegate = self
+                            Alamofire.request(self.URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
+                        print(response)
+                        passData.actPost = self.ActivityPostID ?? 0
+                        passData.actData = self.titleLabel.text ?? ""
+                        self.navigationController?.pushViewController(passData, animated: true)
+                    }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    
         }
     
         @objc func cancel_Activity (){
@@ -224,6 +241,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
         }
         
         func reloadData(){
+            
                      ActivityPostID = activityData?.dataId ?? 0
                      titleLabel.text = activityData?.actId
                      nameLabel.text = "โดย \(activityData?.caption ?? "ค่าว่าง")"
@@ -241,9 +259,9 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                          }
                      }
             
-                                let parameters: Parameters = ["id": IdActivity]
-                                let url = URL_CHECK_INVITE + "?id=\(IdActivity)"
-                                 Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
+                    let parameters: Parameters = ["id": IdActivity]
+                    let url = URL_CHECK_INVITE + "?id=\(IdActivity)"
+                    Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
 
                                     if let user = resData.result.value as! [String: Any]? {
                                         if let yield = user["invaite"] as? Int {
@@ -257,24 +275,27 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
             
         }
     
-    func reloadFun(){
-        let parameters: Parameters = ["user_id":typecheck,"post_timeline_id":activityData?.dataId ?? 0]
-                           Alamofire.request(URL_CHECK_JOIN, method: .post,parameters: parameters).responseJSON { response in
-                                   print(response)
-                               guard let json = response.value as? [String:Bool], let status = json["error"] else { return }
-                               if !status {
-                                   self.enableButton.isHidden = false
-                                   self.nextButton.isHidden = true
-                               }else{
-                                   self.nextButton.backgroundColor = .blue
+            func reloadFun(){
+                let parameters: Parameters = ["user_id":typecheck,"post_timeline_id":activityData?.dataId ?? 0]
+                                   Alamofire.request(URL_CHECK_JOIN, method: .post,parameters: parameters).responseJSON { response in
+                                           print(response)
+                                       guard let json = response.value as? [String:Bool], let status = json["error"] else { return }
+                                       if !status {
+                                           self.enableButton.isHidden = false
+                                           self.nextButton.isHidden = true
+                                       }else{
+                                           self.nextButton.backgroundColor = .blue
+                                       }
                                }
-                       }
-    }
+            }
     
              override func viewDidLoad() {
                 super.viewDidLoad()
-                reloadData()
-                reloadFun()
+//                print("ข้อมูล \(nameLabel)")
+                print(titleCheck)
+                "\(titleLabel.text = titleCheck)"
+//                reloadData()
+//                reloadFun()
                  if let name2 = defaultValues.string(forKey: "userId") {
                         typecheck = name2
                     }else{

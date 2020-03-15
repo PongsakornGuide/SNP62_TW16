@@ -20,7 +20,7 @@ class grapViewController: UITableViewController {
                     submit.layer.shadowRadius = 10
                     submit.setTitle("SUMMIT", for: .normal)
                     submit.setTitleColor(UIColor.blackAlpha(alpha: 0.7),for: .normal)
-                    submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+                    submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
                     submit.addTarget(self, action: #selector(psuhCheckBox), for: .touchUpInside)
                     return submit
     }()

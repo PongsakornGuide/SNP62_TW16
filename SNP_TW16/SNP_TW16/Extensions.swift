@@ -84,24 +84,43 @@ extension UIColor {
 
 
 extension UIFont {
-    static func PoppinsBold(size: CGFloat)->UIFont{
-        return UIFont(name: "Poppins-Bold", size: size)!
+//    static func PoppinsBold(size: CGFloat)->UIFont{
+//        return UIFont(name: "Poppins-Bold", size: size)!
+//    }
+//    
+//    static func PoppinsLight(size: CGFloat)->UIFont{
+//        return UIFont(name: "Poppins-Light", size: size)!
+//    }
+//    
+//    static func PoppinsMedium(size: CGFloat)->UIFont{
+//        return UIFont(name: "Poppins-Medium", size: size)!
+//    }
+//    
+//    
+//    static func PoppinsMediumItalic(size: CGFloat)->UIFont{
+//        return UIFont(name: "Poppins-MediumItalic", size: size)!
+//    }
+//    
+//    static func PoppinsRegular(size: CGFloat)->UIFont{
+//        return UIFont(name: "Poppins-Regular", size: size)!
+//    }
+    
+    //font
+   static func BaiJamjureeBold(size: CGFloat)->UIFont{
+        return UIFont(name: "BaiJamjuree-Bold", size: size)!
+   }
+    
+    static func BaiJamjureeLight(size: CGFloat)->UIFont{
+         return UIFont(name: "BaiJamjuree-Light", size: size)!
     }
     
-    static func PoppinsLight(size: CGFloat)->UIFont{
-        return UIFont(name: "Poppins-Light", size: size)!
+    
+    static func BaiJamjureeMedium(size: CGFloat)->UIFont{
+         return UIFont(name: "BaiJamjuree-Medium", size: size)!
     }
     
-    static func PoppinsMedium(size: CGFloat)->UIFont{
-        return UIFont(name: "Poppins-Medium", size: size)!
+    static func BaiJamjureeRegular(size: CGFloat)->UIFont{
+         return UIFont(name: "BaiJamjuree-Regular", size: size)!
     }
-    
-    
-    static func PoppinsMediumItalic(size: CGFloat)->UIFont{
-        return UIFont(name: "Poppins-MediumItalic", size: size)!
-    }
-    
-    static func PoppinsRegular(size: CGFloat)->UIFont{
-        return UIFont(name: "Poppins-Regular", size: size)!
-    }
+
 }

@@ -13,7 +13,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
     
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
-    
+    let URL_CHECK_JOIN = "\(AppDelegate.link)alder_iosapp/v1/checkjoin.php"
     let URL_GET_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/showProfile.php"
 //    let URL_GET_PROFILE = "http://172.20.10.5/alder_iosapp/v1/showProfile.php"
     lazy var defaultValues = UserDefaults.standard
@@ -23,7 +23,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
           reloadData()
-//          navigationController?.navigationBar.isHidden = true
+//          navigationController?.navigationBar.isHidden = false
     }
 
     lazy var viewScroll: UIScrollView = {
@@ -91,7 +91,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
               let submit = UIButton(type: UIButton.ButtonType.system)
               submit.setTitle("แก้ไขข้อมูลส่วนตัว", for: .normal)
               submit.setTitleColor(UIColor.rgb(red: 167, green: 169, blue: 172),for: .normal)
-              submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+              submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 18)
               submit.addTarget(self, action: #selector(editUser), for: .touchUpInside)
               return submit
     }()
@@ -106,7 +106,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         let title = "รัตน์มณี"
       let style = NSMutableParagraphStyle()
        style.alignment = NSTextAlignment.center
-       let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+       let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
         label.attributedText = attributedText
         label.numberOfLines = 0
         return label
@@ -118,7 +118,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
           let title = "รัตน์มณี"
         let style = NSMutableParagraphStyle()
          style.alignment = NSTextAlignment.center
-         let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+         let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
             label.attributedText = attributedText
           label.numberOfLines = 0
           return label
@@ -142,7 +142,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         let title = "Chersery Home"
         let style = NSMutableParagraphStyle()
         style.alignment = NSTextAlignment.center
-        let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+        let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
         label.attributedText = attributedText
         label.numberOfLines = 0
         return label
@@ -169,7 +169,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         let title = "28 กุมภาพันธ์ 2500"
         let style = NSMutableParagraphStyle()
         style.alignment = NSTextAlignment.center
-        let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+        let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
         label.attributedText = attributedText
         label.numberOfLines = 0
         return label
@@ -191,7 +191,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         let title = "089 - 446 - 3444"
         let style = NSMutableParagraphStyle()
               style.alignment = NSTextAlignment.center
-              let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+              let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
         label.attributedText = attributedText
         return label
     }()
@@ -246,7 +246,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
          image.setTitle("กระทู้ของฉัน", for: .normal)
          image.contentVerticalAlignment = .bottom
          image.setTitleColor(UIColor.black,for: .normal)
-         image.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+         image.titleLabel?.font = UIFont.BaiJamjureeBold(size: 20)
          image.addTarget(self, action: #selector(listUserPost), for: .touchUpInside)
          return image
     }()
@@ -293,10 +293,17 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
             image.setTitle("กิจกรรมของฉัน", for: .normal)
             image.contentVerticalAlignment = .bottom
             image.setTitleColor(UIColor.black,for: .normal)
-            image.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+            image.titleLabel?.font = UIFont.BaiJamjureeBold(size: 20)
             image.addTarget(self, action: #selector(listUserActivity), for: .touchUpInside)
             return image
     }()
+    
+//    func reloadJoinUser(){
+//        let parameters: Parameters = ["user_id":getIduser]
+//        Alamofire.request(URL_CHECK_JOIN, method: .post,parameters: parameters).responseJSON { response in
+//            print(response)
+//        }
+//    }
     
     func reloadData(){
         let parameters: Parameters = ["userId":getIduser]
@@ -307,12 +314,12 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                             print(user)
                                 if let yield = user["username"] as? String{
                                     self?.nameHeader.text = yield
-                                    self?.nameHeader.font = UIFont.PoppinsBold(size: 18)
+                                    self?.nameHeader.font = UIFont.BaiJamjureeBold(size: 18)
                                 }
                             
                                 if let yield = user["surname"] as? String{
                                     self?.surnameHeader.text = yield
-                                    self?.surnameHeader.font = UIFont.PoppinsBold(size: 18)
+                                    self?.surnameHeader.font = UIFont.BaiJamjureeBold(size: 18)
                                 }
                    
                                 if let yield = user["address"] as? String{
@@ -343,17 +350,98 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
 
                @objc func handelSetting(){
                         print("5555")
-                let notificaionView = NotificationTableView()
-                navigationController?.pushViewController(notificaionView, animated: true)
+                        let notificaionView = NotificationTableView()
+                        navigationController?.pushViewController(notificaionView, animated: true)
              }
     
+    
+    
 
+    lazy var pointAcivity: UIView = {
+            let image = UIView()
+            image.backgroundColor = UIColor.white
+            image.layer.cornerRadius = 10
+            image.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
+            image.layer.shadowOpacity = 0.1
+            image.layer.shadowOffset = CGSize(width: 0, height: 0)
+            image.layer.shadowRadius = 10
+            image.layer.shouldRasterize = true
+            return image
+    }()
 
+    
+    lazy var titleActivity : UILabel = {
+        let label = UILabel()
+        let title = "กิจกรรมของฉัน"
+      let style = NSMutableParagraphStyle()
+       style.alignment = NSTextAlignment.center
+       let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 22),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+        label.attributedText = attributedText
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    
+    lazy var countActivity : UIButton = {
+            let image = UIButton()
+            image.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
+            image.layer.cornerRadius = 10
+            image.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
+            image.layer.shadowOpacity = 0.1
+            image.layer.shadowOffset = CGSize(width: 0, height: 0)
+            image.layer.shadowRadius = 10
+            image.layer.shouldRasterize = true
+            image.setTitle("เข้าร่วม", for: .normal)
+            image.contentVerticalAlignment = .bottom
+            image.setTitleColor(UIColor.white,for: .normal)
+            image.titleLabel?.font = UIFont.BaiJamjureeBold(size: 20)
+//            image.addTarget(self, action: #selector(listUserActivity), for: .touchUpInside)
+            return image
+    }()
+    
+    lazy var notcountActivity : UIButton = {
+              let image = UIButton()
+              image.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
+              image.layer.cornerRadius = 10
+              image.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
+              image.layer.shadowOpacity = 0.1
+              image.layer.shadowOffset = CGSize(width: 0, height: 0)
+              image.layer.shadowRadius = 10
+              image.layer.shouldRasterize = true
+              image.setTitle("เสร็จสิ้น", for: .normal)
+              image.contentVerticalAlignment = .bottom
+              image.setTitleColor(UIColor.white,for: .normal)
+              image.titleLabel?.font = UIFont.BaiJamjureeBold(size: 20)
+//              image.addTarget(self, action: #selector(listUserActivity), for: .touchUpInside)
+              return image
+      }()
+        
+    lazy var numActivty : UILabel = {
+        let label = UILabel()
+        let title = "1"
+      let style = NSMutableParagraphStyle()
+       style.alignment = NSTextAlignment.center
+       let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 40),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+        label.attributedText = attributedText
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var endActivty : UILabel = {
+          let label = UILabel()
+          let title = "0"
+        let style = NSMutableParagraphStyle()
+         style.alignment = NSTextAlignment.center
+         let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 40),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+          label.attributedText = attributedText
+          label.numberOfLines = 0
+          return label
+      }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Alder"
-     
         let settings = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(handelSetting))
         settings.width = 0.5
         settings.tintColor = UIColor.rgb(red: 253, green: 173, blue: 82)
@@ -368,6 +456,14 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         stacView2.spacing = 20
         stacView2.axis = .horizontal
         
+        
+        let stacView3 = UIStackView(arrangedSubviews:[countActivity,notcountActivity])
+        stacView3.distribution = .fillEqually
+        stacView3.spacing = 20
+        stacView3.axis = .horizontal
+        
+        
+    
         view.backgroundColor = UIColor.rgb(red: 247, green: 250, blue: 255)
         view.addSubview(viewScroll)
         viewScroll.addSubview(stepView)
@@ -384,11 +480,20 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         viewScroll.addSubview(line)
         viewScroll.addSubview(tel)
         viewScroll.addSubview(icontel)
+ 
         viewScroll.addSubview(stacView2)
+        viewScroll.addSubview(pointAcivity)
         viewScroll.addSubview(birthday)
         viewScroll.addSubview(iconbirthday)
         viewScroll.addSubview(iconPost)
         viewScroll.addSubview(iconActivity)
+        viewScroll.addSubview(titleActivity)
+        viewScroll.addSubview(stacView3)
+        viewScroll.addSubview(numActivty)
+         viewScroll.addSubview(endActivty)
+        
+        
+        
 
         viewScroll.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
@@ -431,12 +536,22 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         tel.anchor(birthday.bottomAnchor, left: nil, right: nil, bottom: nil, topConstant: 4, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 50)
         tel.centerXAnchor.constraint(equalTo: BGView.centerXAnchor).isActive = true
         
+        pointAcivity.anchor(dataUser.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: stacView2.topAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 15, rightConstant: 15, widthConstant: screenSizeX, heightConstant: 0)
+        
+        titleActivity.anchor(pointAcivity.topAnchor, left: pointAcivity.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 15, widthConstant: 0, heightConstant: 20)
+        
+        stacView3.anchor(titleActivity.bottomAnchor, left: pointAcivity.leftAnchor, right: pointAcivity.rightAnchor, bottom: pointAcivity.bottomAnchor, topConstant: 25, bottomConstant: 25, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX, heightConstant: 120)
     
-        stacView2.anchor(dataUser.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 35, bottomConstant: 30, leftConstant: 15, rightConstant: 15, widthConstant: screenSizeX, heightConstant: 120)
+        numActivty.anchor(countActivity.topAnchor, left: countActivity.leftAnchor, right:countActivity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: iconActivity.frame.size.width , heightConstant: iconActivity.frame.size.height)
+        endActivty.anchor(notcountActivity.topAnchor, left: notcountActivity.leftAnchor, right:notcountActivity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: iconActivity.frame.size.width , heightConstant: iconActivity.frame.size.height)
+
+        
+        stacView2.anchor(stacView3.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 15, bottomConstant: 30, leftConstant: 15, rightConstant: 15, widthConstant: screenSizeX, heightConstant: 120)
 
         iconActivity.anchor(activityUser.topAnchor, left: activityUser.leftAnchor, right:activityUser.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: iconActivity.frame.size.width , heightConstant: iconActivity.frame.size.height )
+
+        iconPost.anchor(postUser.topAnchor, left: postUser.leftAnchor, right:postUser.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 65, rightConstant: 65, widthConstant: iconPost.frame.size.width, heightConstant: iconPost.frame.size.height)
         
-        iconPost.anchor(postUser.topAnchor, left: postUser.leftAnchor, right:postUser.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 75, rightConstant: 75, widthConstant: iconPost.frame.size.width, heightConstant: iconPost.frame.size.height)
 
 
         if let name = defaultValues.string(forKey: "userId") {

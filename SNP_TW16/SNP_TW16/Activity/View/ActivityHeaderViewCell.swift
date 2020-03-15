@@ -39,9 +39,9 @@ class ActivityHeaderViewCell: UITableViewCell {
                  let title = "กิจกรรม"
                  let text = "\n สร้างสุข"
                  let attributedText = NSMutableAttributedString(string: title,
-                 attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+                 attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
 
-                 attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.PoppinsBold(size: 32),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
+                 attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
 
                  label.attributedText = attributedText
                  label.numberOfLines = 1

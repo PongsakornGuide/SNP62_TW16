@@ -28,9 +28,9 @@ class DecideViewCell: UITableViewCell,UITextFieldDelegate,UINavigationController
     
     lazy var headerText : UILabel = {
         let header = UILabel()
-        let title = "โปรดเลือกคำตอบก่อนเข้าร่วม กิจกรรม"
+        let title = "โปรดเลือกคำตอบก่อนเข้าร่วมกิจกรรม"
         let attributedText = NSMutableAttributedString(string: title,
-                   attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 25),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                   attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 25),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
         header.attributedText = attributedText
         header.numberOfLines = 2
         return header
@@ -40,7 +40,7 @@ class DecideViewCell: UITableViewCell,UITextFieldDelegate,UINavigationController
           let header = UILabel()
           let title = "ท่านคาดหวังอะไรกับกิจกรรมนี้"
           let attributedText = NSMutableAttributedString(string: title,
-                     attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 22),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                     attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 22),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
           header.attributedText = attributedText
           header.numberOfLines = 0
           header.textColor = .red
@@ -51,7 +51,7 @@ class DecideViewCell: UITableViewCell,UITextFieldDelegate,UINavigationController
           let header = UILabel()
           let title = "*เลือกได้มากกว่า 1 ข้อ"
           let attributedText = NSMutableAttributedString(string: title,
-                     attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 17),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+                     attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 17),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
           header.attributedText = attributedText
           header.numberOfLines = 0
         header.textColor = UIColor.rgb(red: 241, green: 90, blue: 66)

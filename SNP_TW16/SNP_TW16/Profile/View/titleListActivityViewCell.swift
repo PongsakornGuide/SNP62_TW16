@@ -28,7 +28,7 @@ class titleListActivityViewCell: UITableViewCell {
                    let label = UILabel()
                    let title = "กิจกรรมที่เข้าร่วม"
                    let attributedText = NSMutableAttributedString(string: title,
-                   attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+                   attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
                    label.attributedText = attributedText
                    label.numberOfLines = 0
                    return label

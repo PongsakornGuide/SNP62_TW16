@@ -51,7 +51,7 @@ class TypeActivityView: UITableViewCell {
                  let label = UILabel()
                  let title = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
                  let attributedText = NSMutableAttributedString(string: title,
-                                                                attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+                                                                attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
             
                  label.attributedText = attributedText
                  label.numberOfLines = 0

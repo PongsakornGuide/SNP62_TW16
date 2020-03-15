@@ -77,7 +77,7 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
                button.layer.cornerRadius = 20
                button.setTitle("ขั้นตอนต่อ", for: .normal)
                button.setTitleColor(.white, for: .normal)
-               button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+               button.titleLabel?.font = UIFont.BaiJamjureeBold(size: 20)
                button.addTarget(self, action: #selector(ClicksveData), for: .touchUpInside)
                return button
            }()
@@ -158,7 +158,7 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
             let style = NSMutableParagraphStyle()
             style.alignment = NSTextAlignment.center
             let attributedText = NSMutableAttributedString(string: title,
-        attributes: [ NSAttributedString.Key.font : UIFont.PoppinsBold(size: 24),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 255, green: 0, blue: 0)])
+        attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 24),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 255, green: 0, blue: 0)])
         
             label.attributedText = attributedText
             label.numberOfLines = 0
@@ -167,10 +167,10 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
         //-----------------------------------------------------------------------------------------------
                 let relativeNameTextField: UITextField = {
                    let textField = UITextField()
-                   textField.attributedPlaceholder = NSAttributedString(string: "ชื่อญาติ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+                   textField.attributedPlaceholder = NSAttributedString(string: "ชื่อญาติ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                    textField.textColor = .black
                    //textField.addTarget(self, action: #selector(checkOnClick), for: .editingChanged)
-                   textField.font = UIFont.boldSystemFont(ofSize: 15)
+                   textField.font = UIFont.BaiJamjureeBold(size: 20)
                    return textField
                }()
                let relativeKTextFieldLine: UIView = {
@@ -181,10 +181,10 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
            //-----------------------------------------------------------------------------------------------
                let relativePhoneTextField: UITextField = {
                    let textField = UITextField()
-                   textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์",attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+                   textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์",attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20) ,NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                    textField.textColor = .black
                    //textField.addTarget(self, action: #selector(handelemailCheckValid), for: .editingChanged)
-                   textField.font = UIFont.boldSystemFont(ofSize: 15)
+                   textField.font = UIFont.BaiJamjureeBold(size: 20)
                    textField.keyboardType = .emailAddress
                    return textField
                }()
@@ -196,11 +196,11 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
            //-----------------------------------------------------------------------------------------------
                let relativeTypeTextField: UITextField = {
                    let textField = UITextField()
-                   textField.attributedPlaceholder = NSAttributedString(string: "สถานะ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+                   textField.attributedPlaceholder = NSAttributedString(string: "สถานะ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                    textField.textColor = .black
                    //textField.addTarget(self, action: #selector(handlepasswordCheckValid), for: .editingChanged)
     //               textField.isSecureTextEntry = true
-                   textField.font = UIFont.boldSystemFont(ofSize: 15)
+                   textField.font = UIFont.BaiJamjureeBold(size: 20)
                    return textField
                }()
                let relativeTypeTextFieldLine: UIView = {

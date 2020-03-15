@@ -36,7 +36,7 @@ class TitleTableViewCell: UITableViewCell {
                       let label = UILabel()
                       let title = "สวัสดีวันจันทร์,"
                       let attributedText = NSMutableAttributedString(string: title,
-                      attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+                      attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
                       label.attributedText = attributedText
                       label.numberOfLines = 0
                       return label
@@ -47,7 +47,7 @@ class TitleTableViewCell: UITableViewCell {
                    let label = UILabel()
                    let title = "สวัสดีวันจันทร์,"
                    let attributedTexts = NSMutableAttributedString(string: title,
-                   attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+                   attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
                    label.attributedText = attributedTexts
                    label.numberOfLines = 0
                    return label

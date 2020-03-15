@@ -146,6 +146,7 @@ class CommunViewController: UITableViewController{
                     let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId2]
                                     Alamofire.request(URL_CLICK_LIKE, method: .post,parameters: parameters).responseJSON { response in
                     }
+
                     _sender.tag = 1
                         _sender.tintColor = UIColor.red
                         _sender.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -200,7 +201,7 @@ class CommunViewController: UITableViewController{
               submit.setTitle("โพสต์", for: .normal)
               submit.setTitleColor(UIColor.white,for: .normal)
               submit.addTarget(self, action: #selector(handelSetting), for: .touchUpInside)
-              submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
+              submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 22)
               return submit
       }()
 

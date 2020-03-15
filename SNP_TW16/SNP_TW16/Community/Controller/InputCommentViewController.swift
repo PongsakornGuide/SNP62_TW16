@@ -275,8 +275,8 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
 
         lazy var commentTextField: UITextField = {
                    let textField = UITextField()
-                   textField.attributedPlaceholder = NSAttributedString(string: "แสดงความคิดเห็น", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-                   textField.font = UIFont.PoppinsRegular(size:18)
+                   textField.attributedPlaceholder = NSAttributedString(string: "แสดงความคิดเห็น", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+                   textField.font = UIFont.BaiJamjureeRegular(size:18)
                    textField.textColor = UIColor.blackAlpha(alpha: 0.7)
                    textField.layer.borderColor = UIColor.whiteAlpha(alpha: 0.9).cgColor
                    textField.layer.borderWidth = 1
@@ -295,7 +295,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                   submit.layer.cornerRadius = 15
                   submit.setTitle("ส่ง", for: .normal)
                   submit.setTitleColor(UIColor.white,for: .normal)
-                  submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+                  submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
                   submit.addTarget(self, action: #selector(sendData), for: .touchUpInside)
                   return submit
         }()

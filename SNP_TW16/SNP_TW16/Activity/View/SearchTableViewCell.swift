@@ -43,7 +43,7 @@ class SearchTableViewCell: UITableViewCell {
            let label = UILabel()
                    label.text = "แซนวิสเพื่อสุขภาพ"
                    label.textColor = UIColor.black
-                   label.font = UIFont.PoppinsBold(size: 20)
+                   label.font = UIFont.BaiJamjureeBold(size: 20)
                    label.numberOfLines = 0
            return label
     }()
@@ -66,7 +66,7 @@ class SearchTableViewCell: UITableViewCell {
             let label = UILabel()
             label.text = "โดย ไกด์ ฐิติวัฒน์"
             label.textColor = UIColor.blackAlpha(alpha: 0.3)
-            label.font = UIFont.PoppinsMedium(size: 16)
+            label.font = UIFont.BaiJamjureeMedium(size: 16)
             return label
     }()
     
@@ -74,7 +74,7 @@ class SearchTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = " "
         label.textColor = UIColor.blackAlpha(alpha: 0.3)
-        label.font = UIFont.PoppinsMedium(size: 16)
+        label.font = UIFont.BaiJamjureeMedium(size: 16)
         return label
     }()
     
@@ -82,7 +82,7 @@ class SearchTableViewCell: UITableViewCell {
           let label = UILabel()
           label.text = "14 สิงหาคม 2562"
           label.textColor = UIColor.blackAlpha(alpha: 0.8)
-          label.font = UIFont.PoppinsMedium(size: 16)
+          label.font = UIFont.BaiJamjureeMedium(size: 16)
           return label
     }()
      let CheckPoint: UIButton = {
@@ -91,7 +91,7 @@ class SearchTableViewCell: UITableViewCell {
                button.layer.cornerRadius = 30/2
                button.setTitle("ยังไม่ได้ประเมิน", for: .normal)
                button.setTitleColor(.white, for: .normal)
-               button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+               button.titleLabel?.font = UIFont.BaiJamjureeMedium(size: 15)
                button.isEnabled = true
                button.addTarget(self, action: #selector(ClickUser), for: .touchUpInside)
                return button
@@ -102,7 +102,7 @@ class SearchTableViewCell: UITableViewCell {
                button.layer.cornerRadius = 30/2
                button.setTitle("ประเมินแล้ว", for: .normal)
                button.setTitleColor(.white, for: .normal)
-               button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+               button.titleLabel?.font = UIFont.BaiJamjureeMedium(size: 15)
                button.isEnabled = true
                button.isHidden = true
                return button
@@ -112,7 +112,7 @@ class SearchTableViewCell: UITableViewCell {
     }
     
         func setupViewCell(){
-
+            backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
             addSubview(profileImage)
             addSubview(bgActivitity)
             addSubview(titleFullname)
@@ -124,13 +124,13 @@ class SearchTableViewCell: UITableViewCell {
 
             profileImage.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: supportName.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
             
-            bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 150)
+            bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 150)
 
-            titleFullname.anchor(bgActivitity.bottomAnchor, left: bgActivitity.leftAnchor, right: CheckPoint.leftAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+            titleFullname.anchor(bgActivitity.bottomAnchor, left: bgActivitity.leftAnchor, right: CheckPoint.leftAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 5, widthConstant: 0, heightConstant: 0)
 
             titleFullname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 140).isActive = true
                         
-            CheckPoint.anchor(bgActivitity.bottomAnchor, left: titleFullname.rightAnchor, right:profileImage.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 30)
+            CheckPoint.anchor(bgActivitity.bottomAnchor, left: titleFullname.rightAnchor, right:profileImage.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 100, heightConstant: 30)
             
             decidePass.anchor(bgActivitity.bottomAnchor, left: titleFullname.rightAnchor, right:profileImage.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 30)
             

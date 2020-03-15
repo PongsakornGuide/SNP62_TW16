@@ -39,8 +39,6 @@ class listPostUserTableView: UITableViewController {
             self.tabBarController?.tabBar.isHidden = false
         }
     
-    
-           
         override func numberOfSections(in tableView: UITableView) -> Int {
               return 2
         }
@@ -224,33 +222,50 @@ class listPostUserTableView: UITableViewController {
             (action, view , completionHandler) in
             print("Delete..")
             
-            
-            let PostUser = self.ActivityList?[indexPath.row]
-            self.postId = PostUser?.id ?? 0
-            print(self.postId)
-            let parameters: Parameters = ["id":self.postId,"user_app_id":self.user_id]
-            let url = self.URL_DELETE_POST
-            Alamofire.request(url, method: .post,parameters: parameters).responseJSON { response in
-                self.ActivityList?.remove(at: indexPath.row)
-                self.tableView.reloadData()
-            }
 
             
+            let alert = UIAlertController(title: "ท่านต้องการจะลบกระทู้ของท่านไหม", message: "ยืนยันการลบ",preferredStyle: UIAlertController.Style.alert)
             
-            completionHandler(true)
+            alert.addAction(UIAlertAction(title: "ยกเลิก", style: UIAlertAction.Style.destructive, handler: { _ in
+                print("Cancel")
+            }))
+                      
+            alert.addAction(UIAlertAction(title: "ลบกระทู้",style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+                let PostUser = self.ActivityList?[indexPath.row]
+                self.postId = PostUser?.id ?? 0
+                print(self.postId)
+                let parameters: Parameters = ["id":self.postId,"user_app_id":self.user_id]
+                let url = self.URL_DELETE_POST
+                Alamofire.request(url, method: .post,parameters: parameters).responseJSON { response in
+                    self.ActivityList?.remove(at: indexPath.row)
+                    self.tableView.reloadData()
+                }
+                completionHandler(true)
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
         
         let edit = UIContextualAction(style: .normal, title: "Edit") {
                   (action, view , completionHandler) in
                 print("Email..")
-               let PostUser = self.ActivityList?[indexPath.row]
-               self.postId = PostUser?.id ?? 0
-                print(self.postId)
-                let view = editPostUserViewController()
-                view.post_id = self.postId
             
-                self.navigationController?.pushViewController(view, animated: true)
-                completionHandler(true)
+            let alert = UIAlertController(title: "ท่านต้องการจะแก้ไขกระทู้ของท่านไหม", message: "ยืนยันการแก้ไข",preferredStyle: UIAlertController.Style.alert)
+                      
+            alert.addAction(UIAlertAction(title: "ยกเลิก", style: UIAlertAction.Style.destructive, handler: { _ in
+                          print("Cancel")
+            }))
+            alert.addAction(UIAlertAction(title: "แก้ไขกระทู้",style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+                
+                          let PostUser = self.ActivityList?[indexPath.row]
+                          self.postId = PostUser?.id ?? 0
+                           print(self.postId)
+                           let view = editPostUserViewController()
+                           view.post_id = self.postId
+                       
+                           self.navigationController?.pushViewController(view, animated: true)
+                           completionHandler(true)
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
         
         let configuration = UISwipeActionsConfiguration(actions: [delete, edit])

@@ -37,9 +37,9 @@ class EmergencyView: UITableViewCell {
                 let title = "ต้องการความช่วยเหลือ"
                 let text = "\nโทรด่วน"
                 let attributedText = NSMutableAttributedString(string: title,
-                attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 30),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+                attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 30),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
 
-                attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.PoppinsBold(size: 40),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
+                attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 40),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
 
                 label.attributedText = attributedText
                 label.numberOfLines = 0
@@ -54,7 +54,7 @@ class EmergencyView: UITableViewCell {
     lazy var btnEmergency : UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("โทรด่วน", for: .normal)
-        btn.titleLabel?.font = UIFont.PoppinsBold(size: 30)
+        btn.titleLabel?.font = UIFont.BaiJamjureeBold(size: 30)
         btn.setTitleColor(.red, for: .normal)
         btn.backgroundColor = UIColor.white
         btn.layer.cornerRadius = 190/2
@@ -82,7 +82,7 @@ class EmergencyView: UITableViewCell {
              style.alignment = NSTextAlignment.center
         
              let attributedText = NSMutableAttributedString(string: title,
-             attributes: [ NSAttributedString.Key.font : UIFont.PoppinsBold(size: 24),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 33, green: 64, blue: 154)])
+             attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 24),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 33, green: 64, blue: 154)])
              label.attributedText = attributedText
              label.numberOfLines = 2
                 label.textAlignment = .center

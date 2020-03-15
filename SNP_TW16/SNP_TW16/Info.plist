@@ -32,6 +32,10 @@
 		<string>Poppins-Medium.ttf</string>
 		<string>Poppins-MediumItalic.ttf</string>
 		<string>Poppins-Regular.ttf</string>
+		<string>BaiJamjuree-Bold.ttf</string>
+		<string>BaiJamjuree-Light.ttf</string>
+		<string>BaiJamjuree-Medium.ttf</string>
+		<string>BaiJamjuree-Regular.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

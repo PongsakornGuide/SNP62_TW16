@@ -45,8 +45,8 @@ class LoginViewController: UIViewController {
             let title = "ยินดีต้อนรับ Alder"
             let text = "\n \n ใส่เบอร์มือถือสำหรับเข้าสู่ระบบ"
             let attributedText = NSMutableAttributedString(string: title,
-            attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 30),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
-            attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.PoppinsBold(size: 18),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
+            attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 30),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+            attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 18),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
             label.attributedText = attributedText
             label.numberOfLines = 0
             return label
@@ -54,8 +54,8 @@ class LoginViewController: UIViewController {
 
     lazy var numberTextField: UITextField = {
             let textField = UITextField()
-            textField.attributedPlaceholder = NSAttributedString(string: "กรอกเบอร์โทรศัพท์มือถือ", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-            textField.font = UIFont.PoppinsRegular(size:18)
+            textField.attributedPlaceholder = NSAttributedString(string: "กรอกเบอร์โทรศัพท์มือถือ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+            textField.font = UIFont.BaiJamjureeRegular(size:18)
             textField.textColor = UIColor.blackAlpha(alpha: 0.7)
             textField.layer.borderColor = UIColor.whiteAlpha(alpha: 0.9).cgColor
             textField.layer.borderWidth = 1
@@ -74,15 +74,15 @@ class LoginViewController: UIViewController {
             submit.layer.cornerRadius = 30
             submit.setTitle("ขอรหัสยืนยัน", for: .normal)
             submit.setTitleColor(UIColor.white,for: .normal)
-            submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+            submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
             submit.addTarget(self, action: #selector(submitBtn), for: .touchUpInside)
             return submit
     }()
     
     lazy var otpTextField : UITextField = {
        let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "กรอก otp ",attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-        textField.font = UIFont.PoppinsRegular(size: 18)
+        textField.attributedPlaceholder = NSAttributedString(string: "กรอก otp ",attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+        textField.font = UIFont.BaiJamjureeRegular(size: 18)
         textField.textColor = UIColor.blackAlpha(alpha: 0.7)
         textField.backgroundColor = UIColor.white
         textField.layer.borderWidth = 1
@@ -105,7 +105,7 @@ class LoginViewController: UIViewController {
               submit.layer.cornerRadius = 30
               submit.setTitle("ยืนยัน", for: .normal)
               submit.setTitleColor(UIColor.white,for: .normal)
-              submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+              submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
               submit.addTarget(self, action: #selector(loginToApp), for: .touchUpInside)
               return submit
     }()
@@ -119,7 +119,7 @@ class LoginViewController: UIViewController {
                  submit.layer.cornerRadius = 30
                  submit.setTitle("ยกเลิก", for: .normal)
                  submit.setTitleColor(UIColor.white,for: .normal)
-                 submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+                 submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
                  submit.addTarget(self, action: #selector(cancelApp), for: .touchUpInside)
                  return submit
     }()
@@ -130,46 +130,46 @@ class LoginViewController: UIViewController {
 //        let fromNumber = "+12565308003"// actual number is +9999999
 //        let toNumber = "+66631921545"// actual number is +9999999
         
-        Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
-                        if let otp = response.result.value as! [String: Any]? {
-                            if let yield = otp["otp"] as? String {
-                               print(yield)
-                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                    // your code here
-                                      self.otpTextField.text = yield
-                                }
-                                        let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
-                                        let twilioSecret = "a74824968da571b8afac81506f84acf2"
-                                        let fromNumber = "+12565308003"// actual number is +9999999
-                                        let toNumber = "+66631921545"// actual number is +9999999
-//                                let twilioSID = "AC6eb59c25b1d9e5c102ff07382a033245"
-//                                let twilioSecret = "3a776b6855e4ce991e1d0b07bdefa350"
-//                                                            //Note replace + = %2B , for To and From phone number
-//                                let fromNumber = "+14064123140"// actual number is +9999999
-//                                let toNumber = "+66815552550"// actual number is +9999999
-
-                                
-                                         let message = "Your verification code is \(yield) for Login"
-                                         // Build the request
-                                         let request = NSMutableURLRequest(url: URL(string:"https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/SMS/Messages")!)
-                                         request.httpMethod = "POST"
-                                         request.httpBody = "From=\(fromNumber)&To=\(toNumber)&Body=\(message)".data(using: .utf8)
-                                                         // Build the completion block and send the request
-                                         URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
-                                             print("Finished")
-                                             if let data = data, let responseDetails = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
-                                                 // Success
-                                                 print("Response: \(responseDetails)")
-                                             } else {
-                                                 // Failure
-                                                print("Error: \(error)")
-                                             }
-                                         }).resume()
-                             }
-
-                }
-            }
+//        Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
+//                        if let otp = response.result.value as! [String: Any]? {
+//                            if let yield = otp["otp"] as? String {
+//                               print(yield)
+//
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//                                    // your code here
+//                                      self.otpTextField.text = yield
+//                                }
+//                                        let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
+//                                        let twilioSecret = "a74824968da571b8afac81506f84acf2"
+//                                        let fromNumber = "+12565308003"// actual number is +9999999
+//                                        let toNumber = "+66631921545"// actual number is +9999999
+////                                let twilioSID = "AC6eb59c25b1d9e5c102ff07382a033245"
+////                                let twilioSecret = "3a776b6855e4ce991e1d0b07bdefa350"
+////                                                            //Note replace + = %2B , for To and From phone number
+////                                let fromNumber = "+14064123140"// actual number is +9999999
+////                                let toNumber = "+66815552550"// actual number is +9999999
+//
+//
+//                                         let message = "Your verification code is \(yield) for Login"
+//                                         // Build the request
+//                                         let request = NSMutableURLRequest(url: URL(string:"https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/SMS/Messages")!)
+//                                         request.httpMethod = "POST"
+//                                         request.httpBody = "From=\(fromNumber)&To=\(toNumber)&Body=\(message)".data(using: .utf8)
+//                                                         // Build the completion block and send the request
+//                                         URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
+//                                             print("Finished")
+//                                             if let data = data, let responseDetails = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
+//                                                 // Success
+//                                                 print("Response: \(responseDetails)")
+//                                             } else {
+//                                                 // Failure
+//                                                print("Error: \(error)")
+//                                             }
+//                                         }).resume()
+//                             }
+//
+//                }
+//            }
     }
 
   
@@ -245,7 +245,7 @@ class LoginViewController: UIViewController {
                 submit.layer.shadowRadius = 10
                 submit.setTitle("สมัครสมาชิก", for: .normal)
                 submit.setTitleColor(UIColor.blackAlpha(alpha: 0.7),for: .normal)
-                submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+                submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
                 submit.addTarget(self, action: #selector(pushToReigster), for: .touchUpInside)
                 return submit
             }()
@@ -267,7 +267,7 @@ class LoginViewController: UIViewController {
              let showText = "Phone number error message."
              let style = NSMutableParagraphStyle()
              style.alignment = NSTextAlignment.center
-             let attributedText = NSMutableAttributedString(string: showText,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 12),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 255, green: 0, blue: 0)])
+             let attributedText = NSMutableAttributedString(string: showText,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 12),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 255, green: 0, blue: 0)])
              check.attributedText = attributedText
              check.numberOfLines = 0
              return check
@@ -337,11 +337,11 @@ class LoginViewController: UIViewController {
             
             otpTextField.anchor(submitButton.bottomAnchor, left: otpView.leftAnchor, right: otpView.rightAnchor, bottom: nil, topConstant: 26, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 80)
             
-            submitLogin.anchor(otpTextField.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
+            submitLogin.anchor(otpTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: submitLogin.topAnchor, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
             
             regButton.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: -130, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
             
-             cancelLogin.anchor(submitLogin.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
+             cancelLogin.anchor(submitLogin.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
             
             checkError.anchor(regButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 50)
         }

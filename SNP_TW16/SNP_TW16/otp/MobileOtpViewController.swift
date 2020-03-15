@@ -37,9 +37,9 @@ class MobileOtpViewController: UIViewController {
         let style = NSMutableParagraphStyle()
         style.alignment = NSTextAlignment.center
         let attributedText = NSMutableAttributedString(string: title,
-        attributes: [NSAttributedString.Key.paragraphStyle:style,NSAttributedString.Key.font : UIFont.PoppinsBold(size: 35),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+        attributes: [NSAttributedString.Key.paragraphStyle:style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 35),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
         
-        attributedText.append(NSMutableAttributedString(string: text,attributes: [NSAttributedString.Key.paragraphStyle:style,NSMutableAttributedString.Key.font : UIFont.PoppinsBold(size: 22),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
+        attributedText.append(NSMutableAttributedString(string: text,attributes: [NSAttributedString.Key.paragraphStyle:style,NSMutableAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 22),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
         
         label.attributedText = attributedText
         label.numberOfLines = 0
@@ -49,8 +49,8 @@ class MobileOtpViewController: UIViewController {
     
     var otpTextField: UITextField = {
         let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "กรอกเบอร์โทรศัพท์มือถือ", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-        textField.font = UIFont.PoppinsRegular(size:18)
+        textField.attributedPlaceholder = NSAttributedString(string: "กรอกเบอร์โทรศัพท์มือถือ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+        textField.font = UIFont.BaiJamjureeRegular(size:18)
         textField.textColor = UIColor.blackAlpha(alpha: 0.7)
         textField.layer.borderColor = UIColor.whiteAlpha(alpha: 0.9).cgColor
         textField.layer.borderWidth = 1
@@ -84,7 +84,7 @@ class MobileOtpViewController: UIViewController {
         submit.layer.cornerRadius = 15
         submit.setTitle("ขอรหัสยืนยัน", for: .normal)
         submit.setTitleColor(UIColor.white,for: .normal)
-        submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
         submit.addTarget(self, action: #selector(submitBtn), for: .touchUpInside)
         return submit
     }()
@@ -167,7 +167,7 @@ class MobileOtpViewController: UIViewController {
          let showText = "Phone number error message."
          let style = NSMutableParagraphStyle()
          style.alignment = NSTextAlignment.center
-        let attributedText = NSMutableAttributedString(string: showText,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 12),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 255, green: 0, blue: 0)])
+        let attributedText = NSMutableAttributedString(string: showText,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 12),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 255, green: 0, blue: 0)])
 
         
          check.attributedText = attributedText

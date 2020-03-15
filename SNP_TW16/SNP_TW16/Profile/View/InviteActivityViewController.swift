@@ -38,7 +38,7 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                     let label = UILabel()
                     let title = "กิจกรรมที่เข้าร่วม"
                     let attributedText = NSMutableAttributedString(string: title,
-                    attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                    attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
                     label.attributedText = attributedText
                     label.numberOfLines = 0
                     return label
@@ -86,6 +86,7 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                         Alamofire.request((listActivity?.imagePost ?? "0")!).responseImage { response in
                                 if let image = response.result.value {
                                     cell.bgActivitity.image = image
+                                    
                                 }
                         }
                         
@@ -213,7 +214,7 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
         view.addSubview(stackView)
         view.addSubview(titleHeader)
         
-        titleHeader.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 80)
+        titleHeader.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 80)
         stackView.anchor(titleHeader.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
 }

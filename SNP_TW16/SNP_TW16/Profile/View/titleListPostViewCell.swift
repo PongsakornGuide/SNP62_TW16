@@ -27,7 +27,7 @@ class titleListPostViewCell: UITableViewCell {
                    let label = UILabel()
                    let title = "โพสต์ของฉัน"
                    let attributedText = NSMutableAttributedString(string: title,
-                   attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+                   attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
                    label.attributedText = attributedText
                    label.numberOfLines = 0
                    return label
@@ -42,6 +42,6 @@ class titleListPostViewCell: UITableViewCell {
         
         bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 100)
         
-        titleHeader.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 30, rightConstant: 40, widthConstant: 0, heightConstant: 0)
+        titleHeader.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 40, widthConstant: 0, heightConstant: 0)
     }
 }

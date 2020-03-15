@@ -51,7 +51,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
     lazy var namelabel : UILabel = {
         let view2 = UILabel()
         view2.text = "คุณสมศรี"
-        view2.font = UIFont.PoppinsBold(size: 20)
+        view2.font = UIFont.BaiJamjureeBold(size: 20)
         return view2
     }()
     
@@ -69,8 +69,8 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
     
     lazy var contentTextField: UITextField = {
             let textField = UITextField()
-            textField.attributedPlaceholder = NSAttributedString(string: "เพิ่มข้อความ . . .", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-            textField.font = UIFont.PoppinsRegular(size:18)
+            textField.attributedPlaceholder = NSAttributedString(string: "เพิ่มข้อความ . . .", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+            textField.font = UIFont.BaiJamjureeRegular(size:18)
             textField.textColor = UIColor.blackAlpha(alpha: 0.7)
             textField.layer.borderColor = UIColor.whiteAlpha(alpha: 0.9).cgColor
             textField.layer.borderWidth = 1
@@ -120,7 +120,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
             submit.layer.cornerRadius = 20
             submit.setTitle("โพสต์", for: .normal)
             submit.setTitleColor(UIColor.white,for: .normal)
-            submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+            submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 15)
             submit.addTarget(self, action: #selector(postContent), for: .touchUpInside)
             return submit
         }()
@@ -132,7 +132,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         label.text = "กรุณากรอกข้อมูลให้ครบถ้วน"
         label.textColor = .red
         label.textAlignment = .center
-        label.font = UIFont.PoppinsBold(size: 18)
+        label.font = UIFont.BaiJamjureeBold(size: 18)
         return label
       }()
     
@@ -247,21 +247,21 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         view.addSubview(submitButton)
         view.addSubview(alertLabel)
         
-        bgView.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        bgView.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
         
         Imagelabel.anchor(bgView.topAnchor, left: contentTextField.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 0, rightConstant: 30, widthConstant: 80, heightConstant: 80)
         
         namelabel.anchor(bgView.topAnchor, left: Imagelabel.rightAnchor, right: nil, bottom: nil, topConstant: 55, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        contentTextField.anchor(Imagelabel.bottomAnchor, left: view.leftAnchor, right:  view.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 60)
+        contentTextField.anchor(Imagelabel.bottomAnchor, left: view.leftAnchor, right:  view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 30)
         
         contentTextField.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 40).isActive = true
         
-        imageView.anchor(contentTextField.bottomAnchor, left: contentTextField.leftAnchor, right: contentTextField.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 30, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 230)
+        imageView.anchor(contentTextField.bottomAnchor, left: contentTextField.leftAnchor, right: contentTextField.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200)
         
-        btn.anchor(imageView.topAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: imageView.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 230)
+        btn.anchor(imageView.topAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: imageView.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200)
 
-        submitButton.anchor(nil, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 70)
+        submitButton.anchor(imageView.bottomAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 70)
 
         alertLabel.anchor(submitButton.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: bgView.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 30)
         

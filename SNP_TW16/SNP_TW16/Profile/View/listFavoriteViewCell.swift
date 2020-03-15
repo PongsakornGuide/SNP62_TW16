@@ -49,7 +49,7 @@ class listFavoriteViewCell: UITableViewCell {
            let label = UILabel()
              label.text = "Dorothy Puscas"
                    label.textColor = UIColor.black
-                   label.font = UIFont.PoppinsBold(size: 16)
+                   label.font = UIFont.BaiJamjureeBold(size: 16)
                    label.numberOfLines = 1
            return label
         }()
@@ -58,7 +58,7 @@ class listFavoriteViewCell: UITableViewCell {
             let label = UILabel()
             label.text = "Lorem Ipsum is simply dummy text of the printing."
             label.textColor = UIColor.black
-            label.font =  UIFont.PoppinsBold(size: 18)
+            label.font =  UIFont.BaiJamjureeBold(size: 18)
             label.numberOfLines = 10
             return label
         }()
@@ -67,7 +67,7 @@ class listFavoriteViewCell: UITableViewCell {
                let label = UILabel()
                label.text = "9:34"
                label.textColor = UIColor.blackAlpha(alpha: 0.5)
-               label.font = UIFont.PoppinsRegular(size: 14)
+               label.font = UIFont.BaiJamjureeRegular(size: 14)
                label.numberOfLines = 0
                return label
         }()
@@ -111,7 +111,7 @@ class listFavoriteViewCell: UITableViewCell {
                 let label = UILabel()
                 label.text = "2"
                 label.textColor = UIColor.blackAlpha(alpha: 0.5)
-                label.font = UIFont.PoppinsRegular(size: 18)
+                label.font = UIFont.BaiJamjureeRegular(size: 18)
                 label.numberOfLines = 0
                 return label
          }()
@@ -120,7 +120,7 @@ class listFavoriteViewCell: UITableViewCell {
                    let label = UILabel()
                    label.text = "ถูกใจ"
                    label.textColor = UIColor.blackAlpha(alpha: 0.5)
-                   label.font = UIFont.PoppinsRegular(size: 18)
+                   label.font = UIFont.BaiJamjureeRegular(size: 18)
                    label.numberOfLines = 0
                    return label
         }()
@@ -130,7 +130,7 @@ class listFavoriteViewCell: UITableViewCell {
                let label = UILabel()
                label.text = "10"
                label.textColor = UIColor.blackAlpha(alpha: 0.5)
-               label.font = UIFont.PoppinsRegular(size: 18)
+               label.font = UIFont.BaiJamjureeRegular(size: 18)
                label.numberOfLines = 0
                return label
         }()
@@ -139,7 +139,7 @@ class listFavoriteViewCell: UITableViewCell {
                      let label = UILabel()
                      label.text = "คอมเม้นต์"
                      label.textColor = UIColor.blackAlpha(alpha: 0.5)
-                     label.font = UIFont.PoppinsRegular(size: 18)
+                     label.font = UIFont.BaiJamjureeRegular(size: 18)
                      label.numberOfLines = 0
                      return label
           }()
@@ -152,7 +152,7 @@ class listFavoriteViewCell: UITableViewCell {
             button.layer.cornerRadius = 300
             button.setTitle("โพส", for: .normal)
             button.setTitleColor(UIColor.whiteAlpha(alpha: 0.8), for: .normal)
-            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+            button.titleLabel?.font = UIFont.BaiJamjureeBold(size: 18)
             button.tintColor = UIColor.whiteAlpha(alpha: 0.8)
             return button
         }()

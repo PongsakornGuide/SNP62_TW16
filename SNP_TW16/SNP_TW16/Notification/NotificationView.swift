@@ -26,7 +26,7 @@ class NotificationView: UIViewController,UNUserNotificationCenterDelegate {
             submit.layer.cornerRadius = 30
             submit.setTitle("ขอรหัสยืนยัน", for: .normal)
             submit.setTitleColor(UIColor.white,for: .normal)
-            submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+            submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
             submit.addTarget(self, action: #selector(submitBtn), for: .touchUpInside)
             return submit
     }()

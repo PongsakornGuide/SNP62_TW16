@@ -26,7 +26,7 @@ class TitleFavoriteView: UITableViewCell,UITextFieldDelegate,UINavigationControl
                    let label = UILabel()
                    let title = "ความสนใจ *"
                    let attributedText = NSMutableAttributedString(string: title,
-                   attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 30),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                   attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size:30),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
                    label.attributedText = attributedText
                    label.numberOfLines = 0
                    return label
@@ -36,7 +36,7 @@ class TitleFavoriteView: UITableViewCell,UITextFieldDelegate,UINavigationControl
                      let label = UILabel()
                      let title = "เลือกประเภทสิ่งที่คุณสนใจ"
                      let attributedText = NSMutableAttributedString(string: title,
-                     attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 25),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                     attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size:25),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
                      label.attributedText = attributedText
                      label.numberOfLines = 0
                      return label

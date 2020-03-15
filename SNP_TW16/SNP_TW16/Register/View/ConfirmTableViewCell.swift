@@ -24,7 +24,7 @@ class ConfirmTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
                     button.layer.cornerRadius = 20
                     button.setTitle("บันทึก", for: .normal)
                     button.setTitleColor(.white, for: .normal)
-                    button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+                    button.titleLabel?.font = UIFont.BaiJamjureeBold(size: 20)
                     button.addTarget(self, action: #selector(psuhCheckBox), for: .touchUpInside)
                     return button
     }()

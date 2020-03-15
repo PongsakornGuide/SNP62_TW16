@@ -25,8 +25,8 @@ class OtpViewController: UIViewController {
         let style = NSMutableParagraphStyle()
         style.alignment = NSTextAlignment.center
         let attributedText = NSMutableAttributedString(string: title,
-        attributes: [ NSAttributedString.Key.font : UIFont.PoppinsBold(size: 26),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 47, green: 58, blue: 243)])
-        attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.PoppinsMediumItalic(size: 14),NSMutableAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.4)]))
+        attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 26),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 47, green: 58, blue: 243)])
+        attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 14),NSMutableAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.4)]))
         label.attributedText = attributedText
         label.numberOfLines = 0
         return label
@@ -34,8 +34,8 @@ class OtpViewController: UIViewController {
     
     let otpTextField: UITextField = {
         let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "Full Name", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-        textField.font = UIFont.PoppinsRegular(size: 16)
+        textField.attributedPlaceholder = NSAttributedString(string: "Full Name", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+        textField.font = UIFont.BaiJamjureeRegular(size: 16)
         textField.textColor = UIColor.blackAlpha(alpha: 0.7)
         textField.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
         textField.layer.borderWidth = 2
@@ -52,8 +52,8 @@ class OtpViewController: UIViewController {
     
    var idTextField: UITextField = {
         let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "id", attributes: [NSAttributedString.Key.font : UIFont.PoppinsRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-        textField.font = UIFont.PoppinsRegular(size: 16)
+        textField.attributedPlaceholder = NSAttributedString(string: "id", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+        textField.font = UIFont.BaiJamjureeBold(size: 16)
         textField.textColor = UIColor.blackAlpha(alpha: 0.7)
         textField.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
         textField.layer.borderWidth = 2
@@ -87,7 +87,7 @@ class OtpViewController: UIViewController {
         style.alignment = NSTextAlignment.center
         
         let attributedText = NSMutableAttributedString(string: errorText,
-          attributes: [NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 12),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 47, green: 58, blue: 243)])
+          attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 12),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 47, green: 58, blue: 243)])
         error.attributedText = attributedText
         error.numberOfLines = 0
         return error
@@ -99,7 +99,7 @@ class OtpViewController: UIViewController {
         let style = NSMutableParagraphStyle()
         style.alignment = NSTextAlignment.center
 
-        let attributedText = NSMutableAttributedString(string: successText,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 12),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 31, green: 220, blue: 156)])
+        let attributedText = NSMutableAttributedString(string: successText,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 12),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 31, green: 220, blue: 156)])
         success.attributedText = attributedText
         success.numberOfLines = 0
         return success
@@ -109,7 +109,7 @@ class OtpViewController: UIViewController {
     var showLabel : UILabel = {
         let show = UILabel()
         let showText = "Error of OTP you can input otp new."
-        let attributedText = NSMutableAttributedString(string: showText,attributes: [NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 12),NSMutableAttributedString.Key.foregroundColor : UIColor.red])
+        let attributedText = NSMutableAttributedString(string: showText,attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 12),NSMutableAttributedString.Key.foregroundColor : UIColor.red])
         show.attributedText = attributedText
         show.numberOfLines = 0
         return show
@@ -167,7 +167,7 @@ class OtpViewController: UIViewController {
         submit.layer.cornerRadius = 25
         submit.setTitle("CHECK OTP", for: .normal)
         submit.setTitleColor(UIColor.whiteAlpha(alpha: 0.8), for: .normal)
-        submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        submit.titleLabel?.font = UIFont.BaiJamjureeMedium(size: 24)
         submit.addTarget(self, action: #selector(clickCheck), for: .touchUpInside)
         return submit
     }()

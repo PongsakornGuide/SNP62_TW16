@@ -54,7 +54,7 @@ class DiseaseTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
                 let style = NSMutableParagraphStyle()
                 style.alignment = NSTextAlignment.center
                 let attributedText = NSMutableAttributedString(string: title,
-            attributes: [ NSAttributedString.Key.font : UIFont.PoppinsBold(size: 26),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 47, green: 58, blue: 243)])
+            attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 26),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 47, green: 58, blue: 243)])
                 label.attributedText = attributedText
                 label.numberOfLines = 0
                 return label
@@ -62,9 +62,9 @@ class DiseaseTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
     
    static var diseaseNameTextField: UITextField = {
                          let textField = UITextField()
-                         textField.attributedPlaceholder = NSAttributedString(string: "โรคประจำตัว", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+                         textField.attributedPlaceholder = NSAttributedString(string: "โรคประจำตัว", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                          textField.textColor = .black
-                         textField.font = UIFont.boldSystemFont(ofSize: 15)
+                         textField.font = UIFont.BaiJamjureeBold(size: 20)
                          return textField
                      }()
     lazy var diseaseTextFieldLine: UIView = {
@@ -76,9 +76,9 @@ class DiseaseTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
                  //-----------------------------------------------------------------------------------------------
     static var diseaseDetailTextField: UITextField = {
             let textField = UITextField()
-            textField.attributedPlaceholder = NSAttributedString(string: "รายละเอียดอื่นๆ",attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+            textField.attributedPlaceholder = NSAttributedString(string: "รายละเอียดอื่นๆ",attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
              textField.textColor = .black
-             textField.font = UIFont.boldSystemFont(ofSize: 15)
+             textField.font = UIFont.BaiJamjureeBold(size: 20)
              return textField
                      }()
     lazy var diseaseDetailTextFieldLine: UIView = {

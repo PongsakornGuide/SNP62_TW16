@@ -29,7 +29,7 @@ class ActivityPageViewController: UITableViewCell {
     lazy var header:UILabel = {
        let title = UILabel()
         title.lineBreakMode = .byWordWrapping
-        title.font = UIFont.PoppinsBold(size: 25)
+        title.font = UIFont.BaiJamjureeBold(size: 25)
         title.textColor = UIColor.rgb(red: 66, green: 100, blue: 38)
         title.numberOfLines = 5
         title.text = "กิจกรรม รักษ์โลก \nเชิญชวนปลูกต้นไม้ \nณ บริเวณท่าน้ำนนท์"

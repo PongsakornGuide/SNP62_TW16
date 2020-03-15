@@ -142,7 +142,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
            button.layer.cornerRadius = 20
            button.setTitle("ขั้นตอนต่อไป", for: .normal)
            button.setTitleColor(.white, for: .normal)
-           button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+           button.titleLabel?.font = UIFont.BaiJamjureeBold(size: 20)
            button.addTarget(self, action: #selector(pushto), for: .touchUpInside)
            return button
        }()
@@ -157,7 +157,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
         let style = NSMutableParagraphStyle()
         style.alignment = NSTextAlignment.center
         let attributedText = NSMutableAttributedString(string: title,
-    attributes: [ NSAttributedString.Key.font : UIFont.PoppinsBold(size: 0),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+    attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 0),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
     
         label.attributedText = attributedText
         label.numberOfLines = 0
@@ -166,9 +166,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
     //-----------------------------------------------------------------------------------------------
        let nameTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+               textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
-               textField.font = UIFont.boldSystemFont(ofSize: 15)
+               textField.font = UIFont.BaiJamjureeBold(size: 20)
                return textField
            }()
            let nameTextFieldLine: UIView = {
@@ -179,9 +179,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
        //-----------------------------------------------------------------------------------------------
            let surnameTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "นามสกุล",attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+               textField.attributedPlaceholder = NSAttributedString(string: "นามสกุล",attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
-               textField.font = UIFont.boldSystemFont(ofSize: 15)
+               textField.font = UIFont.BaiJamjureeBold(size: 20)
                return textField
            }()
            let surnameTextFieldLine: UIView = {
@@ -192,9 +192,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
        //-----------------------------------------------------------------------------------------------
            let phoneTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+               textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
-               textField.font = UIFont.boldSystemFont(ofSize: 15)
+               textField.font = UIFont.BaiJamjureeBold(size: 20)
                return textField
            }()
            let phoneTextFieldLine: UIView = {
@@ -206,9 +206,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
        //-----------------------------------------------------------------------------------------------
            let dateTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "ปี / เดือน / วัน", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+               textField.attributedPlaceholder = NSAttributedString(string: "ปี / เดือน / วัน", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
-               textField.font = UIFont.boldSystemFont(ofSize: 15)
+               textField.font = UIFont.BaiJamjureeBold(size: 20)
                return textField
            }()
            let dateTextFieldLine: UIView = {
@@ -221,9 +221,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
     //-----------------------------------------------------------------------------------------------
               let genTextField: UITextField = {
                   let textField = UITextField()
-                  textField.attributedPlaceholder = NSAttributedString(string: "เพศ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+                  textField.attributedPlaceholder = NSAttributedString(string: "เพศ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                   textField.textColor = .black
-                  textField.font = UIFont.boldSystemFont(ofSize: 15)
+                  textField.font = UIFont.BaiJamjureeBold(size: 20)
                   return textField
               }()
               let genTextFieldTextFieldLine: UIView = {
@@ -236,9 +236,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
     //-----------------------------------------------------------------------------------------------
                   let cultTextField: UITextField = {
                       let textField = UITextField()
-                      textField.attributedPlaceholder = NSAttributedString(string: "ศาสนา", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+                      textField.attributedPlaceholder = NSAttributedString(string: "ศาสนา", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                       textField.textColor = .black
-                      textField.font = UIFont.boldSystemFont(ofSize: 15)
+                      textField.font = UIFont.BaiJamjureeBold(size: 20)
                       return textField
                   }()
                   let cultTextFieldTextFieldLine: UIView = {
@@ -250,9 +250,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
     //-----------------------------------------------------------------------------------------------
                   let addressTextField: UITextField = {
                       let textField = UITextField()
-                      textField.attributedPlaceholder = NSAttributedString(string: "ศูนย์ที่อยู่อาศัย", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+                      textField.attributedPlaceholder = NSAttributedString(string: "ศูนย์ที่อยู่อาศัย", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                       textField.textColor = .black
-                      textField.font = UIFont.boldSystemFont(ofSize: 15)
+                      textField.font = UIFont.BaiJamjureeBold(size: 20)
                       return textField
                   }()
                   let addressTextFieldTextFieldLine: UIView = {
@@ -339,7 +339,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
            navigationItem.title = "ข้อมูลส่วนตัว"
            let stacView = UIStackView(arrangedSubviews: [nameTextField,surnameTextField,phoneTextField,dateTextField,genTextField,cultTextField,addressTextField])
            stacView.distribution = .fillEqually
-           stacView.spacing = 0
+           stacView.spacing = 30
            stacView.axis = .vertical
         
            self.nameTextField.delegate = self

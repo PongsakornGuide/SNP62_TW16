@@ -46,7 +46,7 @@ class HeaderActivity: UITableViewCell {
        lazy var titleType : UILabel = {
           let title = UILabel()
            title.text = "กิจกรรม"
-           title.font = UIFont.PoppinsBold(size: 30)
+           title.font = UIFont.BaiJamjureeBold(size: 30)
            title.numberOfLines = 3
            title.textAlignment = .center
            return title

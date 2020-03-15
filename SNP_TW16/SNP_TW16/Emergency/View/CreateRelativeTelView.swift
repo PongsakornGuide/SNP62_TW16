@@ -26,7 +26,7 @@ class CreateRelativeTelView: UIViewController {
         let label = UILabel()
         let title = "เพิ่มเบอร์ติดต่อฉุกเฉิน"
         let attributedText = NSMutableAttributedString(string: title,
-        attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 30),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+        attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 30),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
         label.attributedText = attributedText
         label.numberOfLines = 1
         return label
@@ -35,9 +35,9 @@ class CreateRelativeTelView: UIViewController {
     //-----------------------------------------------------------------------------------------------
        lazy var nameTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
+               textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                textField.textColor = .black
-               textField.font = UIFont.boldSystemFont(ofSize: 15)
+               textField.font = UIFont.BaiJamjureeBold(size: 15)
                return textField
            }()
            let nameTextFieldLine: UIView = {
@@ -49,9 +49,9 @@ class CreateRelativeTelView: UIViewController {
 
        lazy var telTextField: UITextField = {
                   let textField = UITextField()
-                  textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
+                  textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                   textField.textColor = .black
-                  textField.font = UIFont.boldSystemFont(ofSize: 15)
+                  textField.font = UIFont.BaiJamjureeBold(size: 15)
                   return textField
               }()
        lazy var telTextFieldLine: UIView = {
@@ -71,7 +71,7 @@ class CreateRelativeTelView: UIViewController {
             submit.layer.shadowRadius = 10
             submit.setTitle("บันทึก", for: .normal)
             submit.setTitleColor(UIColor.white,for: .normal)
-            submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+            submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
             submit.addTarget(self, action: #selector(pushToRelatvie), for: .touchUpInside)
             return submit
         }()
@@ -82,7 +82,7 @@ class CreateRelativeTelView: UIViewController {
         label.text = "กรุณากรอกเบอร์โทรศัพท์ให้ครบ"
         label.textColor = .red
         label.textAlignment = .center
-        label.font = UIFont.PoppinsBold(size: 18)
+        label.font = UIFont.BaiJamjureeBold(size: 18)
         return label
       }()
     

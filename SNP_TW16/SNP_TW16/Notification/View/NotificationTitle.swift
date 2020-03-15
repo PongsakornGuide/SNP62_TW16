@@ -28,15 +28,15 @@ class NotificationTitle: UITableViewCell {
            return background
        }()
        
-       lazy var textHeader : UILabel = {
+       var textHeader : UILabel = {
                    let label = UILabel()
                    let title = "5 รายการ"
                    let attributedTexts = NSMutableAttributedString(string: title,
-                   attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 34),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                   attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 34),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
                    label.attributedText = attributedTexts
                    label.numberOfLines = 0
                    return label
-               }()
+        }()
        
        
 

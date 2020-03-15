@@ -62,7 +62,8 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
                     let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! layoutTableViewCell
                     let emogiDecide = feel?[indexPath.row]
                     cell.textHeader.text = emogiDecide?.feel
-        
+                    cell.textHeader.font = UIFont.BaiJamjureeBold(size: 25)
+                    cell.textHeader.textColor = .black
                     Alamofire.request((emogiDecide?.iconImage ?? "0")!).responseImage { response in
                             if let image2 = response.result.value {
                                     cell.bgImage.image = image2

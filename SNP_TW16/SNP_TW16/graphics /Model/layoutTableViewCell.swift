@@ -41,7 +41,7 @@ class layoutTableViewCell: UITableViewCell {
                 let label = UILabel()
                 let title = "check box"
                 let attributedText = NSMutableAttributedString(string: title,
-                attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 25),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+                attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 25),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
                 label.attributedText = attributedText
                 label.textColor = .black
                 label.numberOfLines = 0

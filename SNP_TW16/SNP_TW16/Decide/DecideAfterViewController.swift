@@ -24,6 +24,11 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
                 self.tabBarController?.tabBar.isHidden = true
         }
         
+        lazy var viewScroll: UIScrollView = {
+           let view = UIScrollView()
+           return view
+        }()
+    
         let bgActivitity:UIView = {
              let background = UIView()
              background.backgroundColor = UIColor.white
@@ -34,7 +39,7 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
             let header = UILabel()
             let title = "กรุณาทำแบบประเมินหลังเข้าร่วม \nกิจกรรม"
             let attributedText = NSMutableAttributedString(string: title,
-                       attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 22),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                       attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 22),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
             header.attributedText = attributedText
             header.numberOfLines = 4
             return header
@@ -44,7 +49,7 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
             let header = UILabel()
             let title = "1. หลังจากเข้าร่วมกิจกรรม ท่านมีความรู้สึกอย่างไร"
             let attributedText = NSMutableAttributedString(string: title,
-                       attributes: [NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                       attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
             header.attributedText = attributedText
             header.numberOfLines = 4
             return header
@@ -129,7 +134,7 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
             let header = UILabel()
             let title = "2. ท่านสนใจที่จะเข้าร่วมกิจกรรมที่จัดขึ้นในครั้งต่อไปอีกหรือไม่"
             let attributedText = NSMutableAttributedString(string: title,
-                       attributes: [NSAttributedString.Key.font : UIFont.PoppinsMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                       attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
             header.attributedText = attributedText
             header.numberOfLines = 4
             return header
@@ -164,7 +169,7 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
                   submit.layer.cornerRadius = 20
                   submit.setTitle("ส่งคำตอบ", for: .normal)
                   submit.setTitleColor(UIColor.white,for: .normal)
-                  submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+                  submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
                   submit.addTarget(self, action: #selector(sendData), for: .touchUpInside)
                   return submit
         }()
@@ -205,27 +210,32 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
             stacView2.spacing = 0
             stacView2.axis = .horizontal
             
-            view.addSubview(bgActivitity)
-            view.addSubview(headerText)
-            view.addSubview(titleText)
-            view.addSubview(stacView)
-            view.addSubview(title2Text)
-            view.addSubview(stacView2)
-            view.addSubview(sendBtn)
+            view.addSubview(viewScroll)
+            viewScroll.addSubview(bgActivitity)
+            viewScroll.addSubview(headerText)
+            viewScroll.addSubview(titleText)
+            viewScroll.addSubview(stacView)
+            viewScroll.addSubview(title2Text)
+            viewScroll.addSubview(stacView2)
+            viewScroll.addSubview(sendBtn)
             
-            bgActivitity.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+            
+            viewScroll.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+            
+            
+            bgActivitity.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX, heightConstant: screenSizeY)
                  
             headerText.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
 
             titleText.anchor(headerText.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
 
-            stacView.anchor(titleText.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 100, bottomConstant: 50, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 100, heightConstant: 100)
-            
-            
+            stacView.anchor(titleText.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 100, bottomConstant: 50, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 0)
+
+
             title2Text.anchor(stacView.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
 
-            stacView2.anchor(title2Text.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 100, bottomConstant: 50, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 100, heightConstant: 100)
-            
+            stacView2.anchor(title2Text.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 100, bottomConstant: 50, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 100)
+
             sendBtn.anchor(stacView2.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 70)
         }
         

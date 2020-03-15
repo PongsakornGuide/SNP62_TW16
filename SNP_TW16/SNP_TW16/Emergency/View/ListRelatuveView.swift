@@ -47,7 +47,7 @@ class ListRelatuveView: UITableViewCell {
        lazy var title : UILabel = {
           let title = UILabel()
            title.text = "ตำรวจ 191"
-           title.font = UIFont.PoppinsBold(size: 20)
+           title.font = UIFont.BaiJamjureeBold(size: 20)
             title.numberOfLines = 0
            return title
        }()

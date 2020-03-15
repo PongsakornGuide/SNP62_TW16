@@ -24,7 +24,8 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     private var cellId2 = "Cell2"
-    
+    private var cellId3 = "Cell3"
+     private var cellId4 = "Cell4"
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             reloadData()
@@ -32,48 +33,62 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
         }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-            return 2
+            return 4
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 if section == 0 {
                     return 1
-                }else{
+                }else if section == 1{
                     return header?.count ?? 0
+                }else if section == 2{
+                    return 1
+                }else{
+                    return 1
                 }
     }
     
         override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            
-    
-      
-            
-    if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
-            cell.selectionStyle = .none
-            cell.titleHeader.text = day
-            cell.titleHeader.textColor = .white
-            cell.titleHeader.font = UIFont.PoppinsBold(size: 22)
-            cell.textHeader.text = Labelname
-            cell.textHeader.textColor = .white
-            cell.textHeader.font = UIFont.PoppinsBold(size: 32)
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
-            return cell
-                   
-    }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
-            let headerActivity = header?[indexPath.row]
-            cell.titleType.text = headerActivity?.activityTypeName
-            Alamofire.request((headerActivity?.activtiyIcon ?? "0")!).responseImage { response in
-            if let image = response.result.value {
-                cell.iconImage.image = image
+            if indexPath.section == 0 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
+                    cell.selectionStyle = .none
+                    cell.titleHeader.text = day
+                    cell.titleHeader.textColor = .white
+                    cell.titleHeader.font = UIFont.BaiJamjureeBold(size:22)
+                    cell.textHeader.text = Labelname
+                    cell.textHeader.textColor = .white
+                    cell.textHeader.font = UIFont.BaiJamjureeBold(size: 32)
+                    cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+                    return cell
+                           
+            }else if indexPath.section == 1{
+                    let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
+                    let headerActivity = header?[indexPath.row]
+                    cell.titleType.text = headerActivity?.activityTypeName
+                    Alamofire.request((headerActivity?.activtiyIcon ?? "0")!).responseImage { response in
+                    if let image = response.result.value {
+                        cell.iconImage.image = image
+                    }
+                      }
+                    self.tableView.separatorStyle = .none
+                    cell.selectionStyle = .none
+                    cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+                    return cell
+            }else if indexPath.section == 2{
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellId3,for: indexPath) as! HeaderReligion
+                self.tableView.separatorStyle = .none
+                cell.selectionStyle = .none
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+                return cell
+                    
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellId4,for: indexPath) as! HeaderMusic
+                self.tableView.separatorStyle = .none
+                cell.selectionStyle = .none
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+                return cell
             }
-              }
-            self.tableView.separatorStyle = .none
-            cell.selectionStyle = .none
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
-            return cell
-           }
+            
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
@@ -94,7 +109,7 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
 
-        }else{
+        }else if indexPath.section == 1{
             let dvc = SubActivityTypeTableViewController()
             let headerActivity = header?[indexPath.row]
             dvc.typeAct = headerActivity?.activityTypeName ?? "x"
@@ -106,7 +121,14 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
                 }
             dvc.activityList = activitiesPosts
             self.navigationController?.pushViewController(dvc, animated: true)
-       }
+        }else if indexPath.section == 2{
+            print("555")
+            let dvc = TitleStoryTableView()
+            self.navigationController?.pushViewController(dvc, animated: true)
+        }else{
+            print("666")
+        }
+        
     }
 
     
@@ -180,14 +202,13 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
         if let name = defaultValues.string(forKey: "userName") {
                 Labelname = name
             print(Labelname)
-             }
+        }
 
         if let name2 = defaultValues.string(forKey: "userId") {
                 typecheck = name2
             print(typecheck)
             }else{
         }
-        
         
         NotificaitonUser()
         UNUserNotificationCenter.current().delegate = self
@@ -219,6 +240,8 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
         
           tableView.register(TitleTableViewCell.self, forCellReuseIdentifier: cellId1)
           tableView.register(HeaderActivity.self, forCellReuseIdentifier: cellId2)
+          tableView.register(HeaderReligion.self, forCellReuseIdentifier: cellId3)
+          tableView.register(HeaderMusic.self, forCellReuseIdentifier: cellId4)
           tableView.rowHeight = UITableView.automaticDimension
           tableView.estimatedRowHeight = 50
           view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)

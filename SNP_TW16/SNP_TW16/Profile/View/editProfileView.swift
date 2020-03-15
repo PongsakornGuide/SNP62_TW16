@@ -13,6 +13,7 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
        override func viewWillAppear(_ animated: Bool) {
               super.viewWillAppear(animated)
               reloadData()
+              self.tabBarController?.tabBar.isHidden = true
        }
     
        let URL_GET_EDIT_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/showProfile.php"
@@ -83,7 +84,7 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
            button.layer.cornerRadius = 20
            button.setTitle("บันทึก", for: .normal)
            button.setTitleColor(.white, for: .normal)
-           button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+           button.titleLabel?.font = UIFont.BaiJamjureeBold(size: 20)
            button.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
            return button
        }()
@@ -150,7 +151,7 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
         let style = NSMutableParagraphStyle()
         style.alignment = NSTextAlignment.center
         let attributedText = NSMutableAttributedString(string: title,
-    attributes: [ NSAttributedString.Key.font : UIFont.PoppinsBold(size: 0),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+    attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 0),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
     
         label.attributedText = attributedText
         label.numberOfLines = 0
@@ -159,9 +160,9 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
     //-----------------------------------------------------------------------------------------------
        lazy var nameTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+               textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
-               textField.font = UIFont.boldSystemFont(ofSize: 15)
+               textField.font = UIFont.BaiJamjureeBold(size: 15)
                return textField
            }()
            lazy var nameTextFieldLine: UIView = {
@@ -172,9 +173,9 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
        //-----------------------------------------------------------------------------------------------
            lazy var surnameTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "นามสกุล",attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+               textField.attributedPlaceholder = NSAttributedString(string: "นามสกุล",attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
-               textField.font = UIFont.boldSystemFont(ofSize: 15)
+               textField.font = UIFont.BaiJamjureeBold(size: 15)
                return textField
            }()
            lazy var surnameTextFieldLine: UIView = {
@@ -185,9 +186,9 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
        //-----------------------------------------------------------------------------------------------
            lazy var phoneTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+               textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
-               textField.font = UIFont.boldSystemFont(ofSize: 15)
+               textField.font = UIFont.BaiJamjureeBold(size: 15)
 //                textField.userInteractionEnabled = false
                textField.isUserInteractionEnabled = false
                return textField
@@ -201,9 +202,9 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
        //-----------------------------------------------------------------------------------------------
     let dateTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "ปี / เดือน / วัน", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+               textField.attributedPlaceholder = NSAttributedString(string: "ปี / เดือน / วัน", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
-               textField.font = UIFont.boldSystemFont(ofSize: 15)
+               textField.font = UIFont.BaiJamjureeBold(size: 15)
                return textField
            }()
            let dateTextFieldLine: UIView = {
@@ -253,22 +254,22 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
                         if let user = resData.result.value as! [String: Any]? {
                                 if let yield = user["username"] as? String{
                                     self?.nameTextField.text = yield
-                                    self?.nameTextField.font = UIFont.PoppinsBold(size: 20)
+                                    self?.nameTextField.font = UIFont.BaiJamjureeBold(size: 20)
                                 }
                                 if let yield = user["surname"] as? String{
                                     self?.surnameTextField.text = yield
-                                    self?.surnameTextField.font = UIFont.PoppinsBold(size: 20)
+                                    self?.surnameTextField.font = UIFont.BaiJamjureeBold(size: 20)
                                 }
 //
                                 if let yield = user["tel"] as? Int{
                                     self?.phoneTextField.text = "0\(yield)"
-                                    self?.phoneTextField.font = UIFont.PoppinsBold(size: 20)
+                                    self?.phoneTextField.font = UIFont.BaiJamjureeBold(size: 20)
                                     self?.phoneTextField.textColor = UIColor.rgb(red: 188, green: 188, blue: 188)
                                 }
                             
                                 if let yield = user["birthday"] as? String{
                                      self?.dateTextField.text = yield
-                                    self?.dateTextField.font = UIFont.PoppinsBold(size: 20)
+                                    self?.dateTextField.font = UIFont.BaiJamjureeBold(size: 20)
                                 }
 
                                 if let yield = user["photo"] as? String{

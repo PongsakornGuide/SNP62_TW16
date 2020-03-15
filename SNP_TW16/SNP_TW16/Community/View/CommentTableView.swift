@@ -44,14 +44,14 @@ class CommentTableView: UITableViewCell {
     lazy var username : UILabel = {
        let name = UILabel()
        name.text = "Pongsakorn"
-        name.font = UIFont.PoppinsBold(size: 16)
+        name.font = UIFont.BaiJamjureeBold(size: 16)
        return name
     }()
     
     lazy var date : UILabel = {
           let timer = UILabel()
           timer.text = "12 ตุลาคม 2562 เวลา 15: 20"
-          timer.font = UIFont.PoppinsMedium(size: 12)
+          timer.font = UIFont.BaiJamjureeRegular(size: 12)
           timer.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
           return timer
     }()
@@ -67,7 +67,7 @@ class CommentTableView: UITableViewCell {
     lazy var comment:UILabel = {
              let comment = UILabel()
              comment.text = "สวัสดีวันจันทร์นะคะ คุณสมเกียรติ"
-             comment.font = UIFont.PoppinsMedium(size: 16)
+             comment.font = UIFont.BaiJamjureeMedium(size: 16)
              comment.textColor = UIColor.black
         comment.numberOfLines = 0
              return comment
@@ -97,7 +97,7 @@ class CommentTableView: UITableViewCell {
             let label = UILabel()
             label.text = "0"
             label.textColor = UIColor.red
-            label.font = UIFont.PoppinsBold(size: 12)
+            label.font = UIFont.BaiJamjureeBold(size: 12)
             label.numberOfLines = 0
             return label
     }()

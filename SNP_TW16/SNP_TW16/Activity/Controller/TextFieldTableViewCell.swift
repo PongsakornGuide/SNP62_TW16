@@ -28,7 +28,7 @@ class  TextFieldTableViewCell :UITableViewCell,UITextFieldDelegate {
         let header = UILabel()
         let title = "อื่นๆ (โปรดระบุ)"
         let attributedText = NSMutableAttributedString(string: title,
-                   attributes: [NSAttributedString.Key.font : UIFont.PoppinsBold(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                   attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
         header.attributedText = attributedText
         header.numberOfLines = 2
         return header
@@ -37,7 +37,7 @@ class  TextFieldTableViewCell :UITableViewCell,UITextFieldDelegate {
     static var textView: KMPlaceholderTextView = {
         let textView = KMPlaceholderTextView()
          textView.textColor = UIColor.blackAlpha(alpha: 0.8)
-         textView.font = UIFont.PoppinsRegular(size: 16)
+         textView.font = UIFont.BaiJamjureeRegular(size: 16)
          textView.layer.borderColor = UIColor.blackAlpha(alpha: 0.3).cgColor
          textView.layer.borderWidth = 0.5
          textView.textColor = UIColor.lightGray
@@ -57,7 +57,7 @@ class  TextFieldTableViewCell :UITableViewCell,UITextFieldDelegate {
          submit.layer.shadowRadius = 10
          submit.setTitle("เข้าร่วมกิจกรรม", for: .normal)
          submit.setTitleColor(UIColor.white,for: .normal)
-         submit.titleLabel?.font = UIFont.PoppinsBold(size: 24)
+         submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
          submit.addTarget(self, action: #selector(psuhCheckBox), for: .touchUpInside)
          return submit
     }()

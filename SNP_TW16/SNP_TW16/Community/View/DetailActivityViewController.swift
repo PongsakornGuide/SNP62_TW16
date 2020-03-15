@@ -33,7 +33,7 @@ class DetailActivityViewController: UITableViewCell {
      lazy var username : UILabel = {
         let name = UILabel()
         name.text = "asdsa"
-        name.font = UIFont.PoppinsBold(size: 16)
+        name.font = UIFont.BaiJamjureeBold(size: 16)
         name.numberOfLines = 0
         return name
      }()
@@ -42,7 +42,7 @@ class DetailActivityViewController: UITableViewCell {
            let timer = UILabel()
            timer.text = "9:34"
            timer.textColor = UIColor.blackAlpha(alpha: 0.5)
-           timer.font = UIFont.PoppinsRegular(size: 14)
+           timer.font = UIFont.BaiJamjureeRegular(size: 14)
            timer.numberOfLines = 0
            return timer
      }()
@@ -52,7 +52,7 @@ class DetailActivityViewController: UITableViewCell {
         let comment = UILabel()
         comment.text = "Lorem Ipsum is simply dummy text of the printing."
         comment.textColor = UIColor.black
-        comment.font =  UIFont.PoppinsBold(size: 18)
+        comment.font =  UIFont.BaiJamjureeBold(size: 18)
         comment.numberOfLines = 0
         return comment
     }()
@@ -91,7 +91,7 @@ class DetailActivityViewController: UITableViewCell {
               let label = UILabel()
               label.text = "0"
               label.textColor = UIColor.blackAlpha(alpha: 0.5)
-              label.font = UIFont.PoppinsRegular(size: 20)
+              label.font = UIFont.BaiJamjureeRegular(size: 20)
               label.numberOfLines = 0
               return label
     }()
@@ -109,7 +109,7 @@ class DetailActivityViewController: UITableViewCell {
                let label = UILabel()
                label.text = "0"
                label.textColor = UIColor.blackAlpha(alpha: 0.5)
-               label.font = UIFont.PoppinsRegular(size: 20)
+               label.font = UIFont.BaiJamjureeRegular(size: 20)
                label.numberOfLines = 0
                return label
     }()

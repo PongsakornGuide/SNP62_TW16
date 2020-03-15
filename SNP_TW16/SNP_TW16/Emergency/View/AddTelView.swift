@@ -38,8 +38,8 @@ class AddTelView: UITableViewCell {
       
     lazy var titleLabel : UILabel = {
          let title = UILabel()
-          title.text = "เพิ่มเบอร์ฉุกเฉินเบอร์อื่นๆ .."
-          title.font = UIFont.PoppinsBold(size: 20)
+          title.text = "เพิ่มเบอร์ติดต่ออื่นๆ.."
+          title.font = UIFont.BaiJamjureeBold(size: 20)
           title.textColor = UIColor.rgb(red: 33, green: 64, blue: 154)
           return title
       }()
@@ -47,7 +47,7 @@ class AddTelView: UITableViewCell {
     var btnCell : UIButton = {
         let bg = UIButton(type: .system)
         bg.setTitle("+", for: .normal)
-        bg.titleLabel?.font = UIFont.PoppinsMedium(size: 65)
+        bg.titleLabel?.font = UIFont.BaiJamjureeMedium(size: 65)
         bg.setTitleColor(UIColor.rgb(red: 33, green: 64, blue: 154), for: .normal)
         bg.addTarget(self, action: #selector(addTelUserRelative), for: .touchUpInside)
         return bg
