@@ -9,11 +9,11 @@
 import UIKit
 import Alamofire
 import ObjectMapper
+import SDWebImage
 class listPostUserTableView: UITableViewController {
     
-//    let URL_GET_POST = "http://172.20.10.5/alder_iosapp/v1/savePostUser.php"
     let URL_GET_POST = "\(AppDelegate.link)alder_iosapp/v1/savePostUser.php"
-    let URL_GET_DATA = "\(AppDelegate.link)alder_iosapp/v1/show.php"
+//    let URL_GET_DATA = "\(AppDelegate.link)alder_iosapp/v1/show.php"
     let URL_CLICK_LIKE = "\(AppDelegate.link)alder_iosapp/v1/like_Activity.php"
     let URL_CLICK_UNLIKE = "\(AppDelegate.link)alder_iosapp/v1/deleteLike.php"
     let URL_CHECK_LIKE = "\(AppDelegate.link)alder_iosapp/v1/checkLike.php"
@@ -65,47 +65,22 @@ class listPostUserTableView: UITableViewController {
                 let listActivity = ActivityList?[indexPath.row]
                 cell.userFullname.text = listActivity?.username
                 cell.timeTextLabel.text = listActivity?.createdAt
-//                cell.numCount.text = "\(listActivity?.like ?? 0)"
-//                cell.numCom.text = "\(listActivity?.comment ?? 0)"
                 cell.messageTextLabel.text = listActivity?.caption
-                adpostId = listActivity?.id ?? 0
-                print(adpostId)
-                
-                let parametersId: Parameters = ["ad_post_timeline_id":adpostId]
-                                let url = URL_COUNT_LIKE + "?id=\(adpostId)"
-                                    Alamofire.request(url, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
-                                        if let user = resData.result.value as! [String: Any]? {
-                                            if let yield = user["likeActivity"] as? Int {
-                                                cell.numCount.text = "\(yield)"
-                                            }
-                                        }
-                }
-                
-                let urlComment = URL_COUNT_COMMENT + "?id=\(adpostId)"
-                                        Alamofire.request(urlComment, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
-                                                   if let user = resData.result.value as! [String: Any]? {
-                                                       if let commentId = user["commentActivity"] as? Int {
-                                                           cell.numCom.text = "\(commentId)"
-                                                       }
-                                    }
-                }
-                
-                
-                   Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (listActivity?.img ?? "0")!).responseImage { response in
-                                         if let image = response.result.value{
-                                         cell.postImage.image = image
-                             }
-                         }
-                         
-                         Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (listActivity?.photo ?? "0")!).responseImage { response in
-                                         if let image2 = response.result.value {
-                                         cell.profileImage.image = image2
-                             }
-                         }
-                
+                cell.numCount.text = "\(listActivity?.likeActivity ?? 0)"
+                cell.numCom.text = "\(listActivity?.commentsActivity ?? 0)"
 
-                    
-                    let parameters: Parameters = ["user_id":user_id,"ad_post_timeline_id":adpostId]
+                adpostId = listActivity?.id ?? 0
+                let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + (listActivity?.img ?? "0")!)
+                            if let postImageURL = URL(string: postImagePath) {
+                                cell.postImage.sd_setImage(with: postImageURL, completed: nil)
+                }
+                            
+                let profileImagePath = ("\(AppDelegate.link)alder_iosapp/" + (listActivity?.photo ?? "0")!)
+                            if let postImageURL = URL(string: profileImagePath) {
+                                cell.profileImage.sd_setImage(with: postImageURL, completed: nil)
+                }
+                
+                let parameters: Parameters = ["user_id":user_id,"ad_post_timeline_id":adpostId]
                     Alamofire.request(URL_CHECK_LIKE, method: .post,parameters: parameters).responseJSON { response in
                             guard let json = response.value as? [String:Bool], let status = json["error"] else {
                             return }
@@ -116,7 +91,8 @@ class listPostUserTableView: UITableViewController {
                                     
                             }else{
                         }
-                    }
+                }
+                
                 cell.iconImageLike.titleLabel?.tag = listActivity?.id ?? 0
                 self.tableView.separatorStyle = .none
                 cell.selectionStyle = .none
@@ -134,33 +110,6 @@ class listPostUserTableView: UITableViewController {
              }
     }
     
-//    let settingLauncher = settingsLauncher()
-    
-//
-//       let blackView = UIView()
-//    @objc func morePost(){
-//
-//        if let window = UIApplication.shared.keyWindow {
-//
-//            blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
-//            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handDismiss)))
-//                   window.addSubview(blackView)
-//                   blackView.frame = view.frame
-//            blackView.alpha = 0
-//
-//            UIView.animate(withDuration: 0.5, animations: {
-//                self.blackView.alpha = 1
-//            })
-//        }
-//
-//
-//    }
-//
-//    @objc func handDismiss() {
-//        UIView.animate(withDuration: 0.5) {
-//            self.blackView.alpha = 0
-//        }
-//    }
     
             override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                 if  indexPath.section == 0{
@@ -291,11 +240,6 @@ class listPostUserTableView: UITableViewController {
                                            tableView.addSubview(refresher)
             }
                    
-            
-//            let backItem = UIBarButtonItem()
-//            backItem.title = " "
-//            navigationItem.backBarButtonItem = backItem
-//            
             view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
             tableView.register(titleListPostViewCell.self, forCellReuseIdentifier: cellId)
             tableView.register(AcivityListTableViewCell.self, forCellReuseIdentifier: cellId1)
@@ -304,8 +248,7 @@ class listPostUserTableView: UITableViewController {
             
             if let userId = defaultValues.string(forKey: "userId") {
                user_id = userId
-               print("user id :: \(user_id)")
-               }else{
+            }else{
                //send back to login view controller
             }
         }

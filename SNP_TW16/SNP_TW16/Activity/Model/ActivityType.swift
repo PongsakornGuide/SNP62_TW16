@@ -151,3 +151,5 @@ class VideoUser: Mappable {
         content <- map["content"]
     }
 }
+
+

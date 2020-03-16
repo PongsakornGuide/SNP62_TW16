@@ -33,7 +33,6 @@ class MusicViewCell: UITableViewCell {
 
     lazy var bgActivitity:UIWebView = {
              let image = UIWebView()
-//             image.layer.cornerRadius = 20
              return image
     }()
     

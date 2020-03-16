@@ -9,20 +9,13 @@
 import UIKit
 import Alamofire
 import ObjectMapper
+import SDWebImage
 class EmergencyViewController: UITableViewController {
     let defaultValues = UserDefaults.standard
     var user_id = String()
-    
-    
-    
     let URL_GET_TEL = "\(AppDelegate.link)alder_iosapp/v1/emergency.php"
     let URL_GET_TEL_RELATIVE = "\(AppDelegate.link)alder_iosapp/v1/showTel.php"
     let URL_GET_TEL_RELATIVE_ADD = "\(AppDelegate.link)alder_iosapp/v1/showTelRelative.php"
-    
-//    let URL_GET_TEL = "http://172.20.10.5/alder_iosapp/v1/emergency.php"
-//    let URL_GET_TEL_RELATIVE = "http://172.20.10.5/alder_iosapp/v1/showTel.php"
-//    let URL_GET_TEL_RELATIVE_ADD = "http://172.20.10.5/alder_iosapp/v1/showTelRelative.php"
-    
     var relativeList: [listRelative]?
     var emergencyList: [allListTel]?
     var userRelavite: [addRelative]?
@@ -56,7 +49,6 @@ class EmergencyViewController: UITableViewController {
               }
     }
     
-//    heightForHeaderInSection
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             
         if indexPath.section == 0 {
@@ -64,32 +56,28 @@ class EmergencyViewController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 return cell
-            } else if indexPath.section == 1{
+        }else if indexPath.section == 1{
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! DetailEmergencyView
                 let Emergency = emergencyList?[indexPath.row]
-//                        cell.num.text = "\(Emergency?.emergencyCall ?? 0)"
-                        cell.title.text = Emergency?.emergencyName ?? "5555"
+                cell.title.text = Emergency?.emergencyName ?? "5555"
                 
-                
-                Alamofire.request((Emergency?.emergencyIcon ?? "0")!).responseImage { response in
-                       if let image = response.result.value {
-                            cell.ImageView.image = image
-                       }
+                let postImagePath = Emergency?.emergencyIcon ?? "0"
+                    if let postImageURL = URL(string: postImagePath) {
+                        cell.ImageView.sd_setImage(with: postImageURL, completed: nil)
                 }
-                
-                        cell.selectionStyle = .none
-                        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+            
+                cell.selectionStyle = .none
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 self.tableView.separatorStyle = .none
                 return cell
                 
-            }else if indexPath.section == 2{
+        }else if indexPath.section == 2{
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId3,for: indexPath) as! ListRelatuveView
                 let ListRelative = userRelavite?[indexPath.row]
-//                cell.num.text = "\(ListRelative?.telphone ?? 0)"
                 cell.title.text = "\(ListRelative?.username ?? "nil")"
                 cell.selectionStyle = .none
-                  cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 self.tableView.separatorStyle = .none
                 return cell
             }else{
@@ -208,7 +196,6 @@ class EmergencyViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationController?.navigationBar.isHidden = true
         navigationItem.title = "Alder"
         if #available(iOS 12.1 , *) {
             tableView.refreshControl = refresher
@@ -217,16 +204,14 @@ class EmergencyViewController: UITableViewController {
         }
         if let user = defaultValues.string(forKey: "userId") {
             user_id = user
-            print(user_id)
          }else{
-                      //send back to login view controller
+            //send back to login view controller
         }
         
         tableView.register(EmergencyView.self, forCellReuseIdentifier: cellId)
         tableView.register(DetailEmergencyView.self, forCellReuseIdentifier: cellId1)
         tableView.register(AddTelView.self, forCellReuseIdentifier: cellId2)
         tableView.register(ListRelatuveView.self, forCellReuseIdentifier: cellId3)
-        
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)

@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import ObjectMapper
+import SDWebImage
 class TitleStoryTableView:  UITableViewController ,UINavigationControllerDelegate{
     
     private var cellId = "Cell"
@@ -56,11 +57,16 @@ class TitleStoryTableView:  UITableViewController ,UINavigationControllerDelegat
                        let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! ReligionTableView
                        let prayerUserRead = prayer?[indexPath.row]
                         cell.titleFullname.text = prayerUserRead?.title
-                            Alamofire.request((prayerUserRead?.image ?? "0")!).responseImage { response in
-                                   if let image = response.result.value {
-                                       cell.bgActivitity.image = image
-                                   }
-                            }
+                
+                let postImagePath = prayerUserRead?.image ?? "0"
+                      if let postImageURL = URL(string: postImagePath) {
+                          cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
+                }
+
+                     
+                
+                
+                
                        self.tableView.separatorStyle = .none
                        cell.selectionStyle = .none
                        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
@@ -77,11 +83,12 @@ class TitleStoryTableView:  UITableViewController ,UINavigationControllerDelegat
                         let storyUserRead = story?[indexPath.row]
                         cell.titleFullname.text = storyUserRead?.title
                         cell.detaillname.text = storyUserRead?.caption
-                            Alamofire.request((storyUserRead?.image ?? "0")!).responseImage { response in
-                                if let image = response.result.value {
-                                    cell.bgActivitity.image = image
-                            }
+                
+                        let postImagePath = storyUserRead?.image ?? "0"
+                                     if let postImageURL = URL(string: postImagePath) {
+                                         cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
                         }
+                
                 
                        self.tableView.separatorStyle = .none
                        cell.selectionStyle = .none
@@ -101,11 +108,11 @@ class TitleStoryTableView:  UITableViewController ,UINavigationControllerDelegat
             vc.titleLabel.text = deatilPrayer?.title
             vc.contentLabel.text = deatilPrayer?.content
             
-              Alamofire.request((deatilPrayer?.image ?? "0")!).responseImage { response in
-                        if let image = response.result.value{
-                            vc.stepView.image = image
-                        }
-             }
+            
+            let postImagePath = deatilPrayer?.image ?? "0"
+                    if let postImageURL = URL(string: postImagePath) {
+                    vc.stepView.sd_setImage(with: postImageURL, completed: nil)
+            }
             self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.section == 2{
             
@@ -114,15 +121,15 @@ class TitleStoryTableView:  UITableViewController ,UINavigationControllerDelegat
             let deatilStory = story?[indexPath.row]
             vc.titleLabel.text = deatilStory?.title
             vc.contentLabel.text = deatilStory?.content
-            Alamofire.request((deatilStory?.image ?? "0")!).responseImage { response in
-                                   if let image = response.result.value{
-                                       vc.stepView.image = image
-                                   }
+            
+            let postImagePath = deatilStory?.image ?? "0"
+                    if let postImageURL = URL(string: postImagePath) {
+                    vc.stepView.sd_setImage(with: postImageURL, completed: nil)
             }
+            
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
     
     
       func getPrayer(){
@@ -152,7 +159,6 @@ class TitleStoryTableView:  UITableViewController ,UINavigationControllerDelegat
 
         }
             
-        
         override func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()
         }

@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import ObjectMapper
 import UserNotifications
+import SDWebImage
 //UIViewController ,UITableViewDelegate, UITableViewDataSource
 class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate,UNUserNotificationCenterDelegate{
     
@@ -64,12 +65,13 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
                     cell.textHeader.text = emogiDecide?.feel
                     cell.textHeader.font = UIFont.BaiJamjureeBold(size: 25)
                     cell.textHeader.textColor = .black
-                    Alamofire.request((emogiDecide?.iconImage ?? "0")!).responseImage { response in
-                            if let image2 = response.result.value {
-                                    cell.bgImage.image = image2
-                            }
+                    
+                    
+                    let postImagePath = emogiDecide?.iconImage ?? "0"
+                    if let postImageURL = URL(string: postImagePath) {
+                                  cell.bgImage.sd_setImage(with: postImageURL, completed: nil)
                     }
-        
+
                     cell.selectionStyle = .none
                     cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                     return cell

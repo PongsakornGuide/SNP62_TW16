@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import ObjectMapper
+import SDWebImage
 class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINavigationControllerDelegate{
     lazy var defaultValues = UserDefaults.standard
     var activityData: ActivityDetail?
@@ -253,26 +254,22 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                      endtimerAct.text = activityData?.endtime
                      IdActivity = activityData?.dataId ?? 0
                     
-                     Alamofire.request((activityData?.imagePost ?? "0")!).responseImage { response in
-                                 if let image = response.result.value {
-                                 self.stepView.image = image
-                         }
-                     }
             
-                    let parameters: Parameters = ["id": IdActivity]
-                    let url = URL_CHECK_INVITE + "?id=\(IdActivity)"
-                    Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
+            let postImagePath = activityData?.imagePost ?? "0"
 
-                                    if let user = resData.result.value as! [String: Any]? {
-                                        if let yield = user["invaite"] as? Int {
+            if let postImageURL = URL(string: postImagePath) {
+                self.stepView.sd_setImage(with: postImageURL, completed: nil)
+            }
+            
+            let parameters: Parameters = ["id": IdActivity]
+            let url = URL_CHECK_INVITE + "?id=\(IdActivity)"
+            Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
+                        if let user = resData.result.value as! [String: Any]? {
+                                if let yield = user["invaite"] as? Int {
                                             self?.joinAct.text = "ผู้เข้าร่วม \(yield ?? 0) / \(self?.activityData?.join ?? 0) คน"
                                         }
-
                                     }
-
-
-                                }
-            
+                }
         }
     
             func reloadFun(){
@@ -291,11 +288,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
     
              override func viewDidLoad() {
                 super.viewDidLoad()
-//                print("ข้อมูล \(nameLabel)")
-                print(titleCheck)
                 "\(titleLabel.text = titleCheck)"
-//                reloadData()
-//                reloadFun()
                  if let name2 = defaultValues.string(forKey: "userId") {
                         typecheck = name2
                     }else{

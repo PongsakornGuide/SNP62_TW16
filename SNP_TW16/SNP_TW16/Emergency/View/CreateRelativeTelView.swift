@@ -11,18 +11,15 @@ import Alamofire
 import ObjectMapper
 class CreateRelativeTelView: UIViewController {
     var user_id = String()
-//    var addList: [addRelative]?
-    
-     let URL_ADD_RELATIVE = "\(AppDelegate.link)alder_iosapp/v1/addTel.php"
-//     let URL_ADD_RELATIVE = "http://172.20.10.5/alder_iosapp/v1/addTel.php"
+    let URL_ADD_RELATIVE = "\(AppDelegate.link)alder_iosapp/v1/addTel.php"
     let defaultValues = UserDefaults.standard
+    
     let bgActivitity:UIView = {
          let background = UIView()
-//         background.backgroundColor = .purple
          return background
-     }()
+    }()
      
-      lazy var textHeader : UILabel = {
+    lazy var textHeader : UILabel = {
         let label = UILabel()
         let title = "เพิ่มเบอร์ติดต่อฉุกเฉิน"
         let attributedText = NSMutableAttributedString(string: title,
@@ -30,35 +27,37 @@ class CreateRelativeTelView: UIViewController {
         label.attributedText = attributedText
         label.numberOfLines = 1
         return label
-      }()
+    }()
     
     //-----------------------------------------------------------------------------------------------
-       lazy var nameTextField: UITextField = {
-               let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
-               textField.textColor = .black
-               textField.font = UIFont.BaiJamjureeBold(size: 15)
-               return textField
-           }()
-           let nameTextFieldLine: UIView = {
-                  let view = UIView()
-                  view.backgroundColor = UIColor.rgb(red: 167, green: 169, blue: 172)
-                  return view
+    lazy var nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
+        textField.textColor = .black
+        textField.font = UIFont.BaiJamjureeBold(size: 15)
+        return textField
+    }()
+    
+    let nameTextFieldLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+    return view
            }()
     //-----------------------------------------------------------------------------------------------
 
-       lazy var telTextField: UITextField = {
-                  let textField = UITextField()
-                  textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
-                  textField.textColor = .black
-                  textField.font = UIFont.BaiJamjureeBold(size: 15)
-                  return textField
-              }()
-       lazy var telTextFieldLine: UIView = {
-                     let view = UIView()
-                     view.backgroundColor = UIColor.rgb(red: 167, green: 169, blue: 172)
-                     return view
-              }()
+    lazy var telTextField: UITextField = {
+        let textField = UITextField()
+        textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
+        textField.textColor = .black
+        textField.font = UIFont.BaiJamjureeBold(size: 15)
+        return textField
+    }()
+    
+    lazy var telTextFieldLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+        return view
+    }()
     //-----------------------------------------------------------------------------------------------
        
        lazy var addTel : UIButton = {

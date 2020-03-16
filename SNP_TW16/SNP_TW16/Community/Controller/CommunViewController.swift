@@ -27,9 +27,10 @@ class CommunViewController: UITableViewController{
     let URL_GET_DATA = "\(AppDelegate.link)alder_iosapp/v1/show.php"
     let URL_CLICK_LIKE = "\(AppDelegate.link)alder_iosapp/v1/like_Activity.php"
     let URL_CLICK_UNLIKE = "\(AppDelegate.link)alder_iosapp/v1/deleteLike.php"
+    
     let URL_CHECK_LIKE = "\(AppDelegate.link)alder_iosapp/v1/checkLike.php"
-    let URL_COUNT_LIKE = "\(AppDelegate.link)alder_iosapp/v1/countLike.php"
-    let URL_COUNT_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/countComment.php"
+//    let URL_COUNT_LIKE = "\(AppDelegate.link)alder_iosapp/v1/countLike.php"
+//    let URL_COUNT_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/countComment.php"
     
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
@@ -115,6 +116,7 @@ class CommunViewController: UITableViewController{
                 }
             }
             
+            
             cell.iconImageLike.titleLabel?.tag = headerActivity?.id ?? 0
             self.tableView.separatorStyle = .none
             cell.selectionStyle = .none
@@ -140,14 +142,13 @@ class CommunViewController: UITableViewController{
                     let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId2]
                                     Alamofire.request(URL_CLICK_LIKE, method: .post,parameters: parameters).responseJSON { response in
                     }
-
                     _sender.tag = 1
                         _sender.tintColor = UIColor.red
                         _sender.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 case 1:
                     requestData()
                     let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId2]
-                                                       Alamofire.request(URL_CLICK_UNLIKE, method: .post,parameters: parameters).responseJSON { response in
+                                    Alamofire.request(URL_CLICK_UNLIKE, method: .post,parameters: parameters).responseJSON { response in
                     }
                     _sender.tag = 0
                     _sender.tintColor = .black

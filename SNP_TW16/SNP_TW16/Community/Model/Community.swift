@@ -31,6 +31,8 @@ class allList: Mappable{
         photo <- map["photo"]
         likeActivity <- map["likeActivity"]
         commentsActivity <- map["commentsActivity"]
+        
     }
 
 }
+

@@ -35,14 +35,14 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
     }
     
     lazy var titleHeader : UILabel = {
-                    let label = UILabel()
-                    let title = "กิจกรรมที่เข้าร่วม"
-                    let attributedText = NSMutableAttributedString(string: title,
+        let label = UILabel()
+        let title = "กิจกรรมที่เข้าร่วม"
+        let attributedText = NSMutableAttributedString(string: title,
                     attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
-                    label.attributedText = attributedText
-                    label.numberOfLines = 0
-                    return label
-     }()
+        label.attributedText = attributedText
+        label.numberOfLines = 0
+        return label
+    }()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          
@@ -63,11 +63,11 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                         cell.supportName.text = listActivity?.caption
                         cell.supportTime.text = listActivity?.created
                         
-                        Alamofire.request((listActivity?.imagePost ?? "0")!).responseImage { response in
-                                         if let image = response.result.value {
-                                             cell.bgActivitity.image = image
-                                         }
+                        let profileImagePath = ((listActivity?.imagePost ?? "0")!)
+                                if let postImageURL = URL(string: profileImagePath) {
+                                cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
                         }
+            
                         cell.CheckPoint.isHidden = true
                         cell.decidePass.isHidden = true
                         self.tableView.separatorStyle = .none
@@ -83,11 +83,10 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                         cell.supportName.text = listActivity?.caption
                         cell.supportTime.text = listActivity?.created
             
-                        Alamofire.request((listActivity?.imagePost ?? "0")!).responseImage { response in
-                                if let image = response.result.value {
-                                    cell.bgActivitity.image = image
-                                    
-                                }
+
+                        let profileImagePath = ((listActivity?.imagePost ?? "0")!)
+                            if let postImageURL = URL(string: profileImagePath) {
+                            cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
                         }
                         
                         self.tableView.separatorStyle = .none
@@ -108,9 +107,8 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                             }else{
                                                             
                             }
-                           
                     }
-             return cell
+                    return cell
         }
 
     }

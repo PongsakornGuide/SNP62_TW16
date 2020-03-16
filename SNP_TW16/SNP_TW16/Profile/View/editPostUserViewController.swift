@@ -157,14 +157,13 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
 
  
                                     if let yield = user["img"] as? String{
-                                        Alamofire.request("\(AppDelegate.link)alder_iosapp/" + yield).responseImage { response in
-                                            if let image = response.result.value {
-                                                    self?.imageView.image = image
-                                                }
+                                        
+                                        let profileImagePath = ("\(AppDelegate.link)alder_iosapp/" + yield)
+                                                if let postImageURL = URL(string: profileImagePath) {
+                                                self?.imageView.sd_setImage(with: postImageURL, completed: nil)
                                         }
-                                    }
+                                }
                         }
-//
                 }
         }
     
@@ -266,14 +265,16 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
 //
             if let name3 = defaultValues.string(forKey: "ImageUser") {
                            imageViewPro = name3
-                Alamofire.request("http://localhost/alder_iosapp/" + (imageViewPro ?? "0")!).responseImage { response in
-                            if let image = response.result.value {
-                            self.Imagelabel.image = image
-                    }
+                            let profileImagePath = ("http://localhost/alder_iosapp/" + (imageViewPro ?? "0")!)
+                                    if let postImageURL = URL(string: profileImagePath) {
+                                    self.Imagelabel.sd_setImage(with: postImageURL, completed: nil)
+                            }
+                
+
                 }
-            }
-//        //-----------------------------------------------------------------------------------------------
-//
+            
+          //-----------------------------------------------------------------------------------------------
+
             view.backgroundColor = .white
             alertLabel.isHidden = true
             

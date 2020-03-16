@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import ObjectMapper
+import SDWebImage
 class SubActivityTypeTableViewController: UITableViewController ,UINavigationControllerDelegate{
     
     let URL_USER_ID = "\(AppDelegate.link)alder_iosapp/v1/showactivity.php/"
@@ -46,13 +47,13 @@ class SubActivityTypeTableViewController: UITableViewController ,UINavigationCon
         
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-                        let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! ActivityHeaderViewCell
-                        cell.selectionStyle = .none
-                        cell.textHeader.text = typeAct
-                        cell.textHeader.numberOfLines = 2
-                        cell.textHeader.textColor = .white
-                        cell.textHeader.font = UIFont.BaiJamjureeBold(size: 30)
-                        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+                    let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! ActivityHeaderViewCell
+                    cell.selectionStyle = .none
+                    cell.textHeader.text = typeAct
+                    cell.textHeader.numberOfLines = 2
+                    cell.textHeader.textColor = .white
+                    cell.textHeader.font = UIFont.BaiJamjureeBold(size: 30)
+                    cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                                     return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! SearchTableViewCell
@@ -63,35 +64,17 @@ class SubActivityTypeTableViewController: UITableViewController ,UINavigationCon
                     cell.supportTime.text = activity?.created
                     cell.CheckPoint.isHidden = true
                     cell.decidePass.isHidden = true
-                    
-                   Alamofire.request((activity?.imagePost ?? "0")!).responseImage { response in
-                   if let image = response.result.value {
-                    cell.bgActivitity.image = image
-                       }
-                   }
-                  
+
+                    let postImagePath = activity?.imagePost ?? "0"
+                                    if let postImageURL = URL(string: postImagePath) {
+                                        cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
+                    }
+ 
                    cell.selectionStyle = .none
                    self.tableView.separatorStyle = .none
                    return cell
                 }
     }
-    
-//    func reloadData(){
-//        let parameters: Parameters = ["id": activityList?.]
-////                let url = URL_CHECK_INVITE + "?id=\(typecheck)"
-//                Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
-//                    print(resData)
-////                    guard let json = resData.value as? NSDictionary else { return }
-////                    var header: [ActivityType] = []
-////                    for key in json.allKeys {
-////                        guard let item = json[key] as? [String:Any], let map = Mapper<ActivityType>().map(JSON: item) else { return }
-////                        header.append(map)
-////                    }
-////                    self?.header = header
-////                    self?.tableView.reloadData()
-//                }
-//    }
-    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -111,9 +94,6 @@ class SubActivityTypeTableViewController: UITableViewController ,UINavigationCon
         navigationItem.title = "Alder"
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.register(ActivityHeaderViewCell.self, forCellReuseIdentifier: cellId1)
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.estimatedRowHeight = 350
-        
         if let name2 = defaultValues.string(forKey: "userId") {
             typecheck = name2
         }else{

@@ -9,21 +9,20 @@
 import UIKit
 import Alamofire
 import MultiDegreeLikeButton
+import SDWebImage
 class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
     
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
-    let URL_CHECK_JOIN = "\(AppDelegate.link)alder_iosapp/v1/checkjoin.php"
     let URL_GET_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/showProfile.php"
-//    let URL_GET_PROFILE = "http://172.20.10.5/alder_iosapp/v1/showProfile.php"
     lazy var defaultValues = UserDefaults.standard
     lazy var getIduser = String()
     lazy var ImageProfiles = String()
     
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
           reloadData()
-//          navigationController?.navigationBar.isHidden = false
     }
 
     lazy var viewScroll: UIScrollView = {
@@ -134,9 +133,6 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
               return view
     }()
     
- 
-            
-    
     lazy var nursingHome : UILabel = {
         let label = UILabel()
         let title = "Chersery Home"
@@ -148,8 +144,6 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         return label
     }()
 
- 
-    
     lazy var iconNursingHome : UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "locatePlace")
@@ -298,13 +292,6 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
             return image
     }()
     
-//    func reloadJoinUser(){
-//        let parameters: Parameters = ["user_id":getIduser]
-//        Alamofire.request(URL_CHECK_JOIN, method: .post,parameters: parameters).responseJSON { response in
-//            print(response)
-//        }
-//    }
-    
     func reloadData(){
         let parameters: Parameters = ["userId":getIduser]
               let url = URL_GET_PROFILE + "?id=\(getIduser)"
@@ -335,11 +322,11 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                                 }
                             
                                 if let yield = user["photo"] as? String{
-                                        Alamofire.request("\(AppDelegate.link)alder_iosapp/" + yield).responseImage { response in
-                                        if let image = response.result.value {
-                                            self?.ImageProfile.image = image
-                                              }
-                                      }
+                                    
+                                let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + yield)
+                                    if let postImageURL = URL(string: postImagePath) {
+                                        self?.ImageProfile.sd_setImage(with: postImageURL, completed: nil)
+                                    }
                                }
                        }
                 

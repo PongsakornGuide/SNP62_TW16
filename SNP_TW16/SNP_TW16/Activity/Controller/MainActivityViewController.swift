@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import ObjectMapper
 import UserNotifications
+import SDWebImage
 class MainActivityViewController: UITableViewController,UNUserNotificationCenterDelegate {
     
     let URL_USER_ID = "\(AppDelegate.link)alder_iosapp/v1/showactivity.php"
@@ -65,11 +66,12 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
                     let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
                     let headerActivity = header?[indexPath.row]
                     cell.titleType.text = headerActivity?.activityTypeName
-                    Alamofire.request((headerActivity?.activtiyIcon ?? "0")!).responseImage { response in
-                    if let image = response.result.value {
-                        cell.iconImage.image = image
-                    }
-                      }
+                
+                
+                    let postImagePath = headerActivity?.activtiyIcon ?? "0"
+                          if let postImageURL = URL(string: postImagePath) {
+                              cell.iconImage.sd_setImage(with: postImageURL, completed: nil)
+                          }
                     self.tableView.separatorStyle = .none
                     cell.selectionStyle = .none
                     cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)

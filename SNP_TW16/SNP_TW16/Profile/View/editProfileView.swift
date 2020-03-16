@@ -96,7 +96,6 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
         let checkData = nameTextField.text?.count ?? 0 > 1 && surnameTextField.text?.count ?? 0 > 1 && dateTextField.text?.count ?? 0 > 1
         
         if !checkData {
-
             print("NO")
         }else{
             print("OK")
@@ -157,6 +156,7 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
         label.numberOfLines = 0
         return label
     }()
+    
     //-----------------------------------------------------------------------------------------------
        lazy var nameTextField: UITextField = {
                let textField = UITextField()
@@ -213,6 +213,18 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
                return view
     }()
 
+    
+               lazy var useTextField: UITextField = {
+                   let textField = UITextField()
+                   textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+                   textField.textColor = .black
+                   textField.font = UIFont.BaiJamjureeBold(size: 15)
+    //                textField.userInteractionEnabled = false
+                   textField.isUserInteractionEnabled = false
+                   return textField
+               }()
+     
+    
     @objc func dateChanged(datePicker: UIDatePicker) {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy/MM/dd"
@@ -252,16 +264,16 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
               Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
                         print(resData)
                         if let user = resData.result.value as! [String: Any]? {
-                                if let yield = user["username"] as? String{
+                                if let yield = user["username"] as? String {
                                     self?.nameTextField.text = yield
                                     self?.nameTextField.font = UIFont.BaiJamjureeBold(size: 20)
                                 }
-                                if let yield = user["surname"] as? String{
+                                if let yield = user["surname"] as? String {
                                     self?.surnameTextField.text = yield
                                     self?.surnameTextField.font = UIFont.BaiJamjureeBold(size: 20)
                                 }
 //
-                                if let yield = user["tel"] as? Int{
+                                if let yield = user["tel"] as? Int {
                                     self?.phoneTextField.text = "0\(yield)"
                                     self?.phoneTextField.font = UIFont.BaiJamjureeBold(size: 20)
                                     self?.phoneTextField.textColor = UIColor.rgb(red: 188, green: 188, blue: 188)
@@ -272,11 +284,10 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
                                     self?.dateTextField.font = UIFont.BaiJamjureeBold(size: 20)
                                 }
 
-                                if let yield = user["photo"] as? String{
-                                    Alamofire.request("\(AppDelegate.link)alder_iosapp/" + yield).responseImage { response in
-                                        if let image = response.result.value {
-                                                self?.imgView.image = image
-                                            }
+                                if let yield = user["photo"] as? String {
+                                    let profileImagePath = ("\(AppDelegate.link)alder_iosapp/" + yield)
+                                            if let postImageURL = URL(string: profileImagePath) {
+                                            self?.imgView.sd_setImage(with: postImageURL, completed: nil)
                                     }
                                 }
                     }
@@ -286,33 +297,31 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if let name = defaultValues.string(forKey: "userId") {
                 getIduser = name
-                print("ID User :: \(getIduser)")
         }
-        
         view.addSubview(btnBack)
         //picker
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
         dateTextField.inputView = datePicker
-        
         datePicker?.addTarget(self, action: #selector(editProfileView.dateChanged(datePicker: )), for: .valueChanged)
-        
         let TapGesture = UITapGestureRecognizer(target: self, action: #selector(editProfileView.viewTapped(gestureRecognizer:)))
         phoneTextField.text = NumberPhoneLabelText
-
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         navigationItem.title = "ข้อมูลส่วนตัว"
+        
         let stacView = UIStackView(arrangedSubviews: [nameTextField,surnameTextField,phoneTextField,dateTextField])
         stacView.distribution = .fillEqually
         stacView.spacing = 0
         stacView.axis = .vertical
+        
         self.nameTextField.delegate = self
         self.surnameTextField.delegate = self
         self.phoneTextField.delegate = self
         self.dateTextField.delegate = self
-           
+
         view.addSubview(viewScroll)
         viewScroll.addSubview(BGView)
         viewScroll.addSubview(imgView)
@@ -325,17 +334,17 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
         viewScroll.addSubview(phoneTextFieldLine)
         viewScroll.addSubview(dateTextFieldLine)
     
-           
-        viewScroll.anchor(view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        viewScroll.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
             
-        imgView.anchor(BGView.topAnchor, left: nil, right: nil, bottom: nil, topConstant: -60, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 150, heightConstant: 150)
+        imgView.anchor(BGView.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 60, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 150, heightConstant: 150)
             imgView.centerXAnchor.constraint(equalTo: BGView.centerXAnchor).isActive = true
 
         uploadImage.anchor(imgView.topAnchor, left: nil, right: imgView.rightAnchor, bottom: nil, topConstant: 75, bottomConstant: 0, leftConstant: 0, rightConstant: -15, widthConstant: 70, heightConstant: 70)
 
-        BGView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nextButton.topAnchor, topConstant: 100, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 40, heightConstant: screenSizeY)
+        BGView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nextButton.topAnchor, topConstant: 20, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 40, heightConstant: 0)
 
-        stacView.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 100, bottomConstant: 50, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 100, heightConstant: 700)
+    
+        stacView.anchor(imgView.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nextButton.topAnchor, topConstant: 30, bottomConstant: 60, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 400)
 
         titleLabel.anchor(BGView.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: stacView.topAnchor, topConstant: 50, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
@@ -346,8 +355,7 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
         phoneTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: phoneTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
         dateTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: dateTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
-
-  
+//
         nextButton.anchor(BGView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 80, rightConstant: 80, widthConstant: screenSizeX - 160, heightConstant: 70)
            // Do any additional setup after loading the view.
        }
