@@ -15,14 +15,18 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
     let URL_GET_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/showProfile.php"
+    let URL_GET_COUNT_JOIN_ACTIVITY_START = "\(AppDelegate.link)alder_iosapp/v1/countJoinActivityStart.php"
+    let URL_GET_COUNT_JOIN_ACTIVITY_END = "\(AppDelegate.link)alder_iosapp/v1/countJoinActivityEnd.php"
     lazy var defaultValues = UserDefaults.standard
     lazy var getIduser = String()
     lazy var ImageProfiles = String()
     
     override func viewWillAppear(_ animated: Bool) {
-          super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
-          reloadData()
+        reloadData()
+        reloadCountDataStart()
+        reloadCountDataEnd()
     }
 
     lazy var viewScroll: UIScrollView = {
@@ -268,7 +272,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
     
     lazy var iconActivity : UIImageView = {
              let image = UIImageView()
-             image.image = UIImage(named: "history")
+             image.image = UIImage(named: "group1285")
              image.layer.masksToBounds = true
              image.contentMode = .scaleAspectFit
              return image
@@ -301,12 +305,12 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                             print(user)
                                 if let yield = user["username"] as? String{
                                     self?.nameHeader.text = yield
-                                    self?.nameHeader.font = UIFont.BaiJamjureeBold(size: 18)
+                                    self?.nameHeader.font = UIFont.BaiJamjureeBold(size: 22)
                                 }
                             
                                 if let yield = user["surname"] as? String{
                                     self?.surnameHeader.text = yield
-                                    self?.surnameHeader.font = UIFont.BaiJamjureeBold(size: 18)
+                                    self?.surnameHeader.font = UIFont.BaiJamjureeBold(size: 22)
                                 }
                    
                                 if let yield = user["address"] as? String{
@@ -314,7 +318,15 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                                 }
                             
                                 if let yield = user["birthday"] as? String{
-                                     self?.birthday.text = yield
+                                    
+                                    let mouthStart = DateFormatter()
+                                    mouthStart.dateFormat = "yyyy-MM-dd"
+                                    let date = mouthStart.date(from: yield)
+                                    mouthStart.dateFormat = "d MMMM yyyy"
+                                    let mouthStringStart = mouthStart.string(from: date ?? Date())
+                                    self?.birthday.text = "\(mouthStringStart)"
+                                    
+//                                     self?.birthday.text = yield
                                 }
 
                                 if let yield = user["tel"] as? Int{
@@ -332,6 +344,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                 
               }
     }
+    
     
 
 
@@ -382,7 +395,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
             image.contentVerticalAlignment = .bottom
             image.setTitleColor(UIColor.white,for: .normal)
             image.titleLabel?.font = UIFont.BaiJamjureeBold(size: 20)
-//            image.addTarget(self, action: #selector(listUserActivity), for: .touchUpInside)
+            image.addTarget(self, action: #selector(listUserActivity), for: .touchUpInside)
             return image
     }()
     
@@ -399,13 +412,13 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
               image.contentVerticalAlignment = .bottom
               image.setTitleColor(UIColor.white,for: .normal)
               image.titleLabel?.font = UIFont.BaiJamjureeBold(size: 20)
-//              image.addTarget(self, action: #selector(listUserActivity), for: .touchUpInside)
+              image.addTarget(self, action: #selector(listUserActivity), for: .touchUpInside)
               return image
       }()
         
     lazy var numActivty : UILabel = {
         let label = UILabel()
-        let title = "1"
+        let title = "0"
       let style = NSMutableParagraphStyle()
        style.alignment = NSTextAlignment.center
        let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 40),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
@@ -425,6 +438,37 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
           return label
       }()
     
+    
+    func reloadCountDataStart(){
+             let parameters: Parameters = ["user_id":getIduser]
+        print(parameters)
+                   let url = URL_GET_COUNT_JOIN_ACTIVITY_START + "?id=\(getIduser)"
+        print(url)
+                   Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
+                             if let user = resData.result.value as! [String: Any]? {
+                                 if let yield = user["joinActivity"] as? Int{
+                                     self?.numActivty.text = "\(yield)"
+                                     self?.numActivty.font = UIFont.BaiJamjureeBold(size: 40)
+                                 }
+                         }
+                   }
+    }
+    
+    func reloadCountDataEnd(){
+              let parameters: Parameters = ["user_id":getIduser]
+         print(parameters)
+                    let url = URL_GET_COUNT_JOIN_ACTIVITY_END + "?id=\(getIduser)"
+         print(url)
+                    Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
+                              if let user = resData.result.value as! [String: Any]? {
+                                  if let yield = user["joinActivityEnd"] as? Int{
+                                      self?.endActivty.text = "\(yield)"
+                                      self?.endActivty.font = UIFont.BaiJamjureeBold(size: 40)
+                                  }
+                          }
+                    }
+     }
+     
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -537,7 +581,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
 
         iconActivity.anchor(activityUser.topAnchor, left: activityUser.leftAnchor, right:activityUser.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: iconActivity.frame.size.width , heightConstant: iconActivity.frame.size.height )
 
-        iconPost.anchor(postUser.topAnchor, left: postUser.leftAnchor, right:postUser.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 65, rightConstant: 65, widthConstant: iconPost.frame.size.width, heightConstant: iconPost.frame.size.height)
+        iconPost.anchor(postUser.topAnchor, left: postUser.leftAnchor, right:postUser.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: iconPost.frame.size.width, heightConstant: iconPost.frame.size.height)
         
 
 

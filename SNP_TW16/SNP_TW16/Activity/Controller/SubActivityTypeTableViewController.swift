@@ -61,7 +61,14 @@ class SubActivityTypeTableViewController: UITableViewController ,UINavigationCon
                     let activity = activityList?[indexPath.row]
                     cell.titleFullname.text = activity?.actId
                     cell.supportName.text = activity?.caption
-                    cell.supportTime.text = activity?.created
+            
+                    let mouthStart = DateFormatter()
+                    mouthStart.dateFormat = "yyyy-mm-dd"
+                    let date = mouthStart.date(from: activity?.created ?? "x")
+                    mouthStart.dateFormat = "dd MMMM yyyy"
+                    let mouthStringStart = mouthStart.string(from: date ?? Date())
+                    cell.supportTime.text = mouthStringStart
+            
                     cell.CheckPoint.isHidden = true
                     cell.decidePass.isHidden = true
 

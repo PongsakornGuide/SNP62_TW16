@@ -58,16 +58,18 @@ class NotificationTableView: UITableViewController,UNUserNotificationCenterDeleg
              let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! NotificationColumn
 
              let listNoti = notification?[indexPath.row]
-             cell.timeLabel.text = listNoti?.create
-             cell.textLabelTitle.text = "กิจกรรม : \(listNoti?.testtitle ?? "x")"
-//             cell.username.text = listNoti?.username
-             cell.textLabelName.text = "ตอนนี้ \(listNoti?.title ?? "x") \nขอให้สนุกกับกิจกรรมในเร็วๆนี้"
+             
+            cell.textLabelTitle.text = "กิจกรรม : \(listNoti?.testtitle ?? "x")"
+            cell.textLabelName.text = "ตอนนี้ \(listNoti?.title ?? "x") \nขอให้สนุกกับกิจกรรมในเร็วๆนี้"
 
-//            Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (listNoti?.photo ?? "0")!).responseImage { response in
-//                                if let image = response.result.value{
-//                                cell.profileImage.image = image
-//                    }
-//            }
+
+        
+            let mouthStart = DateFormatter()
+            mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let date = mouthStart.date(from: listNoti?.create ?? "x")
+            mouthStart.dateFormat = "h"
+            let mouthStringStart = mouthStart.string(from: date ?? Date())
+            cell.timeLabel.text = "\(mouthStringStart) ชั่วโมงที่แล้ว"
 
              tableView.separatorStyle = .none
              cell.selectionStyle = .none

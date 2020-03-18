@@ -56,6 +56,7 @@ class ActivityDetail: Mappable {
     var imgact:String?
     var imgtime:String?
     var created:String?
+    var enddate:String?
     var join:Int?
     var invite:Int?
     var startTime:String?
@@ -75,6 +76,7 @@ class ActivityDetail: Mappable {
         imgact <- map["imgact"]
         imgtime <- map["imgtime"]
         created <- map["startDate"]
+        enddate <- map["endDate"]
         join <- map["maxJoin"]
         invite <- map["invaite"]
         startTime <- map["startTime"]
@@ -139,7 +141,8 @@ class StoryUser: Mappable {
 class VideoUser: Mappable {
     var id:Int?
     var url:String?
-    var content:String?
+    var singerName:String?
+    var title_video:String?
     
     required init?(map: Map) {
         
@@ -148,7 +151,8 @@ class VideoUser: Mappable {
     func mapping(map: Map) {
         id <- map["id"]
         url <- map["url"]
-        content <- map["content"]
+        singerName <- map["singerName"]
+        title_video <- map["title_video"]
     }
 }
 

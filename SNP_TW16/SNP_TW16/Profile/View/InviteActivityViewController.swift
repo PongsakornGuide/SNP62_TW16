@@ -59,9 +59,15 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
         if(self.segmentedControl.selectedSegmentIndex == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! SearchTableViewCell
                         let listActivity = ActivityStart?[indexPath.row]
+            
                         cell.titleFullname.text = listActivity?.actId
-                        cell.supportName.text = listActivity?.caption
-                        cell.supportTime.text = listActivity?.created
+                        cell.supportName.text = "โดย \(listActivity?.caption ?? "x")"
+                        let mouthStart = DateFormatter()
+                        mouthStart.dateFormat = "yyyy-mm-dd"
+                        let mouthStringStartt = mouthStart.date(from: listActivity?.created ?? "x")
+                        mouthStart.dateFormat = "dd MMMM yyyy"
+                        let mouthStringStart = mouthStart.string(from: mouthStringStartt ?? Date())
+                        cell.supportTime.text = mouthStringStart
                         
                         let profileImagePath = ((listActivity?.imagePost ?? "0")!)
                                 if let postImageURL = URL(string: profileImagePath) {
@@ -73,25 +79,30 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                         self.tableView.separatorStyle = .none
                         cell.selectionStyle = .none
                         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
-            
                         return cell
             
         }else{
               let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! SearchTableViewCell
-                        let listActivity = ActivityList?[indexPath.row]
-                        cell.titleFullname.text = listActivity?.actId
-                        cell.supportName.text = listActivity?.caption
-                        cell.supportTime.text = listActivity?.created
+                       let listActivity = ActivityList?[indexPath.row]
+                       cell.bgActivitityBg.isHidden = false
+                       cell.titleFullnameEnd.isHidden = false
+                       cell.titleFullname.text = listActivity?.actId
+                       cell.supportName.text = "โดย \(listActivity?.caption ?? "x")"
+                       let mouthStart = DateFormatter()
+                       mouthStart.dateFormat = "yyyy-mm-dd"
+                       let mouthStringStartt = mouthStart.date(from: listActivity?.created ?? "x")
+                       mouthStart.dateFormat = "dd MMMM yyyy"
+                       let mouthStringStart = mouthStart.string(from: mouthStringStartt ?? Date())
+                       cell.supportTime.text = mouthStringStart
             
-
-                        let profileImagePath = ((listActivity?.imagePost ?? "0")!)
+                       let profileImagePath = ((listActivity?.imagePost ?? "0")!)
                             if let postImageURL = URL(string: profileImagePath) {
                             cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
+//
+                              
                         }
                         
-                        self.tableView.separatorStyle = .none
-                        cell.selectionStyle = .none
-                        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+                        
                         IdPost =  listActivity?.dataId ?? 0
             
                         let parameters: Parameters = ["user_id":user_id,"post_timeline_id":IdPost]
@@ -108,6 +119,9 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                                                             
                             }
                     }
+                    self.tableView.separatorStyle = .none
+                    cell.selectionStyle = .none
+                    cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                     return cell
         }
 
@@ -157,7 +171,7 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
     }
     
     let segmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["กำลังจะมาถึง", "ที่ผ่านไปแล้ว"])
+        let control = UISegmentedControl(items: ["กิจกรรมที่เข้าร่วม", "กิจกรรมที่เข้าร่วมแล้ว"])
         control.selectedSegmentIndex = 0
         control.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
         return control
@@ -177,9 +191,6 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
     }
     
     let tableView = UITableView(frame: .zero, style: .plain)
-    
-    
-    
     //master array
     lazy var rowToDisplay = ActivityList
     

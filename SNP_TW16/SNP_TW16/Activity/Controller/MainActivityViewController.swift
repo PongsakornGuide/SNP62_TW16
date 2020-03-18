@@ -53,7 +53,7 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
             if indexPath.section == 0 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
                     cell.selectionStyle = .none
-                    cell.titleHeader.text = day
+                    cell.titleHeader.text = "สวัสดี \(day)"
                     cell.titleHeader.textColor = .white
                     cell.titleHeader.font = UIFont.BaiJamjureeBold(size:22)
                     cell.textHeader.text = Labelname
@@ -223,6 +223,7 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
         let dateFormatter = DateFormatter()
         let date = Date()
         let format = DateFormatter()
+        format.timeZone = NSTimeZone(abbreviation: "ICT") as TimeZone?
         format.dateFormat = "EEEE"
         let formattedDate = format.string(from: date)
         day = formattedDate

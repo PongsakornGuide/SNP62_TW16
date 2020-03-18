@@ -182,11 +182,12 @@ class OtpViewController: UIViewController {
     }()
     
     @objc func performSegueToReturnBack()  {
-        if let nav = self.navigationController {
-            _ = navigationController?.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true, completion: nil)
-        }
+//        if let nav = self.navigationController {
+//            _ = navigationController?.popViewController(animated: true)
+//        } else {
+//            self.dismiss(animated: true, completion: nil)
+//        }
+        navigationController?.popViewController(animated: true)
     }
     
    ////hide keyborad

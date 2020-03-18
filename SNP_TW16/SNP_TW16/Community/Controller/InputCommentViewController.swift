@@ -67,7 +67,14 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
 
                let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! DetailActivityViewController
                 cell.username.text = check?.username
-                cell.date.text = check?.createdAt
+                
+                let mouthStart = DateFormatter()
+                mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                let date = mouthStart.date(from: check?.createdAt ?? "x")
+                mouthStart.dateFormat = "MMM d, h:mm a"
+                let mouthStringStart = mouthStart.string(from: date ?? Date())
+                cell.date.text = mouthStringStart
+                
                 cell.comment.text = check?.caption
                 cell.numCount.text = "\(check?.likeActivity ?? 0)"
                 cell.comCount.text = "\(check?.commentsActivity ?? 0)"
@@ -104,7 +111,14 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as!
                  CommentTableView
                 let commentActivity = comment?[indexPath.row]
-                cell.date.text = "\(commentActivity?.created ?? "x") น."
+                
+                let mouthStart = DateFormatter()
+                mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                let date = mouthStart.date(from: commentActivity?.created ?? "x")
+                mouthStart.dateFormat = "MMM d, h:mm a"
+                let mouthStringStart = mouthStart.string(from: date ?? Date())
+                cell.date.text = "\(mouthStringStart)"
+            
                 cell.comment.text = commentActivity?.post
                 cell.username.text = commentActivity?.userName
                     
@@ -152,13 +166,14 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
         @objc func sendData(_ sender:UIButton){
                        let isCheckValid = commentTextField.text?.count ?? 0 > 0
                        if isCheckValid{
-                        commentTextField.text = ""
                               let parameters: Parameters = ["ad_post_timeline_id":check?.id ?? 0,"user_id":userid,"post":commentTextField.text!]
+                        print(parameters)
                                  let url = URL_POST_COMMENT
                                  Alamofire.request(url, method: .post,parameters: parameters).responseJSON { response in
                                     self.getcomment()
+                                    
                                  }
-
+ commentTextField.text = ""
 
                        }else{
 

@@ -64,10 +64,18 @@ class listPostUserTableView: UITableViewController {
    
                 let listActivity = ActivityList?[indexPath.row]
                 cell.userFullname.text = listActivity?.username
-                cell.timeTextLabel.text = listActivity?.createdAt
+                
+                let mouthStart = DateFormatter()
+                mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                let date = mouthStart.date(from: listActivity?.createdAt ?? "x")
+                mouthStart.dateFormat = "MMM d, h:mm a"
+                let mouthStringStart = mouthStart.string(from: date ?? Date())
+                cell.timeTextLabel.text = mouthStringStart
+                
+//                cell.timeTextLabel.text = listActivity?.createdAt
                 cell.messageTextLabel.text = listActivity?.caption
-                cell.numCount.text = "\(listActivity?.likeActivity ?? 0)"
-                cell.numCom.text = "\(listActivity?.commentsActivity ?? 0)"
+                cell.numCount.text = "\(listActivity?.likeActivity ?? 0)  ถูกใจ"
+                cell.numCom.text = "\(listActivity?.commentsActivity ?? 0)  คอมเม้นต์"
 
                 adpostId = listActivity?.id ?? 0
                 let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + (listActivity?.img ?? "0")!)

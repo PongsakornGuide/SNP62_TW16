@@ -10,7 +10,20 @@ import UIKit
 import Alamofire
 import ObjectMapper
 import SDWebImage
+import EventKitUI
 class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINavigationControllerDelegate{
+    
+    lazy var gettitle = String()
+    
+    lazy var getstart = String()
+    lazy var getend = String()
+    
+    lazy var ttitle = String()
+    lazy var title2 = String()
+    
+    lazy var startTime = String()
+    lazy var endDate = String()
+    
     lazy var defaultValues = UserDefaults.standard
     var activityData: ActivityDetail?
     lazy var typecheck = String()
@@ -194,6 +207,92 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
         let alert = UIAlertController(title: "แน่ใจว่าต้องการเข้าร่วมกิจกรรม", message: "ยืนยันการเข้าร่วม",preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "ยกเลิก", style: UIAlertAction.Style.destructive, handler: { _ in
             print("Cancel")
+//            startDate.text = "\(activityData?.created ?? "ค่าว่าง")"
+//            timerAct.text = "\(activityData?.startTime ?? "x") - "
+//            endtimerAct.text = activityData?.endtime
+//            print(self.titleLabel.text ?? "x")
+//            print(self.startDate.text ?? "x")
+//            print(self.endDate)
+//            print(self.startTime)
+//            print(self.endtimerAct.text ?? "x")
+//            let check = Date()
+//            print(check)
+//            let isoDateStart = "\(self.startDate.text ?? "x") \(self.startTime) +0700"
+//            print(isoDateStart)
+            self.ttitle = self.startDate.text ?? "x"
+            self.title2 = self.endtimerAct.text ?? "x"
+            self.gettitle = self.titleLabel.text ?? "x"
+//            let isoDateEnd = "\(self.endDate) \(self.endtimerAct.text ?? "x") +0700"
+//            print(isoDateEnd)
+            
+            let eventStore : EKEventStore = EKEventStore()
+            // 'EKEntityTypeReminder' or 'EKEntityTypeEvent'
+            eventStore.requestAccess(to: .event) { (granted, error) in
+
+            if (granted) && (error == nil) {
+                print("granted \(granted)")
+                print("error \(error)")
+                let event:EKEvent = EKEvent(eventStore: eventStore)
+
+                
+                
+
+                
+                //start
+//                let isoDateStart = "2020-03-17T22:00:00+0700"
+                let isoDateStart = "\(self.ttitle)T\(self.startTime)+0700"
+                
+                self.getstart = isoDateStart
+                print(self.getstart)
+                let dateFormatterStart = DateFormatter()
+                dateFormatterStart.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+                dateFormatterStart.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                dateFormatterStart.timeZone = NSTimeZone(abbreviation: "ICT") as TimeZone?
+                let dateStart = dateFormatterStart.date(from:isoDateStart)
+                print(dateStart ?? "x")
+                event.startDate = dateStart ?? Date()
+
+                //end
+//                let isoDateEnd = "2020-03-18T09:00:00+0700"
+                let isoDateEnd = "\(self.endDate)T\(self.title2) +0700"
+                self.getend = isoDateEnd
+                print(self.getend)
+                let dateFormatterEnd = DateFormatter()
+                dateFormatterEnd.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+                dateFormatterEnd.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                dateFormatterEnd.timeZone = NSTimeZone(abbreviation: "ICT") as TimeZone?
+                let dateEnd = dateFormatterEnd.date(from:isoDateEnd)
+                print(dateEnd ?? "x")
+                event.endDate = dateEnd ?? Date()
+
+                //header alert
+                event.title = self.gettitle
+                //title alert
+                event.notes = "กิจกรรมจะเตือนคุณในอีกไม่ช้านี้"
+                event.calendar = eventStore.defaultCalendarForNewEvents
+
+                //alert before start activity 1 hour
+                let alarm1hour = EKAlarm(relativeOffset: -3600)
+
+                //alert before start activity 1 day
+                let alarm1day = EKAlarm(relativeOffset: -86400)
+
+                event.addAlarm(alarm1day)
+                event.addAlarm(alarm1hour)
+
+                do {
+                    try eventStore.save(event, span: .thisEvent)
+                } catch let error as NSError {
+                    print("failed to save event with error : \(error)")
+                }
+                    print("Saved Event")
+                } else{
+                    print("failed to save event with error : \(error) or access not granted")
+                }
+            }
+            
+            
+            
         }))
                   
         alert.addAction(UIAlertAction(title: "เข้าร่วม",style: UIAlertAction.Style.default, handler: { _ in
@@ -243,16 +342,57 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
         
         func reloadData(){
             
-                     ActivityPostID = activityData?.dataId ?? 0
-                     titleLabel.text = activityData?.actId
-                     nameLabel.text = "โดย \(activityData?.caption ?? "ค่าว่าง")"
-                     timeLabel.text = "วันเริ่มกิจกรรม: \(activityData?.created ?? "ค่าว่าง")"
-                     contentLabel.text = activityData?.content
-                     textHeader.text = activityData?.type
-                     startDate.text = "\(activityData?.created ?? "ค่าว่าง")"
-                     timerAct.text = "\(activityData?.startTime ?? "x") - "
-                     endtimerAct.text = activityData?.endtime
-                     IdActivity = activityData?.dataId ?? 0
+            ActivityPostID = activityData?.dataId ?? 0
+            titleLabel.text = activityData?.actId
+            nameLabel.text = "โดย \(activityData?.caption ?? "ค่าว่าง")"
+//            timeLabel.text = "วันเริ่มกิจกรรม: \(activityData?.created ?? "ค่าว่าง")"
+            contentLabel.text = activityData?.content
+            textHeader.text = activityData?.type
+//            startTime = "\(activityData?.startTime ?? "x")"
+            endDate = "\(activityData?.enddate ?? "x")"
+//            startDate.text = activityData?.created
+            
+            
+          
+            let mouthStart = DateFormatter()
+            mouthStart.dateFormat = "yyyy-mm-dd"
+            let mouthStringStartt = mouthStart.date(from: activityData?.created ?? "x")
+            mouthStart.dateFormat = "dd MMMM yyyy"
+            let mouthStringStart = mouthStart.string(from: mouthStringStartt ?? Date())
+            startDate.text = mouthStringStart
+            timeLabel.text = "วันเริ่มกิจกรรม: \(mouthStringStart)"
+            
+//            let mouthStart = DateFormatter()
+//            mouthStart.dateFormat = "yyyy:mm:dd"
+//            let dateCheck = mouthStart.date(from: activityData?.created ?? "x")
+//            mouthStart.dateFormat = "dd MMMM yyyy"
+//            let mouthStringStart = mouthStart.string(from: dateCheck ?? Date())
+//            startDate.text = "\(mouthStringStart ?? "x")"
+//            timeLabel.text = "วันเริ่มกิจกรรม: \(mouthStringStart)"
+            
+           
+            
+            let dateFormatterStart = DateFormatter()
+            dateFormatterStart.dateFormat = "HH:mm:ss"
+            let dateStart = dateFormatterStart.date(from: activityData?.startTime ?? "x")
+            dateFormatterStart.dateFormat = "HH:mm"
+            let dateString = dateFormatterStart.string(from: dateStart ?? Date())
+            timerAct.text = "\(dateString ?? "x") - "
+
+            
+            let dateFormatterEnd = DateFormatter()
+            dateFormatterEnd.dateFormat = "HH:mm:ss"
+            let dateEnd = dateFormatterEnd.date(from: activityData?.endtime ?? "x")
+            dateFormatterEnd.dateFormat = "HH:mm"
+            let dateStringEnd = dateFormatterEnd.string(from: dateEnd ?? Date())
+            endtimerAct.text = dateStringEnd
+            
+            
+            
+            IdActivity = activityData?.dataId ?? 0
+                     
+            
+            
                     
             
             let postImagePath = activityData?.imagePost ?? "0"
@@ -322,11 +462,11 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
 //
 //                CheckPoint.isHidden = true
                 
-              viewScroll.anchor(view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+                viewScroll.anchor(view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
               
               stepView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX - 0, heightConstant: 250)
                  
-              BGView.anchor(stepView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: -20, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX , heightConstant: screenSizeY)
+              BGView.anchor(stepView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: -20, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX , heightConstant: 0)
               
               header.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 40)
 
@@ -343,18 +483,17 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                timeLabel.anchor(nameLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 20)
 
 
-                contentLabel.anchor(timeLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX, heightConstant: 0)
+                contentLabel.anchor(timeLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
                 
                 contentLabel.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 100).isActive = true
 
                 Activityline.anchor(contentLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 30 , widthConstant: screenSizeX, heightConstant: 1.5)
 
 
-                contentImage.anchor(Activityline.bottomAnchor, left: BGView.leftAnchor, right: nil, bottom: nil, topConstant: 50, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 50, heightConstant: 50)
+                contentImage.anchor(Activityline.bottomAnchor, left: BGView.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 50, heightConstant: 50)
 
 
-                startDate.anchor(Activityline.bottomAnchor, left: contentImage.rightAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 50)
-
+                startDate.anchor(Activityline.bottomAnchor, left: contentImage.rightAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 50)
 
                 timeImage.anchor(contentImage.bottomAnchor, left: BGView.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 50, heightConstant: 50)
 
@@ -367,10 +506,9 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
 
                 joinAct.anchor(timeImage.bottomAnchor, left: userImage.rightAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 50)
 
+                nextButton.anchor(userImage.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 40, bottomConstant: 30, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX, heightConstant: 70)
 
-                nextButton.anchor(userImage.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 40, bottomConstant: 30, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX, heightConstant: 70)
-//
-                enableButton.anchor(userImage.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 40, bottomConstant: 30, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX, heightConstant: 70)
+                enableButton.anchor(userImage.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 40, bottomConstant: 30, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX, heightConstant: 70)
 
             }
 

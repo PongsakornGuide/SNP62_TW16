@@ -213,12 +213,12 @@ class AcivityListTableViewCell: UITableViewCell{
             
         iconImageLike.anchor(postImage.bottomAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 20, rightConstant: 0, widthConstant: 30, heightConstant: 30)
 
-        numCount.anchor(postImage.bottomAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 40, rightConstant: 0, widthConstant: 30, heightConstant: 30)
+        numCount.anchor(postImage.bottomAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 40, rightConstant: 0, widthConstant: 0, heightConstant: 30)
 
             
         iconImageComment.anchor(postImage.bottomAnchor, left: nil, right: numCom.leftAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 10, widthConstant: 30, heightConstant: 30)
 
-        numCom.anchor(postImage.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 10, widthConstant: 30, heightConstant: 30)
+        numCom.anchor(postImage.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 40, widthConstant: 0, heightConstant: 30)
     }
     
     

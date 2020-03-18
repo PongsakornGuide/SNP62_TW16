@@ -73,9 +73,17 @@ class CommunViewController: UITableViewController{
             let headerActivity = activityList?[indexPath.row]
             cell.userFullname.text = headerActivity?.username
             cell.messageTextLabel.text = headerActivity?.caption
-            cell.timeTextLabel.text = headerActivity?.createdAt
-            cell.numCount.text = "\(headerActivity?.likeActivity ?? 0)"
-            cell.numCom.text = "\(headerActivity?.commentsActivity ?? 0)"
+            
+            let mouthStart = DateFormatter()
+//            2020-03-15 15:45:41
+            mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let date = mouthStart.date(from: headerActivity?.createdAt ?? "x")
+            mouthStart.dateFormat = "MMM d, h:mm a"
+            let mouthStringStart = mouthStart.string(from: date ?? Date())
+            cell.timeTextLabel.text = mouthStringStart
+            
+            cell.numCount.text = "\(headerActivity?.likeActivity ?? 0)  ถูกใจ"
+            cell.numCom.text = "\(headerActivity?.commentsActivity ?? 0  )  คอมเม้นต์"
             adpostId = headerActivity?.id ?? 0
             
 

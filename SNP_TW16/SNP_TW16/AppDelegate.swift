@@ -17,11 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     static let link = "http://localhost/"
 //    static let link = "http://192.168.43.145/"
-    
-    
-//    static let link = "http://192.168.1.105/"
+//    static let link = "http://192.168.1.46/"
 //    static let link = "http://192.168.1.16/"
-//    192.168.1.105.
+//      static let link = "http://192.168.1.100/"
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
         self.SetupPushNotification(application: application)

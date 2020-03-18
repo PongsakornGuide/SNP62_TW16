@@ -182,7 +182,7 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
             
             alertbox.addAction(UIAlertAction(title: "ยืนยัน",style:.default,handler: {UIAlertAction in
                 print("Successful")
-                let parameters = ["user_id":self.IdUser,"post_timeline_id":self.post_timeline,"feel_id":self.feel,"impress_id":self.impress] as [String : Any]
+                let parameters = ["user_id":self.IdUser,"post_timeline_id":self.post_timeline,"assess_id":self.feel,"impress_id":self.impress] as [String : Any]
                             Alamofire.request(self.URL_POST_DECIDE_AFTER, method: .post,parameters: parameters).responseJSON { response in
                                 if let delegate = self.delegate as? InviteActivityViewController {
                                         delegate.buttonView.isHidden = true

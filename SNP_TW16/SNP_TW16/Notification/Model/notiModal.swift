@@ -59,7 +59,7 @@ class listNotification: Mappable{
         title <- map["contentAct"]
         testtitle <- map["title"]
         friend <- map["friend"]
-        create <- map["create_at"]
+        create <- map["created_at"]
         username <- map["username"]
         photo <- map["photo"]
         

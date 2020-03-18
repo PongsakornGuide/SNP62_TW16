@@ -37,7 +37,7 @@ class HeaderReligion: UITableViewCell {
        
        lazy var iconImage : UIImageView = {
            let image = UIImageView()
-           image.image = UIImage(named: "gameController")
+           image.image = UIImage(named: "group1499")
            image.contentMode = .scaleAspectFit
            image.layer.masksToBounds = true
            return image
