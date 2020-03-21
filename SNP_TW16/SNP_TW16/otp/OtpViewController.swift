@@ -11,7 +11,7 @@ import Foundation
 import Alamofire
 
 class OtpViewController: UIViewController {
-//    http://localhost/alder_iosapp/v1/select_otp.php
+
     var idUserLabelText = String()
     var OTP = String()
     
@@ -136,7 +136,7 @@ class OtpViewController: UIViewController {
                             if let result = response.result.value {
                                 let jsonData = result as? Bool ?? true
                                 if(jsonData == false) {
-                                    let otpId = ("otp") as! NSObject
+                                    let otpId = ("otp") as NSObject
                                     self.defaultValues.set(otpId, forKey: "otp")
                                  let puchToReg = RegisterViewController ()
                                  puchToReg.NumberPhoneLabelText = self.idTextField.text ?? "0"

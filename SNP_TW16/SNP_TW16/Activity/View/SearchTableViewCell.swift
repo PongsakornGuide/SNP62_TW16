@@ -20,7 +20,7 @@ class SearchTableViewCell: UITableViewCell {
      
     lazy var profileImage: UIView = {
               let background = UIView()
-                 background.backgroundColor = UIColor.white
+                 background.backgroundColor = .white
                  background.layer.cornerRadius = 20
                  background.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
                  background.layer.shadowOpacity = 0.1
@@ -67,14 +67,7 @@ class SearchTableViewCell: UITableViewCell {
            return label
     }()
     
-    lazy var markImage:UIImageView = {
-                let image = UIImageView()
-                image.image = UIImage(named: "group1310")
-                image.contentMode = .scaleAspectFill
-                image.layer.masksToBounds = true
-                return image
-    }()
-    
+
     lazy var line: UIView = {
             let view = UIView()
             view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 252)
@@ -85,7 +78,7 @@ class SearchTableViewCell: UITableViewCell {
             let label = UILabel()
             label.text = "โดย ไกด์ ฐิติวัฒน์"
             label.textColor = UIColor.blackAlpha(alpha: 0.3)
-            label.font = UIFont.BaiJamjureeMedium(size: 16)
+            label.font = UIFont.BaiJamjureeLight(size: 16)
             return label
     }()
     
@@ -101,7 +94,7 @@ class SearchTableViewCell: UITableViewCell {
           let label = UILabel()
           label.text = "14 สิงหาคม 2562"
           label.textColor = UIColor.blackAlpha(alpha: 0.8)
-          label.font = UIFont.BaiJamjureeMedium(size: 16)
+          label.font = UIFont.BaiJamjureeLight(size: 16)
           return label
     }()
     
@@ -133,7 +126,9 @@ class SearchTableViewCell: UITableViewCell {
     }
     
         func setupViewCell(){
-//            backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+           
+            
+            backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
             bgActivitityBg.isHidden = true
             titleFullnameEnd.isHidden = true
             addSubview(profileImage)
@@ -147,7 +142,7 @@ class SearchTableViewCell: UITableViewCell {
             addSubview(CheckPoint)
             addSubview(decidePass)
 
-            profileImage.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: supportName.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+            profileImage.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: supportName.bottomAnchor, topConstant: 5, bottomConstant: 15, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
             
             bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 150)
 
@@ -161,12 +156,13 @@ class SearchTableViewCell: UITableViewCell {
 
             titleFullname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
                         
+
             CheckPoint.anchor(bgActivitity.bottomAnchor, left: titleFullname.rightAnchor, right:profileImage.rightAnchor, bottom: nil, topConstant: 18, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 110, heightConstant: 30)
             
             decidePass.anchor(bgActivitity.bottomAnchor, left: titleFullname.rightAnchor, right:profileImage.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 30)
             
             
-            line.anchor(titleFullname.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 0, rightConstant: 30, widthConstant: 0, heightConstant: 1.1)
+            line.anchor(titleFullname.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1.1)
                      
             supportName.anchor(line.bottomAnchor, left: bgActivitity.leftAnchor, right: rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 80)
                         

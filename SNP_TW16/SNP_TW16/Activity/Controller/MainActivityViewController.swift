@@ -53,7 +53,7 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
             if indexPath.section == 0 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
                     cell.selectionStyle = .none
-                    cell.titleHeader.text = "สวัสดี \(day)"
+                    cell.titleHeader.text = "สวัสดีวัน \(day)"
                     cell.titleHeader.textColor = .white
                     cell.titleHeader.font = UIFont.BaiJamjureeBold(size:22)
                     cell.textHeader.text = Labelname
@@ -70,8 +70,10 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
                 
                     let postImagePath = headerActivity?.activtiyIcon ?? "0"
                           if let postImageURL = URL(string: postImagePath) {
-                              cell.iconImage.sd_setImage(with: postImageURL, completed: nil)
-                          }
+                        cell.iconImage.sd_setImage(with: postImageURL, completed: nil)
+                    }
+                
+                    
                     self.tableView.separatorStyle = .none
                     cell.selectionStyle = .none
                     cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
@@ -227,6 +229,7 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
         format.dateFormat = "EEEE"
         let formattedDate = format.string(from: date)
         day = formattedDate
+        
         navigationItem.title = "Alder"
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)

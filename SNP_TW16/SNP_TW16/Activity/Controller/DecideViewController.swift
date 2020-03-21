@@ -63,8 +63,8 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
                     let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! layoutTableViewCell
                     let emogiDecide = feel?[indexPath.row]
                     cell.textHeader.text = emogiDecide?.feel
-                    cell.textHeader.font = UIFont.BaiJamjureeBold(size: 25)
-                    cell.textHeader.textColor = .black
+                    cell.textHeader.font = UIFont.BaiJamjureeBold(size: 26)
+                    cell.textHeader.textColor = UIColor.rgb(red: 27, green: 71, blue: 147)
                     
                     
                     let postImagePath = emogiDecide?.iconImage ?? "0"

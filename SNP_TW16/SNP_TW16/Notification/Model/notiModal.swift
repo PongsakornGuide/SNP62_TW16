@@ -80,4 +80,31 @@ class listNotification: Mappable{
     }
 }
 
+class listNotificationPost: Mappable{
+    
+    var id: Int?
+    var userId: Int?
+    var otherId: Int?
+    var adposTtimeline: Int?
+    var contentPost: String?
+    var photo: String?
+    var username: String?
+    var caption: String?
+    var create: String?
+    
+    required init?(map: Map) {
+        
+    }
+    func mapping(map: Map) {
+        id <- map["id"]
+        userId <- map["user_id"]
+        otherId <- map["other_id"]
+        adposTtimeline <- map["ad_post_timeline_id"]
+        contentPost <- map["contentPost"]
+        photo <- map["photo"]
+        username <- map["username"]
+        caption <- map["caption"]
+        create <- map["create_at"]
+    }
+}
 

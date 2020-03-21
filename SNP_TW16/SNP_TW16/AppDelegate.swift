@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    static let link = "http://192.168.43.145/"
 //    static let link = "http://192.168.1.46/"
 //    static let link = "http://192.168.1.16/"
-//      static let link = "http://192.168.1.100/"
+//    static let link = "http://192.168.1.57/"
+//    static let link = "http://192.168.1.12/"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
@@ -28,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = tabBarViewController()
+//        application.applicationIconBadgeNumber = 10
 //        window?.rootViewController = UINavigationController(rootViewController: tabBarViewController())
         return true
     }
@@ -35,16 +37,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  // Setup appdelegate for push notifications
     func SetupPushNotification(application: UIApplication) -> () {
         
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge])
-        {(granted,error) in
-            if granted{
-                DispatchQueue.main.async {
-                    application.registerForRemoteNotifications()
-                }
-            } else {
-                print("User Notification permission denied: \(error?.localizedDescription ?? "error")")
-            }
-        }
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge])
+//        {(granted,error) in
+//            if granted{
+//                DispatchQueue.main.async {
+//                    application.registerForRemoteNotifications()
+//                }
+//            } else {
+//                print("User Notification permission denied: \(error?.localizedDescription ?? "error")")
+//            }
+//        }
     }
     //  MARK: UNUserNotificationCenter Delegate methods
     

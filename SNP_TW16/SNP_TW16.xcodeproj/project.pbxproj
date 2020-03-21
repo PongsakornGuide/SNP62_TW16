@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		202CCAB82415608500DB3B26 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202CCAB72415608500DB3B26 /* NotificationView.swift */; };
 		2033A2C5240F614400B38FED /* barChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2033A2C4240F614400B38FED /* barChartViewController.swift */; };
+		20D6F1AD2425E95600F315EF /* NotificationColumnPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D6F1AC2425E95600F315EF /* NotificationColumnPost.swift */; };
 		20E7EF842419A85100DCE89F /* editPostUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E7EF832419A85100DCE89F /* editPostUserViewController.swift */; };
 		20EB4439241810FA009EDDE6 /* NotificationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB4438241810FA009EDDE6 /* NotificationTableView.swift */; };
 		20EB443B241812FD009EDDE6 /* NotificationTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB443A241812FD009EDDE6 /* NotificationTitle.swift */; };
@@ -109,6 +110,7 @@
 /* Begin PBXFileReference section */
 		202CCAB72415608500DB3B26 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		2033A2C4240F614400B38FED /* barChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = barChartViewController.swift; sourceTree = "<group>"; };
+		20D6F1AC2425E95600F315EF /* NotificationColumnPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationColumnPost.swift; sourceTree = "<group>"; };
 		20E7EF832419A85100DCE89F /* editPostUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editPostUserViewController.swift; sourceTree = "<group>"; };
 		20EB4438241810FA009EDDE6 /* NotificationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableView.swift; sourceTree = "<group>"; };
 		20EB443A241812FD009EDDE6 /* NotificationTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTitle.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 			children = (
 				20EB443A241812FD009EDDE6 /* NotificationTitle.swift */,
 				20EB443C24181535009EDDE6 /* NotificationColumn.swift */,
+				20D6F1AC2425E95600F315EF /* NotificationColumnPost.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -828,6 +831,7 @@
 				202CCAB82415608500DB3B26 /* NotificationView.swift in Sources */,
 				65F50AD2234F9385006A1767 /* CommunViewController.swift in Sources */,
 				654F379923C9A1F9009259A3 /* CommentTableView.swift in Sources */,
+				20D6F1AD2425E95600F315EF /* NotificationColumnPost.swift in Sources */,
 				65DBB65523E447A90081F9BE /* listPostUserTableView.swift in Sources */,
 				657C548623BA827E00B32EC6 /* EmergencyViewController.swift in Sources */,
 				20F43247241DE06C0016F251 /* TitleMusicTableView.swift in Sources */,

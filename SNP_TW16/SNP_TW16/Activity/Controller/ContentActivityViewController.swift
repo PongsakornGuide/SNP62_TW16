@@ -13,15 +13,19 @@ import SDWebImage
 import EventKitUI
 class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINavigationControllerDelegate{
     
-    lazy var gettitle = String()
+    //name Activity
+    lazy var getTitle = String()
     
-    lazy var getstart = String()
-    lazy var getend = String()
+    //Activity covert
+    lazy var getStart = String()
+    lazy var getEnd = String()
     
-    lazy var ttitle = String()
-    lazy var title2 = String()
-    
+    //time
     lazy var startTime = String()
+    lazy var endTime = String()
+    
+    //date
+    lazy var startDate = String()
     lazy var endDate = String()
     
     lazy var defaultValues = UserDefaults.standard
@@ -29,14 +33,12 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
     lazy var typecheck = String()
     lazy var ActivityPostID = Int()
     lazy var IdActivity = Int()
-    lazy var titleCheck = String()
+    
     var delegate:UIViewController?
     let URL_USER_ID = "\(AppDelegate.link)alder_iosapp/v1/join.php"
     let URL_CHECK_JOIN = "\(AppDelegate.link)alder_iosapp/v1/checkjoin.php"
     let URL_CANCEL_ACTIVITY = "\(AppDelegate.link)alder_iosapp/v1/deleteJoinActivity.php"
-    
     let URL_CHECK_INVITE = "\(AppDelegate.link)alder_iosapp/v1/inviteActivity.php"
-    
     let URL_INSERT_NOTIFICATION = "\(AppDelegate.link)alder_iosapp/v1/insertNotification.php"
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
@@ -168,7 +170,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                return button
       }()
     
-     lazy var startDate : UILabel = {
+     lazy var startDateAct : UILabel = {
               let title = UILabel()
               title.text = "14 สิงหาคม 2562"
               title.textColor = UIColor.black
@@ -183,7 +185,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
           title.font = UIFont.BaiJamjureeMedium(size: 20)
           return title
      }()
-    
+   
     lazy var endtimerAct : UILabel = {
          let title = UILabel()
          title.text = "10:30 - 11:00"
@@ -203,70 +205,44 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
     
 
        @objc func join_Activity(){
-        
         let alert = UIAlertController(title: "แน่ใจว่าต้องการเข้าร่วมกิจกรรม", message: "ยืนยันการเข้าร่วม",preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "ยกเลิก", style: UIAlertAction.Style.destructive, handler: { _ in
             print("Cancel")
-//            startDate.text = "\(activityData?.created ?? "ค่าว่าง")"
-//            timerAct.text = "\(activityData?.startTime ?? "x") - "
-//            endtimerAct.text = activityData?.endtime
-//            print(self.titleLabel.text ?? "x")
-//            print(self.startDate.text ?? "x")
-//            print(self.endDate)
-//            print(self.startTime)
-//            print(self.endtimerAct.text ?? "x")
-//            let check = Date()
-//            print(check)
-//            let isoDateStart = "\(self.startDate.text ?? "x") \(self.startTime) +0700"
-//            print(isoDateStart)
-            self.ttitle = self.startDate.text ?? "x"
-            self.title2 = self.endtimerAct.text ?? "x"
-            self.gettitle = self.titleLabel.text ?? "x"
-//            let isoDateEnd = "\(self.endDate) \(self.endtimerAct.text ?? "x") +0700"
-//            print(isoDateEnd)
             
+            self.getTitle = self.titleLabel.text ?? "x"
             let eventStore : EKEventStore = EKEventStore()
             // 'EKEntityTypeReminder' or 'EKEntityTypeEvent'
             eventStore.requestAccess(to: .event) { (granted, error) in
 
             if (granted) && (error == nil) {
-                print("granted \(granted)")
-                print("error \(error)")
+//                print("granted \(granted)")
+//                print("error \(String(describing: error))")
                 let event:EKEvent = EKEvent(eventStore: eventStore)
 
-                
-                
-
-                
                 //start
 //                let isoDateStart = "2020-03-17T22:00:00+0700"
-                let isoDateStart = "\(self.ttitle)T\(self.startTime)+0700"
-                
-                self.getstart = isoDateStart
-                print(self.getstart)
+                let isoDateStart = "\(self.startDate)T\(self.startTime)+0700"
+                self.getStart = isoDateStart
                 let dateFormatterStart = DateFormatter()
                 dateFormatterStart.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
                 dateFormatterStart.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
                 dateFormatterStart.timeZone = NSTimeZone(abbreviation: "ICT") as TimeZone?
                 let dateStart = dateFormatterStart.date(from:isoDateStart)
-                print(dateStart ?? "x")
                 event.startDate = dateStart ?? Date()
 
                 //end
-//                let isoDateEnd = "2020-03-18T09:00:00+0700"
-                let isoDateEnd = "\(self.endDate)T\(self.title2) +0700"
-                self.getend = isoDateEnd
-                print(self.getend)
+//                let isoDateEnd = "2020-03-29T09:00:00+0700"
+                let isoDateEnd = "\(self.endDate)T\(self.endTime)+0700"
+                self.getEnd = isoDateEnd
                 let dateFormatterEnd = DateFormatter()
                 dateFormatterEnd.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
                 dateFormatterEnd.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
                 dateFormatterEnd.timeZone = NSTimeZone(abbreviation: "ICT") as TimeZone?
                 let dateEnd = dateFormatterEnd.date(from:isoDateEnd)
-                print(dateEnd ?? "x")
                 event.endDate = dateEnd ?? Date()
 
                 //header alert
-                event.title = self.gettitle
+                event.title = self.getTitle
                 //title alert
                 event.notes = "กิจกรรมจะเตือนคุณในอีกไม่ช้านี้"
                 event.calendar = eventStore.defaultCalendarForNewEvents
@@ -287,12 +263,10 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                 }
                     print("Saved Event")
                 } else{
-                    print("failed to save event with error : \(error) or access not granted")
+//                print("failed to save event with error : \(error ?? 0) or access not granted")
+                  print("error")
                 }
             }
-            
-            
-            
         }))
                   
         alert.addAction(UIAlertAction(title: "เข้าร่วม",style: UIAlertAction.Style.default, handler: { _ in
@@ -308,7 +282,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                         passData.delegate = self
                             Alamofire.request(self.URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
                         print(response)
-                        passData.actPost = self.ActivityPostID ?? 0
+                        passData.actPost = self.ActivityPostID
                         passData.actData = self.titleLabel.text ?? ""
                         self.navigationController?.pushViewController(passData, animated: true)
                     }
@@ -345,13 +319,15 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
             ActivityPostID = activityData?.dataId ?? 0
             titleLabel.text = activityData?.actId
             nameLabel.text = "โดย \(activityData?.caption ?? "ค่าว่าง")"
-//            timeLabel.text = "วันเริ่มกิจกรรม: \(activityData?.created ?? "ค่าว่าง")"
             contentLabel.text = activityData?.content
             textHeader.text = activityData?.type
-//            startTime = "\(activityData?.startTime ?? "x")"
+            startTime = "\(activityData?.startTime ?? "x")"
+            endTime = "\(activityData?.endtime ?? "x")"
             endDate = "\(activityData?.enddate ?? "x")"
-//            startDate.text = activityData?.created
             
+            //get type before to covert
+            startDate = activityData?.created ?? "x"
+
             
           
             let mouthStart = DateFormatter()
@@ -359,44 +335,31 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
             let mouthStringStartt = mouthStart.date(from: activityData?.created ?? "x")
             mouthStart.dateFormat = "dd MMMM yyyy"
             let mouthStringStart = mouthStart.string(from: mouthStringStartt ?? Date())
-            startDate.text = mouthStringStart
+            startDateAct.text = mouthStringStart
             timeLabel.text = "วันเริ่มกิจกรรม: \(mouthStringStart)"
-            
-//            let mouthStart = DateFormatter()
-//            mouthStart.dateFormat = "yyyy:mm:dd"
-//            let dateCheck = mouthStart.date(from: activityData?.created ?? "x")
-//            mouthStart.dateFormat = "dd MMMM yyyy"
-//            let mouthStringStart = mouthStart.string(from: dateCheck ?? Date())
-//            startDate.text = "\(mouthStringStart ?? "x")"
-//            timeLabel.text = "วันเริ่มกิจกรรม: \(mouthStringStart)"
-            
-           
             
             let dateFormatterStart = DateFormatter()
             dateFormatterStart.dateFormat = "HH:mm:ss"
             let dateStart = dateFormatterStart.date(from: activityData?.startTime ?? "x")
             dateFormatterStart.dateFormat = "HH:mm"
             let dateString = dateFormatterStart.string(from: dateStart ?? Date())
-            timerAct.text = "\(dateString ?? "x") - "
+            timerAct.text = "\(dateString) - "
 
-            
+            print(timerAct.text ?? 0)
             let dateFormatterEnd = DateFormatter()
             dateFormatterEnd.dateFormat = "HH:mm:ss"
             let dateEnd = dateFormatterEnd.date(from: activityData?.endtime ?? "x")
             dateFormatterEnd.dateFormat = "HH:mm"
             let dateStringEnd = dateFormatterEnd.string(from: dateEnd ?? Date())
-            endtimerAct.text = dateStringEnd
+            endtimerAct.text = "\(dateStringEnd)"
+            print(endtimerAct.text ?? 0)
             
             
             
             IdActivity = activityData?.dataId ?? 0
                      
             
-            
-                    
-            
             let postImagePath = activityData?.imagePost ?? "0"
-
             if let postImageURL = URL(string: postImagePath) {
                 self.stepView.sd_setImage(with: postImageURL, completed: nil)
             }
@@ -406,7 +369,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
             Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
                         if let user = resData.result.value as! [String: Any]? {
                                 if let yield = user["invaite"] as? Int {
-                                            self?.joinAct.text = "ผู้เข้าร่วม \(yield ?? 0) / \(self?.activityData?.join ?? 0) คน"
+                                            self?.joinAct.text = "ผู้เข้าร่วม \(yield) / \(self?.activityData?.join ?? 0) คน"
                                         }
                                     }
                 }
@@ -428,7 +391,6 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
     
              override func viewDidLoad() {
                 super.viewDidLoad()
-                "\(titleLabel.text = titleCheck)"
                  if let name2 = defaultValues.string(forKey: "userId") {
                         typecheck = name2
                     }else{
@@ -448,7 +410,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                  viewScroll.addSubview(Activityline)
                  viewScroll.addSubview(contentImage)
                 
-                 viewScroll.addSubview(startDate)
+                 viewScroll.addSubview(startDateAct)
                  viewScroll.addSubview(timerAct)
                  viewScroll.addSubview(endtimerAct)
                  viewScroll.addSubview(joinAct)
@@ -474,9 +436,9 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
               textHeader.anchor(header.topAnchor, left: header.leftAnchor, right: header.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
 
 
-               titleLabel.anchor(header.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 0)
+               titleLabel.anchor(header.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX, heightConstant: 0)
                 
-               titleLabel.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 60).isActive = true
+               titleLabel.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
 
                nameLabel.anchor(titleLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 40)
 
@@ -493,7 +455,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                 contentImage.anchor(Activityline.bottomAnchor, left: BGView.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 50, heightConstant: 50)
 
 
-                startDate.anchor(Activityline.bottomAnchor, left: contentImage.rightAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+                startDateAct.anchor(Activityline.bottomAnchor, left: contentImage.rightAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 50)
 
                 timeImage.anchor(contentImage.bottomAnchor, left: BGView.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 50, heightConstant: 50)
 

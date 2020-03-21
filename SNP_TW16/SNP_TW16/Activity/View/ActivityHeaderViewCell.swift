@@ -22,13 +22,13 @@ class ActivityHeaderViewCell: UITableViewCell {
 
      lazy var bgActivitity:UIView = {
          let background = UIView()
-         background.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+        background.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
          return background
      }()
      
      lazy var bgImage : UIImageView = {
                    let image = UIImageView()
-                   image.image = UIImage(named: "Intersection 4")
+                   image.image = UIImage(named: "bgPrayer")
                    image.contentMode = .scaleAspectFill
                    image.layer.masksToBounds = true
                    return image
@@ -39,28 +39,38 @@ class ActivityHeaderViewCell: UITableViewCell {
                  let title = "กิจกรรม"
                  let text = "\n สร้างสุข"
                  let attributedText = NSMutableAttributedString(string: title,
-                 attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+                 attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
 
-                 attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
-
+                 attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor: UIColor.black]))
                  label.attributedText = attributedText
                  label.numberOfLines = 1
                  return label
              }()
-     
+    
+        lazy var titleComent: UILabel = {
+                 let label = UILabel()
+                 label.text = "แนะนำสำหรับคุณ"
+                 label.textColor = UIColor.black
+                 label.font = UIFont.BaiJamjureeMedium(size: 24)
+                 label.numberOfLines = 0
+                 return label
+        }()
      
 
      func setLayout(){
          addSubview(bgActivitity)
          addSubview(bgImage)
          addSubview(textHeader)
+         addSubview(titleComent)
          
-         bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 200)
+        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 180)
 
-         bgImage.anchor(bgActivitity.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200
-                )
+         bgImage.anchor(bgActivitity.topAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 190, heightConstant: 113)
          
-         textHeader.anchor(bgImage.topAnchor, left: bgImage.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 20, widthConstant: 150, heightConstant: 150)
+         textHeader.anchor(bgImage.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 20, widthConstant: 140, heightConstant: 100)
+        
+         titleComent.anchor(textHeader.bottomAnchor, left: textHeader.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        
 
      }
 }

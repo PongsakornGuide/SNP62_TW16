@@ -28,7 +28,7 @@ class tabBarViewController: UITabBarController ,UITabBarControllerDelegate{
         let navController = UINavigationController(rootViewController: rootViewController)
         navController.tabBarItem.image = unselectedImage
         navController.tabBarItem.selectedImage = selectedImage
-        navController.tabBarItem.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: -4, right: 0)
+//        navController.tabBarItem.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 4, right: 0)
         navController.title = title
         return navController
         }

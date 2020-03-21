@@ -26,6 +26,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
          let URL_CHECK_LIKE_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/checkLikeComment.php"
          let URL_COUNT_LIKE_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/coutLikeComment.php"
 
+    
          lazy var defaultValues = UserDefaults.standard
          lazy var adpostId = Int()
          lazy var adpostId2 = String()
@@ -74,35 +75,68 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                 mouthStart.dateFormat = "MMM d, h:mm a"
                 let mouthStringStart = mouthStart.string(from: date ?? Date())
                 cell.date.text = mouthStringStart
-                
                 cell.comment.text = check?.caption
-                cell.numCount.text = "\(check?.likeActivity ?? 0)"
-                cell.comCount.text = "\(check?.commentsActivity ?? 0)"
+//                cell.numCount.text = "\(check?.likeActivity ?? 0)  ถูกใจ"
+//                cell.comCount.text = "\(check?.commentsActivity ?? 0)  คอมเม้นต์"
+                
+                
+
+                
+                
                 adpostId = check?.id ?? 0
                 cell.iconImageLike.titleLabel?.tag = check?.id ?? 0
                 let postImagePath = "\(AppDelegate.link)alder_iosapp/" + (check?.img ?? "0")
                 let profileImagePath = "\(AppDelegate.link)alder_iosapp/" + (check?.photo ?? "0")
                 
-                  if let postImageURL = URL(string: postImagePath) {
+                if let postImageURL = URL(string: postImagePath) {
                     cell.imagePost.sd_setImage(with: postImageURL, completed: nil)
-                  }
+                }
                           
-                  if let profileImageURL = URL(string: profileImagePath){
-                      cell.profile.sd_setImage(with: profileImageURL, completed: nil)
-                  }
+                if let profileImageURL = URL(string: profileImagePath){
+                    cell.profile.sd_setImage(with: profileImageURL, completed: nil)
+                }
                 
                     let parameters: Parameters = ["user_id":userid,"ad_post_timeline_id":adpostId]
-                    Alamofire.request(URL_CHECK_LIKE, method: .post,parameters: parameters).responseJSON { response in
-                            guard let json = response.value as? [String:Bool], let status = json["error"] else {
-                            return }
-                                if !status {
-                                   cell.iconImageLike.tag = 1
-                                   cell.iconImageLike.tintColor = UIColor.red
-                                    cell.iconImageLike.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                            }else{
-                        }
+//                                print(parameters)
+                            Alamofire.request(URL_CHECK_LIKE, method: .post,parameters: parameters).responseJSON { response in
+                                guard let json = response.value as? [String:Bool], let status = json["error"] else {
+                                return }
+                                    if !status {
+                                       cell.iconImageLike.tag = 1
+                                        cell.iconImageLike.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                                       cell.iconImageLike.tintColor = UIColor.red
+                                        
+                                }else{
+                                        
+                            }
                     }
+                
+                    
+                
+                
+                    let parametersId: Parameters = ["ad_post_timeline_id":adpostId]
+                                        let urlComment = URL_COUNT_LIKE + "?id=\(adpostId)"
+                              Alamofire.request(urlComment, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
+                                      if let user = resData.result.value as! [String: Any]? {
+                                              if let commentId = user["likeActivity"] as? Int {
+                                                  cell.numCount.text = "\(commentId)  ถูกใจ"
+                                      }
+                                                      
+                              }
 
+                    }
+                
+                    let parametersCom: Parameters = ["ad_post_timeline_id":adpostId]
+                                        let urlCommentCh = URL_COUNT_COMMENT + "?id=\(adpostId)"
+                              Alamofire.request(urlCommentCh, method: .post,parameters: parametersCom).responseJSON { [weak self](resData) in
+                                      if let user = resData.result.value as! [String: Any]? {
+                                              if let commentId = user["commentActivity"] as? Int {
+                                                  cell.comCount.text = "\(commentId)  คอมเม้นต์"
+                                      }
+                                                      
+                              }
+
+                    }
                 
                     cell.selectionStyle = .none
                     cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
@@ -122,20 +156,22 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                 cell.comment.text = commentActivity?.post
                 cell.username.text = commentActivity?.userName
                     
-                    let postImagePath = "\(AppDelegate.link)alder_iosapp/" + (commentActivity?.imageView ?? "0")
+                let postImagePath = "\(AppDelegate.link)alder_iosapp/" + (commentActivity?.imageView ?? "0")
                         if let postImageURL = URL(string: postImagePath) {
                             cell.profile.sd_setImage(with: postImageURL, completed: nil)
-                    }
+                }
                     
                 
                 let parametersId: Parameters = ["ad_post_timeline_id":adpostId,"commentId":commentActivity?.id ?? 0]
                                   let urlComment = URL_COUNT_LIKE_COMMENT + "?id=\(adpostId)&commentId=\(commentActivity?.id ?? 0)"
-                                  Alamofire.request(urlComment, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
-                                              if let user = resData.result.value as! [String: Any]? {
-                                                      if let commentId = user["likeActivity"] as? Int {
-                                                          cell.numCount.text = "\(commentId)"
-                                                }
-                                    }
+                        Alamofire.request(urlComment, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
+                                if let user = resData.result.value as! [String: Any]? {
+                                        if let commentId = user["likeActivity"] as? Int {
+                                            cell.numCount.text = "\(commentId)"
+                                        }
+                                                
+                        }
+
                 }
 
 
@@ -173,7 +209,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                                     self.getcomment()
                                     
                                  }
- commentTextField.text = ""
+                            commentTextField.text = ""
 
                        }else{
 
@@ -185,24 +221,26 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
         adpostId2 = "\(_sender.titleLabel?.tag ?? 0)"
         switch _sender.tag{
                 case 0:
-                    requestData()
                     let parameters: Parameters = ["user_id":userid,"ad_post_timeline_id":adpostId2]
                         Alamofire.request(URL_CLICK_LIKE, method: .post,parameters: parameters).responseJSON { response in
                     }
                     _sender.tag = 1
-                     _sender.tintColor = .black
                     _sender.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                case 1:
+                    _sender.tintColor = .red
                     requestData()
+                    self.tableview.reloadData()
+                case 1:
                     let parameters: Parameters = ["user_id":userid,"ad_post_timeline_id":adpostId2]
                         Alamofire.request(URL_CLICK_UNLIKE, method: .post,parameters: parameters).responseJSON { response in
                     }
                     _sender.tag = 0
-                   _sender.tintColor = .black
                     _sender.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                    _sender.tintColor = .black
+                     requestData()
+                    self.tableview.reloadData()
                 default: break
                 }
-        self.tableview.reloadData()
+        
     }
 
 
@@ -272,7 +310,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
 
         lazy var commentTextField: UITextField = {
                    let textField = UITextField()
-                   textField.attributedPlaceholder = NSAttributedString(string: "แสดงความคิดเห็น", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+//                   textField.attributedPlaceholder = NSAttributedString(string: "แสดงความคิดเห็น", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                    textField.font = UIFont.BaiJamjureeRegular(size:18)
                    textField.textColor = UIColor.blackAlpha(alpha: 0.7)
                    textField.layer.borderColor = UIColor.whiteAlpha(alpha: 0.9).cgColor
@@ -281,6 +319,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                    textField.backgroundColor = .white
                    textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
                    textField.leftViewMode = UITextField.ViewMode.always
+                    textField.placeholder = "แสดงความคิดเห็น"
                    return textField
         }()
 
@@ -330,13 +369,13 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
       }()
 
          // action refresh
-      @objc func requestData(){
-//             print("requestData for tableView")
-             let RefreshLine = DispatchTime.now() + .milliseconds(500)
-             DispatchQueue.main.asyncAfter(deadline: RefreshLine) {
-                 self.refresher.endRefreshing()
-             }
-      }
+        @objc func requestData(){
+    //             print("requestData for tableView")
+                 let RefreshLine = DispatchTime.now() + .milliseconds(500)
+                 DispatchQueue.main.asyncAfter(deadline: RefreshLine) {
+                     self.refresher.endRefreshing()
+                 }
+        }
     
     
         func getcomment(){

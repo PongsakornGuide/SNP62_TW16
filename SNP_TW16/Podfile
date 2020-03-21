@@ -16,4 +16,5 @@ target 'SNP_TW16' do
   pod 'MultiDegreeLikeButton'
   pod 'KMPlaceholderTextView'
   pod 'SDWebImage', '~> 5.0'
+  pod 'PopupDialog', '~> 1.1'
 end

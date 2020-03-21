@@ -189,7 +189,6 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
                textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 12), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
                textField.font = UIFont.BaiJamjureeBold(size: 15)
-//                textField.userInteractionEnabled = false
                textField.isUserInteractionEnabled = false
                return textField
            }()

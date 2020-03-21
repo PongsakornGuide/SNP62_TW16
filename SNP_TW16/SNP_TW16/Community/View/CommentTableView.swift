@@ -59,7 +59,7 @@ class CommentTableView: UITableViewCell {
     lazy var contrainerComment:UIView = {
            let view = UIView()
            view.layer.cornerRadius = 20/2
-           view.layer.backgroundColor = UIColor.rgb(red: 219, green: 219, blue: 219).cgColor
+           view.layer.backgroundColor = UIColor.rgb(red: 247, green: 250, blue: 255).cgColor
            return view
     }()
     
@@ -84,10 +84,11 @@ class CommentTableView: UITableViewCell {
     
     var iconImageLike: UIButton = {
             let imagelike = UIImage(named: "like") as UIImage?
-            let image = UIButton()
+            let image = UIButton(type: UIButton.ButtonType.system)
             image.setImage(imagelike, for: .normal)
             image.contentMode = .scaleAspectFill
             image.layer.masksToBounds = true
+            image.tintColor = .black
             image.tag = 0
             image.addTarget(self, action: #selector(likeComment), for: .touchUpInside)
             return image
@@ -97,7 +98,7 @@ class CommentTableView: UITableViewCell {
             let label = UILabel()
             label.text = "0"
             label.textColor = UIColor.red
-            label.font = UIFont.BaiJamjureeBold(size: 12)
+            label.font = UIFont.BaiJamjureeBold(size: 14)
             label.numberOfLines = 0
             return label
     }()
@@ -139,7 +140,7 @@ class CommentTableView: UITableViewCell {
 
         numCount.anchor(contrainerComment.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 10, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 20, heightConstant: 20)
 
-        iconImageLike.anchor(contrainerComment.bottomAnchor, left: nil, right: numCount.leftAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 10, bottomConstant: 10, leftConstant: 0, rightConstant: 10, widthConstant: 20, heightConstant: 20)
+        iconImageLike.anchor(contrainerComment.bottomAnchor, left: nil, right: numCount.leftAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 10, bottomConstant: 10, leftConstant: 0, rightConstant: 10, widthConstant: 20, heightConstant: 30)
 
     }
     required init?(coder: NSCoder) {

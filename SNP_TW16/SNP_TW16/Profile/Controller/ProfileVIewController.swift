@@ -305,12 +305,12 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                             print(user)
                                 if let yield = user["username"] as? String{
                                     self?.nameHeader.text = yield
-                                    self?.nameHeader.font = UIFont.BaiJamjureeBold(size: 22)
+                                    self?.nameHeader.font = UIFont.BaiJamjureeBold(size: 20)
                                 }
                             
                                 if let yield = user["surname"] as? String{
                                     self?.surnameHeader.text = yield
-                                    self?.surnameHeader.font = UIFont.BaiJamjureeBold(size: 22)
+                                    self?.surnameHeader.font = UIFont.BaiJamjureeBold(size: 20)
                                 }
                    
                                 if let yield = user["address"] as? String{
@@ -449,6 +449,8 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                                  if let yield = user["joinActivity"] as? Int{
                                      self?.numActivty.text = "\(yield)"
                                      self?.numActivty.font = UIFont.BaiJamjureeBold(size: 40)
+                                     self?.numActivty.textAlignment = .center
+                                     self?.numActivty.textColor = .white
                                  }
                          }
                    }
@@ -464,6 +466,8 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                                   if let yield = user["joinActivityEnd"] as? Int{
                                       self?.endActivty.text = "\(yield)"
                                       self?.endActivty.font = UIFont.BaiJamjureeBold(size: 40)
+                                      self?.endActivty.textAlignment = .center
+                                      self?.endActivty.textColor = .white
                                   }
                           }
                     }

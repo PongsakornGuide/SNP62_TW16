@@ -72,14 +72,14 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
         
         lazy var contentTextField: UITextField = {
                 let textField = UITextField()
-                textField.attributedPlaceholder = NSAttributedString(string: "เพิ่มข้อความ . . .", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-                textField.font = UIFont.BaiJamjureeRegular(size:18)
-                textField.textColor = UIColor.blackAlpha(alpha: 0.7)
-                textField.layer.borderColor = UIColor.whiteAlpha(alpha: 0.9).cgColor
-                textField.layer.borderWidth = 1
-                textField.layer.cornerRadius = 10
-                textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-                textField.leftViewMode = UITextField.ViewMode.always
+                      textField.attributedPlaceholder = NSAttributedString(string: "เพิ่มข้อความ . . .", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+                      textField.font = UIFont.BaiJamjureeRegular(size:18)
+                      textField.textColor = UIColor.blackAlpha(alpha: 0.7)
+                      textField.layer.borderColor = UIColor.whiteAlpha(alpha: 0.9).cgColor
+                      textField.layer.borderWidth = 1
+                      textField.layer.cornerRadius = 10
+                      textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+                      textField.leftViewMode = UITextField.ViewMode.always
         return textField
          }()
         
@@ -199,7 +199,7 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
                                 case .success(let request, _, _):
                                     request.responseJSON(completionHandler: { (resJson) in
                                 print(resJson.value ?? "0")
-                                self.navigationController?.popToRootViewController(animated: true)
+                                        self.navigationController?.popToRootViewController(animated: true)
                                     })
                              case .failure(_):
                                 print("fail")
@@ -246,6 +246,7 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
         override func viewDidLoad() {
             super.viewDidLoad()
             
+            
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
             
@@ -265,13 +266,13 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
 //
             if let name3 = defaultValues.string(forKey: "ImageUser") {
                            imageViewPro = name3
-                            let profileImagePath = ("http://localhost/alder_iosapp/" + (imageViewPro ?? "0")!)
+                            let profileImagePath = ("\(AppDelegate.link)alder_iosapp/" + (imageViewPro ))
                                     if let postImageURL = URL(string: profileImagePath) {
                                     self.Imagelabel.sd_setImage(with: postImageURL, completed: nil)
                             }
                 
 
-                }
+            }
             
           //-----------------------------------------------------------------------------------------------
 

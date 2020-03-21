@@ -41,8 +41,10 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                     attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
         label.attributedText = attributedText
         label.numberOfLines = 0
+        label.backgroundColor = UIColor.rgb(red: 247 ,green: 250, blue: 255)
         return label
     }()
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          
@@ -79,6 +81,7 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                         self.tableView.separatorStyle = .none
                         cell.selectionStyle = .none
                         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+            
                         return cell
             
         }else{
@@ -173,6 +176,7 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
     let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["กิจกรรมที่เข้าร่วม", "กิจกรรมที่เข้าร่วมแล้ว"])
         control.selectedSegmentIndex = 0
+        control.tintColor = .red
         control.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
         return control
     }()
@@ -198,6 +202,7 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if let name2 = defaultValues.string(forKey: "userId") {
             user_id = name2
 
@@ -207,10 +212,14 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
         
         tableView.dataSource = self
         tableView.delegate = self
-//        view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+//        view.backgroundColor = .white
         let stackView = UIStackView(arrangedSubviews: [
-            segmentedControl, tableView
+            segmentedControl
+        ])
+        
+        let stackView2 = UIStackView(arrangedSubviews: [
+                tableView
         ])
         
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId)
@@ -218,12 +227,18 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
+        
         stackView.axis = .vertical
+        stackView2.axis = .vertical
         
         view.addSubview(stackView)
+        view.addSubview(stackView2)
         view.addSubview(titleHeader)
         
-        titleHeader.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 80)
-        stackView.anchor(titleHeader.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        titleHeader.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 80)
+        
+        stackView.anchor(titleHeader.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: stackView2.topAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 35)
+        
+        stackView2.anchor(stackView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
 }

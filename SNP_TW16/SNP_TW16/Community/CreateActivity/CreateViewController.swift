@@ -77,9 +77,23 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
             textField.layer.cornerRadius = 10
             textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             textField.leftViewMode = UITextField.ViewMode.always
-    return textField
+//            textField.addTarget(self, action: #selector(titleText), for:  .editingChanged)
+        return textField
      }()
-    
+
+//    @objc func titleText(){
+//        let checkValue = contentTextField.text?.count ?? 0 > 0
+//        if !checkValue{
+//            submitButton.backgroundColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+//            submitButton.layer.borderColor = UIColor.rgb(red: 167, green: 169, blue: 172).cgColor
+//            submitButton.isEnabled = true
+//        }else{
+//            submitButton.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
+//            submitButton.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
+//            submitButton.isEnabled = false
+//        }
+//    }
+//
     //-----------------------------------------------------------------------------------------------
     
     lazy var imageView : UIImageView = {
@@ -113,14 +127,14 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
     
      lazy var submitButton : UIButton = {
             let submit = UIButton(type: UIButton.ButtonType.system)
-            submit.backgroundColor = UIColor.white
-            submit.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
+            submit.backgroundColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            submit.layer.borderColor = UIColor.rgb(red: 167, green: 169, blue: 172).cgColor
             submit.layer.borderWidth = 2
-            submit.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
-            submit.layer.cornerRadius = 20
-            submit.setTitle("โพสต์", for: .normal)
+            submit.layer.cornerRadius = 10
+            submit.setTitle("ส่งข้อความ", for: .normal)
             submit.setTitleColor(UIColor.white,for: .normal)
-            submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 15)
+            submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 18)
+//            submit.isEnabled = trued
             submit.addTarget(self, action: #selector(postContent), for: .touchUpInside)
             return submit
         }()
@@ -139,7 +153,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
     //-----------------------------------------------------------------------------------------------
     
     @objc func postContent(){
-        let checkCaption = contentTextField.text?.count ?? 0 > 5 && imageView.image != nil
+        let checkCaption = contentTextField.text?.count ?? 0 > 1 && imageView.image != nil
         if !checkCaption{
             alertLabel.isHidden = false
         }else{
@@ -227,7 +241,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         
         if let name3 = defaultValues.string(forKey: "ImageUser") {
                        imageViewPro = name3
-            Alamofire.request("http://localhost/alder_iosapp/" + (imageViewPro ?? "0")!).responseImage { response in
+            Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (imageViewPro)).responseImage { response in
                         if let image = response.result.value {
                         self.Imagelabel.image = image
                 }
@@ -253,17 +267,17 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         
         namelabel.anchor(bgView.topAnchor, left: Imagelabel.rightAnchor, right: nil, bottom: nil, topConstant: 55, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        contentTextField.anchor(Imagelabel.bottomAnchor, left: view.leftAnchor, right:  view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 30)
+        contentTextField.anchor(Imagelabel.bottomAnchor, left: view.leftAnchor, right:  view.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 40)
         
         contentTextField.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 40).isActive = true
         
-        imageView.anchor(contentTextField.bottomAnchor, left: contentTextField.leftAnchor, right: contentTextField.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200)
+        imageView.anchor(contentTextField.bottomAnchor, left: contentTextField.leftAnchor, right: contentTextField.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 250)
         
-        btn.anchor(imageView.topAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: imageView.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200)
+        btn.anchor(imageView.topAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: imageView.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 250)
 
-        submitButton.anchor(imageView.bottomAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 70)
+        submitButton.anchor(btn.bottomAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
 
-        alertLabel.anchor(submitButton.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: bgView.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 30)
+        alertLabel.anchor(nil, left: submitButton.leftAnchor, right: submitButton.rightAnchor, bottom: bgView.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 30)
         
     }
 }

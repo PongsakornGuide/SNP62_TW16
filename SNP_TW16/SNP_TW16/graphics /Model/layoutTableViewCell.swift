@@ -43,7 +43,6 @@ class layoutTableViewCell: UITableViewCell {
                 let attributedText = NSMutableAttributedString(string: title,
                 attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 25),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
                 label.attributedText = attributedText
-                label.textColor = .black
                 label.numberOfLines = 0
                 return label
     }()
@@ -58,7 +57,7 @@ class layoutTableViewCell: UITableViewCell {
 
         bgImage.anchor(bgCheck.topAnchor, left: bgCheck.leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 20, leftConstant: 20, rightConstant: 0, widthConstant: 90, heightConstant: 90)
 
-        textHeader.anchor(bgCheck.topAnchor, left: bgImage.rightAnchor, right: nil, bottom: nil, topConstant: 35, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant:0)
+        textHeader.anchor(bgCheck.topAnchor, left: bgImage.rightAnchor, right: nil, bottom: bgCheck.bottomAnchor, topConstant: 35, bottomConstant: 30, leftConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant:0)
         
     }
 }

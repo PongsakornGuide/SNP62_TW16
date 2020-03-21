@@ -29,7 +29,7 @@ class CommunViewController: UITableViewController{
     let URL_CLICK_UNLIKE = "\(AppDelegate.link)alder_iosapp/v1/deleteLike.php"
     
     let URL_CHECK_LIKE = "\(AppDelegate.link)alder_iosapp/v1/checkLike.php"
-//    let URL_COUNT_LIKE = "\(AppDelegate.link)alder_iosapp/v1/countLike.php"
+    let URL_COUNT_LIKE = "\(AppDelegate.link)alder_iosapp/v1/countLike.php"
 //    let URL_COUNT_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/countComment.php"
     
     private var cellId = "Cell"
@@ -75,18 +75,40 @@ class CommunViewController: UITableViewController{
             cell.messageTextLabel.text = headerActivity?.caption
             
             let mouthStart = DateFormatter()
-//            2020-03-15 15:45:41
             mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let date = mouthStart.date(from: headerActivity?.createdAt ?? "x")
             mouthStart.dateFormat = "MMM d, h:mm a"
             let mouthStringStart = mouthStart.string(from: date ?? Date())
             cell.timeTextLabel.text = mouthStringStart
             
-            cell.numCount.text = "\(headerActivity?.likeActivity ?? 0)  ถูกใจ"
+            
+      
+            
+            
+//            cell.numCount.text = "\(headerActivity?.likeActivity ?? 0)  ถูกใจ"
             cell.numCom.text = "\(headerActivity?.commentsActivity ?? 0  )  คอมเม้นต์"
             adpostId = headerActivity?.id ?? 0
             
+//            cell.iconImageLike.tag = 1
+            if cell.iconImageLike.tag == 0{
+                
+            }else{
+                cell.iconImageLike.tintColor = .black
+                cell.iconImageLike.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            }
+            
+            cell.iconImageLike.titleLabel?.tag = headerActivity?.id ?? 0
 
+            let parametersId: Parameters = ["ad_post_timeline_id":adpostId]
+                    let urlComment = URL_COUNT_LIKE + "?id=\(adpostId)"
+                    Alamofire.request(urlComment, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
+                                if let user = resData.result.value as! [String: Any]? {
+                                        if let commentId = user["likeActivity"] as? Int {
+                                                    cell.numCount.text = "\(commentId)  ถูกใจ"
+                                        }
+                    }
+            }
+            
             
             let postImagePath = "\(AppDelegate.link)alder_iosapp/" + (headerActivity?.img ?? "0")
             let profileImagePath = "\(AppDelegate.link)alder_iosapp/" + (headerActivity?.photo ?? "0")
@@ -97,19 +119,7 @@ class CommunViewController: UITableViewController{
             if let profileImageURL = URL(string: profileImagePath){
                 cell.profileImage.sd_setImage(with: profileImageURL, completed: nil)
             }
-//            Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (headerActivity?.img ?? "0")!).responseImage { response in
-//                            if let image = response.result.value{
-//                            cell.postImage.image = image
-//                }
-//            }
-//            Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (headerActivity?.photo ?? "0")!).responseImage { response in
-//                            if let image2 = response.result.value {
-//                            cell.profileImage.image = image2
-//                }
-//            }
-            
-            
-            
+
             
             let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId]
             Alamofire.request(URL_CHECK_LIKE, method: .post,parameters: parameters).responseJSON { response in
@@ -119,13 +129,12 @@ class CommunViewController: UITableViewController{
                             cell.iconImageLike.tag = 1
                             cell.iconImageLike.tintColor = UIColor.red
                             cell.iconImageLike.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                            
                     }else{
                 }
             }
             
             
-            cell.iconImageLike.titleLabel?.tag = headerActivity?.id ?? 0
+            
             self.tableView.separatorStyle = .none
             cell.selectionStyle = .none
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
@@ -148,22 +157,26 @@ class CommunViewController: UITableViewController{
                 case 0:
                     requestData()
                     let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId2]
+                    print(parameters)
                                     Alamofire.request(URL_CLICK_LIKE, method: .post,parameters: parameters).responseJSON { response in
                     }
                     _sender.tag = 1
-                        _sender.tintColor = UIColor.red
-                        _sender.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                    _sender.tintColor = UIColor.red
+                    _sender.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                    self.tableView.reloadData()
                 case 1:
                     requestData()
                     let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId2]
+                    print(parameters)
                                     Alamofire.request(URL_CLICK_UNLIKE, method: .post,parameters: parameters).responseJSON { response in
                     }
                     _sender.tag = 0
                     _sender.tintColor = .black
                     _sender.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                    self.tableView.reloadData()
                 default: break
                 }
-         self.tableView.reloadData()
+         
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
