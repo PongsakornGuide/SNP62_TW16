@@ -25,8 +25,10 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
          let URL_DELETE_LIKE_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/deleteLikeComment.php"
          let URL_CHECK_LIKE_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/checkLikeComment.php"
          let URL_COUNT_LIKE_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/coutLikeComment.php"
-
     
+         let URL_INSERT_NOTIFICATION_POST = "\(AppDelegate.link)alder_iosapp/v1/insertPostUser.php"
+
+         lazy var idPost = Int()
          lazy var defaultValues = UserDefaults.standard
          lazy var adpostId = Int()
          lazy var adpostId2 = String()
@@ -68,6 +70,9 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
 
                let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! DetailActivityViewController
                 cell.username.text = check?.username
+                
+                idPost = check?.userAppId ?? 0
+                print("ID POST :: \(idPost)")
                 
                 let mouthStart = DateFormatter()
                 mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -202,14 +207,24 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
         @objc func sendData(_ sender:UIButton){
                        let isCheckValid = commentTextField.text?.count ?? 0 > 0
                        if isCheckValid{
+//                        print("ID POST :: \(idPost)")
                               let parameters: Parameters = ["ad_post_timeline_id":check?.id ?? 0,"user_id":userid,"post":commentTextField.text!]
                         print(parameters)
                                  let url = URL_POST_COMMENT
                                  Alamofire.request(url, method: .post,parameters: parameters).responseJSON { response in
                                     self.getcomment()
-                                    
+                                    print(response)
                                  }
                             commentTextField.text = ""
+                        
+                        let urlPost = URL_INSERT_NOTIFICATION_POST + "?id=\(userid)"
+                        
+                        let insertNotificaiton: Parameters = ["ad_post_timeline_id":check?.id ?? 0,"user_id":idPost,"other_id":userid]
+                     
+                            print(insertNotificaiton)
+                            Alamofire.request(urlPost, method: .post,parameters: insertNotificaiton).responseJSON { response in
+                                         print(response)
+                        }
 
                        }else{
 

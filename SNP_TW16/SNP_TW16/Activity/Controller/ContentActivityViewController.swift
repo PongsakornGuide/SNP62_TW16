@@ -275,7 +275,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
                         print(insertNotification)
                         Alamofire.request(self.URL_INSERT_NOTIFICATION, method: .post,parameters: insertNotification).responseJSON { response in
                                      print(response)
-                        }
+                    }
             
                     let passData = DecideViewController()
                         let parameters: Parameters = ["user_id":self.typecheck,"post_timeline_id":self.activityData?.dataId ?? 0]

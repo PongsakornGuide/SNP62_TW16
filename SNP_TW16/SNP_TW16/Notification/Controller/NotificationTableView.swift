@@ -32,10 +32,11 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        requestData()
+        
 //        getCountNotificationUser()
         getNotificationPostUser()
         getNotificationUser()
+        requestData()
         tableView.reloadData()
     }
     
@@ -202,6 +203,7 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
     func getNotificationPostUser(){
                  let parameters: Parameters = ["id":user_id]
                  let url = URL_GET_NOTIFICATION_POST + "?id=\(user_id)"
+                print(url)
                  Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
                     self?.notificationPost = Mapper<listNotificationPost>().mapArray(JSONObject: dataRes.result.value)
                  }
@@ -238,6 +240,7 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
          case 0:
              rowToDisplay = notification
              getNotificationUser()
+             
              break
          case 1:
              rowToDisplay2 = notificationPost
@@ -258,7 +261,8 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
     
      override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getNotificationPostUser()
+        getNotificationUser()
         if #available(iOS 12.1 , *) {
                  tableView.refreshControl = refresher
              }else{
@@ -266,8 +270,6 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
         }
         
 //      getCountNotificationUser()
-        getNotificationPostUser()
-        getNotificationUser()
         
         tableView.dataSource = self
         tableView.delegate = self

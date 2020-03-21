@@ -86,7 +86,7 @@ class listNotificationPost: Mappable{
     var userId: Int?
     var otherId: Int?
     var adposTtimeline: Int?
-    var contentPost: String?
+//    var contentPost: String?
     var photo: String?
     var username: String?
     var caption: String?
@@ -100,7 +100,7 @@ class listNotificationPost: Mappable{
         userId <- map["user_id"]
         otherId <- map["other_id"]
         adposTtimeline <- map["ad_post_timeline_id"]
-        contentPost <- map["contentPost"]
+//        contentPost <- map["contentPost"]
         photo <- map["photo"]
         username <- map["username"]
         caption <- map["caption"]
