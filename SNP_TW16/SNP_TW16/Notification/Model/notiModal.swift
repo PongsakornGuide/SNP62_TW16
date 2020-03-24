@@ -59,7 +59,7 @@ class listNotification: Mappable{
         title <- map["contentAct"]
         testtitle <- map["title"]
         friend <- map["friend"]
-        create <- map["created_at"]
+        create <- map["Timer"]
         username <- map["username"]
         photo <- map["photo"]
         
@@ -108,3 +108,30 @@ class listNotificationPost: Mappable{
     }
 }
 
+//class allList: Mappable{
+//    var id: Int?
+//    var userAppId: Int?
+//    var caption: String?
+//    var img: String?
+//    var createdAt: String?
+//    var username: String?
+//    var photo: String?
+//    var likeActivity: Int?
+//    var commentsActivity: Int?
+//    required init?(map: Map) {
+//
+//    }
+//    // Mappable
+//    func mapping(map: Map) {
+//        id  <- map["id"]
+//        userAppId  <- map["user_app_id"]
+//        caption <- map["caption"]
+//        img  <- map["img"]
+//        createdAt <- map["created_at"]
+//        username  <- map["username"]
+//        photo <- map["photo"]
+//        likeActivity <- map["likeActivity"]
+//        commentsActivity <- map["commentsActivity"]
+//
+//    }
+//}

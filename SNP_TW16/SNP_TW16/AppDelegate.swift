@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     static let link = "http://localhost/"
+
 //    static let link = "http://192.168.43.145/"
 //    static let link = "http://192.168.1.46/"
 //    static let link = "http://192.168.1.16/"

@@ -20,7 +20,8 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
     //variable
     var countNotification: [countlistNotification]?
     var notification: [listNotification]?
-    var notificationPost: [listNotificationPost]?
+//    var notificationPost: [listNotificationPost]?
+    var notificationPost: [allList]?
     lazy var user_id = String()
     lazy var defaultValues = UserDefaults.standard
     
@@ -29,11 +30,9 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
     let URL_GET_NOTIFICATION = "\(AppDelegate.link)alder_iosapp/v1/notificationUser.php"
     let URL_GET_NOTIFICATION_POST = "\(AppDelegate.link)alder_iosapp/v1/notificationPostUser.php"
     let URL_CHECK_INVITE = "\(AppDelegate.link)alder_iosapp/v1/inviteActivity.php"
-    
-    override func viewWillAppear(_ animated: Bool) {
+
+    override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(animated)
-        
-//        getCountNotificationUser()
         getNotificationPostUser()
         getNotificationUser()
         requestData()
@@ -41,27 +40,21 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
     }
     
     lazy var textHeader : UILabel = {
-                    let label = UILabel()
-                    let title = "การแจ้งเตือน"
-                    let attributedTexts = NSMutableAttributedString(string: title,
-                    attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 34),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
-                    label.attributedText = attributedTexts
-                    label.numberOfLines = 0
-                    return label
+        let label = UILabel()
+        let title = "การแจ้งเตือน"
+        let attributedTexts = NSMutableAttributedString(string: title,
+        attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 34),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+        label.attributedText = attributedTexts
+        label.numberOfLines = 0
+        return label
     }()
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if(self.segmentedControl.selectedSegmentIndex == 0){
             return notification?.count ?? 0
-            
-        }else if(self.segmentedControl.selectedSegmentIndex == 1){
-            return notificationPost?.count ?? 0
-            
         }else{
-            return notification?.count ?? 0
-            
+            return notificationPost?.count ?? 0
         }
     }
 
@@ -73,17 +66,19 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
                cell.textLabelTitle.textColor = UIColor.rgb(red: 33, green: 64, blue: 154)
                cell.textLabelTitle.font = UIFont.BaiJamjureeBold(size: 20)
                cell.textLabelName.text = "ตอนนี้ \(listNoti?.title ?? "x") \nขอให้สนุกกับกิจกรรมในเร็วๆนี้"
-               let mouthStart = DateFormatter()
-               mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
-               let date = mouthStart.date(from: listNoti?.create ?? "x")
-               mouthStart.dateFormat = "h"
-               let mouthStringStart = mouthStart.string(from: date ?? Date())
-               cell.timeLabel.text = "\(mouthStringStart) ชั่วโมงที่แล้ว"
+
+              let mouthStart = DateFormatter()
+              mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
+              let date = mouthStart.date(from: listNoti?.create ?? "x")
+              mouthStart.dateFormat = "MMM d, h:mm a"
+              let mouthStringStart = mouthStart.string(from: date ?? Date())
+              cell.timeLabel.text = "\(mouthStringStart) น."
+            
                tableView.separatorStyle = .none
                 cell.selectionStyle = .none
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 return cell
-       }else if(self.segmentedControl.selectedSegmentIndex == 1){
+       }else{
              let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! NotificationColumnPost
              let listPost = notificationPost?[indexPath.row]
              cell.username.text = "คุณ : \(listPost?.username ?? "x")"
@@ -92,10 +87,10 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
              cell.textLabelTitle.text = "ได้แสดงความคิดในโพส \(listPost?.caption ?? "x") ของคุณ"
              let mouthStart = DateFormatter()
              mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
-             let date = mouthStart.date(from: listPost?.create ?? "x")
+             let date = mouthStart.date(from: listPost?.createdAt ?? "x")
              mouthStart.dateFormat = "HH:mm"
              let mouthStringStart = mouthStart.string(from: date ?? Date())
-             cell.timeLabel.text = "เวลา \(mouthStringStart) น."
+             cell.timeLabel.text = "\(mouthStringStart) น."
              cell.timeLabel.font = UIFont.BaiJamjureeBold(size: 18)
 
              let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + (listPost?.photo ?? "0")!)
@@ -109,22 +104,8 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
              cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
              return cell
             
-        }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! NotificationColumn
-            let listNoti = notification?[indexPath.row]
-            cell.textLabelTitle.text = "กิจกรรม : \(listNoti?.testtitle ?? "x")"
-            cell.textLabelName.text = "ตอนนี้ \(listNoti?.title ?? "x") \nขอให้สนุกกับกิจกรรมในเร็วๆนี้"
-            let mouthStart = DateFormatter()
-            mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let date = mouthStart.date(from: listNoti?.create ?? "x")
-            mouthStart.dateFormat = "h"
-            let mouthStringStart = mouthStart.string(from: date ?? Date())
-            cell.timeLabel.text = "\(mouthStringStart) ชั่วโมงที่แล้ว"
-            tableView.separatorStyle = .none
-            cell.selectionStyle = .none
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
-            return cell
-         }
+        }
+
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -185,11 +166,12 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
                         }
             }
             navigationController?.pushViewController(contentActivity, animated: true)
-          }else if(self.segmentedControl.selectedSegmentIndex == 1){
-            
           }else{
-            
-        }
+
+//                let CommentView = InputCommentViewController()
+//                CommentView.check = notificationPost?[indexPath.row]
+//                navigationController?.pushViewController(CommentView, animated: true)
+          }
     }
 
     func getNotificationUser(){
@@ -205,7 +187,7 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
                  let url = URL_GET_NOTIFICATION_POST + "?id=\(user_id)"
                 print(url)
                  Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
-                    self?.notificationPost = Mapper<listNotificationPost>().mapArray(JSONObject: dataRes.result.value)
+                    self?.notificationPost = Mapper<allList>().mapArray(JSONObject: dataRes.result.value)
                  }
      }
 
@@ -228,7 +210,7 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
     }
     
     let segmentedControl: UISegmentedControl = {
-         let control = UISegmentedControl(items: ["กิจกรรมของฉัน", "โพสต์ของฉัน","โพสต์ของฉัน"])
+         let control = UISegmentedControl(items: ["กิจกรรมของฉัน", "โพสต์ของฉัน"])
          control.selectedSegmentIndex = 0
          control.tintColor = .red
          control.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
@@ -242,13 +224,13 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
              getNotificationUser()
              
              break
-         case 1:
+         default :
              rowToDisplay2 = notificationPost
              getNotificationPostUser()
              break
-         default:
-             rowToDisplay3 = notification
-             break
+//         default:
+//             rowToDisplay3 = notification
+//             break
          }
          tableView.reloadData()
      }
@@ -257,7 +239,7 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
      //master array
      lazy var rowToDisplay = notification
      lazy var rowToDisplay2 = notificationPost
-     lazy var rowToDisplay3 = notification
+//     lazy var rowToDisplay3 = notification
     
      override func viewDidLoad() {
         super.viewDidLoad()
@@ -284,14 +266,14 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         tableView.register(NotificationColumn.self, forCellReuseIdentifier: cellId)
         tableView.register(NotificationColumnPost.self, forCellReuseIdentifier: cellId1)
-        tableView.register(NotificationColumn.self, forCellReuseIdentifier: cellId2)
+//        tableView.register(NotificationColumn.self, forCellReuseIdentifier: cellId2)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
 
         stackView.axis = .vertical
         stackView2.axis = .vertical
              
-
+//        tableView.backgroundView = UIImageView(image: UIImage(named: "bg"))
         view.addSubview(textHeader)
         view.addSubview(stackView)
         view.addSubview(stackView2)

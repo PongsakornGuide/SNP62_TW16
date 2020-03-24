@@ -192,7 +192,7 @@ class AcivityListTableViewCell: UITableViewCell{
         addSubview(iconImageComment)
         addSubview(numCom)
             
-        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: postImage.leftAnchor, right: postImage.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: postImage.leftAnchor, right: postImage.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 10, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 
             
         profileImage.anchor(bgActivitity.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 60, heightConstant: 60)

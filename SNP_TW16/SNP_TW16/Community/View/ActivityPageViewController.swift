@@ -22,7 +22,7 @@ class ActivityPageViewController: UITableViewCell {
     lazy var bgActivitity:UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
-        image.image = UIImage(named: "group")
+        image.image = UIImage(named: "group1531")
         return image
     }()
     
@@ -40,11 +40,11 @@ class ActivityPageViewController: UITableViewCell {
 
     func setLayout(){
         addSubview(bgActivitity)
-        addSubview(header)
+//        addSubview(header)
 
         bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 170)
 
-        header.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 120)
+//        header.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 120)
 
     }
 }

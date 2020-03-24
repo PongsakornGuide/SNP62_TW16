@@ -11,7 +11,7 @@ class HeaderActivity: UITableViewCell {
      override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
                super.init(style: style, reuseIdentifier: reuseIdentifier)
                setupViewCell()
-               backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+//               backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
        }
        
        required init?(coder: NSCoder) {

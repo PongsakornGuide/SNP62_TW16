@@ -11,33 +11,46 @@ import Alamofire
 import ObjectMapper
 import UserNotifications
 import SDWebImage
-class MainActivityViewController: UITableViewController,UNUserNotificationCenterDelegate {
-    
+class MainActivityViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,UINavigationControllerDelegate ,UNUserNotificationCenterDelegate{
+
     let URL_USER_ID = "\(AppDelegate.link)alder_iosapp/v1/showactivity.php"
+    let URL_GET_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/showProfile.php"
     lazy var defaultValues = UserDefaults.standard
     lazy var num1 = String()
     lazy var num2 = String()
     lazy var Labelname = String()
     lazy var day = String()
+    lazy var day2 = String()
     lazy var imageView = String()
     lazy var typecheck = String()
+    lazy var brithday = String()
     var header: [ActivityType]?
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     private var cellId2 = "Cell2"
     private var cellId3 = "Cell3"
-     private var cellId4 = "Cell4"
-        override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            reloadData()
-            self.tableView.reloadData()
-        }
+    private var cellId4 = "Cell4"
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+//    lazy var bgImage : UIImageView = {
+//        let image = UIImageView(frame: UIScreen.main.bounds)
+//        image.image = UIImage(named: "bg")
+//        image.contentMode = .scaleAspectFill
+//        image.layer.masksToBounds = true
+//        return image
+//    }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            Specialday()
+            reloadData()
+            tableView.reloadData()
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
             return 4
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 if section == 0 {
                     return 1
                 }else if section == 1{
@@ -49,17 +62,18 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
                 }
     }
     
-        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             if indexPath.section == 0 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
                     cell.selectionStyle = .none
                     cell.titleHeader.text = "สวัสดีวัน \(day)"
                     cell.titleHeader.textColor = .white
-                    cell.titleHeader.font = UIFont.BaiJamjureeBold(size:22)
+                    cell.titleHeader.font = UIFont.BaiJamjureeBold(size:20)
                     cell.textHeader.text = Labelname
                     cell.textHeader.textColor = .white
-                    cell.textHeader.font = UIFont.BaiJamjureeBold(size: 32)
+                    cell.textHeader.font = UIFont.BaiJamjureeBold(size: 28)
                     cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+                cell.backgroundColor = nil
                     return cell
                            
             }else if indexPath.section == 1{
@@ -74,21 +88,24 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
                     }
                 
                     
-                    self.tableView.separatorStyle = .none
+                    tableView.separatorStyle = .none
                     cell.selectionStyle = .none
                     cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+                cell.backgroundColor = nil
                     return cell
             }else if indexPath.section == 2{
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId3,for: indexPath) as! HeaderReligion
-                self.tableView.separatorStyle = .none
+                cell.backgroundColor = nil
+                tableView.separatorStyle = .none
                 cell.selectionStyle = .none
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 return cell
                     
             }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId4,for: indexPath) as! HeaderMusic
-                self.tableView.separatorStyle = .none
+                tableView.separatorStyle = .none
                 cell.selectionStyle = .none
+                cell.backgroundColor = nil
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 return cell
             }
@@ -110,7 +127,7 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
               }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
 
         }else if indexPath.section == 1{
@@ -139,7 +156,6 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
         
     }
 
-    
    // refresh
       lazy var refresher: UIRefreshControl = {
            let refreshControl = UIRefreshControl()
@@ -203,32 +219,84 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
          }
      }
     
+    
+    func Specialday(){
+           let parameters: Parameters = ["userId":typecheck]
+                      let url = URL_GET_PROFILE + "?id=\(typecheck)"
+                      Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
+                                print(resData)
+                                if let user = resData.result.value as! [String: Any]? {
+                                        if let yield = user["birthday"] as? String{
+                                            self?.brithday = yield
+                                        }
+                                    if self?.day2 == self?.brithday {
+                                        print("NOOO")
+                                        self?.tableView.backgroundView = UIImageView(image: UIImage(named: "BGDAY"))
+
+                                    }else{
+                                        print("NOOO")
+                                        self?.tableView.backgroundView = UIImageView(image: UIImage(named: ""))
+                                        self?.view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+                                    }
+                               }
+                }
+    }
+
+    
+    func colorDay(){
+        if day == "Sunday"{
+            print("555")
+        }else if day == "Monday"{
+            print("666")
+        }else if day == "Tuesday"{
+            print("3333")
+        }else if day == "Wednesday"{
+            print("666")
+        }else if day == "Thursday"{
+            print("3333")
+        }else if day == "Friday"{
+            print("666")
+        }else{
+            print("3333")
+        }
+    }
+    let tableView = UITableView(frame: .zero, style: .plain)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+        tableView.dataSource = self
+        tableView.delegate = self
+       
         if let name = defaultValues.string(forKey: "userName") {
                 Labelname = name
-            print(Labelname)
         }
 
         if let name2 = defaultValues.string(forKey: "userId") {
                 typecheck = name2
-            print(typecheck)
             }else{
         }
         
-        NotificaitonUser()
-        UNUserNotificationCenter.current().delegate = self
+        if let birthdayUser = defaultValues.string(forKey: "birthdayUser") {
+                brithday = birthdayUser
+        }
         
-        let currentDate = NSDate()
-        let dateFormatter = DateFormatter()
+        NotificaitonUser()
+        UNUserNotificationCenter.current().delegate = self 
+        
         let date = Date()
         let format = DateFormatter()
         format.timeZone = NSTimeZone(abbreviation: "ICT") as TimeZone?
         format.dateFormat = "EEEE"
         let formattedDate = format.string(from: date)
         day = formattedDate
+        
+        let format2 = DateFormatter()
+        format2.timeZone = NSTimeZone(abbreviation: "ICT") as TimeZone?
+        format2.dateFormat = "yyyy-MM-dd"
+        let formattedDate2 = format2.string(from: date)
+        day2 = formattedDate2
+        Specialday()
         
         navigationItem.title = "Alder"
         
@@ -240,7 +308,7 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
         let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
             settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
             navigationItem.rightBarButtonItem = settings
-        view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+        
         
         if #available(iOS 12.1 , *) {
                  tableView.refreshControl = refresher
@@ -252,9 +320,17 @@ class MainActivityViewController: UITableViewController,UNUserNotificationCenter
           tableView.register(HeaderActivity.self, forCellReuseIdentifier: cellId2)
           tableView.register(HeaderReligion.self, forCellReuseIdentifier: cellId3)
           tableView.register(HeaderMusic.self, forCellReuseIdentifier: cellId4)
+        
+        
           tableView.rowHeight = UITableView.automaticDimension
           tableView.estimatedRowHeight = 50
-          view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+            let stackView = UIStackView(arrangedSubviews: [
+            tableView
+             ])
+            view.addSubview(stackView)
+            stackView.axis = .vertical
+        stackView.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

@@ -46,7 +46,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
     
     lazy var imageView : UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "Intersection 4")
+        image.image = UIImage(named: "maskGroup48")
         image.contentMode = .scaleAspectFill
         image.layer.masksToBounds = true
         return image
@@ -92,9 +92,14 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
     
    lazy var editProfile : UIButton = {
               let submit = UIButton(type: UIButton.ButtonType.system)
-              submit.setTitle("แก้ไขข้อมูลส่วนตัว", for: .normal)
+    
+            let attributedString = NSAttributedString(string: NSLocalizedString("แก้ไขข้อมูลส่วนตัว", comment: ""), attributes:[
+                NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 18),
+                NSAttributedString.Key.foregroundColor : UIColor.gray,
+                NSAttributedString.Key.underlineStyle:1.0
+                ])
+                submit.setAttributedTitle(attributedString, for: .normal)
               submit.setTitleColor(UIColor.rgb(red: 167, green: 169, blue: 172),for: .normal)
-              submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 18)
               submit.addTarget(self, action: #selector(editUser), for: .touchUpInside)
               return submit
     }()
@@ -305,16 +310,17 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                             print(user)
                                 if let yield = user["username"] as? String{
                                     self?.nameHeader.text = yield
-                                    self?.nameHeader.font = UIFont.BaiJamjureeBold(size: 20)
+                                    self?.nameHeader.font = UIFont.BaiJamjureeBold(size: 22)
                                 }
                             
                                 if let yield = user["surname"] as? String{
                                     self?.surnameHeader.text = yield
-                                    self?.surnameHeader.font = UIFont.BaiJamjureeBold(size: 20)
+                                    self?.surnameHeader.font = UIFont.BaiJamjureeBold(size: 22)
                                 }
                    
                                 if let yield = user["address"] as? String{
                                     self?.nursingHome.text = yield
+                                    self?.nursingHome.font = UIFont.BaiJamjureeMedium(size: 20)
                                 }
                             
                                 if let yield = user["birthday"] as? String{
@@ -325,12 +331,14 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                                     mouthStart.dateFormat = "d MMMM yyyy"
                                     let mouthStringStart = mouthStart.string(from: date ?? Date())
                                     self?.birthday.text = "\(mouthStringStart)"
+                                    self?.birthday.font = UIFont.BaiJamjureeMedium(size: 20)
                                     
-//                                     self?.birthday.text = yield
+//                                   self?.birthday.text = yield
                                 }
 
                                 if let yield = user["tel"] as? Int{
                                      self?.tel.text = "\(0)" + "\(yield)"
+                                    self?.tel.font = UIFont.BaiJamjureeMedium(size: 20)
                                 }
                             
                                 if let yield = user["photo"] as? String{
@@ -532,7 +540,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
 
         viewScroll.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        imageView.anchor(view.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200)
+        imageView.anchor(view.safeAreaLayoutGuide.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         stepView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX - 0, heightConstant: 500)
         

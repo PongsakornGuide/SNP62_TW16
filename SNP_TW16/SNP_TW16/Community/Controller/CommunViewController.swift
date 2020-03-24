@@ -12,6 +12,7 @@ import Alamofire
 import AlamofireImage
 import ObjectMapper
 import SDWebImage
+import PopupDialog
 
 class CommunViewController: UITableViewController{
 
@@ -30,11 +31,14 @@ class CommunViewController: UITableViewController{
     
     let URL_CHECK_LIKE = "\(AppDelegate.link)alder_iosapp/v1/checkLike.php"
     let URL_COUNT_LIKE = "\(AppDelegate.link)alder_iosapp/v1/countLike.php"
-//    let URL_COUNT_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/countComment.php"
+    let URL_DELETE_POST = "\(AppDelegate.link)alder_iosapp/v1/deletePostUser.php"
     
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     lazy var idcontent = Int()
+    lazy var idPostUser = Int()
+    lazy var postId = Int()
+    lazy var postIdtitle = Int()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -74,22 +78,23 @@ class CommunViewController: UITableViewController{
             cell.userFullname.text = headerActivity?.username
             cell.messageTextLabel.text = headerActivity?.caption
             
+            
             let mouthStart = DateFormatter()
             mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let date = mouthStart.date(from: headerActivity?.createdAt ?? "x")
             mouthStart.dateFormat = "MMM d, h:mm a"
             let mouthStringStart = mouthStart.string(from: date ?? Date())
             cell.timeTextLabel.text = mouthStringStart
+            idPostUser = headerActivity?.userAppId ?? 0
+            cell.iconOther.titleLabel?.tag = indexPath.row
+            let userId = User_ID
+                        
             
-            
-      
-            
-            
-//            cell.numCount.text = "\(headerActivity?.likeActivity ?? 0)  ถูกใจ"
-            cell.numCom.text = "\(headerActivity?.commentsActivity ?? 0  )  คอมเม้นต์"
+            cell.numCount.text = "\(headerActivity?.likeActivity ?? 0)  ถูกใจ"
+            cell.numCom.text = "\(headerActivity?.commentsActivity ?? 0)  คอมเม้นต์"
             adpostId = headerActivity?.id ?? 0
+            cell.iconOther.tag = headerActivity?.id ?? 0
             
-//            cell.iconImageLike.tag = 1
             if cell.iconImageLike.tag == 0{
                 
             }else{
@@ -121,6 +126,12 @@ class CommunViewController: UITableViewController{
             }
 
             
+            
+                
+                      
+            
+            
+            
             let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId]
             Alamofire.request(URL_CHECK_LIKE, method: .post,parameters: parameters).responseJSON { response in
                     guard let json = response.value as? [String:Bool], let status = json["error"] else {
@@ -133,16 +144,63 @@ class CommunViewController: UITableViewController{
                 }
             }
             
-            
+            if userId == "\(idPostUser)"{
+                cell.iconOther.isHidden = false
+                }else{
+                cell.iconOther.isHidden = true
+            }
             
             self.tableView.separatorStyle = .none
             cell.selectionStyle = .none
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
-            
             return cell
         }
     }
 
+    @objc func moreOther(_sender:UIButton){
+         postIdtitle = _sender.tag
+         postId = _sender.titleLabel?.tag ?? 0
+        
+        //Prepare the popup assets
+        let title = "THIS IS THE DIALOG TITLE"
+        //label.font = UIFont.BaiJamjureeRegular(size: 14)
+
+        let message = "This is the message section of the popup dialog default view"
+        let image = UIImage(named: "pexels-photo-103290")
+
+        // Create the dialog
+        let popup = PopupDialog(title: title, message: message, image: image)
+
+        // Create buttons
+        let buttonOne = CancelButton(title: "ยกเลิก") {
+            print("You canceled the car dialog.")
+        }
+
+        // This button will not the dismiss the dialog
+        let buttonTwo = DefaultButton(title: "แก้ไขข้อมูล") {
+            print("What a beauty!")
+            let view = editPostUserViewController()
+            view.post_id = self.postIdtitle
+            self.navigationController?.pushViewController(view, animated: true)
+        }
+
+        let buttonThree = DefaultButton(title: "ลบข้อมูล", height: 60) {
+            print("Delete")
+            _ = self.activityList?[self.postId]
+            let parameters: Parameters = ["id":self.postIdtitle,"user_app_id":self.User_ID]
+            let url = self.URL_DELETE_POST
+            Alamofire.request(url, method: .post,parameters: parameters).responseJSON { response in
+                self.activityList?.remove(at: self.postId)
+                self.tableView.reloadData()
+            }
+        }
+
+        popup.addButtons([buttonTwo, buttonThree, buttonOne])
+
+        self.present(popup, animated: true, completion: nil)
+    }
+    
+    
     func getActivty(){
              Alamofire.request(URL_GET_DATA).responseJSON { [weak self](resData) in
                      self?.activityList = Mapper<allList>().mapArray(JSONObject: resData.result.value)
@@ -221,10 +279,10 @@ class CommunViewController: UITableViewController{
               return submit
       }()
 
+
     
        override func viewDidLoad() {
        super.viewDidLoad()
-
           view.addSubview(submitBtn)
           navigationItem.title = "Alder"
           submitBtn.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -100, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 90, heightConstant: 90)
@@ -252,7 +310,7 @@ class CommunViewController: UITableViewController{
                        }else {
                      //send back to login view controller
             }
-            
+        
             if let name = defaultValues.string(forKey: "userName") {
                                  //setting the name to label
                                 User_Name = name

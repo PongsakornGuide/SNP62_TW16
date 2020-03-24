@@ -26,13 +26,12 @@ class allList: Mappable{
         userAppId  <- map["user_app_id"]
         caption <- map["caption"]
         img  <- map["img"]
-        createdAt <- map["created_at"]
+        createdAt <- map["Timer"]
         username  <- map["username"]
         photo <- map["photo"]
         likeActivity <- map["likeActivity"]
         commentsActivity <- map["commentsActivity"]
         
     }
-
 }
 

@@ -10,6 +10,7 @@
 		202CCAB82415608500DB3B26 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202CCAB72415608500DB3B26 /* NotificationView.swift */; };
 		2033A2C5240F614400B38FED /* barChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2033A2C4240F614400B38FED /* barChartViewController.swift */; };
 		20D6F1AD2425E95600F315EF /* NotificationColumnPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D6F1AC2425E95600F315EF /* NotificationColumnPost.swift */; };
+		20DD9E1F2427759D006EE138 /* EditCommentPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD9E1E2427759D006EE138 /* EditCommentPostViewController.swift */; };
 		20E7EF842419A85100DCE89F /* editPostUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E7EF832419A85100DCE89F /* editPostUserViewController.swift */; };
 		20EB4439241810FA009EDDE6 /* NotificationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB4438241810FA009EDDE6 /* NotificationTableView.swift */; };
 		20EB443B241812FD009EDDE6 /* NotificationTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB443A241812FD009EDDE6 /* NotificationTitle.swift */; };
@@ -111,6 +112,7 @@
 		202CCAB72415608500DB3B26 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		2033A2C4240F614400B38FED /* barChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = barChartViewController.swift; sourceTree = "<group>"; };
 		20D6F1AC2425E95600F315EF /* NotificationColumnPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationColumnPost.swift; sourceTree = "<group>"; };
+		20DD9E1E2427759D006EE138 /* EditCommentPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCommentPostViewController.swift; sourceTree = "<group>"; };
 		20E7EF832419A85100DCE89F /* editPostUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editPostUserViewController.swift; sourceTree = "<group>"; };
 		20EB4438241810FA009EDDE6 /* NotificationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableView.swift; sourceTree = "<group>"; };
 		20EB443A241812FD009EDDE6 /* NotificationTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTitle.swift; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 			children = (
 				65F50AD1234F9385006A1767 /* CommunViewController.swift */,
 				6564EE5623EECE2000FB9400 /* InputCommentViewController.swift */,
+				20DD9E1E2427759D006EE138 /* EditCommentPostViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -838,6 +841,7 @@
 				6589100823E17B61007E5DF0 /* TitleTableVIiewCellTest.swift in Sources */,
 				20E7EF842419A85100DCE89F /* editPostUserViewController.swift in Sources */,
 				20F071CA241D491B005FF642 /* ReligionTableView.swift in Sources */,
+				20DD9E1F2427759D006EE138 /* EditCommentPostViewController.swift in Sources */,
 				6589100B23E17E08007E5DF0 /* DiseaseTableViewCell.swift in Sources */,
 				20EB443D24181535009EDDE6 /* NotificationColumn.swift in Sources */,
 				659EB1BB232CEF6D00BF433B /* AppDelegate.swift in Sources */,

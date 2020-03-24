@@ -215,12 +215,15 @@ class LoginViewController: UIViewController {
                                    let tel = user.value(forKey: "tel") as! String
                                    //saving user
                                    let image = user.value(forKey: "photo") as! String
+                                    
+                                    let birthday = user.value(forKey: "birthday") as! String
                         
                         
                                    self.defaultValues.set(userId, forKey: "userId")
                                    self.defaultValues.set(userName, forKey: "userName")
                                    self.defaultValues.set(tel, forKey: "tel")
                                    self.defaultValues.set(image, forKey: "ImageUser")
+                                   self.defaultValues.set(birthday, forKey: "birthdayUser")
                                    self.dismiss(animated: false, completion: nil)
                     } else {
                                   self.checkError.isHidden = false

@@ -37,12 +37,13 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
          private var cellId = "Cell"
          private var cellId1 = "Cell1"
          private var cellId2 = "Cell2"
-
+         var postIdtitle = Int()
          var check : allList?
 
+    
          var comment: [CommentList]?
          lazy var userid = String()
-
+        lazy var TestComment = Int()
 
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
@@ -126,11 +127,11 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                                               if let commentId = user["likeActivity"] as? Int {
                                                   cell.numCount.text = "\(commentId)  ถูกใจ"
                                       }
-                                                      
+
                               }
 
                     }
-                
+
                     let parametersCom: Parameters = ["ad_post_timeline_id":adpostId]
                                         let urlCommentCh = URL_COUNT_COMMENT + "?id=\(adpostId)"
                               Alamofire.request(urlCommentCh, method: .post,parameters: parametersCom).responseJSON { [weak self](resData) in
@@ -138,7 +139,7 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
                                               if let commentId = user["commentActivity"] as? Int {
                                                   cell.comCount.text = "\(commentId)  คอมเม้นต์"
                                       }
-                                                      
+
                               }
 
                     }
@@ -260,10 +261,14 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
 
 
      func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let commentActivity = comment?[indexPath.row]
+        TestComment = commentActivity?.id ?? 0
+        
         if indexPath.section == 0{
             let configuration = UISwipeActionsConfiguration()
             return configuration
         }else{
+            
             let delete = UIContextualAction(style: .normal, title: "Delete") { (action, view , completionHandler) in
                 let commentActivity = self.comment?[indexPath.row]
                 self.postComID = commentActivity?.id ?? 0
@@ -279,6 +284,10 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
 
             let edit = UIContextualAction(style: .normal, title: "Edit") {(action, view , completionHandler) in
                 completionHandler(true)
+//                let EditPost = editPostUserViewController()
+//                EditPost.comment_Id = self.TestComment
+//                EditPost.user_Id = self.userid
+//                self.navigationController?.pushViewController(EditPost, animated: true)
             }
 
             let configuration = UISwipeActionsConfiguration(actions: [delete, edit])
@@ -325,7 +334,6 @@ class InputCommentViewController: UIViewController ,UITableViewDelegate, UITable
 
         lazy var commentTextField: UITextField = {
                    let textField = UITextField()
-//                   textField.attributedPlaceholder = NSAttributedString(string: "แสดงความคิดเห็น", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeRegular(size: 18), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                    textField.font = UIFont.BaiJamjureeRegular(size:18)
                    textField.textColor = UIColor.blackAlpha(alpha: 0.7)
                    textField.layer.borderColor = UIColor.whiteAlpha(alpha: 0.9).cgColor

@@ -85,6 +85,7 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                         return cell
             
         }else{
+            
               let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! SearchTableViewCell
                        let listActivity = ActivityList?[indexPath.row]
                        cell.bgActivitityBg.isHidden = false
