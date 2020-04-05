@@ -7,11 +7,12 @@ mysqli_set_charset($conn, "utf8");
 header('Content-Type: application/json; charset=utf-8');
 
 if (!verifyRequiredParams(array('ad_post_timeline_id', 'user_id','post'))) {
+
     $ad_post_timeline_id = $_POST["ad_post_timeline_id"];
     $user_id = $_POST["user_id"];
     $post = $_POST["post"];
 
-    $sql = "INSERT INTO comments (ad_post_timeline_id, user_id, post) VALUES ('$ad_post_timeline_id','$user_id','$post')";
+    $sql = "INSERT INTO comments (ad_post_timeline_id, user_id,post) VALUES ('$ad_post_timeline_id','$user_id','$post')";
     if ($conn->query($sql) === true) {
         echo json_encode(['message' => "Created Article Successfully"]);
     } else {

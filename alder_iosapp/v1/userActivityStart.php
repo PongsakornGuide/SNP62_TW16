@@ -7,7 +7,7 @@ mysqli_set_charset($conn, "utf8");
 header('Content-Type: application/json; charset=utf-8');
 date_default_timezone_set('Asia/Bangkok');
 $id = $_GET["id"];
-$sql = "SELECT post_timeline.* FROM join_activity LEFT JOIN post_timeline ON join_activity.post_timeline_id = post_timeline.id WHERE join_activity.user_id =  $id";
+$sql = "SELECT post_timelines.* FROM join_activity LEFT JOIN post_timelines ON join_activity.post_timeline_id = post_timelines.id WHERE join_activity.user_id =  $id";
 $result = $conn->query($sql);
 $datas = array();
 $timeauto = date("Y-m-d");

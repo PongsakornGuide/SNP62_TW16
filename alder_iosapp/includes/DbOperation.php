@@ -27,9 +27,6 @@ class DbOperation
     //Function to create a new user
     public function createUser($username, $surname, $photo, $birthday, $gender, $tel, $address, $religion, $relative_name, $relative_phone, $relative_type)
     {
-
-
-
         if (!$this->isUserExist($username, $tel)) {
             $stmt = $this->conn->prepare("INSERT INTO user_apps (username, surname, photo, birthday, gender, tel, address, religion, relative_name, relative_phone, relative_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("sssssisssss", $username, $surname, $photo, $birthday, $gender, $tel, $address, $religion, $relative_name, $relative_phone, $relative_type);
@@ -41,7 +38,6 @@ class DbOperation
         } else {
             return USER_ALREADY_EXIST;
         }
-
     }
 
     //
@@ -56,10 +52,10 @@ class DbOperation
 
     public function getUserByUsername($tel)
     {
-        $stmt = $this->conn->prepare("SELECT id, username, tel , photo FROM user_apps WHERE tel = ?");
+        $stmt = $this->conn->prepare("SELECT id, username, tel , photo , birthday FROM user_apps WHERE tel = ?");
         $stmt->bind_param("i", $tel);
         $stmt->execute();
-        $stmt->bind_result($id, $username, $tel,$photo);
+        $stmt->bind_result($id, $username, $tel,$photo,$birthday);
         $stmt->fetch();
         $user = array();
         $_SESSION['id'] = $id;
@@ -67,6 +63,7 @@ class DbOperation
         $user['username'] = $username;
         $user['tel'] = $tel;
         $user['photo'] = $photo;
+        $user['birthday'] = $birthday;
         return $user;
     }
 
@@ -145,16 +142,17 @@ class DbOperation
         return $stmt->num_rows > 0;
     }
 
+    //Function Check user join Activity
     public function checkjoin2($post_timeline_id,$user_id)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM decide_after WHERE post_timeline_id = ? AND user_id = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM decide_afters WHERE post_timeline_id = ? AND user_id = ?");
         $stmt->bind_param("ii", $post_timeline_id,$user_id);
         $stmt->execute();
         $stmt->store_result();
         return $stmt->num_rows > 0;
     }
 
-
+    //Function Check user like Post
     public function checkLike($ad_post_timeline_id,$user_id)
     {
         $stmt = $this->conn->prepare("SELECT * FROM likeActivity WHERE ad_post_timeline_id = ? AND user_id = ?");
@@ -164,6 +162,7 @@ class DbOperation
         return $stmt->num_rows > 0;
     }
 
+    //Function Check user comment Post
     public function checkLikeComment($user_id,$ad_post_timeline_id,$comment_id)
     {
         $stmt = $this->conn->prepare("SELECT * FROM likeActivityComment WHERE user_id = ? AND ad_post_timeline_id = ? AND comment_id = ?");
@@ -172,17 +171,5 @@ class DbOperation
         $stmt->store_result();
         return $stmt->num_rows > 0;
     }
-    
-
-    //Function Delete
-//    public function delete($user_app_id){
-//        $stmt = $this->conn->prepare("DELETE FROM ad_post_timeline WHERE user_app_id = $user_app_id");
-//        $stmt->bind_param("i", $user_app_id);
-//        if($this->conn->query($stmt) === true){
-//            echo json_encode(['message' => "Delete Article Successfully"]);
-//        }else{
-//            echo json_encode(['message' => "Error: " . $stmt->error]);
-//        }
-//    }
 
 }

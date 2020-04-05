@@ -6,13 +6,13 @@ $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
 mysqli_set_charset($conn, "utf8");
 header('Content-Type: application/json; charset=utf-8');
 
-if (!verifyRequiredParams(array('user_id','post_timeline_id','feel_id','impress_id'))) {
+if (!verifyRequiredParams(array('user_id','post_timeline_id','assess_id','impress_id'))) {
         $user_id = $_POST["user_id"];
         $post_timeline_id = $_POST["post_timeline_id"];
-        $feel_id = $_POST["feel_id"];
+        $assess_id = $_POST["assess_id"];
         $impress_id = $_POST["impress_id"];
 
-    $sql = "INSERT INTO decide_after (user_id,post_timeline_id,feel_id,impress_id) VALUES ('$user_id','$post_timeline_id','$feel_id','$impress_id')";
+    $sql = "INSERT INTO decide_afters (user_id,post_timeline_id,assess_id,impress_id) VALUES ('$user_id','$post_timeline_id','$assess_id','$impress_id')";
     if ($conn->query($sql) === true) {
         echo json_encode(['message' => "Created Article Successfully"]);
     } else {
