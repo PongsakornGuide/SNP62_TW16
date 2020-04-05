@@ -77,23 +77,23 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
             textField.layer.cornerRadius = 10
             textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             textField.leftViewMode = UITextField.ViewMode.always
-//            textField.addTarget(self, action: #selector(titleText), for:  .editingChanged)
+            textField.addTarget(self, action: #selector(titleText), for:  .editingChanged)
         return textField
      }()
 
-//    @objc func titleText(){
-//        let checkValue = contentTextField.text?.count ?? 0 > 0
-//        if !checkValue{
-//            submitButton.backgroundColor = UIColor.rgb(red: 167, green: 169, blue: 172)
-//            submitButton.layer.borderColor = UIColor.rgb(red: 167, green: 169, blue: 172).cgColor
+    @objc func titleText(){
+        let checkValue = contentTextField.text?.count ?? 0 > 0
+        if !checkValue{
+            submitButton.backgroundColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            submitButton.layer.borderColor = UIColor.rgb(red: 167, green: 169, blue: 172).cgColor
 //            submitButton.isEnabled = true
-//        }else{
-//            submitButton.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
-//            submitButton.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
+        }else{
+            submitButton.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
+            submitButton.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
 //            submitButton.isEnabled = false
-//        }
-//    }
-//
+        }
+    }
+
     //-----------------------------------------------------------------------------------------------
     
     lazy var imageView : UIImageView = {

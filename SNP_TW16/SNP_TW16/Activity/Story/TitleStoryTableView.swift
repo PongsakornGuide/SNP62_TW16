@@ -58,12 +58,15 @@ class TitleStoryTableView:  UITableViewController ,UINavigationControllerDelegat
                        let prayerUserRead = prayer?[indexPath.row]
                         cell.titleFullname.text = prayerUserRead?.title
                 
-                let postImagePath = prayerUserRead?.image ?? "0"
+                let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + (prayerUserRead?.image  ?? "0"))
                       if let postImageURL = URL(string: postImagePath) {
                           cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
                 }
 
-                     
+//                     let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + yield)
+//                                                        if let postImageURL = URL(string: postImagePath) {
+//                                                            self?.ImageProfile.sd_setImage(with: postImageURL, completed: nil)
+//                                                        }
                 
                 
                 
@@ -84,7 +87,7 @@ class TitleStoryTableView:  UITableViewController ,UINavigationControllerDelegat
                         cell.titleFullname.text = storyUserRead?.title
                         cell.detaillname.text = storyUserRead?.caption
                 
-                        let postImagePath = storyUserRead?.image ?? "0"
+                        let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + (storyUserRead?.image ?? "0"))
                                      if let postImageURL = URL(string: postImagePath) {
                                          cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
                         }
@@ -109,7 +112,7 @@ class TitleStoryTableView:  UITableViewController ,UINavigationControllerDelegat
             vc.contentLabel.text = deatilPrayer?.content
             
             
-            let postImagePath = deatilPrayer?.image ?? "0"
+            let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + (deatilPrayer?.image ?? "0"))
                     if let postImageURL = URL(string: postImagePath) {
                     vc.stepView.sd_setImage(with: postImageURL, completed: nil)
             }
@@ -122,7 +125,7 @@ class TitleStoryTableView:  UITableViewController ,UINavigationControllerDelegat
             vc.titleLabel.text = deatilStory?.title
             vc.contentLabel.text = deatilStory?.content
             
-            let postImagePath = deatilStory?.image ?? "0"
+            let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + (deatilStory?.image ?? "0"))
                     if let postImageURL = URL(string: postImagePath) {
                     vc.stepView.sd_setImage(with: postImageURL, completed: nil)
             }

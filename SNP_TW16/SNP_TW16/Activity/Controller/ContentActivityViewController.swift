@@ -331,7 +331,7 @@ class ContentActivityViewController: UIViewController,UITextFieldDelegate ,UINav
             
           
             let mouthStart = DateFormatter()
-            mouthStart.dateFormat = "yyyy-mm-dd"
+            mouthStart.dateFormat = "yyyy-MM-dd"
             let mouthStringStartt = mouthStart.date(from: activityData?.created ?? "x")
             mouthStart.dateFormat = "dd MMMM yyyy"
             let mouthStringStart = mouthStart.string(from: mouthStringStartt ?? Date())

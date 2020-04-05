@@ -90,6 +90,14 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                return image
     }()
     
+    lazy var iconedit : UIImageView = {
+              let image = UIImageView()
+              image.image = UIImage(named: "subtraction1")
+              image.contentMode = .scaleAspectFill
+              image.layer.masksToBounds = true
+              return image
+   }()
+    
    lazy var editProfile : UIButton = {
               let submit = UIButton(type: UIButton.ButtonType.system)
     
@@ -114,7 +122,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         let title = "รัตน์มณี"
       let style = NSMutableParagraphStyle()
        style.alignment = NSTextAlignment.center
-       let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+       let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 19),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
         label.attributedText = attributedText
         label.numberOfLines = 0
         return label
@@ -126,7 +134,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
           let title = "รัตน์มณี"
         let style = NSMutableParagraphStyle()
          style.alignment = NSTextAlignment.center
-         let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+         let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 19),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
             label.attributedText = attributedText
           label.numberOfLines = 0
           return label
@@ -187,6 +195,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         image.layer.masksToBounds = true
         return image
     }()
+        
     
     
     lazy var tel : UILabel = {
@@ -343,7 +352,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                             
                                 if let yield = user["photo"] as? String{
                                     
-                                let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + yield)
+                                    let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + yield)
                                     if let postImageURL = URL(string: postImagePath) {
                                         self?.ImageProfile.sd_setImage(with: postImageURL, completed: nil)
                                     }
@@ -356,11 +365,10 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
     
 
 
-               @objc func handelSetting(){
-                        print("5555")
-                        let notificaionView = NotificationTableView()
-                        navigationController?.pushViewController(notificaionView, animated: true)
-             }
+    @objc func handelSetting(){
+            let notificaionView = NotificationTableView()
+            navigationController?.pushViewController(notificaionView, animated: true)
+    }
     
     
     
@@ -484,11 +492,19 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationItem.title = "Alder"
+          let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
+                navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
+        
+        
         let settings = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(handelSetting))
         settings.width = 0.5
         settings.tintColor = UIColor.rgb(red: 253, green: 173, blue: 82)
         navigationItem.rightBarButtonItem = settings
+        
+        
         let stacView = UIStackView(arrangedSubviews:[nameHeader,surnameHeader])
         stacView.distribution = .fillEqually
         stacView.spacing = 0
@@ -515,7 +531,11 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         viewScroll.addSubview(bgImageProfile)
         viewScroll.addSubview(profileImageView)
         viewScroll.addSubview(ImageProfile)
+        viewScroll.addSubview(iconedit)
+        
+        viewScroll.addSubview(iconedit)
         viewScroll.addSubview(editProfile)
+        
         viewScroll.addSubview(dataUser)
         viewScroll.addSubview(stacView)
         viewScroll.addSubview(iconNursingHome)
@@ -554,11 +574,17 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         ImageProfile.anchor(profileImageView.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 5, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 150, heightConstant: 150)
         ImageProfile.centerXAnchor.constraint(equalTo: BGView.centerXAnchor).isActive = true
         
-        editProfile.anchor(bgImageProfile.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 100, rightConstant: 100, widthConstant: screenSizeX, heightConstant: 100)
+        
+        iconedit.anchor(bgImageProfile.bottomAnchor, left: nil, right: editProfile.leftAnchor, bottom: nil, topConstant: 42, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        
+        editProfile.anchor(bgImageProfile.bottomAnchor, left: nil, right: nil, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 100, rightConstant: 100, widthConstant: 0, heightConstant: 100)
+        
+        editProfile.centerXAnchor.constraint(equalTo: BGView.centerXAnchor).isActive = true
 
+        
         dataUser.anchor(editProfile.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 15, rightConstant: 15, widthConstant: 0, heightConstant: 280)
 
-        stacView.anchor(dataUser.topAnchor, left: dataUser.leftAnchor, right: dataUser.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 80)
+        stacView.anchor(dataUser.topAnchor, left: dataUser.leftAnchor, right: dataUser.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 20, leftConstant: 10, rightConstant: 10, widthConstant: screenSizeX, heightConstant: 80)
         
         iconNursingHome.anchor(stacView.bottomAnchor, left: nil, right: nursingHome.leftAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 

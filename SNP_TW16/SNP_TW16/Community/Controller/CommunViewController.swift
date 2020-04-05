@@ -280,11 +280,24 @@ class CommunViewController: UITableViewController{
       }()
 
 
-    
+    @objc func handelSettingNotification(){
+        let notificaionView = NotificationTableView()
+        navigationController?.pushViewController(notificaionView, animated: true)
+    }
+          
        override func viewDidLoad() {
        super.viewDidLoad()
           view.addSubview(submitBtn)
           navigationItem.title = "Alder"
+        
+        let settings = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(handelSettingNotification))
+        settings.width = 0.5
+        settings.tintColor = UIColor.rgb(red: 253, green: 173, blue: 82)
+        navigationItem.rightBarButtonItem = settings
+        
+          let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
+                navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
           submitBtn.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -100, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 90, heightConstant: 90)
         
             if #available(iOS 12.1 , *) {

@@ -21,8 +21,8 @@ class MusicViewCell: UITableViewCell {
      
     lazy var profileImage: UIView = {
               let background = UIView()
-                 background.backgroundColor = UIColor.white
-//                 background.layer.cornerRadius = 20
+                 background.backgroundColor = UIColor.whiteAlpha(alpha: 0.7)
+                 background.layer.cornerRadius = 25
                  background.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
                  background.layer.shadowOpacity = 0.1
                  background.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -63,9 +63,9 @@ class MusicViewCell: UITableViewCell {
             addSubview(nameMusic)
             addSubview(songMusic)
 
-            profileImage.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+            profileImage.anchor(safeAreaLayoutGuide.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 20, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
                       
-            bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 200)
+            bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 200)
 
             nameMusic.anchor(bgActivitity.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: songMusic.topAnchor, topConstant: 30, bottomConstant: 20, leftConstant: 20, rightConstant: 5, widthConstant: 0, heightConstant: 0)
 

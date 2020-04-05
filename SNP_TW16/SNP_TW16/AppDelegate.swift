@@ -16,9 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     static let link = "http://localhost/"
-
-//    static let link = "http://192.168.43.145/"
-//    static let link = "http://192.168.1.46/"
+//192.168.1.101
+//    static let link = "http://192.168.1.101/"
+//    static let link = "http://192.168.1.102/"
 //    static let link = "http://192.168.1.16/"
 //    static let link = "http://192.168.1.57/"
 //    static let link = "http://192.168.1.12/"
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.rootViewController = tabBarViewController()
 //        application.applicationIconBadgeNumber = 10
-//        window?.rootViewController = UINavigationController(rootViewController: tabBarViewController())
+//        window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
         return true
     }
 

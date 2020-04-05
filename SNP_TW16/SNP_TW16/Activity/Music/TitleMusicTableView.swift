@@ -50,8 +50,8 @@ class TitleMusicTableView: UITableViewController ,UINavigationControllerDelegate
                          VideoName = videoUserRead?.url ?? "x"
                          let url = URL(string:"https://www.youtube.com/embed/\(VideoName)")
                          cell.bgActivitity.loadRequest(URLRequest(url: url!))
-                         cell.nameMusic.text = videoUserRead?.singerName
-                         cell.songMusic.text = videoUserRead?.title_video
+                    cell.nameMusic.text = "เพลง: \(videoUserRead?.singerName ?? "x")"
+                         cell.songMusic.text = "นักร้อง: \(videoUserRead?.title_video ?? "x")"
                          self.tableView.separatorStyle = .none
                          cell.selectionStyle = .none
                          cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)

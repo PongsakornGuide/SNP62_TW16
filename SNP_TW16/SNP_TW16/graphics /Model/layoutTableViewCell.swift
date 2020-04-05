@@ -7,7 +7,8 @@
 //
 
 import UIKit
-class layoutTableViewCell: UITableViewCell {
+class layoutTableViewCell: UITableViewCell{
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
          super.init(style: style, reuseIdentifier: reuseIdentifier)
          setLayout()

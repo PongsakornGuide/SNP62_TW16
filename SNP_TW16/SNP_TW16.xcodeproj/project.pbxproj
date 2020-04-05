@@ -9,12 +9,19 @@
 /* Begin PBXBuildFile section */
 		202CCAB82415608500DB3B26 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202CCAB72415608500DB3B26 /* NotificationView.swift */; };
 		2033A2C5240F614400B38FED /* barChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2033A2C4240F614400B38FED /* barChartViewController.swift */; };
+		207F518824372D8D00F36A6D /* favouriteModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207F518724372D8D00F36A6D /* favouriteModelView.swift */; };
 		20D6F1AD2425E95600F315EF /* NotificationColumnPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D6F1AC2425E95600F315EF /* NotificationColumnPost.swift */; };
+		20D9555E2433488C0060D3F8 /* DecideChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D9555D2433488C0060D3F8 /* DecideChoiceViewController.swift */; };
+		20D9556024334DE30060D3F8 /* titleDecideChoiceViwe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D9555F24334DE30060D3F8 /* titleDecideChoiceViwe.swift */; };
+		20D9556224334E7B0060D3F8 /* DecideChoiceUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D9556124334E7B0060D3F8 /* DecideChoiceUserView.swift */; };
+		20D9556524344C240060D3F8 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D9556424344C240060D3F8 /* Choice.swift */; };
 		20DD9E1F2427759D006EE138 /* EditCommentPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD9E1E2427759D006EE138 /* EditCommentPostViewController.swift */; };
 		20E7EF842419A85100DCE89F /* editPostUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E7EF832419A85100DCE89F /* editPostUserViewController.swift */; };
+		20EA7EEB2434654900838F18 /* ChoiceCommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA7EEA2434654900838F18 /* ChoiceCommitView.swift */; };
 		20EB4439241810FA009EDDE6 /* NotificationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB4438241810FA009EDDE6 /* NotificationTableView.swift */; };
 		20EB443B241812FD009EDDE6 /* NotificationTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB443A241812FD009EDDE6 /* NotificationTitle.swift */; };
 		20EB443D24181535009EDDE6 /* NotificationColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB443C24181535009EDDE6 /* NotificationColumn.swift */; };
+		20EBE4B22435E07B00A35E51 /* feeldecideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EBE4B12435E07B00A35E51 /* feeldecideModel.swift */; };
 		20EC77802415019900A1B6BA /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EC777F2415019900A1B6BA /* TextFieldTableViewCell.swift */; };
 		20ED2C752403D6FF00EC9772 /* DecideAfterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED2C742403D6FF00EC9772 /* DecideAfterViewController.swift */; };
 		20F03C55241A568600ABB7DB /* notiModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F03C54241A568600ABB7DB /* notiModal.swift */; };
@@ -111,12 +118,19 @@
 /* Begin PBXFileReference section */
 		202CCAB72415608500DB3B26 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		2033A2C4240F614400B38FED /* barChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = barChartViewController.swift; sourceTree = "<group>"; };
+		207F518724372D8D00F36A6D /* favouriteModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favouriteModelView.swift; sourceTree = "<group>"; };
 		20D6F1AC2425E95600F315EF /* NotificationColumnPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationColumnPost.swift; sourceTree = "<group>"; };
+		20D9555D2433488C0060D3F8 /* DecideChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecideChoiceViewController.swift; sourceTree = "<group>"; };
+		20D9555F24334DE30060D3F8 /* titleDecideChoiceViwe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = titleDecideChoiceViwe.swift; sourceTree = "<group>"; };
+		20D9556124334E7B0060D3F8 /* DecideChoiceUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecideChoiceUserView.swift; sourceTree = "<group>"; };
+		20D9556424344C240060D3F8 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		20DD9E1E2427759D006EE138 /* EditCommentPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCommentPostViewController.swift; sourceTree = "<group>"; };
 		20E7EF832419A85100DCE89F /* editPostUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editPostUserViewController.swift; sourceTree = "<group>"; };
+		20EA7EEA2434654900838F18 /* ChoiceCommitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceCommitView.swift; sourceTree = "<group>"; };
 		20EB4438241810FA009EDDE6 /* NotificationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableView.swift; sourceTree = "<group>"; };
 		20EB443A241812FD009EDDE6 /* NotificationTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTitle.swift; sourceTree = "<group>"; };
 		20EB443C24181535009EDDE6 /* NotificationColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationColumn.swift; sourceTree = "<group>"; };
+		20EBE4B12435E07B00A35E51 /* feeldecideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = feeldecideModel.swift; sourceTree = "<group>"; };
 		20EC777F2415019900A1B6BA /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		20ED2C742403D6FF00EC9772 /* DecideAfterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecideAfterViewController.swift; sourceTree = "<group>"; };
 		20F03C54241A568600ABB7DB /* notiModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notiModal.swift; sourceTree = "<group>"; };
@@ -255,6 +269,25 @@
 			path = barchart;
 			sourceTree = "<group>";
 		};
+		20D9556324344C150060D3F8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				20D9556424344C240060D3F8 /* Choice.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		20EA7EE92434652A00838F18 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				20ED2C742403D6FF00EC9772 /* DecideAfterViewController.swift */,
+				20D9556124334E7B0060D3F8 /* DecideChoiceUserView.swift */,
+				20D9555F24334DE30060D3F8 /* titleDecideChoiceViwe.swift */,
+				20EA7EEA2434654900838F18 /* ChoiceCommitView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		20EB4435241810D6009EDDE6 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,7 +318,9 @@
 		20ED2C732403D6B600EC9772 /* Decide */ = {
 			isa = PBXGroup;
 			children = (
-				20ED2C742403D6FF00EC9772 /* DecideAfterViewController.swift */,
+				20EA7EE92434652A00838F18 /* View */,
+				20D9556324344C150060D3F8 /* Model */,
+				20D9555D2433488C0060D3F8 /* DecideChoiceViewController.swift */,
 			);
 			path = Decide;
 			sourceTree = "<group>";
@@ -456,6 +491,7 @@
 			isa = PBXGroup;
 			children = (
 				6589101323E204DA007E5DF0 /* ListActTitleType.swift */,
+				207F518724372D8D00F36A6D /* favouriteModelView.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -627,6 +663,7 @@
 			isa = PBXGroup;
 			children = (
 				6543825223CB3A030062399D /* ActivityType.swift */,
+				20EBE4B12435E07B00A35E51 /* feeldecideModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -809,10 +846,13 @@
 				65B0164423AB152600EBB76A /* Comment.swift in Sources */,
 				20F03C55241A568600ABB7DB /* notiModal.swift in Sources */,
 				654E850A23C1007E001E2508 /* HeaderActivity.swift in Sources */,
+				20D9556024334DE30060D3F8 /* titleDecideChoiceViwe.swift in Sources */,
 				659EB1CD232CF05E00BF433B /* Extensions.swift in Sources */,
 				65DD3CDA23AD45B9008C5EA5 /* SearchTableViewCell.swift in Sources */,
+				20D9556524344C240060D3F8 /* Choice.swift in Sources */,
 				20F071D0241DC71F005FF642 /* DetailStoryViewController.swift in Sources */,
 				65DBB65323E447210081F9BE /* titleListPostViewCell.swift in Sources */,
+				20D9556224334E7B0060D3F8 /* DecideChoiceUserView.swift in Sources */,
 				20F43249241DE56E0016F251 /* TitleMusicViewCell.swift in Sources */,
 				6589101423E204DA007E5DF0 /* ListActTitleType.swift in Sources */,
 				65D0708123DC482E00A41ABA /* grapViewController.swift in Sources */,
@@ -820,6 +860,7 @@
 				20F071C3241D4552005FF642 /* TitleStoryTableView.swift in Sources */,
 				65DB237223DA16ED00E71500 /* ActivityTypeTableViewController.swift in Sources */,
 				6589100623E174F4007E5DF0 /* TestCheckBoxTableView.swift in Sources */,
+				20D9555E2433488C0060D3F8 /* DecideChoiceViewController.swift in Sources */,
 				20EB4439241810FA009EDDE6 /* NotificationTableView.swift in Sources */,
 				65E4E09D23BFA99E00D0F108 /* AddTelView.swift in Sources */,
 				20F071BF241D38A1005FF642 /* HeaderReligion.swift in Sources */,
@@ -845,6 +886,7 @@
 				6589100B23E17E08007E5DF0 /* DiseaseTableViewCell.swift in Sources */,
 				20EB443D24181535009EDDE6 /* NotificationColumn.swift in Sources */,
 				659EB1BB232CEF6D00BF433B /* AppDelegate.swift in Sources */,
+				20EBE4B22435E07B00A35E51 /* feeldecideModel.swift in Sources */,
 				657C547E23BA7CE600B32EC6 /* TitleTableViewCell.swift in Sources */,
 				6580827E23BCA3650092B0D6 /* Emergency.swift in Sources */,
 				65B9171723D783F200F13190 /* Relative.swift in Sources */,
@@ -861,6 +903,7 @@
 				65DBB64923E403120081F9BE /* Profile.swift in Sources */,
 				20F4324B241DE5C50016F251 /* MusicViewCell.swift in Sources */,
 				6580828423BDF3F70092B0D6 /* ProfileVIewController.swift in Sources */,
+				207F518824372D8D00F36A6D /* favouriteModelView.swift in Sources */,
 				657C548A23BA837D00B32EC6 /* DetailEmergencyView.swift in Sources */,
 				20ED2C752403D6FF00EC9772 /* DecideAfterViewController.swift in Sources */,
 				6574B2E423DD4246005E82DF /* layoutTableViewCell.swift in Sources */,
@@ -874,6 +917,7 @@
 				20F03C57241B421C00ABB7DB /* NotificationContent.swift in Sources */,
 				652DDEE623A9BB2B00AF79D3 /* RecordViewController.swift in Sources */,
 				65B9171923D9A46100F13190 /* CreateRelativeTelView.swift in Sources */,
+				20EA7EEB2434654900838F18 /* ChoiceCommitView.swift in Sources */,
 				6580BEB8232D380500B6C621 /* RegisterViewController.swift in Sources */,
 				65DBB64D23E42A230081F9BE /* listFavoriteViewCell.swift in Sources */,
 				20F071CC241D492E005FF642 /* StroyTableView.swift in Sources */,

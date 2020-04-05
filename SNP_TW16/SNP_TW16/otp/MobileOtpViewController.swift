@@ -33,13 +33,22 @@ class MobileOtpViewController: UIViewController {
      var textHeader : UILabel = {
         let label = UILabel()
         let title = "กรุณาลงทะเบียน"
-        let text = "\n \n โปรดใส่เบอร์มือถือสำหรับการลงทะเบียน"
         let style = NSMutableParagraphStyle()
         style.alignment = NSTextAlignment.center
         let attributedText = NSMutableAttributedString(string: title,
         attributes: [NSAttributedString.Key.paragraphStyle:style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 35),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
         
-        attributedText.append(NSMutableAttributedString(string: text,attributes: [NSAttributedString.Key.paragraphStyle:style,NSMutableAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 22),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
+        label.attributedText = attributedText
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    var textHeader2 : UILabel = {
+        let label = UILabel()
+        let text = "\nโปรดใส่เบอร์มือถือ\n สำหรับการลงทะเบียน"
+        let style = NSMutableParagraphStyle()
+        style.alignment = NSTextAlignment.center
+        let attributedText = NSMutableAttributedString(string: text,attributes: [NSAttributedString.Key.paragraphStyle:style,NSMutableAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 22),NSMutableAttributedString.Key.foregroundColor: UIColor.white])
         
         label.attributedText = attributedText
         label.numberOfLines = 0
@@ -84,7 +93,7 @@ class MobileOtpViewController: UIViewController {
         submit.layer.cornerRadius = 15
         submit.setTitle("ขอรหัสยืนยัน", for: .normal)
         submit.setTitleColor(UIColor.white,for: .normal)
-        submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 24)
+        submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 22)
         submit.addTarget(self, action: #selector(submitBtn), for: .touchUpInside)
         return submit
     }()
@@ -136,10 +145,8 @@ class MobileOtpViewController: UIViewController {
     
     @objc func submitBtn (){
         if otpTextField.text?.count ?? 0 == 10{
-            print("เรียบร้อย")
             check_use_otp()
         }else{
-            print("เอาใหม่")
             checkError.isHidden = false
         }
     }
@@ -222,6 +229,7 @@ class MobileOtpViewController: UIViewController {
         otpView.addSubview(otpTextField)
         
         view.addSubview(textHeader)
+        view.addSubview(textHeader2)
         view.addSubview(submitButton)
         view.addSubview(btnBack)
         view.addSubview(checkError)
@@ -236,8 +244,12 @@ class MobileOtpViewController: UIViewController {
 
         
         textHeader.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 100, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        
+        textHeader2.anchor(textHeader.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 
-        stackView.anchor(textHeader.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 80)
+        
+
+        stackView.anchor(textHeader2.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 80)
                    
         imageIcon.anchor(otpView.safeAreaLayoutGuide.topAnchor, left: otpView.leftAnchor, right: nil, bottom: nil, topConstant: 25, bottomConstant: 0,  leftConstant: 20, rightConstant: 0, widthConstant: 40, heightConstant: 30)
 
@@ -248,7 +260,7 @@ class MobileOtpViewController: UIViewController {
         
     
         
-        submitButton.anchor(otpView.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 80, rightConstant: 80, widthConstant: 0, heightConstant: 70)
+        submitButton.anchor(otpView.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 80, rightConstant: 80, widthConstant: 0, heightConstant: 60)
 
         checkError.anchor(submitButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 50)
     }

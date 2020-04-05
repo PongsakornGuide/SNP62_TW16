@@ -20,14 +20,12 @@ class TitleTableViewCell: UITableViewCell {
 
        lazy var bgActivitity:UIView = {
            let background = UIView()
-//           background.backgroundColor = UIColor.red
            return background
        }()
-//       group1485
-//    Intersection 4
+
        lazy var bgImage : UIImageView = {
                      let image = UIImageView()
-//                     image.image = UIImage(named: "Intersection 4")
+                     image.image = UIImage(named: "Intersection 4")
                      image.contentMode = .scaleAspectFill
                      image.layer.masksToBounds = true
                      return image
@@ -62,16 +60,16 @@ class TitleTableViewCell: UITableViewCell {
            addSubview(titleHeader)
            addSubview(textHeader)
            
-           bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 200)
+        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 190)
 
-           bgImage.anchor(bgActivitity.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200
+           bgImage.anchor(bgActivitity.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0
                   )
            
         
-           titleHeader.anchor(bgImage.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 60, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-           titleHeader.centerXAnchor.constraint(equalTo: bgActivitity.centerXAnchor).isActive = true
+        titleHeader.anchor(bgImage.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+//           titleHeader.centerXAnchor.constraint(equalTo: bgActivitity.centerXAnchor).isActive = true
         
-           textHeader.anchor(titleHeader.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-            textHeader.centerXAnchor.constraint(equalTo: bgActivitity.centerXAnchor).isActive = true
+           textHeader.anchor(titleHeader.bottomAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+//            textHeader.centerXAnchor.constraint(equalTo: bgActivitity.centerXAnchor).isActive = true
        }
 }

@@ -213,6 +213,8 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
 //        view.backgroundColor = .white
         let stackView = UIStackView(arrangedSubviews: [

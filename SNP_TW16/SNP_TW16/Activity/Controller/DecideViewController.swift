@@ -27,6 +27,7 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
     private var cellId2 = "Cell2"
     var feel: [emojiUser]?
     
+    var feelUser = feeldecideModel.feelofUser()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadData()
@@ -42,7 +43,7 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
           if section == 0 {
                 return 1
           }else if section == 1{
-                return feel?.count ?? 0
+            return feelUser.count
           }else{
                 return 1
         }
@@ -61,17 +62,10 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
                 }else if indexPath.section == 1{
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! layoutTableViewCell
-                    let emogiDecide = feel?[indexPath.row]
-                    cell.textHeader.text = emogiDecide?.feel
+                    cell.textHeader.text = feelUser[indexPath.row].title
+                    cell.bgImage.image = feelUser[indexPath.row].profileImage
                     cell.textHeader.font = UIFont.BaiJamjureeBold(size: 26)
                     cell.textHeader.textColor = UIColor.rgb(red: 27, green: 71, blue: 147)
-                    
-                    
-                    let postImagePath = emogiDecide?.iconImage ?? "0"
-                    if let postImageURL = URL(string: postImagePath) {
-                                  cell.bgImage.sd_setImage(with: postImageURL, completed: nil)
-                    }
-
                     cell.selectionStyle = .none
                     cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                     return cell
@@ -94,19 +88,21 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? layoutTableViewCell{
-            cell.bgImage.layer.cornerRadius = 90/2
-            cell.bgImage.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
-            cell.bgImage.layer.borderWidth = 5
-            cell.backgroundColor = UIColor.blackAlpha(alpha: 0.1)
+            cell.bgImage.image = UIImage(named: "group1438")
+//            cell.bgImage.layer.cornerRadius = 90/2
+//            cell.bgImage.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
+//            cell.bgImage.layer.borderWidth = 5
+//            cell.backgroundColor = UIColor.blackAlpha(alpha: 0.1)
         }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath){
             if let cell = tableView.cellForRow(at: indexPath) as? layoutTableViewCell{
-                cell.bgImage.layer.cornerRadius = 90/2
-                cell.bgImage.layer.borderColor = UIColor.white.cgColor
-                cell.bgImage.layer.borderWidth = 5
-                cell.backgroundColor = .white
+                  cell.bgImage.image = feelUser[indexPath.row].profileImage
+//                cell.bgImage.layer.cornerRadius = 90/2
+//                cell.bgImage.layer.borderColor = UIColor.white.cgColor
+//                cell.bgImage.layer.borderWidth = 5
+//                cell.backgroundColor = .white
         }
     }
     

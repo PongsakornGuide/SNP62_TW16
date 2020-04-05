@@ -84,70 +84,70 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
     
     
             @objc func ClicksveData(){
-            
-                let parameters: Parameters =
-                               ["username":NameLabelText,
-                                "surname":SernameLabelText,
-                                "photo":PhotoLabelText,
-                                "birthday":BirthLabelText,
-                                "gender":GenderLabelText,
-                                "tel":MobileLabelText,
-                                "address":AddressLabelText,
-                                "religion":RegligionLabelText,
-                                "relative_name":relativeNameTextField.text!,
-                                "relative_phone":relativePhoneTextField.text!,
-                                "relative_type":relativeTypeTextField.text!]
-//                print(relativeNameTextField.text)
-//                print(relativePhoneTextField.text)
-//                print(relativeTypeTextField.text)
-                print("5555")
-
-                        let header: HTTPHeaders = ["Content-type":"multipart/form-data"]
-
-                                 let dateFormatter : DateFormatter = DateFormatter()
-                                 dateFormatter.dateFormat = "yyyyMMddHH:mm:ss"
-                                 let date = Date()
-                                 let dateString = dateFormatter.string(from: date)
-
-                             Alamofire.upload(multipartFormData: { (formData) in
-
-                                if let imageData = self.PhotoLabelText.jpegData(compressionQuality: 0.5){
-                                     formData.append(imageData, withName: "image" ,fileName: dateString,mimeType: "image/jpg")
-
-                                 }
-                                 for (key,value) in parameters {
-                                     if let stringData = value as? String, let data = stringData.data(using: .utf8) {
-                                         formData.append(data, withName: key)
-                                     }
-                                 }
+                if NameLabelText.count > 0 && SernameLabelText.count > 0 && BirthLabelText.count > 0 && GenderLabelText.count > 0 && MobileLabelText.count > 0 && AddressLabelText.count > 0 && RegligionLabelText.count > 0 && relativeNameTextField.text?.count ?? 0 > 0 && relativePhoneTextField.text?.count ?? 0 > 0 && relativeTypeTextField.text?.count ?? 0 > 0  {
 
 
-                             }, to: URL_CREATE_USER ,method: .post ,headers: header) { (res) in
-                                 switch res{
-                                 case .success(let request, _, _):
-                                 request.responseJSON(completionHandler: { (resJson) in
-                                     print(resJson.value ?? "0")
-                                    guard let json = resJson.value as? [String:Any]
-                                        , let id = json["id"]  , let username = json["username"] , let tel = json["tel"] else { return }
-//                                    print(id)
-//                                    print(username)
-//                                    print(tel)
-                                    
-                                    let ImpressView = TestCheckBoxTableView()
-                                    ImpressView.disease_user_id = "\(id)"
-                                    ImpressView.activity_user_id = "\(id)"
-                                    ImpressView.username_user = "\(username)"
-                                    ImpressView.phone_number_user = "\(tel)"
-//                                    let ImpressView = TestCheckBoxTableView()
-                                    
-                                    self.navigationController?.pushViewController(ImpressView, animated: true)
-                                    
+                      let parameters: Parameters =
+                                                   ["username":NameLabelText,
+                                                    "surname":SernameLabelText,
+                                                    "photo":PhotoLabelText,
+                                                    "birthday":BirthLabelText,
+                                                    "gender":GenderLabelText,
+                                                    "tel":MobileLabelText,
+                                                    "address":AddressLabelText,
+                                                    "religion":RegligionLabelText,
+                                                    "relative_name":relativeNameTextField.text ?? 0,
+                                                    "relative_phone":relativePhoneTextField.text ?? 0,
+                                                    "relative_type":relativeTypeTextField.text ?? 0]
+                    print(parameters)
+                                            let header: HTTPHeaders = ["Content-type":"multipart/form-data"]
 
-                                 })
-                                 case .failure(_):
-                                     print("fail")
-                                    }
-                                 }
+                                                     let dateFormatter : DateFormatter = DateFormatter()
+                                                     dateFormatter.dateFormat = "yyyyMMddHH:mm:ss"
+                                                     let date = Date()
+                                                     let dateString = dateFormatter.string(from: date)
+
+                                                 Alamofire.upload(multipartFormData: { (formData) in
+
+                                                    if let imageData = self.PhotoLabelText.jpegData(compressionQuality: 0.5){
+                                                         formData.append(imageData, withName: "image" ,fileName: dateString,mimeType: "image/jpg")
+
+                                                     }
+                                                     for (key,value) in parameters {
+                                                         if let stringData = value as? String, let data = stringData.data(using: .utf8) {
+                                                             formData.append(data, withName: key)
+                                                         }
+                                                     }
+
+
+                                                 }, to: URL_CREATE_USER ,method: .post ,headers: header) { (res) in
+                                                     switch res{
+                                                     case .success(let request, _, _):
+                                                     request.responseJSON(completionHandler: { (resJson) in
+                                                         print(resJson.value ?? "0")
+                                                        guard let json = resJson.value as? [String:Any]
+                                                            , let id = json["id"]  , let username = json["username"] , let tel = json["tel"] else { return }
+                                                        let ImpressView = TestCheckBoxTableView()
+                                                        ImpressView.disease_user_id = "\(id)"
+                                                        ImpressView.activity_user_id = "\(id)"
+                                                        ImpressView.username_user = "\(username)"
+                                                        ImpressView.phone_number_user = "\(tel)"
+                                                        self.navigationController?.pushViewController(ImpressView, animated: true)
+
+
+                                                     })
+                                                     case .failure(_):
+                                                         print("fail")
+                                                        }
+                                                     }
+
+                }else{
+                      let alert = UIAlertController(title: "ข้อมูลไม่ครบถ้วน", message: "กรุณากรอกข้อมูลให้ครบถ้วน", preferredStyle: UIAlertController.Style.alert)
+                                  alert.addAction(UIAlertAction(title: "ตกลง", style: UIAlertAction.Style.default, handler: nil))
+                                  self.present(alert, animated: true, completion: nil)
+
+                }
+
                 
             }
         

@@ -12,7 +12,7 @@ import ObjectMapper
 import UserNotifications
 import SDWebImage
 class MainActivityViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,UINavigationControllerDelegate ,UNUserNotificationCenterDelegate{
-
+    
     let URL_USER_ID = "\(AppDelegate.link)alder_iosapp/v1/showactivity.php"
     let URL_GET_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/showProfile.php"
     lazy var defaultValues = UserDefaults.standard
@@ -24,6 +24,7 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
     lazy var imageView = String()
     lazy var typecheck = String()
     lazy var brithday = String()
+    lazy var brithday2 = String()
     var header: [ActivityType]?
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
@@ -31,17 +32,8 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
     private var cellId3 = "Cell3"
     private var cellId4 = "Cell4"
     
-//    lazy var bgImage : UIImageView = {
-//        let image = UIImageView(frame: UIScreen.main.bounds)
-//        image.image = UIImage(named: "bg")
-//        image.contentMode = .scaleAspectFill
-//        image.layer.masksToBounds = true
-//        return image
-//    }()
-    
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-            Specialday()
             reloadData()
             tableView.reloadData()
     }
@@ -53,27 +45,98 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 if section == 0 {
                     return 1
-                }else if section == 1{
+                }else if section == 1 {
                     return header?.count ?? 0
-                }else if section == 2{
+                }else if section == 2 {
                     return 1
-                }else{
+                }else {
                     return 1
                 }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             if indexPath.section == 0 {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! TitleTableViewCell
                     cell.selectionStyle = .none
-                    cell.titleHeader.text = "สวัสดีวัน \(day)"
-                    cell.titleHeader.textColor = .white
-                    cell.titleHeader.font = UIFont.BaiJamjureeBold(size:20)
-                    cell.textHeader.text = Labelname
-                    cell.textHeader.textColor = .white
-                    cell.textHeader.font = UIFont.BaiJamjureeBold(size: 28)
+//                    cell.bgImage.image = UIImage(named: "bgMonday")
+                    let parameters: Parameters = ["userId":typecheck]
+                                         let url = URL_GET_PROFILE + "?id=\(typecheck)"
+                                         Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
+                                             print(resData)
+                                        
+                                    if let user = resData.result.value as! [String: Any]? {
+
+                                    if let yield = user["birthday"] as? String{
+                                        self?.brithday = yield
+                                        let mouthStart = DateFormatter()
+                                        mouthStart.dateFormat = "yyyy-MM-dd"
+                                        mouthStart.timeZone = NSTimeZone(abbreviation: "ICT") as TimeZone?
+                                        let date = mouthStart.date(from: yield)
+                                        mouthStart.dateFormat = "MM-dd"
+                                        let mouthStringStart = mouthStart.string(from: date ?? Date())
+                                        self?.brithday2  = mouthStringStart
+                                    }
+                                        let songkran = "04-13"
+                                        let songkran1 = "04-14"
+                                        let songkran2 = "04-15"
+                                        if self?.day2 == self?.brithday2 {
+                                        cell.titleHeader.text = "สุขสันต์วันเกิด"
+                                        cell.titleHeader.textColor = .white
+                                        cell.titleHeader.font = UIFont.BaiJamjureeBold(size:32)
+                                        cell.textHeader.text = "\(self?.Labelname ?? "x")"
+                                        cell.textHeader.textColor = .white
+                                        cell.textHeader.font = UIFont.BaiJamjureeBold(size: 32)
+                                        self?.tableView.backgroundView = UIImageView(image: UIImage(named: "BGDAY"))
+                                        cell.bgImage.isHidden = true
+                                        }else if "\(self?.day2 ?? "x")" == songkran || "\(self?.day2 ?? "x")" == songkran1 || "\(self?.day2 ?? "x")" == songkran2{
+                                        cell.titleHeader.text = "สวัสดีวันสงกรานต์!"
+                                        cell.titleHeader.textColor = .white
+                                        cell.titleHeader.font = UIFont.BaiJamjureeBold(size:32)
+                                        cell.textHeader.text = self?.Labelname
+                                        cell.textHeader.textColor = .white
+                                        cell.textHeader.font = UIFont.BaiJamjureeBold(size: 32)
+                                        self?.tableView.backgroundView = UIImageView(image: UIImage(named: "BGDAY1"))
+                                        cell.bgImage.isHidden = true
+                                        }else{
+                                        cell.bgImage.isHidden = false
+                                        cell.titleHeader.textColor = .white
+                                        cell.titleHeader.font = UIFont.BaiJamjureeBold(size:32)
+                                        cell.textHeader.text = self?.Labelname
+                                        cell.textHeader.textColor = .white
+                                        cell.textHeader.font = UIFont.BaiJamjureeBold(size: 32)
+                                        self?.tableView.backgroundView = UIImageView(image: UIImage(named: ""))
+                                            
+                                        if self?.day == "Sunday"{
+                                                cell.titleHeader.text = "สวัสดี วันอาทิตย์"
+                                                cell.bgImage.image = UIImage(named: "bgSunday")
+
+                                        }else if self?.day == "Monday"{
+                                                cell.titleHeader.text = "สวัสดี วันจันทร์"
+                                                cell.bgImage.image = UIImage(named: "bgMonday")
+                                        }else if self?.day == "Tuesday"{
+                                                cell.titleHeader.text = "สวัสดี อังคาร"
+                                                cell.bgImage.image = UIImage(named: "bgTuesday")
+                                        }else if self?.day == "Wednesday"{
+                                                cell.titleHeader.text = "สวัสดี วันพุธ"
+                                                cell.bgImage.image = UIImage(named: "bgWednesday")
+                                        }else if self?.day == "Thursday"{
+                                                cell.titleHeader.text = "สวัสดี วันพฤหัส"
+                                                cell.bgImage.image = UIImage(named: "bgThursday")
+                                        }else if self?.day == "Friday"{
+                                                cell.titleHeader.text = "สวัสดี วันศุกร์"
+                                                cell.bgImage.image = UIImage(named: "bgFriday")
+                                        }else{
+                                                cell.titleHeader.text = "สวัสดี วันเสาร์"
+                                                cell.bgImage.image = UIImage(named: "bgSaturday")
+                                        }
+                                }
+                        }
+                }
+
                     cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
-                cell.backgroundColor = nil
+                    cell.backgroundColor = nil
+                
+                
                     return cell
                            
             }else if indexPath.section == 1{
@@ -191,15 +254,17 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
     }
            
     
-         @objc func handelSetting(){
-                         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-                         UserDefaults.standard.synchronize()
-                         let loginViewController = LoginViewController()
-                         self.navigationController?.pushViewController(loginViewController, animated: true)
-                         self.dismiss(animated: false, completion: nil)
-        }
-    
-    
+//         @objc func handelSetting(){
+//                         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+//                         UserDefaults.standard.synchronize()
+//                         let loginViewController = LoginViewController()
+//                         self.navigationController?.pushViewController(loginViewController, animated: true)
+//                         self.dismiss(animated: false, completion: nil)
+//        }
+//
+//    let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
+//               settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
+//               navigationItem.rightBarButtonItem = settings
     
     func NotificaitonUser(){
          let content = UNMutableNotificationContent()
@@ -220,46 +285,16 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
      }
     
     
-    func Specialday(){
-           let parameters: Parameters = ["userId":typecheck]
-                      let url = URL_GET_PROFILE + "?id=\(typecheck)"
-                      Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
-                                print(resData)
-                                if let user = resData.result.value as! [String: Any]? {
-                                        if let yield = user["birthday"] as? String{
-                                            self?.brithday = yield
-                                        }
-                                    if self?.day2 == self?.brithday {
-                                        print("NOOO")
-                                        self?.tableView.backgroundView = UIImageView(image: UIImage(named: "BGDAY"))
-
-                                    }else{
-                                        print("NOOO")
-                                        self?.tableView.backgroundView = UIImageView(image: UIImage(named: ""))
-                                        self?.view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-                                    }
-                               }
-                }
-    }
 
     
-    func colorDay(){
-        if day == "Sunday"{
-            print("555")
-        }else if day == "Monday"{
-            print("666")
-        }else if day == "Tuesday"{
-            print("3333")
-        }else if day == "Wednesday"{
-            print("666")
-        }else if day == "Thursday"{
-            print("3333")
-        }else if day == "Friday"{
-            print("666")
-        }else{
-            print("3333")
-        }
-    }
+
+    
+     @objc func handelSettingNotification(){
+         let notificaionView = NotificationTableView()
+         navigationController?.pushViewController(notificaionView, animated: true)
+     }
+           
+    
     let tableView = UITableView(frame: .zero, style: .plain)
     
     override func viewDidLoad() {
@@ -268,6 +303,11 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
         tableView.dataSource = self
         tableView.delegate = self
        
+        let settings = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(handelSettingNotification))
+        settings.width = 0.5
+        settings.tintColor = UIColor.rgb(red: 253, green: 173, blue: 82)
+        navigationItem.rightBarButtonItem = settings
+        
         if let name = defaultValues.string(forKey: "userName") {
                 Labelname = name
         }
@@ -290,24 +330,28 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
         format.dateFormat = "EEEE"
         let formattedDate = format.string(from: date)
         day = formattedDate
-        
+
         let format2 = DateFormatter()
         format2.timeZone = NSTimeZone(abbreviation: "ICT") as TimeZone?
-        format2.dateFormat = "yyyy-MM-dd"
+        format2.dateFormat = "MM-dd"
         let formattedDate2 = format2.string(from: date)
         day2 = formattedDate2
-        Specialday()
+//        Specialday()
+//        print(day2)
         
         navigationItem.title = "Alder"
-        
+
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         self.tableView.reloadData()
         
-        let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
-            settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
-            navigationItem.rightBarButtonItem = settings
+//        let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
+//            settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
+//            navigationItem.rightBarButtonItem = settings
         
         
         if #available(iOS 12.1 , *) {

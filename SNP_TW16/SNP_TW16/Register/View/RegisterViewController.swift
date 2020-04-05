@@ -153,16 +153,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
     
     let titleLabel : UILabel = {
         let label = UILabel()
-        let title = "ข้อมูลส่วนตัว"
-        let style = NSMutableParagraphStyle()
-        style.alignment = NSTextAlignment.center
-        let attributedText = NSMutableAttributedString(string: title,
-    attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 0),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
-    
-        label.attributedText = attributedText
+        label.text = "ข้อมูลส่วนตัว *"
+        label.font = UIFont.BaiJamjureeBold(size: 20)
+        label.textColor = .black
         label.numberOfLines = 0
         return label
     }()
+    
     //-----------------------------------------------------------------------------------------------
        let nameTextField: UITextField = {
                let textField = UITextField()
@@ -273,6 +270,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
         }
     
         func pushData(){
+//            if otpTextField.text?.count ?? 0
+            if nameTextField.text?.count ?? 0 > 0 && surnameTextField.text?.count ?? 0 > 0 && phoneTextField.text?.count ?? 0 > 0 && dateTextField.text?.count ?? 0 > 0 && cultTextField.text?.count ?? 0 > 0 && cultTextField.text?.count ?? 0 > 0 && addressTextField.text?.count ?? 0 > 0 && genTextField.text?.count ?? 0 > 0 {
                 let passData = RecordViewController()
                 passData.NameLabelText = nameTextField.text ?? "0"
                 passData.SernameLabelText = surnameTextField.text ?? "0"
@@ -283,6 +282,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
                 passData.AddressLabelText = addressTextField.text ?? "0"
                 passData.GenderLabelText = genTextField.text ?? "0"
                 self.navigationController?.pushViewController(passData, animated: true)
+            }else{
+                let alert = UIAlertController(title: "ข้อมูลไม่ครบถ้วน", message: "กรุณากรอกข้อมูลให้ครบถ้วน", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "ตกลง", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+
         }
         
     
@@ -337,7 +342,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
 
             view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
            navigationItem.title = "ข้อมูลส่วนตัว"
-           let stacView = UIStackView(arrangedSubviews: [nameTextField,surnameTextField,phoneTextField,dateTextField,genTextField,cultTextField,addressTextField])
+           let stacView = UIStackView(arrangedSubviews: [titleLabel,nameTextField,surnameTextField,phoneTextField,dateTextField,genTextField,cultTextField,addressTextField])
            stacView.distribution = .fillEqually
            stacView.spacing = 30
            stacView.axis = .vertical
@@ -357,7 +362,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
             viewScroll.addSubview(BGView)
             viewScroll.addSubview(imgView)
             viewScroll.addSubview(uploadImage)
-            viewScroll.addSubview(titleLabel)
+//            viewScroll.addSubview(titleLabel)
             viewScroll.addSubview(stacView)
             viewScroll.addSubview(nextButton)
             viewScroll.addSubview(nameTextFieldLine)
@@ -371,24 +376,23 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
            
         viewScroll.anchor(view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-//     viewUIView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-            
         btnBack.anchor(viewScroll.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 15, rightConstant: 0, widthConstant: 20, heightConstant: 20
                )
+        
+//        titleLabel.anchor(btnBack.bottomAnchor, left: nil, right: nil, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: 0, heightConstant: 100)
 //
-        stepView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX - 0, heightConstant: 120)
+        stepView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX - 0, heightConstant: 110)
 
         imgView.anchor(BGView.topAnchor, left: nil, right: nil, bottom: nil, topConstant: -60, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 150, heightConstant: 150)
             imgView.centerXAnchor.constraint(equalTo: BGView.centerXAnchor).isActive = true
 
         uploadImage.anchor(imgView.topAnchor, left: nil, right: imgView.rightAnchor, bottom: nil, topConstant: 75, bottomConstant: 0, leftConstant: 0, rightConstant: -15, widthConstant: 70, heightConstant: 70)
 
+       
         BGView.anchor(stepView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nextButton.topAnchor, topConstant: 100, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 40, heightConstant: screenSizeY)
 
         stacView.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 100, bottomConstant: 50, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 100, heightConstant: 700)
-
-        titleLabel.anchor(BGView.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: stacView.topAnchor, topConstant: 50, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
-
+ 
         nameTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nameTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
         surnameTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: surnameTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)

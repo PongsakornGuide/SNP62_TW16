@@ -212,7 +212,6 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
     let segmentedControl: UISegmentedControl = {
          let control = UISegmentedControl(items: ["กิจกรรมของฉัน", "โพสต์ของฉัน"])
          control.selectedSegmentIndex = 0
-         control.tintColor = .red
          control.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
          return control
     }()
@@ -280,7 +279,7 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
         
         textHeader.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 80)
         
-        stackView.anchor(textHeader.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: stackView2.topAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 35)
+        stackView.anchor(textHeader.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: stackView2.topAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 45)
         
         stackView2.anchor(stackView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         

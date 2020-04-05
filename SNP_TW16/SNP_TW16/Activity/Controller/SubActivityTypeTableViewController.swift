@@ -64,7 +64,7 @@ class SubActivityTypeTableViewController: UITableViewController ,UINavigationCon
             
                     //covert startDate
                     let mouthStart = DateFormatter()
-                    mouthStart.dateFormat = "yyyy-mm-dd"
+                    mouthStart.dateFormat = "yyyy-MM-dd"
                     let date = mouthStart.date(from: activity?.created ?? "x")
                     mouthStart.dateFormat = "dd MMMM yyyy"
                     let mouthStringStart = mouthStart.string(from: date ?? Date())

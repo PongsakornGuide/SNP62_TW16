@@ -25,6 +25,9 @@ class TestCheckBoxTableView: UITableViewController{
     lazy var phone_number_user = String()
     lazy var defaultValues = UserDefaults.standard
     
+    
+    var favouriteUser = favouriteModelView.favouriteofUser()
+    
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
           getActivty()
@@ -46,7 +49,7 @@ class TestCheckBoxTableView: UITableViewController{
           }else if section == 2 {
               return 1
           }else if section == 3 {
-              return activityList?.count ?? 0
+              return favouriteUser.count
           }else{
               return 1
          }
@@ -73,13 +76,15 @@ class TestCheckBoxTableView: UITableViewController{
             
            }else  if indexPath.section == 3{
               let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! CheckBoxTableViewCell
-                   let headerActivity = activityList?[indexPath.row]
-                   cell.textHeader.text = headerActivity?.activityName
-           
-              Alamofire.request((headerActivity?.activtiyIcon ?? "0")!).responseImage { response in
-                           if let image = response.result.value {
-                               cell.bgImage.image = image
-            }}
+//                   let headerActivity = activityList?[indexPath.row]
+//                   cell.textHeader.text = headerActivity?.activityName
+//
+//              Alamofire.request((headerActivity?.activtiyIcon ?? "0")!).responseImage { response in
+//                           if let image = response.result.value {
+//                               cell.bgImage.image = image
+//            }}
+              cell.textHeader.text = favouriteUser[indexPath.row].title
+              cell.bgImage.image = favouriteUser[indexPath.row].profileImage
               cell.selectionStyle = .none
               cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                     return cell
@@ -103,53 +108,58 @@ class TestCheckBoxTableView: UITableViewController{
     
    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? CheckBoxTableViewCell{
-            cell.bgImage.layer.cornerRadius = 90/2
-            cell.bgImage.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
-            cell.bgImage.layer.borderWidth = 5
-            cell.backgroundColor = UIColor.blackAlpha(alpha: 0.1)
+                cell.bgImage.image = UIImage(named: "group1438")
+
         }
     }
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath){
             if let cell = tableView.cellForRow(at: indexPath) as? CheckBoxTableViewCell{
-                cell.bgImage.layer.cornerRadius = 90/2
-                cell.bgImage.layer.borderColor = UIColor.white.cgColor
-                cell.bgImage.layer.borderWidth = 5
-                cell.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-                
+                cell.bgImage.image = favouriteUser[indexPath.row].profileImage
         }
     }
     
     
     @objc func psuhCheckBox(){
-        guard let cell = DiseaseTableViewCell.diseaseDetailTextField.text else { return }
-        let selectedIndex = tableView.indexPathsForSelectedRows
-        let index = selectedIndex?.compactMap{ " \( 1 + $0.row)" }
-        var selectedChoice = index?.joined(separator: ",") ?? ""
-        print(selectedChoice)
         
-        let parameters: Parameters = ["activity_user_apps":activity_user_id,"activity_name":selectedChoice,"disease_id":
+        if activity_user_id.count > 0 && DiseaseTableViewCell.diseaseNameTextField.tag > 0 && disease_user_id.count > 0 && phone_number_user.count > 0 {
             
-            DiseaseTableViewCell.diseaseNameTextField.tag,"disease_detail" : cell,"disease_user_apps":disease_user_id,"tel":phone_number_user]
-        
-        Alamofire.request(URL_USER_REGISTER, method: .post,parameters: parameters).responseJSON { response in
-                print(response)
+             guard let cell = DiseaseTableViewCell.diseaseDetailTextField.text else { return }
+                    let selectedIndex = tableView.indexPathsForSelectedRows
+                    let index = selectedIndex?.compactMap{ " \( 1 + $0.row)" }
+                    var selectedChoice = index?.joined(separator: ",") ?? ""
+                    print(selectedChoice)
+                    
+                    
+                    let parameters: Parameters = ["activity_user_apps":activity_user_id,"activity_name":selectedChoice,"disease_id":DiseaseTableViewCell.diseaseNameTextField.tag,"disease_detail" : cell,"disease_user_apps":disease_user_id,"tel":phone_number_user]
+
+                    Alamofire.request(URL_USER_REGISTER, method: .post,parameters: parameters).responseJSON { response in
+                            print(response)
 
 
-                        if let result = response.result.value {
-                        let jsonData = result as! NSDictionary
-                        if(!(jsonData.value(forKey: "error") as! Bool )){
-                            let alertController = UIAlertController(title: "สมัครสมาชิกเรียบร้อย", message: "ยินดีต้อนรับเข้าสู่ Alder", preferredStyle: .alert)
+                                    if let result = response.result.value {
+                                    let jsonData = result as! NSDictionary
+                                    if(!(jsonData.value(forKey: "error") as! Bool )){
+                                        let alertController = UIAlertController(title: "สมัครสมาชิกเรียบร้อย", message: "ยินดีต้อนรับเข้าสู่ Alder", preferredStyle: .alert)
 
-                            let action1 = UIAlertAction(title: "เข้าสู่ระบบ", style: .default) { (action:UIAlertAction) in
-                                 self.view.window?.rootViewController = LoginViewController()
-                                 self.view.window?.makeKeyAndVisible()
-                            }
+                                        let action1 = UIAlertAction(title: "เข้าสู่ระบบ", style: .default) { (action:UIAlertAction) in
+            //                                 self.view.window?.rootViewController = LoginViewController()
+            //                                 self.view.window?.makeKeyAndVisible()
+                                            let View = LoginViewController()
+                                            self.navigationController?.pushViewController(View, animated: true)
+                                        }
 
-                            alertController.addAction(action1)
-                            self.present(alertController, animated: true, completion: nil)
-                 }
-            }
+                                        alertController.addAction(action1)
+                                        self.present(alertController, animated: true, completion: nil)
+                             }
+                        }
+                    }
+            
+        }else{
+            let alert = UIAlertController(title: "ข้อมูลไม่ครบถ้วน", message: "กรุณากรอกข้อมูลให้ครบถ้วน", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "ตกลง", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+
         }
 }
     

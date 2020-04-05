@@ -194,9 +194,23 @@ class EmergencyViewController: UITableViewController {
         navigationController?.pushViewController(createRelative, animated: true)
     }
     
+    @objc func handelSetting(){
+        let notificaionView = NotificationTableView()
+        navigationController?.pushViewController(notificaionView, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Alder"
+
+    let settings = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(handelSetting))
+    settings.width = 0.5
+    settings.tintColor = UIColor.rgb(red: 253, green: 173, blue: 82)
+    navigationItem.rightBarButtonItem = settings
+        
+    navigationItem.title = "Alder"
+    let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
+                navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
         if #available(iOS 12.1 , *) {
             tableView.refreshControl = refresher
         }else{
