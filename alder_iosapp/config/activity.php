@@ -1,174 +1,121 @@
+<?php
+    session_start();
+    // echo 'Wellcome to' . $_SESSION['email'];
+    if(isset($_SESSION['email'])){
+      // echo 'Wellcome to' . $_SESSION['email'];
+    }
+
+ ?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
   <title></title>
 </head>
+
 <body>
-    <link href="../css/switchery.css" rel="stylesheet">
-      <link href="../css/concept.css" rel="stylesheet">
-        <link href="../css/concept.min.css" rel="stylesheet">
-          <link href="../css/switchery.min.css" rel="stylesheet">
-          <!-- <link href="../css/font-awesome.min.css" rel="stylesheet">
-          <link href="../css/font-awesome.css" rel="stylesheet"> -->
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="../css/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
+  <link href="../css/switchery.css" type="text/css" rel="stylesheet">
+  <link href="../css/concept.css" type="text/css" rel="stylesheet">
+  <link href="../css/concept.min.css" type="text/css" rel="stylesheet">
+  <link href="../css/switchery.min.css" type="text/css" rel="stylesheet">
+  <link href="../css/webfonts/fa-regular-400.woff" type="text/css" rel="stylesheet">
+  <link href="../css/all.min.css" type="text/css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;700&display=swap" rel="stylesheet">
+
   <style>
-      .menu-active{
-          width: 199px;
-          height: 45px;
-          border-radius: 25px 0px 0px 25px;
-          background-color: #F1F3F9;
-          color: rgb(27, 71, 147)!important;
-          margin: 5px 0 10px 0;
-          float: right;
-          padding-top: 5px;
-      }
-      .secondary-sidebar-menu ul li a{
-          color: #174495!important;
-      }
+    body {
+      background-color: #fff;
+    }
+
+    .menu-active {
+      width: 199px;
+      height: 45px;
+      border-radius: 25px 0px 0px 25px;
+      background-color: #F1F3F9;
+      color: rgb(27, 71, 147) !important;
+      margin: 5px 0 10px 0;
+      float: right;
+      padding-top: 5px;
+    }
+
+    .secondary-sidebar-menu ul li a {
+      color: #174495 !important;
+    }
   </style>
 
-    <div class="secondary-sidebar" style=" background: #1B4793; color: #fff; position: fixed; top: 0;overflow: hidden; hidden;left: 0px;">
-        <div class="secondary-sidebar-bar">
-            <a href="/" class="logo-box" style="font-family: 'Poppins', sans-serif;font-weight: bolder;color:#fff!important; text-align: center;"><img src="https://uppic.cc/d/6m7y" style="height:30px;margin-bottom: 10px;">&nbsp;Alder</a>
-        </div>
-        <div class="secondary-sidebar-menu">
-            <ul class="accordion-menu">
-                <li>
-                    <a href="/alder_iosapp/config/index.php">
-                      <span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">ข้อมูลผู้สูงอายุ</span>
-                    </a>
-                </li>
-
-
-                <li class="menu-active">
-                    <a href="/alder_iosapp/config/activity.php">
-                        <span style="color: #174495; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;กิจกรรมที่จัด</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/alder_iosapp/config/createActivity.php">
-                        <span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;สร้างกิจกรรม</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/alder_iosapp/config/uploadVideo.php">
-                        <span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;อัพโหลดวิดีโอ</span>
-                    </a>
-                </li>
-
-                <li>
-                       <a href="/alder_iosapp/config/blogger.php">
-                          <span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;บทความศาสนา</span>
-                      </a>
-                </li>
-
-            </ul>
-        </div>
+  <div class="secondary-sidebar" style=" background: #1B4793; color: #fff; position: fixed; top: 0;overflow: hidden; hidden;left: 0px;">
+    <div class="secondary-sidebar-bar">
+      <a href="/alder_iosapp/config/home.php" class="logo-box" style="font-family: 'Poppins', sans-serif;font-weight: bolder;color:#fff!important; text-align: center;"><img src="https://uppic.cc/d/6m7y"
+          style="height:30px;margin-bottom: 10px;">&nbsp;Alder</a>
     </div>
+    <div class="secondary-sidebar-menu">
+      <ul class="accordion-menu">
+        <li>
+          <a href="/alder_iosapp/config/home.php">
+            <i class="menu-icon far fa-user-circle" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">ข้อมูลผู้สูงอายุ</span>
+          </a>
+        </li>
 
+        <li class="menu-active">
+          <a href="/alder_iosapp/config/activity.php">
+            <i class="menu-icon far fa-calendar-alt" style="color: #174495;"></i><span style="color: #174495; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;กิจกรรมที่จัด</span>
+          </a>
+        </li>
 
-    <!-- Page Header -->
-       <div class="page-header">
-           <div class="search-form">
-               <form action="#" method="GET">
-                   <div class="input-group">
-                       <input type="text" name="search" class="form-control search-input" placeholder="Type something...">
-                       <span class="input-group-btn">
-                                   <button class="btn btn-default" id="close-search" type="button"><i class="icon-close"></i></button>
-                               </span>
-                   </div>
-               </form>
-           </div>
-           <nav class="navbar navbar-default navbar-expand-md">
-               <div class="container-fluid">
-                   <!-- Brand and toggle get grouped for better mobile display -->
-                   <div class="navbar-header">
-                       <div class="logo-sm">
-                           <a href="javascript:void(0)" id="sidebar-toggle-button"><i class="fas fa-bars"></i></a>
-                           <a class="logo-box" href="index.html"><span>concept</span></a>
-                       </div>
-                       <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                           <i class="fas fa-angle-down"></i>
-                       </button>
-                   </div>
+        <li>
+          <a href="/alder_iosapp/config/createActivity.php">
+            <i class="menu-icon far fa-calendar-plus" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;สร้างกิจกรรม</span>
+          </a>
+        </li>
 
-                   <!-- Collect the nav links, forms, and other content for toggling -->
+        <li>
+          <a href="/alder_iosapp/config/uploadVideo.php">
+            <i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;อัพโหลดวิดีโอ</span>
+          </a>
+        </li>
 
-                   <div class="collapse navbar-collapse justify-content-between" id="bs-example-navbar-collapse-1">
-                       <ul class="nav navbar-nav mr-auto">
-                           <!-- <li><a href="javascript:void(0)" id="toggle-fullscreen"><i class="fas fa-expand"></i></a></li> -->
-                           <li><a href="javascript:void(0)" id="search-button"><i class="fas fa-search"></i></a></li>
-                       </ul>
-                   </div><!-- /.navbar-collapse -->
-                   <ul class="nav navbar-nav">
+        <li>
+          <a href="/alder_iosapp/config/blogger.php">
+            <i class="menu-icon far fa-newspaper" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;บทความศาสนา</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-                       <li class="dropdown nav-item d-md-block">
-                           <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: 800; font-size: 13px;" >
-                             <!-- {{Auth::user()->name}} -->
+  <div class="page-header">
+    <nav class="navbar navbar-default navbar-expand-md">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse justify-content-between" id="bs-example-navbar-collapse-1">
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="dropdown nav-item d-md-block">
+            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: 500; font-size: 13px;">
+                <?php echo $_SESSION["email"];?>
+              </span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-caret-square-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <li><a href="/alder_iosapp/func/logout.php?logout">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.container-fluid -->
+    </nav>
+  </div><!-- /Page Header -->
 
-                             Admin
-                           </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-angle-down"></i></a>
+  <div class="page-inner no-page-title" style="background:#fff;">
+    <div id="main-wrapper">
 
-                           <ul class="dropdown-menu dropdown-menu-right dropdown-lg dropdown-content" style="width: 102px;">
-                               <li class="">
-                               <!-- @if (Auth::guest()) -->
-                                   <li><a href="{{ route('login') }}">Login</a></li>
-                                   <li><a href="{{ route('register') }}">Register</a></li>
-                               <!-- @else -->
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+      <h2 class="mt-4" style="font-family: 'Bai Jamjuree', sans-serif; font-weight: bold;font-size:40px;color:#1B4793;">กิจกรรม&nbsp;<i class="fas fa-gamepad" style="font-size:45px;"></i></h2>
 
-                                        xxxxx
-                                    </a>
-                                   <li>
-                                       <a href="{{ route('logout') }}"
-                                          onclick="event.preventDefault();
-                                                                  document.getElementById('logout-form').submit();" style="text-align: center;">
-                                           Logout
-                                       </a>
-                                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                           <!-- {{ csrf_field() }} -->
-                                       </form>
-                                   </li>
+      <hr>
+      <br>
 
-                                   <!-- @endif -->
-                               </li>
-                           </ul>
-                       </li>
-                       <!-- <li class="nav-item d-md-block"><a href="javascript:void(0)" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar">{{Auth::user()->name}}</a></li> -->
-
-                       <li class="dropdown nav-item d-md-block">
-                           <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">                                <img src="../theme/assets/images/avatars/avatar1.png" alt="" class="rounded-circle">
-                           </a>
-                           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                               <li><a href="#"><span class="badge float-right badge-info">64</span>Messages</a></li>
-                               <li role="separator" class="divider"></li>
-                               <li><a href="#">Account Settings</a></li>
-                               <li><a href="#">Log Out</a></li>
-                           </ul>
-                       </li>
-
-                   </ul>
-               </div><!-- /.container-fluid -->
-           </nav>
-       </div><!-- /Page Header -->
-
-
-
-
-
-    <div class="page-inner no-page-title" style="background:#fff;">
-      <div id="main-wrapper">
-
-        <h2 class="mt-4" style="font-family: 'Bai Jamjuree', sans-serif; font-weight: bold;">Acivity From Chersery Home! &nbsp;</h2>
-        <br>
-        <hr>
-        <br>
-
-        <?php
+      <?php
                 $conn = mysqli_connect("localhost","root","","Alder");
                 $conn->set_charset('utf8');
                 if($conn->connect_error){
@@ -179,39 +126,41 @@
                         LEFT JOIN activity_type ON post_timelines.act_id = activity_type.id WHERE post_timelines.act_id = 1";
                 $result = $conn-> query($sql);
                 $conn-> close();
-              ?>
+            ?>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <div class="card" style="border-radius:20px;">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <h5 class="card-text mt-4" style="text-align: center; font-family: 'Bai Jamjuree', sans-serif; font-size:20px;font-weight:bold;color:black;">
+                  <div class="col-4 mt-3">
+                  </div>
+                  <img class="mr-3 mb-3" src="../images/activity -1 – 1.png" style="width: 60px;">
+                  กิจกรรมสันทนาการ
+                </h5>
+                <hr>
+              </div>
+              <div class="col-12">
+                <?while ($row = $result-> fetch_assoc()) {?>
+                <div class="row">
+                  <div class="col-8" style="margin-left: 60px;">
+                    <p class="card-text" style="text-align: center; font-family: 'Bai Jamjuree', sans-serif;  font-weight:600;font-size:20px"> <span style="color:#2178AE; font-size:50px"> <?php echo $row['countAct'] ?> </span> กิจกรรม</p>
+                  </div>
+                </div>
+                <progress id="file" value="<?php echo $row['countAct'] ?>" max="100" style="width:100%;"> 32% </progress>
+
+                <? } ?>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-        <div class="row">
-                  <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="card" style="border-radius:20px;">
-                          <div class="card-body">
-                            <div class="row">
-                              <div class="col-12">
-                                <h5 class="card-text mt-4" style="font-size:20px;font-weight:bold;color:#999;">กิจกรรมสันทนาการ</h5>
-                              </div>
-                                <div class="col-12">
-                                      <?while ($row = $result-> fetch_assoc()) {?>
-                                          <div class="row">
-                                          <div class="col-8">
-                                              <p class="card-text" style="font-weight:600;font-size:20px"> <span style="color:#2178AE; font-size:50px"> <?php echo $row['countAct'] ?> </span> กิจกรรม</p>
-                                        </div>
-                                        <div class="col-4 mt-3">
-                                            <i class="fa fa-camera" style="font-size:50px;"></i>
-                                        </div>
-                                        </div>
-                                        <hr>
-                                          <progress id="file" value="<?php echo $row['countAct'] ?>" max="100" style="width:100%;"> 32% </progress>
 
-                                      <? } ?>
-                                </div>
-                            </div>
-                          </div>
-                        </div>
-                  </div>
-
-
-                  <?php
+      <?php
                           $conn = mysqli_connect("localhost","root","","Alder");
                           $conn->set_charset('utf8');
                           if($conn->connect_error){
@@ -224,35 +173,35 @@
                           $conn-> close();
                         ?>
 
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                              <div class="card" style="border-radius:20px;">
-                                <div class="card-body">
-                                  <div class="row">
-                                    <div class="col-12">
-                                      <h5 class="card-text mt-4" style="font-size:20px;font-weight:bold;color:#999;">กิจกรรมกระตุ้นสมอง</h5>
-                                    </div>
-                                      <div class="col-12">
-                                            <?while ($row = $result-> fetch_assoc()) {?>
-                                                <div class="row">
-                                                <div class="col-8">
-                                                    <p class="card-text" style="font-weight:600;font-size:20px"> <span style="color:#2178AE; font-size:50px"> <?php echo $row['countAct'] ?> </span> กิจกรรม</p>
-                                              </div>
-                                              <div class="col-4 mt-3">
-                                                  <i class="fa fa-camera" style="font-size:50px;"></i>
-                                              </div>
-                                              </div>
-                                              <hr>
-                                                <progress id="file" value="<?php echo $row['countAct'] ?>" max="100" style="width:100%;"> 32% </progress>
+      <div class="col-4">
+        <div class="card" style="border-radius:20px;">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <h5 class="card-text mt-4" style="text-align: center; font-family: 'Bai Jamjuree', sans-serif; font-size:20px;font-weight:bold;color:black;">
+                  <!-- <i class="fas fa-brain mr-3" style="font-size: 50px; color:#2178AE"></i> -->
+                  <img class="mr-3 mb-3" src="../images/activity -2 – 1.png" style="width: 60px;">
+                  กิจกรรมกระตุ้นสมอง</h5>
+                <hr>
+              </div>
+              <div class="col-12">
+                <?while ($row = $result-> fetch_assoc()) {?>
+                <div class="row">
+                  <div class="col-8" style="margin-left: 60px;">
+                    <p class="card-text" style="text-align: center; font-family: 'Bai Jamjuree', sans-serif; font-weight:600;font-size:20px"> <span style="color:#2178AE; font-size:50px"> <?php echo $row['countAct'] ?> </span> กิจกรรม</p>
+                  </div>
+                </div>
+                <progress id="file" value="<?php echo $row['countAct'] ?>" max="100" style="width:100%;"> 32% </progress>
 
-                                            <? } ?>
-                                      </div>
-                                  </div>
-                                </div>
-                              </div>
-                        </div>
+                <? } ?>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
-                  <?php
+      <?php
                           $conn = mysqli_connect("localhost","root","","Alder");
                           $conn->set_charset('utf8');
                           if($conn->connect_error){
@@ -265,248 +214,252 @@
                           $conn-> close();
                         ?>
 
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                              <div class="card" style="border-radius:20px;">
-                                <div class="card-body">
-                                  <div class="row">
-                                    <div class="col-12">
-                                      <h5 class="card-text mt-4" style="font-size:20px;font-weight:bold;color:#999;">กิจกรรมกายภาพบำบัด</h5>
-                                    </div>
-                                      <div class="col-12">
-                                            <?while ($row = $result-> fetch_assoc()) {?>
-                                                <div class="row">
-                                                <div class="col-8">
-                                                    <p class="card-text" style="font-weight:600;font-size:20px"> <span style="color:#2178AE; font-size:50px"> <?php echo $row['countAct'] ?> </span> กิจกรรม</p>
-                                              </div>
-                                              <div class="col-4 mt-3">
-                                                  <i class="fa fa-camera" style="font-size:50px;"></i>
-                                              </div>
-                                              </div>
-                                              <hr>
-                                                <progress id="file" value="<?php echo $row['countAct'] ?>" max="100" style="width:100%;"> 32% </progress>
+      <div class="col-4">
+        <div class="card" style="border-radius:20px;">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <h5 class="card-text mt-4" style="text-align: center; font-family: 'Bai Jamjuree', sans-serif; font-size:20px;font-weight:bold;color:black;">
+                  <!-- <i class="fas fa-blind mr-3" style="font-size: 50px; color:#ED8E83"></i> -->
+                  <img class="mr-3 mb-3" src="../images/activity -3 – 1.png" style="width: 60px;">
+                  กิจกรรมกายภาพบำบัด</h5>
+                <hr>
+              </div>
+              <div class="col-12">
+                <?while ($row = $result-> fetch_assoc()) {?>
+                <div class="row">
+                  <div class="col-8" style="margin-left: 60px;">
+                    <p class="card-text" style="text-align: center; font-family: 'Bai Jamjuree', sans-serif;  font-weight:600;font-size:20px"> <span style="color:#2178AE; font-size:50px"> <?php echo $row['countAct'] ?> </span> กิจกรรม</p>
+                  </div>
+                </div>
+                <progress id="file" value="<?php echo $row['countAct'] ?>" max="100" style="width:100%;"> 32% </progress>
 
-                                            <? } ?>
-                                      </div>
-                                  </div>
-                                </div>
-                              </div>
-                        </div>
+                <? } ?>
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
 
 
 
-        <!-- php -->
-        <div>
-          <?php
+    <!-- php -->
+    <div>
+      <?php
                   $conn = mysqli_connect("localhost","root","","Alder");
                   $conn->set_charset('utf8');
                   if($conn->connect_error){
                     die("Connection failed:".$conn->connect_error);
                   }
-                  $sql = "SELECT * FROM post_timelines WHERE act_id = 1";
+                  $sql = "SELECT * FROM post_timelines WHERE post_timelines.act_id = 1 ORDER BY id DESC LIMIT 0,3";
                   $result = $conn-> query($sql);
                   $conn-> close();
                 ?>
-        </div>
+    </div>
 
 
-        <div class="card col-lg-12" style="margin-top: 10px !important; border-radius:20px;">
-          <div class="card-body" style="font-family: 'Bai Jamjuree', sans-serif;">
-            <!--สันทนาการ-->
+    <div class="card col-lg-12" style="margin-top: 10px !important; border-radius:20px;">
+      <div class="card-body" style="font-family: 'Bai Jamjuree', sans-serif;">
+        <!--สันทนาการ-->
 
-            <form method="POST" action="/activity/store" enctype="multipart/form-data">
+        <form method="POST" action="/activity/store" enctype="multipart/form-data">
 
-              <div class="row ">
-                <div class="container">
-                  <button type="button" class="btn btn-warning mb-4" style="font-weight:Bold; color:#fff">กิจกรรมสันทนาการ</button>
-                  <a href="/activity/category/1">
-                    <div class="btn mb-4 offset-md-9" style="font-weight:normal; text-decoration:underline; color:#A7A9AC">ดูทั้งหมด</div>
-                  </a>
-                </div>
-              </div>
-
-
-              <div class="row">
-                <?while ($row = $result-> fetch_assoc()) {?>
+          <div class="row ">
+            <div class="container">
+              <button type="button" class="btn btn-warning mb-4" style="font-weight:Bold; color:#fff">กิจกรรมสันทนาการ</button>
+              <a href="/alder_iosapp/config/showlistActivty.php">
+                <div class="btn mb-4 offset-md-9" style="font-family:'Bai Jamjuree', sans-serif; font-weight:normal; text-decoration:underline; color:#A7A9AC">ดูทั้งหมด</div>
+              </a>
+            </div>
+          </div>
 
 
-                <div class="col-lg-4">
-                  <div class="card">
-                    <!-- <img src='/alder_iosapp/<?php echo $row['img'] ?>'class="card-img-top" alt="...">
+          <div class="row">
+            <?while ($row = $result-> fetch_assoc()) {?>
+
+
+            <div class="col-lg-4">
+              <div class="card">
+                <!-- <img src='/alder_iosapp/<?php echo $row['img'] ?>'class="card-img-top" alt="...">
                    -->
-                   <a href="/alder_iosapp/config/showDetail.php?id=<? echo $row['id']?>">
-                    <img src='<?php echo $row['img'] ?>' class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title" style="text-align: center;font-size: 16px;">
-                        <? echo $row['title']?>
-                      </h5>
-                      <p class="card-text" style="color:black;">
-                        <? echo $row['content']?>
+                <a href="/alder_iosapp/config/showDetail.php?id=<? echo $row['id']?>">
+                  <!-- /alder_iosapp/ -->
+                  <img src='/alder_iosapp/<?php echo $row['img'] ?>' class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title" style="font-family: 'Bai Jamjuree', sans-serif; text-align: center;font-size: 20px;">
+                      <? echo $row['title']?>
+                    </h5>
+                    <p class="card-text" style="font-family: 'Bai Jamjuree', sans-serif; color:black;">
+                      <? echo $row['content']?>
+                    </p>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-6" style="text-align:center;">
+                      <p class="card-text" style="font-family: 'Bai Jamjuree', sans-serif; margin-top: 10px; color:#A7A9AC">
+                        โดย :
+                        <? echo $row['leaderActivity']?>
                       </p>
                     </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-6" style="text-align:center;">
-                          <p class="card-text" style="margin-top: 10px; color:#A7A9AC">
-                              <? echo $row['leaderActivity']?>
-                          </p>
-                      </div>
-                      <div class="col-6" style="text-align:center;">
+                    <div class="col-6" style="text-align:center;">
 
-                          <p class="card-text" style="margin-top: 10px;margin-bottom: 20px; color:#A7A9AC">
-                              <? echo $row['startDate']?>
-                          </p>
-                      </div>
+                      <p class="card-text" style="font-family: 'Bai Jamjuree', sans-serif; margin-top: 10px;margin-bottom: 20px; color:#A7A9AC">
+                        <? echo $row['startDate']?>
+                      </p>
                     </div>
-
                   </div>
-                </div>
-                <? } ?>
+
               </div>
+            </div>
+            <? } ?>
+          </div>
 
 
-            </form>
-            <hr>
+        </form>
+        <hr>
 
 
-            <div>
-              <?php
+        <div>
+          <?php
                       $conn = mysqli_connect("localhost","root","","Alder");
                       $conn->set_charset('utf8');
                       if($conn->connect_error){
                         die("Connection failed:".$conn->connect_error);
                       }
-                      $sql = "SELECT * FROM post_timelines WHERE act_id = 2";
+                      $sql = "SELECT * FROM post_timelines WHERE post_timelines.act_id = 2 ORDER BY id DESC LIMIT 0,3";
                       $result = $conn-> query($sql);
                       $conn-> close();
                     ?>
+        </div>
+
+        <form method="POST" action="/activity/store" enctype="multipart/form-data">
+
+          <div class="row mt-4">
+            <div class="container">
+              <button type="button" class="btn mb-4" style="font-weight:Bold; color:#fff; background:#2178AE">กิจกรรมกระตุ้นสมอง</button>
+              <a href="/alder_iosapp/config/showlistActivty2.php">
+                <div class="btn mb-4 offset-md-9" style="font-family:'Bai Jamjuree', sans-serif; font-weight:normal; text-decoration:underline; color:#A7A9AC">ดูทั้งหมด</div>
+              </a>
             </div>
-
-            <form method="POST" action="/activity/store" enctype="multipart/form-data">
-
-              <div class="row mt-4">
-                <div class="container">
-                  <button type="button" class="btn mb-4" style="font-weight:Bold; color:#fff; background:#2178AE">กิจกรรมกระตุ้นสมอง</button>
-                  <a href="/activity/category/1">
-                    <div class="btn mb-4 offset-md-9" style="font-weight:normal; text-decoration:underline; color:#A7A9AC">ดูทั้งหมด</div>
-                  </a>
-                </div>
-              </div>
-              <div class="row">
-                <?while ($row = $result-> fetch_assoc()) {?>
+          </div>
+          <div class="row">
+            <?while ($row = $result-> fetch_assoc()) {?>
 
 
-                <div class="col-lg-4">
-                  <div class="card">
-                    <!-- <img src='/alder_iosapp/<?php echo $row['img'] ?>'class="card-img-top" alt="...">
+            <div class="col-lg-4">
+              <div class="card">
+                <!-- <img src='/alder_iosapp/<?php echo $row['img'] ?>'class="card-img-top" alt="...">
                    -->
-                   <a href="/alder_iosapp/config/showDetail.php?id=<? echo $row['id']?>">
-                    <img src='<?php echo $row['img'] ?>' class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title" style="text-align: center;font-size: 16px;">
-                        <? echo $row['title']?>
-                      </h5>
-                      <p class="card-text" style="color:black;">
-                        <? echo $row['content']?>
+                <a href="/alder_iosapp/config/showDetail.php?id=<? echo $row['id']?>">
+                  <img src='/alder_iosapp/<?php echo $row['img'] ?>' class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title" style="font-family: 'Bai Jamjuree', sans-serif; text-align: center;font-size: 20px;">
+                      <? echo $row['title']?>
+                    </h5>
+                    <p class="card-text" style="font-family: 'Bai Jamjuree', sans-serif; color:black;">
+                      <? echo $row['content']?>
+                    </p>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-6" style="text-align:center;">
+                      <p class="card-text" style="font-family: 'Bai Jamjuree', sans-serif; margin-top: 10px; color:#A7A9AC">
+                        โดย :
+                        <? echo $row['leaderActivity']?>
                       </p>
                     </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-6" style="text-align:center;">
-                          <p class="card-text" style="margin-top: 10px; color:#A7A9AC">
-                              <? echo $row['leaderActivity']?>
-                          </p>
-                      </div>
-                      <div class="col-6" style="text-align:center;">
+                    <div class="col-6" style="text-align:center;">
 
-                          <p class="card-text" style="margin-top: 10px;margin-bottom: 20px; color:#A7A9AC">
-                              <? echo $row['startDate']?>
-                          </p>
-                      </div>
+                      <p class="card-text" style="font-family: 'Bai Jamjuree', sans-serif; margin-top: 10px;margin-bottom: 20px; color:#A7A9AC">
+                        <? echo $row['startDate']?>
+                      </p>
                     </div>
-
                   </div>
-                </div>
-                <? } ?>
-              </div>
 
-            </form>
-            <hr>
-            <div>
-              <?php
+              </div>
+            </div>
+            <? } ?>
+          </div>
+
+        </form>
+        <hr>
+        <div>
+          <?php
             $conn = mysqli_connect("localhost","root","","Alder");
             $conn->set_charset('utf8');
             if($conn->connect_error){
               die("Connection failed:".$conn->connect_error);
             }
-            $sql = "SELECT * FROM post_timelines WHERE act_id = 3";
+            $sql = "SELECT * FROM post_timelines WHERE post_timelines.act_id = 3 ORDER BY id DESC LIMIT 0,3";
             $result = $conn-> query($sql);
             $conn-> close();
           ?>
+        </div>
+
+        <form method="POST" action="/activity/store" enctype="multipart/form-data">
+
+          <div class="row mt-4">
+            <div class="container">
+              <button type="button" class="btn mb-4" style="font-weight:Bold; color:#fff; background:#ED8E83">กิจกรรมกายภาพบำบัด</button>
+              <a href="/alder_iosapp/config/showlistActivty3.php">
+                <div class="btn mb-4 offset-md-9" style="font-family:'Bai Jamjuree', sans-serif; font-weight:normal; text-decoration:underline; color:#A7A9AC">ดูทั้งหมด</div>
+              </a>
             </div>
-
-            <form method="POST" action="/activity/store" enctype="multipart/form-data">
-
-              <div class="row mt-4">
-                <div class="container">
-                  <button type="button" class="btn mb-4" style="font-weight:Bold; color:#fff; background:#ED8E83">กิจกรรมกายภาพบำบัด</button>
-                  <a href="/activity/category/1">
-                    <div class="btn mb-4 offset-md-9" style="font-weight:normal; text-decoration:underline; color:#A7A9AC">ดูทั้งหมด</div>
-                  </a>
-                </div>
-              </div>
-
-              <div class="row">
-                <?while ($row = $result-> fetch_assoc()) {?>
-
-
-                <div class="col-lg-4">
-                  <div class="card">
-                    <!-- <img src='/alder_iosapp/<?php echo $row['img'] ?>'class="card-img-top" alt="...">
-                   -->
-                   <a href="/alder_iosapp/config/showDetail.php?id=<? echo $row['id']?>">
-                    <img src='<?php echo $row['img'] ?>' class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title" style="text-align: center;font-size: 16px;">
-                        <? echo $row['title']?>
-                      </h5>
-                      <p class="card-text" style="color:black;">
-                        <? echo $row['content']?>
-                      </p>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-6" style="text-align:center;">
-                          <p class="card-text" style="margin-top: 10px;margin-bottom: 20px;  color:#A7A9AC">
-                              <? echo $row['leaderActivity']?>
-                          </p>
-                      </div>
-                      <div class="col-6" style="text-align:center;">
-
-                          <p class="card-text" style="margin-top: 10px;margin-bottom: 20px;  color:#A7A9AC">
-                              <? echo $row['startDate']?>
-                          </p>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-                <? } ?>
-              </div>
-
-            </form>
-
-
-
           </div>
 
-          <br>
-          <br>
-        </div>
+          <div class="row">
+            <?while ($row = $result-> fetch_assoc()) {?>
+
+
+            <div class="col-lg-4">
+              <div class="card">
+                <!-- <img src='/alder_iosapp/<?php echo $row['img'] ?>'class="card-img-top" alt="...">
+                   -->
+                <a href="/alder_iosapp/config/showDetail.php?id=<? echo $row['id']?>">
+                  <img src='/alder_iosapp/<?php echo $row['img'] ?>' class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title" style="font-family: 'Bai Jamjuree', sans-serif; text-align: center;font-size: 20px;">
+                      <? echo $row['title']?>
+                    </h5>
+                    <p class="card-text" style="font-family: 'Bai Jamjuree', sans-serif; color:black;">
+                      <? echo $row['content']?>
+                    </p>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-6" style="text-align:center;">
+                      <p class="card-text" style="font-family: 'Bai Jamjuree', sans-serif; margin-top: 10px;margin-bottom: 20px;  color:#A7A9AC">
+                        โดย :
+                        <? echo $row['leaderActivity']?>
+                      </p>
+                    </div>
+                    <div class="col-6" style="text-align:center;">
+
+                      <p class="card-text" style="font-family: 'Bai Jamjuree', sans-serif; margin-top: 10px;margin-bottom: 20px;  color:#A7A9AC">
+                        <? echo $row['startDate']?>
+                      </p>
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+            <? } ?>
+          </div>
+
+        </form>
+
 
 
       </div>
+
+      <br>
+      <br>
     </div>
+
+
+  </div>
+  </div>
 
 
   <br>

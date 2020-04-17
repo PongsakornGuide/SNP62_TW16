@@ -14,264 +14,315 @@ $query = mysqli_query($conn,$sql);
 $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 ?>
 
+<?php
+    session_start();
+    // echo 'Wellcome to' . $_SESSION['email'];
+    if(isset($_SESSION['email'])){
+      // echo 'Wellcome to' . $_SESSION['email'];
+    }
+
+ ?>
+
 <!DOCTYPE html>
-  <html>
-  <head>
-  	<title></title>
-  </head>
-  <body style="background:#fff;">
+<html>
 
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
- <link href="../css/switchery.css" rel="stylesheet">
-   <link href="../css/concept.css" rel="stylesheet">
-     <link href="../css/concept.min.css" rel="stylesheet">
-       <link href="../css/switchery.min.css" rel="stylesheet">
-			 <link href="../css/font-awesome.min.css" rel="stylesheet">
-			 <link href="../css/font-awesome.css" rel="stylesheet">
+<head>
+	<title></title>
+</head>
 
-  <style>
-      .menu-active{
-          width: 199px;
-          height: 45px;
-          border-radius: 25px 0px 0px 25px;
-          background-color: #F1F3F9;
-          color: rgb(27, 71, 147)!important;
-          margin: 5px 0 10px 0;
-          float: right;
-          padding-top: 5px;
-      }
-      .secondary-sidebar-menu ul li a{
-          color: #174495!important;
-      }
-  </style>
+<body style="background:#fff;">
 
-    <div class="secondary-sidebar" style=" background: #1B4793; color: #fff; position: fixed; top: 0;overflow: hidden; hidden;left: 0px;">
-        <div class="secondary-sidebar-bar">
-            <a href="/" class="logo-box" style="font-family: 'Poppins', sans-serif;font-weight: bolder;color:#fff!important; text-align: center;"><img src="https://uppic.cc/d/6m7y" style="height:30px;margin-bottom: 10px;">&nbsp;Alder</a>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="../css/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
+	<link href="../css/switchery.css" type="text/css" rel="stylesheet">
+	<link href="../css/concept.css" type="text/css" rel="stylesheet">
+	<link href="../css/concept.min.css" type="text/css" rel="stylesheet">
+	<link href="../css/switchery.min.css" type="text/css" rel="stylesheet">
+	<link href="../css/webfonts/fa-regular-400.woff" type="text/css" rel="stylesheet">
+	<link href="../css/all.min.css" type="text/css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<style>
+		body {
+			background-color: #fff;
+		}
+
+		.menu-active {
+			width: 199px;
+			height: 45px;
+			border-radius: 25px 0px 0px 25px;
+			background-color: #F1F3F9;
+			color: rgb(27, 71, 147) !important;
+			margin: 5px 0 10px 0;
+			float: right;
+			padding-top: 5px;
+		}
+
+		.secondary-sidebar-menu ul li a {
+			color: #174495 !important;
+		}
+	</style>
+
+	<div class="secondary-sidebar" style=" background: #1B4793; color: #fff; position: fixed; top: 0;overflow: hidden; hidden;left: 0px;">
+		<div class="secondary-sidebar-bar">
+			<a href="/alder_iosapp/config/home.php" class="logo-box" style="font-family: 'Poppins', sans-serif;font-weight: bolder;color:#fff!important; text-align: center;"><img src="https://uppic.cc/d/6m7y"
+					style="height:30px;margin-bottom: 10px;">&nbsp;Alder</a>
+		</div>
+		<div class="secondary-sidebar-menu">
+			<ul class="accordion-menu">
+				<li class="menu-active">
+					<a href="/alder_iosapp/config/home.php">
+						<i class="menu-icon far fa-user-circle" style="color: #174495;"></i><span style="color: #174495; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">ข้อมูลผู้สูงอายุ</span>
+					</a>
+				</li>
+
+				<li>
+					<a href="/alder_iosapp/config/activity.php">
+						<i class="menu-icon far fa-calendar-alt" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;กิจกรรมที่จัด</span>
+					</a>
+				</li>
+
+				<li>
+					<a href="/alder_iosapp/config/createActivity.php">
+						<i class="menu-icon far fa-calendar-plus" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;สร้างกิจกรรม</span>
+					</a>
+				</li>
+
+				<li>
+					<a href="/alder_iosapp/config/uploadVideo.php">
+						<i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;อัพโหลดวิดีโอ</span>
+					</a>
+				</li>
+
+				<li>
+					<a href="/alder_iosapp/config/blogger.php">
+						<i class="menu-icon far fa-newspaper" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;บทความศาสนา</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="page-header">
+    <nav class="navbar navbar-default navbar-expand-md">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse justify-content-between" id="bs-example-navbar-collapse-1">
         </div>
-        <div class="secondary-sidebar-menu">
-            <ul class="accordion-menu">
-                <li  class="menu-active">
-                    <a href="/alder_iosapp/config/index.php">
-                        <span style="color: #174495; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">ข้อมูลผู้สูงอายุ</span>
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="/alder_iosapp/config/activity.php">
-                      	<span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;กิจกรรมที่จัด</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/alder_iosapp/config/createActivity.php">
-                        <span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;สร้างกิจกรรม</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/alder_iosapp/config/uploadVideo.php">
-                        <span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;อัพโหลดวิดีโอ</span>
-                    </a>
-                </li>
-
-								<li>
-                       <a href="/alder_iosapp/config/blogger.php">
-                          <span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;บทความศาสนา</span>
-                      </a>
-                </li>
+        <ul class="nav navbar-nav">
+          <li class="dropdown nav-item d-md-block">
+            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: 500; font-size: 13px;">
+                <?php echo $_SESSION["email"];?>
+              </span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-caret-square-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <li><a href="/alder_iosapp/func/logout.php?logout">Logout</a></li>
             </ul>
-        </div>
-    </div>
+          </li>
+        </ul>
+      </div><!-- /.container-fluid -->
+    </nav>
+  </div><!-- /Page Header -->
+
+	<div class="page-inner no-page-title">
+		<div id="main-wrapper">
+
+			<input type="hidden" name="_method" value="put">
+			<h2 style="font-family: 'Bai Jamjuree', sans-serif; font-weight: bold;font-size:40px;color:#1B4793;">แก้ไขข้อมูล : คุณ&nbsp;" <?php echo $result["username"];?> "</h2>
+			<div class="card mt-2 col-lg-12" style="margin-top: 30px !important; border-radius:15px;">
+				<div class="card-body" style="font-family: 'Bai Jamjuree', sans-serif;">
+
+					<form id="myForm" action="../func/saveUser.php" method="post" enctype="multipart/form-data">
 
 
-    <!-- Page Header -->
-       <div class="page-header">
-           <div class="search-form">
-               <form action="#" method="GET">
-                   <div class="input-group">
-                       <input type="text" name="search" class="form-control search-input" placeholder="Type something...">
-                       <span class="input-group-btn">
-                                   <button class="btn btn-default" id="close-search" type="button"><i class="icon-close"></i></button>
-                               </span>
-                   </div>
-               </form>
-           </div>
-           <nav class="navbar navbar-default navbar-expand-md">
-               <div class="container-fluid">
-                   <!-- Brand and toggle get grouped for better mobile display -->
-                   <div class="navbar-header">
-                       <div class="logo-sm">
-                           <a href="javascript:void(0)" id="sidebar-toggle-button"><i class="fas fa-bars"></i></a>
-                           <a class="logo-box" href="index.html"><span>concept</span></a>
-                       </div>
-                       <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                           <i class="fas fa-angle-down"></i>
-                       </button>
-                   </div>
+						<div class="row">
+							<div class="form-group col-12">
+								<p style="text-align:center;">
+									<img src='/alder_iosapp/<?php echo $result["photo"];?>' class="rounded-circle" style="width:200px;height:200px;" alt="">
+								</p>
+							</div>
 
-                   <!-- Collect the nav links, forms, and other content for toggling -->
-
-                   <div class="collapse navbar-collapse justify-content-between" id="bs-example-navbar-collapse-1">
-                       <ul class="nav navbar-nav mr-auto">
-                           <!-- <li><a href="javascript:void(0)" id="toggle-fullscreen"><i class="fas fa-expand"></i></a></li> -->
-                           <li><a href="javascript:void(0)" id="search-button"><i class="fas fa-search"></i></a></li>
-                       </ul>
-                   </div><!-- /.navbar-collapse -->
-                   <ul class="nav navbar-nav">
-
-                       <li class="dropdown nav-item d-md-block">
-                           <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: 800; font-size: 13px;" >
-                             <!-- {{Auth::user()->name}} -->
-
-                             Admin
-                           </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-angle-down"></i></a>
-
-                           <ul class="dropdown-menu dropdown-menu-right dropdown-lg dropdown-content" style="width: 102px;">
-                               <li class="">
-                               <!-- @if (Auth::guest()) -->
-                                   <li><a href="{{ route('login') }}">Login</a></li>
-                                   <li><a href="{{ route('register') }}">Register</a></li>
-                               <!-- @else -->
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-
-                                        xxxxx
-                                    </a>
-                                   <li>
-                                       <a href="{{ route('logout') }}"
-                                          onclick="event.preventDefault();
-                                                                  document.getElementById('logout-form').submit();" style="text-align: center;">
-                                           Logout
-                                       </a>
-                                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                           <!-- {{ csrf_field() }} -->
-                                       </form>
-                                   </li>
-
-                                   <!-- @endif -->
-                               </li>
-                           </ul>
-                       </li>
-                       <!-- <li class="nav-item d-md-block"><a href="javascript:void(0)" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar">{{Auth::user()->name}}</a></li> -->
-
-                       <li class="dropdown nav-item d-md-block">
-                           <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">                                <img src="../theme/assets/images/avatars/avatar1.png" alt="" class="rounded-circle">
-                           </a>
-                           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                               <li><a href="#"><span class="badge float-right badge-info">64</span>Messages</a></li>
-                               <li role="separator" class="divider"></li>
-                               <li><a href="#">Account Settings</a></li>
-                               <li><a href="#">Log Out</a></li>
-                           </ul>
-                       </li>
-
-                   </ul>
-               </div><!-- /.container-fluid -->
-           </nav>
-       </div><!-- /Page Header -->
+							<div class="form-group col-12">
+								<input type="hidden" name="id" id="id" value="<?php echo $result["id"];?>">
+							</div>
 
 
-       <div class="page-inner no-page-title">
-                   <div id="main-wrapper">
+							<div class="form-group col-6">
+								<label for="text" class="control-label" style="font-weight:bold;">ชื่อ : </label>
+								<input class="form-control" name="username" type="text" id="username" disabled style="background-color: rgba(233, 236, 239, 0.55)" value="<?php echo $result["username"];?>">
+							</div>
 
-                                      <input type="hidden" name="_method" value="put">
-                                       <h2 style="font-family: 'Bai Jamjuree', sans-serif; font-weight: bold;">แก้ไขข้อมูล : คุณ&nbsp;"<?php echo $result["username"];?>"</h2>
-                                           <div class="card mt-2 col-lg-12" style="margin-top: 30px !important; border-radius:15px;">
-                                               <div class="card-body" style="font-family: 'Bai Jamjuree', sans-serif;">
+							<div class="form-group col-6">
+								<label for="text" class="control-label" style="font-weight:bold;">นามสกุล : </label>
+								<input class="form-control" name="surname" type="text" id="surname" disabled style="background-color: rgba(233, 236, 239, 0.55)" value="<?php echo $result["surname"];?>">
+							</div>
+						</div>
 
-                                                   <form action="../func/saveUser.php" method="post"  enctype="multipart/form-data">
+						<div class="row">
+							<div class="form-group col-3">
+								<label for="text" class="control-label" style="font-weight:bold;">วันเกิด : </label>
+								<input class="form-control" name="birthday" type="date" id="birthday" value="<?php echo $result["birthday"];?>">
+							</div>
+							<div class="form-group col-3">
+								<label for="text" class="control-label" style="font-weight:bold;">เพศ : </label>
+								<input class="form-control" name="gender" type="text" id="gender" value="<?php echo $result["gender"];?>">
+							</div>
+							<div class="form-group col-3">
+								<label for="text" class="control-label" style="font-weight:bold;">ศาสนา : </label>
+								<input class="form-control" name="religion" type="text" id="religion" value="<?php echo $result["religion"];?>">
+							</div>
+							<div class="form-group col-3">
+								<label for="text" class="control-label" style="font-weight:bold;">เบอร์โทรศัพท์ : </label>
+								<input class="form-control" name="tel" type="text" id="tel" value="<?php echo $result["tel"];?>">
+							</div>
+						</div>
 
+						<div class="row">
+							<div class="form-group col-6">
+								<label for="text" class="control-label" style="font-weight:bold;">ที่อยู่ปัจจุบัน : </label>
+								<input class="form-control" name="address" type="text" id="address" value="<?php echo $result["address"];?>">
+							</div>
 
-                                                       <div class="row">
-                                                         <div class="form-group col-12">
-                                                           <p style="text-align:center;">
-                                                                <img src='/alder_iosapp/<?php echo $result["photo"];?>' class="rounded-circle" style="width:200px;height:200px;" alt="">
-                                                           </p>
-                                                         </div>
-
-                                                         <div class="form-group col-12">
-                                                              <input type="hidden" name="id" id="id" value="<?php echo $result["id"];?>">
-                                                         </div>
-
-
-                                                           <div class="form-group col-6">
-                                                               <label for="text" class="control-label" style="font-weight:bold;">ชื่อ : </label>
-                                                               <input class="form-control" name="username" type="text" id="username" disabled style="background-color: rgba(233, 236, 239, 0.55)" value="<?php echo $result["username"];?>">
-                                                           </div>
-
-                                                           <div class="form-group col-6">
-                                                               <label for="text" class="control-label" style="font-weight:bold;">นามสกุล : </label>
-                                                               <input class="form-control" name="surname" type="text" id="surname" disabled style="background-color: rgba(233, 236, 239, 0.55)" value="<?php echo $result["surname"];?>">
-                                                           </div>
-                                                       </div>
+							<div class="form-group col-6">
+								<label for="text" class="control-label" style="font-weight:bold;">โรคประจำตัว : </label>
+								<input class="form-control" name="disease" type="text" id="disease" disabled value="<?php echo $result["diseaseName_th"];?>">
+							</div>
 
 
 
-                                                       <div class="row">
-                                                           <div class="form-group col-3">
-                                                               <label for="text" class="control-label" style="font-weight:bold;">วันเกิด : </label>
-                                                               <input class="form-control" name="birthday" type="date" id="birthday" value="<?php echo $result["birthday"];?>">
-                                                           </div>
-                                                           <div class="form-group col-3">
-                                                               <label for="text" class="control-label" style="font-weight:bold;">เพศ : </label>
-                                                               <input class="form-control" name="gender" type="text" id="gender" value="<?php echo $result["gender"];?>">
-                                                           </div>
-                                                           <div class="form-group col-3">
-                                                               <label for="text" class="control-label" style="font-weight:bold;">ศาสนา : </label>
-                                                               <input class="form-control" name="religion" type="text" id="religion" value="<?php echo $result["religion"];?>">
-                                                           </div>
-                                                           <div class="form-group col-3">
-                                                               <label for="text" class="control-label" style="font-weight:bold;">เบอร์โทรศัพท์ : </label>
-                                                               <input class="form-control" name="tel" type="text" id="tel" value="<?php echo $result["tel"];?>">
-                                                           </div>
-                                                       </div>
+						</div>
 
-                                                       <div class="row">
-                                                           <div class="form-group col-6">
-                                                               <label for="text" class="control-label" style="font-weight:bold;">ที่อยู่ปัจจุบัน : </label>
-                                                               <input class="form-control" name="address" type="text" id="address" value="<?php echo $result["address"];?>">
-                                                           </div>
+						<div class="row">
+							<div class="form-group col-6">
+								<label for="text" class="control-label" style="font-weight:bold;">ชื่อของญาติ : </label>
+								<input class="form-control" name="relative_name" type="text" id="relative_name" value="<?php echo $result["relative_name"];?>">
+							</div>
+							<div class="form-group col-3">
+								<label for="text" class="control-label" style="font-weight:bold;">เบอร์โทรศัพท์ญาติ : </label>
+								<input class="form-control" name="relative_phone" type="text" id="relative_phone" value="<?php echo $result["relative_phone"];?>">
+							</div>
+							<div class="form-group col-3">
+								<label for="text" class="control-label" style="font-weight:bold;">ความสัมพันธ์ : </label>
+								<input class="form-control" name="relative_type" type="text" id="relative_type" value="<?php echo $result["relative_type"];?>">
+							</div>
+							<div class="form-group col-12">
+								<div style="float:right;">
+									<button class="submit" type="submit" style="background: #FAC92C;color:#fff;font-family: 'Bai Jamjuree', sans-serif; font-weight: 700;padding:12px;border-radius:5px;border:none;"> <i class="fas fa-user-edit"></i> แก้ไขกิจกรรม</button> &nbsp;
 
-                                                        <div class="form-group col-6">
-                                                             <label for="text" class="control-label" style="font-weight:bold;">โรคประจำตัว : </label>
-                                                               <input class="form-control" name="disease" type="text" id="disease" disabled value="<?php echo $result["diseaseName_th"];?>">
-                                                           </div>
+									<a class="btnbtn btn-danger" href="../func/delete.php?delete=<?php echo $result["id"];?>" href="ssss"style="background: #FAC92C;color:#fff;font-family: 'Bai Jamjuree', sans-serif; font-weight: 700;padding:14px;border-radius:5px;color:#fff;">
+										<span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:normal;">
+											<i class="fas fa-trash"></i> ลบผู้ใช้
+										</span>
+									</a>
+
+								</div>
+							</div>
+						</div>
+
+					</form>
+
+					 <!-- <a href="check" class="btn-delete">Delete</a> -->
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+	</div>
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<!-- <script>
+$(document).on('click', '.submit', function(e) {
+	e.preventDefault();
+	Swal.fire({
+		icon : 'question',
+		title: 'ต้องการแก้ไขข้อมูล',
+		text: 'แก้ไขข้อมูล',
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'OK'
+	}).then(function (result) {
+		if(result.value){
+			$('#myForm').submit();
+		}
+	});
+});
+</script> -->
+
+<script>
+$(document).on('click', '.submit', function(e) {
+	e.preventDefault();
+	var username = $('#username').val();
+	var surname = $('#surname').val();
+	var birthday = $('#birthday').val();
+	var gender = $('#gender').val();
+	var religion = $('#religion').val();
+	var tel = $('#tel').val();
+	var address = $('#address').val();
+	var disease = $('#disease').val();
+	var relative_name = $('#relative_name').val();
+	var relative_phone = $('#relative_phone').val();
+	var relative_type = $('#relative_type').val();
+
+	if(username == '' || surname == ''|| birthday == '' || gender == '' || religion == '' || tel == '' || address == '' || disease == '' || relative_name == '' || relative_phone == '' || relative_type == ''){
+		Swal.fire({
+				icon: 'error',
+				title: 'กรอกข้อมูลให้ครบถ้วน',
+				text: 'กรอกข้อมูลให้ครบถ้วน'
+		})
+	}else{
+			Swal.fire({
+				icon : 'question',
+				title: 'ต้องการแก้ไขข้อมูล',
+				text: 'แก้ไขข้อมูล',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'OK'
+			}).then(function (result) {
+				if(result.value){
+					$('#myForm').submit();
+				}else{
+				}
+			});
+
+		}
+
+});
+</script>
 
 
 
-                                                       </div>
 
-                                                       <div class="row">
-                                                           <div class="form-group col-6">
-                                                               <label for="text" class="control-label" style="font-weight:bold;">ชื่อของญาติ : </label>
-                                                               <input class="form-control" name="relative_name" type="text" id="relative_name" value="<?php echo $result["relative_name"];?>">
-                                                           </div>
-                                                           <div class="form-group col-3">
-                                                               <label for="text" class="control-label" style="font-weight:bold;">เบอร์โทรศัพท์ญาติ : </label>
-                                                               <input class="form-control" name="relative_phone" type="text" id="relative_phone" value="<?php echo $result["relative_phone"];?>">
-                                                           </div>
-                                                           <div class="form-group col-3">
-                                                               <label for="text" class="control-label" style="font-weight:bold;">ความสัมพันธ์ : </label>
-                                                               <input class="form-control" name="relative_type" type="text" id="relative_type" value="<?php echo $result["relative_type"];?>">
-                                                           </div>
+<script>
+	$('.btnbtn').on('click',function(e){
+			e.preventDefault();
+			const href = $(this).attr('href')
+			Swal.fire({
+				icon : 'error',
+				title: 'ต้องการลบข้อมูลผู้สูงอายุ',
+ 				text: 'แน่ใจที่ต้องการจะลบ',
+ 				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+ 				confirmButtonText: 'Delete'
+			}).then((result) => {
+				 if(result.value){
+					 document.location.href = href;
+				 }
+			})
 
-                                                       </div>
-                                                       <div>
-                                                              <input class="btn offset-9 mt-3" style="background: #419F5D; color:#fff" type="submit" value="ยืนยันการแก้ไข">
+	})
 
-                                                              <input class="btn offset-1"type="hidden" name="_method" value="delete"><button class="btn btn-danger mt-3">ลบข้อมูล</button>
-                                                       </div></form>
-                                               </div>
-                                           </div>
+</script>
 
-                                   </div>
-                               </div>
-                   </div>
-               </div>
+	<script src="../func/sweetalert2.all.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
 
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
-  </html>
+</html>

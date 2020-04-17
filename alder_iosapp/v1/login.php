@@ -1,5 +1,11 @@
 <?php
+require_once '../includes/Constants.php';
+require_once '../includes/DbConnect.php';
 require_once '../includes/DbOperation.php';
+$conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
+mysqli_set_charset($conn, "utf8");
+header('Content-Type: application/json; charset=utf-8');
+
 $response = array();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['tel']) && isset($_POST['otp'])) {

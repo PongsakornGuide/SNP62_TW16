@@ -45,6 +45,7 @@ if ($uploadOk == 0) {
 
         if ($conn->query($sql) === true){
             echo json_encode(['message' => "Created Article Successfully"]);
+            header( "location: ../config/activity.php" );
         }else{
             echo json_encode(['message' => "Error: " . $conn->error]);
         }
@@ -54,26 +55,6 @@ if ($uploadOk == 0) {
         echo json_encode(['message' => "Sorry, there was an error uploading your file."]);
     }
 }
-
-
-
-// $title_video = $_POST['title_video'];
-// $url = $_POST['url'];
-// $singerName = $_POST['singerName'];
-//
-// include("../config/db.php");
-// $sql = "INSERT INTO upload_videos(title_video,url,singerName) value('$title_video','$url','$singerName')";
-// // ------------------------check error
-// $check_sql="";
-// $check_sql=mysqli_query($conn,$sql);
-// if (!$check_sql) {
-// 	echo "error sql";
-// 	}
-// else {
-// 	echo "succes sql";
-// 	}
-//   header( "location: ../config/index.php" );
-
 
 
 ?>

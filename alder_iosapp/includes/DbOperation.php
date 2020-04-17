@@ -43,6 +43,8 @@ class DbOperation
     //
     private function isUserExist($username, $tel)
     {
+        mysqli_set_charset($this->conn, "utf8");
+        header('Content-Type: application/json; charset=utf-8');
         $stmt = $this->conn->prepare("SELECT id FROM user_apps WHERE username = ? OR tel = ?");
         $stmt->bind_param("si", $username, $tel);
         $stmt->execute();
@@ -52,6 +54,9 @@ class DbOperation
 
     public function getUserByUsername($tel)
     {
+        mysqli_set_charset($this->conn, "utf8");
+        header('Content-Type: application/json; charset=utf-8');
+
         $stmt = $this->conn->prepare("SELECT id, username, tel , photo , birthday FROM user_apps WHERE tel = ?");
         $stmt->bind_param("i", $tel);
         $stmt->execute();
@@ -69,6 +74,8 @@ class DbOperation
 
     public function getUserByActivity($tel)
     {
+        mysqli_set_charset($this->conn, "utf8");
+        header('Content-Type: application/json; charset=utf-8');
         $stmt = $this->conn->prepare("SELECT id, username, tel FROM user_apps WHERE tel = ?");
         $stmt->bind_param("i", $tel);
         $stmt->execute();
@@ -86,6 +93,8 @@ class DbOperation
     //Function update status
     public function updateStatus($otp)
     {
+        mysqli_set_charset($this->conn, "utf8");
+        header('Content-Type: application/json; charset=utf-8');
         $stmt = $this->conn->prepare("UPDATE otp SET status = '1' WHERE otp = ?");
         $stmt->bind_param("s", $otp);
         $stmt->execute();
@@ -107,6 +116,8 @@ class DbOperation
     //Function Post
     public function createPost($user_app_id, $caption, $img)
     {
+        mysqli_set_charset($this->conn, "utf8");
+        header('Content-Type: application/json; charset=utf-8');
         $stmt = $this->conn->prepare("INSERT INTO ad_post_timeline (user_app_id,caption,img) VALUES (?,?,?)");
         $stmt->bind_param("iss", $user_app_id, $caption, $img);
         $stmt->execute();
@@ -117,7 +128,8 @@ class DbOperation
     //Function to create a new user
     public function add_activity($activity_user_apps,$activity_name,$disease_user_apps,$disease_id,$disease_detail)
     {
-
+            mysqli_set_charset($this->conn, "utf8");
+            header('Content-Type: application/json; charset=utf-8');
             $stmt = $this->conn->prepare("INSERT INTO exception_disease (disease_user_apps,disease_id,disease_detail) VALUES (?, ?, ?)");
             $stmt->bind_param("iis", $disease_user_apps, $disease_id,$disease_detail);
 
