@@ -17,6 +17,8 @@ class allList: Mappable{
     var photo: String?
     var likeActivity: Int?
     var commentsActivity: Int?
+    var adposttimeline: Int?
+    var userPostId: Int?
     required init?(map: Map) {
 
     }
@@ -31,7 +33,9 @@ class allList: Mappable{
         photo <- map["photo"]
         likeActivity <- map["likeActivity"]
         commentsActivity <- map["commentsActivity"]
-        
+        adposttimeline <- map["ad_post_timeline_id"]
+        userPostId <- map["user_id"]
+//
     }
 }
 

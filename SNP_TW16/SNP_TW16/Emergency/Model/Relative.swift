@@ -10,17 +10,20 @@ import UIKit
 import ObjectMapper
 class listRelative: Mappable{
     var relativeTel: Int?
+    var relativeName: String?
     required init?(map: Map) {
         
     }
     func mapping(map: Map) {
         relativeTel <- map["relative_phone"]
+        relativeName <- map["relative_name"]
     }
 }
 
 
 class addRelative: Mappable{
     var id: Int?
+    var idTel: Int?
     var username: String?
     var telphone: Int?
     
@@ -29,6 +32,7 @@ class addRelative: Mappable{
     }
     func mapping(map: Map) {
         id  <- map["user_id"]
+        idTel <- map["id"]
         username  <- map["name"]
         telphone <- map["tel"]
     }

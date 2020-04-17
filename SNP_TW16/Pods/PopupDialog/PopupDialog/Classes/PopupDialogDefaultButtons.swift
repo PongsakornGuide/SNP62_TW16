@@ -49,6 +49,7 @@ public final class DestructiveButton: PopupDialogButton {
 
     override public func setupView() {
         defaultTitleColor = UIColor.red
+        
         super.setupView()
     }
 }

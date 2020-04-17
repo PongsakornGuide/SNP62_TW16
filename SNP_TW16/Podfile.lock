@@ -15,6 +15,7 @@ PODS:
     - SDWebImage/Core (= 5.6.1)
   - SDWebImage/Core (5.6.1)
   - SwiftyJSON (5.0.0)
+  - TwicketSegmentedControl (0.1.2)
 
 DEPENDENCIES:
   - Alamofire
@@ -28,6 +29,7 @@ DEPENDENCIES:
   - PopupDialog (~> 1.1)
   - SDWebImage (~> 5.0)
   - SwiftyJSON
+  - TwicketSegmentedControl
 
 SPEC REPOS:
   trunk:
@@ -43,6 +45,7 @@ SPEC REPOS:
     - PopupDialog
     - SDWebImage
     - SwiftyJSON
+    - TwicketSegmentedControl
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -57,7 +60,8 @@ SPEC CHECKSUMS:
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   SDWebImage: 7edb9c3ea661e77a66661f7f044de8c1b55d1120
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  TwicketSegmentedControl: 6d7a4cf243657e0ac3f00d06d873a25334c04042
 
-PODFILE CHECKSUM: b8b31ff97a51c5a7738d38ea9c4a72e5e8a79861
+PODFILE CHECKSUM: c0605951511851dc446272a42a383a8467361953
 
 COCOAPODS: 1.8.4

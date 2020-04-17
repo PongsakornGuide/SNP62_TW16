@@ -56,21 +56,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
         
            
            func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
                             if pickerView == religionPicker {
                                cultTextField.text = religion[row]
-                                self.view.endEditing(false)
                             }else if pickerView == genPicker {
-                                
                                 genTextField.text = gender[row]
-                                self.view.endEditing(false)
-                                
                             }else if pickerView == centerPicker {
                                 addressTextField.text = center[row]
-                                self.view.endEditing(false)
                             }else{
                                 addressTextField.text = center[row]
-                                self.view.endEditing(false)
                             }
            }
     
@@ -89,15 +82,19 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
            return view
        }()
     
-       let imgView: UIImageView = {
-           let view = UIImageView()
-            view.image = UIImage(named: "Group 1094")
-            view.layer.cornerRadius = 30/2
-            view.contentMode = .scaleAspectFit
-            view.layer.masksToBounds = true
-           return view
-       }()
-    
+
+        lazy var imgView: UIImageView = {
+            let view = UIImageView()
+             view.image = UIImage(named: "Group 1094")
+             view.layer.cornerRadius = 160/2
+             view.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
+             view.layer.shadowOpacity = 0.1
+             view.layer.shadowOffset = CGSize(width: 0, height: 0)
+             view.layer.shadowRadius = 10
+             view.contentMode = .scaleToFill
+             view.layer.masksToBounds = true
+            return view
+        }()
     
         let uploadImage: UIButton = {
             let image = UIImage(named: "Group 1093") as UIImage?
@@ -161,100 +158,161 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
     }()
     
     //-----------------------------------------------------------------------------------------------
+        lazy var titlenameLabel : UILabel = {
+              let label = UILabel()
+              let title = "ชื่อ:"
+              let attributedText = NSMutableAttributedString(string: title,
+          attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+              label.attributedText = attributedText
+              label.numberOfLines = 0
+              return label
+        }()
+    
        let nameTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-               textField.textColor = .black
-               textField.font = UIFont.BaiJamjureeBold(size: 20)
+               textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font :  UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                return textField
            }()
            let nameTextFieldLine: UIView = {
                   let view = UIView()
-                  view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
+                  view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                   return view
            }()
        //-----------------------------------------------------------------------------------------------
+    
+          lazy var titlesurnameLabel : UILabel = {
+                let label = UILabel()
+                let title = "นามสกุล:"
+                let attributedText = NSMutableAttributedString(string: title,
+            attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+                label.attributedText = attributedText
+                label.numberOfLines = 0
+                return label
+          }()
+    
+    
            let surnameTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "นามสกุล",attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-               textField.textColor = .black
-               textField.font = UIFont.BaiJamjureeBold(size: 20)
+               textField.attributedPlaceholder = NSAttributedString(string: "นามสกุล",attributes: [NSAttributedString.Key.font :  UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                return textField
            }()
            let surnameTextFieldLine: UIView = {
                let view = UIView()
-               view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
+               view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                return view
            }()
        //-----------------------------------------------------------------------------------------------
+          lazy var titletelLabel : UILabel = {
+                let label = UILabel()
+                let title = "เบอร์โทรศัพท์:"
+                let attributedText = NSMutableAttributedString(string: title,
+            attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+                label.attributedText = attributedText
+                label.numberOfLines = 0
+                return label
+          }()
+    
            let phoneTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-               textField.textColor = .black
-               textField.font = UIFont.BaiJamjureeBold(size: 20)
-               return textField
+               textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font :  UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
+            return textField
            }()
            let phoneTextFieldLine: UIView = {
                let view = UIView()
-               view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
+               view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                return view
            }()
           
        //-----------------------------------------------------------------------------------------------
+            lazy var titledateLabel : UILabel = {
+                   let label = UILabel()
+                   let title = "วันเกิด:"
+                   let attributedText = NSMutableAttributedString(string: title,
+               attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+                   label.attributedText = attributedText
+                   label.numberOfLines = 0
+                   return label
+            }()
+    
            let dateTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "ปี / เดือน / วัน", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-               textField.textColor = .black
-               textField.font = UIFont.BaiJamjureeBold(size: 20)
+               textField.attributedPlaceholder = NSAttributedString(string: "วันเกิด", attributes: [NSAttributedString.Key.font :  UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                return textField
            }()
            let dateTextFieldLine: UIView = {
                let view = UIView()
-               view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
+               view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                return view
            }()
        
     
     //-----------------------------------------------------------------------------------------------
+              lazy var titlegenderLabel : UILabel = {
+                                let label = UILabel()
+                                let title = "เพศ:"
+                                let attributedText = NSMutableAttributedString(string: title,
+                            attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+                                label.attributedText = attributedText
+                                label.numberOfLines = 0
+                                return label
+              }()
+    
               let genTextField: UITextField = {
                   let textField = UITextField()
-                  textField.attributedPlaceholder = NSAttributedString(string: "เพศ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-                  textField.textColor = .black
-                  textField.font = UIFont.BaiJamjureeBold(size: 20)
+                  textField.attributedPlaceholder = NSAttributedString(string: "เพศ", attributes: [NSAttributedString.Key.font :  UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                   return textField
               }()
               let genTextFieldTextFieldLine: UIView = {
                   let view = UIView()
-                  view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
+                  view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                   return view
               }()
     
     
     //-----------------------------------------------------------------------------------------------
+    
+                    lazy var titlecultLabel : UILabel = {
+                                      let label = UILabel()
+                                      let title = "ศาสนา:"
+                                      let attributedText = NSMutableAttributedString(string: title,
+                                  attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+                                      label.attributedText = attributedText
+                                      label.numberOfLines = 0
+                                      return label
+                    }()
+    
                   let cultTextField: UITextField = {
                       let textField = UITextField()
-                      textField.attributedPlaceholder = NSAttributedString(string: "ศาสนา", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-                      textField.textColor = .black
-                      textField.font = UIFont.BaiJamjureeBold(size: 20)
+                      textField.attributedPlaceholder = NSAttributedString(string: "ศาสนา", attributes: [NSAttributedString.Key.font :  UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                       return textField
                   }()
                   let cultTextFieldTextFieldLine: UIView = {
                       let view = UIView()
-                      view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
+                      view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                       return view
                   }()
     
     //-----------------------------------------------------------------------------------------------
-                  let addressTextField: UITextField = {
+                  lazy var titleaddressLabel : UILabel = {
+                        let label = UILabel()
+                        let title = "ศูนย์ที่อยู่ปัจจุบัน:"
+                        let attributedText = NSMutableAttributedString(string: title,
+                                                  attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+                        label.attributedText = attributedText
+                        label.numberOfLines = 0
+                        return label
+                }()
+                    
+    
+    
+                    let addressTextField: UITextField = {
                       let textField = UITextField()
-                      textField.attributedPlaceholder = NSAttributedString(string: "ศูนย์ที่อยู่อาศัย", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-                      textField.textColor = .black
-                      textField.font = UIFont.BaiJamjureeBold(size: 20)
+                      textField.attributedPlaceholder = NSAttributedString(string: "ศูนย์ที่อยู่อาศัย", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                       return textField
                   }()
                   let addressTextFieldTextFieldLine: UIView = {
                       let view = UIView()
-                      view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
+                      view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                       return view
                   }()
           
@@ -262,7 +320,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy/MM/dd"
             dateTextField.text = dateFormatter.string(from: datePicker.date)
-            view.endEditing(true)
         }
     
         @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
@@ -325,7 +382,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
        religionPicker.delegate = self
        religionPicker.dataSource = self
        cultTextField.inputView = religionPicker
-                
+        
        centerPicker.delegate = self
        centerPicker.dataSource = self
        addressTextField.inputView = centerPicker
@@ -341,10 +398,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
             phoneTextField.text = NumberPhoneLabelText
 
             view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-           navigationItem.title = "ข้อมูลส่วนตัว"
-           let stacView = UIStackView(arrangedSubviews: [titleLabel,nameTextField,surnameTextField,phoneTextField,dateTextField,genTextField,cultTextField,addressTextField])
+            navigationItem.title = "ข้อมูลส่วนตัว"
+
+                  let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
+                  navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
+           let stacView = UIStackView(arrangedSubviews: [titleLabel,titlenameLabel,nameTextField,titlesurnameLabel,surnameTextField,titletelLabel,phoneTextField,titledateLabel,dateTextField,titlegenderLabel,genTextField,titlecultLabel,cultTextField,titleaddressLabel,addressTextField])
            stacView.distribution = .fillEqually
-           stacView.spacing = 30
+           stacView.spacing = 0
            stacView.axis = .vertical
         
            self.nameTextField.delegate = self
@@ -374,40 +435,37 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
             viewScroll.addSubview(addressTextFieldTextFieldLine)
     
            
-        viewScroll.anchor(view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+       viewScroll.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+                           
+       btnBack.anchor(viewScroll.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 25, rightConstant: 0, widthConstant: 20, heightConstant: 20)
+              
+        stepView.anchor(btnBack.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX - 0, heightConstant: 110)
         
-        btnBack.anchor(viewScroll.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 15, rightConstant: 0, widthConstant: 20, heightConstant: 20
-               )
-        
-//        titleLabel.anchor(btnBack.bottomAnchor, left: nil, right: nil, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: 0, heightConstant: 100)
-//
-        stepView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX - 0, heightConstant: 110)
-
-        imgView.anchor(BGView.topAnchor, left: nil, right: nil, bottom: nil, topConstant: -60, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 150, heightConstant: 150)
+        imgView.anchor(BGView.topAnchor, left: nil, right: nil, bottom: nil, topConstant: -60, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 160, heightConstant: 160)
             imgView.centerXAnchor.constraint(equalTo: BGView.centerXAnchor).isActive = true
 
         uploadImage.anchor(imgView.topAnchor, left: nil, right: imgView.rightAnchor, bottom: nil, topConstant: 75, bottomConstant: 0, leftConstant: 0, rightConstant: -15, widthConstant: 70, heightConstant: 70)
 
        
-        BGView.anchor(stepView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nextButton.topAnchor, topConstant: 100, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 40, heightConstant: screenSizeY)
+        BGView.anchor(stepView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nextButton.topAnchor, topConstant: 100, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 40, heightConstant: 1050)
 
-        stacView.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 100, bottomConstant: 50, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 100, heightConstant: 700)
+        stacView.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 130, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 100, heightConstant: 0)
  
-        nameTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nameTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
+        nameTextFieldLine.anchor(nameTextField.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: -15, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
-        surnameTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: surnameTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
+        surnameTextFieldLine.anchor(surnameTextField.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: -15, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
-        phoneTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: phoneTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
+        phoneTextFieldLine.anchor(phoneTextField.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: -15, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
-        dateTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: dateTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
+        dateTextFieldLine.anchor(dateTextField.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: -15, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
-        genTextFieldTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: genTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
+        genTextFieldTextFieldLine.anchor(genTextField.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: -15, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
-        cultTextFieldTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: cultTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
+        cultTextFieldTextFieldLine.anchor(cultTextField.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: -15, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
-        addressTextFieldTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: addressTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
+        addressTextFieldTextFieldLine.anchor(addressTextField.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: -15, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
-        nextButton.anchor(BGView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 80, rightConstant: 80, widthConstant: screenSizeX - 160, heightConstant: 70)
+        nextButton.anchor(BGView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 80, rightConstant: 80, widthConstant: screenSizeX - 160, heightConstant: 60)
            // Do any additional setup after loading the view.
        }
 

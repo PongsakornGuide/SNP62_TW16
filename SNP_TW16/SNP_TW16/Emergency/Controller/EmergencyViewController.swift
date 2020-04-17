@@ -10,12 +10,14 @@ import UIKit
 import Alamofire
 import ObjectMapper
 import SDWebImage
+import PopupDialog
 class EmergencyViewController: UITableViewController {
     let defaultValues = UserDefaults.standard
     var user_id = String()
     let URL_GET_TEL = "\(AppDelegate.link)alder_iosapp/v1/emergency.php"
     let URL_GET_TEL_RELATIVE = "\(AppDelegate.link)alder_iosapp/v1/showTel.php"
     let URL_GET_TEL_RELATIVE_ADD = "\(AppDelegate.link)alder_iosapp/v1/showTelRelative.php"
+    let URL_DELETE_TEL_RELATIVE = "\(AppDelegate.link)alder_iosapp/v1/deleteRelativeTel.php"
     var relativeList: [listRelative]?
     var emergencyList: [allListTel]?
     var userRelavite: [addRelative]?
@@ -92,37 +94,109 @@ class EmergencyViewController: UITableViewController {
     //Func call phone
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0{
-                let callRelative = self.relativeList?[indexPath.row]
-            var TelUser = "\(0)\(callRelative?.relativeTel ?? 0)"
-              if let url = URL(string: "tel://\(TelUser)"), UIApplication.shared.canOpenURL(url){
-                                  if #available(iOS 10, *) {
-                                      UIApplication.shared.open(url)
-                                  } else {
-                                      UIApplication.shared.openURL(url)
-                                  }
-                        }
-        }else if indexPath.section == 1{
-                let callEmergency = self.emergencyList?[indexPath.row]
+            let callRelative = self.relativeList?[indexPath.row]
+            let TelUser = "\(0)\(callRelative?.relativeTel ?? 0)"
+            let TelnameUser = callRelative?.relativeName
+        
+            let title = "ติดต่อคุณ : \(TelnameUser ?? "x")"
+            let message = "ติดต่อเบอร์ : \(TelUser)"
+            let image = UIImage(named: "pexels-photo-103290")
 
-                  if let url = URL(string: "tel://\(callEmergency?.emergencyCall ?? 0)"), UIApplication.shared.canOpenURL(url) {
-                            if #available(iOS 10, *) {
-                                UIApplication.shared.open(url)
-                            } else {
-                                UIApplication.shared.openURL(url)
-                            }
+            // Create the dialog
+            let popup = PopupDialog(title: title, message: message, image: image)
+
+            // Create buttons
+            let buttonOne = CancelButton(title: "ยกเลิก") {
+                print("You canceled the car dialog.")
             }
+
+            let buttonTwo = DefaultButton(title: "ต้องการโทร") {
+            let callRelative = self.relativeList?[indexPath.row]
+            let TelUser = "\(0)\(callRelative?.relativeTel ?? 0)"
+                if let url = URL(string: "tel://\(TelUser)"), UIApplication.shared.canOpenURL(url){
+                    if #available(iOS 10, *) {
+                        UIApplication.shared.open(url)
+                } else {
+                        UIApplication.shared.openURL(url)
+                }
+            }
+        }
+
+            popup.addButtons([buttonTwo,buttonOne])
+            self.present(popup, animated: true, completion: nil)
+            
+        }else if indexPath.section == 1{
+            let callRelative = self.emergencyList?[indexPath.row]
+            let TelUser = "\(callRelative?.emergencyCall ?? 0)"
+            let TelnameUser = callRelative?.emergencyName
+            let title = "ติดต่อ : \(TelnameUser ?? "x")"
+                   let message = "ติดต่อเบอร์ : \(TelUser)"
+                   let image = UIImage(named: "pexels-photo-103290")
+
+                   // Create the dialog
+                   let popup = PopupDialog(title: title, message: message, image: image)
+
+                   // Create buttons
+                   let buttonOne = CancelButton(title: "ยกเลิก") {
+                       print("You canceled the car dialog.")
+                   }
+
+                       let buttonTwo = DefaultButton(title: "ต้องการโทร") {
+                            let callEmergency = self.emergencyList?[indexPath.row]
+                              if let url = URL(string: "tel://\(callEmergency?.emergencyCall ?? 0)"), UIApplication.shared.canOpenURL(url) {
+                                        if #available(iOS 10, *) {
+                                            UIApplication.shared.open(url)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                }
+                        }
+                   }
+                   popup.addButtons([buttonTwo,buttonOne])
+
+                   self.present(popup, animated: true, completion: nil)
+            
+            
         }else if indexPath.section == 2{
-            let callAddRelative = self.userRelavite?[indexPath.row]
-            var TelDecide = "\(0)\(callAddRelative?.telphone ?? 0)"
-            if let url = URL(string: "tel://\(TelDecide)"), UIApplication.shared.canOpenURL(url) {
-                      if #available(iOS 10, *) {
-                          UIApplication.shared.open(url)
-                      } else {
-                          UIApplication.shared.openURL(url)
-                      }
-            }
+            let callRelative = self.userRelavite?[indexPath.row]
+            let callIdTel = callRelative?.idTel
+            let TelDecide = "\(0)\(callRelative?.telphone ?? 0)"
+                    let TelnameUser = callRelative?.username
+                    let title = "ติดต่อคุณ : \(TelnameUser ?? "x")"
+                           let message = "ติดต่อเบอร์ : \(TelDecide)"
+                           let image = UIImage(named: "pexels-photo-103290")
+
+                           // Create the dialog
+                           let popup = PopupDialog(title: title, message: message, image: image)
+
+                           // Create buttons
+                           let buttonOne = CancelButton(title: "ยกเลิก") {
+                               print("You canceled the car dialog.")
+                           }
+
+                            let buttonTwo = DefaultButton(title: "ต้องการโทร") {
+                                if let url = URL(string: "tel://\(TelDecide)"), UIApplication.shared.canOpenURL(url) {
+                                          if #available(iOS 10, *) {
+                                              UIApplication.shared.open(url)
+                                          } else {
+                                              UIApplication.shared.openURL(url)
+                                          }
+                                }
+                           }
+                           let buttonThree = DestructiveButton(title: "ลบข้อมูล", height: 60) {
+                            let parameters: Parameters = ["id":"\(callIdTel ?? 0)","user_id":self.user_id]
+                                    let url = self.URL_DELETE_TEL_RELATIVE
+//                                  print(url)
+                            print(parameters)
+                                  Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
+                                    self?.userRelavite?.remove(at: indexPath.row)
+                                    self?.tableView.reloadData()
+                                  }
+                           }
+                           popup.addButtons([buttonTwo,buttonThree,buttonOne])
+                           self.present(popup, animated: true, completion: nil)
         }else{
-            print("section3")
+            let createRelative = CreateRelativeTelView()
+            navigationController?.pushViewController(createRelative, animated: true)
         }
     }
     
@@ -189,10 +263,6 @@ class EmergencyViewController: UITableViewController {
         }
     }
     
-    @objc func addTelUserRelative(){
-        let createRelative = CreateRelativeTelView()
-        navigationController?.pushViewController(createRelative, animated: true)
-    }
     
     @objc func handelSetting(){
         let notificaionView = NotificationTableView()
@@ -227,7 +297,7 @@ class EmergencyViewController: UITableViewController {
         tableView.register(AddTelView.self, forCellReuseIdentifier: cellId2)
         tableView.register(ListRelatuveView.self, forCellReuseIdentifier: cellId3)
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
+        tableView.estimatedRowHeight = 40
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         animateTable()
     }

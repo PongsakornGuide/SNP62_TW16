@@ -17,6 +17,8 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
     private var cellId1 = "Cell1"
     private var cellId2 = "Cell2"
     
+    var idpost = Int()
+    var idpostUser = Int()
     //variable
     var countNotification: [countlistNotification]?
     var notification: [listNotification]?
@@ -36,6 +38,7 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
         getNotificationPostUser()
         getNotificationUser()
         requestData()
+        self.tabBarController?.tabBar.isHidden = false
         tableView.reloadData()
     }
     
@@ -60,13 +63,12 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(self.segmentedControl.selectedSegmentIndex == 0){
-               let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! NotificationColumn
-               let listNoti = notification?[indexPath.row]
-               cell.textLabelTitle.text = "กิจกรรม : \(listNoti?.testtitle ?? "x")"
-               cell.textLabelTitle.textColor = UIColor.rgb(red: 33, green: 64, blue: 154)
-               cell.textLabelTitle.font = UIFont.BaiJamjureeBold(size: 20)
-               cell.textLabelName.text = "ตอนนี้ \(listNoti?.title ?? "x") \nขอให้สนุกกับกิจกรรมในเร็วๆนี้"
-
+              let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! NotificationColumn
+              let listNoti = notification?[indexPath.row]
+              cell.textLabelTitle.text = "กิจกรรม : \(listNoti?.testtitle ?? "x")"
+              cell.textLabelTitle.textColor = UIColor.rgb(red: 33, green: 64, blue: 154)
+              cell.textLabelTitle.font = UIFont.BaiJamjureeBold(size: 20)
+              cell.textLabelName.text = "ตอนนี้ \(listNoti?.title ?? "x") \nขอให้สนุกกับกิจกรรมในเร็วๆนี้"
               let mouthStart = DateFormatter()
               mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
               let date = mouthStart.date(from: listNoti?.create ?? "x")
@@ -74,10 +76,10 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
               let mouthStringStart = mouthStart.string(from: date ?? Date())
               cell.timeLabel.text = "\(mouthStringStart) น."
             
-               tableView.separatorStyle = .none
-                cell.selectionStyle = .none
-                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
-                return cell
+              tableView.separatorStyle = .none
+              cell.selectionStyle = .none
+              cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
+              return cell
        }else{
              let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! NotificationColumnPost
              let listPost = notificationPost?[indexPath.row]
@@ -97,8 +99,9 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
                 if let postImageURL = URL(string: postImagePath) {
                 cell.profileImage.sd_setImage(with: postImageURL, completed: nil)
              }
-                           
             
+             idpost = listPost?.adposttimeline ?? 0
+             idpostUser = listPost?.userPostId ?? 0
              tableView.separatorStyle = .none
              cell.selectionStyle = .none
              cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
@@ -107,6 +110,18 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
         }
 
     }
+    
+    lazy var lineImage: UIView = {
+                 let background = UIView()
+         background.backgroundColor = UIColor.rgb(red: 33, green: 120, blue: 174)
+                    return background
+     }()
+     
+     lazy var lineImage2: UIView = {
+                    let background = UIView()
+                       background.backgroundColor = UIColor.white
+                       return background
+     }()
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
           if(self.segmentedControl.selectedSegmentIndex == 0){
@@ -148,7 +163,7 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
             contentActivity.endtimerAct.text = "\(dateStringEnd)"
 
             //getImage
-            let postImagePath = deatilActvity?.imagePost ?? "0"
+            let postImagePath = "\(AppDelegate.link)alder_iosapp/" + (deatilActvity?.imagePost ?? "0")
                 if let postImageURL = URL(string: postImagePath) {
                         contentActivity.stepView.sd_setImage(with: postImageURL, completed: nil)
             }
@@ -167,10 +182,11 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
             }
             navigationController?.pushViewController(contentActivity, animated: true)
           }else{
-
-//                let CommentView = InputCommentViewController()
-//                CommentView.check = notificationPost?[indexPath.row]
-//                navigationController?.pushViewController(CommentView, animated: true)
+                print("555")
+                let CommentView = PostActivityUserViewController()
+                CommentView.idPost = idpost
+                CommentView.idPostUser = idpostUser
+                navigationController?.pushViewController(CommentView, animated: true)
           }
     }
 
@@ -185,7 +201,6 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
     func getNotificationPostUser(){
                  let parameters: Parameters = ["id":user_id]
                  let url = URL_GET_NOTIFICATION_POST + "?id=\(user_id)"
-                print(url)
                  Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
                     self?.notificationPost = Mapper<allList>().mapArray(JSONObject: dataRes.result.value)
                  }
@@ -211,7 +226,18 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
     
     let segmentedControl: UISegmentedControl = {
          let control = UISegmentedControl(items: ["กิจกรรมของฉัน", "โพสต์ของฉัน"])
-         control.selectedSegmentIndex = 0
+                 control.selectedSegmentIndex = 0
+                 control.backgroundColor = .white
+                 control.tintColor = .clear
+                 
+
+                 control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.BaiJamjureeBold(size: 16),NSAttributedString.Key.backgroundColor: UIColor.white], for: .normal)
+         //        control.backgroundColor = UIColor.white
+                 
+                 
+                 control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black,
+                 NSAttributedString.Key.font: UIFont.BaiJamjureeBold(size: 16),NSAttributedString.Key.backgroundColor: UIColor.white], for: .selected)
+                 
          control.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
          return control
     }()
@@ -220,11 +246,15 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
          switch segmentedControl.selectedSegmentIndex{
          case 0:
              rowToDisplay = notification
+             lineImage2.backgroundColor = UIColor.white
+             lineImage.backgroundColor = UIColor.rgb(red: 33, green: 120, blue: 174)
              getNotificationUser()
              
              break
          default :
              rowToDisplay2 = notificationPost
+             lineImage.backgroundColor = UIColor.white
+             lineImage2.backgroundColor = UIColor.rgb(red: 33, green: 120, blue: 174)
              getNotificationPostUser()
              break
 //         default:
@@ -254,6 +284,7 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         let stackView = UIStackView(arrangedSubviews: [
             segmentedControl
              ])
@@ -261,6 +292,11 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
         let stackView2 = UIStackView(arrangedSubviews: [
             tableView
         ])
+        
+        let stacView3 = UIStackView(arrangedSubviews:[lineImage,lineImage2])
+          stacView3.distribution = .fillEqually
+          stacView3.spacing = 0
+          stacView3.axis = .horizontal
         
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         tableView.register(NotificationColumn.self, forCellReuseIdentifier: cellId)
@@ -276,10 +312,14 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
         view.addSubview(textHeader)
         view.addSubview(stackView)
         view.addSubview(stackView2)
+        view.addSubview(stacView3)
         
         textHeader.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 80)
         
         stackView.anchor(textHeader.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: stackView2.topAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 45)
+        
+        stacView3.anchor(nil, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: stackView.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 6)
+           
         
         stackView2.anchor(stackView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         

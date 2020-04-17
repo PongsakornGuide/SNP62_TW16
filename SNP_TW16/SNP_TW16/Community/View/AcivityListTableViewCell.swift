@@ -137,13 +137,14 @@ class AcivityListTableViewCell: UITableViewCell{
     }()
     
     lazy var typeCom: UILabel = {
-                 let label = UILabel()
-                 label.text = "คอมเม้นต์"
-                 label.textColor = UIColor.blackAlpha(alpha: 0.5)
-                 label.font = UIFont.BaiJamjureeRegular(size: 18)
-                 label.numberOfLines = 0
-                 return label
+          let label = UILabel()
+          label.text = "คอมเม้นต์"
+          label.textColor = UIColor.blackAlpha(alpha: 0.5)
+          label.font = UIFont.BaiJamjureeRegular(size: 18)
+          label.numberOfLines = 0
+          return label
       }()
+    
     
     lazy var postAct  : UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
@@ -189,10 +190,12 @@ class AcivityListTableViewCell: UITableViewCell{
         addSubview(postImage)
         addSubview(iconImageLike)
         addSubview(numCount)
+        addSubview(typeLike)
         addSubview(iconImageComment)
         addSubview(numCom)
+        addSubview(typeCom)
             
-        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: postImage.leftAnchor, right: postImage.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 10, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: postImage.leftAnchor, right: postImage.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 10, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 
             
         profileImage.anchor(bgActivitity.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 60, heightConstant: 60)
@@ -216,12 +219,16 @@ class AcivityListTableViewCell: UITableViewCell{
             
         iconImageLike.anchor(postImage.bottomAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 20, rightConstant: 0, widthConstant: 30, heightConstant: 30)
 
-        numCount.anchor(postImage.bottomAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 40, rightConstant: 0, widthConstant: 0, heightConstant: 30)
-
+        numCount.anchor(postImage.bottomAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 40, rightConstant: 10, widthConstant: 20, heightConstant: 30)
+        
+        
+        typeLike.anchor(postImage.bottomAnchor, left: numCount.rightAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 30)
             
         iconImageComment.anchor(postImage.bottomAnchor, left: nil, right: numCom.leftAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 10, widthConstant: 30, heightConstant: 30)
 
-        numCom.anchor(postImage.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 40, widthConstant: 0, heightConstant: 30)
+        numCom.anchor(postImage.bottomAnchor, left: nil, right: typeCom.leftAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 10, rightConstant: 0, widthConstant: 20, heightConstant: 30)
+        
+        typeCom.anchor(postImage.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 30)
     }
     
     

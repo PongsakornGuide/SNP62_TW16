@@ -37,9 +37,9 @@ class EmergencyView: UITableViewCell {
                 let title = "ต้องการความช่วยเหลือ"
                 let text = "\nโทรด่วน"
                 let attributedText = NSMutableAttributedString(string: title,
-                attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 30),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
+                attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 28),NSMutableAttributedString.Key.foregroundColor : UIColor.white])
 
-                attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 40),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
+                attributedText.append(NSMutableAttributedString(string: text,attributes: [NSMutableAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 30),NSMutableAttributedString.Key.foregroundColor: UIColor.white]))
 
                 label.attributedText = attributedText
                 label.numberOfLines = 0
@@ -82,7 +82,7 @@ class EmergencyView: UITableViewCell {
              style.alignment = NSTextAlignment.center
         
              let attributedText = NSMutableAttributedString(string: title,
-             attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 24),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 33, green: 64, blue: 154)])
+             attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.red])
              label.attributedText = attributedText
              label.numberOfLines = 2
                 label.textAlignment = .center

@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import MultiDegreeLikeButton
 import SDWebImage
+import PopupDialog
 class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
     
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
@@ -255,7 +256,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
          image.layer.shadowOffset = CGSize(width: 0, height: 0)
          image.layer.shadowRadius = 10
          image.layer.shouldRasterize = true
-         image.setTitle("กระทู้ของฉัน", for: .normal)
+//         image.setTitle("กระทู้ของฉัน", for: .normal)
          image.contentVerticalAlignment = .bottom
          image.setTitleColor(UIColor.black,for: .normal)
          image.titleLabel?.font = UIFont.BaiJamjureeBold(size: 20)
@@ -302,13 +303,36 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
             image.layer.shadowOffset = CGSize(width: 0, height: 0)
             image.layer.shadowRadius = 10
             image.layer.shouldRasterize = true
-            image.setTitle("กิจกรรมของฉัน", for: .normal)
+//            image.setTitle("กิจกรรมของฉัน", for: .normal)
             image.contentVerticalAlignment = .bottom
             image.setTitleColor(UIColor.black,for: .normal)
             image.titleLabel?.font = UIFont.BaiJamjureeBold(size: 20)
             image.addTarget(self, action: #selector(listUserActivity), for: .touchUpInside)
             return image
     }()
+    
+    lazy var title1 : UILabel = {
+        let label = UILabel()
+        let title = "กิจกรรมของฉัน"
+      let style = NSMutableParagraphStyle()
+       style.alignment = NSTextAlignment.center
+       let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+        label.attributedText = attributedText
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var title2 : UILabel = {
+        let label = UILabel()
+        let title = "กระทู้ของฉัน"
+      let style = NSMutableParagraphStyle()
+       style.alignment = NSTextAlignment.center
+       let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+        label.attributedText = attributedText
+        label.numberOfLines = 0
+        return label
+    }()
+    
     
     func reloadData(){
         let parameters: Parameters = ["userId":getIduser]
@@ -319,11 +343,13 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                             print(user)
                                 if let yield = user["username"] as? String{
                                     self?.nameHeader.text = yield
+                                    self?.nameHeader.textAlignment = .center
                                     self?.nameHeader.font = UIFont.BaiJamjureeBold(size: 22)
                                 }
                             
                                 if let yield = user["surname"] as? String{
                                     self?.surnameHeader.text = yield
+                                    self?.surnameHeader.textAlignment = .center
                                     self?.surnameHeader.font = UIFont.BaiJamjureeBold(size: 22)
                                 }
                    
@@ -361,16 +387,6 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                 
               }
     }
-    
-    
-
-
-    @objc func handelSetting(){
-            let notificaionView = NotificationTableView()
-            navigationController?.pushViewController(notificaionView, animated: true)
-    }
-    
-    
     
 
     lazy var pointAcivity: UIView = {
@@ -488,7 +504,51 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                           }
                     }
      }
-     
+    
+//    @objc func handelSetting(){
+//            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+//            UserDefaults.standard.synchronize()
+//            let loginViewController = LoginViewController()
+//            self.navigationController?.pushViewController(loginViewController, animated: true)
+//            self.dismiss(animated: false, completion: nil)
+//    }
+    
+    
+    @objc func moreOther(_sender:UIButton){
+//         postIdtitle = _sender.tag
+//         postId = _sender.titleLabel?.tag ?? 0
+        
+        //Prepare the popup assets
+        let title = "ตั้งค่า"
+
+        let message = "This is the message section of the popup dialog default view"
+
+        // Create the dialog
+        let popup = PopupDialog(title: title, message: message)
+        // Create buttons
+        let buttonOne = CancelButton(title: "ยกเลิก") {
+            print("You canceled the car dialog.")
+        }
+        // This button will not the dismiss the dialog
+        let buttonTwo = DestructiveButton(title: "ออกจากระบบ") {
+            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+            UserDefaults.standard.synchronize()
+            let loginViewController = LoginViewController()
+            self.navigationController?.pushViewController(loginViewController, animated: true)
+            self.dismiss(animated: false, completion: nil)
+        }
+        
+        // This button will not the dismiss the dialog
+        let buttonThree = DefaultButton(title: "แก้ไขข้อมูล") {
+            let EditVuew = editProfileView()
+            self.navigationController?.pushViewController(EditVuew, animated: true)
+        }
+        
+        
+        popup.addButtons([buttonTwo,buttonThree,buttonOne])
+        self.present(popup, animated: true, completion: nil)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -498,12 +558,12 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
                 navigationController?.navigationBar.titleTextAttributes = textAttributes
         
         
+             
         
-        let settings = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(handelSetting))
-        settings.width = 0.5
-        settings.tintColor = UIColor.rgb(red: 253, green: 173, blue: 82)
-        navigationItem.rightBarButtonItem = settings
+            let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(moreOther))
+                       settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
         
+                       navigationItem.rightBarButtonItem = settings
         
         let stacView = UIStackView(arrangedSubviews:[nameHeader,surnameHeader])
         stacView.distribution = .fillEqually
@@ -551,6 +611,8 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         viewScroll.addSubview(iconPost)
         viewScroll.addSubview(iconActivity)
         viewScroll.addSubview(titleActivity)
+        viewScroll.addSubview(title1)
+        viewScroll.addSubview(title2)
         viewScroll.addSubview(stacView3)
         viewScroll.addSubview(numActivty)
          viewScroll.addSubview(endActivty)
@@ -584,7 +646,7 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         
         dataUser.anchor(editProfile.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 15, rightConstant: 15, widthConstant: 0, heightConstant: 280)
 
-        stacView.anchor(dataUser.topAnchor, left: dataUser.leftAnchor, right: dataUser.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 20, leftConstant: 10, rightConstant: 10, widthConstant: screenSizeX, heightConstant: 80)
+        stacView.anchor(dataUser.topAnchor, left: dataUser.leftAnchor, right: dataUser.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 80)
         
         iconNursingHome.anchor(stacView.bottomAnchor, left: nil, right: nursingHome.leftAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 
@@ -620,6 +682,10 @@ class ProfileVIewController: UIViewController,UINavigationControllerDelegate{
         iconActivity.anchor(activityUser.topAnchor, left: activityUser.leftAnchor, right:activityUser.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: iconActivity.frame.size.width , heightConstant: iconActivity.frame.size.height )
 
         iconPost.anchor(postUser.topAnchor, left: postUser.leftAnchor, right:postUser.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: iconPost.frame.size.width, heightConstant: iconPost.frame.size.height)
+        
+        title2.anchor(iconActivity.bottomAnchor, left: postUser.leftAnchor, right:postUser.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: iconActivity.frame.size.width, heightConstant: iconActivity.frame.size.height)
+        
+        title1.anchor(iconPost.bottomAnchor, left: activityUser.leftAnchor, right:activityUser.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: iconPost.frame.size.width, heightConstant: iconPost.frame.size.height)
         
 
 

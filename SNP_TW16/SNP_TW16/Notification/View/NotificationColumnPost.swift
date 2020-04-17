@@ -90,7 +90,7 @@ class NotificationColumnPost: UITableViewCell {
            addSubview(textLabelTitle)
            addSubview(iconImage)
            addSubview(timeLabel)
-           
+
         bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 5, bottomConstant: 5, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         

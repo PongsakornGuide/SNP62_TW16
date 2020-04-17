@@ -59,6 +59,6 @@ class CheckBoxTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCon
 
            bgImage.anchor(bgCheck.topAnchor, left: bgCheck.leftAnchor, right: nil, bottom: nil, topConstant: 15, bottomConstant: 20, leftConstant: 20, rightConstant: 0, widthConstant: 90, heightConstant: 90)
 
-           textHeader.anchor(bgCheck.topAnchor, left: bgImage.rightAnchor, right: nil, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant:0)
+        textHeader.anchor(bgCheck.topAnchor, left: bgImage.rightAnchor, right: nil, bottom: bgCheck.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant:0)
        }
 }

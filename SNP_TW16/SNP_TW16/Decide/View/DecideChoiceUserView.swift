@@ -54,7 +54,7 @@ class DecideChoiceUserView: UITableViewCell,UITextFieldDelegate,UINavigationCont
            addSubview(bgImage)
            addSubview(textHeader)
            backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-            bgImage.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: nil, bottom: nil, topConstant: 35, bottomConstant: 0, leftConstant: 40, rightConstant: 0, widthConstant: 40, heightConstant:40)
+            bgImage.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 0, widthConstant: 40, heightConstant:40)
         
            textHeader.anchor(safeAreaLayoutGuide.topAnchor, left: bgImage.rightAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 40, widthConstant: 0, heightConstant:100)
        }

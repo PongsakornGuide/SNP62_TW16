@@ -17,4 +17,5 @@ target 'SNP_TW16' do
   pod 'KMPlaceholderTextView'
   pod 'SDWebImage', '~> 5.0'
   pod 'PopupDialog', '~> 1.1'
+  pod 'TwicketSegmentedControl'
 end

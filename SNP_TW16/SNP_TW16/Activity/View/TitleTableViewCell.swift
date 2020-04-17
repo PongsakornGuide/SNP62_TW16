@@ -66,7 +66,7 @@ class TitleTableViewCell: UITableViewCell {
                   )
            
         
-        titleHeader.anchor(bgImage.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        titleHeader.anchor(bgImage.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: textHeader.topAnchor, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 45)
 //           titleHeader.centerXAnchor.constraint(equalTo: bgActivitity.centerXAnchor).isActive = true
         
            textHeader.anchor(titleHeader.bottomAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 0)

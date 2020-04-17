@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import ObjectMapper
+import TwicketSegmentedControl
 class InviteActivityViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,UINavigationControllerDelegate {
 
     var ActivityStart: [ActivityDetail]?
@@ -16,6 +17,7 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
     lazy var IdPost = Int()
     lazy var buttonView = UIButton()
     lazy var buttonView2 = UIButton()
+    lazy var IdPostFormDecilde = String()
     let URL_GET_POST = "\(AppDelegate.link)alder_iosapp/v1/userActivityEnd.php"
     let URL_GET_POST_ACTIVITY_START = "\(AppDelegate.link)alder_iosapp/v1/userActivityStart.php"
     
@@ -56,6 +58,18 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
         }
     }
     
+    lazy var lineImage: UIView = {
+                let background = UIView()
+        background.backgroundColor = UIColor.rgb(red: 33, green: 120, blue: 174)
+                   return background
+    }()
+    
+    lazy var lineImage2: UIView = {
+                   let background = UIView()
+                      background.backgroundColor = UIColor.white
+                      return background
+    }()
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if(self.segmentedControl.selectedSegmentIndex == 0){
@@ -71,7 +85,7 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                         let mouthStringStart = mouthStart.string(from: mouthStringStartt ?? Date())
                         cell.supportTime.text = mouthStringStart
                         
-                        let profileImagePath = ((listActivity?.imagePost ?? "0")!)
+                        let profileImagePath = ("\(AppDelegate.link)alder_iosapp/" + (listActivity?.imagePost ?? "0")!)
                                 if let postImageURL = URL(string: profileImagePath) {
                                 cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
                         }
@@ -99,15 +113,17 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                        let mouthStringStart = mouthStart.string(from: mouthStringStartt ?? Date())
                        cell.supportTime.text = mouthStringStart
             
-                       let profileImagePath = ((listActivity?.imagePost ?? "0")!)
+                       let profileImagePath = ("\(AppDelegate.link)alder_iosapp/" + (listActivity?.imagePost ?? "0")!)
                             if let postImageURL = URL(string: profileImagePath) {
                             cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
 //
                               
                         }
-                        
-                        
+                                    
                         IdPost =  listActivity?.dataId ?? 0
+            
+                        cell.CheckPoint.titleLabel?.tag = listActivity?.dataId ?? 0
+            
             
                         let parameters: Parameters = ["user_id":user_id,"post_timeline_id":IdPost]
                         Alamofire.request(URL_GET_CHECK_DECIDE, method: .post,parameters: parameters).responseJSON { response in
@@ -131,14 +147,16 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
 
     }
     
-
     
     
-    @objc func ClickUser(){
+    @objc func ClickUser(_sender:UIButton){
+        IdPostFormDecilde = "\(_sender.titleLabel?.tag ?? 0)"
         let passData = DecideAfterViewController()
         passData.delegate = self
-        passData.post_timeline = IdPost
+        passData.post_timeline = IdPostFormDecilde
         passData.IdUser = user_id
+        print(IdPost)
+        print(user_id)
         self.navigationController?.pushViewController(passData, animated: true)
         self.tableView.reloadData()
     }
@@ -177,19 +195,32 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
     let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["กิจกรรมที่เข้าร่วม", "กิจกรรมที่เข้าร่วมแล้ว"])
         control.selectedSegmentIndex = 0
-        control.tintColor = .red
+        control.backgroundColor = .white
+        control.tintColor = .clear
+        
+
+        control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.BaiJamjureeBold(size: 16)], for: .normal)
+//        control.backgroundColor = UIColor.white
+        
+        
+        control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black,
+        NSAttributedString.Key.font: UIFont.BaiJamjureeBold(size: 16)], for: .selected)
+        
         control.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
         return control
     }()
-    
     
     @objc fileprivate func handleSegmentChange(){
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             rowToDisplay2 = ActivityStart
+            lineImage2.backgroundColor = UIColor.white
+            lineImage.backgroundColor = UIColor.rgb(red: 33, green: 120, blue: 174)
             break
         default:
             rowToDisplay = ActivityList
+            lineImage.backgroundColor = UIColor.white
+            lineImage2.backgroundColor = UIColor.rgb(red: 33, green: 120, blue: 174)
             break
         }
         tableView.reloadData()
@@ -203,6 +234,11 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "กิจกรรมของฉัน"
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
+                       navigationController?.navigationBar.titleTextAttributes = textAttributes
+               
         
         if let name2 = defaultValues.string(forKey: "userId") {
             user_id = name2
@@ -225,6 +261,12 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                 tableView
         ])
         
+        let stacView3 = UIStackView(arrangedSubviews:[lineImage,lineImage2])
+        stacView3.distribution = .fillEqually
+        stacView3.spacing = 0
+        stacView3.axis = .horizontal
+        
+
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId1)
         
@@ -237,10 +279,15 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
         view.addSubview(stackView)
         view.addSubview(stackView2)
         view.addSubview(titleHeader)
+        view.addSubview(stacView3)
+       
         
         titleHeader.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 80)
         
-        stackView.anchor(titleHeader.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: stackView2.topAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 35)
+        stackView.anchor(titleHeader.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: stackView2.topAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 45)
+        
+    
+        stacView3.anchor(nil, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: stackView.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 6)
         
         stackView2.anchor(stackView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }

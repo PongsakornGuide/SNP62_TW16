@@ -64,7 +64,7 @@ class DetailReligionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        navigationItem.title = "กิจกรรม"
+        navigationItem.title = "บทสวดมนต์"
         view.addSubview(viewScroll)
         viewScroll.addSubview(stepView)
         viewScroll.addSubview(BGView)

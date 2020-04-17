@@ -15,7 +15,7 @@ class DecideChoiceViewController: UITableViewController{
 //    let URL_SHOW_ACTIVITY = "\(AppDelegate.link)alder_iosapp/v1/showTitleActivity.php"
     var activityList: [ListDetailActivity]?
     
-    var idpost:Int?
+    var idpost:String?
     var idUser:String?
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
@@ -83,31 +83,30 @@ class DecideChoiceViewController: UITableViewController{
         }
     }
     
+    @objc func actionJoin(){
+      let selectedIndex = tableView.indexPathsForSelectedRows
+      let index = selectedIndex?.compactMap{ " \( 1 + $0.row)" }
+      var selectedChoice = index?.joined(separator: ",") ?? ""
+      let parameters: Parameters = ["user_id":idUser ?? 0,"post_timeline_id":idpost ?? 0,"decide_supplement_id":selectedChoice]
+      Alamofire.request(URL_USER_REGISTER, method: .post,parameters: parameters).responseJSON { response in
+              print(response)
+                      if let result = response.result.value {
+                      let jsonData = result as! NSDictionary
+                      if(!(jsonData.value(forKey: "error") as! Bool )){
+                        self.view.window?.rootViewController = tabBarViewController()
+                        self.view.window?.makeKeyAndVisible()
+               }
+          }
+      }
+    }
 
     @objc func pushCheckBox(){
-//        guard let cell = DiseaseTableViewCell.diseaseDetailTextField.text else { return }
-        let selectedIndex = tableView.indexPathsForSelectedRows
-        let index = selectedIndex?.compactMap{ " \( 1 + $0.row)" }
-        var selectedChoice = index?.joined(separator: ",") ?? ""
-        let parameters: Parameters = ["user_id":idUser ?? 0,"post_timeline_id":idpost ?? 0,"decide_supplement_id":selectedChoice]
-        Alamofire.request(URL_USER_REGISTER, method: .post,parameters: parameters).responseJSON { response in
-                print(response)
-                        if let result = response.result.value {
-                        let jsonData = result as! NSDictionary
-                        if(!(jsonData.value(forKey: "error") as! Bool )){
-                            let alertController = UIAlertController(title: "ทำการเมินเรียบร้อย", message: "ขอบคุณสำหรับความคิดเห็น", preferredStyle: .alert)
-
-                            let action1 = UIAlertAction(title: "กลับสู่หน้า Home", style: .default) { (action:UIAlertAction) in
-                                 self.view.window?.rootViewController = tabBarViewController()
-                                 self.view.window?.makeKeyAndVisible()
-                            }
-
-                            alertController.addAction(action1)
-                            self.present(alertController, animated: true, completion: nil)
-                 }
-            }
-        }
-}
+        let popOverVC = AlertDecideAfterSection2ViewController()
+        self.addChild(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParent: self)
+    }
     
     
     override func viewDidLoad() {

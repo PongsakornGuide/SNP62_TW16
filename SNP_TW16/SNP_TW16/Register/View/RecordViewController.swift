@@ -27,9 +27,7 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
           relativeTypeTextField.text = friend[row]
-          self.view.endEditing(false)
     }
         
     
@@ -164,48 +162,75 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
             label.numberOfLines = 0
             return label
         }()
-        //-----------------------------------------------------------------------------------------------
+    
+
+                     
+    
+    //-----------------------------------------------------------------------------------------------
+    
+    
+                lazy var titlerelativeNameLabel : UILabel = {
+                        let label = UILabel()
+                        let title = "ชื่อญาติ:"
+                        let attributedText = NSMutableAttributedString(string: title,
+                                                  attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+                        label.attributedText = attributedText
+                        label.numberOfLines = 0
+                        return label
+                }()
+    
                 let relativeNameTextField: UITextField = {
                    let textField = UITextField()
-                   textField.attributedPlaceholder = NSAttributedString(string: "ชื่อญาติ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-                   textField.textColor = .black
-                   //textField.addTarget(self, action: #selector(checkOnClick), for: .editingChanged)
-                   textField.font = UIFont.BaiJamjureeBold(size: 20)
+                   textField.attributedPlaceholder = NSAttributedString(string: "ชื่อญาติ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                    return textField
                }()
                let relativeKTextFieldLine: UIView = {
                       let view = UIView()
-                      view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
+                      view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                       return view
                }()
            //-----------------------------------------------------------------------------------------------
+    
+                lazy var titlerelativePhoneLabel : UILabel = {
+                        let label = UILabel()
+                        let title = "เบอร์โทรศัพท์:"
+                        let attributedText = NSMutableAttributedString(string: title,
+                                                  attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+                        label.attributedText = attributedText
+                        label.numberOfLines = 0
+                        return label
+                }()
+    
                let relativePhoneTextField: UITextField = {
                    let textField = UITextField()
-                   textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์",attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20) ,NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-                   textField.textColor = .black
-                   //textField.addTarget(self, action: #selector(handelemailCheckValid), for: .editingChanged)
-                   textField.font = UIFont.BaiJamjureeBold(size: 20)
-                   textField.keyboardType = .emailAddress
+                   textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์",attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                    return textField
                }()
                let relativePhoneTextFieldLine: UIView = {
                    let view = UIView()
-                   view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
+                   view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                    return view
                }()
            //-----------------------------------------------------------------------------------------------
+    
+                lazy var titlerelativeTypeLabel : UILabel = {
+                           let label = UILabel()
+                           let title = "สถานะ:"
+                           let attributedText = NSMutableAttributedString(string: title,
+                                                     attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+                           label.attributedText = attributedText
+                           label.numberOfLines = 0
+                           return label
+               }()
+    
                let relativeTypeTextField: UITextField = {
                    let textField = UITextField()
-                   textField.attributedPlaceholder = NSAttributedString(string: "สถานะ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-                   textField.textColor = .black
-                   //textField.addTarget(self, action: #selector(handlepasswordCheckValid), for: .editingChanged)
-    //               textField.isSecureTextEntry = true
-                   textField.font = UIFont.BaiJamjureeBold(size: 20)
+                   textField.attributedPlaceholder = NSAttributedString(string: "สถานะ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                    return textField
                }()
                let relativeTypeTextFieldLine: UIView = {
                    let view = UIView()
-                   view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
+                   view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                    return view
                }()
     
@@ -239,6 +264,11 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
             print(AddressLabelText)
             print(GenderLabelText)
         
+        navigationItem.title = "ข้อมูลส่วนตัว"
+
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
               friendPicker.delegate = self
               friendPicker.dataSource = self
               relativeTypeTextField.inputView = friendPicker
@@ -248,7 +278,7 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
 
         
         
-            let stacView = UIStackView(arrangedSubviews: [relativeNameTextField,relativePhoneTextField,relativeTypeTextField])
+            let stacView = UIStackView(arrangedSubviews: [titlerelativeNameLabel,relativeNameTextField,titlerelativePhoneLabel,relativePhoneTextField,titlerelativeTypeLabel,relativeTypeTextField])
                        stacView.distribution = .fillEqually
                        stacView.spacing = 0
                        stacView.axis = .vertical
@@ -258,6 +288,7 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
                        self.relativeTypeTextField.delegate = self
                
                        view.addSubview(viewScroll)
+                       viewScroll.addSubview(btnBack)
                        viewScroll.addSubview(stepView)
                        viewScroll.addSubview(BGView)
                        viewScroll.addSubview(titleLabel)
@@ -269,28 +300,32 @@ class RecordViewController: UIViewController, UITextFieldDelegate ,UINavigationC
                        
         
         
-                btnBack.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 20, heightConstant: 20
+                  
+        
+                viewScroll.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+                     
+                    btnBack.anchor(viewScroll.topAnchor, left: view.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 25, rightConstant: 0, widthConstant: 20, heightConstant: 20
                )
-                    viewScroll.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-                       
-                   stepView.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX - 0, heightConstant: 115)
+        
+                    stepView.anchor(btnBack.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: screenSizeX - 0, heightConstant: 110)
+
 
                        
-                    BGView.anchor(stepView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nextButton.topAnchor, topConstant: 50, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 40, heightConstant: screenSizeY)
+                    BGView.anchor(stepView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nextButton.topAnchor, topConstant: 20, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 40, heightConstant: screenSizeY)
 
-                    stacView.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 100, bottomConstant: 50, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 100, heightConstant: 300)
+                    stacView.anchor(titleLabel.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 50, bottomConstant: 50, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX - 100, heightConstant: 400)
                        //stacView.widthAnchor.constraint(lessThanOrEqualToConstant: 200).isActive = true
                         
                     titleLabel.anchor(BGView.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: stacView.topAnchor, topConstant: 50, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
                     
-                    relativeKTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: relativeNameTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
+                    relativeKTextFieldLine.anchor(relativeNameTextField.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: -15, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
                         
-                    relativePhoneTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: relativePhoneTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
+                    relativePhoneTextFieldLine.anchor(relativePhoneTextField.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: -15, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
-                    relativeTypeTextFieldLine.anchor(nil, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: relativeTypeTextField.bottomAnchor, topConstant: 0, bottomConstant: 10, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
+                    relativeTypeTextFieldLine.anchor(relativeTypeTextField.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: -15, bottomConstant: 0, leftConstant: 40, rightConstant: 40 , widthConstant: screenSizeX - 140, heightConstant: 1.5)
 
                        
-                    nextButton.anchor(BGView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 80, rightConstant: 80, widthConstant: screenSizeX - 160, heightConstant: 70)
+                    nextButton.anchor(BGView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 80, rightConstant: 80, widthConstant: screenSizeX - 160, heightConstant: 60)
                        // Do any additional setup after loading the view.
                    }
 

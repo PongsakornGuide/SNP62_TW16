@@ -44,34 +44,31 @@ class AddTelView: UITableViewCell {
           return title
       }()
     
-    var btnCell : UIButton = {
-        let bg = UIButton(type: .system)
-        bg.setTitle("+", for: .normal)
-        bg.titleLabel?.font = UIFont.BaiJamjureeMedium(size: 65)
-        bg.setTitleColor(UIColor.rgb(red: 33, green: 64, blue: 154), for: .normal)
-        bg.addTarget(self, action: #selector(addTelUserRelative), for: .touchUpInside)
-        return bg
+    
+    lazy var ImageCall : UIImageView = {
+           let image = UIImageView()
+           image.image = UIImage(named: "call")
+           image.contentMode = .scaleAspectFill
+           return image
     }()
     
-    @objc func addTelUserRelative(){
-//        print("555")
-    }
-    
+
     func setLayout(){
         backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         addSubview(bgActivitity)
         addSubview(bgEmergency)
         addSubview(titleLabel)
-        addSubview(btnCell)
+        addSubview(ImageCall)
         
-        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 100)
+        bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 90)
         
         bgEmergency.anchor(bgActivitity.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 80)
         
         
-        titleLabel.anchor(bgEmergency.topAnchor, left: bgEmergency.leftAnchor, right: btnCell.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 25, rightConstant: 25, widthConstant: 0, heightConstant: 0)
+        titleLabel.anchor(bgEmergency.topAnchor, left: bgEmergency.leftAnchor, right: ImageCall.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 25, rightConstant: 25, widthConstant: 0, heightConstant: 0)
         
-        btnCell.anchor(bgEmergency.topAnchor, left: nil, right: rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 25, leftConstant: 0, rightConstant: 50, widthConstant: 0, heightConstant: 30)
+        ImageCall.anchor(bgEmergency.topAnchor, left: nil, right: bgEmergency.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 25, rightConstant: 25, widthConstant: 30, heightConstant: 30)
+         
     
     }
 }

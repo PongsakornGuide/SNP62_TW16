@@ -32,9 +32,7 @@ class CreateRelativeTelView: UIViewController {
     //-----------------------------------------------------------------------------------------------
     lazy var nameTextField: UITextField = {
         let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
-        textField.textColor = .black
-        textField.font = UIFont.BaiJamjureeBold(size: 15)
+        textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 18), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
         return textField
     }()
     
@@ -47,9 +45,7 @@ class CreateRelativeTelView: UIViewController {
 
     lazy var telTextField: UITextField = {
         let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
-        textField.textColor = .black
-        textField.font = UIFont.BaiJamjureeBold(size: 15)
+        textField.attributedPlaceholder = NSAttributedString(string: "เบอร์โทรศัพท์", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 18), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
         return textField
     }()
     
@@ -81,14 +77,15 @@ class CreateRelativeTelView: UIViewController {
         label.text = "กรุณากรอกเบอร์โทรศัพท์ให้ครบ"
         label.textColor = .red
         label.textAlignment = .center
-        label.font = UIFont.BaiJamjureeBold(size: 18)
+        label.font = UIFont.BaiJamjureeBold(size: 16)
         return label
       }()
     
     //-----------------------------------------------------------------------------------------------
     
+ 
     @objc func pushToRelatvie(){
-        let checkTel = telTextField.text?.count ?? 0 >= 10 && nameTextField.text?.count ?? 0 > 2 && nameTextField.text?.count ?? 0 < 20
+        let checkTel = telTextField.text?.count ?? 0 >= 10 && nameTextField.text?.count ?? 0 > 1 && nameTextField.text?.count ?? 0 < 20
         if !checkTel{
             print("OTP NOT REGISTER")
             alertLabel.isHidden = false
@@ -107,6 +104,10 @@ class CreateRelativeTelView: UIViewController {
         }
     }
     
+    //-----------------------------------------------------------------------------------------------
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -118,6 +119,12 @@ class CreateRelativeTelView: UIViewController {
         view.addSubview(telTextFieldLine)
         view.addSubview(addTel)
         view.addSubview(alertLabel)
+        
+        navigationItem.title = "เพิ่มเบอร์ติดต่อ"
+
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
         alertLabel.isHidden = true
         if let user = defaultValues.string(forKey: "userId") {
                          user_id = user
@@ -126,21 +133,21 @@ class CreateRelativeTelView: UIViewController {
                            //send back to login view controller
         }
         
-        bgActivitity.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 200)
+        bgActivitity.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
        
-        textHeader.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 80, bottomConstant: 0, leftConstant: 25, rightConstant: 25, widthConstant: 0, heightConstant: 0)
+        textHeader.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 25, rightConstant: 25, widthConstant: 0, heightConstant: 0)
         
         nameTextField.anchor(textHeader.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 80, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
         
-        nameTextFieldLine.anchor(nameTextField.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
+        nameTextFieldLine.anchor(nameTextField.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
          
         
         telTextField.anchor(nameTextFieldLine.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 80, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
-             
-               telTextFieldLine.anchor(telTextField.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
+            
+        telTextFieldLine.anchor(telTextField.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
         
-        addTel.anchor(telTextFieldLine.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 80)
-        
-         alertLabel.anchor(addTel.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 80)
+        addTel.anchor(telTextFieldLine.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 60)
+
+        alertLabel.anchor(addTel.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 20)
     }
 }

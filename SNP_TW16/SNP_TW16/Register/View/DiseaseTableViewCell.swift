@@ -60,30 +60,51 @@ class DiseaseTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
                 return label
    }()
     
+    
+   //-----------------------------------------------------------------------------------------------
+    
+    lazy var titlediseaseNameLabel : UILabel = {
+                          let label = UILabel()
+                          let title = "โรค:"
+                          let attributedText = NSMutableAttributedString(string: title,
+                                                    attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+                          label.attributedText = attributedText
+                          label.numberOfLines = 0
+                          return label
+   }()
+    
+    
+    
    static var diseaseNameTextField: UITextField = {
                          let textField = UITextField()
-                         textField.attributedPlaceholder = NSAttributedString(string: "โรคประจำตัว", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-                         textField.textColor = .black
-                         textField.font = UIFont.BaiJamjureeBold(size: 20)
+                         textField.attributedPlaceholder = NSAttributedString(string: "โรคประจำตัว", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                          return textField
                      }()
     lazy var diseaseTextFieldLine: UIView = {
                             let view = UIView()
-                            view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
+                            view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                             return view
                      }()
        
-                 //-----------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------
+    lazy var titlediseaseDetailLabel : UILabel = {
+                           let label = UILabel()
+                           let title = "รายละเอียดอื่นๆ:"
+                           let attributedText = NSMutableAttributedString(string: title,
+                                                     attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+                           label.attributedText = attributedText
+                           label.numberOfLines = 0
+                           return label
+    }()
+    
     static var diseaseDetailTextField: UITextField = {
             let textField = UITextField()
-            textField.attributedPlaceholder = NSAttributedString(string: "รายละเอียดอื่นๆ",attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
-             textField.textColor = .black
-             textField.font = UIFont.BaiJamjureeBold(size: 20)
-             return textField
+            textField.attributedPlaceholder = NSAttributedString(string: "รายละเอียดอื่นๆ",attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
+            return textField
                      }()
     lazy var diseaseDetailTextFieldLine: UIView = {
             let view = UIView()
-            view.backgroundColor = UIColor.blackAlpha(alpha: 0.5)
+            view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
             return view
     }() //-----------------------------------------------------------------------------------------------
         
@@ -93,8 +114,10 @@ class DiseaseTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
         backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         addSubview(BGView)
         addSubview(titleLabel)
+        addSubview(titlediseaseNameLabel)
         addSubview(DiseaseTableViewCell.diseaseNameTextField)
         addSubview(diseaseTextFieldLine)
+        addSubview(titlediseaseDetailLabel)
         addSubview(DiseaseTableViewCell.diseaseDetailTextField)
         addSubview(diseaseDetailTextFieldLine)
         diseasePickerView.delegate = self
@@ -102,18 +125,24 @@ class DiseaseTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
         DiseaseTableViewCell.diseaseNameTextField.inputView = diseasePickerView
         
         
-        BGView.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 350)
+        BGView.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 
         titleLabel.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 30)
         
-        DiseaseTableViewCell.diseaseNameTextField.anchor(titleLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 100)
+        titlediseaseNameLabel.anchor(titleLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
         
-        diseaseTextFieldLine.anchor(DiseaseTableViewCell.diseaseNameTextField.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
+        DiseaseTableViewCell.diseaseNameTextField.anchor(titlediseaseNameLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        
+        
+        diseaseTextFieldLine.anchor(DiseaseTableViewCell.diseaseNameTextField.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
+        
+        
+        titlediseaseDetailLabel.anchor(diseaseTextFieldLine.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        
 
-        
-        DiseaseTableViewCell.diseaseDetailTextField.anchor(diseaseTextFieldLine.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 100)
-        
-        diseaseDetailTextFieldLine.anchor(DiseaseTableViewCell.diseaseDetailTextField.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 0, bottomConstant: 40, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
+        DiseaseTableViewCell.diseaseDetailTextField.anchor(titlediseaseDetailLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+
+        diseaseDetailTextFieldLine.anchor(DiseaseTableViewCell.diseaseDetailTextField.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: BGView.bottomAnchor, topConstant: 10, bottomConstant: 40, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
 
     }
     

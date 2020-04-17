@@ -90,12 +90,12 @@ class DetailActivityViewController: UITableViewCell {
     }
     
     lazy var numCount: UILabel = {
-              let label = UILabel()
-              label.text = "0"
-              label.textColor = UIColor.blackAlpha(alpha: 0.5)
-              label.font = UIFont.BaiJamjureeRegular(size: 20)
-              label.numberOfLines = 0
-              return label
+            let label = UILabel()
+            label.text = "0"
+            label.textColor = UIColor.blackAlpha(alpha: 0.5)
+            label.font = UIFont.BaiJamjureeRegular(size: 20)
+            label.numberOfLines = 0
+            return label
     }()
     
     lazy var iconImageComment: UIButton = {
@@ -122,6 +122,22 @@ class DetailActivityViewController: UITableViewCell {
             return view
     }()
 
+    lazy var typeLike: UILabel = {
+               let label = UILabel()
+               label.text = "ถูกใจ"
+               label.textColor = UIColor.blackAlpha(alpha: 0.5)
+               label.font = UIFont.BaiJamjureeRegular(size: 18)
+               label.numberOfLines = 0
+               return label
+    }()
+    lazy var typeCom: UILabel = {
+                    let label = UILabel()
+                    label.text = "คอมเม้นต์"
+                    label.textColor = UIColor.blackAlpha(alpha: 0.5)
+                    label.font = UIFont.BaiJamjureeRegular(size: 18)
+                    label.numberOfLines = 0
+                    return label
+    }()
 
     
     func setupViewCell(){
@@ -134,8 +150,10 @@ class DetailActivityViewController: UITableViewCell {
         addSubview(contrainer)
         addSubview(iconImageLike)
         addSubview(numCount)
+        addSubview(typeLike)
         addSubview(iconImageComment)
         addSubview(comCount)
+        addSubview(typeCom)
         addSubview(lineLayout)
         
         pageView.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom:safeAreaLayoutGuide.bottomAnchor, topConstant: 15, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
@@ -157,16 +175,25 @@ class DetailActivityViewController: UITableViewCell {
         imagePost.anchor(comment.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 15, rightConstant: 15, widthConstant: 0, heightConstant:230)
         
         
-        iconImageLike.anchor(imagePost.bottomAnchor, left: safeAreaLayoutGuide.leftAnchor, right: nil, bottom: lineLayout.topAnchor, topConstant: 15, bottomConstant: 25, leftConstant: 20, rightConstant: 0, widthConstant: 30, heightConstant: 30)
+        iconImageLike.anchor(imagePost.bottomAnchor, left: safeAreaLayoutGuide.leftAnchor, right: nil, bottom: lineLayout.topAnchor, topConstant: 25, bottomConstant: 25, leftConstant: 20, rightConstant: 0, widthConstant: 30, heightConstant: 30)
         
-        numCount.anchor(imagePost.bottomAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: lineLayout.topAnchor, topConstant: 15, bottomConstant: 25, leftConstant: 40, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-        
+//        numCount.anchor(imagePost.bottomAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: lineLayout.topAnchor, topConstant: 15, bottomConstant: 25, leftConstant: 40, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+//
+        numCount.anchor(imagePost.bottomAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: lineLayout.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 40, rightConstant: 10, widthConstant: 20, heightConstant: 30)
+            
+            
+        typeLike.anchor(imagePost.bottomAnchor, left: numCount.rightAnchor, right: nil, bottom: lineLayout.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 30)
+                
         
         lineLayout.anchor(iconImageLike.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: pageView.bottomAnchor, topConstant: 30, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1.5)
         
-        iconImageComment.anchor(imagePost.bottomAnchor, left: nil, right: comCount.leftAnchor, bottom: lineLayout.topAnchor, topConstant: 15, bottomConstant: 25, leftConstant: 0, rightConstant: 10, widthConstant: 30, heightConstant: 30)
+        iconImageComment.anchor(imagePost.bottomAnchor, left: nil, right: comCount.leftAnchor, bottom: lineLayout.topAnchor, topConstant: 25, bottomConstant: 25, leftConstant: 0, rightConstant: 10, widthConstant: 30, heightConstant: 30)
         
-        comCount.anchor(imagePost.bottomAnchor, left: nil, right: safeAreaLayoutGuide.rightAnchor, bottom: lineLayout.topAnchor, topConstant: 15, bottomConstant: 25, leftConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+//        comCount.anchor(imagePost.bottomAnchor, left: nil, right: safeAreaLayoutGuide.rightAnchor, bottom: lineLayout.topAnchor, topConstant: 15, bottomConstant: 25, leftConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+//
+        comCount.anchor(imagePost.bottomAnchor, left: nil, right: typeCom.leftAnchor, bottom: lineLayout.topAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 10, rightConstant: 0, widthConstant: 20, heightConstant: 30)
+               
+        typeCom.anchor(imagePost.bottomAnchor, left: nil, right: safeAreaLayoutGuide.rightAnchor, bottom: lineLayout.topAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 30)
     
     }
     

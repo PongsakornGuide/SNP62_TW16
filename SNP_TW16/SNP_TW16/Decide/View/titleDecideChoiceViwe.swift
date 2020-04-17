@@ -50,7 +50,7 @@ class titleDecideChoiceViwe: UITableViewCell{
     
                 bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 
-                 titleHeader.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 40, bottomConstant: 40, leftConstant: 30, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+                 titleHeader.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 40, leftConstant: 30, rightConstant: 20, widthConstant: 0, heightConstant: 0)
                 
                 line.anchor(titleHeader.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 30, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
              }

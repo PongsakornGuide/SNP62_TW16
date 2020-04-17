@@ -69,7 +69,7 @@ class CommentTableView: UITableViewCell {
              comment.text = "สวัสดีวันจันทร์นะคะ คุณสมเกียรติ"
              comment.font = UIFont.BaiJamjureeMedium(size: 16)
              comment.textColor = UIColor.black
-        comment.numberOfLines = 0
+             comment.numberOfLines = 0
              return comment
      }()
     
@@ -102,12 +102,27 @@ class CommentTableView: UITableViewCell {
             label.numberOfLines = 0
             return label
     }()
+    
+    var iconOther: UIButton = {
+           let image = UIButton(type: UIButton.ButtonType.system)
+           let imagecomment = UIImage(named: "other") as UIImage?
+           image.setImage(imagecomment, for: .normal)
+           image.tintColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+           image.contentMode = .scaleAspectFill
+           image.layer.masksToBounds = true
+           image.isHidden = true
+           image.tag = 0
+           image.addTarget(self, action: #selector(InputCommentViewController.actionOther), for: .touchUpInside)
+           return image
+       }()
+    
     @objc func likeComment(_sender:UIButton){
         
     }
     
     func setupViewCell(){
         addSubview(bgActivitity)
+        addSubview(iconOther)
         addSubview(contrainer)
         addSubview(contrainerComment)
         addSubview(profile)
@@ -118,13 +133,15 @@ class CommentTableView: UITableViewCell {
         addSubview(numCount)
         
         bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-//
-//        contrainer.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-//////
-        profile.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 10, rightConstant: 0, widthConstant: 60, heightConstant: 60)
-//
-//
-        contrainerComment.anchor(bgActivitity.topAnchor, left: profile.rightAnchor, right: bgActivitity.rightAnchor, bottom: date.topAnchor, topConstant: 20, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+
+        iconOther.anchor(contrainerComment.topAnchor, left: nil , right: bgActivitity.rightAnchor, bottom: nil, topConstant: -10, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 30, heightConstant: 30)
+
+        
+        profile.anchor(contrainerComment.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 10, rightConstant: 0, widthConstant: 60, heightConstant: 60)
+
+       
+        
+        contrainerComment.anchor(bgActivitity.topAnchor, left: profile.rightAnchor, right: iconOther.leftAnchor, bottom: date.topAnchor, topConstant: 20, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 0)
 
 
         username.anchor(contrainerComment.topAnchor, left: contrainerComment.leftAnchor, right: contrainerComment.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 20)
@@ -136,11 +153,11 @@ class CommentTableView: UITableViewCell {
         comment.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
 
 
-        date.anchor(contrainerComment.bottomAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 10, bottomConstant: 10, leftConstant: 80, rightConstant: 0, widthConstant: 0, heightConstant: 20)
+        date.anchor(contrainerComment.bottomAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 10, bottomConstant: 20, leftConstant: 80, rightConstant: 0, widthConstant: 0, heightConstant: 20)
 
-        numCount.anchor(contrainerComment.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 10, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 20, heightConstant: 20)
+        numCount.anchor(contrainerComment.bottomAnchor, left: nil, right: contrainerComment.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 10, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 20, heightConstant: 20)
 
-        iconImageLike.anchor(contrainerComment.bottomAnchor, left: nil, right: numCount.leftAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 10, bottomConstant: 10, leftConstant: 0, rightConstant: 10, widthConstant: 20, heightConstant: 30)
+        iconImageLike.anchor(contrainerComment.bottomAnchor, left: nil, right: numCount.leftAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 10, bottomConstant: 20, leftConstant: 0, rightConstant: 10, widthConstant: 20, heightConstant: 30)
 
     }
     required init?(coder: NSCoder) {

@@ -26,7 +26,6 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
             super.viewWillAppear(animated)
             self.tabBarController?.tabBar.isHidden = true
             reloadData()
-            
         }
         
         lazy var bgView: UIView = {
@@ -170,7 +169,7 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
     //-----------------------------------------------------------------------------------------------
 //    updatePostUserAct.php?id=1
         @objc func postContent(){
-            let checkCaption = contentTextField.text?.count ?? 0 > 5 && imageView.image != nil
+            let checkCaption = contentTextField.text?.count ?? 0 > 1 && imageView.image != nil
             if !checkCaption{
                 alertLabel.isHidden = false
             }else{

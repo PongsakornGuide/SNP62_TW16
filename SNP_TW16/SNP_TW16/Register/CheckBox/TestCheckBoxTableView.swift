@@ -9,7 +9,8 @@
 import UIKit
 import Alamofire
 import ObjectMapper
-class TestCheckBoxTableView: UITableViewController{
+class TestCheckBoxTableView: UITableViewController {
+    
     let URL_USER_REGISTER = "\(AppDelegate.link)alder_iosapp/v1/user_activity.php"
     let URL_SHOW_ACTIVITY = "\(AppDelegate.link)alder_iosapp/v1/showTitleActivity.php"
     var activityList: [ListDetailActivity]?
@@ -55,6 +56,14 @@ class TestCheckBoxTableView: UITableViewController{
          }
     }
     
+    @objc func performSegueToReturnBack()  {
+                if let nav = self.navigationController {
+                    nav.popToRootViewController(animated: true)
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
            if indexPath.section == 0 {
@@ -76,14 +85,8 @@ class TestCheckBoxTableView: UITableViewController{
             
            }else  if indexPath.section == 3{
               let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! CheckBoxTableViewCell
-//                   let headerActivity = activityList?[indexPath.row]
-//                   cell.textHeader.text = headerActivity?.activityName
-//
-//              Alamofire.request((headerActivity?.activtiyIcon ?? "0")!).responseImage { response in
-//                           if let image = response.result.value {
-//                               cell.bgImage.image = image
-//            }}
               cell.textHeader.text = favouriteUser[indexPath.row].title
+              cell.textHeader.font = UIFont.BaiJamjureeBold(size: 25)
               cell.bgImage.image = favouriteUser[indexPath.row].profileImage
               cell.selectionStyle = .none
               cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
@@ -119,18 +122,21 @@ class TestCheckBoxTableView: UITableViewController{
         }
     }
     
+//    @objc func actionRegister(){
+//        print("5555")
+//    }
     
-    @objc func psuhCheckBox(){
-        
+    @objc func pushCheckBox(){
+
         if activity_user_id.count > 0 && DiseaseTableViewCell.diseaseNameTextField.tag > 0 && disease_user_id.count > 0 && phone_number_user.count > 0 {
-            
+
              guard let cell = DiseaseTableViewCell.diseaseDetailTextField.text else { return }
                     let selectedIndex = tableView.indexPathsForSelectedRows
                     let index = selectedIndex?.compactMap{ " \( 1 + $0.row)" }
                     var selectedChoice = index?.joined(separator: ",") ?? ""
                     print(selectedChoice)
-                    
-                    
+
+
                     let parameters: Parameters = ["activity_user_apps":activity_user_id,"activity_name":selectedChoice,"disease_id":DiseaseTableViewCell.diseaseNameTextField.tag,"disease_detail" : cell,"disease_user_apps":disease_user_id,"tel":phone_number_user]
 
                     Alamofire.request(URL_USER_REGISTER, method: .post,parameters: parameters).responseJSON { response in
@@ -143,10 +149,11 @@ class TestCheckBoxTableView: UITableViewController{
                                         let alertController = UIAlertController(title: "สมัครสมาชิกเรียบร้อย", message: "ยินดีต้อนรับเข้าสู่ Alder", preferredStyle: .alert)
 
                                         let action1 = UIAlertAction(title: "เข้าสู่ระบบ", style: .default) { (action:UIAlertAction) in
-            //                                 self.view.window?.rootViewController = LoginViewController()
-            //                                 self.view.window?.makeKeyAndVisible()
-                                            let View = LoginViewController()
-                                            self.navigationController?.pushViewController(View, animated: true)
+                                             self.view.window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+//                                             self.view.window?.rootViewController = LoginViewController()
+                                             self.view.window?.makeKeyAndVisible()
+//                                            let View = LoginViewController()
+//                                            self.navigationController?.pushViewController(View, animated: true)
                                         }
 
                                         alertController.addAction(action1)
@@ -154,15 +161,15 @@ class TestCheckBoxTableView: UITableViewController{
                              }
                         }
                     }
-            
+
         }else{
             let alert = UIAlertController(title: "ข้อมูลไม่ครบถ้วน", message: "กรุณากรอกข้อมูลให้ครบถ้วน", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "ตกลง", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
 
         }
-}
-    
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -179,6 +186,7 @@ class TestCheckBoxTableView: UITableViewController{
         tableView.register(TitleFavoriteView.self, forCellReuseIdentifier: cellId4)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
+
     }
     
     

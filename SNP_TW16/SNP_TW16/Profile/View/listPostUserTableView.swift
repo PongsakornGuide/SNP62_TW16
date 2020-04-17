@@ -84,8 +84,8 @@ class listPostUserTableView: UITableViewController {
                 let mouthStringStart = mouthStart.string(from: date ?? Date())
                 cell.timeTextLabel.text = mouthStringStart
                 cell.messageTextLabel.text = listActivity?.caption
-                cell.numCount.text = "\(listActivity?.likeActivity ?? 0)  ถูกใจ"
-                cell.numCom.text = "\(listActivity?.commentsActivity ?? 0)  คอมเม้นต์"
+                cell.numCount.text = "\(listActivity?.likeActivity ?? 0)"
+                cell.numCom.text = "\(listActivity?.commentsActivity ?? 0)"
                 
                 cell.iconOther.titleLabel?.tag = indexPath.row
 //                postId = listActivity?.id ?? 0
@@ -157,7 +157,7 @@ class listPostUserTableView: UITableViewController {
                         self.navigationController?.pushViewController(view, animated: true)
                     }
 
-                    let buttonThree = DefaultButton(title: "ลบข้อมูล", height: 60) {
+                    let buttonThree = DestructiveButton(title: "ลบข้อมูล", height: 60) {
                         _ = self.activityList?[self.postId]
                       let parameters: Parameters = ["id":self.postIdtitle,"user_app_id":self.user_id]
                             let url = self.URL_DELETE_POST
@@ -336,6 +336,8 @@ class listPostUserTableView: UITableViewController {
     
         override func viewDidLoad(){
             super.viewDidLoad()
+            navigationItem.title = "กระทู้ของฉัน"
+                 let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
             
             if #available(iOS 12.1 , *) {
                                            tableView.refreshControl = refresher

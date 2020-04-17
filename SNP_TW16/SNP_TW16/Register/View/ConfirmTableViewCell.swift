@@ -25,7 +25,7 @@ class ConfirmTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
                     button.setTitle("บันทึก", for: .normal)
                     button.setTitleColor(.white, for: .normal)
                     button.titleLabel?.font = UIFont.BaiJamjureeBold(size: 20)
-                    button.addTarget(self, action: #selector(psuhCheckBox), for: .touchUpInside)
+                    button.addTarget(self, action: #selector(pushCheckBox), for: .touchUpInside)
                     return button
     }()
    lazy var BGView: UIView = {
@@ -33,8 +33,10 @@ class ConfirmTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
           return view
       }()
     
-    @objc func psuhCheckBox(){
-         }
+    @objc func pushCheckBox(){
+        
+    }
+  
     func setLayout(){
         addSubview(BGView)
         addSubview(nextButton)

@@ -39,6 +39,15 @@ class SearchTableViewCell: UITableViewCell {
              return image
     }()
     
+    lazy var recommend:UIImageView = {
+              let image = UIImageView()
+              image.image = UIImage(named: "group1322")
+              image.contentMode = .scaleAspectFill
+              image.layer.masksToBounds = true
+              return image
+    }()
+    
+    
     lazy var bgActivitityBg : UIView = {
              let image = UIView()
              image.layer.cornerRadius = 20
@@ -78,7 +87,7 @@ class SearchTableViewCell: UITableViewCell {
             let label = UILabel()
             label.text = "โดย ไกด์ ฐิติวัฒน์"
             label.textColor = UIColor.blackAlpha(alpha: 0.3)
-            label.font = UIFont.BaiJamjureeLight(size: 16)
+            label.font = UIFont.BaiJamjureeRegular(size: 16)
             return label
     }()
     
@@ -94,7 +103,7 @@ class SearchTableViewCell: UITableViewCell {
           let label = UILabel()
           label.text = "14 สิงหาคม 2562"
           label.textColor = UIColor.blackAlpha(alpha: 0.8)
-          label.font = UIFont.BaiJamjureeLight(size: 16)
+          label.font = UIFont.BaiJamjureeRegular(size: 16)
           return label
     }()
     
@@ -102,18 +111,21 @@ class SearchTableViewCell: UITableViewCell {
                let button = UIButton(type: .system)
                button.backgroundColor = UIColor.rgb(red: 241, green: 90, blue: 66)
                button.layer.cornerRadius = 20/2
+               button.tag = 0
                button.setTitle("ยังไม่ได้ประเมิน", for: .normal)
                button.setTitleColor(.white, for: .normal)
                button.titleLabel?.font = UIFont.BaiJamjureeMedium(size: 14)
                button.isEnabled = true
-               button.addTarget(self, action: #selector(ClickUser), for: .touchUpInside)
+               button.addTarget(self, action: #selector(InviteActivityViewController.ClickUser), for: .touchUpInside)
                return button
     }()
     
-    let decidePass: UIButton = {
+    
+    var decidePass: UIButton = {
                let button = UIButton(type: .system)
                button.backgroundColor = UIColor.rgb(red: 70, green: 136, blue: 61)
                button.layer.cornerRadius = 20/2
+               button.tag = 0
                button.setTitle("ประเมินแล้ว", for: .normal)
                button.setTitleColor(.white, for: .normal)
                button.titleLabel?.font = UIFont.BaiJamjureeMedium(size: 14)
@@ -133,6 +145,7 @@ class SearchTableViewCell: UITableViewCell {
             titleFullnameEnd.isHidden = true
             addSubview(profileImage)
             addSubview(bgActivitity)
+            addSubview(recommend)
             addSubview(bgActivitityBg)
             addSubview(titleFullname)
             addSubview(titleFullnameEnd)
@@ -152,7 +165,11 @@ class SearchTableViewCell: UITableViewCell {
 
             titleFullnameEnd.centerXAnchor.constraint(equalTo: profileImage.centerXAnchor).isActive = true
             
-            titleFullname.anchor(bgActivitity.bottomAnchor, left: bgActivitity.leftAnchor, right: CheckPoint.leftAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 5, widthConstant: 0, heightConstant: 0)
+            
+            recommend.anchor(bgActivitity.bottomAnchor, left:bgActivitity.leftAnchor, right:  nil, bottom: nil, topConstant: 22, bottomConstant: 0, leftConstant: 15, rightConstant: 0, widthConstant: 20, heightConstant: 20)
+                       
+            
+            titleFullname.anchor(bgActivitity.bottomAnchor, left: recommend.rightAnchor, right: CheckPoint.leftAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 10, rightConstant: 5, widthConstant: 0, heightConstant: 0)
 
             titleFullname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
                         

@@ -64,7 +64,7 @@ class DetailStoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        navigationItem.title = "กิจกรรม"
+        navigationItem.title = "นิทาน"
         view.addSubview(viewScroll)
         viewScroll.addSubview(stepView)
         viewScroll.addSubview(BGView)

@@ -277,7 +277,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
 
         submitButton.anchor(btn.bottomAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
 
-        alertLabel.anchor(nil, left: submitButton.leftAnchor, right: submitButton.rightAnchor, bottom: bgView.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 30)
+        alertLabel.anchor(submitButton.bottomAnchor, left: submitButton.leftAnchor, right: submitButton.rightAnchor, bottom: bgView.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 30)
         
     }
 }

@@ -9,8 +9,12 @@
 import UIKit
 import Alamofire
 import ObjectMapper
-class LoginViewController: UIViewController {
+import UserNotifications
+class LoginViewController: UIViewController,UNUserNotificationCenterDelegate {
     
+    let screenSizeX: CGFloat = UIScreen.main.bounds.width
+    let screenSizeY: CGFloat = UIScreen.main.bounds.height
+    var otpUser = String()
     lazy var OTP_check = String()
     lazy var OTP = String()
     lazy var defaultValues = UserDefaults.standard
@@ -124,67 +128,84 @@ class LoginViewController: UIViewController {
                  return submit
     }()
 
-    func send_to_otp(){
-//        let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
-//        let twilioSecret = "a74824968da571b8afac81506f84acf2"
-//        let fromNumber = "+12565308003"// actual number is +9999999
-//        let toNumber = "+66631921545"// actual number is +9999999
-        
+//    func send_to_otp(){
+//        Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
+//                        if let otp = response.result.value as! [String: Any]? {
+//                            if let yield = otp["otp"] as? String {
+//                               print(yield)
+//
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//                                    // your code here
+//                                      self.otpTextField.text = yield
+//                                }
+//                                        let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
+//                                        let twilioSecret = "a74824968da571b8afac81506f84acf2"
+//                                        let fromNumber = "+12565308003"// actual number is +9999999
+//                                        let toNumber = "+66631921545"// actual number is +9999999
+//
+//                                         let message = "Your verification code is \(yield) for Login"
+//                                         // Build the request
+//                                         let request = NSMutableURLRequest(url: URL(string:"https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/SMS/Messages")!)
+//                                         request.httpMethod = "POST"
+//                                         request.httpBody = "From=\(fromNumber)&To=\(toNumber)&Body=\(message)".data(using: .utf8)
+//                                                         // Build the completion block and send the request
+//                                         URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
+//                                             print("Finished")
+//                                             if let data = data, let responseDetails = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
+//                                                 // Success
+//                                                 print("Response: \(responseDetails)")
+//                                             } else {
+//                                                 // Failure
+//                                                print("Error: \(error)")
+//                                             }
+//                                         }).resume()
+//                             }
+//
+//                }
+//            }
+//    }
+    
+      func NotificaitonUser(){
         Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
-                        if let otp = response.result.value as! [String: Any]? {
-                            if let yield = otp["otp"] as? String {
-                               print(yield)
-
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                    // your code here
-                                      self.otpTextField.text = yield
-                                }
-                                        let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
-                                        let twilioSecret = "a74824968da571b8afac81506f84acf2"
-                                        let fromNumber = "+12565308003"// actual number is +9999999
-                                        let toNumber = "+66631921545"// actual number is +9999999
-//                                let twilioSID = "AC6eb59c25b1d9e5c102ff07382a033245"
-//                                let twilioSecret = "3a776b6855e4ce991e1d0b07bdefa350"
-//                                                            //Note replace + = %2B , for To and From phone number
-//                                let fromNumber = "+14064123140"// actual number is +9999999
-//                                let toNumber = "+66815552550"// actual number is +9999999
-
-
-                                         let message = "Your verification code is \(yield) for Login"
-                                         // Build the request
-                                         let request = NSMutableURLRequest(url: URL(string:"https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/SMS/Messages")!)
-                                         request.httpMethod = "POST"
-                                         request.httpBody = "From=\(fromNumber)&To=\(toNumber)&Body=\(message)".data(using: .utf8)
-                                                         // Build the completion block and send the request
-                                         URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
-                                             print("Finished")
-                                             if let data = data, let responseDetails = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
-                                                 // Success
-                                                 print("Response: \(responseDetails)")
-                                             } else {
-                                                 // Failure
-                                                print("Error: \(error)")
-                                             }
-                                         }).resume()
-                             }
-
-                }
+                    if let otp = response.result.value as! [String: Any]? {
+                        if let yield = otp["otp"] as? String {
+                        print(yield)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        // your code here
+                            self.otpTextField.text = yield
+                        }
+                        let content = UNMutableNotificationContent()
+                        content.title = "ใส่รหัส OTP เพื่อทำการเข้าสู่ระบบ Alder"
+                        content.body = "รหัส OTP ของคุณคือ \(yield)"
+                        content.badge = 1
+                        content.sound = UNNotificationSound.default
+                    let triger = UNTimeIntervalNotificationTrigger(timeInterval: 3.0, repeats: false)
+                        let request = UNNotificationRequest(identifier: "Identifier", content: content, trigger: triger)
+                            UNUserNotificationCenter.current().add(request) { (Error) in
+                            print(Error as Any)
+                        }
+                    }
             }
+        }
+           
     }
 
   
 
     @objc func submitBtn(){
+        
         let checkNum = numberTextField.text?.count ?? 0 >= 10
         if !checkNum {
             checkError.isHidden = false
         }else{
+            NotificaitonUser()
+            UNUserNotificationCenter.current().delegate = self
             otpTextField.isHidden = false
             submitLogin.isHidden = false
             checkError.isHidden = true
             regButton.isHidden = true
             cancelLogin.isHidden = false
-            send_to_otp()
+//            send_to_otp()
         }
     }
     
@@ -253,7 +274,7 @@ class LoginViewController: UIViewController {
                 return submit
             }()
 
-    @objc func pushToReigster(){
+        @objc func pushToReigster(){
             let Register = MobileOtpViewController()
             navigationController?.pushViewController(Register, animated: true)
             
@@ -300,11 +321,20 @@ class LoginViewController: UIViewController {
     
         override func viewDidLoad() {
             super.viewDidLoad()
+
+            
+            let stacView1 = UIStackView(arrangedSubviews:[submitLogin,cancelLogin])
+            stacView1.distribution = .fillEqually
+            stacView1.spacing = 10
+            stacView1.axis = .horizontal
+            
             tabBarController?.tabBar.isHidden = true
             let stackView = UIStackView(arrangedSubviews: [otpView])
             stackView.distribution = .fillEqually
-            stackView.spacing = 10
+            stackView.spacing = 0
             stackView.axis = .vertical
+            
+            
             view.addSubview(stackView)
             view.backgroundColor = .white
             view.addSubview(imageView)
@@ -316,36 +346,43 @@ class LoginViewController: UIViewController {
             view.addSubview(checkError)
             view.addSubview(regButton)
             view.addSubview(otpTextField)
-            view.addSubview(submitLogin)
-            view.addSubview(cancelLogin)
+            view.addSubview(stacView1)
+//            view.addSubview(submitLogin)
+//            view.addSubview(cancelLogin)
+            
+            
             checkError.isHidden = true
             otpTextField.isHidden = true
             submitLogin.isHidden = true
             cancelLogin.isHidden = true
+
             
             imageView.anchor(view.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200
             )
 
             textHeader.anchor(imageView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 60, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 
-            stackView.anchor(imageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 80)
+            stackView.anchor(imageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 80)
 
             imageIcon.anchor(otpView.safeAreaLayoutGuide.topAnchor, left: otpView.leftAnchor, right: nil, bottom: nil, topConstant: 25, bottomConstant: 0,  leftConstant: 20, rightConstant: 0, widthConstant: 40, heightConstant: 30)
 
             line.anchor(otpView.safeAreaLayoutGuide.topAnchor, left: imageIcon.rightAnchor, right: nil, bottom: nil, topConstant: 0, bottomConstant: 0,  leftConstant: 20, rightConstant: 0, widthConstant: 1.5, heightConstant: 80)
 
-            numberTextField.anchor(otpView.topAnchor, left: line.rightAnchor, right: otpView.rightAnchor, bottom: nil, topConstant: 26, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+            numberTextField.anchor(otpView.topAnchor, left: line.rightAnchor, right: otpView.rightAnchor, bottom: nil, topConstant: 26, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 0)
 
-            submitButton.anchor(otpView.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
+            submitButton.anchor(otpView.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
             
-            otpTextField.anchor(submitButton.bottomAnchor, left: otpView.leftAnchor, right: otpView.rightAnchor, bottom: nil, topConstant: 26, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 80)
+            otpTextField.anchor(submitButton.bottomAnchor, left: otpView.leftAnchor, right: otpView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 80)
             
-            submitLogin.anchor(otpTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: submitLogin.topAnchor, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
+            stacView1.anchor(otpTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 40, rightConstant: 40, widthConstant: screenSizeX, heightConstant: 60)
+                   
             
             regButton.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: -130, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
             
-             cancelLogin.anchor(submitLogin.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 60, rightConstant: 60, widthConstant: 0, heightConstant: 65)
-            
-            checkError.anchor(regButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 50)
+             checkError.anchor(regButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 50)
         }
+      func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+          completionHandler([.alert,.sound,.badge])
+
+      }
 }

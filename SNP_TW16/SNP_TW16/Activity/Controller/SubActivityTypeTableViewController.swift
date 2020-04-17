@@ -60,7 +60,7 @@ class SubActivityTypeTableViewController: UITableViewController ,UINavigationCon
             
                     let activity = activityList?[indexPath.row]
                     cell.titleFullname.text = "\(activity?.actId ?? "x")"
-                    cell.supportName.text = activity?.caption
+                    cell.supportName.text = "โดย \(activity?.caption ?? "x")"
             
                     //covert startDate
                     let mouthStart = DateFormatter()
@@ -72,9 +72,9 @@ class SubActivityTypeTableViewController: UITableViewController ,UINavigationCon
             
             
                     cell.CheckPoint.isHidden = true
-                    cell.decidePass.isHidden = true
-
-                    let postImagePath = activity?.imagePost ?? "0"
+                    cell.decidePass.isHidden = true            
+                    
+                    let postImagePath = "\(AppDelegate.link)alder_iosapp/" + (activity?.imagePost ?? "0")
                             if let postImageURL = URL(string: postImagePath) {
                                 cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
                     }

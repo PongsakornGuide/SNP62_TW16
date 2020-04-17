@@ -69,7 +69,7 @@ class ActivityHeaderViewCell: UITableViewCell {
          
          textHeader.anchor(bgImage.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 20, widthConstant: 140, heightConstant: 100)
         
-         titleComent.anchor(textHeader.bottomAnchor, left: textHeader.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        titleComent.anchor(textHeader.bottomAnchor, left: textHeader.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 10, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
         
 
      }

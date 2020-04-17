@@ -68,6 +68,8 @@ class  TextFieldTableViewCell :UITableViewCell,UITextFieldDelegate {
     }
     
     func setLayout(){
+        
+        
         addSubview(bgActivitity)
         addSubview(headerText)
         addSubview(TextFieldTableViewCell.textView)

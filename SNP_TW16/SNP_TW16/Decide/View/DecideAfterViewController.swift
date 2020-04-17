@@ -12,7 +12,7 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
         
         var delegate:UIViewController?
         let URL_POST_DECIDE_AFTER = "\(AppDelegate.link)alder_iosapp/v1/decideAfter.php"
-        lazy var post_timeline = Int()
+        lazy var post_timeline = String()
         lazy var IdUser = String()
         lazy var feel = Int()
         lazy var impress = Int()
@@ -39,9 +39,9 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
             let header = UILabel()
             let title = "กรุณาทำแบบประเมินหลังเข้าร่วม \nกิจกรรม"
             let attributedText = NSMutableAttributedString(string: title,
-                       attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 22),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                       attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
             header.attributedText = attributedText
-            header.numberOfLines = 4
+            header.numberOfLines = 0
             return header
         }()
         
@@ -89,7 +89,7 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
                let header = UILabel()
                let title = "ไม่มีความสุข"
                let attributedText = NSMutableAttributedString(string: title,
-                          attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                          attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
                header.attributedText = attributedText
                header.numberOfLines = 0
                header.textAlignment = .center;
@@ -100,7 +100,7 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
                   let header = UILabel()
                   let title = "เฉยๆ"
                   let attributedText = NSMutableAttributedString(string: title,
-                             attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                             attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
                   header.attributedText = attributedText
                   header.numberOfLines = 0
                   header.textAlignment = .center;
@@ -111,7 +111,7 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
                     let header = UILabel()
                     let title = "มีความสุข"
                     let attributedText = NSMutableAttributedString(string: title,
-                               attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                               attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
                     header.attributedText = attributedText
                     header.numberOfLines = 0
                     header.textAlignment = .center;
@@ -129,7 +129,7 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
                        let header = UILabel()
                        let title = "ใช่"
                        let attributedText = NSMutableAttributedString(string: title,
-                                  attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                                  attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
                        header.attributedText = attributedText
                        header.numberOfLines = 0
                        header.textAlignment = .center;
@@ -140,7 +140,7 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
                           let header = UILabel()
                           let title = "ไม่"
                           let attributedText = NSMutableAttributedString(string: title,
-                                     attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 20),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                                     attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
                           header.attributedText = attributedText
                           header.numberOfLines = 0
                           header.textAlignment = .center;
@@ -236,40 +236,38 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
                   return submit
         }()
         
+    
+        @objc func actionJoin(){
+            let parameters = ["user_id":self.IdUser,"post_timeline_id":self.post_timeline,"assess_id":self.feel,"impress_id":self.impress] as [String : Any]
+                         let idposttimeline = self.post_timeline
+                         print(parameters)
+                         if self.impress == 1 {
+                             Alamofire.request(self.URL_POST_DECIDE_AFTER, method: .post,parameters: parameters).responseJSON { response in
+                                 if let delegate = self.delegate as? InviteActivityViewController {
+                                     delegate.buttonView.isHidden = true
+                                     delegate.buttonView2.isHidden = false
+                                     self.navigationController?.popViewController(animated: true)
+                                 }
+                             }
+                         }else{
+                             Alamofire.request(self.URL_POST_DECIDE_AFTER, method: .post,parameters: parameters).responseJSON { response in
+                                 if let delegate = self.delegate as? InviteActivityViewController {
+                                     delegate.buttonView.isHidden = true
+                                     delegate.buttonView2.isHidden = false
+                                     let passData = DecideChoiceViewController()
+                                     passData.idpost = idposttimeline
+                                     self.navigationController?.pushViewController(passData, animated: true)
+                                 }
+                             }
+                         }
+        }
+    
         @objc func sendData(){
-            let alertbox = UIAlertController(title: "ยืนยันการประเมินกิกรรม", message: "ขอบคุณสำหรับความคิดเห็นของท่าน", preferredStyle: .alert)
-            alertbox.addAction(UIAlertAction(title: "ยกเลิก",style:.default,handler: {UIAlertAction in
-                 print("Cancel")
-            }))
-            
-            alertbox.addAction(UIAlertAction(title: "ยืนยัน",style:.default,handler: {UIAlertAction in
-                print("Successful")
-                let parameters = ["user_id":self.IdUser,"post_timeline_id":self.post_timeline,"assess_id":self.feel,"impress_id":self.impress] as [String : Any]
-                let idposttimeline = self.post_timeline
-                print(parameters)
-                if self.impress == 1 {
-                    Alamofire.request(self.URL_POST_DECIDE_AFTER, method: .post,parameters: parameters).responseJSON { response in
-                        if let delegate = self.delegate as? InviteActivityViewController {
-                            delegate.buttonView.isHidden = true
-                            delegate.buttonView2.isHidden = false
-                            self.navigationController?.popViewController(animated: true)
-                        }
-                    }
-                }else{
-                    Alamofire.request(self.URL_POST_DECIDE_AFTER, method: .post,parameters: parameters).responseJSON { response in
-                        if let delegate = self.delegate as? InviteActivityViewController {
-                            delegate.buttonView.isHidden = true
-                            delegate.buttonView2.isHidden = false
-                            let passData = DecideChoiceViewController()
-                            passData.idpost = idposttimeline
-                            self.navigationController?.pushViewController(passData, animated: true)
-                        }
-                    }
-                }
-
-                
-            }))
-            self.present(alertbox,animated: true, completion: nil)
+            let popOverVC = AlertDecideAfterViewController()
+            self.addChild(popOverVC)
+            popOverVC.view.frame = self.view.frame
+            self.view.addSubview(popOverVC.view)
+            popOverVC.didMove(toParent: self)
         }
         
         override func viewDidLoad() {
@@ -316,27 +314,25 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
             
             bgActivitity.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX, heightConstant: screenSizeY)
                  
-            headerText.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
+            headerText.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 50)
 
-            titleText.anchor(headerText.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
+            titleText.anchor(headerText.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
 
-            stacView.anchor(titleText.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 100, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 0)
+            stacView.anchor(titleText.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 0)
 
             stacViewfell.anchor(stacView.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 0)
 
-            line.anchor(stacViewfell.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
-            
-//            stacViewfell.centerXAnchor.constraint(equalTo: bgActivitity.centerXAnchor).isActive = true
+            line.anchor(stacViewfell.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
 
-            title2Text.anchor(line.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
-            
-            
+
+            title2Text.anchor(line.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
+
 
             stacView2.anchor(title2Text.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 100)
 
-            stackViewclick.anchor(stacView2.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 0)
-            
-            sendBtn.anchor(stackViewclick.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 70)
+            stackViewclick.anchor(stacView2.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 0)
+
+            sendBtn.anchor(stackViewclick.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 70)
         }
         
     

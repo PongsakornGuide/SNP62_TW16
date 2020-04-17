@@ -131,35 +131,31 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
              }
          }
     
+    
+    @objc func actionJoin(){
+                guard let cell = TextFieldTableViewCell.textView.text else { return }
+                let selectedIndex = tableview.indexPathsForSelectedRows
+                let index = selectedIndex?.compactMap{ "\($0.row+1)" }
+                var selectedChoice = index?.joined(separator: ",") ?? ""
+                            let parameters: Parameters = ["user_id":"\(self.actUserId)","post_timeline_id":"\(self.actPost)","feel_id[]":selectedChoice,"more":cell]
+                                Alamofire.request(self.URL_USER_DECIDE, method: .post,parameters: parameters).responseJSON { response in
+                                    if let delegate = self.delegate as? ContentActivityViewController {
+                                        delegate.nextButton.setTitle("เข้าร่วมกิจกรรมแล้ว",for: .normal)
+                                        delegate.enableButton.isHidden = false
+                                        delegate.nextButton.isHidden = true
+                                        self.NotificaitonUser()
+                                        self.navigationController?.popViewController(animated: true)
+                                }
+        
+                            }
+    }
     @objc func psuhCheckBox(){
-        guard let cell = TextFieldTableViewCell.textView.text else { return }
-        let selectedIndex = tableview.indexPathsForSelectedRows
-        let index = selectedIndex?.compactMap{ "\($0.row+1)" }
-        var selectedChoice = index?.joined(separator: ",") ?? ""
-        print(selectedChoice)
-        self.NotificaitonUser()
-        UNUserNotificationCenter.current().delegate = self
-          let alertController = UIAlertController(title: "คุณเข้าร่วมกิจกรรมสำเร็จ", message: "แล้วพบกันในเร็วๆ นี้ :-)", preferredStyle: .alert)
-                let action1 = UIAlertAction(title: "เข้าร่วม", style: .default) { (action:UIAlertAction) in
-                    let passData = ContentActivityViewController()
-                    let parameters: Parameters = ["user_id":"\(self.actUserId)","post_timeline_id":"\(self.actPost)","feel_id[]":selectedChoice,"more":cell]
-        //                AcitivityView.delegate = self
-                        Alamofire.request(self.URL_USER_DECIDE, method: .post,parameters: parameters).responseJSON { response in
-                            if let delegate = self.delegate as? ContentActivityViewController {
-                                  delegate.nextButton.setTitle("เข้าร่วมกิจกรรมแล้ว",for: .normal)
-                                  delegate.enableButton.isHidden = false
-                                  delegate.nextButton.isHidden = true
-                               
-                                
-                                
-                                self.navigationController?.popViewController(animated: true)
-                        }
-
-                    }
-                }
-
-                alertController.addAction(action1)
-                self.present(alertController, animated: true, completion: nil)
+        let popOverVC = AlertCompleteJoinViewController()
+        self.addChild(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParent: self)
+        
     }
         @objc func keyboardWillHide(notification: NSNotification) {
                          if self.view.frame.origin.y != 0 {
@@ -179,6 +175,12 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
       override func viewDidLoad() {
         super.viewDidLoad()
         print(actData)
+        
+        navigationItem.title = "กิจกรรม"
+
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
+                         navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
@@ -202,11 +204,6 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
 
           }
 
-//        textView.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 20, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant:70)
-
-
-//        regButton.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -70, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 55)
-        
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

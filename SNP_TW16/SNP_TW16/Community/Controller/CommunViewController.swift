@@ -89,9 +89,10 @@ class CommunViewController: UITableViewController{
             cell.iconOther.titleLabel?.tag = indexPath.row
             let userId = User_ID
                         
-            
-            cell.numCount.text = "\(headerActivity?.likeActivity ?? 0)  ถูกใจ"
-            cell.numCom.text = "\(headerActivity?.commentsActivity ?? 0)  คอมเม้นต์"
+//            คอมเม้นต์
+//            ถูกใจ
+            cell.numCount.text = "\(headerActivity?.likeActivity ?? 0)"
+            cell.numCom.text = "\(headerActivity?.commentsActivity ?? 0)"
             adpostId = headerActivity?.id ?? 0
             cell.iconOther.tag = headerActivity?.id ?? 0
             
@@ -109,7 +110,7 @@ class CommunViewController: UITableViewController{
                     Alamofire.request(urlComment, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
                                 if let user = resData.result.value as! [String: Any]? {
                                         if let commentId = user["likeActivity"] as? Int {
-                                                    cell.numCount.text = "\(commentId)  ถูกใจ"
+                                                    cell.numCount.text = "\(commentId)"
                                         }
                     }
             }
@@ -157,6 +158,7 @@ class CommunViewController: UITableViewController{
         }
     }
 
+    
     @objc func moreOther(_sender:UIButton){
          postIdtitle = _sender.tag
          postId = _sender.titleLabel?.tag ?? 0
@@ -184,7 +186,7 @@ class CommunViewController: UITableViewController{
             self.navigationController?.pushViewController(view, animated: true)
         }
 
-        let buttonThree = DefaultButton(title: "ลบข้อมูล", height: 60) {
+        let buttonThree = DestructiveButton(title: "ลบข้อมูล", height: 60) {
             print("Delete")
             _ = self.activityList?[self.postId]
             let parameters: Parameters = ["id":self.postIdtitle,"user_app_id":self.User_ID]
@@ -195,7 +197,7 @@ class CommunViewController: UITableViewController{
             }
         }
 
-        popup.addButtons([buttonTwo, buttonThree, buttonOne])
+        popup.addButtons([buttonThree,buttonTwo, buttonOne])
 
         self.present(popup, animated: true, completion: nil)
     }

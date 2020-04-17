@@ -12,9 +12,9 @@ import ObjectMapper
 import UserNotifications
 import SDWebImage
 class MainActivityViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,UINavigationControllerDelegate ,UNUserNotificationCenterDelegate{
-    
     let URL_USER_ID = "\(AppDelegate.link)alder_iosapp/v1/showactivity.php"
     let URL_GET_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/showProfile.php"
+    var btnBarBadge : MJBadgeBarButton!
     lazy var defaultValues = UserDefaults.standard
     lazy var num1 = String()
     lazy var num2 = String()
@@ -139,7 +139,7 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
                 
                     return cell
                            
-            }else if indexPath.section == 1{
+    }else if indexPath.section == 1{
                     let cell = tableView.dequeueReusableCell(withIdentifier: cellId2,for: indexPath) as! HeaderActivity
                     let headerActivity = header?[indexPath.row]
                     cell.titleType.text = headerActivity?.activityTypeName
@@ -156,7 +156,7 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
                     cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 cell.backgroundColor = nil
                     return cell
-            }else if indexPath.section == 2{
+    }else if indexPath.section == 2{
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId3,for: indexPath) as! HeaderReligion
                 cell.backgroundColor = nil
                 tableView.separatorStyle = .none
@@ -164,7 +164,7 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 return cell
                     
-            }else{
+    }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId4,for: indexPath) as! HeaderMusic
                 tableView.separatorStyle = .none
                 cell.selectionStyle = .none
@@ -172,13 +172,12 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 return cell
             }
-            
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-                        if self.view.frame.origin.y != 0 {
-                            self.view.frame.origin.y = 0
-                        }
+                if self.view.frame.origin.y != 0 {
+                    self.view.frame.origin.y = 0
+                }
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -186,13 +185,12 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
                   if self.view.frame.origin.y == 0 {
                    self.view.frame.origin.y -= keyboardSize.height
                        //keyboardSize.height
-                  }
-              }
+                 }
+            }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-
         }else if indexPath.section == 1{
             let dvc = SubActivityTypeTableViewController()
             let headerActivity = header?[indexPath.row]
@@ -220,15 +218,15 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
     }
 
    // refresh
-      lazy var refresher: UIRefreshControl = {
+    lazy var refresher: UIRefreshControl = {
            let refreshControl = UIRefreshControl()
            refreshControl.tintColor = .black
            refreshControl.addTarget(self, action: #selector(requestData), for: .valueChanged)
            return refreshControl
-      }()
+    }()
       
       // action refresh
-      @objc func requestData(){
+    @objc func requestData(){
           print("requestData for tableView")
           let RefreshLine = DispatchTime.now() + .milliseconds(500)
           DispatchQueue.main.asyncAfter(deadline: RefreshLine) {
@@ -236,7 +234,7 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
               self.reloadData()
               self.tableView.reloadData()
           }
-      }
+    }
     
     func reloadData(){
         let parameters: Parameters = ["userId":typecheck]
@@ -252,19 +250,6 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
                   self?.tableView.reloadData()
               }
     }
-           
-    
-//         @objc func handelSetting(){
-//                         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-//                         UserDefaults.standard.synchronize()
-//                         let loginViewController = LoginViewController()
-//                         self.navigationController?.pushViewController(loginViewController, animated: true)
-//                         self.dismiss(animated: false, completion: nil)
-//        }
-//
-//    let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
-//               settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
-//               navigationItem.rightBarButtonItem = settings
     
     func NotificaitonUser(){
          let content = UNMutableNotificationContent()
@@ -274,26 +259,17 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
 //         content.body = "พร้อมจะค้นหากิจกรรมกันหรือยัง"
          content.badge = 1
          content.sound = UNNotificationSound.default
-        
-         
          let triger = UNTimeIntervalNotificationTrigger(timeInterval: 3.0, repeats: false)
          let request = UNNotificationRequest(identifier: "Identifier", content: content, trigger: triger)
-         
          UNUserNotificationCenter.current().add(request) { (Error) in
              print(Error as Any)
          }
-     }
+    }
     
-    
-
-    
-
-    
-     @objc func handelSettingNotification(){
-         let notificaionView = NotificationTableView()
-         navigationController?.pushViewController(notificaionView, animated: true)
-     }
-           
+    @objc func onBagdeButtonClick(){
+        let notificaionView = NotificationTableView()
+        navigationController?.pushViewController(notificaionView, animated: true)
+    }
     
     let tableView = UITableView(frame: .zero, style: .plain)
     
@@ -302,15 +278,26 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         tableView.dataSource = self
         tableView.delegate = self
-       
-        let settings = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(handelSettingNotification))
-        settings.width = 0.5
-        settings.tintColor = UIColor.rgb(red: 253, green: 173, blue: 82)
-        navigationItem.rightBarButtonItem = settings
+        
+        let customButton = UIButton(type: UIButton.ButtonType.custom)
+          customButton.frame = CGRect(x: 0, y: 0, width: 35.0, height: 35.0)
+          customButton.addTarget(self, action: #selector(self.onBagdeButtonClick), for: .touchUpInside)
+        customButton.setImage(UIImage(named: "bell"), for: .normal)
+        
+        self.btnBarBadge = MJBadgeBarButton()
+        self.btnBarBadge.setup(customButton: customButton)
+        self.btnBarBadge.badgeValue = "3"
+        self.btnBarBadge.badgeOriginX = 20.0
+        self.btnBarBadge.badgeOriginY = -4
+        
+        
+        self.navigationItem.rightBarButtonItem = self.btnBarBadge
         
         if let name = defaultValues.string(forKey: "userName") {
                 Labelname = name
         }
+        
+        
 
         if let name2 = defaultValues.string(forKey: "userId") {
                 typecheck = name2
@@ -322,7 +309,7 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
         }
         
         NotificaitonUser()
-        UNUserNotificationCenter.current().delegate = self 
+        UNUserNotificationCenter.current().delegate = self
         
         let date = Date()
         let format = DateFormatter()
@@ -340,18 +327,14 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
 //        print(day2)
         
         navigationItem.title = "Alder"
-
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
 
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         self.tableView.reloadData()
-        
-//        let settings = UIBarButtonItem(image: UIImage(named: "user"), style: .plain, target: self, action: #selector(handelSetting))
-//            settings.tintColor = UIColor.blackAlpha(alpha: 0.7)
-//            navigationItem.rightBarButtonItem = settings
         
         
         if #available(iOS 12.1 , *) {
@@ -379,5 +362,6 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert,.sound,.badge])
+
     }
 }

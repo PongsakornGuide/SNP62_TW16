@@ -1,0 +1,143 @@
+//
+//  AlertCancelJoinViewController.swift
+//  SNP_TW16
+//
+//  Created by Pongsakorn Piya-ampornkul on 9/4/2563 BE.
+//  Copyright © 2563 guide. All rights reserved.
+//
+
+import UIKit
+
+class AlertCancelJoinViewController: UIViewController {
+    
+    let screenSizeX: CGFloat = UIScreen.main.bounds.width
+    let screenSizeY: CGFloat = UIScreen.main.bounds.height
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.removeFromSuperview()
+    }
+    
+    lazy var bgImageProfile:UIView = {
+        let background = UIView()
+        background.backgroundColor = UIColor.white
+        background.layer.cornerRadius = 15
+        background.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
+        background.layer.shadowOpacity = 0.1
+        background.layer.shadowOffset = CGSize(width: 0, height: 0)
+        background.layer.shadowRadius = 10
+        background.layer.shouldRasterize = true
+        return background
+    }()
+    
+    lazy var iconImage : UIImageView = {
+              let image = UIImageView()
+              image.image = UIImage(named: "Group 1076")
+              image.contentMode = .scaleAspectFit
+              image.layer.masksToBounds = true
+              return image
+    }()
+    
+
+    
+    lazy var titleHeader : UILabel = {
+            let label = UILabel()
+            let title = "ต้องการยกเลิกกิจกรรม"
+            let style = NSMutableParagraphStyle()
+            style.alignment = NSTextAlignment.center
+            let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 23),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+            label.attributedText = attributedText
+            label.numberOfLines = 0
+            return label
+    }()
+    
+     var postUser : UIButton = {
+            let submit = UIButton(type: UIButton.ButtonType.system)
+            submit.backgroundColor = UIColor.white
+            submit.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
+            submit.layer.borderWidth = 2
+            submit.backgroundColor =  UIColor.rgb(red: 33, green: 64, blue: 154)
+            submit.layer.cornerRadius = 10
+            submit.setTitle("ยกเลิกกิจกรรม", for: .normal)
+            submit.setTitleColor(UIColor.white,for: .normal)
+            submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 22)
+            submit.addTarget(self, action: #selector(ContentActivityViewController.cancelJoin), for: .touchUpInside)
+            return submit
+    }()
+
+    
+   
+            
+    
+    var cancel : UIButton = {
+            let submit = UIButton(type: UIButton.ButtonType.system)
+            submit.backgroundColor = UIColor.white
+            submit.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
+            submit.layer.shadowOpacity = 0.1
+            submit.layer.shadowOffset = CGSize(width: 0, height: 0)
+            submit.layer.shadowRadius = 10
+            submit.layer.borderWidth = 2
+            submit.layer.cornerRadius = 10
+            submit.setTitle("ยกเลิก", for: .normal)
+            submit.setTitleColor(UIColor.black,for: .normal)
+            submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 22)
+            submit.addTarget(self, action: #selector(cancelError), for: .touchUpInside)
+            return submit
+    }()
+    
+    func showAlert(){
+        self.view.transform = CGAffineTransform(scaleX: 1.3,y: 1.3)
+        self.view.alpha = 0.0;
+        UIView.animate(withDuration: 0.25, animations: {
+            self.view.alpha = 1.0;
+            self.view.transform = CGAffineTransform(scaleX: 1.0,y: 1.0)
+            
+        });
+    }
+    
+
+    func showAlertcancel(){
+        UIView.animate(withDuration: 0.25, animations: {
+            self.view.transform = CGAffineTransform(scaleX: 1.3,y: 1.3)
+            self.view.alpha = 0.0;
+        }, completion: {(finished : Bool) in
+            if(finished)
+            {
+                self.view.removeFromSuperview()
+            }
+        });
+    }
+    
+    
+    @objc func cancelError(){
+        showAlertcancel()
+    }
+    
+    override func viewDidLoad() {
+    super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.8)
+        showAlert()
+        view.addSubview(bgImageProfile)
+        view.addSubview(titleHeader)
+        view.addSubview(iconImage)
+        view.addSubview(postUser)
+        view.addSubview(cancel)
+        
+        
+        bgImageProfile.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 80, bottomConstant: 80, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 0)
+        
+        iconImage.anchor(bgImageProfile.topAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: 100, heightConstant: 100)
+        
+        
+        titleHeader.anchor(iconImage.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 30)
+        
+        titleHeader.centerXAnchor.constraint(equalTo: bgImageProfile.centerXAnchor).isActive = true
+
+        
+        postUser.anchor(titleHeader.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 60)
+        
+        cancel.anchor(postUser.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: bgImageProfile.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 60)
+
+    }
+}
