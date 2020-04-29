@@ -105,30 +105,35 @@ class AlertDecideAfterSection2ViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.8)
         showAlert()
+        
         view.addSubview(bgImageProfile)
         view.addSubview(titleHeader)
         view.addSubview(titleLabel)
         view.addSubview(iconImage)
         view.addSubview(postUser)
         
-        
-        bgImageProfile.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 165, bottomConstant: 165, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 0)
-        
-        iconImage.anchor(bgImageProfile.topAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: 80, heightConstant: 80)
-        
-        
-        titleHeader.anchor(iconImage.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 30)
-        
-        titleHeader.centerXAnchor.constraint(equalTo: bgImageProfile.centerXAnchor).isActive = true
+        bgImageProfile.anchor(nil, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: postUser.bottomAnchor, topConstant: -100, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+         
+         bgImageProfile.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
-        
-        titleLabel.anchor(titleHeader.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 30)
-        
-        titleLabel.centerXAnchor.constraint(equalTo: bgImageProfile.centerXAnchor).isActive = true
+         bgImageProfile.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+         
+         iconImage.anchor(bgImageProfile.topAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: 90, heightConstant: 90)
+         
+         
+         titleHeader.anchor(iconImage.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 30)
+         
+         titleHeader.centerXAnchor.constraint(equalTo: bgImageProfile.centerXAnchor).isActive = true
 
-        
-        
-        postUser.anchor(titleLabel.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: bgImageProfile.bottomAnchor, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 60)
+         
+         titleLabel.anchor(titleHeader.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 30)
+         
+         titleLabel.centerXAnchor.constraint(equalTo: bgImageProfile.centerXAnchor).isActive = true
+
+         
+         postUser.anchor(titleLabel.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: bgImageProfile.bottomAnchor, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 60)
+
+
         
     }
 }

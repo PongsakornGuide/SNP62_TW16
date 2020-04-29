@@ -63,6 +63,12 @@ class DetailStoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = "back"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+              
+        
         view.backgroundColor = UIColor.white
         navigationItem.title = "นิทาน"
         view.addSubview(viewScroll)

@@ -33,12 +33,16 @@ if ($uploadOk == 0) {
         $username = $_POST["username"];
         $surname = $_POST["surname"];
         $birthday = $_POST["birthday"];
+
+        $relative_name = $_POST["relative_name"];
+        $relative_phone = $_POST["relative_phone"];
+        $relative_type = $_POST["relative_type"];
         $image_path = "/images/" . $image_name;
 
 
         // $sql = "INSERT INTO ad_post_timeline (user_app_id, caption,img) VALUES ('$user_app_id','$caption','$image_path')";
 
-        $sql = "UPDATE user_apps SET username = '$username', surname = '$surname', birthday = '$birthday', photo = '$image_path' WHERE id = $id";
+        $sql = "UPDATE user_apps SET username = '$username', surname = '$surname', birthday = '$birthday', photo = '$image_path' , relative_name = '$relative_name' , relative_phone = '$relative_phone' , relative_type = '$relative_type' WHERE id = $id";
 
         if ($conn->query($sql) === true){
             echo json_encode(['message' => "Created Article Successfully"]);

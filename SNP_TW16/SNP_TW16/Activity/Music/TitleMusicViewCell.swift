@@ -14,12 +14,12 @@ class TitleMusicViewCell: UITableViewCell{
                   setLayout()
               }
          
-             lazy var bgImage : UIImageView = {
-                        let image = UIImageView()
-                        image.image = UIImage(named: "bgPrayer")
-                        image.contentMode = .scaleAspectFill
-                        image.layer.masksToBounds = true
-                        return image
+            lazy var bgImage : UIImageView = {
+                           let image = UIImageView()
+                           image.image = UIImage(named: "bgPrayer")
+                           image.contentMode = .scaleAspectFill
+                           image.layer.masksToBounds = true
+                           return image
              }()
     
              required init?(coder: NSCoder) {
@@ -62,10 +62,10 @@ class TitleMusicViewCell: UITableViewCell{
                  addSubview(Header)
                 bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 
-                bgImage.anchor(bgActivitity.topAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 260, heightConstant: 150)
-
-                 titleHeader.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 30, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+                bgImage.anchor(bgActivitity.topAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 190, heightConstant: 113)
+                
+                titleHeader.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 40, bottomConstant: 0, leftConstant: 30, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 //
-                 Header.anchor(titleHeader.bottomAnchor, left: titleHeader.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 40, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+                Header.anchor(titleHeader.bottomAnchor, left: titleHeader.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 40, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
              }
 }

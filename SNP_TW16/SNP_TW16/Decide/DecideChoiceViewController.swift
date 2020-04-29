@@ -9,10 +9,8 @@
 import UIKit
 import Alamofire
 import ObjectMapper
-class DecideChoiceViewController: UITableViewController{
+class DecideChoiceViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate,UNUserNotificationCenterDelegate {
     let URL_USER_REGISTER = "\(AppDelegate.link)alder_iosapp/v1/supplementAfter.php"
-
-//    let URL_SHOW_ACTIVITY = "\(AppDelegate.link)alder_iosapp/v1/showTitleActivity.php"
     var activityList: [ListDetailActivity]?
     
     var idpost:String?
@@ -32,13 +30,13 @@ class DecideChoiceViewController: UITableViewController{
       
     var choiceUser = Choice.choiceofUser()
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
           return 3
     }
     
 
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
           if section == 0 {
               return 1
           }else if section == 1{
@@ -48,17 +46,21 @@ class DecideChoiceViewController: UITableViewController{
           }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
            if indexPath.section == 0 {
                let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! titleDecideChoiceViwe
-               self.tableView.separatorStyle = .none
+               self.tableview.separatorStyle = .none
                cell.selectionStyle = .none
                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                return cell
            }else if indexPath.section == 1 {
              let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! DecideChoiceUserView
             cell.textHeader.text = choiceUser[indexPath.row].title
+            cell.textHeader.font = UIFont.BaiJamjureeMedium(size: 20)
+            
+            cell.textHeader.tag = choiceUser.index(after: indexPath.row)
+            print(cell.textHeader.tag)
             cell.bgImage.image = choiceUser[indexPath.row].profileImage
             cell.selectionStyle = .none
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
@@ -70,24 +72,50 @@ class DecideChoiceViewController: UITableViewController{
             return cell
         }
     }
+    lazy var tableview : UITableView = {
+            let tableview = UITableView()
+            tableview.delegate = self
+            tableview.dataSource = self
+            tableview.tableFooterView = UIView()
+            tableview.showsVerticalScrollIndicator = false
+            tableview.backgroundColor = .none
+            return tableview
+    }()
+    
 
-   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? DecideChoiceUserView{
             cell.bgImage.image = UIImage(named: "group1567")
+            if cell.textHeader.tag == 1{
+            }else if cell.textHeader.tag == 2{
+            }else if cell.textHeader.tag == 3{
+            }else{
+                TextFieldTableViewCell.textView.isHidden = false
+            }
         }
     }
     
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath){
+     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath){
             if let cell = tableView.cellForRow(at: indexPath) as? DecideChoiceUserView{
                 cell.bgImage.image = UIImage(named: "rectangle142")
+                if cell.textHeader.tag == 1{
+                       }else if cell.textHeader.tag == 2{
+                       }else if cell.textHeader.tag == 3{
+                       }else{
+                        TextFieldTableViewCell.textView.isHidden = true
+                        TextFieldTableViewCell.textView.text = ""
+                }
+                
         }
     }
-    
+   
     @objc func actionJoin(){
-      let selectedIndex = tableView.indexPathsForSelectedRows
+    guard let cell = TextFieldTableViewCell.textView.text else { return }
+      let selectedIndex = tableview.indexPathsForSelectedRows
       let index = selectedIndex?.compactMap{ " \( 1 + $0.row)" }
       var selectedChoice = index?.joined(separator: ",") ?? ""
-      let parameters: Parameters = ["user_id":idUser ?? 0,"post_timeline_id":idpost ?? 0,"decide_supplement_id":selectedChoice]
+      let parameters: Parameters = ["user_id":idUser ?? 0,"post_timeline_id":idpost ?? 0,"decide_supplement_id":selectedChoice,"titleComment": cell]
+      print(parameters)
       Alamofire.request(URL_USER_REGISTER, method: .post,parameters: parameters).responseJSON { response in
               print(response)
                       if let result = response.result.value {
@@ -95,19 +123,35 @@ class DecideChoiceViewController: UITableViewController{
                       if(!(jsonData.value(forKey: "error") as! Bool )){
                         self.view.window?.rootViewController = tabBarViewController()
                         self.view.window?.makeKeyAndVisible()
+                        TextFieldTableViewCell.textView.text = ""
                }
           }
       }
     }
 
-    @objc func pushCheckBox(){
-        let popOverVC = AlertDecideAfterSection2ViewController()
-        self.addChild(popOverVC)
-        popOverVC.view.frame = self.view.frame
-        self.view.addSubview(popOverVC.view)
-        popOverVC.didMove(toParent: self)
+    @objc func cancelError(){
+        
     }
     
+    @objc func pushCheckBox(){
+        guard let cell = TextFieldTableViewCell.textView.text else { return }
+        let selectedIndex = tableview.indexPathsForSelectedRows
+        let index = selectedIndex?.compactMap{ " \( 1 + $0.row)" }
+        var selectedChoice = index?.joined(separator: ",") ?? ""
+        if selectedChoice != ""{
+            let popOverVC = AlertDecideAfterSection2ViewController()
+            self.addChild(popOverVC)
+            popOverVC.view.frame = self.view.frame
+            self.view.addSubview(popOverVC.view)
+            popOverVC.didMove(toParent: self)
+        }else{
+            let popOverVC = AlertDecideSupplement()
+            self.addChild(popOverVC)
+            popOverVC.view.frame = self.view.frame
+            self.view.addSubview(popOverVC.view)
+            popOverVC.didMove(toParent: self)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,13 +160,17 @@ class DecideChoiceViewController: UITableViewController{
               }else{
         }
         
-        view.backgroundColor = UIColor.white
-        tableView.allowsMultipleSelection = true
-        tableView.register(titleDecideChoiceViwe.self, forCellReuseIdentifier: cellId)
-        tableView.register(DecideChoiceUserView.self, forCellReuseIdentifier: cellId1)
-        tableView.register(ChoiceCommitView.self, forCellReuseIdentifier: cellId2)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
+        view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
+        tableview.delegate = self
+        view.addSubview(tableview)
+        tableview.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor,  right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor ,topConstant: 0,  bottomConstant: 0,leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+
+        tableview.allowsMultipleSelection = true
+        tableview.register(titleDecideChoiceViwe.self, forCellReuseIdentifier: cellId)
+        tableview.register(DecideChoiceUserView.self, forCellReuseIdentifier: cellId1)
+        tableview.register(ChoiceCommitView.self, forCellReuseIdentifier: cellId2)
+        tableview.rowHeight = UITableView.automaticDimension
+        tableview.estimatedRowHeight = 50
     }
     
     

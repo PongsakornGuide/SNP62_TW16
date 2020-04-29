@@ -103,6 +103,7 @@ class DbOperation
     }
 
     //Function Check status otp
+    
     public function checkOtp($otp)
     {
         $stmt = $this->conn->prepare("SELECT id FROM otp WHERE otp = ?");

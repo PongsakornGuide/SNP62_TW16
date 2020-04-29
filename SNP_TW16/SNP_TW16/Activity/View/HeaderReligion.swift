@@ -45,7 +45,7 @@ class HeaderReligion: UITableViewCell {
        
        lazy var titleType : UILabel = {
           let title = UILabel()
-           title.text = "ศาสนา \nปฏิบัติธรรม"
+           title.text = "ศาสนา\nปฏิบัติ\nธรรม"
            title.font = UIFont.BaiJamjureeBold(size: 30)
            title.numberOfLines = 3
            title.textAlignment = .center

@@ -7,6 +7,17 @@ use Medoo\Medoo;
 
 $database = new Medoo([
     // required
+    // 'database_type' => 'mysql',
+    // 'database_name' => 'snptwald_Alder',
+    // 'server' => 'localhost',
+    // 'username' => 'snptwald_Alder',
+    // 'password' => 'Guide109',
+    //
+    // // [optional]
+    // 'charset' => 'utf8mb4',
+    // 'collation' => 'utf8mb4_general_ci',
+    // 'port' => 3306,
+
     'database_type' => 'mysql',
     'database_name' => 'Alder',
     'server' => 'localhost',

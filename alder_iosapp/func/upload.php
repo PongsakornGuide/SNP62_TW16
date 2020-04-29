@@ -27,9 +27,10 @@ if ($uploadOk == 0) {
 				 $title_video = $_POST['title_video'];
 				 $url = $_POST['url'];
 				 $singerName = $_POST['singerName'];
+         $center = $_POST['center'];
          $image_path = "/images/" . $image_name;
 
-        $sql = "INSERT INTO upload_videos(title_video,url,singerName,img) value('$title_video','$url','$singerName','$image_path')";
+        $sql = "INSERT INTO upload_videos(title_video,url,singerName,center,img) value('$title_video','$url','$singerName','$center','$image_path')";
 
         if ($conn->query($sql) === true){
             echo json_encode(['message' => "Created Article Successfully"]);

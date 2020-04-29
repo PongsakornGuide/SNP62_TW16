@@ -42,14 +42,26 @@ class AlertJoinViewController: UIViewController {
     
     lazy var titleHeader : UILabel = {
             let label = UILabel()
-            let title = "ยืนยันเข้าร่วมกิจกรรม"
+            let title = "ยืนยันการเข้าร่วม"
             let style = NSMutableParagraphStyle()
             style.alignment = NSTextAlignment.center
-            let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 23),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+            let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 24),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
             label.attributedText = attributedText
             label.numberOfLines = 0
             return label
     }()
+    
+         lazy var titleHeader1 : UILabel = {
+                  let label = UILabel()
+                  let title = "ต้องการยกเลิก"
+                  let style = NSMutableParagraphStyle()
+                  style.alignment = NSTextAlignment.center
+                  let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                  label.attributedText = attributedText
+                  
+                  label.numberOfLines = 0
+                  return label
+          }()
     
      var postUser : UIButton = {
             let submit = UIButton(type: UIButton.ButtonType.system)
@@ -120,12 +132,17 @@ class AlertJoinViewController: UIViewController {
         showAlert()
         view.addSubview(bgImageProfile)
         view.addSubview(titleHeader)
+        view.addSubview(titleHeader1)
         view.addSubview(iconImage)
         view.addSubview(postUser)
         view.addSubview(cancel)
         
         
-        bgImageProfile.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 80, bottomConstant: 80, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 0)
+        bgImageProfile.anchor(nil, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: cancel.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        
+        bgImageProfile.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        bgImageProfile.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+               
         
         iconImage.anchor(bgImageProfile.topAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: 100, heightConstant: 100)
         
@@ -134,8 +151,11 @@ class AlertJoinViewController: UIViewController {
         
         titleHeader.centerXAnchor.constraint(equalTo: bgImageProfile.centerXAnchor).isActive = true
 
-        
-        postUser.anchor(titleHeader.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 60)
+        titleHeader1.anchor(titleHeader.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 30)
+             
+             titleHeader1.centerXAnchor.constraint(equalTo: bgImageProfile.centerXAnchor).isActive = true
+
+        postUser.anchor(titleHeader1.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 60)
         
         cancel.anchor(postUser.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: bgImageProfile.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 60)
 

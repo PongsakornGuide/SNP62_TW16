@@ -147,29 +147,49 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
                           return header
         }()
     
+//    1
+//    2
+//    3
         @objc func click(_sender: UIButton){
                      let checkValue = boreddBtn
                      let checkValue2 = notbotheredBtn
                      let checkValue3 = satisfiedBtn
-            
                   switch _sender.tag {
                   case 1:
+                      checkValue.tag = 3
                       checkValue.tintColor = UIColor.rgb(red: 27, green: 71, blue: 147)
                       checkValue2.tintColor = UIColor.rgb(red: 167, green: 169, blue: 172)
                       checkValue3.tintColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                      titlenothapply.textColor = UIColor.rgb(red: 27, green: 71, blue: 147)
+                      titlenotbothered.textColor = UIColor.black
+                      titlehapply.textColor = UIColor.black
                       feel = checkValue.tag
+                      _sender.tag = 1
+                    print(feel)
                   case 2:
+                      checkValue2.tag = 2
                       checkValue.tintColor = UIColor.rgb(red: 167, green: 169, blue: 172)
                       checkValue2.tintColor = UIColor.rgb(red: 27, green: 71, blue: 147)
                       checkValue3.tintColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                      titlenothapply.textColor = UIColor.black
+                      titlenotbothered.textColor = UIColor.rgb(red: 27, green: 71, blue: 147)
+                      titlehapply.textColor = UIColor.black
                       feel = checkValue2.tag
+                      _sender.tag = 2
+                    print(feel)
                   case 3:
-                      checkValue.tintColor = UIColor.rgb(red: 167, green: 169, blue: 172)
-                      checkValue2.tintColor = UIColor.rgb(red: 167, green: 169, blue: 172)
-                      checkValue3.tintColor = UIColor.rgb(red: 27, green: 71, blue: 147)
-                      feel = checkValue3.tag
+                        checkValue3.tag = 1
+                        checkValue.tintColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                        checkValue2.tintColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                        checkValue3.tintColor = UIColor.rgb(red: 27, green: 71, blue: 147)
+                        titlenothapply.textColor = UIColor.black
+                        titlenotbothered.textColor = UIColor.black
+                        titlehapply.textColor = UIColor.rgb(red: 27, green: 71, blue: 147)
+                        feel = checkValue3.tag
+                        _sender.tag = 3
+                    print(feel)
                   default: break
-                  }
+                }
         }
         
 
@@ -181,10 +201,14 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
             case 1:
                 checkValue.tintColor = UIColor.rgb(red: 27, green: 71, blue: 147)
                 checkValue2.tintColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                titleLike.textColor = UIColor.rgb(red: 27, green: 71, blue: 147)
+                titleUnLike.textColor = UIColor.black
                 impress = checkValue.tag
             case 2:
                 checkValue2.tintColor = UIColor.rgb(red: 27, green: 71, blue: 147)
                 checkValue.tintColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                titleLike.textColor = UIColor.black
+                titleUnLike.textColor = UIColor.rgb(red: 27, green: 71, blue: 147)
                 impress = checkValue2.tag
             default: break
             }
@@ -237,42 +261,90 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
         }()
         
     
+        @objc func cancelError(){
+        }
+    
+    
+        @objc func section2(){
+        let parameters = ["user_id":self.IdUser,"post_timeline_id":self.post_timeline,"assess_id":self.feel,"impress_id":self.impress] as [String : Any]
+                           let idposttimeline = self.post_timeline
+            
+                                Alamofire.request(self.URL_POST_DECIDE_AFTER, method: .post,parameters: parameters).responseJSON { response in
+                                   if let delegate = self.delegate as? InviteActivityViewController {
+                                   delegate.buttonView.isHidden = true
+                                   delegate.buttonView2.isHidden = false
+                                   let passData = DecideChoiceViewController()
+                                   passData.idpost = idposttimeline
+                                   self.navigationController?.pushViewController(passData, animated: true)
+                                   }
+                          
+                   }
+        }
+    
+    
         @objc func actionJoin(){
-            let parameters = ["user_id":self.IdUser,"post_timeline_id":self.post_timeline,"assess_id":self.feel,"impress_id":self.impress] as [String : Any]
-                         let idposttimeline = self.post_timeline
-                         print(parameters)
-                         if self.impress == 1 {
+        let parameters = ["user_id":self.IdUser,"post_timeline_id":self.post_timeline,"assess_id":self.feel,"impress_id":self.impress] as [String : Any]
+            let idposttimeline = self.post_timeline
+
                              Alamofire.request(self.URL_POST_DECIDE_AFTER, method: .post,parameters: parameters).responseJSON { response in
-                                 if let delegate = self.delegate as? InviteActivityViewController {
-                                     delegate.buttonView.isHidden = true
-                                     delegate.buttonView2.isHidden = false
-                                     self.navigationController?.popViewController(animated: true)
+                            if let delegate = self.delegate as? InviteActivityViewController {
+                                delegate.buttonView.isHidden = true
+                                delegate.buttonView2.isHidden = false
+                                self.navigationController?.popViewController(animated: true)
                                  }
                              }
-                         }else{
-                             Alamofire.request(self.URL_POST_DECIDE_AFTER, method: .post,parameters: parameters).responseJSON { response in
-                                 if let delegate = self.delegate as? InviteActivityViewController {
-                                     delegate.buttonView.isHidden = true
-                                     delegate.buttonView2.isHidden = false
-                                     let passData = DecideChoiceViewController()
-                                     passData.idpost = idposttimeline
-                                     self.navigationController?.pushViewController(passData, animated: true)
-                                 }
-                             }
-                         }
+                         
+            
+            
+//            let parameters = ["user_id":self.IdUser,"post_timeline_id":self.post_timeline,"assess_id":self.feel,"impress_id":self.impress] as [String : Any]
+//                                let idposttimeline = self.post_timeline
+//                                 if self.impress == 1{
+//                                     Alamofire.request(self.URL_POST_DECIDE_AFTER, method: .post,parameters: parameters).responseJSON { response in
+//                                    if let delegate = self.delegate as? InviteActivityViewController {
+//                                        delegate.buttonView.isHidden = true
+//                                        delegate.buttonView2.isHidden = false
+//                                        self.navigationController?.popViewController(animated: true)
+//                                         }
+//                                     }
+//                                 }else{
+//                                     Alamofire.request(self.URL_POST_DECIDE_AFTER, method: .post,parameters: parameters).responseJSON { response in
+//                                        if let delegate = self.delegate as? InviteActivityViewController {
+//                                        delegate.buttonView.isHidden = true
+//                                        delegate.buttonView2.isHidden = false
+//                                        let passData = DecideChoiceViewController()
+//                                        passData.idpost = idposttimeline
+//                                        self.navigationController?.pushViewController(passData, animated: true)
+//                                        }
+//                                }
+//                        }
         }
     
         @objc func sendData(){
-            let popOverVC = AlertDecideAfterViewController()
-            self.addChild(popOverVC)
-            popOverVC.view.frame = self.view.frame
-            self.view.addSubview(popOverVC.view)
-            popOverVC.didMove(toParent: self)
+            if self.impress == 0 || self.feel == 0{
+                    let popOverVC = AlertCheckChoice()
+                    self.addChild(popOverVC)
+                    popOverVC.view.frame = self.view.frame
+                    self.view.addSubview(popOverVC.view)
+                    popOverVC.didMove(toParent: self)
+            }else if self.impress == 1{
+                    let popOverVC = AlertDecideAfterViewController()
+                    self.addChild(popOverVC)
+                    popOverVC.view.frame = self.view.frame
+                    self.view.addSubview(popOverVC.view)
+                    popOverVC.didMove(toParent: self)
+            }else{
+                let popOverVC = AlertDecideActivitySection2()
+                self.addChild(popOverVC)
+                popOverVC.view.frame = self.view.frame
+                self.view.addSubview(popOverVC.view)
+                popOverVC.didMove(toParent: self)
+            }
         }
         
         override func viewDidLoad() {
             super.viewDidLoad()
-            view.backgroundColor = UIColor.rgb(red: 247, green: 250, blue: 255)
+//            view.backgroundColor = UIColor.rgb(red: 247, green: 250, blue: 255)
+            view.backgroundColor = UIColor.white
             navigationItem.title = "กิจกรรม"
             
             let stacView = UIStackView(arrangedSubviews:[boreddBtn,notbotheredBtn,satisfiedBtn])
@@ -312,27 +384,27 @@ class DecideAfterViewController: UIViewController,UITextFieldDelegate ,UINavigat
             viewScroll.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
             
             
-            bgActivitity.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX, heightConstant: screenSizeY)
+            bgActivitity.anchor(viewScroll.topAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 0)
                  
-            headerText.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 50)
+            headerText.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 45, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
 
-            titleText.anchor(headerText.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 15, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
+            titleText.anchor(headerText.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
 
-            stacView.anchor(titleText.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 0)
+            stacView.anchor(titleText.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 0)
 
             stacViewfell.anchor(stacView.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 0)
 
-            line.anchor(stacViewfell.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
+            line.anchor(stacViewfell.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
 
 
             title2Text.anchor(line.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
 
 
-            stacView2.anchor(title2Text.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 100)
+            stacView2.anchor(title2Text.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 100)
 
             stackViewclick.anchor(stacView2.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: screenSizeX, heightConstant: 0)
 
-            sendBtn.anchor(stackViewclick.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 70)
+            sendBtn.anchor(stackViewclick.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 50, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 65)
         }
         
     

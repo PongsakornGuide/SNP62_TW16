@@ -7,8 +7,9 @@
 //
 
 import UIKit
+
 class DetailActivityViewController: UITableViewCell {
-    
+  
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
            super.init(style: style, reuseIdentifier: reuseIdentifier)
            setupViewCell()
@@ -47,6 +48,15 @@ class DetailActivityViewController: UITableViewCell {
            return timer
      }()
     
+    lazy var date1 : UILabel = {
+          let timer = UILabel()
+          timer.text = "9:34"
+          timer.textColor = UIColor.blackAlpha(alpha: 0.5)
+          timer.font = UIFont.BaiJamjureeRegular(size: 14)
+          timer.numberOfLines = 0
+          return timer
+    }()
+    
     
     lazy var comment:UILabel = {
         let comment = UILabel()
@@ -79,15 +89,12 @@ class DetailActivityViewController: UITableViewCell {
               image.tintColor = .black
               image.setImage(imagelike, for: .normal)
               image.contentMode = .scaleAspectFill
+//              image.backgroundColor = .green
               image.layer.masksToBounds = true
-              image.addTarget(self, action: #selector(likePost), for: .touchUpInside)
-              
+              image.addTarget(self, action: #selector(InputCommentViewController.likePost), for: .touchUpInside)
               return image
     }()
     
-    @objc func likePost(_sender:UIButton){
-        
-    }
     
     lazy var numCount: UILabel = {
             let label = UILabel()
@@ -105,7 +112,7 @@ class DetailActivityViewController: UITableViewCell {
            image.contentMode = .scaleAspectFill
            image.layer.masksToBounds = true
            return image
-       }()
+    }()
        
     lazy var comCount: UILabel = {
                let label = UILabel()
@@ -145,6 +152,7 @@ class DetailActivityViewController: UITableViewCell {
         addSubview(profile)
         addSubview(username)
         addSubview(date)
+        addSubview(date1)
         addSubview(imagePost)
         addSubview(comment)
         addSubview(contrainer)
@@ -167,6 +175,8 @@ class DetailActivityViewController: UITableViewCell {
         
         date.anchor(username.bottomAnchor, left: profile.leftAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 80, rightConstant: 0, widthConstant: 0, heightConstant: 20)
         
+        date1.anchor(username.bottomAnchor, left: date.rightAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 20)
+        
         comment.anchor(date.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 15, rightConstant: 10, widthConstant: 0, heightConstant: 0)
         
         comment.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 100).isActive = true
@@ -182,7 +192,7 @@ class DetailActivityViewController: UITableViewCell {
         numCount.anchor(imagePost.bottomAnchor, left: iconImageLike.leftAnchor, right: nil, bottom: lineLayout.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 40, rightConstant: 10, widthConstant: 20, heightConstant: 30)
             
             
-        typeLike.anchor(imagePost.bottomAnchor, left: numCount.rightAnchor, right: nil, bottom: lineLayout.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 30)
+        typeLike.anchor(imagePost.bottomAnchor, left: numCount.rightAnchor, right: nil, bottom: lineLayout.bottomAnchor, topConstant: 15, bottomConstant: 15, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 30)
                 
         
         lineLayout.anchor(iconImageLike.bottomAnchor, left: pageView.leftAnchor, right: pageView.rightAnchor, bottom: pageView.bottomAnchor, topConstant: 30, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1.5)

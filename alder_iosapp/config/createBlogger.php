@@ -1,21 +1,17 @@
 <?php
-    session_start();
-    // echo 'Wellcome to' . $_SESSION['email'];
-    if(isset($_SESSION['email'])){
-      // echo 'Wellcome to' . $_SESSION['email'];
-    }
-
+ include('../func/auth.php')
  ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title></title>
+  <title>Alder</title>
+  <link rel="shortcut icon" type="image/png" href="../images/group1457@3x.png">
 </head>
 
 <body style="background:#fff;">
-
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link href="../css/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
   <link href="../css/switchery.css" type="text/css" rel="stylesheet">
@@ -24,7 +20,7 @@
   <link href="../css/switchery.min.css" type="text/css" rel="stylesheet">
   <link href="../css/webfonts/fa-regular-400.woff" type="text/css" rel="stylesheet">
   <link href="../css/all.min.css" type="text/css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #fff;
@@ -34,10 +30,9 @@
       width: 199px;
       height: 45px;
       border-radius: 25px 0px 0px 25px;
-      background-color: #F1F3F9;
+      background-color: #fff;
       color: rgb(27, 71, 147) !important;
       margin: 5px 0 10px 0;
-      float: right;
       padding-top: 5px;
     }
 
@@ -74,7 +69,7 @@
 
         <li>
           <a href="/alder_iosapp/config/uploadVideo.php">
-            <i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;อัพโหลดวิดีโอ</span>
+            <i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;วิดีโอ / เพลง</span>
           </a>
         </li>
 
@@ -94,12 +89,13 @@
         </div>
         <ul class="nav navbar-nav">
           <li class="dropdown nav-item d-md-block">
-            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: 500; font-size: 13px;">
+            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                style="font-weight: 500; font-size: 13px;font-family: 'Bai Jamjuree', sans-serif; ">
                 <?php echo $_SESSION["email"];?>
               </span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-caret-square-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <li><a href="/alder_iosapp/func/logout.php?logout">Logout</a></li>
+              <li><a href="/alder_iosapp/func/logout.php?logout" style="font-family: 'Bai Jamjuree', sans-serif; ">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -115,29 +111,41 @@
         <div class="card-body" style="font-family: 'Bai Jamjuree', sans-serif;">
 
           <form id="myForm" action="../func/createBlogger.php" method="post" enctype="multipart/form-data">
-            <div class="row col-12">
+            <div class="row">
               <div class="form-group col-12">
                 <label for="text" class="control-label" style="font-weight:bold;">ชื่อบทสวด : </label>
-                <input class="form-control" name="title" type="text" id="title" placeholder="บทสวด">
+                <input class="form-control" name="title" type="text" id="title" placeholder="ชื่อบทสวด">
               </div>
             </div>
 
-            <div class="row col-12">
-              <div class="form-group col-12">
-                <label for="text" class="control-label" style="font-weight:bold;"> เนื้อหา : </label>
-                <input class="form-control" name="content" type="text" id="content" placeholder="หลวงปู่ชา">
-              </div>
-            </div>
-
-            <div class="row col-12">
+            <div class="row">
               <div class="form-group col-12">
                 <label for="text" class="control-label" style="font-weight:bold;"> โดย : </label>
-                <input class="form-control" name="credit" type="text" id="credit" placeholder="ชื่อผู้แต่ง">
+                <input class="form-control" name="credit" type="text" id="credit" placeholder="โดย">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-12">
+                <label for="exampleFormControlSelect2" style="font-weight:bold;">ศูนย์ : </label>
+                <input class="form-control" name="center" type="text" id="center" placeholder="ศูนย์">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-12">
+                <label for="exampleFormControlSelect2" style="font-weight:bold;">บทสวด : </label>
+                <textarea class="form-control" cols="50" rows="5" id="content" name="content" placeholder="บทสวด"></textarea>
+
               </div>
             </div>
 
 
-            <div class="row col-12">
+
+
+
+
+            <div class="row">
               <div class="form-group col-12">
                 <label for="due" class="control-label" style="font-weight:bold;">รูปภาพปก :</label>
                 <div class="upload imgpreview">
@@ -149,9 +157,10 @@
                 </div>
               </div>
               <div class="form-group col-12">
-								<div style="float:right;">
+                <div style="float:right;">
                   <!-- <input class="btn" style="background: #419F5D; color:#fff" type="submit" value="บันทึกข้อมูล"> -->
-                  <button class="submit" type="submit" style="background: #419F5D;color:#fff;font-family: 'Bai Jamjuree', sans-serif; font-weight: 700;padding:12px;border-radius:5px;border:none;"><i class="fas fa-plus"></i> สร้างบทสวด</button>&nbsp;&nbsp;
+                  <button class="submit" type="submit" style="background: #419F5D;color:#fff;font-family: 'Bai Jamjuree', sans-serif; font-weight: 700;padding:12px;border-radius:5px;border:none;"><i class="fas fa-plus"></i>
+                    สร้างบทสวด</button>&nbsp;&nbsp;
 
                 </div>
               </div>
@@ -205,21 +214,22 @@
 
 
   <script>
-  $(document).on('click', '.submit', function(e) {
-    e.preventDefault();
-    var title = $('#title').val();
-    var content = $('#content').val();
-    var credit = $('#credit').val();
-    var image = $('#files').val();
-    if(title == '' || content == '' || credit == '' || image == ''){
-      Swal.fire({
-        icon: 'error',
-        title: 'กรอกข้อมูลให้ครบถ้วน',
-        text: 'กรอกข้อมูลให้ครบถ้วน'
-      })
-    }else{
+    $(document).on('click', '.submit', function(e) {
+      e.preventDefault();
+      var title = $('#title').val();
+      var content = $('#content').val();
+      var credit = $('#credit').val();
+      var center = $('#center').val();
+      var image = $('#files').val();
+      if (title == '' || content == '' || credit == '' || center == '' || image == '') {
         Swal.fire({
-          icon : 'question',
+          icon: 'error',
+          title: 'กรอกข้อมูลให้ครบถ้วน',
+          text: 'กรอกข้อมูลให้ครบถ้วน'
+        })
+      } else {
+        Swal.fire({
+          icon: 'question',
           title: 'ต้องการสร้างบทสวดธรรมะ',
           text: 'บทสวดธรรมะ',
           type: 'warning',
@@ -227,16 +237,15 @@
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
           confirmButtonText: 'OK'
-        }).then(function (result) {
-          if(result.value){
+        }).then(function(result) {
+          if (result.value) {
             $('#myForm').submit();
-          }else{
-          }
+          } else {}
         });
 
       }
 
-  });
+    });
   </script>
 
 

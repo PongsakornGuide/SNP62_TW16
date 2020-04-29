@@ -65,30 +65,34 @@ class NotificationColumnPost: UITableViewCell {
          return image
     }()
        
+    
+    lazy var timeLabel1 : UILabel = {
+                        let label = UILabel()
+                         let title = "30 นาทีที่แล้ว"
+                         let attributedTexts = NSMutableAttributedString(string: title,
+                         attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeLight(size: 16),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+                         label.attributedText = attributedTexts
+                         label.numberOfLines = 0
+                  return label
+    }()
+    
     lazy var timeLabel : UILabel = {
-               let label = UILabel()
-               let title = "30 นาทีที่แล้ว"
-               let attributedTexts = NSMutableAttributedString(string: title,
-               attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeLight(size: 16),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
-               label.attributedText = attributedTexts
-               label.numberOfLines = 0
+                     let label = UILabel()
+                      let title = "30 นาทีที่แล้ว"
+                      let attributedTexts = NSMutableAttributedString(string: title,
+                      attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeLight(size: 16),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+                      label.attributedText = attributedTexts
+                      label.numberOfLines = 0
                return label
     }()
     
-    lazy var iconImage: UIImageView = {
-         let image = UIImageView()
-          image.image = UIImage(named: "heartPost")
-          image.contentMode = .scaleAspectFill
-          image.layer.masksToBounds = true
-         return image
-    }()
 
        func setLayout(){
            addSubview(bgActivitity)
            addSubview(profileImage)
            addSubview(username)
            addSubview(textLabelTitle)
-           addSubview(iconImage)
+           addSubview(timeLabel1)
            addSubview(timeLabel)
 
         bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 5, bottomConstant: 5, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
@@ -97,7 +101,7 @@ class NotificationColumnPost: UITableViewCell {
         profileImage.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: 60, heightConstant: 60)
         
         
-        username.anchor(bgActivitity.topAnchor, left: profileImage.rightAnchor, right: bgActivitity.rightAnchor, bottom: textLabelTitle.topAnchor, topConstant: 25, bottomConstant: 15, leftConstant: 20, rightConstant: 15, widthConstant: 0, heightConstant: 0)
+        username.anchor(bgActivitity.topAnchor, left: profileImage.rightAnchor, right: bgActivitity.rightAnchor, bottom: textLabelTitle.topAnchor, topConstant: 25, bottomConstant: 15, leftConstant: 20, rightConstant: 15, widthConstant: 0, heightConstant: 30)
 
         username.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
 
@@ -105,11 +109,11 @@ class NotificationColumnPost: UITableViewCell {
         textLabelTitle.anchor(username.bottomAnchor, left: username.leftAnchor, right: bgActivitity.rightAnchor, bottom:nil, topConstant: 5, bottomConstant: 15, leftConstant: 0, rightConstant:10, widthConstant: 0, heightConstant: 0)
         textLabelTitle.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
 
-        iconImage.anchor(textLabelTitle.bottomAnchor, left: textLabelTitle.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 30, heightConstant: 30)
+        
+        timeLabel1.anchor(textLabelTitle.bottomAnchor, left: textLabelTitle.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         
-        timeLabel.anchor(textLabelTitle.bottomAnchor, left: iconImage.rightAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-        timeLabel.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
+        timeLabel.anchor(textLabelTitle.bottomAnchor, left: timeLabel1.rightAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
 
 

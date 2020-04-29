@@ -9,11 +9,20 @@
 /* Begin PBXBuildFile section */
 		20110BDD243EE97F0080E129 /* AlertCancelJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20110BDC243EE97F0080E129 /* AlertCancelJoinViewController.swift */; };
 		20110BDF243F28B20080E129 /* PostActivityUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20110BDE243F28B20080E129 /* PostActivityUserViewController.swift */; };
+		2023F5992456152100F406DB /* AlertEditProfileCancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2023F5982456152100F406DB /* AlertEditProfileCancel.swift */; };
+		2023F59B24569F9F00F406DB /* AlertCompleteEditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2023F59A24569F9F00F406DB /* AlertCompleteEditProfile.swift */; };
 		202CCAB82415608500DB3B26 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202CCAB72415608500DB3B26 /* NotificationView.swift */; };
 		2033A2C5240F614400B38FED /* barChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2033A2C4240F614400B38FED /* barChartViewController.swift */; };
+		2070C7F924500EF800B291C6 /* AlertJoinActivityFromNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2070C7F824500EF800B291C6 /* AlertJoinActivityFromNotification.swift */; };
+		2070C7FB245011A000B291C6 /* AlertCancelJoinActivityFromNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2070C7FA245011A000B291C6 /* AlertCancelJoinActivityFromNotification.swift */; };
 		207F518824372D8D00F36A6D /* favouriteModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207F518724372D8D00F36A6D /* favouriteModelView.swift */; };
 		20AEF7BD243B33DA00187214 /* AlertCompleteJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AEF7BC243B33DA00187214 /* AlertCompleteJoinViewController.swift */; };
 		20AEF7C1243B392C00187214 /* AlertDecideAfterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AEF7C0243B392C00187214 /* AlertDecideAfterViewController.swift */; };
+		20CB7F342452329700C7E673 /* AlertDecideSupplement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CB7F332452329700C7E673 /* AlertDecideSupplement.swift */; };
+		20CB7F3724527EA800C7E673 /* AlertofCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CB7F3624527EA800C7E673 /* AlertofCall.swift */; };
+		20CB7F3924528B4200C7E673 /* AlertDecide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CB7F3824528B4200C7E673 /* AlertDecide.swift */; };
+		20CB7F3B24528E3800C7E673 /* AlertCallofUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CB7F3A24528E3800C7E673 /* AlertCallofUser.swift */; };
+		20CB7F3D2452A2B100C7E673 /* AlertDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CB7F3C2452A2B100C7E673 /* AlertDelete.swift */; };
 		20D6F1AD2425E95600F315EF /* NotificationColumnPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D6F1AC2425E95600F315EF /* NotificationColumnPost.swift */; };
 		20D8B0692444D723005B2542 /* MJBadgeBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D8B0682444D723005B2542 /* MJBadgeBarButton.swift */; };
 		20D8B06B2444DB4C005B2542 /* testViewforseg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D8B06A2444DB4C005B2542 /* testViewforseg.swift */; };
@@ -23,14 +32,27 @@
 		20D9556524344C240060D3F8 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D9556424344C240060D3F8 /* Choice.swift */; };
 		20E7EF842419A85100DCE89F /* editPostUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E7EF832419A85100DCE89F /* editPostUserViewController.swift */; };
 		20E8B0B1243A4C3900DE68C1 /* AlertJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E8B0B0243A4C3900DE68C1 /* AlertJoinViewController.swift */; };
+		20E9F5A22451A4D4001F4779 /* AlertCancelInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9F5A12451A4D4001F4779 /* AlertCancelInput.swift */; };
+		20E9F5A42451C595001F4779 /* AlertCheckChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9F5A32451C595001F4779 /* AlertCheckChoice.swift */; };
+		20E9F5A62451DFEC001F4779 /* AlertCheckChoice2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9F5A52451DFEC001F4779 /* AlertCheckChoice2.swift */; };
+		20E9F5A82451EFA7001F4779 /* AlertDecideActivitySection2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9F5A72451EFA7001F4779 /* AlertDecideActivitySection2.swift */; };
 		20EA7EEB2434654900838F18 /* ChoiceCommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA7EEA2434654900838F18 /* ChoiceCommitView.swift */; };
+		20EA9D172450D0CE00C30F3B /* testbtncheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA9D162450D0CE00C30F3B /* testbtncheck.swift */; };
+		20EA9D192450D26A00C30F3B /* FaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA9D182450D26A00C30F3B /* FaveButton.swift */; };
+		20EA9D1D2450D2BD00C30F3B /* Spark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA9D1A2450D2BB00C30F3B /* Spark.swift */; };
+		20EA9D1E2450D2BD00C30F3B /* FaveIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA9D1B2450D2BB00C30F3B /* FaveIcon.swift */; };
+		20EA9D1F2450D2BD00C30F3B /* Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA9D1C2450D2BC00C30F3B /* Ring.swift */; };
+		20EA9D262450D36000C30F3B /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA9D222450D36000C30F3B /* Geometry.swift */; };
+		20EA9D272450D36000C30F3B /* Easing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA9D232450D36000C30F3B /* Easing.swift */; };
+		20EA9D282450D36000C30F3B /* Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA9D242450D36000C30F3B /* Init.swift */; };
+		20EA9D292450D36000C30F3B /* Constraints+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA9D252450D36000C30F3B /* Constraints+.swift */; };
+		20EA9D2C2450D38100C30F3B /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA9D2B2450D38000C30F3B /* ImageAsset.swift */; };
 		20EB4439241810FA009EDDE6 /* NotificationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB4438241810FA009EDDE6 /* NotificationTableView.swift */; };
 		20EB443B241812FD009EDDE6 /* NotificationTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB443A241812FD009EDDE6 /* NotificationTitle.swift */; };
 		20EB443D24181535009EDDE6 /* NotificationColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB443C24181535009EDDE6 /* NotificationColumn.swift */; };
 		20EBE1BE243B75DC00DED133 /* AlertDecideAfterSection2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EBE1BD243B75DC00DED133 /* AlertDecideAfterSection2ViewController.swift */; };
 		20EBE1C0243B8E7800DED133 /* AlertEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EBE1BF243B8E7800DED133 /* AlertEditProfileViewController.swift */; };
 		20EBE1C2243B905D00DED133 /* AlertEditProfileCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EBE1C1243B905D00DED133 /* AlertEditProfileCompleteViewController.swift */; };
-		20EBE1C5243C87D600DED133 /* AlertRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EBE1C4243C87D600DED133 /* AlertRegisterViewController.swift */; };
 		20EBE4B22435E07B00A35E51 /* feeldecideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EBE4B12435E07B00A35E51 /* feeldecideModel.swift */; };
 		20EC77802415019900A1B6BA /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EC777F2415019900A1B6BA /* TextFieldTableViewCell.swift */; };
 		20ED2C752403D6FF00EC9772 /* DecideAfterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ED2C742403D6FF00EC9772 /* DecideAfterViewController.swift */; };
@@ -124,11 +146,20 @@
 /* Begin PBXFileReference section */
 		20110BDC243EE97F0080E129 /* AlertCancelJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCancelJoinViewController.swift; sourceTree = "<group>"; };
 		20110BDE243F28B20080E129 /* PostActivityUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostActivityUserViewController.swift; sourceTree = "<group>"; };
+		2023F5982456152100F406DB /* AlertEditProfileCancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertEditProfileCancel.swift; sourceTree = "<group>"; };
+		2023F59A24569F9F00F406DB /* AlertCompleteEditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCompleteEditProfile.swift; sourceTree = "<group>"; };
 		202CCAB72415608500DB3B26 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		2033A2C4240F614400B38FED /* barChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = barChartViewController.swift; sourceTree = "<group>"; };
+		2070C7F824500EF800B291C6 /* AlertJoinActivityFromNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertJoinActivityFromNotification.swift; sourceTree = "<group>"; };
+		2070C7FA245011A000B291C6 /* AlertCancelJoinActivityFromNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCancelJoinActivityFromNotification.swift; sourceTree = "<group>"; };
 		207F518724372D8D00F36A6D /* favouriteModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favouriteModelView.swift; sourceTree = "<group>"; };
 		20AEF7BC243B33DA00187214 /* AlertCompleteJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCompleteJoinViewController.swift; sourceTree = "<group>"; };
 		20AEF7C0243B392C00187214 /* AlertDecideAfterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDecideAfterViewController.swift; sourceTree = "<group>"; };
+		20CB7F332452329700C7E673 /* AlertDecideSupplement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDecideSupplement.swift; sourceTree = "<group>"; };
+		20CB7F3624527EA800C7E673 /* AlertofCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertofCall.swift; sourceTree = "<group>"; };
+		20CB7F3824528B4200C7E673 /* AlertDecide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDecide.swift; sourceTree = "<group>"; };
+		20CB7F3A24528E3800C7E673 /* AlertCallofUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCallofUser.swift; sourceTree = "<group>"; };
+		20CB7F3C2452A2B100C7E673 /* AlertDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDelete.swift; sourceTree = "<group>"; };
 		20D6F1AC2425E95600F315EF /* NotificationColumnPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationColumnPost.swift; sourceTree = "<group>"; };
 		20D8B0682444D723005B2542 /* MJBadgeBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJBadgeBarButton.swift; sourceTree = "<group>"; };
 		20D8B06A2444DB4C005B2542 /* testViewforseg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewforseg.swift; sourceTree = "<group>"; };
@@ -138,14 +169,27 @@
 		20D9556424344C240060D3F8 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		20E7EF832419A85100DCE89F /* editPostUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editPostUserViewController.swift; sourceTree = "<group>"; };
 		20E8B0B0243A4C3900DE68C1 /* AlertJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertJoinViewController.swift; sourceTree = "<group>"; };
+		20E9F5A12451A4D4001F4779 /* AlertCancelInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCancelInput.swift; sourceTree = "<group>"; };
+		20E9F5A32451C595001F4779 /* AlertCheckChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCheckChoice.swift; sourceTree = "<group>"; };
+		20E9F5A52451DFEC001F4779 /* AlertCheckChoice2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCheckChoice2.swift; sourceTree = "<group>"; };
+		20E9F5A72451EFA7001F4779 /* AlertDecideActivitySection2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDecideActivitySection2.swift; sourceTree = "<group>"; };
 		20EA7EEA2434654900838F18 /* ChoiceCommitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceCommitView.swift; sourceTree = "<group>"; };
+		20EA9D162450D0CE00C30F3B /* testbtncheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testbtncheck.swift; sourceTree = "<group>"; };
+		20EA9D182450D26A00C30F3B /* FaveButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaveButton.swift; sourceTree = "<group>"; };
+		20EA9D1A2450D2BB00C30F3B /* Spark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spark.swift; sourceTree = "<group>"; };
+		20EA9D1B2450D2BB00C30F3B /* FaveIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaveIcon.swift; sourceTree = "<group>"; };
+		20EA9D1C2450D2BC00C30F3B /* Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ring.swift; sourceTree = "<group>"; };
+		20EA9D222450D36000C30F3B /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
+		20EA9D232450D36000C30F3B /* Easing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Easing.swift; sourceTree = "<group>"; };
+		20EA9D242450D36000C30F3B /* Init.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Init.swift; sourceTree = "<group>"; };
+		20EA9D252450D36000C30F3B /* Constraints+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constraints+.swift"; sourceTree = "<group>"; };
+		20EA9D2B2450D38000C30F3B /* ImageAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
 		20EB4438241810FA009EDDE6 /* NotificationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableView.swift; sourceTree = "<group>"; };
 		20EB443A241812FD009EDDE6 /* NotificationTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTitle.swift; sourceTree = "<group>"; };
 		20EB443C24181535009EDDE6 /* NotificationColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationColumn.swift; sourceTree = "<group>"; };
 		20EBE1BD243B75DC00DED133 /* AlertDecideAfterSection2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDecideAfterSection2ViewController.swift; sourceTree = "<group>"; };
 		20EBE1BF243B8E7800DED133 /* AlertEditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertEditProfileViewController.swift; sourceTree = "<group>"; };
 		20EBE1C1243B905D00DED133 /* AlertEditProfileCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertEditProfileCompleteViewController.swift; sourceTree = "<group>"; };
-		20EBE1C4243C87D600DED133 /* AlertRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertRegisterViewController.swift; sourceTree = "<group>"; };
 		20EBE4B12435E07B00A35E51 /* feeldecideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = feeldecideModel.swift; sourceTree = "<group>"; };
 		20EC777F2415019900A1B6BA /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		20ED2C742403D6FF00EC9772 /* DecideAfterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecideAfterViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +313,7 @@
 		202CCAB42415602200DB3B26 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				2070C7F724500E8900B291C6 /* Alert */,
 				20EB4437241810E6009EDDE6 /* Controller */,
 				20EB4436241810DD009EDDE6 /* Model */,
 				20EB4435241810D6009EDDE6 /* View */,
@@ -285,12 +330,22 @@
 			path = barchart;
 			sourceTree = "<group>";
 		};
+		2070C7F724500E8900B291C6 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				2070C7F824500EF800B291C6 /* AlertJoinActivityFromNotification.swift */,
+				2070C7FA245011A000B291C6 /* AlertCancelJoinActivityFromNotification.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
 		20AEF7BE243B38E300187214 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
 				20E8B0B0243A4C3900DE68C1 /* AlertJoinViewController.swift */,
 				20AEF7BC243B33DA00187214 /* AlertCompleteJoinViewController.swift */,
 				20110BDC243EE97F0080E129 /* AlertCancelJoinViewController.swift */,
+				20E9F5A12451A4D4001F4779 /* AlertCancelInput.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -302,6 +357,30 @@
 				20EBE1BD243B75DC00DED133 /* AlertDecideAfterSection2ViewController.swift */,
 				20EBE1BF243B8E7800DED133 /* AlertEditProfileViewController.swift */,
 				20EBE1C1243B905D00DED133 /* AlertEditProfileCompleteViewController.swift */,
+				20E9F5A32451C595001F4779 /* AlertCheckChoice.swift */,
+				20E9F5A52451DFEC001F4779 /* AlertCheckChoice2.swift */,
+				20E9F5A72451EFA7001F4779 /* AlertDecideActivitySection2.swift */,
+				2023F5982456152100F406DB /* AlertEditProfileCancel.swift */,
+				2023F59A24569F9F00F406DB /* AlertCompleteEditProfile.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		20CB7F322452326500C7E673 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				20CB7F332452329700C7E673 /* AlertDecideSupplement.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		20CB7F3524527E9300C7E673 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				20CB7F3624527EA800C7E673 /* AlertofCall.swift */,
+				20CB7F3824528B4200C7E673 /* AlertDecide.swift */,
+				20CB7F3A24528E3800C7E673 /* AlertCallofUser.swift */,
+				20CB7F3C2452A2B100C7E673 /* AlertDelete.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -323,6 +402,37 @@
 				20EA7EEA2434654900838F18 /* ChoiceCommitView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		20EA9D202450D2CF00C30F3B /* Btntest */ = {
+			isa = PBXGroup;
+			children = (
+				20EA9D162450D0CE00C30F3B /* testbtncheck.swift */,
+				20EA9D182450D26A00C30F3B /* FaveButton.swift */,
+				20EA9D1B2450D2BB00C30F3B /* FaveIcon.swift */,
+				20EA9D1C2450D2BC00C30F3B /* Ring.swift */,
+				20EA9D1A2450D2BB00C30F3B /* Spark.swift */,
+			);
+			path = Btntest;
+			sourceTree = "<group>";
+		};
+		20EA9D212450D36000C30F3B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				20EA9D222450D36000C30F3B /* Geometry.swift */,
+				20EA9D232450D36000C30F3B /* Easing.swift */,
+				20EA9D242450D36000C30F3B /* Init.swift */,
+				20EA9D252450D36000C30F3B /* Constraints+.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		20EA9D2A2450D38000C30F3B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				20EA9D2B2450D38000C30F3B /* ImageAsset.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		20EB4435241810D6009EDDE6 /* View */ = {
@@ -353,17 +463,10 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		20EBE1C3243C87BE00DED133 /* Alert */ = {
-			isa = PBXGroup;
-			children = (
-				20EBE1C4243C87D600DED133 /* AlertRegisterViewController.swift */,
-			);
-			path = Alert;
-			sourceTree = "<group>";
-		};
 		20ED2C732403D6B600EC9772 /* Decide */ = {
 			isa = PBXGroup;
 			children = (
+				20CB7F322452326500C7E673 /* Alert */,
 				20EA7EE92434652A00838F18 /* View */,
 				20D9556324344C150060D3F8 /* Model */,
 				20D9555D2433488C0060D3F8 /* DecideChoiceViewController.swift */,
@@ -425,7 +528,6 @@
 		655799E1234F0EE20047BAC3 /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				20EBE1C3243C87BE00DED133 /* Alert */,
 				6589101023E1A301007E5DF0 /* Model */,
 				6589100923E17B66007E5DF0 /* View */,
 				6589100423E174C5007E5DF0 /* CheckBox */,
@@ -436,6 +538,7 @@
 		657C547F23BA817400B32EC6 /* Emergency */ = {
 			isa = PBXGroup;
 			children = (
+				20CB7F3524527E9300C7E673 /* Alert */,
 				657C548223BA81A200B32EC6 /* Controller */,
 				657C548123BA819C00B32EC6 /* Model */,
 				657C548023BA818F00B32EC6 /* View */,
@@ -577,9 +680,12 @@
 				657C547F23BA817400B32EC6 /* Emergency */,
 				6580827F23BDF11F0092B0D6 /* Profile */,
 				20ED2C732403D6B600EC9772 /* Decide */,
-				65F50AC9234F71B4006A1767 /* TarBar */,
+				65F50AC9234F71B4006A1767 /* TabBar */,
 				655799BB234E503A0047BAC3 /* Sources */,
 				659EB1CE232CF06500BF433B /* Fonts */,
+				20EA9D202450D2CF00C30F3B /* Btntest */,
+				20EA9D212450D36000C30F3B /* Helpers */,
+				20EA9D2A2450D38000C30F3B /* Utils */,
 				659EB1BA232CEF6D00BF433B /* AppDelegate.swift */,
 				659EB1C1232CEF6E00BF433B /* Assets.xcassets */,
 				659EB1C3232CEF6E00BF433B /* LaunchScreen.storyboard */,
@@ -746,12 +852,12 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		65F50AC9234F71B4006A1767 /* TarBar */ = {
+		65F50AC9234F71B4006A1767 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
 				65F50ACA234F71D8006A1767 /* tabBarViewController.swift */,
 			);
-			path = TarBar;
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -887,12 +993,16 @@
 				20F071C8241D4833005FF642 /* TileStoryViewCell.swift in Sources */,
 				6506942823ACC5E700A045E6 /* DetailActivityViewController.swift in Sources */,
 				20F071C1241D3C59005FF642 /* HeaderMusic.swift in Sources */,
+				20EA9D2C2450D38100C30F3B /* ImageAsset.swift in Sources */,
 				6574B2EA23DD61D0005E82DF /* DecideViewCell.swift in Sources */,
 				65B0164023AAF95200EBB76A /* AcivityListTableViewCell.swift in Sources */,
+				20CB7F342452329700C7E673 /* AlertDecideSupplement.swift in Sources */,
 				65B0164423AB152600EBB76A /* Comment.swift in Sources */,
 				20F03C55241A568600ABB7DB /* notiModal.swift in Sources */,
 				654E850A23C1007E001E2508 /* HeaderActivity.swift in Sources */,
+				2023F5992456152100F406DB /* AlertEditProfileCancel.swift in Sources */,
 				20D9556024334DE30060D3F8 /* titleDecideChoiceViwe.swift in Sources */,
+				2070C7FB245011A000B291C6 /* AlertCancelJoinActivityFromNotification.swift in Sources */,
 				659EB1CD232CF05E00BF433B /* Extensions.swift in Sources */,
 				65DD3CDA23AD45B9008C5EA5 /* SearchTableViewCell.swift in Sources */,
 				20D9556524344C240060D3F8 /* Choice.swift in Sources */,
@@ -901,34 +1011,47 @@
 				65DBB65323E447210081F9BE /* titleListPostViewCell.swift in Sources */,
 				20D9556224334E7B0060D3F8 /* DecideChoiceUserView.swift in Sources */,
 				20F43249241DE56E0016F251 /* TitleMusicViewCell.swift in Sources */,
+				20EA9D172450D0CE00C30F3B /* testbtncheck.swift in Sources */,
 				6589101423E204DA007E5DF0 /* ListActTitleType.swift in Sources */,
 				20EBE1C0243B8E7800DED133 /* AlertEditProfileViewController.swift in Sources */,
 				65D0708123DC482E00A41ABA /* grapViewController.swift in Sources */,
 				65B0164A23AB6C3B00EBB76A /* CreateViewController.swift in Sources */,
 				20F071C3241D4552005FF642 /* TitleStoryTableView.swift in Sources */,
 				65DB237223DA16ED00E71500 /* ActivityTypeTableViewController.swift in Sources */,
+				2070C7F924500EF800B291C6 /* AlertJoinActivityFromNotification.swift in Sources */,
+				20CB7F3D2452A2B100C7E673 /* AlertDelete.swift in Sources */,
 				20110BDD243EE97F0080E129 /* AlertCancelJoinViewController.swift in Sources */,
 				6589100623E174F4007E5DF0 /* TestCheckBoxTableView.swift in Sources */,
 				20D9555E2433488C0060D3F8 /* DecideChoiceViewController.swift in Sources */,
 				20EB4439241810FA009EDDE6 /* NotificationTableView.swift in Sources */,
 				65E4E09D23BFA99E00D0F108 /* AddTelView.swift in Sources */,
 				20F071BF241D38A1005FF642 /* HeaderReligion.swift in Sources */,
+				20EA9D272450D36000C30F3B /* Easing.swift in Sources */,
 				6560B4152333F4CC00F53D26 /* MobileOtpViewController.swift in Sources */,
 				65DBB64F23E442CF0081F9BE /* titleListActivityViewCell.swift in Sources */,
+				20CB7F3924528B4200C7E673 /* AlertDecide.swift in Sources */,
+				2023F59B24569F9F00F406DB /* AlertCompleteEditProfile.swift in Sources */,
 				65BADF5A23F2ACBD00DAEAD1 /* editProfileView.swift in Sources */,
 				65B0164723AB2BCC00EBB76A /* LoginViewController.swift in Sources */,
 				20F4326E241DFA900016F251 /* TestVideoController.swift in Sources */,
+				20E9F5A82451EFA7001F4779 /* AlertDecideActivitySection2.swift in Sources */,
 				20EC77802415019900A1B6BA /* TextFieldTableViewCell.swift in Sources */,
+				20CB7F3B24528E3800C7E673 /* AlertCallofUser.swift in Sources */,
 				6589101623E22498007E5DF0 /* TitleFavoriteView.swift in Sources */,
 				654936A823C1CDF600B190A1 /* SubActivityTypeTableViewController.swift in Sources */,
 				202CCAB82415608500DB3B26 /* NotificationView.swift in Sources */,
 				65F50AD2234F9385006A1767 /* CommunViewController.swift in Sources */,
+				20EA9D292450D36000C30F3B /* Constraints+.swift in Sources */,
 				20110BDF243F28B20080E129 /* PostActivityUserViewController.swift in Sources */,
 				654F379923C9A1F9009259A3 /* CommentTableView.swift in Sources */,
 				20D6F1AD2425E95600F315EF /* NotificationColumnPost.swift in Sources */,
+				20CB7F3724527EA800C7E673 /* AlertofCall.swift in Sources */,
+				20E9F5A62451DFEC001F4779 /* AlertCheckChoice2.swift in Sources */,
 				20EBE1BE243B75DC00DED133 /* AlertDecideAfterSection2ViewController.swift in Sources */,
+				20EA9D1D2450D2BD00C30F3B /* Spark.swift in Sources */,
 				65DBB65523E447A90081F9BE /* listPostUserTableView.swift in Sources */,
 				20E8B0B1243A4C3900DE68C1 /* AlertJoinViewController.swift in Sources */,
+				20EA9D282450D36000C30F3B /* Init.swift in Sources */,
 				657C548623BA827E00B32EC6 /* EmergencyViewController.swift in Sources */,
 				20F43247241DE06C0016F251 /* TitleMusicTableView.swift in Sources */,
 				20AEF7C1243B392C00187214 /* AlertDecideAfterViewController.swift in Sources */,
@@ -946,6 +1069,8 @@
 				20F071C6241D47B8005FF642 /* TitleReligionViewCell.swift in Sources */,
 				20EB443B241812FD009EDDE6 /* NotificationTitle.swift in Sources */,
 				6574B2E623DD6113005E82DF /* DecideViewController.swift in Sources */,
+				20EA9D262450D36000C30F3B /* Geometry.swift in Sources */,
+				20E9F5A42451C595001F4779 /* AlertCheckChoice.swift in Sources */,
 				6535A3F623CD6A8A0005027F /* Community.swift in Sources */,
 				2033A2C5240F614400B38FED /* barChartViewController.swift in Sources */,
 				6564EE5723EECE2100FB9400 /* InputCommentViewController.swift in Sources */,
@@ -960,22 +1085,25 @@
 				207F518824372D8D00F36A6D /* favouriteModelView.swift in Sources */,
 				657C548A23BA837D00B32EC6 /* DetailEmergencyView.swift in Sources */,
 				20ED2C752403D6FF00EC9772 /* DecideAfterViewController.swift in Sources */,
-				20EBE1C5243C87D600DED133 /* AlertRegisterViewController.swift in Sources */,
 				20D8B06B2444DB4C005B2542 /* testViewforseg.swift in Sources */,
 				6574B2E423DD4246005E82DF /* layoutTableViewCell.swift in Sources */,
 				654936AA23C1EAA000B190A1 /* ContentActivityViewController.swift in Sources */,
 				6589100D23E17F79007E5DF0 /* ConfirmTableViewCell.swift in Sources */,
 				6560B41223332EFF00F53D26 /* OtpViewController.swift in Sources */,
+				20E9F5A22451A4D4001F4779 /* AlertCancelInput.swift in Sources */,
 				65E156D723AA091700CC3856 /* MainActivityViewController.swift in Sources */,
+				20EA9D192450D26A00C30F3B /* FaveButton.swift in Sources */,
 				65811B4223B8FB4300351DA9 /* ActivityPageViewController.swift in Sources */,
 				20F071CE241D5415005FF642 /* DetailReligionViewController.swift in Sources */,
 				65B9171B23D9C28500F13190 /* ListRelatuveView.swift in Sources */,
 				20F03C57241B421C00ABB7DB /* NotificationContent.swift in Sources */,
+				20EA9D1F2450D2BD00C30F3B /* Ring.swift in Sources */,
 				652DDEE623A9BB2B00AF79D3 /* RecordViewController.swift in Sources */,
 				65B9171923D9A46100F13190 /* CreateRelativeTelView.swift in Sources */,
 				20EA7EEB2434654900838F18 /* ChoiceCommitView.swift in Sources */,
 				6580BEB8232D380500B6C621 /* RegisterViewController.swift in Sources */,
 				65DBB64D23E42A230081F9BE /* listFavoriteViewCell.swift in Sources */,
+				20EA9D1E2450D2BD00C30F3B /* FaveIcon.swift in Sources */,
 				20F071CC241D492E005FF642 /* StroyTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1045,7 +1173,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1100,7 +1228,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1119,7 +1247,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3Z6Q26APU;
 				INFOPLIST_FILE = SNP_TW16/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1140,7 +1268,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3Z6Q26APU;
 				INFOPLIST_FILE = SNP_TW16/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

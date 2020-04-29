@@ -6,7 +6,7 @@ $req= $_REQUEST;
 $request = (object) $req;
 $response = array();
 
-    if (isset($req['user_id']) && isset($req['post_timeline_id']) && isset($req['decide_supplement_id'])){
+    if (isset($req['user_id']) && isset($req['post_timeline_id']) && isset($req['decide_supplement_id']) && isset($req['titleComment'])){
 
         $request->decide_supplement_id = explode(',',$request->decide_supplement_id);
 
@@ -14,6 +14,7 @@ $response = array();
                 $database->insert("supplementAfter", [
                     "user_id" => $request->user_id,
                     "post_timeline_id" => $request->post_timeline_id,
+                    "titleComment" => $request->titleComment,
                     "decide_supplement_id" => $id,
                 ]);
                $response['message'] = 'User created successfully';
@@ -24,4 +25,3 @@ $response = array();
             $response['message'] = 'Invalid username or password';
     }
     echo json_encode($response);
-

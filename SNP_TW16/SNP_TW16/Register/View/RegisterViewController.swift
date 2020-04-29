@@ -247,87 +247,92 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
        
     
     //-----------------------------------------------------------------------------------------------
-              lazy var titlegenderLabel : UILabel = {
-                                let label = UILabel()
-                                let title = "เพศ:"
-                                let attributedText = NSMutableAttributedString(string: title,
-                            attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
-                                label.attributedText = attributedText
-                                label.numberOfLines = 0
-                                return label
-              }()
+        lazy var titlegenderLabel : UILabel = {
+            let label = UILabel()
+            let title = "เพศ:"
+            let attributedText = NSMutableAttributedString(string: title,
+            attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+            label.attributedText = attributedText
+            label.numberOfLines = 0
+            return label
+        }()
     
-              let genTextField: UITextField = {
-                  let textField = UITextField()
+        let genTextField: UITextField = {
+            let textField = UITextField()
                   textField.attributedPlaceholder = NSAttributedString(string: "เพศ", attributes: [NSAttributedString.Key.font :  UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
-                  return textField
-              }()
-              let genTextFieldTextFieldLine: UIView = {
-                  let view = UIView()
-                  view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
-                  return view
-              }()
+            return textField
+        }()
+    
+        let genTextFieldTextFieldLine: UIView = {
+            let view = UIView()
+            view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
+            return view
+        }()
     
     
     //-----------------------------------------------------------------------------------------------
     
-                    lazy var titlecultLabel : UILabel = {
-                                      let label = UILabel()
-                                      let title = "ศาสนา:"
-                                      let attributedText = NSMutableAttributedString(string: title,
-                                  attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
-                                      label.attributedText = attributedText
-                                      label.numberOfLines = 0
-                                      return label
-                    }()
+        lazy var titlecultLabel : UILabel = {
+            let label = UILabel()
+            let title = "ศาสนา:"
+            let attributedText = NSMutableAttributedString(string: title,
+            attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+            label.attributedText = attributedText
+            label.numberOfLines = 0
+            return label
+        }()
     
-                  let cultTextField: UITextField = {
+        let cultTextField: UITextField = {
                       let textField = UITextField()
-                      textField.attributedPlaceholder = NSAttributedString(string: "ศาสนา", attributes: [NSAttributedString.Key.font :  UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
-                      return textField
-                  }()
-                  let cultTextFieldTextFieldLine: UIView = {
-                      let view = UIView()
-                      view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
-                      return view
-                  }()
+        textField.attributedPlaceholder = NSAttributedString(string: "ศาสนา", attributes: [NSAttributedString.Key.font :  UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
+        return textField
+    }()
+    
+    let cultTextFieldTextFieldLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
+        return view
+    }()
     
     //-----------------------------------------------------------------------------------------------
-                  lazy var titleaddressLabel : UILabel = {
-                        let label = UILabel()
-                        let title = "ศูนย์ที่อยู่ปัจจุบัน:"
-                        let attributedText = NSMutableAttributedString(string: title,
-                                                  attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
-                        label.attributedText = attributedText
-                        label.numberOfLines = 0
-                        return label
-                }()
+    lazy var titleaddressLabel : UILabel = {
+        let label = UILabel()
+        let title = "ศูนย์ที่อยู่ปัจจุบัน:"
+        let attributedText = NSMutableAttributedString(string: title,
+        attributes: [ NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+        label.attributedText = attributedText
+        label.numberOfLines = 0
+        return label
+    }()
                     
+    let addressTextField: UITextField = {
+    let textField = UITextField()
+        textField.attributedPlaceholder = NSAttributedString(string: "ศูนย์ที่อยู่อาศัย", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
+        return textField
+    }()
     
-    
-                    let addressTextField: UITextField = {
-                      let textField = UITextField()
-                      textField.attributedPlaceholder = NSAttributedString(string: "ศูนย์ที่อยู่อาศัย", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
-                      return textField
-                  }()
-                  let addressTextFieldTextFieldLine: UIView = {
-                      let view = UIView()
-                      view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
-                      return view
-                  }()
+    let addressTextFieldTextFieldLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
+        return view
+    }()
           
-        @objc func dateChanged(datePicker: UIDatePicker) {
+    @objc func dateChanged(datePicker: UIDatePicker) {
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy/MM/dd"
+//            dateTextField.text = dateFormatter.string(from: datePicker.date)
             let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "th")
             dateFormatter.dateFormat = "yyyy/MM/dd"
             dateTextField.text = dateFormatter.string(from: datePicker.date)
-        }
+    }
     
-        @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
-            view.endEditing(true)
-        }
+    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
     
-        func pushData(){
-//            if otpTextField.text?.count ?? 0
+    func pushData(){
+
             if nameTextField.text?.count ?? 0 > 0 && surnameTextField.text?.count ?? 0 > 0 && phoneTextField.text?.count ?? 0 > 0 && dateTextField.text?.count ?? 0 > 0 && cultTextField.text?.count ?? 0 > 0 && cultTextField.text?.count ?? 0 > 0 && addressTextField.text?.count ?? 0 > 0 && genTextField.text?.count ?? 0 > 0 {
                 let passData = RecordViewController()
                 passData.NameLabelText = nameTextField.text ?? "0"
@@ -345,7 +350,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
                 self.present(alert, animated: true, completion: nil)
             }
 
-        }
+    }
         
     
     let btnBack : UIButton = {
@@ -387,9 +392,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate ,UINavigatio
        centerPicker.dataSource = self
        addressTextField.inputView = centerPicker
         //picker
-       datePicker = UIDatePicker()
-       datePicker?.datePickerMode = .date
-       dateTextField.inputView = datePicker
+//       datePicker = UIDatePicker()
+//       datePicker?.datePickerMode = .date
+//       dateTextField.inputView = datePicker
+        datePicker = UIDatePicker()
+        datePicker?.datePickerMode = .date
+        datePicker?.locale = Locale(identifier: "th")
+        dateTextField.inputView = datePicker
+        
         
        datePicker?.addTarget(self, action: #selector(RegisterViewController.dateChanged(datePicker: )), for: .valueChanged)
         

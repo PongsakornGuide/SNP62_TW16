@@ -40,7 +40,7 @@ class AlertEditProfileViewController: UIViewController {
     
     lazy var titleHeader : UILabel = {
             let label = UILabel()
-            let title = "ยกเลิกการแก้ไขใช่หรือไม่"
+            let title = "ยืนยันการแก้ไขข้อมูลใช่หรือไม่"
             let style = NSMutableParagraphStyle()
             style.alignment = NSTextAlignment.center
             let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 23),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
@@ -69,14 +69,15 @@ class AlertEditProfileViewController: UIViewController {
     
     var cancel : UIButton = {
             let submit = UIButton(type: UIButton.ButtonType.system)
-            submit.backgroundColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            submit.backgroundColor = UIColor.white
             submit.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
             submit.layer.shadowOpacity = 0.1
             submit.layer.shadowOffset = CGSize(width: 0, height: 0)
             submit.layer.shadowRadius = 10
+            submit.layer.borderWidth = 2
             submit.layer.cornerRadius = 10
             submit.setTitle("ไม่", for: .normal)
-            submit.setTitleColor(UIColor.white,for: .normal)
+            submit.setTitleColor(UIColor.black,for: .normal)
             submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 22)
             submit.addTarget(self, action: #selector(cancelError), for: .touchUpInside)
             return submit
@@ -121,7 +122,11 @@ class AlertEditProfileViewController: UIViewController {
         view.addSubview(cancel)
         
         
-        bgImageProfile.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 80, bottomConstant: 80, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 0)
+        bgImageProfile.anchor(nil, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: cancel.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        
+        bgImageProfile.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        bgImageProfile.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         iconImage.anchor(bgImageProfile.topAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: 100, heightConstant: 100)
         

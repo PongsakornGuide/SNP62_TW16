@@ -237,9 +237,7 @@ class LoginViewController: UIViewController,UNUserNotificationCenterDelegate {
                                    //saving user
                                    let image = user.value(forKey: "photo") as! String
                                     
-                                    let birthday = user.value(forKey: "birthday") as! String
-                        
-                        
+                                   let birthday = user.value(forKey: "birthday") as! String
                                    self.defaultValues.set(userId, forKey: "userId")
                                    self.defaultValues.set(userName, forKey: "userName")
                                    self.defaultValues.set(tel, forKey: "tel")
@@ -381,6 +379,7 @@ class LoginViewController: UIViewController,UNUserNotificationCenterDelegate {
             
              checkError.anchor(regButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, topConstant: 0, bottomConstant: 0, leftConstant: 50, rightConstant: 50, widthConstant: 0, heightConstant: 50)
         }
+    
       func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
           completionHandler([.alert,.sound,.badge])
 

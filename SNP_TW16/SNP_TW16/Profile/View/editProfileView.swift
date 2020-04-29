@@ -8,16 +8,19 @@
 
 import UIKit
 import Alamofire
-class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationControllerDelegate , UIImagePickerControllerDelegate{
+import UserNotifications
+class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationControllerDelegate , UIImagePickerControllerDelegate, UNUserNotificationCenterDelegate{
     
        override func viewWillAppear(_ animated: Bool) {
               super.viewWillAppear(animated)
-              reloadData()
               self.tabBarController?.tabBar.isHidden = true
        }
     
+        let URL_USER_USE_OTP = "\(AppDelegate.link)alder_iosapp/v1/select_otp.php"
        let URL_GET_EDIT_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/showProfile.php"
        let URL_POST_EDIT_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/update.php"
+    
+        let URL_VERIFY_USER = "\(AppDelegate.link)alder_iosapp/v1/verify.php"
        lazy var getIduser = String()
        lazy var defaultValues = UserDefaults.standard
        lazy var NumberPhoneLabelText = String()
@@ -118,60 +121,140 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParent: self)
+        NotificaitonUser()
+    }
+    
+    @objc func cancelErrorUser(){
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @objc func complete(){
+        self.navigationController?.popToRootViewController(animated: true)
+        AlertEditProfileCompleteViewController.otpTextField.text = ""
     }
     
     @objc func actionComplete(){
-        
-        let checkData = nameTextField.text?.count ?? 0 > 1 && surnameTextField.text?.count ?? 0 > 1 && dateTextField.text?.count ?? 0 > 1
-
-        if !checkData {
-            print("NO")
+        let checkOTP = AlertEditProfileCompleteViewController.otpTextField.text
+//        print(checkOTP)
+        if  checkOTP == nil{
+            print("OTP NOT")
         }else{
-           guard let image = self.imgView.image else { return }
-            let url = self.URL_POST_EDIT_PROFILE + "?id=\(self.getIduser)"
-            let parameters: Parameters = ["id":self.getIduser ,"username":self.nameTextField.text ?? "nil","surname":self.surnameTextField.text ?? "nil","photo":"\(self.imgView.image)","birthday" ?? "nil":self.dateTextField.text ?? "00-00-00","relative_name":self.nameRelativeTextField.text ?? "nil","relative_phone":self.telRelativeTextField.text ?? "nil","relative_type":self.relativeTextField.text ?? "nil"]
+            print("OTP OK")
+            let parameters = ["otp": checkOTP ?? "x"]
             print(parameters)
-            let header: HTTPHeaders = ["Content-type":"multipart/form-data"]
-            let dateFormatter : DateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyyMMddHH:mm:ss"
-            let date = Date()
-            let dateString = dateFormatter.string(from: date)
-                Alamofire.upload(multipartFormData: { (formData) in
-                    if let imageData = image.jpegData(compressionQuality: 0.5){
-                        formData.append(imageData, withName: "image" ,fileName: dateString,mimeType: "image/jpg")
-                    }
-                    for (key,value) in parameters {
-                        if let stringData = value as? String, let data = stringData.data(using: .utf8) {
-                            formData.append(data, withName: key)
-                        }
-                    }
-                }, to: url ,method: .post ,headers: header) { (res) in
-                    print(url)
-                    switch res{
-                        case .success(let request, _, _):
-                            request.responseJSON(completionHandler: { (resJson) in
-                                print(resJson.value ?? "0")
-                                self.navigationController?.popToRootViewController(animated: true)
-                            })
-                        case .failure(_):
-                            print("fail")
-                    }
+            Alamofire.request(URL_VERIFY_USER, method: .post,parameters: parameters).responseJSON { response in
+                print(response)
+                if let result = response.result.value {
+                let jsonData = result as! NSDictionary
+                    if(!(jsonData.value(forKey: "error") as! Bool)){
+                       guard let image = self.imgView.image else { return }
+                        let url = self.URL_POST_EDIT_PROFILE + "?id=\(self.getIduser)"
+                        let parameters: Parameters = ["id":self.getIduser ,"username":self.nameTextField.text ?? "nil","surname":self.surnameTextField.text ?? "nil","photo":"\(self.imgView.image)","birthday" :self.dateTextField.text,"relative_name":self.nameRelativeTextField.text,"relative_phone":self.telRelativeTextField.text,"relative_type":self.relativeTextField.text]
+                        print(parameters)
+                        let header: HTTPHeaders = ["Content-type":"multipart/form-data"]
+                        let dateFormatter : DateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyyMMddHH:mm:ss"
+                        let date = Date()
+                        let dateString = dateFormatter.string(from: date)
+                            Alamofire.upload(multipartFormData: { (formData) in
+                                if let imageData = image.jpegData(compressionQuality: 0.5){
+                                    formData.append(imageData, withName: "image" ,fileName: dateString,mimeType: "image/jpg")
+                                }
+                                for (key,value) in parameters {
+                                    if let stringData = value as? String, let data = stringData.data(using: .utf8) {
+                                        formData.append(data, withName: key)
+                                    }
+                                }
+                            }, to: url ,method: .post ,headers: header) { (res) in
+                                print(url)
+                                switch res{
+                                    case .success(let request, _, _):
+                                        request.responseJSON(completionHandler: { (resJson) in
+                                            print(resJson.value ?? "0")
+                                            
+                                            let popOverVC = AlertCompleteEditProfile()
+                                            self.addChild(popOverVC)
+                                            popOverVC.view.frame = self.view.frame
+                                            self.view.addSubview(popOverVC.view)
+                                            popOverVC.didMove(toParent: self)
+                                            
+                                        })
+                                    case .failure(_):
+                                        print("fail")
+                                }
+                            }
+                }else{
+                        self.navigationController?.popToRootViewController(animated: true)
                 }
 
-            
+            }
+          }
         }
         
+//      เช็คค่าในนี้
+//
+//        let checkData = nameTextField.text?.count ?? 0 > 1 && surnameTextField.text?.count ?? 0 > 1 && dateTextField.text?.count ?? 0 > 1
+//
+//        if !checkData {
+//            print("NO")
+//        }else{
+//           guard let image = self.imgView.image else { return }
+//            let url = self.URL_POST_EDIT_PROFILE + "?id=\(self.getIduser)"
+//            let parameters: Parameters = ["id":self.getIduser ,"username":self.nameTextField.text ?? "nil","surname":self.surnameTextField.text ?? "nil","photo":"\(self.imgView.image)","birthday" :dateTextField.text,"relative_name":nameRelativeTextField.text,"relative_phone":telRelativeTextField.text,"relative_type":relativeTextField.text]
+//            print(parameters)
+//            let header: HTTPHeaders = ["Content-type":"multipart/form-data"]
+//            let dateFormatter : DateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyyMMddHH:mm:ss"
+//            let date = Date()
+//            let dateString = dateFormatter.string(from: date)
+//                Alamofire.upload(multipartFormData: { (formData) in
+//                    if let imageData = image.jpegData(compressionQuality: 0.5){
+//                        formData.append(imageData, withName: "image" ,fileName: dateString,mimeType: "image/jpg")
+//                    }
+//                    for (key,value) in parameters {
+//                        if let stringData = value as? String, let data = stringData.data(using: .utf8) {
+//                            formData.append(data, withName: key)
+//                        }
+//                    }
+//                }, to: url ,method: .post ,headers: header) { (res) in
+//                    print(url)
+//                    switch res{
+//                        case .success(let request, _, _):
+//                            request.responseJSON(completionHandler: { (resJson) in
+//                                print(resJson.value ?? "0")
+//                                self.navigationController?.popToRootViewController(animated: true)
+//                            })
+//                        case .failure(_):
+//                            print("fail")
+//                    }
+//                }
+//        }
     }
     
     @objc func editProfile (){
-             let popOverVC = AlertEditProfileViewController()
-             self.addChild(popOverVC)
-             popOverVC.view.frame = self.view.frame
-             self.view.addSubview(popOverVC.view)
-             popOverVC.didMove(toParent: self)
+        if(nameRelativeTextField.text?.count == 0 || telRelativeTextField.text?.count == 0 || relativeTextField.text?.count == 0){
+            print("nil")
+            let popOverVC = AlertEditProfileCancel()
+            self.addChild(popOverVC)
+            popOverVC.view.frame = self.view.frame
+            self.view.addSubview(popOverVC.view)
+            popOverVC.didMove(toParent: self)
+        }else{
+            print("have data")
+            let popOverVC = AlertEditProfileViewController()
+            self.addChild(popOverVC)
+            popOverVC.view.frame = self.view.frame
+            self.view.addSubview(popOverVC.view)
+            popOverVC.didMove(toParent: self)
+        }
     }
 
-        lazy var titleLabel : UILabel = {
+    
+    //-----------------------------------------------------------------------------------------------
+    
+   
+
+    lazy var titleLabel : UILabel = {
             let label = UILabel()
             let title = "ข้อมูลส่วนตัว"
             let attributedText = NSMutableAttributedString(string: title,
@@ -179,12 +262,12 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
             label.attributedText = attributedText
             label.numberOfLines = 0
             return label
-        }()
+    }()
     
     //-----------------------------------------------------------------------------------------------
     
     
-        lazy var titleNameLabel : UILabel = {
+    lazy var titleNameLabel : UILabel = {
              let label = UILabel()
              let title = "ชื่อ:"
              let attributedText = NSMutableAttributedString(string: title,
@@ -192,21 +275,23 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
              label.attributedText = attributedText
              label.numberOfLines = 0
              return label
-       }()
+    }()
     
-       lazy var nameTextField: UITextField = {
-               let textField = UITextField()
+    lazy var nameTextField: UITextField = {
+            let textField = UITextField()
                textField.attributedPlaceholder = NSAttributedString(string: "ชื่อของคุณ", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
-               return textField
-           }()
-           lazy var nameTextFieldLine: UIView = {
+               textField.isUserInteractionEnabled = false
+            return textField
+    }()
+    
+    lazy var nameTextFieldLine: UIView = {
                   let view = UIView()
                   view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                   return view
-           }()
-       //-----------------------------------------------------------------------------------------------
-        lazy var titleSurnameLabel : UILabel = {
+    }()
+    //-----------------------------------------------------------------------------------------------
+    lazy var titleSurnameLabel : UILabel = {
                 let label = UILabel()
                 let title = "นามสกุล:"
                 let attributedText = NSMutableAttributedString(string: title,
@@ -219,15 +304,17 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
                let textField = UITextField()
                textField.attributedPlaceholder = NSAttributedString(string: "นามสกุล",attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
+               textField.isUserInteractionEnabled = false
                return textField
            }()
            lazy var surnameTextFieldLine: UIView = {
                let view = UIView()
                view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                return view
-           }()
-       //-----------------------------------------------------------------------------------------------
-        lazy var titleTelLabel : UILabel = {
+    }()
+    //-----------------------------------------------------------------------------------------------
+    
+    lazy var titleTelLabel : UILabel = {
                   let label = UILabel()
                   let title = "เบอร์โทรศัพท์:"
                   let attributedText = NSMutableAttributedString(string: title,
@@ -262,8 +349,9 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
     }()
     let dateTextField: UITextField = {
                let textField = UITextField()
-               textField.attributedPlaceholder = NSAttributedString(string: "ปี / เดือน / วัน", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
+               textField.attributedPlaceholder = NSAttributedString(string: "วัน / เดือน / ปี", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.blackAlpha(alpha: 0.5)])
                textField.textColor = .black
+               textField.isUserInteractionEnabled = false
                return textField
            }()
            let dateTextFieldLine: UIView = {
@@ -283,10 +371,11 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
     
     @objc func dateChanged(datePicker: UIDatePicker) {
             let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "th")
             dateFormatter.dateFormat = "yyyy/MM/dd"
             dateTextField.text = dateFormatter.string(from: datePicker.date)
     }
-    
+
     @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
             view.endEditing(true)
     }
@@ -322,10 +411,12 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
                                 if let yield = user["username"] as? String {
                                     self?.nameTextField.text = yield
                                     self?.nameTextField.font = UIFont.BaiJamjureeMedium(size: 15)
+                                    self?.nameTextField.textColor = UIColor.rgb(red: 188, green: 188, blue: 188)
                                 }
                                 if let yield = user["surname"] as? String {
                                     self?.surnameTextField.text = yield
                                     self?.surnameTextField.font = UIFont.BaiJamjureeMedium(size: 15)
+                                     self?.surnameTextField.textColor = UIColor.rgb(red: 188, green: 188, blue: 188)
                                 }
 //
                                 if let yield = user["tel"] as? Int {
@@ -337,6 +428,7 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
                                 if let yield = user["birthday"] as? String{
                                      self?.dateTextField.text = yield
                                      self?.dateTextField.font = UIFont.BaiJamjureeMedium(size: 15)
+                                    self?.dateTextField.textColor = UIColor.rgb(red: 188, green: 188, blue: 188)
                                 }
 
                                 if let yield = user["photo"] as? String {
@@ -448,19 +540,60 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
                view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                return view
         }()
-    //-----------------------------------------------------------------------------------------------
-       
+
+    
+    func NotificaitonUser(){
+           Alamofire.request(URL_USER_USE_OTP, method: .post).responseJSON { response in
+                       if let otp = response.result.value as! [String: Any]? {
+                           if let yield = otp["otp"] as? String {
+                           print(yield)
+                           DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                           // your code here
+                        AlertEditProfileCompleteViewController.otpTextField.text = yield
+                         
+                           }
+                           let content = UNMutableNotificationContent()
+                           content.title = "ใส่รหัส OTP เพื่อทำการแก้ไขข้อมูล "
+                           content.body = "รหัส OTP ของคุณคือ \(yield)"
+                           content.badge = 1
+                           content.sound = UNNotificationSound.default
+                       let triger = UNTimeIntervalNotificationTrigger(timeInterval: 3.0, repeats: false)
+                           let request = UNNotificationRequest(identifier: "Identifier", content: content, trigger: triger)
+                               UNUserNotificationCenter.current().add(request) { (Error) in
+                               print(Error as Any)
+                           }
+                       }
+               }
+           }
+              
+    }
+    
+    
+ 
+    
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let backButton = UIBarButtonItem()
+        backButton.title = "back"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        
+        UNUserNotificationCenter.current().delegate = self
         
         if let name = defaultValues.string(forKey: "userId") {
                 getIduser = name
+                print(getIduser)
         }
+        reloadData()
         view.addSubview(btnBack)
         //picker
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
+        datePicker?.locale = Locale(identifier: "th")
         dateTextField.inputView = datePicker
+        
+        
         datePicker?.addTarget(self, action: #selector(editProfileView.dateChanged(datePicker: )), for: .valueChanged)
         let TapGesture = UITapGestureRecognizer(target: self, action: #selector(editProfileView.viewTapped(gestureRecognizer:)))
         phoneTextField.text = NumberPhoneLabelText
@@ -545,5 +678,10 @@ class editProfileView: UIViewController, UITextFieldDelegate ,UINavigationContro
 
         nextButton.anchor(BGView2.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: viewScroll.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 80, rightConstant: 80, widthConstant: screenSizeX - 160, heightConstant: 60)
        }
+    
+        func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            completionHandler([.alert,.sound,.badge])
+
+        }
 
 }

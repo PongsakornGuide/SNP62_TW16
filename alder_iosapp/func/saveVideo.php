@@ -13,6 +13,7 @@
       if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
            $title_video = isset($_POST['title_video']) ? $_POST['title_video'] : '';
            $singerName = isset($_POST['singerName']) ? $_POST['singerName'] : '';
+           $center = isset($_POST['center']) ? $_POST['center'] : '';
            $url = isset($_POST['url']) ? $_POST['url'] : '';
            $image = $_FILES['image']['name'];
            $image_temp = $_FILES['image']['tmp_name'];
@@ -23,6 +24,7 @@
            $conn->set_charset('utf8');
            $sql = "UPDATE `upload_videos` SET
            title_video = '".$title_video."',
+           center = '".$center."',
            singerName = '".$singerName."',
            url = '".$url."',
            img = '/images/".$image_name."'
@@ -41,16 +43,19 @@
            else
            {
            	echo "ไม่สำเร็จ";
+            header( "location: ../config/uploadVideo.php" );
            }
       }else{
             $title_video = isset($_POST['title_video']) ? $_POST['title_video'] : '';
             $singerName = isset($_POST['singerName']) ? $_POST['singerName'] : '';
+            $center = isset($_POST['center']) ? $_POST['center'] : '';
             $url = isset($_POST['url']) ? $_POST['url'] : '';
             $id = isset($_POST['id']) ? $_POST['id'] : '';
             $conn = mysqli_connect("localhost","root","","Alder");
             $conn->set_charset('utf8');
             $sql = "UPDATE `upload_videos` SET
             title_video = '".$title_video."',
+            center = '".$center."',
             singerName = '".$singerName."',
             url = '".$url."'
             WHERE `upload_videos`.`id` = '".$id."'";
@@ -65,6 +70,7 @@
             }
             else
             {
-             echo "ไม่สำเร็จ";
+             // echo "ไม่สำเร็จ";
+             header( "location: ../config/uploadVideo.php" );
             }
       }

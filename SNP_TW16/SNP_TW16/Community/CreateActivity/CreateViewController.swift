@@ -18,6 +18,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
     lazy var user_id = String()
     lazy var imageViewPro = String()
     lazy var defaultValues = UserDefaults.standard
+    let URL_GET_PROFILE = "\(AppDelegate.link)alder_iosapp/v1/showProfile.php"
     let URL_USER_CreatePost = "\(AppDelegate.link)alder_iosapp/v1/create_post.php"
     lazy var ImageProfile = UIImage()
     
@@ -43,6 +44,7 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         view1.image = UIImage(named: "petr")
         view1.layer.masksToBounds = true
         view1.layer.cornerRadius = 80/2
+        view1.contentMode = .scaleAspectFill
         return view1
     }()
     
@@ -221,34 +223,61 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
     
     //-----------------------------------------------------------------------------------------------
     
+    
+     func reloadData(){
+            let parameters: Parameters = ["userId":user_id]
+                  let url = URL_GET_PROFILE + "?id=\(user_id)"
+                  Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
+                            print(resData)
+                            if let user = resData.result.value as! [String: Any]? {
+                                print(user)
+                                    if let yield = user["username"] as? String{
+                                        self?.namelabel.text = yield
+                                        self?.namelabel.textAlignment = .center
+                                        self?.namelabel.font = UIFont.BaiJamjureeBold(size: 22)
+                                    }
+
+                                      if let yield = user["photo"] as? String{
+                                        let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + yield)
+                                            if let postImageURL = URL(string: postImagePath) {
+                                            self?.Imagelabel.sd_setImage(with: postImageURL, completed: nil)
+                                        }
+                                    }
+                    }
+                    
+            }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let backButton = UIBarButtonItem()
+        backButton.title = "back"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        if let name = defaultValues.string(forKey: "userName") {
-            username = name
-            namelabel.text = username
-        }
-        
-    //-----------------------------------------------------------------------------------------------
-        
+//        if let name = defaultValues.string(forKey: "userName") {
+//            username = name
+//            namelabel.text = username
+//        }
+//
+//    //-----------------------------------------------------------------------------------------------
+//
         if let name2 = defaultValues.string(forKey: "userId") {
                       user_id = name2
         }
-    //-----------------------------------------------------------------------------------------------
-        
-        if let name3 = defaultValues.string(forKey: "ImageUser") {
-                       imageViewPro = name3
-            Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (imageViewPro)).responseImage { response in
-                        if let image = response.result.value {
-                        self.Imagelabel.image = image
-                }
-            }
-        }
-    //-----------------------------------------------------------------------------------------------
-        
+//    //-----------------------------------------------------------------------------------------------
+//
+//        if let name3 = defaultValues.string(forKey: "ImageUser") {
+//                       imageViewPro = name3
+//                        Alamofire.request("\(AppDelegate.link)alder_iosapp/" + (imageViewPro)).responseImage { response in
+//                        if let image = response.result.value {
+//                        self.Imagelabel.image = image
+//                }
+//            }
+//        }
+//    //-----------------------------------------------------------------------------------------------
+        reloadData()
         view.backgroundColor = .white
         alertLabel.isHidden = true
         
@@ -271,11 +300,11 @@ class CreateViewController: UIViewController , UINavigationControllerDelegate , 
         
         contentTextField.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 40).isActive = true
         
-        imageView.anchor(contentTextField.bottomAnchor, left: contentTextField.leftAnchor, right: contentTextField.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 250)
+        imageView.anchor(contentTextField.bottomAnchor, left: contentTextField.leftAnchor, right: contentTextField.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 280)
         
         btn.anchor(imageView.topAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: imageView.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 250)
 
-        submitButton.anchor(btn.bottomAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+        submitButton.anchor(btn.bottomAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 60)
 
         alertLabel.anchor(submitButton.bottomAnchor, left: submitButton.leftAnchor, right: submitButton.rightAnchor, bottom: bgView.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 30)
         

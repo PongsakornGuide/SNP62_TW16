@@ -49,7 +49,6 @@ class StroyTableView: UITableViewCell {
            return label
     }()
     
-    
     lazy var detaillname: UILabel = {
               let label = UILabel()
                       label.text = "โดย: หลวงปู่ชา"
@@ -69,14 +68,15 @@ class StroyTableView: UITableViewCell {
 
             profileImage.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: detaillname.bottomAnchor, topConstant: 0, bottomConstant: -10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
             
-            bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 150)
+            bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 200)
 
-            titleFullname.anchor(bgActivitity.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: detaillname.topAnchor, topConstant: 20, bottomConstant: 10, leftConstant: 20, rightConstant: 5, widthConstant: 0, heightConstant: 0)
+
+            titleFullname.anchor(bgActivitity.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: detaillname.topAnchor, topConstant: 15, bottomConstant: 10, leftConstant: 20, rightConstant: 5, widthConstant: 0, heightConstant: 0)
 
             titleFullname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 140).isActive = true
             
             
-            detaillname.anchor(titleFullname.bottomAnchor, left: titleFullname.leftAnchor, right: titleFullname.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 10, bottomConstant: 20, leftConstant: 0, rightConstant: 5, widthConstant: 0, heightConstant: 0)
+            detaillname.anchor(titleFullname.bottomAnchor, left: titleFullname.leftAnchor, right: titleFullname.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 10, bottomConstant: 30, leftConstant: 0, rightConstant: 5, widthConstant: 0, heightConstant: 0)
 
             detaillname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 140).isActive = true
             

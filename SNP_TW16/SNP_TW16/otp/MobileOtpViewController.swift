@@ -127,37 +127,8 @@ class MobileOtpViewController: UIViewController,UNUserNotificationCenterDelegate
                                         }
                                 }
                     
-//                                let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
-//                                let twilioSecret = "a74824968da571b8afac81506f84acf2"
-//                                //Note replace + = %2B , for To and From phone number
-//                                let fromNumber = "+12565308003"// actual number is +9999999
-//                                let toNumber = "+66631921545"// actual number is +9999999
-//
-////                            DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
-////                                                       self.Tel_user = yield
-////                              }
-//                              //    let twilioSID = "AC399894510e0fe4b814b3e40737f3b2a5"
-//                              //    let twilioSecret = "a74824968da571b8afac81506f84acf2"
-//                              //    //Note replace + = %2B , for To and From phone number
-//                              //    let fromNumber = "+12565308003"// actual number is +9999999
-//                              //    let toNumber = "+66631921545"// actual number is +9999999
-//                             let message = "Your verification code is " + "\(yield)" + "of Register"
-//
-//                             let request = NSMutableURLRequest(url: URL(string:"https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/SMS/Messages")!)
-//                             request.httpMethod = "POST"
-//                             request.httpBody = "From=\(fromNumber)&To=\(toNumber)&Body=\(message)".data(using: .utf8)
-//                             // Build the completion block and send the request
-//                             URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
-//                                 print("Finished")
-//                                 if let data = data, let responseDetails = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
-//                                     print("Response: \(responseDetails)")
-//                                 } else {
-//                                    print("Error: \(error)")
-//                                 }
-//                             }).resume()
-//
-//                        }
-                }
+        }
+                
             let nextToOtp = OtpViewController()
             nextToOtp.idUserLabelText = self.otpTextField.text ?? "0"
             nextToOtp.OTP = self.Tel_user ?? "Nil"

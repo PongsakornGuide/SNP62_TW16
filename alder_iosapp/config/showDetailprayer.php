@@ -12,22 +12,19 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 ?>
 
 <?php
-    session_start();
-    // echo 'Wellcome to' . $_SESSION['email'];
-    if(isset($_SESSION['email'])){
-      // echo 'Wellcome to' . $_SESSION['email'];
-    }
-
+ include('../func/auth.php')
  ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title></title>
+	<title>Alder</title>
+	<link rel="shortcut icon" type="image/png" href="../images/group1457@3x.png">
 </head>
 
 <body>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href="../css/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
 	<link href="../css/switchery.css" type="text/css" rel="stylesheet">
@@ -36,7 +33,7 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 	<link href="../css/switchery.min.css" type="text/css" rel="stylesheet">
 	<link href="../css/webfonts/fa-regular-400.woff" type="text/css" rel="stylesheet">
 	<link href="../css/all.min.css" type="text/css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;700&display=swap" rel="stylesheet">
 	<style>
 		body {
 			background-color: #fff;
@@ -46,10 +43,9 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 			width: 199px;
 			height: 45px;
 			border-radius: 25px 0px 0px 25px;
-			background-color: #F1F3F9;
+			background-color: #fff;
 			color: rgb(27, 71, 147) !important;
 			margin: 5px 0 10px 0;
-			float: right;
 			padding-top: 5px;
 		}
 
@@ -86,7 +82,7 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 
 				<li>
 					<a href="/alder_iosapp/config/uploadVideo.php">
-						<i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;อัพโหลดวิดีโอ</span>
+						<i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;วิดีโอ / เพลง</span>
 					</a>
 				</li>
 
@@ -106,12 +102,13 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 				</div>
 				<ul class="nav navbar-nav">
 					<li class="dropdown nav-item d-md-block">
-						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: 500; font-size: 13px;">
+						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+								style="font-weight: 500; font-size: 13px;font-family: 'Bai Jamjuree', sans-serif; ">
 								<?php echo $_SESSION["email"];?>
 							</span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-caret-square-down"></i>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-							<li><a href="/alder_iosapp/func/logout.php?logout">Logout</a></li>
+							<li><a href="/alder_iosapp/func/logout.php?logout" style="font-family: 'Bai Jamjuree', sans-serif; ">Logout</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -121,7 +118,7 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 
 	<div class="page-inner no-page-title" style="background:#fff;">
 		<div id="main-wrapper">
-			<h2 style="font-family: 'Bai Jamjuree', sans-serif; font-weight: bold;font-size:40px;color:#1B4793;">เพลง : " <?php echo $result["title"];?> "</h2>
+			<h2 style="font-family: 'Bai Jamjuree', sans-serif; font-weight: bold;font-size:40px;color:#1B4793;">บทสวด : " <?php echo $result["title"];?> "</h2>
 			<div class="card mt-2 col-lg-12" style="margin-top: 30px !important; border-radius:15px;">
 				<div class="card-body" style="font-family: 'Bai Jamjuree', sans-serif;">
 					<!--สันทนาการ-->
@@ -145,34 +142,43 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 							<input type="hidden" name="id" id="id" value="<?php echo $result["id"];?>">
 						</div>
 
-						<div class="row col-12">
+						<div class="row">
 							<div class="form-group col-12">
-								<label for="text" class="control-label" style="font-weight:bold;">ชื่อเพลง</label>
+								<label for="text" class="control-label" style="font-weight:bold;">ชื่อบทสวด</label>
 								<input class="form-control" name="title" type="text" id="title" value="<?php echo $result["title"];?>">
 							</div>
 
-							<div class="form-group col-6">
-								<label for="exampleFormControlSelect2" style="font-weight:bold;">นักร้อง</label>
-								<input class="form-control" id="content" name="content" value="<?php echo $result["content"];?>">
-							</div>
-
-							<div class="form-group col-6">
-								<label for="exampleFormControlSelect2" style="font-weight:bold;">ข้อมูลเพิ่มเติม</label>
+							<div class="form-group col-12">
+								<label for="exampleFormControlSelect2" style="font-weight:bold;">หมวดหมู่</label>
 								<input class="form-control" id="credit" name="credit" value="<?php echo $result["credit"];?>">
 							</div>
 
 							<div class="form-group col-12">
-								<div style="float:right;">
-									<input class="btn offset-1" type="hidden">
-									<button class="submit" type="submit" style="background: #FAC92C;color:#fff;font-family: 'Bai Jamjuree', sans-serif; font-weight: 700;padding:12px;border-radius:5px;border:none;"><i class="fas fa-user-edit"></i> แก้ไขบทสวดมนต์</button>&nbsp;&nbsp;
-									<a class="btnbtn btn-danger" href="../func/deletePrayer.php?delete=<?php echo $result["id"];?>"
-										style="background: #FAC92C;color:#fff;font-family: 'Bai Jamjuree', sans-serif; font-weight: 700;padding:14px;border-radius:5px;color:#fff;">
-										<span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:normal;">
-											<i class="fas fa-trash"></i> ลบบทสวดมนต์
-										</span>
-									</a>
-								</div>
+								<label for="exampleFormControlSelect2" style="font-weight:bold;">ศูนย์</label>
+								<input class="form-control" id="center" name="center" value="<?php echo $result["center"];?>">
 							</div>
+
+							<div class="form-group col-12">
+								<label for="exampleFormControlSelect2" style="font-weight:bold;">บทสวด</label>
+								<textarea class="form-control" cols="50" rows="5" id="content" name="content" ><?php echo $result["content"];?></textarea>
+							</div>
+
+							<?php if ($_SESSION["email"] == 'admin@hotmail.com'){ ?>
+								<div class="form-group col-12">
+									<div style="float:right;">
+										<input class="btn offset-1" type="hidden">
+										<button class="submit" type="submit" style="background: #FAC92C;color:#fff;font-family: 'Bai Jamjuree', sans-serif; font-weight: 700;padding:12px;border-radius:5px;border:none;"><i class="fas fa-user-edit"></i>
+											แก้ไขบทสวดมนต์</button>&nbsp;&nbsp;
+										<a class="btnbtn btn-danger" href="../func/deletePrayer.php?delete=<?php echo $result["id"];?>"
+											style="background: #FAC92C;color:#fff;font-family: 'Bai Jamjuree', sans-serif; font-weight: 700;padding:14px;border-radius:5px;color:#fff;">
+											<span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:bold;">
+												<i class="fas fa-trash"></i> ลบบทสวดมนต์
+											</span>
+										</a>
+									</div>
+								</div>
+								<?php } ?>
+
 						</div>
 
 					</form>
@@ -190,44 +196,22 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 	<br>
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-	<!-- <script>
-	$(document).on('click', '.submit', function(e) {
-	e.preventDefault();
-	Swal.fire({
-		icon : 'question',
-		title: 'ต้องการแก้ไขข้อมูล',
-		text: 'แก้ไขข้อมูล',
-		type: 'warning',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'OK'
-	}).then(function (result) {
-		if(result.value){
-			$('#myForm').submit();
-		}
-	});
-	});
-	</script> -->
-
-
-
 	<script>
-	$(document).on('click', '.submit', function(e) {
-		e.preventDefault();
-		var title = $('#title').val();
-		var content = $('#content').val();
-		var credit = $('#credit').val();
-
-		if(title == '' || content == ''|| credit == ''){
-			Swal.fire({
-				icon: 'error',
-				title: 'กรอกข้อมูลให้ครบถ้วน',
-				text: 'กรอกข้อมูลให้ครบถ้วน'
-			})
-		}else{
+		$(document).on('click', '.submit', function(e) {
+			e.preventDefault();
+			var title = $('#title').val();
+			var content = $('#content').val();
+			var credit = $('#credit').val();
+			var center = $('#center').val();
+			if (title == '' || content == '' || center == '' || credit == '') {
 				Swal.fire({
-					icon : 'question',
+					icon: 'error',
+					title: 'กรอกข้อมูลให้ครบถ้วน',
+					text: 'กรอกข้อมูลให้ครบถ้วน'
+				})
+			} else {
+				Swal.fire({
+					icon: 'question',
 					title: 'ต้องการแก้ไขข้อมูล',
 					text: 'แก้ไขข้อมูล',
 					type: 'warning',
@@ -235,24 +219,23 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 					confirmButtonColor: '#3085d6',
 					cancelButtonColor: '#d33',
 					confirmButtonText: 'OK'
-				}).then(function (result) {
-					if(result.value){
+				}).then(function(result) {
+					if (result.value) {
 						$('#myForm').submit();
-					}else{
-					}
+					} else {}
 				});
 
 			}
 
-	});
+		});
 	</script>
 
 	<script>
-	$('.btnbtn').on('click',function(e){
+		$('.btnbtn').on('click', function(e) {
 			e.preventDefault();
 			const href = $(this).attr('href')
 			Swal.fire({
-				icon : 'error',
+				icon: 'error',
 				title: 'ต้องการลบข้อมูล',
 				text: 'แน่ใจที่ต้องการจะลบ',
 				type: 'warning',
@@ -261,13 +244,12 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 				cancelButtonColor: '#d33',
 				confirmButtonText: 'Delete'
 			}).then((result) => {
-				 if(result.value){
-					 document.location.href = href;
-				 }
+				if (result.value) {
+					document.location.href = href;
+				}
 			})
 
-	})
-
+		})
 	</script>
 
 	<script src="../func/sweetalert2.all.min.js"></script>

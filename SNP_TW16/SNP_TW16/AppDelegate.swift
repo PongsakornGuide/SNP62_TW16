@@ -15,30 +15,27 @@ import FLEX
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    
-//    static let link = "http://localhost/"
-//192.168.1.101
-    static let link = "http://192.168.1.14/"
-//    static let link = "http://192.168.1.102/"
-//    static let link = "http://192.168.1.16/"
-//    static let link = "http://192.168.1.57/"
-//    static let link = "http://192.168.1.12/"
-
+//  static let link = "http://localhost/"
+//  static let link = "http://192.168.1.20/"
+//  static let link = "http://192.168.1.102/"
+//  static let link = "http://192.168.1.16/"
+//  static let link = "http://192.168.1.57/"
+//  static let link = "http://192.168.1.12/"
+    static let link = "http://snptw16alder.com/"
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
         self.SetupPushNotification(application: application)
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = tabBarViewController()
-//        application.applicationIconBadgeNumber = 10
-//        window?.rootViewController = UINavigationController(rootViewController: tabBarViewController())
+//      window?.rootViewController = tabBarViewController()
+        window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
         return true
     }
-
+    
  // Setup appdelegate for push notifications
     func SetupPushNotification(application: UIApplication) -> () {
-        
+
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge])
         {(granted,error) in
             if granted{
@@ -52,7 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     //  MARK: UNUserNotificationCenter Delegate methods
     
-    
     // Method: 1 -  Will register app on apns to receieve token
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
@@ -60,19 +56,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(tokenString(deviceToken)) // this method will convert token "Data" to string formate
     }
     
-    
     // Method: 2 - Failed registration. Explain why.
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Failed to register for remote notifications: \(error.localizedDescription)")
     }
-    
     
     // Method: 3 - In this method app will receive notifications in [userInfo]
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
         print(userInfo)
         
     }
-    
     
     //code to make a token string
     func tokenString(_ deviceToken:Data) -> String{
@@ -83,8 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return token //  this token will be passed to your backend that can be written in php, js, .net etc.
     }
-    
-    
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -107,7 +98,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
 
 }
 

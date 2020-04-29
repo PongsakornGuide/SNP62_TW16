@@ -14,6 +14,7 @@
 
            $title = isset($_POST['title']) ? $_POST['title'] : '';
            $content = isset($_POST['content']) ? $_POST['content'] : '';
+           $center = isset($_POST['center']) ? $_POST['center'] : '';
            $credit = isset($_POST['credit']) ? $_POST['credit'] : '';
            $image = $_FILES['image']['name'];
            $image_temp = $_FILES['image']['tmp_name'];
@@ -25,6 +26,7 @@
            $sql = "UPDATE `prayer` SET
            title = '".$title."',
            content = '".$content."',
+           center = '".$center."',
            credit = '".$credit."',
            image = '/images/".$image_name."'
 
@@ -50,6 +52,7 @@
 
                    $title = isset($_POST['title']) ? $_POST['title'] : '';
                    $content = isset($_POST['content']) ? $_POST['content'] : '';
+                   $center = isset($_POST['center']) ? $_POST['center'] : '';
                    $credit = isset($_POST['credit']) ? $_POST['credit'] : '';
                    $id = isset($_POST['id']) ? $_POST['id'] : '';
 
@@ -60,6 +63,7 @@
 
                    $sql = "UPDATE `prayer` SET
                    title = '".$title."',
+                   center = '".$center."',
                    content = '".$content."',
                    credit = '".$credit."'
 

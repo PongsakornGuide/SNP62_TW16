@@ -8,46 +8,48 @@
 
 import UIKit
 class DiseaseTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource {
-    
-     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    //-----------------------------------------------------------------------------------------------
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
            return 1
     }
-    
+    //-----------------------------------------------------------------------------------------------
     let diseasePickerView = UIPickerView()
     var disease = ["ความดันโลหิตสูง","โรคเบาหวาน","โรคอักเสบ/ข้อเสื่อม","ภาวะหูตึง","ต้อกระจก","โรคหลอกเลือดหัวใจตีบ","อัมพาต","กล้ามเนื้อหัวใจตาย","ภาวะซึมเศร้า","ภาวะสมองเสื่อม"]
     
     var disease1 = [1,2,3,4,5,6,7,8,9,10]
-    
+    //-----------------------------------------------------------------------------------------------
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setLayout()
     }
-
+    //-----------------------------------------------------------------------------------------------
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //-----------------------------------------------------------------------------------------------
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 
             return disease.count
     }
+    //-----------------------------------------------------------------------------------------------
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     
            return disease[row]
    
     }
+    //-----------------------------------------------------------------------------------------------
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         DiseaseTableViewCell.diseaseNameTextField.text = disease[row]
         DiseaseTableViewCell.diseaseNameTextField.tag = disease1[row]
     }
-    
+    //-----------------------------------------------------------------------------------------------
     lazy var BGView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 20
         return view
     }()
-    
+    //-----------------------------------------------------------------------------------------------
     lazy var titleLabel : UILabel = {
                 let label = UILabel()
                 let title = "โรคประจำตัว"
@@ -59,10 +61,7 @@ class DiseaseTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
                 label.numberOfLines = 0
                 return label
    }()
-    
-    
    //-----------------------------------------------------------------------------------------------
-    
     lazy var titlediseaseNameLabel : UILabel = {
                           let label = UILabel()
                           let title = "โรค:"
@@ -73,21 +72,20 @@ class DiseaseTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
                           return label
    }()
     
-    
-    
+   //-----------------------------------------------------------------------------------------------
    static var diseaseNameTextField: UITextField = {
                          let textField = UITextField()
                          textField.attributedPlaceholder = NSAttributedString(string: "โรคประจำตัว", attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
                          return textField
                      }()
-    lazy var diseaseTextFieldLine: UIView = {
+   lazy var diseaseTextFieldLine: UIView = {
                             let view = UIView()
                             view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
                             return view
                      }()
        
-    //-----------------------------------------------------------------------------------------------
-    lazy var titlediseaseDetailLabel : UILabel = {
+   //-----------------------------------------------------------------------------------------------
+   lazy var titlediseaseDetailLabel : UILabel = {
                            let label = UILabel()
                            let title = "รายละเอียดอื่นๆ:"
                            let attributedText = NSMutableAttributedString(string: title,
@@ -96,7 +94,7 @@ class DiseaseTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
                            label.numberOfLines = 0
                            return label
     }()
-    
+    //-----------------------------------------------------------------------------------------------
     static var diseaseDetailTextField: UITextField = {
             let textField = UITextField()
             textField.attributedPlaceholder = NSAttributedString(string: "รายละเอียดอื่นๆ",attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeMedium(size: 15), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 167, green: 169, blue: 172)])
@@ -106,10 +104,8 @@ class DiseaseTableViewCell: UITableViewCell,UITextFieldDelegate,UINavigationCont
             let view = UIView()
             view.backgroundColor = UIColor.rgb(red: 224, green: 224, blue: 224)
             return view
-    }() //-----------------------------------------------------------------------------------------------
-        
-            
-              
+    }()
+    //-----------------------------------------------------------------------------------------------
     func setLayout(){
         backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         addSubview(BGView)

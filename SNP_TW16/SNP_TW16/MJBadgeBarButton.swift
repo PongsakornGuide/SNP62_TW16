@@ -16,12 +16,16 @@ class MJBadgeBarButton: UIBarButtonItem {
     
     var badgeValue : String = "" {
         didSet {
-            if (self.badgeValue == "0" && self.shouldHideBadgeAtZero == true) || self.badgeValue.isEmpty {
-                self.removeBadge()
+            if (self.badgeValue == "" && self.shouldHideBadgeAtZero == true) || self.badgeValue.isEmpty {
+//                                self.removeBadge()
+                self.badge.isHidden = false
+                self.updateBadgeValueAnimated(animated: true)
             } else {
                 self.badge.isHidden = false
                 self.updateBadgeValueAnimated(animated: true)
             }
+//            self.badge.isHidden = false
+//            self.updateBadgeValueAnimated(animated: true)
         }
     }
     

@@ -8,16 +8,15 @@
 
 import UIKit
 class SearchTableViewCell: UITableViewCell {
-//        var id_user = String()
-        override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             setupViewCell()
-        }
+    }
+    
     let screenSizeX: CGFloat = UIScreen.main.bounds.width
     let screenSizeY: CGFloat = UIScreen.main.bounds.height
                 
-        
-     
     lazy var profileImage: UIView = {
               let background = UIView()
                  background.backgroundColor = .white
@@ -47,7 +46,7 @@ class SearchTableViewCell: UITableViewCell {
               return image
     }()
     
-    
+
     lazy var bgActivitityBg : UIView = {
              let image = UIView()
              image.layer.cornerRadius = 20
@@ -55,17 +54,14 @@ class SearchTableViewCell: UITableViewCell {
              return image
     }()
     
-    
     lazy var titleFullnameEnd: UILabel = {
             let label = UILabel()
             label.text = "กิจกรรมนี้สิ้นสุดลงแล้ว"
             label.textColor = UIColor.white
             label.font = UIFont.BaiJamjureeBold(size: 24)
             label.numberOfLines = 0
-//        label.backgroundColor = .white
             return label
-     }()
-     
+    }()
     
     lazy var titleFullname: UILabel = {
            let label = UILabel()
@@ -76,7 +72,15 @@ class SearchTableViewCell: UITableViewCell {
            return label
     }()
     
-
+    lazy var fullActivity: UILabel = {
+           let label = UILabel()
+           label.text = "กิจกรรมเต็มแล้ว"
+           label.textColor = UIColor.white
+           label.font = UIFont.BaiJamjureeBold(size: 25)
+           label.numberOfLines = 0
+           return label
+    }()
+    
     lazy var line: UIView = {
             let view = UIView()
             view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 252)
@@ -102,6 +106,22 @@ class SearchTableViewCell: UITableViewCell {
     lazy var supportTime: UILabel = {
           let label = UILabel()
           label.text = "14 สิงหาคม 2562"
+          label.textColor = UIColor.blackAlpha(alpha: 0.8)
+          label.font = UIFont.BaiJamjureeRegular(size: 16)
+          return label
+    }()
+    
+    lazy var supportTime1: UILabel = {
+          let label = UILabel()
+          label.text = "14"
+          label.textColor = UIColor.blackAlpha(alpha: 0.8)
+          label.font = UIFont.BaiJamjureeRegular(size: 16)
+          return label
+    }()
+    
+    lazy var supportTime2: UILabel = {
+          let label = UILabel()
+          label.text = "2562"
           label.textColor = UIColor.blackAlpha(alpha: 0.8)
           label.font = UIFont.BaiJamjureeRegular(size: 16)
           return label
@@ -138,20 +158,23 @@ class SearchTableViewCell: UITableViewCell {
     }
     
         func setupViewCell(){
-           
-            
+          
             backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
             bgActivitityBg.isHidden = true
             titleFullnameEnd.isHidden = true
+            fullActivity.isHidden = true
             addSubview(profileImage)
             addSubview(bgActivitity)
             addSubview(recommend)
             addSubview(bgActivitityBg)
             addSubview(titleFullname)
+            addSubview(fullActivity)
             addSubview(titleFullnameEnd)
             addSubview(line)
             addSubview(supportName)
             addSubview(supportTime)
+            addSubview(supportTime1)
+            addSubview(supportTime2)
             addSubview(CheckPoint)
             addSubview(decidePass)
 
@@ -159,32 +182,37 @@ class SearchTableViewCell: UITableViewCell {
             
             bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 150)
 
-            bgActivitityBg.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 150)
+            bgActivitityBg.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
 
-            titleFullnameEnd.anchor(bgActivitityBg.topAnchor, left: nil, right: nil, bottom: nil, topConstant: 60, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
+            titleFullnameEnd.anchor(bgActivitityBg.topAnchor, left: nil, right: nil, bottom: bgActivitityBg.bottomAnchor, topConstant: 40, bottomConstant: 40, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 50)
 
             titleFullnameEnd.centerXAnchor.constraint(equalTo: profileImage.centerXAnchor).isActive = true
             
+            fullActivity.anchor(bgActivitityBg.topAnchor, left: nil, right: nil, bottom: bgActivitityBg.bottomAnchor, topConstant: 40, bottomConstant: 40, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 50)
+
+            fullActivity.centerXAnchor.constraint(equalTo: profileImage.centerXAnchor).isActive = true
+                       
             
             recommend.anchor(bgActivitity.bottomAnchor, left:bgActivitity.leftAnchor, right:  nil, bottom: nil, topConstant: 22, bottomConstant: 0, leftConstant: 15, rightConstant: 0, widthConstant: 20, heightConstant: 20)
                        
-            
             titleFullname.anchor(bgActivitity.bottomAnchor, left: recommend.rightAnchor, right: CheckPoint.leftAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 10, rightConstant: 5, widthConstant: 0, heightConstant: 0)
 
             titleFullname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
                         
-
             CheckPoint.anchor(bgActivitity.bottomAnchor, left: titleFullname.rightAnchor, right:profileImage.rightAnchor, bottom: nil, topConstant: 18, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 110, heightConstant: 30)
             
             decidePass.anchor(bgActivitity.bottomAnchor, left: titleFullname.rightAnchor, right:profileImage.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 30)
             
-            
             line.anchor(titleFullname.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1.1)
                      
             supportName.anchor(line.bottomAnchor, left: bgActivitity.leftAnchor, right: rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 80)
-                        
-            supportTime.anchor(line.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 80)
             
+            
+            supportTime1.anchor(line.bottomAnchor, left: nil, right: supportTime.leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 5, widthConstant: 0, heightConstant: 80)
+            
+            supportTime.anchor(line.bottomAnchor, left: nil, right: supportTime2.leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 5, widthConstant: 0, heightConstant: 80)
+            
+            supportTime2.anchor(line.bottomAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 80)
 
         }
         

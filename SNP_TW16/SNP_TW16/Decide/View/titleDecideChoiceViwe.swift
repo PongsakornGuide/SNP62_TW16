@@ -27,7 +27,7 @@ class titleDecideChoiceViwe: UITableViewCell{
              
              lazy var titleHeader : UILabel = {
                             let label = UILabel()
-                            let title = "โปรดเลือกสาเหตุเพื่อให้เรา \nเข้าใจถึงสิ่งที่เกิดในการจัด\nกิจกรรมครั้งนี้"
+                            let title = "โปรดเลือกสาเหตุเพื่อให้เรา \n\nเข้าใจถึงสิ่งที่เกิดในการจัด\n\nกิจกรรมครั้งนี้"
                             let attributedText = NSMutableAttributedString(string: title,
                             attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 25),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
                             label.attributedText = attributedText

@@ -1,21 +1,17 @@
 <?php
-    session_start();
-    // echo 'Wellcome to' . $_SESSION['email'];
-    if(isset($_SESSION['email'])){
-      // echo 'Wellcome to' . $_SESSION['email'];
-    }
-
+ include('../func/auth.php')
  ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title></title>
+  <title>Alder</title>
+  <link rel="shortcut icon" type="image/png" href="../images/group1457@3x.png">
 </head>
 
 <body>
-
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link href="../css/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
   <link href="../css/switchery.css" type="text/css" rel="stylesheet">
@@ -34,10 +30,9 @@
       width: 199px;
       height: 45px;
       border-radius: 25px 0px 0px 25px;
-      background-color: #F1F3F9;
+      background-color: #fff;
       color: rgb(27, 71, 147) !important;
       margin: 5px 0 10px 0;
-      float: right;
       padding-top: 5px;
     }
 
@@ -74,7 +69,7 @@
 
         <li>
           <a href="/alder_iosapp/config/uploadVideo.php">
-            <i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;อัพโหลดวิดีโอ</span>
+            <i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;วิดีโอ / เพลง</span>
           </a>
         </li>
 
@@ -94,12 +89,13 @@
         </div>
         <ul class="nav navbar-nav">
           <li class="dropdown nav-item d-md-block">
-            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: 500; font-size: 13px;">
+            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                style="font-weight: 500; font-size: 13px;font-family: 'Bai Jamjuree', sans-serif; ">
                 <?php echo $_SESSION["email"];?>
               </span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-caret-square-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <li><a href="/alder_iosapp/func/logout.php?logout">Logout</a></li>
+              <li><a href="/alder_iosapp/func/logout.php?logout" style="font-family: 'Bai Jamjuree', sans-serif; ">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -135,8 +131,8 @@
           <div class="col-lg-4 col-md-6 col-sm-12 mt-4">
             <a href="/alder_iosapp/config/showDetailVideo.php?id=<? echo $row['id']?>">
               <img src="/alder_iosapp/<?php echo $row['img'] ?>" alt="" style="width:100%;height:auto;">
-              <p class="mt-4" style="font-size:18px;font-weight:bold;"><?php echo $row['title_video'] ?></p>
-              <p style="font-size:14px;font-weight: normal; color:#999;"><?php echo $row['singerName'] ?></p>
+              <p class="mt-4" style="font-size:18px;font-weight:bold;font-family: 'Bai Jamjuree', sans-serif;color:#1B4793;"><?php echo $row['title_video'] ?></p>
+              <p style="font-size:14px;font-weight: normal; color:#999;font-family: 'Bai Jamjuree',sans-serif;"><?php echo $row['singerName'] ?></p>
             </a>
           </div>
 
@@ -144,13 +140,8 @@
         </div>
       </div>
       <br>
-
-
-
     </div>
   </div>
-
-
   <br>
   <br>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

@@ -27,12 +27,13 @@ if ($uploadOk == 0) {
          $title = $_POST["title"];
          $content = $_POST["content"];
          $image_path = "/images/" . $image_name;
+         $center = $_POST["center"];
          $caption = $_POST["caption"];
 
 
 
-        $sql = "INSERT INTO story (title,content,image,caption)
-        VALUES ('$title','$content','$image_path','$caption')";
+        $sql = "INSERT INTO story (title,content,image,center,caption)
+        VALUES ('$title','$content','$image_path','$center','$caption')";
 
         if ($conn->query($sql) === true){
             echo json_encode(['message' => "Created Article Successfully"]);

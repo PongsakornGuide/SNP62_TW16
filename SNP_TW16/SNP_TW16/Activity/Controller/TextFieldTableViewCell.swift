@@ -36,14 +36,13 @@ class  TextFieldTableViewCell :UITableViewCell,UITextFieldDelegate {
     
     static var textView: KMPlaceholderTextView = {
         let textView = KMPlaceholderTextView()
-         textView.textColor = UIColor.blackAlpha(alpha: 0.8)
-         textView.font = UIFont.BaiJamjureeRegular(size: 16)
+         textView.textColor = UIColor.black
+         textView.font = UIFont.BaiJamjureeRegular(size: 22)
          textView.layer.borderColor = UIColor.blackAlpha(alpha: 0.3).cgColor
          textView.layer.borderWidth = 0.5
-         textView.textColor = UIColor.lightGray
          textView.layer.cornerRadius = 5
          textView.placeholder = "เขียนข้อความ ..."
-         textView.placeholderColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+         textView.placeholderColor = UIColor.black
          return textView
     }()
     
@@ -73,6 +72,7 @@ class  TextFieldTableViewCell :UITableViewCell,UITextFieldDelegate {
         addSubview(bgActivitity)
         addSubview(headerText)
         addSubview(TextFieldTableViewCell.textView)
+        
         addSubview(regButton)
         backgroundColor = .white
         

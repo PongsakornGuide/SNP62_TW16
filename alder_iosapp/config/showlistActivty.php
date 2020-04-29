@@ -1,21 +1,17 @@
 <?php
-    session_start();
-    // echo 'Wellcome to' . $_SESSION['email'];
-    if(isset($_SESSION['email'])){
-      // echo 'Wellcome to' . $_SESSION['email'];
-    }
-
+ include('../func/auth.php')
  ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title></title>
+  <title>Alder</title>
+  <link rel="shortcut icon" type="image/png" href="../images/group1457@3x.png">
 </head>
 
 <body>
-
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link href="../css/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
   <link href="../css/switchery.css" type="text/css" rel="stylesheet">
@@ -34,10 +30,9 @@
       width: 199px;
       height: 45px;
       border-radius: 25px 0px 0px 25px;
-      background-color: #F1F3F9;
+      background-color: #fff;
       color: rgb(27, 71, 147) !important;
       margin: 5px 0 10px 0;
-      float: right;
       padding-top: 5px;
     }
 
@@ -73,7 +68,7 @@
 
         <li>
           <a href="/alder_iosapp/config/uploadVideo.php">
-            <i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;อัพโหลดวิดีโอ</span>
+            <i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;วิดีโอ / เพลง</span>
           </a>
         </li>
 
@@ -93,12 +88,13 @@
         </div>
         <ul class="nav navbar-nav">
           <li class="dropdown nav-item d-md-block">
-            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: 500; font-size: 13px;">
+            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                style="font-weight: 500; font-size: 13px;font-family: 'Bai Jamjuree', sans-serif; ">
                 <?php echo $_SESSION["email"];?>
               </span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-caret-square-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <li><a href="/alder_iosapp/func/logout.php?logout">Logout</a></li>
+              <li><a href="/alder_iosapp/func/logout.php?logout" style="font-family: 'Bai Jamjuree', sans-serif; ">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -114,71 +110,108 @@
       <hr>
       <br>
 
-      <div>
-        <?php
+      <?php
                   $conn = mysqli_connect("localhost","root","","Alder");
                   $conn->set_charset('utf8');
                   if($conn->connect_error){
                     die("Connection failed:".$conn->connect_error);
                   }
-                  $sql = "SELECT * FROM post_timelines WHERE post_timelines.act_id = 1 ORDER BY id DESC";
+                  $sql = "SELECT * FROM post_timelines WHERE post_timelines.act_id = 1 ORDER BY id DESC LIMIT 0,3";
                   $result = $conn-> query($sql);
                   $conn-> close();
                 ?>
-      </div>
-
-      <form method="POST" action="/activity/store" enctype="multipart/form-data">
-        <div class="row">
-          <?while ($row = $result-> fetch_assoc()) {?>
+    </div>
 
 
-          <div class="col-lg-4">
-            <div class="card">
-              <!-- <img src='/alder_iosapp/<?php echo $row['img'] ?>'class="card-img-top" alt="...">
-               -->
+    <div class="card col-lg-12" style="margin-top: 10px !important; border-radius:20px;">
+      <div class="card-body" style="font-family: 'Bai Jamjuree', sans-serif;">
+        <!--สันทนาการ-->
+
+        <form method="POST" action="/activity/store" enctype="multipart/form-data">
+          <div class="row">
+            <?while ($row = $result-> fetch_assoc()) {?>
+          <?
+          $date = date("Y-m-d");
+          $dateStart = $row['startDate'];
+          $dateEnd = $row['endDate'];
+
+          if($date <= $dateStart){
+            $bg = '<button type="button" class="btn mb-4 mt ml-2" style="font-weight:Bold; color:#1b4793;background:#fede1c;">กิจกรรมใหม่</button>';
+          }else if($date <= $dateEnd){
+            $bg = '<button type="button" class="btn mb-4 mt" style="font-weight:Bold; color:#fff;background:#1b4793;">กิจกรรมดำเนิน</button>';
+          }else{
+            $bg = '<button type="button" class="btn mb-4" style="font-weight:Bold; color:#fff;background:#f15a42;">กิจกรรมจบลง</button>';
+          }
+
+           ?>
+            <div class=" col-4" style="padding: 0;">
               <a href="/alder_iosapp/config/showDetail.php?id=<? echo $row['id']?>">
-                <!-- /alder_iosapp/ -->
-                <img src='/alder_iosapp/<?php echo $row['img'] ?>' class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title" style="font-family: 'Bai Jamjuree', sans-serif; text-align: center;font-size: 16px;">
-                    <? echo $row['title']?>
-                  </h5>
-                  <p class="card-text" style="font-family: 'Bai Jamjuree', sans-serif; color:black;">
-                    <? echo $row['content']?>
-                  </p>
-                </div>
-                <hr>
-                <div class="row">
-                  <div class="col-6" style="text-align:center;">
-                    <p class="card-text" style="font-family: 'Bai Jamjuree', sans-serif; margin-top: 10px; color:#A7A9AC">
-                    โดย : <? echo $row['leaderActivity']?>
-                    </p>
-                  </div>
-                  <div class="col-6" style="text-align:center;">
+                <div class="col-12">
+                  <div class="card" style="height: 500px;">
+                    <div style="position:absolute;margin-top:200px;margin-left:240px;font-family:'Bai Jamjuree', sans-serif;">
+                        <?=$bg;?>
+                    </div>
+                    <img src='/alder_iosapp/<?php echo $row['img'] ?>' height="250" alt="" class="card-img-top">
+                    <div class="card-body">
 
-                    <p class="card-text" style="font-family: 'Bai Jamjuree', sans-serif; margin-top: 10px;margin-bottom: 20px; color:#A7A9AC">
-                      <? echo $row['startDate']?>
-                    </p>
+                      <h5 class="card-title" style="text-align: center;font-size: 16px;font-family:'Bai Jamjuree', sans-serif;">
+                        <? echo $row['title']?>
+                      </h5>
+                      <p class="card-text" style="color:#A7A9AC;font-family:'Bai Jamjuree', sans-serif; ">
+                        <? echo $row['content']?>
+                      </p>
+
+                    </div>
+                    <hr>
+                    <div class="row" style="padding-left:30px;padding-right:30px;">
+                          <div class="col-lg-6">
+                                <p style="float:left;color:#A7A9AC;font-family:'Bai Jamjuree', sans-serif;">
+                                    โดย : <? echo $row['leaderActivity']?>
+                                </p>
+                          </div>
+                          <div class="col-lg-6">
+                              <p style="float:right;color:#A7A9AC;font-family:'Bai Jamjuree', sans-serif;">
+                                <?php
+                                      $newDate = $row['startDate'];
+                                      echo DateThai($newDate)
+                                 ?>
+                              </p>
+                          </div>
+                    </div>
                   </div>
                 </div>
-
+              </a>
             </div>
+            <?
+
+            ?>
+            <? } ?>
           </div>
-          <? } ?>
-        </div>
 
 
-      </form>
+        </form>
 
     </div>
   </div>
 
+  <br>
+  <br>
 
-  <br>
-  <br>
+  <script type="text/javascript">
+            <?php
+          function DateThai($strDate)
+          {
+            $strYear = date("Y",strtotime($strDate))+543;
+            $strMonth= date("n",strtotime($strDate));
+            $strDay= date("j",strtotime($strDate));
+            $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+            $strMonthThai=$strMonthCut[$strMonth];
+            return "$strDay $strMonthThai $strYear";
+          }
+          ?>
+  </script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
-
 </html>

@@ -44,8 +44,8 @@ class listPostUserTableView: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             getData()
-            self.tableView.reloadData()
             self.tabBarController?.tabBar.isHidden = false
+            self.tableView.reloadData()
         }
     
         override func numberOfSections(in tableView: UITableView) -> Int {
@@ -73,25 +73,73 @@ class listPostUserTableView: UITableViewController {
                 cell.iconOther.isHidden = false
                 let listActivity = activityList?[indexPath.row]
                 cell.userFullname.text = listActivity?.username
-                
                 cell.iconOther.tag = listActivity?.id ?? 0
-//                postId = cell.iconOther.tag
-                
                 let mouthStart = DateFormatter()
-                mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                let date = mouthStart.date(from: listActivity?.createdAt ?? "x")
-                mouthStart.dateFormat = "MMM d, h:mm a"
-                let mouthStringStart = mouthStart.string(from: date ?? Date())
-                cell.timeTextLabel.text = mouthStringStart
+                           mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                           let date = mouthStart.date(from: listActivity?.createdAt ?? "x")
+                           mouthStart.dateFormat = "d, h:mm a"
+                           let mouthStringStart = mouthStart.string(from: date ?? Date())
+                           cell.timeTextLabel1.text = mouthStringStart
+                           mouthStart.dateFormat = "MMMM"
+                                         let mouthStringStart1 = mouthStart.string(from: date ?? Date())
+                                         if mouthStringStart1 == "January"{
+                                           cell.timeTextLabel.text = "มกราคม"
+                                         }else if mouthStringStart1 == "February"{
+                                           cell.timeTextLabel.text = "กุมภาพันธ์"
+                                         }else if mouthStringStart1 == "March"{
+                                           cell.timeTextLabel.text = "มีนาคม"
+                                         }else if mouthStringStart1 == "April"{
+                                           cell.timeTextLabel.text = "เมษายน"
+                                         }else if mouthStringStart1 == "May"{
+                                           cell.timeTextLabel.text = "พฤษภาคม"
+                                         }else if mouthStringStart1 == "June"{
+                                           cell.timeTextLabel.text = "มิถุนายน"
+                                         }else if mouthStringStart1 == "July"{
+                                           cell.timeTextLabel.text = "กรกฎาคม"
+                                         }else if mouthStringStart1 == "August"{
+                                           cell.timeTextLabel.text = "สิงหาคม"
+                                         }else if mouthStringStart1 == "September"{
+                                           cell.timeTextLabel.text = "กันยายน"
+                                         }else if mouthStringStart1 == "October"{
+                                           cell.timeTextLabel.text = "ตุลาคม"
+                                         }else if mouthStringStart1 == "November"{
+                                           cell.timeTextLabel.text = "พฤศจิกายน"
+                                         }else{
+                                           cell.timeTextLabel.text = "ธันวาคม"
+                                         }
+                
+                
+                
+                
+                adpostId = listActivity?.id ?? 0
                 cell.messageTextLabel.text = listActivity?.caption
-                cell.numCount.text = "\(listActivity?.likeActivity ?? 0)"
-                cell.numCom.text = "\(listActivity?.commentsActivity ?? 0)"
+//                cell.numCount.text = "\(listActivity?.likeActivity ?? 0)"
+//                cell.numCom.text = "\(listActivity?.commentsActivity ?? 0)"
+                let parametersId: Parameters = ["ad_post_timeline_id":adpostId]
+                                let urlComment = URL_COUNT_LIKE + "?id=\(adpostId)"
+                                Alamofire.request(urlComment, method: .post,parameters: parametersId).responseJSON { [weak self](resData) in
+                                            if let user = resData.result.value as! [String: Any]? {
+                                                    if let commentId = user["likeActivity"] as? Int {
+                                                        cell.numCount.text = "\(commentId)"
+                                                    }
+                                }
+                }
+                let parametersCom: Parameters = ["ad_post_timeline_id":adpostId]
+                                                            let urlCommentCh = URL_COUNT_COMMENT + "?id=\(adpostId)"
+                                                  Alamofire.request(urlCommentCh, method: .post,parameters: parametersCom).responseJSON { [weak self](resData) in
+                                                          if let user = resData.result.value as! [String: Any]? {
+                                                                  if let commentId = user["commentActivity"] as? Int {
+                                                                      cell.numCom.text = "\(commentId)"
+                                                          }
+                            }
+
+                }
+                
+
                 
                 cell.iconOther.titleLabel?.tag = indexPath.row
 //                postId = listActivity?.id ?? 0
                 
-                
-                adpostId = listActivity?.id ?? 0
                 let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + (listActivity?.img ?? "0")!)
                             if let postImageURL = URL(string: postImagePath) {
                                 cell.postImage.sd_setImage(with: postImageURL, completed: nil)
@@ -114,9 +162,11 @@ class listPostUserTableView: UITableViewController {
                             }else{
                         }
                 }
+                
                 if cell.iconImageLike.tag == 0{
                                
-                           }else{
+                }else{
+                                cell.iconImageLike.tag = 0
                                cell.iconImageLike.tintColor = .black
                                cell.iconImageLike.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 }
@@ -135,14 +185,15 @@ class listPostUserTableView: UITableViewController {
         postId = _sender.titleLabel?.tag ?? 0
 
 //           Prepare the popup assets
-                    let title = "THIS IS THE DIALOG TITLE"
-//                label.font = UIFont.BaiJamjureeRegular(size: 14)
-
-                    let message = "This is the message section of the popup dialog default view"
+                    let title = "ตั้งค่าโพสต์ส่วนตัว"
+                    //        //label.font = UIFont.BaiJamjureeRegular(size: 14)
+                    //
+                    let message = "สามารถเลือกการตั้งค่าด้วยตนเอง"
                     let image = UIImage(named: "pexels-photo-103290")
 
                     // Create the dialog
                     let popup = PopupDialog(title: title, message: message, image: image)
+        
 
                     // Create buttons
                     let buttonOne = CancelButton(title: "ยกเลิก") {
@@ -336,6 +387,9 @@ class listPostUserTableView: UITableViewController {
     
         override func viewDidLoad(){
             super.viewDidLoad()
+            let backButton = UIBarButtonItem()
+            backButton.title = "back"
+            self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
             navigationItem.title = "กระทู้ของฉัน"
                  let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
             

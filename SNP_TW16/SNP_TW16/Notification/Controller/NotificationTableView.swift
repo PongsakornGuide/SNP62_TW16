@@ -68,13 +68,70 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
               cell.textLabelTitle.text = "กิจกรรม : \(listNoti?.testtitle ?? "x")"
               cell.textLabelTitle.textColor = UIColor.rgb(red: 33, green: 64, blue: 154)
               cell.textLabelTitle.font = UIFont.BaiJamjureeBold(size: 20)
+            
               cell.textLabelName.text = "ตอนนี้ \(listNoti?.title ?? "x") \nขอให้สนุกกับกิจกรรมในเร็วๆนี้"
+              cell.textLabelName.font = UIFont.BaiJamjureeMedium(size: 18)
               let mouthStart = DateFormatter()
               mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
               let date = mouthStart.date(from: listNoti?.create ?? "x")
-              mouthStart.dateFormat = "MMM d, h:mm a"
+              mouthStart.dateFormat = "d, h:mm a"
               let mouthStringStart = mouthStart.string(from: date ?? Date())
-              cell.timeLabel.text = "\(mouthStringStart) น."
+              cell.timeLabel1.text = "\(mouthStringStart)"
+              cell.timeLabel1.font = UIFont.BaiJamjureeLight(size: 16)
+              cell.timeLabel1.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+
+            
+                mouthStart.dateFormat = "MMMM"
+                let mouthStringStart2 = mouthStart.string(from: date ?? Date())
+                if mouthStringStart2 == "January"{
+                    cell.timeLabel.text = "มกราคม"
+                    cell.timeLabel.font = UIFont.BaiJamjureeLight(size: 16)
+                    cell.timeLabel.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                }else if mouthStringStart2 == "February"{
+                    cell.timeLabel.text = "กุมภาพันธ์"
+                    cell.timeLabel.font = UIFont.BaiJamjureeLight(size: 16)
+                    cell.timeLabel.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                }else if mouthStringStart2 == "March"{
+                    cell.timeLabel.text = "มีนาคม"
+                    cell.timeLabel.font = UIFont.BaiJamjureeLight(size: 16)
+                    cell.timeLabel.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                }else if mouthStringStart2 == "April"{
+                    cell.timeLabel.text = "เมษายน"
+                    cell.timeLabel.font = UIFont.BaiJamjureeLight(size: 16)
+                    cell.timeLabel.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                }else if mouthStringStart2 == "May"{
+                    cell.timeLabel.text = "พฤษภาคม"
+                    cell.timeLabel.font = UIFont.BaiJamjureeLight(size: 16)
+                    cell.timeLabel.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                }else if mouthStringStart2 == "June"{
+                    cell.timeLabel.text = "มิถุนายน"
+                    cell.timeLabel.font = UIFont.BaiJamjureeLight(size: 16)
+                    cell.timeLabel.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                }else if mouthStringStart2 == "July"{
+                    cell.timeLabel.text = "กรกฎาคม"
+                    cell.timeLabel.font = UIFont.BaiJamjureeLight(size: 16)
+                    cell.timeLabel.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                }else if mouthStringStart2 == "August"{
+                    cell.timeLabel.text = "สิงหาคม"
+                    cell.timeLabel.font = UIFont.BaiJamjureeLight(size: 16)
+                    cell.timeLabel.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                }else if mouthStringStart2 == "September"{
+                    cell.timeLabel.text = "กันยายน"
+                    cell.timeLabel.font = UIFont.BaiJamjureeLight(size: 16)
+                    cell.timeLabel.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                }else if mouthStringStart2 == "October"{
+                    cell.timeLabel.text = "ตุลาคม"
+                    cell.timeLabel.font = UIFont.BaiJamjureeLight(size: 16)
+                    cell.timeLabel.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                }else if mouthStringStart2 == "November"{
+                    cell.timeLabel.text = "พฤศจิกายน"
+                    cell.timeLabel.font = UIFont.BaiJamjureeLight(size: 16)
+                    cell.timeLabel.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                }else{
+                    cell.timeLabel.text = "ธันวาคม"
+                    cell.timeLabel.font = UIFont.BaiJamjureeLight(size: 16)
+                    cell.timeLabel.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+                }
             
               tableView.separatorStyle = .none
               cell.selectionStyle = .none
@@ -83,18 +140,76 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
        }else{
              let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! NotificationColumnPost
              let listPost = notificationPost?[indexPath.row]
-             cell.username.text = "คุณ : \(listPost?.username ?? "x")"
+             cell.username.text = "คุณ : \(listPost?.username ?? "ไม่มีข้อมูล")"
              cell.username.textColor = UIColor.rgb(red: 33, green: 64, blue: 154)
              cell.username.font = UIFont.BaiJamjureeBold(size: 20)
-             cell.textLabelTitle.text = "ได้แสดงความคิดในโพส \(listPost?.caption ?? "x") ของคุณ"
+             cell.textLabelTitle.text = "ได้แสดงความคิดในโพส \(listPost?.caption ?? "ไม่มีข้อมูล") ของคุณ"
+             cell.textLabelTitle.font = UIFont.BaiJamjureeMedium(size: 18)
+            
+            
              let mouthStart = DateFormatter()
              mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
-             let date = mouthStart.date(from: listPost?.createdAt ?? "x")
-             mouthStart.dateFormat = "HH:mm"
+             let date = mouthStart.date(from: listPost?.createdAt ?? "ไม่มีข้อมูล")
+             mouthStart.dateFormat = "d, h:mm a"
              let mouthStringStart = mouthStart.string(from: date ?? Date())
-             cell.timeLabel.text = "\(mouthStringStart) น."
-             cell.timeLabel.font = UIFont.BaiJamjureeBold(size: 18)
+             cell.timeLabel.text = "\(mouthStringStart)"
+             cell.timeLabel.font = UIFont.BaiJamjureeLight(size: 16)
+             cell.timeLabel.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
 
+            
+            mouthStart.dateFormat = "MMMM"
+            let mouthStringStart2 = mouthStart.string(from: date ?? Date())
+            if mouthStringStart2 == "January"{
+                cell.timeLabel1.text = "มกราคม"
+                cell.timeLabel1.font = UIFont.BaiJamjureeLight(size: 16)
+                cell.timeLabel1.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            }else if mouthStringStart2 == "February"{
+                cell.timeLabel1.text = "กุมภาพันธ์"
+                cell.timeLabel1.font = UIFont.BaiJamjureeLight(size: 16)
+                cell.timeLabel1.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            }else if mouthStringStart2 == "March"{
+                cell.timeLabel1.text = "มีนาคม"
+                cell.timeLabel1.font = UIFont.BaiJamjureeLight(size: 16)
+                cell.timeLabel1.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            }else if mouthStringStart2 == "April"{
+                cell.timeLabel1.text = "เมษายน"
+                cell.timeLabel1.font = UIFont.BaiJamjureeLight(size: 16)
+                cell.timeLabel1.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            }else if mouthStringStart2 == "May"{
+                cell.timeLabel1.text = "พฤษภาคม"
+                cell.timeLabel1.font = UIFont.BaiJamjureeLight(size: 16)
+                cell.timeLabel1.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            }else if mouthStringStart2 == "June"{
+                cell.timeLabel1.text = "มิถุนายน"
+                cell.timeLabel1.font = UIFont.BaiJamjureeLight(size: 16)
+                cell.timeLabel1.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            }else if mouthStringStart2 == "July"{
+                cell.timeLabel1.text = "กรกฎาคม"
+                cell.timeLabel1.font = UIFont.BaiJamjureeLight(size: 16)
+                cell.timeLabel1.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            }else if mouthStringStart2 == "August"{
+                cell.timeLabel1.text = "สิงหาคม"
+                cell.timeLabel1.font = UIFont.BaiJamjureeLight(size: 16)
+                cell.timeLabel1.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            }else if mouthStringStart2 == "September"{
+                cell.timeLabel1.text = "กันยายน"
+                cell.timeLabel1.font = UIFont.BaiJamjureeLight(size: 16)
+                cell.timeLabel1.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            }else if mouthStringStart2 == "October"{
+                cell.timeLabel1.text = "ตุลาคม"
+                cell.timeLabel1.font = UIFont.BaiJamjureeLight(size: 16)
+                cell.timeLabel1.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            }else if mouthStringStart2 == "November"{
+                cell.timeLabel1.text = "พฤศจิกายน"
+                cell.timeLabel1.font = UIFont.BaiJamjureeLight(size: 16)
+                cell.timeLabel1.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            }else{
+                cell.timeLabel1.text = "ธันวาคม"
+                cell.timeLabel1.font = UIFont.BaiJamjureeLight(size: 16)
+                cell.timeLabel1.textColor = UIColor.rgb(red: 167, green: 169, blue: 172)
+            }
+            
+            
              let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + (listPost?.photo ?? "0")!)
                 if let postImageURL = URL(string: postImagePath) {
                 cell.profileImage.sd_setImage(with: postImageURL, completed: nil)
@@ -130,22 +245,74 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
             contentActivity.titleLabel.text = deatilActvity?.actId
             contentActivity.textHeader.text = deatilActvity?.type
             contentActivity.nameLabel.text = "โดย: \(deatilActvity?.caption ?? "x")"
-            contentActivity.timeLabel.text = "วันเริ่มกิจกรรม: \(deatilActvity?.created ?? "x")"
             contentActivity.contentLabel.text = deatilActvity?.content
-            contentActivity.startDateAct.text = deatilActvity?.created
             contentActivity.timerAct.text = "\(deatilActvity?.startTime ?? "x") - "
             contentActivity.endtimerAct.text = deatilActvity?.endtime
             contentActivity.postId = deatilActvity?.dataId ?? 0
 
-            //fomatterDate
+//            fomatterDate
+//            print(deatilActvity?.created)
             let mouthStart = DateFormatter()
-            mouthStart.dateFormat = "yyyy-mm-dd"
+            mouthStart.dateFormat = "yyyy-MM-dd"
             let mouthStringStartt = mouthStart.date(from: deatilActvity?.created ?? "x")
-            mouthStart.dateFormat = "dd MMMM yyyy"
+//            print(mouthStringStartt)
+            mouthStart.dateFormat = "dd"
             let mouthStringStart = mouthStart.string(from: mouthStringStartt ?? Date())
             contentActivity.startDateAct.text = mouthStringStart
             contentActivity.timeLabel.text = "วันเริ่มกิจกรรม: \(mouthStringStart)"
 
+            
+            mouthStart.dateFormat = "yyyy"
+            let mouthStringStart1 = mouthStart.string(from: mouthStringStartt ?? Date())
+//            contentActivity.timeLabel2.text = mouthStringStart1
+//            contentActivity.startDateAct2.text = mouthStringStart1
+            var num = Int(mouthStringStart1)
+            num = num! + 543
+            contentActivity.timeLabel2.text = "\(num ?? 0)"
+            contentActivity.startDateAct2.text = "\(num ?? 0)"
+            
+//            print(deatilActvity?.created)
+            mouthStart.dateFormat = "MMMM"
+            let mouthStringStart2 = mouthStart.string(from: mouthStringStartt ?? Date())
+            if mouthStringStart2 == "January"{
+                contentActivity.timeLabel1.text = "มกราคม"
+                contentActivity.startDateAct1.text = "มกราคม"
+            }else if mouthStringStart2 == "February"{
+                contentActivity.timeLabel1.text = "กุมภาพันธ์"
+                contentActivity.startDateAct1.text = "กุมภาพันธ์"
+            }else if mouthStringStart2 == "March"{
+                contentActivity.timeLabel1.text = "มีนาคม"
+                contentActivity.startDateAct1.text = "มีนาคม"
+            }else if mouthStringStart2 == "April"{
+                contentActivity.timeLabel1.text = "เมษายน"
+                contentActivity.startDateAct1.text = "เมษายน"
+            }else if mouthStringStart2 == "May"{
+                contentActivity.timeLabel1.text = "พฤษภาคม"
+                contentActivity.startDateAct1.text = "พฤษภาคม"
+            }else if mouthStringStart2 == "June"{
+                contentActivity.timeLabel1.text = "มิถุนายน"
+                contentActivity.startDateAct1.text = "มิถุนายน"
+            }else if mouthStringStart2 == "July"{
+                contentActivity.timeLabel1.text = "กรกฎาคม"
+                contentActivity.startDateAct1.text = "กรกฎาคม"
+            }else if mouthStringStart2 == "August"{
+                contentActivity.timeLabel1.text = "สิงหาคม"
+                contentActivity.startDateAct1.text = "สิงหาคม"
+            }else if mouthStringStart2 == "September"{
+                contentActivity.timeLabel1.text = "กันยายน"
+                contentActivity.startDateAct1.text = "กันยายน"
+            }else if mouthStringStart2 == "October"{
+                contentActivity.timeLabel1.text = "ตุลาคม"
+                contentActivity.startDateAct1.text = "ตุลาคม"
+            }else if mouthStringStart2 == "November"{
+                contentActivity.timeLabel1.text = "พฤศจิกายน"
+                contentActivity.startDateAct1.text = "พฤศจิกายน"
+            }else{
+                contentActivity.timeLabel1.text = "ธันวาคม"
+                contentActivity.startDateAct1.text = "ธันวาคม"
+            }
+          
+            
             //fomatterDate
             let dateFormatterStart = DateFormatter()
             dateFormatterStart.dateFormat = "HH:mm:ss"
@@ -180,6 +347,7 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
                                         }
                         }
             }
+            
             navigationController?.pushViewController(contentActivity, animated: true)
           }else{
                 print("555")
@@ -231,12 +399,12 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
                  control.tintColor = .clear
                  
 
-                 control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.BaiJamjureeBold(size: 16),NSAttributedString.Key.backgroundColor: UIColor.white], for: .normal)
+                 control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.BaiJamjureeBold(size: 16)], for: .normal)
          //        control.backgroundColor = UIColor.white
                  
                  
                  control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black,
-                 NSAttributedString.Key.font: UIFont.BaiJamjureeBold(size: 16),NSAttributedString.Key.backgroundColor: UIColor.white], for: .selected)
+                 NSAttributedString.Key.font: UIFont.BaiJamjureeBold(size: 16)], for: .selected)
                  
          control.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
          return control
@@ -272,6 +440,15 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
     
      override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "การแจ้งเตือน"
+               let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
+               navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = "back"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        
         getNotificationPostUser()
         getNotificationUser()
         if #available(iOS 12.1 , *) {
@@ -279,8 +456,7 @@ class NotificationTableView: UIViewController,UITableViewDataSource, UITableView
              }else{
                  tableView.addSubview(refresher)
         }
-        
-//      getCountNotificationUser()
+
         
         tableView.dataSource = self
         tableView.delegate = self

@@ -38,6 +38,7 @@ public final class CancelButton: PopupDialogButton {
 
     override public func setupView() {
         defaultTitleColor = UIColor.lightGray
+
         super.setupView()
     }
 }
@@ -49,7 +50,7 @@ public final class DestructiveButton: PopupDialogButton {
 
     override public func setupView() {
         defaultTitleColor = UIColor.red
-        
+//        defaultTitleFont = UIFont(size: 20)
         super.setupView()
     }
 }

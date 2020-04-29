@@ -25,23 +25,23 @@ class DetailReligionViewController: UIViewController {
             return view
         }()
         
-          lazy var BGView: UIView = {
+        lazy var BGView: UIView = {
               let view = UIView()
               view.backgroundColor = .white
               view.layer.cornerRadius = 20
               return view
-          }()
+        }()
 
         
-          lazy var titleLabel : UILabel = {
+        lazy var titleLabel : UILabel = {
                let title = UILabel()
                title.text = "บทสวดธรรมมะ"
                title.font = UIFont.BaiJamjureeBold(size: 28)
                title.numberOfLines = 0
                return title
-          }()
+        }()
     
-      lazy var contentLabel : UILabel = {
+        lazy var contentLabel : UILabel = {
             let title = UILabel()
             title.lineBreakMode = .byWordWrapping
             title.numberOfLines = 0
@@ -65,14 +65,18 @@ class DetailReligionViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         navigationItem.title = "บทสวดมนต์"
+        
+        let backButton = UIBarButtonItem()
+              backButton.title = "back"
+              self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+              
+        
         view.addSubview(viewScroll)
         viewScroll.addSubview(stepView)
         viewScroll.addSubview(BGView)
         viewScroll.addSubview(Activityline)
         viewScroll.addSubview(titleLabel)
         viewScroll.addSubview(contentLabel)
-
-
                         
         viewScroll.anchor(view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
                       
@@ -80,7 +84,7 @@ class DetailReligionViewController: UIViewController {
                          
         BGView.anchor(stepView.bottomAnchor, left: viewScroll.leftAnchor, right: viewScroll.rightAnchor, bottom: nil, topConstant: -20, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: screenSizeX , heightConstant: screenSizeY)
     
-        titleLabel.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        titleLabel.anchor(BGView.topAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
         
         
         Activityline.anchor(titleLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 30, rightConstant: 30 , widthConstant: screenSizeX, heightConstant: 1.5)

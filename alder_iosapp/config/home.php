@@ -1,18 +1,14 @@
 <?php
-    session_start();
-    // echo 'Wellcome to' . $_SESSION['email'];
-    if(isset($_SESSION['email'])){
-      // echo 'Wellcome to' . $_SESSION['email'];
-    }
+ include('../func/auth.php')
  ?>
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>Alder</title>
+  <link rel="shortcut icon" type="image/png" href="../images/group1457@3x.png">
 </head>
 <body style="background:#fff;">
-
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="apple-touch-icon" sizes="57x57" href="../images/apple-icon-57x57.png">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link href="../css/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
@@ -25,20 +21,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #fff;
-    }
-
-    .menu-active {
-      width: 199px;
-      height: 45px;
-      border-radius: 25px 0px 0px 25px;
-      background-color: #F1F3F9;
-      color: rgb(27, 71, 147) !important;
-      margin: 5px 0 10px 0;
-      float: right;
-      padding-top: 5px;
-    }
+  .menu-active {
+    width: 199px;
+    height: 45px;
+    border-radius: 25px 0px 0px 25px;
+    background-color: #fff;
+    color: rgb(27, 71, 147) !important;
+    margin: 5px 0 10px 0;
+    padding-top: 5px;
+  }
 
     .secondary-sidebar-menu ul li a {
       color: #174495 !important;
@@ -50,7 +41,7 @@
     }
 
     .s006 form .inner-form .input-field {
-      height: 60px;
+      height: 50px;
       width: 100%;
       position: relative;
     }
@@ -63,26 +54,27 @@
       background: #1B4793;
       display: block;
       width: 100%;
-      padding: 10px 32px 10px 70px;
-      font-size: 18px;
+      padding: 10px 32px 10px 55px;
       color: #fff;
       border-radius: 34px;
       border-color: blue;
+      font-family: 'Bai Jamjuree', sans-serif;
+      font-weight: bold;
     }
 
     .s006 form .inner-form .input-field input.placeholder {
       color: #ccc;
-      font-size: 18px;
+      font-size: 15px;
     }
 
     .s006 form .inner-form .input-field input:-moz-placeholder {
       color: #ccc;
-      font-size: 18px;
+      font-size: 15px;
     }
 
     .s006 form .inner-form .input-field input::-webkit-input-placeholder {
-      color: #ccc;
-      font-size: 18px;
+      color: #1B4793;
+      font-size: 15px;
     }
 
     .s006 form .inner-form .input-field input:hover,
@@ -111,9 +103,9 @@
     }
 
     .s006 form .inner-form .input-field .btn-search svg {
-      fill: #ccc;
-      width: 30px;
-      height: 30px;
+      fill: #1B4793;
+      width: 20px;
+      height: 20px;
       transition: all .2s ease-out, color .2s ease-out;
     }
 
@@ -160,22 +152,24 @@
         width: 26px;
         height: 26px;
       }
+
+
     }
   </style>
 
-  <div class="secondary-sidebar" style=" background: #1B4793; color: #fff; position: fixed; top: 0;overflow: hidden; hidden;left: 0px;">
+  <div class="secondary-sidebar" style=" background: #1B4793; color: #fff; position: fixed; top: 0;overflow: hidden;left: 0px;">
 
     <div class="secondary-sidebar-bar">
       <a href="/alder_iosapp/config/home.php" class="logo-box" style="font-family: 'Poppins', sans-serif;font-weight: bolder;color:#fff!important; text-align: center;"><img src="https://uppic.cc/d/6m7y"
           style="height:30px;margin-bottom: 10px;">&nbsp;Alder</a>
     </div>
 
-
     <div class="secondary-sidebar-menu">
       <ul class="accordion-menu">
         <li class="menu-active">
           <a href="/alder_iosapp/config/home.php">
-            <i class="menu-icon far fa-user-circle" style="color: #174495;"></i><span style="color: #174495; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">ข้อมูลผู้สูงอายุ</span>
+            <i class="menu-icon far fa-user-circle" style="color: #174495;"></i>
+            <span style="color: #174495; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">ข้อมูลผู้สูงอายุ</span>
           </a>
         </li>
 
@@ -193,7 +187,7 @@
 
         <li>
           <a href="/alder_iosapp/config/uploadVideo.php">
-            <i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;อัพโหลดวิดีโอ</span>
+            <i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;วิดีโอ / เพลง</span>
           </a>
         </li>
 
@@ -206,7 +200,6 @@
     </div>
   </div>
 
-
   <div class="page-header">
     <nav class="navbar navbar-default navbar-expand-md">
       <div class="container-fluid">
@@ -214,12 +207,13 @@
         </div>
         <ul class="nav navbar-nav">
           <li class="dropdown nav-item d-md-block">
-            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: 500; font-size: 13px;">
+            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span style="font-weight: 500; font-size: 13px;font-family: 'Bai Jamjuree', sans-serif; ">
                 <?php echo $_SESSION["email"];?>
               </span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-caret-square-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <li><a href="/alder_iosapp/func/logout.php?logout">Logout</a></li>
+              <li><a href="/alder_iosapp/func/logout.php?logout" style="font-family: 'Bai Jamjuree', sans-serif; ">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -246,8 +240,13 @@
 
     <div id="main-wrapper">
       <div class="row mt-4">
-        <h1 class="col-10" style="font-family: 'Bai Jamjuree', sans-serif; font-weight: bold;font-size: 2rem;text-transform: uppercase;uppercase;font-size:30px;color:#1B4793;">ยินดีต้อนรับ
-          <span style="font-weight: bold;color: #FAC92C;"><?php echo $_SESSION["email"];?> </span>
+        <h1 class="col-10" style="font-family: 'Bai Jamjuree', sans-serif; font-weight: bold;font-size: 2rem;font-size:30px;color:#1B4793;">
+ยินดีต้อนรับ
+
+
+
+
+          <span style="font-weight: bold;color: #FAC92C;font-size: 18px;font-family: 'Bai Jamjuree', sans-serif; "><?php echo $_SESSION["email"];?> </span>
           <?while ($row = $result-> fetch_assoc()) {?>
           <h4 class="col-2" style="font-family: 'Bai Jamjuree', sans-serif; font-size:16px">จำนวนผู้สูงอายุ <span style="font-weight:600; font-size:22px;color: #FAC92C;"> <?php echo $row['CountUser'] ?></span> คน</h4>
           <? } ?>
@@ -265,7 +264,8 @@
                   </path>
                 </svg>
               </button>
-              <input type="text" name="search" id="search" placeholder="Search..." style="border-color: #92a8d1;" />
+              <input type="text" name="search" id="search" placeholder="ค้นหาข้อมูล..." style="color: #1B4793;border-width: 2px;background:white;  border-style: solid;
+              border-color: #1B4793;" />
             </div>
           </div>
         </form>
@@ -291,7 +291,7 @@
       <?while ($row = $result-> fetch_assoc()) {?>
       <div class="row">
         <div class="col-lg-12">
-          <div class="card mt-1" id="fixed-header" style="border-radius: 10px;">
+          <div class="card mt-4" id="fixed-header" style="border-radius: 10px;">
             <div class="card-body" style="font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">
               <div class="card mb-4 rounded" style="border: none;">
               </div>
@@ -343,7 +343,11 @@
                               <? echo $row['tel']?>
                             </p>
                             <p style="color:#7C7E80;">วันเกิด :
-                              <? echo $row['birthday']?>
+                              <?php
+                                  $newDate = $row['birthday'];
+                                  echo DateThai($newDate)
+                               ?>
+
                             </p>
                           </div>
                           <div class="col-lg-3">
@@ -377,6 +381,19 @@
       <? } ?>
     </div><!-- Main Wrapper -->
   </div><!-- /Page Inner -->
+  <script type="text/javascript">
+            <?php
+          function DateThai($strDate)
+          {
+            $strYear = date("Y",strtotime($strDate));
+            $strMonth= date("n",strtotime($strDate));
+            $strDay= date("j",strtotime($strDate));
+            $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+            $strMonthThai=$strMonthCut[$strMonth];
+            return "$strDay $strMonthThai $strYear";
+          }
+          ?>
+  </script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

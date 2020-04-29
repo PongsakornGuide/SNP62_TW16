@@ -23,12 +23,13 @@ class CommunViewController: UITableViewController{
     lazy var adpostId = Int()
     lazy var adpostId2 = String()
     lazy var commentId = Int()
+    var btnBarBadge : MJBadgeBarButton!
     var activityList: [allList]?
     
     let URL_GET_DATA = "\(AppDelegate.link)alder_iosapp/v1/show.php"
     let URL_CLICK_LIKE = "\(AppDelegate.link)alder_iosapp/v1/like_Activity.php"
     let URL_CLICK_UNLIKE = "\(AppDelegate.link)alder_iosapp/v1/deleteLike.php"
-    
+    let URL_COUNT_COMMENT = "\(AppDelegate.link)alder_iosapp/v1/countComment.php"
     let URL_CHECK_LIKE = "\(AppDelegate.link)alder_iosapp/v1/checkLike.php"
     let URL_COUNT_LIKE = "\(AppDelegate.link)alder_iosapp/v1/countLike.php"
     let URL_DELETE_POST = "\(AppDelegate.link)alder_iosapp/v1/deletePostUser.php"
@@ -77,31 +78,63 @@ class CommunViewController: UITableViewController{
             let headerActivity = activityList?[indexPath.row]
             cell.userFullname.text = headerActivity?.username
             cell.messageTextLabel.text = headerActivity?.caption
-            
+
             
             let mouthStart = DateFormatter()
             mouthStart.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let date = mouthStart.date(from: headerActivity?.createdAt ?? "x")
-            mouthStart.dateFormat = "MMM d, h:mm a"
+            mouthStart.dateFormat = "d, h:mm a"
             let mouthStringStart = mouthStart.string(from: date ?? Date())
-            cell.timeTextLabel.text = mouthStringStart
+            cell.timeTextLabel1.text = mouthStringStart
+            
+
+            
+            mouthStart.dateFormat = "MMMM"
+                          let mouthStringStart1 = mouthStart.string(from: date ?? Date())
+                          if mouthStringStart1 == "January"{
+                            cell.timeTextLabel.text = "มกราคม"
+                          }else if mouthStringStart1 == "February"{
+                            cell.timeTextLabel.text = "กุมภาพันธ์"
+                          }else if mouthStringStart1 == "March"{
+                            cell.timeTextLabel.text = "มีนาคม"
+                          }else if mouthStringStart1 == "April"{
+                            cell.timeTextLabel.text = "เมษายน"
+                          }else if mouthStringStart1 == "May"{
+                            cell.timeTextLabel.text = "พฤษภาคม"
+                          }else if mouthStringStart1 == "June"{
+                            cell.timeTextLabel.text = "มิถุนายน"
+                          }else if mouthStringStart1 == "July"{
+                            cell.timeTextLabel.text = "กรกฎาคม"
+                          }else if mouthStringStart1 == "August"{
+                            cell.timeTextLabel.text = "สิงหาคม"
+                          }else if mouthStringStart1 == "September"{
+                            cell.timeTextLabel.text = "กันยายน"
+                          }else if mouthStringStart1 == "October"{
+                            cell.timeTextLabel.text = "ตุลาคม"
+                          }else if mouthStringStart1 == "November"{
+                            cell.timeTextLabel.text = "พฤศจิกายน"
+                          }else{
+                            cell.timeTextLabel.text = "ธันวาคม"
+                          }
+            
+            
             idPostUser = headerActivity?.userAppId ?? 0
             cell.iconOther.titleLabel?.tag = indexPath.row
             let userId = User_ID
                         
 //            คอมเม้นต์
 //            ถูกใจ
-            cell.numCount.text = "\(headerActivity?.likeActivity ?? 0)"
-            cell.numCom.text = "\(headerActivity?.commentsActivity ?? 0)"
+//            cell.numCount.text = "\(headerActivity?.likeActivity ?? 0)"
+//            cell.numCom.text = "\(headerActivity?.commentsActivity ?? 0)"
             adpostId = headerActivity?.id ?? 0
             cell.iconOther.tag = headerActivity?.id ?? 0
             
-            if cell.iconImageLike.tag == 0{
-                
-            }else{
-                cell.iconImageLike.tintColor = .black
-                cell.iconImageLike.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            }
+//            if cell.iconImageLike.tag == 0{
+//
+//            }else{
+//                cell.iconImageLike.tintColor = .black
+//                cell.iconImageLike.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
+//            }
             
             cell.iconImageLike.titleLabel?.tag = headerActivity?.id ?? 0
 
@@ -115,6 +148,21 @@ class CommunViewController: UITableViewController{
                     }
             }
             
+            let parametersCom: Parameters = ["ad_post_timeline_id":adpostId]
+                                                          let urlCommentCh = URL_COUNT_COMMENT + "?id=\(adpostId)"
+                                                Alamofire.request(urlCommentCh, method: .post,parameters: parametersCom).responseJSON { [weak self](resData) in
+                                                        if let user = resData.result.value as! [String: Any]? {
+                                                                if let commentId = user["commentActivity"] as? Int {
+                                                                    cell.numCom.text = "\(commentId)"
+                                                        }
+
+                                                }
+
+            }
+ 
+            
+          
+            
             
             let postImagePath = "\(AppDelegate.link)alder_iosapp/" + (headerActivity?.img ?? "0")
             let profileImagePath = "\(AppDelegate.link)alder_iosapp/" + (headerActivity?.photo ?? "0")
@@ -126,24 +174,28 @@ class CommunViewController: UITableViewController{
                 cell.profileImage.sd_setImage(with: profileImageURL, completed: nil)
             }
 
-            
-            
-                
-                      
-            
-            
-            
             let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId]
             Alamofire.request(URL_CHECK_LIKE, method: .post,parameters: parameters).responseJSON { response in
                     guard let json = response.value as? [String:Bool], let status = json["error"] else {
                     return }
-                        if !status {
+                
+            if !status {
                             cell.iconImageLike.tag = 1
                             cell.iconImageLike.tintColor = UIColor.red
                             cell.iconImageLike.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
                     }else{
+                            cell.iconImageLike.tag = 0
+                            cell.iconImageLike.tintColor = UIColor.black
+                            cell.iconImageLike.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 }
             }
+            
+                       if cell.iconImageLike.tag == 0 {
+                        }else{
+                        cell.iconImageLike.tag = 0
+                       cell.iconImageLike.tintColor = UIColor.black
+                             cell.iconImageLike.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                        }
             
             if userId == "\(idPostUser)"{
                 cell.iconOther.isHidden = false
@@ -164,14 +216,14 @@ class CommunViewController: UITableViewController{
          postId = _sender.titleLabel?.tag ?? 0
         
         //Prepare the popup assets
-        let title = "THIS IS THE DIALOG TITLE"
-        //label.font = UIFont.BaiJamjureeRegular(size: 14)
-
-        let message = "This is the message section of the popup dialog default view"
-        let image = UIImage(named: "pexels-photo-103290")
+        let title = "ตั้งค่าโพสต์ส่วนตัว"
+//        //label.font = UIFont.BaiJamjureeRegular(size: 14)
+//
+        let message = "สามารถเลือกการตั้งค่าด้วยตนเอง"
+//        let image = UIImage(named: "pexels-photo-103290")
 
         // Create the dialog
-        let popup = PopupDialog(title: title, message: message, image: image)
+        let popup = PopupDialog(title: title, message: message)
 
         // Create buttons
         let buttonOne = CancelButton(title: "ยกเลิก") {
@@ -215,7 +267,6 @@ class CommunViewController: UITableViewController{
         adpostId2 = "\(_sender.titleLabel?.tag ?? 0)"
         switch _sender.tag{
                 case 0:
-                    requestData()
                     let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId2]
                     print(parameters)
                                     Alamofire.request(URL_CLICK_LIKE, method: .post,parameters: parameters).responseJSON { response in
@@ -223,9 +274,12 @@ class CommunViewController: UITableViewController{
                     _sender.tag = 1
                     _sender.tintColor = UIColor.red
                     _sender.setImage(UIImage(named: "likeAct")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                    self.tableView.reloadData()
-                case 1:
                     requestData()
+                    getActivty()
+                    self.tableView.reloadData()
+
+                case 1:
+                    
                     let parameters: Parameters = ["user_id":User_ID,"ad_post_timeline_id":adpostId2]
                     print(parameters)
                                     Alamofire.request(URL_CLICK_UNLIKE, method: .post,parameters: parameters).responseJSON { response in
@@ -233,6 +287,8 @@ class CommunViewController: UITableViewController{
                     _sender.tag = 0
                     _sender.tintColor = .black
                     _sender.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                    requestData()
+                    getActivty()
                     self.tableView.reloadData()
                 default: break
                 }
@@ -274,13 +330,20 @@ class CommunViewController: UITableViewController{
               submit.layer.borderWidth = 5
               submit.backgroundColor =  UIColor.rgb(red: 33, green: 120, blue: 174)
               submit.layer.cornerRadius = 45
-              submit.setTitle("โพสต์", for: .normal)
               submit.setTitleColor(UIColor.white,for: .normal)
               submit.addTarget(self, action: #selector(handelSetting), for: .touchUpInside)
-              submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 22)
               return submit
       }()
 
+    let titleBtn : UILabel = {
+            let title = UILabel()
+            title.text = "โพสต์"
+            title.textColor = .white
+            title.font = UIFont.BaiJamjureeBold(size: 22)
+            title.textAlignment = .center
+            return title
+    }()
+    
 
     @objc func handelSettingNotification(){
         let notificaionView = NotificationTableView()
@@ -290,22 +353,31 @@ class CommunViewController: UITableViewController{
        override func viewDidLoad() {
        super.viewDidLoad()
           view.addSubview(submitBtn)
+          view.addSubview(titleBtn)
           navigationItem.title = "Alder"
-        
-        let settings = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(handelSettingNotification))
-        settings.width = 0.5
-        settings.tintColor = UIColor.rgb(red: 253, green: 173, blue: 82)
-        navigationItem.rightBarButtonItem = settings
-        
+
+               let customButton = UIButton(type: UIButton.ButtonType.custom)
+                  customButton.frame = CGRect(x: 0, y: 0, width: 35.0, height: 35.0)
+                  customButton.addTarget(self, action: #selector(self.handelSettingNotification), for: .touchUpInside)
+                customButton.setImage(UIImage(named: "bell"), for: .normal)
+                
+                self.btnBarBadge = MJBadgeBarButton()
+                self.btnBarBadge.setup(customButton: customButton)
+                self.btnBarBadge.badgeOriginX = 20.0
+                self.btnBarBadge.badgeOriginY = -4
+                self.navigationItem.rightBarButtonItem = self.btnBarBadge
+
           let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
                 navigationController?.navigationBar.titleTextAttributes = textAttributes
         
-          submitBtn.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -100, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 90, heightConstant: 90)
+        submitBtn.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: nil, right: view.safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: -100, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant: 90, heightConstant: 90)
+        
+        titleBtn.anchor(submitBtn.topAnchor, left: submitBtn.leftAnchor, right: submitBtn.rightAnchor, bottom: submitBtn.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
             if #available(iOS 12.1 , *) {
-                                tableView.refreshControl = refresher
-                            }else{
-                                tableView.addSubview(refresher)
+                tableView.refreshControl = refresher
+            }else{
+                tableView.addSubview(refresher)
             }
         
             tableView.register(ActivityPageViewController.self, forCellReuseIdentifier: cellId1)

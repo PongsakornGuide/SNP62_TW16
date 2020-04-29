@@ -78,13 +78,60 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
             
                         cell.titleFullname.text = listActivity?.actId
                         cell.supportName.text = "โดย \(listActivity?.caption ?? "x")"
-                        let mouthStart = DateFormatter()
-                        mouthStart.dateFormat = "yyyy-mm-dd"
-                        let mouthStringStartt = mouthStart.date(from: listActivity?.created ?? "x")
-                        mouthStart.dateFormat = "dd MMMM yyyy"
-                        let mouthStringStart = mouthStart.string(from: mouthStringStartt ?? Date())
-                        cell.supportTime.text = mouthStringStart
+            
+            
+//                        let mouthStart = DateFormatter()
+//                        mouthStart.dateFormat = "yyyy-mm-dd"
+//                        let mouthStringStartt = mouthStart.date(from: listActivity?.created ?? "x")
+//                        mouthStart.dateFormat = "dd MMMM yyyy"
+//                        let mouthStringStart = mouthStart.string(from: mouthStringStartt ?? Date())
+//                        cell.supportTime.text = mouthStringStart
                         
+                                    //covert startDate
+                                   let mouthStart = DateFormatter()
+                                   mouthStart.dateFormat = "yyyy-MM-dd"
+                                   let date = mouthStart.date(from: listActivity?.created ?? "x")
+                                   mouthStart.dateFormat = "MMMM"
+                                   let mouthStringStart = mouthStart.string(from: date ?? Date())
+                           
+                                   if mouthStringStart == "January"{
+                                       cell.supportTime.text = "มกราคม"
+                                   }else if mouthStringStart == "February"{
+                                       cell.supportTime.text = "กุมภาพันธ์"
+                                   }else if mouthStringStart == "March"{
+                                       cell.supportTime.text = "มีนาคม"
+                                   }else if mouthStringStart == "April"{
+                                       cell.supportTime.text = "เมษายน"
+                                   }else if mouthStringStart == "May"{
+                                       cell.supportTime.text = "พฤษภาคม"
+                                   }else if mouthStringStart == "June"{
+                                       cell.supportTime.text = "มิถุนายน"
+                                   }else if mouthStringStart == "July"{
+                                       cell.supportTime.text = "กรกฎาคม"
+                                   }else if mouthStringStart == "August"{
+                                       cell.supportTime.text = "สิงหาคม"
+                                   }else if mouthStringStart == "September"{
+                                       cell.supportTime.text = "กันยายน"
+                                   }else if mouthStringStart == "October"{
+                                       cell.supportTime.text = "ตุลาคม"
+                                   }else if mouthStringStart == "November"{
+                                       cell.supportTime.text = "พฤศจิกายน"
+                                   }else{
+                                       cell.supportTime.text = "ธันวาคม"
+                                   }
+                           
+                           
+
+                                   mouthStart.dateFormat = "dd"
+                                   let mouthStringStart1 = mouthStart.string(from: date ?? Date())
+                                   cell.supportTime1.text = mouthStringStart1
+            
+                             mouthStart.dateFormat = "yyyy"
+                             let mouthStringStart2 = mouthStart.string(from: date ?? Date())
+                             var num = Int(mouthStringStart2)
+                             num = num! + 543
+                             cell.supportTime2.text = "\(num ?? 0)"
+            
                         let profileImagePath = ("\(AppDelegate.link)alder_iosapp/" + (listActivity?.imagePost ?? "0")!)
                                 if let postImageURL = URL(string: profileImagePath) {
                                 cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
@@ -106,18 +153,61 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
                        cell.titleFullnameEnd.isHidden = false
                        cell.titleFullname.text = listActivity?.actId
                        cell.supportName.text = "โดย \(listActivity?.caption ?? "x")"
-                       let mouthStart = DateFormatter()
-                       mouthStart.dateFormat = "yyyy-mm-dd"
-                       let mouthStringStartt = mouthStart.date(from: listActivity?.created ?? "x")
-                       mouthStart.dateFormat = "dd MMMM yyyy"
-                       let mouthStringStart = mouthStart.string(from: mouthStringStartt ?? Date())
-                       cell.supportTime.text = mouthStringStart
+//                       let mouthStart = DateFormatter()
+//                       mouthStart.dateFormat = "yyyy-mm-dd"
+//                       let mouthStringStartt = mouthStart.date(from: listActivity?.created ?? "x")
+//                       mouthStart.dateFormat = "dd MMMM yyyy"
+//                       let mouthStringStart = mouthStart.string(from: mouthStringStartt ?? Date())
+//                       cell.supportTime.text = mouthStringStart
+            
+                //covert startDate
+                        let mouthStart = DateFormatter()
+                        mouthStart.dateFormat = "yyyy-MM-dd"
+                        let date = mouthStart.date(from: listActivity?.created ?? "x")
+                        mouthStart.dateFormat = "MMMM"
+                        let mouthStringStart = mouthStart.string(from: date ?? Date())
+                
+                        if mouthStringStart == "January"{
+                            cell.supportTime.text = "มกราคม"
+                        }else if mouthStringStart == "February"{
+                            cell.supportTime.text = "กุมภาพันธ์"
+                        }else if mouthStringStart == "March"{
+                            cell.supportTime.text = "มีนาคม"
+                        }else if mouthStringStart == "April"{
+                            cell.supportTime.text = "เมษายน"
+                        }else if mouthStringStart == "May"{
+                            cell.supportTime.text = "พฤษภาคม"
+                        }else if mouthStringStart == "June"{
+                            cell.supportTime.text = "มิถุนายน"
+                        }else if mouthStringStart == "July"{
+                            cell.supportTime.text = "กรกฎาคม"
+                        }else if mouthStringStart == "August"{
+                            cell.supportTime.text = "สิงหาคม"
+                        }else if mouthStringStart == "September"{
+                            cell.supportTime.text = "กันยายน"
+                        }else if mouthStringStart == "October"{
+                            cell.supportTime.text = "ตุลาคม"
+                        }else if mouthStringStart == "November"{
+                            cell.supportTime.text = "พฤศจิกายน"
+                        }else{
+                            cell.supportTime.text = "ธันวาคม"
+                        }
+                
+                
+
+                        mouthStart.dateFormat = "dd"
+                        let mouthStringStart1 = mouthStart.string(from: date ?? Date())
+                        cell.supportTime1.text = mouthStringStart1
+            
+                        mouthStart.dateFormat = "yyyy"
+                        let mouthStringStart2 = mouthStart.string(from: date ?? Date())
+                        var num = Int(mouthStringStart2)
+                        num = num! + 543
+                        cell.supportTime2.text = "\(num ?? 0)"
             
                        let profileImagePath = ("\(AppDelegate.link)alder_iosapp/" + (listActivity?.imagePost ?? "0")!)
                             if let postImageURL = URL(string: profileImagePath) {
                             cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
-//
-                              
                         }
                                     
                         IdPost =  listActivity?.dataId ?? 0
@@ -146,7 +236,6 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
         }
 
     }
-    
     
     
     @objc func ClickUser(_sender:UIButton){
@@ -234,7 +323,9 @@ class InviteActivityViewController: UIViewController,UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let backButton = UIBarButtonItem()
+        backButton.title = "back"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         navigationItem.title = "กิจกรรมของฉัน"
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
                        navigationController?.navigationBar.titleTextAttributes = textAttributes

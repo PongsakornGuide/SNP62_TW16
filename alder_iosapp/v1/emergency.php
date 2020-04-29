@@ -7,7 +7,7 @@ mysqli_set_charset($conn, "utf8");
 header('Content-Type: application/json; charset=utf-8');
 
 //$sql = "SELECT * FROM ad_post_timeline";
-$sql = "SELECT * FROM emergency";
+$sql = "SELECT * FROM emergency order by id desc";
 $result = $conn->query($sql);
 $datas = array();
 //Fetch into associative array
@@ -18,5 +18,3 @@ while ($row = $result->fetch_object()) {
 
 echo json_encode($datas, JSON_NUMERIC_CHECK);
 $conn->close();
-
-

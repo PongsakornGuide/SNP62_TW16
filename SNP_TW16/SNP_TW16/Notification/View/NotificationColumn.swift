@@ -84,6 +84,16 @@ class NotificationColumn: UITableViewCell {
                return label
     }()
     
+    lazy var timeLabel1 : UILabel = {
+               let label = UILabel()
+               let title = "30 นาทีที่แล้ว"
+               let attributedTexts = NSMutableAttributedString(string: title,
+               attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeLight(size: 16),NSMutableAttributedString.Key.foregroundColor : UIColor.rgb(red: 167, green: 169, blue: 172)])
+               label.attributedText = attributedTexts
+               label.numberOfLines = 0
+               return label
+    }()
+    
 
        func setLayout(){
            addSubview(bgActivitity)
@@ -92,6 +102,7 @@ class NotificationColumn: UITableViewCell {
            addSubview(textLabelTitle)
            addSubview(textLabelName)
            addSubview(timeLabel)
+           addSubview(timeLabel1)
            
         bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 5, bottomConstant: 5, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
@@ -108,8 +119,10 @@ class NotificationColumn: UITableViewCell {
         textLabelName.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
 
         
-        timeLabel.anchor(textLabelName.bottomAnchor, left: textLabelName.leftAnchor, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-        timeLabel.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
+        timeLabel.anchor(textLabelName.bottomAnchor, left: textLabelName.leftAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        timeLabel1.anchor(textLabelName.bottomAnchor, left: timeLabel.rightAnchor, right: nil, bottom: bgActivitity.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+
         
 
 

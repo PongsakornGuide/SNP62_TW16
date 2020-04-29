@@ -32,7 +32,6 @@ class AddTelView: UITableViewCell {
          bg.layer.shadowOpacity = 0.1
          bg.layer.shadowOffset = CGSize(width: 0, height: 0)
          bg.layer.shadowRadius = 10
-         bg.layer.shouldRasterize = true
          return bg
       }()
       
@@ -65,9 +64,9 @@ class AddTelView: UITableViewCell {
         bgEmergency.anchor(bgActivitity.topAnchor, left: leftAnchor, right: rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 80)
         
         
-        titleLabel.anchor(bgEmergency.topAnchor, left: bgEmergency.leftAnchor, right: ImageCall.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 25, rightConstant: 25, widthConstant: 0, heightConstant: 0)
+        titleLabel.anchor(bgEmergency.topAnchor, left: bgEmergency.leftAnchor, right: ImageCall.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 25, bottomConstant: 20, leftConstant: 25, rightConstant: 25, widthConstant: 0, heightConstant: 0)
         
-        ImageCall.anchor(bgEmergency.topAnchor, left: nil, right: bgEmergency.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 25, rightConstant: 25, widthConstant: 30, heightConstant: 30)
+        ImageCall.anchor(bgEmergency.topAnchor, left: nil, right: bgEmergency.rightAnchor, bottom: nil, topConstant: 25, bottomConstant: 20, leftConstant: 25, rightConstant: 25, widthConstant: 30, heightConstant: 30)
          
     
     }

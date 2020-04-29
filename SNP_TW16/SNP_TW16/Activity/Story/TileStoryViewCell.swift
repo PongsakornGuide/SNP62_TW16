@@ -29,7 +29,7 @@ class TileStoryViewCell: UITableViewCell {
                       let label = UILabel()
                       let title = "นิทานธรรมมะ"
                       let attributedText = NSMutableAttributedString(string: title,
-                      attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 32),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+                      attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 22),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
                       label.attributedText = attributedText
                       label.numberOfLines = 0
                       return label

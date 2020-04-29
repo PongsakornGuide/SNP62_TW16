@@ -48,7 +48,8 @@ class ReligionTableView: UITableViewCell {
                    label.numberOfLines = 0
            return label
     }()
-        func setupViewCell(){
+    
+    func setupViewCell(){
             backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
             addSubview(profileImage)
             addSubview(bgActivitity)
@@ -56,11 +57,11 @@ class ReligionTableView: UITableViewCell {
 
            profileImage.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: titleFullname.bottomAnchor, topConstant: 0, bottomConstant: -20, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
                       
-                      bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 150)
+           bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 200)
 
-                      titleFullname.anchor(bgActivitity.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 30, bottomConstant: 20, leftConstant: 20, rightConstant: 5, widthConstant: 0, heightConstant: 0)
+           titleFullname.anchor(bgActivitity.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 25, bottomConstant: 20, leftConstant: 20, rightConstant: 5, widthConstant: 0, heightConstant: 0)
 
-                      titleFullname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 140).isActive = true
+           titleFullname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 140).isActive = true
         }
         
         

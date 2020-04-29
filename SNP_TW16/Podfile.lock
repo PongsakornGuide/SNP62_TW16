@@ -3,6 +3,7 @@ PODS:
   - AlamofireImage (3.5.2):
     - Alamofire (~> 4.8)
   - DynamicBlurView (4.0.0)
+  - FaveButton (3.2.1)
   - FLEX (3.1.2)
   - IQKeyboardManagerSwift (6.3.0)
   - KMPlaceholderTextView (1.4.0)
@@ -16,10 +17,12 @@ PODS:
   - SDWebImage/Core (5.6.1)
   - SwiftyJSON (5.0.0)
   - TwicketSegmentedControl (0.1.2)
+  - YoutubePlayer-in-WKWebView (0.2.5)
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
+  - FaveButton
   - FLEX
   - IQKeyboardManagerSwift (= 6.3.0)
   - KMPlaceholderTextView
@@ -30,12 +33,14 @@ DEPENDENCIES:
   - SDWebImage (~> 5.0)
   - SwiftyJSON
   - TwicketSegmentedControl
+  - YoutubePlayer-in-WKWebView (~> 0.2.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireImage
     - DynamicBlurView
+    - FaveButton
     - FLEX
     - IQKeyboardManagerSwift
     - KMPlaceholderTextView
@@ -46,11 +51,13 @@ SPEC REPOS:
     - SDWebImage
     - SwiftyJSON
     - TwicketSegmentedControl
+    - YoutubePlayer-in-WKWebView
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
   DynamicBlurView: ccf9acd2b20c883cc2c72e3524a04d8d3ee20533
+  FaveButton: 93cfebf6030336fa7653fad2068c3152ed668b39
   FLEX: e13e805fc3eec8732cc227d1f7508770d46e9587
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
   KMPlaceholderTextView: 2206c3df39979e9396e2d96fa9f427a8951121b0
@@ -61,7 +68,8 @@ SPEC CHECKSUMS:
   SDWebImage: 7edb9c3ea661e77a66661f7f044de8c1b55d1120
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   TwicketSegmentedControl: 6d7a4cf243657e0ac3f00d06d873a25334c04042
+  YoutubePlayer-in-WKWebView: 4dad12b3ece938a6456fa4374df78942f88b485a
 
-PODFILE CHECKSUM: c0605951511851dc446272a42a383a8467361953
+PODFILE CHECKSUM: 99818abdabcc711d53bc3d3c2b000ef44ecd646b
 
 COCOAPODS: 1.8.4

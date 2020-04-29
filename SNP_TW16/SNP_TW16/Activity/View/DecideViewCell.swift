@@ -43,7 +43,6 @@ class DecideViewCell: UITableViewCell,UITextFieldDelegate,UINavigationController
                      attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 22),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
           header.attributedText = attributedText
           header.numberOfLines = 0
-          header.textColor = .red
           return header
     }()
     

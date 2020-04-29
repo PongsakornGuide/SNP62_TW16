@@ -26,6 +26,7 @@ class CreateRelativeTelView: UIViewController {
         attributes: [NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 30),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
         label.attributedText = attributedText
         label.numberOfLines = 1
+        label.textAlignment = .center
         return label
     }()
     
@@ -77,7 +78,7 @@ class CreateRelativeTelView: UIViewController {
         label.text = "กรุณากรอกเบอร์โทรศัพท์ให้ครบ"
         label.textColor = .red
         label.textAlignment = .center
-        label.font = UIFont.BaiJamjureeBold(size: 16)
+        label.font = UIFont.BaiJamjureeBold(size: 20)
         return label
       }()
     
@@ -133,11 +134,11 @@ class CreateRelativeTelView: UIViewController {
                            //send back to login view controller
         }
         
-        bgActivitity.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        bgActivitity.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: alertLabel.bottomAnchor, topConstant: 40, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
        
-        textHeader.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 50, bottomConstant: 0, leftConstant: 25, rightConstant: 25, widthConstant: 0, heightConstant: 0)
+        textHeader.anchor(bgActivitity.topAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        nameTextField.anchor(textHeader.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 80, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+        nameTextField.anchor(textHeader.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 60, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
         
         nameTextFieldLine.anchor(nameTextField.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
          
@@ -146,8 +147,8 @@ class CreateRelativeTelView: UIViewController {
             
         telTextFieldLine.anchor(telTextField.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 10, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 1.5)
         
-        addTel.anchor(telTextFieldLine.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 60)
+        addTel.anchor(telTextFieldLine.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 80, bottomConstant: 10, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 60)
 
-        alertLabel.anchor(addTel.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 20)
+        alertLabel.anchor(addTel.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: bgActivitity.bottomAnchor, topConstant: 30, bottomConstant: 20, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 30)
     }
 }

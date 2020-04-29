@@ -13,25 +13,20 @@ WHERE user_apps.id ='$id'";
 $query = mysqli_query($conn,$sql);
 $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 ?>
-
 <?php
-    session_start();
-    // echo 'Wellcome to' . $_SESSION['email'];
-    if(isset($_SESSION['email'])){
-      // echo 'Wellcome to' . $_SESSION['email'];
-    }
-
+ include('../func/auth.php')
  ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title></title>
+	<title>Alder</title>
+	<link rel="shortcut icon" type="image/png" href="../images/group1457@3x.png">
 </head>
 
 <body style="background:#fff;">
-
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href="../css/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
 	<link href="../css/switchery.css" type="text/css" rel="stylesheet">
@@ -41,7 +36,7 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 	<link href="../css/webfonts/fa-regular-400.woff" type="text/css" rel="stylesheet">
 	<link href="../css/all.min.css" type="text/css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<style>
 		body {
 			background-color: #fff;
@@ -51,10 +46,9 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 			width: 199px;
 			height: 45px;
 			border-radius: 25px 0px 0px 25px;
-			background-color: #F1F3F9;
+			background-color: #fff;
 			color: rgb(27, 71, 147) !important;
 			margin: 5px 0 10px 0;
-			float: right;
 			padding-top: 5px;
 		}
 
@@ -90,7 +84,7 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 
 				<li>
 					<a href="/alder_iosapp/config/uploadVideo.php">
-						<i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;อัพโหลดวิดีโอ</span>
+						<i class="menu-icon far fa-file-video" style="color: #fff;"></i><span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:Bold;">&nbsp;วิดีโอ / เพลง</span>
 					</a>
 				</li>
 
@@ -104,24 +98,25 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 	</div>
 
 	<div class="page-header">
-    <nav class="navbar navbar-default navbar-expand-md">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse justify-content-between" id="bs-example-navbar-collapse-1">
-        </div>
-        <ul class="nav navbar-nav">
-          <li class="dropdown nav-item d-md-block">
-            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: 500; font-size: 13px;">
-                <?php echo $_SESSION["email"];?>
-              </span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-caret-square-down"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <li><a href="/alder_iosapp/func/logout.php?logout">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.container-fluid -->
-    </nav>
-  </div><!-- /Page Header -->
+		<nav class="navbar navbar-default navbar-expand-md">
+			<div class="container-fluid">
+				<div class="collapse navbar-collapse justify-content-between" id="bs-example-navbar-collapse-1">
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="dropdown nav-item d-md-block">
+						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+								style="font-weight: 500; font-size: 13px;font-family: 'Bai Jamjuree', sans-serif; ">
+								<?php echo $_SESSION["email"];?>
+							</span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-caret-square-down"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+							<li><a href="/alder_iosapp/func/logout.php?logout" style="font-family: 'Bai Jamjuree', sans-serif; ">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div><!-- /.container-fluid -->
+		</nav>
+	</div><!-- /Page Header -->
 
 	<div class="page-inner no-page-title">
 		<div id="main-wrapper">
@@ -204,23 +199,32 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 								<label for="text" class="control-label" style="font-weight:bold;">ความสัมพันธ์ : </label>
 								<input class="form-control" name="relative_type" type="text" id="relative_type" value="<?php echo $result["relative_type"];?>">
 							</div>
-							<div class="form-group col-12">
-								<div style="float:right;">
-									<button class="submit" type="submit" style="background: #FAC92C;color:#fff;font-family: 'Bai Jamjuree', sans-serif; font-weight: 700;padding:12px;border-radius:5px;border:none;"> <i class="fas fa-user-edit"></i> แก้ไขกิจกรรม</button> &nbsp;
 
-									<a class="btnbtn btn-danger" href="../func/delete.php?delete=<?php echo $result["id"];?>" href="ssss"style="background: #FAC92C;color:#fff;font-family: 'Bai Jamjuree', sans-serif; font-weight: 700;padding:14px;border-radius:5px;color:#fff;">
-										<span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:normal;">
-											<i class="fas fa-trash"></i> ลบผู้ใช้
-										</span>
-									</a>
+							<?php if ($_SESSION["email"] == 'admin@hotmail.com'){ ?>
+								<div class="form-group col-12">
+									<div style="float:right;">
 
+										<a class="btnbtn btn-danger" href="../func/delete.php?delete=<?php echo $result["id"];?>" href="ssss"
+											style="background: #F15A42;color:#fff;font-family: 'Bai Jamjuree', sans-serif;font-weight: bold;padding:14px;border-radius:5px;color:#fff;">
+											<span style="color: #fff; font-family: 'Bai Jamjuree', sans-serif; font-weight:bold;">
+												<i class="fas fa-trash"></i> ลบผู้ใช้
+											</span>
+										</a>
+										&nbsp;
+
+										<button class="submit" type="submit" style="background: #31924E;color:#fff;font-family: 'Bai Jamjuree', sans-serif; font-weight: 700;padding:12px;border-radius:5px;border:none;"> <i class="fas fa-user-edit"></i> บันทึก</button>
+
+
+
+									</div>
 								</div>
-							</div>
+							<?php } ?>
+
 						</div>
 
 					</form>
 
-					 <!-- <a href="check" class="btn-delete">Delete</a> -->
+					<!-- <a href="check" class="btn-delete">Delete</a> -->
 
 				</div>
 			</div>
@@ -230,7 +234,7 @@ $result=mysqli_fetch_array($query,MYSQLI_ASSOC);
 	</div>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<!-- <script>
+	<!-- <script>
 $(document).on('click', '.submit', function(e) {
 	e.preventDefault();
 	Swal.fire({
@@ -250,74 +254,72 @@ $(document).on('click', '.submit', function(e) {
 });
 </script> -->
 
-<script>
-$(document).on('click', '.submit', function(e) {
-	e.preventDefault();
-	var username = $('#username').val();
-	var surname = $('#surname').val();
-	var birthday = $('#birthday').val();
-	var gender = $('#gender').val();
-	var religion = $('#religion').val();
-	var tel = $('#tel').val();
-	var address = $('#address').val();
-	var disease = $('#disease').val();
-	var relative_name = $('#relative_name').val();
-	var relative_phone = $('#relative_phone').val();
-	var relative_type = $('#relative_type').val();
+	<script>
+		$(document).on('click', '.submit', function(e) {
+			e.preventDefault();
+			var username = $('#username').val();
+			var surname = $('#surname').val();
+			var birthday = $('#birthday').val();
+			var gender = $('#gender').val();
+			var religion = $('#religion').val();
+			var tel = $('#tel').val();
+			var address = $('#address').val();
+			var disease = $('#disease').val();
+			var relative_name = $('#relative_name').val();
+			var relative_phone = $('#relative_phone').val();
+			var relative_type = $('#relative_type').val();
 
-	if(username == '' || surname == ''|| birthday == '' || gender == '' || religion == '' || tel == '' || address == '' || disease == '' || relative_name == '' || relative_phone == '' || relative_type == ''){
-		Swal.fire({
-				icon: 'error',
-				title: 'กรอกข้อมูลให้ครบถ้วน',
-				text: 'กรอกข้อมูลให้ครบถ้วน'
-		})
-	}else{
+			if (username == '' || surname == '' || birthday == '' || gender == '' || religion == '' || tel == '' || address == '' || disease == '' || relative_name == '' || relative_phone == '' || relative_type == '') {
+				Swal.fire({
+					icon: 'error',
+					title: 'กรอกข้อมูลให้ครบถ้วน',
+					text: 'กรอกข้อมูลให้ครบถ้วน'
+				})
+			} else {
+				Swal.fire({
+					icon: 'question',
+					title: 'ต้องการแก้ไขข้อมูล',
+					text: 'แก้ไขข้อมูล',
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'OK'
+				}).then(function(result) {
+					if (result.value) {
+						$('#myForm').submit();
+					} else {}
+				});
+
+			}
+
+		});
+	</script>
+
+
+
+
+	<script>
+		$('.btnbtn').on('click', function(e) {
+			e.preventDefault();
+			const href = $(this).attr('href')
 			Swal.fire({
-				icon : 'question',
-				title: 'ต้องการแก้ไขข้อมูล',
-				text: 'แก้ไขข้อมูล',
+				icon: 'error',
+				title: 'ต้องการลบข้อมูลผู้สูงอายุ',
+				text: 'แน่ใจที่ต้องการจะลบ',
 				type: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
 				cancelButtonColor: '#d33',
-				confirmButtonText: 'OK'
-			}).then(function (result) {
-				if(result.value){
-					$('#myForm').submit();
-				}else{
-				}
-			});
-
-		}
-
-});
-</script>
-
-
-
-
-<script>
-	$('.btnbtn').on('click',function(e){
-			e.preventDefault();
-			const href = $(this).attr('href')
-			Swal.fire({
-				icon : 'error',
-				title: 'ต้องการลบข้อมูลผู้สูงอายุ',
- 				text: 'แน่ใจที่ต้องการจะลบ',
- 				type: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
- 				confirmButtonText: 'Delete'
+				confirmButtonText: 'Delete'
 			}).then((result) => {
-				 if(result.value){
-					 document.location.href = href;
-				 }
+				if (result.value) {
+					document.location.href = href;
+				}
 			})
 
-	})
-
-</script>
+		})
+	</script>
 
 	<script src="../func/sweetalert2.all.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

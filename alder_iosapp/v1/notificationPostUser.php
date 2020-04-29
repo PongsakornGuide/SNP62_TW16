@@ -19,14 +19,21 @@ $id = $_GET["id"];
 // LEFT JOIN ad_post_timeline ON notificationsPost.ad_post_timeline_id = ad_post_timeline.id
 // WHERE notificationsPost.user_id = $id AND notificationsPost.other_id != $id ORDER BY notificationsPost.id DESC";
 
+// $sql = "SELECT notificationsPost.id,notificationsPost.user_id,notificationsPost.other_id,notificationsPost.ad_post_timeline_id,notificationsPost.create_at as Timer ,user_apps.photo,user_apps.username,ad_post_timeline.user_app_id,ad_post_timeline.user_app_id,ad_post_timeline.caption,ad_post_timeline.img,ad_post_timeline.created_at
+// ,COUNT(likeActivity.id) AS likeActivity, COUNT(comments.id) AS commentsActivity FROM notificationsPost
+// LEFT JOIN user_apps ON notificationsPost.other_id = user_apps.id
+// LEFT JOIN ad_post_timeline ON notificationsPost.ad_post_timeline_id = ad_post_timeline.id
+// LEFT JOIN likeActivity ON likeActivity.ad_post_timeline_id = ad_post_timeline.id
+// LEFT JOIN comments ON comments.ad_post_timeline_id = ad_post_timeline.id
+// WHERE notificationsPost.user_id = $id AND notificationsPost.other_id != $id ORDER BY notificationsPost.id DESC";
+
 $sql = "SELECT notificationsPost.id,notificationsPost.user_id,notificationsPost.other_id,notificationsPost.ad_post_timeline_id,notificationsPost.create_at as Timer ,user_apps.photo,user_apps.username,ad_post_timeline.user_app_id,ad_post_timeline.user_app_id,ad_post_timeline.caption,ad_post_timeline.img,ad_post_timeline.created_at
-,COUNT(likeActivity.id) AS likeActivity, COUNT(comments.id) AS commentsActivity FROM notificationsPost
+ AS commentsActivity FROM notificationsPost
 LEFT JOIN user_apps ON notificationsPost.other_id = user_apps.id
 LEFT JOIN ad_post_timeline ON notificationsPost.ad_post_timeline_id = ad_post_timeline.id
 LEFT JOIN likeActivity ON likeActivity.ad_post_timeline_id = ad_post_timeline.id
 LEFT JOIN comments ON comments.ad_post_timeline_id = ad_post_timeline.id
-WHERE notificationsPost.user_id = $id AND notificationsPost.other_id != $id ORDER BY notificationsPost.id DESC";
-
+WHERE notificationsPost.user_id = $id AND notificationsPost.other_id != $id GROUP BY id ORDER BY notificationsPost.id DESC";
 
 $result = $conn->query($sql);
 $datas = array();
@@ -45,3 +52,11 @@ $conn->close();
 // LEFT JOIN likeActivity ON likeActivity.ad_post_timeline_id = ad_post_timeline.id
 // LEFT JOIN comments ON comments.ad_post_timeline_id = ad_post_timeline.id
 // WHERE notificationsPost.user_id = $id AND notificationsPost.other_id != $id ORDER BY notificationsPost.id DESC";
+
+// SELECT notificationsPost.id,notificationsPost.user_id,notificationsPost.other_id,notificationsPost.ad_post_timeline_id,notificationsPost.create_at as Timer ,user_apps.photo,user_apps.username,ad_post_timeline.user_app_id,ad_post_timeline.user_app_id,ad_post_timeline.caption,ad_post_timeline.img,ad_post_timeline.created_at
+//  AS commentsActivity FROM notificationsPost
+// LEFT JOIN user_apps ON notificationsPost.other_id = user_apps.id
+// LEFT JOIN ad_post_timeline ON notificationsPost.ad_post_timeline_id = ad_post_timeline.id
+// LEFT JOIN likeActivity ON likeActivity.ad_post_timeline_id = ad_post_timeline.id
+// LEFT JOIN comments ON comments.ad_post_timeline_id = ad_post_timeline.id
+// WHERE notificationsPost.user_id = 1 AND notificationsPost.other_id != 1 GROUP BY id ORDER BY notificationsPost.id DESC

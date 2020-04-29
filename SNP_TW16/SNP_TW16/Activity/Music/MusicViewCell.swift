@@ -41,6 +41,7 @@ class MusicViewCell: UITableViewCell {
            let label = UILabel()
                    label.text = "โลกนี้คือละคร"
                    label.textColor = UIColor.black
+                   label.textColor = UIColor.black
                    label.font = UIFont.BaiJamjureeBold(size: 20)
                    label.numberOfLines = 0
            return label
@@ -50,14 +51,15 @@ class MusicViewCell: UITableViewCell {
             let label = UILabel()
                     label.text = "ปรีชา บุญญเกียรติ"
                     label.textColor = UIColor.black
-                    label.font = UIFont.BaiJamjureeBold(size: 20)
+                    label.textColor = UIColor.blackAlpha(alpha: 0.3)
+                    label.font = UIFont.BaiJamjureeRegular(size: 16)
                     label.numberOfLines = 0
             return label
      }()
     
+   
         func setupViewCell(){
             backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
-
             addSubview(profileImage)
             addSubview(bgActivitity)
             addSubview(nameMusic)
@@ -67,7 +69,9 @@ class MusicViewCell: UITableViewCell {
                       
             bgActivitity.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 200)
 
+            
             nameMusic.anchor(bgActivitity.bottomAnchor, left: bgActivitity.leftAnchor, right: bgActivitity.rightAnchor, bottom: songMusic.topAnchor, topConstant: 30, bottomConstant: 20, leftConstant: 20, rightConstant: 5, widthConstant: 0, heightConstant: 0)
+            
 
             nameMusic.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 140).isActive = true
             

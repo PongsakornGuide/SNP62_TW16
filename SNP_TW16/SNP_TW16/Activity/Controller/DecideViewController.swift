@@ -89,20 +89,12 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? layoutTableViewCell{
             cell.bgImage.image = UIImage(named: "group1438")
-//            cell.bgImage.layer.cornerRadius = 90/2
-//            cell.bgImage.layer.borderColor = UIColor.rgb(red: 33, green: 64, blue: 154).cgColor
-//            cell.bgImage.layer.borderWidth = 5
-//            cell.backgroundColor = UIColor.blackAlpha(alpha: 0.1)
         }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath){
             if let cell = tableView.cellForRow(at: indexPath) as? layoutTableViewCell{
-                  cell.bgImage.image = feelUser[indexPath.row].profileImage
-//                cell.bgImage.layer.cornerRadius = 90/2
-//                cell.bgImage.layer.borderColor = UIColor.white.cgColor
-//                cell.bgImage.layer.borderWidth = 5
-//                cell.backgroundColor = .white
+            cell.bgImage.image = feelUser[indexPath.row].profileImage
         }
     }
     
@@ -112,7 +104,7 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
             tableview.dataSource = self
             tableview.tableFooterView = UIView()
             tableview.showsVerticalScrollIndicator = false
-            tableview.backgroundColor = .none//UIColor(white: 0.95, alpha: 1 )
+            tableview.backgroundColor = .none
             return tableview
     }()
     func NotificaitonUser(){
@@ -129,34 +121,49 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
              UNUserNotificationCenter.current().add(request) { (Error) in
                  print(Error as Any)
              }
-         }
+    }
     
     
-    @objc func actionJoin(){
-                guard let cell = TextFieldTableViewCell.textView.text else { return }
-                let selectedIndex = tableview.indexPathsForSelectedRows
-                let index = selectedIndex?.compactMap{ "\($0.row+1)" }
-                var selectedChoice = index?.joined(separator: ",") ?? ""
-                            let parameters: Parameters = ["user_id":"\(self.actUserId)","post_timeline_id":"\(self.actPost)","feel_id[]":selectedChoice,"more":cell]
-                                Alamofire.request(self.URL_USER_DECIDE, method: .post,parameters: parameters).responseJSON { response in
-                                    if let delegate = self.delegate as? ContentActivityViewController {
-                                        delegate.nextButton.setTitle("เข้าร่วมกิจกรรมแล้ว",for: .normal)
-                                        delegate.enableButton.isHidden = false
-                                        delegate.nextButton.isHidden = true
-                                        self.NotificaitonUser()
-                                        self.navigationController?.popViewController(animated: true)
-                                }
-        
-                            }
-    }
-    @objc func psuhCheckBox(){
-        let popOverVC = AlertCompleteJoinViewController()
-        self.addChild(popOverVC)
-        popOverVC.view.frame = self.view.frame
-        self.view.addSubview(popOverVC.view)
-        popOverVC.didMove(toParent: self)
-        
-    }
+        @objc func actionJoin(){
+                    guard let cell = TextFieldTableViewCell.textView.text else { return }
+                    let selectedIndex = tableview.indexPathsForSelectedRows
+                    let index = selectedIndex?.compactMap{ "\($0.row+1)" }
+                    var selectedChoice = index?.joined(separator: ",") ?? ""
+                    print(selectedChoice)
+                        let parameters: Parameters = ["user_id":"\(self.actUserId)","post_timeline_id":"\(self.actPost)","feel_id[]":selectedChoice,"more":cell]
+                            Alamofire.request(self.URL_USER_DECIDE, method: .post,parameters: parameters).responseJSON { response in
+                        if let delegate = self.delegate{
+                            self.NotificaitonUser()
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                           TextFieldTableViewCell.textView.text = ""
+                }
+        }
+    
+        @objc func cancelError(){
+            
+        }
+    
+        @objc func psuhCheckBox(){
+                    guard let cell = TextFieldTableViewCell.textView.text else { return }
+                            let selectedIndex = tableview.indexPathsForSelectedRows
+                            let index = selectedIndex?.compactMap{ "\($0.row+1)" }
+                            var selectedChoice = index?.joined(separator: ",") ?? ""
+                    if selectedChoice != ""{
+                                let popOverVC = AlertCompleteJoinViewController()
+                                self.addChild(popOverVC)
+                                popOverVC.view.frame = self.view.frame
+                                self.view.addSubview(popOverVC.view)
+                                popOverVC.didMove(toParent: self)
+                    }else{
+                       let popOverVC = AlertCancelInput()
+                       self.addChild(popOverVC)
+                       popOverVC.view.frame = self.view.frame
+                       self.view.addSubview(popOverVC.view)
+                       popOverVC.didMove(toParent: self)
+                    }
+        }
+    
         @objc func keyboardWillHide(notification: NSNotification) {
                          if self.view.frame.origin.y != 0 {
                              self.view.frame.origin.y = 0
@@ -176,7 +183,7 @@ class DecideViewController: UIViewController ,UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         print(actData)
         
-        navigationItem.title = "กิจกรรม"
+        navigationItem.title = "\(actData)"
 
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
                          navigationController?.navigationBar.titleTextAttributes = textAttributes

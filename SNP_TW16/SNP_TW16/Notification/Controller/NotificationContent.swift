@@ -36,6 +36,23 @@ class NotificationContent: UIViewController {
                return title
       }()
     
+    lazy var startDateAct1 : UILabel = {
+                  let title = UILabel()
+                  title.text = "14 สิงหาคม 256asdas2"
+                  title.textColor = UIColor.black
+                  title.font = UIFont.BaiJamjureeMedium(size: 20)
+                  return title
+         }()
+    
+    lazy var startDateAct2 : UILabel = {
+                let title = UILabel()
+                title.text = "2551"
+    //            title.isHidden = true
+                title.textColor = UIColor.black
+                title.font = UIFont.BaiJamjureeMedium(size: 20)
+                return title
+    }()
+    
     lazy var stepView: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "val-vesa-P0F_zH39qhs-unsplash")
@@ -50,10 +67,10 @@ class NotificationContent: UIViewController {
       }()
 
       lazy var header : UIView = {
-          let view = UIView()
-          view.backgroundColor  = UIColor.rgb(red: 237, green: 188, blue: 29)
-          view.layer.cornerRadius = 20
-          return view
+            let view = UIView()
+            view.backgroundColor = UIColor.rgb(red: 33, green: 64, blue: 154)
+            view.layer.cornerRadius = 10
+            return view
       }()
     
       lazy var textHeader : UILabel = {
@@ -89,6 +106,24 @@ class NotificationContent: UIViewController {
       return title
      }()
      
+    lazy var timeLabel1 : UILabel = {
+           let title = UILabel()
+           title.text = "มกราคม"
+           title.textColor = UIColor.black
+           title.font = UIFont.BaiJamjureeMedium(size: 18)
+           return title
+    }()
+    
+     lazy var timeLabel2 : UILabel = {
+               let title = UILabel()
+               title.text = "2562"
+    //           title.isHidden = true
+               title.textColor = UIColor.black
+               title.font = UIFont.BaiJamjureeMedium(size: 18)
+               return title
+    }()
+    
+    
      lazy var contentLabel : UILabel = {
            let title = UILabel()
            title.lineBreakMode = .byWordWrapping
@@ -140,20 +175,31 @@ class NotificationContent: UIViewController {
              return button
      }()
     
-    @objc func join_Activity(){
-             
-             let passData = DecideViewController()
-             let parameters: Parameters = ["user_id":userId,"post_timeline_id":postId]
-                 print(parameters)
-                 passData.delegate = self
-                 Alamofire.request(URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
-                 print(response)
-                     passData.actPost = self.postId ?? 0
-                     passData.actData = self.titleLabel.text ?? ""
-                 self.navigationController?.pushViewController(passData, animated: true)
-     //            self.present(passData, animated: true, completion: nil)
-             }
+    @objc func actionJoin(){
+        let passData = DecideViewController()
+        let parameters: Parameters = ["user_id":userId,"post_timeline_id":postId]
+        passData.delegate = self
+        Alamofire.request(URL_USER_ID, method: .post,parameters: parameters).responseJSON { response in
+        passData.actPost = self.postId ?? 0
+        passData.actData = self.titleLabel.text ?? ""
+        self.navigationController?.pushViewController(passData, animated: true)
+        }
     }
+    
+    @objc func join_Activity(){
+          let popOverVC = AlertJoinActivityFromNotification()
+          self.addChild(popOverVC)
+          popOverVC.titleHeader1.text = "กิจกรรม : \(titleLabel.text ?? "x")"
+          popOverVC.titleHeader1.font  = UIFont.BaiJamjureeBold(size: 20)
+          popOverVC.titleHeader1.textAlignment  = .center
+          popOverVC.view.frame = self.view.frame
+          self.view.addSubview(popOverVC.view)
+          popOverVC.didMove(toParent: self)
+      }
+    
+
+    
+    
     
      var enableButton: UIButton = {
                let button = UIButton()
@@ -168,30 +214,48 @@ class NotificationContent: UIViewController {
                return button
       }()
     
+
+    
      @objc func cancel_Activity (){
-                let alert = UIAlertController(title: "ต้องการยกเลิกกิจกรรมนี้?", message: "แน่ใจใช่ไหมที่ต้องการยกเลิกกิจกรรมนี้",preferredStyle: UIAlertController.Style.alert)
-
-                      alert.addAction(UIAlertAction(title: "ปิด", style: UIAlertAction.Style.default, handler: { _ in
-                          print("Cancel")
-                      }))
-                      alert.addAction(UIAlertAction(title: "ต้องการยกเลิก",style: UIAlertAction.Style.default,
-                      handler: {(_: UIAlertAction!) in
-
-                        let parameters: Parameters = ["user_id":self.userId,"post_timeline_id":self.postId]
-                        print(parameters)
-                        Alamofire.request(self.URL_CANCEL_ACTIVITY, method: .post,parameters: parameters).responseJSON { response in
-    //                                      passData.actPost = self.ActivityPostID ?? 0
-    //                                  self.navigationController?.pushViewController(passData, animated: true)
-                          //            self.present(passData, animated: true, completion: nil)
-                            print("55555")
-                                self.navigationController?.popViewController(animated: true)
-                            
-                        }
-                        
-                      }))
-                      self.present(alert, animated: true, completion: nil)
+        let popOverVC = AlertCancelJoinActivityFromNotification()
+            self.addChild(popOverVC)
+            popOverVC.titleHeader1.text = "กิจกรรม : \(titleLabel.text ?? "x")"
+            popOverVC.titleHeader1.font  = UIFont.BaiJamjureeBold(size: 20)
+            popOverVC.titleHeader1.textAlignment  = .center
+            popOverVC.view.frame = self.view.frame
+            self.view.addSubview(popOverVC.view)
+            popOverVC.didMove(toParent: self)
+//
+//                let alert = UIAlertController(title: "ต้องการยกเลิกกิจกรรมนี้?", message: "แน่ใจใช่ไหมที่ต้องการยกเลิกกิจกรรมนี้",preferredStyle: UIAlertController.Style.alert)
+//
+//                      alert.addAction(UIAlertAction(title: "ปิด", style: UIAlertAction.Style.default, handler: { _ in
+//                          print("Cancel")
+//                      }))
+//                      alert.addAction(UIAlertAction(title: "ต้องการยกเลิก",style: UIAlertAction.Style.default,
+//                      handler: {(_: UIAlertAction!) in
+//
+//                        let parameters: Parameters = ["user_id":self.userId,"post_timeline_id":self.postId]
+//                        print(parameters)
+//                        Alamofire.request(self.URL_CANCEL_ACTIVITY, method: .post,parameters: parameters).responseJSON { response in
+//    //                                      passData.actPost = self.ActivityPostID ?? 0
+//    //                                  self.navigationController?.pushViewController(passData, animated: true)
+//                          //            self.present(passData, animated: true, completion: nil)
+//                            print("55555")
+//                                self.navigationController?.popViewController(animated: true)
+//
+//                        }
+//
+//                      }))
+//                      self.present(alert, animated: true, completion: nil)
     }
     
+    @objc func cancelJoin(){
+        let parameters: Parameters = ["user_id":self.userId,"post_timeline_id":self.postId]
+        print(parameters)
+        Alamofire.request(self.URL_CANCEL_ACTIVITY, method: .post,parameters: parameters).responseJSON { response in
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
     
 //     lazy var startDate : UILabel = {
 //              let title = UILabel()
@@ -243,7 +307,7 @@ class NotificationContent: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        navigationItem.title = "กิจกรรม"
+        navigationItem.title = "\(textHeader.text ?? "x")"
         
         if let name2 = defaultValues.string(forKey: "userId") {
                 userId = name2
@@ -257,11 +321,14 @@ class NotificationContent: UIViewController {
         viewScroll.addSubview(titleLabel)
         viewScroll.addSubview(nameLabel)
         viewScroll.addSubview(timeLabel)
+        viewScroll.addSubview(timeLabel1)
+        viewScroll.addSubview(timeLabel2)
         viewScroll.addSubview(contentLabel)
          viewScroll.addSubview(startDateAct)
+        viewScroll.addSubview(startDateAct1)
+        viewScroll.addSubview(startDateAct2)
         viewScroll.addSubview(Activityline)
         viewScroll.addSubview(contentImage)
-//        viewScroll.addSubview(startDate)
         viewScroll.addSubview(timerAct)
         viewScroll.addSubview(endtimerAct)
         viewScroll.addSubview(joinAct)
@@ -289,9 +356,13 @@ class NotificationContent: UIViewController {
 
                       nameLabel.anchor(titleLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 40)
 
-                      timeLabel.anchor(nameLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 20)
 
-
+                    timeLabel.anchor(nameLabel.bottomAnchor, left: BGView.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 30, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 20)
+                      
+                      timeLabel1.anchor(nameLabel.bottomAnchor, left: timeLabel.rightAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 5, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 20)
+                      
+                      timeLabel2.anchor(nameLabel.bottomAnchor, left: timeLabel1.rightAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 5, rightConstant: 0, widthConstant: screenSizeX, heightConstant: 20)
+        
                        contentLabel.anchor(timeLabel.bottomAnchor, left: BGView.leftAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 20, leftConstant: 30, rightConstant: 30, widthConstant: 0, heightConstant: 0)
                        
                        contentLabel.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 100).isActive = true
@@ -304,7 +375,12 @@ class NotificationContent: UIViewController {
 
                        timeImage.anchor(contentImage.bottomAnchor, left: BGView.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 50, heightConstant: 50)
 
-                    startDateAct.anchor(Activityline.bottomAnchor, left: contentImage.rightAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+                        startDateAct.anchor(Activityline.bottomAnchor, left: contentImage.rightAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+                       
+                       startDateAct1.anchor(Activityline.bottomAnchor, left: startDateAct.rightAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+
+                       startDateAct2.anchor(Activityline.bottomAnchor, left: startDateAct1.rightAnchor, right: BGView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+
 
                        timerAct.anchor(contentImage.bottomAnchor, left: timeImage.rightAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 30, rightConstant: 0, widthConstant: 0, heightConstant: 50)
 

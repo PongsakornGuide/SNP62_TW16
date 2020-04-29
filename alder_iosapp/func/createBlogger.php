@@ -27,12 +27,13 @@ if ($uploadOk == 0) {
          $title = $_POST["title"];
          $content = $_POST["content"];
          $image_path = "/images/" . $image_name;
+         $center = $_POST["center"];
          $credit = $_POST["credit"];
 
 
 
-        $sql = "INSERT INTO prayer (title,content,image,credit)
-        VALUES ('$title','$content','$image_path','$credit')";
+        $sql = "INSERT INTO prayer (title,content,image,center,credit)
+        VALUES ('$title','$content','$image_path','$center','$credit')";
 
         if ($conn->query($sql) === true){
             echo json_encode(['message' => "Created Article Successfully"]);

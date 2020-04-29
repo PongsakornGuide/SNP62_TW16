@@ -66,11 +66,54 @@ class SubActivityTypeTableViewController: UITableViewController ,UINavigationCon
                     let mouthStart = DateFormatter()
                     mouthStart.dateFormat = "yyyy-MM-dd"
                     let date = mouthStart.date(from: activity?.created ?? "x")
-                    mouthStart.dateFormat = "dd MMMM yyyy"
+                    mouthStart.dateFormat = "MMMM"
                     let mouthStringStart = mouthStart.string(from: date ?? Date())
-                    cell.supportTime.text = mouthStringStart
+            
+                    
+                    if mouthStringStart == "January"{
+                        cell.supportTime.text = "มกราคม"
+                    }else if mouthStringStart == "February"{
+                        cell.supportTime.text = "กุมภาพันธ์"
+                    }else if mouthStringStart == "March"{
+                        cell.supportTime.text = "มีนาคม"
+                    }else if mouthStringStart == "April"{
+                        cell.supportTime.text = "เมษายน"
+                    }else if mouthStringStart == "May"{
+                        cell.supportTime.text = "พฤษภาคม"
+                    }else if mouthStringStart == "June"{
+                        cell.supportTime.text = "มิถุนายน"
+                    }else if mouthStringStart == "July"{
+                        cell.supportTime.text = "กรกฎาคม"
+                    }else if mouthStringStart == "August"{
+                        cell.supportTime.text = "สิงหาคม"
+                    }else if mouthStringStart == "September"{
+                        cell.supportTime.text = "กันยายน"
+                    }else if mouthStringStart == "October"{
+                        cell.supportTime.text = "ตุลาคม"
+                    }else if mouthStringStart == "November"{
+                        cell.supportTime.text = "พฤศจิกายน"
+                    }else{
+                        cell.supportTime.text = "ธันวาคม"
+                    }
             
             
+
+                    mouthStart.dateFormat = "dd"
+                    let mouthStringStart1 = mouthStart.string(from: date ?? Date())
+                    cell.supportTime1.text = mouthStringStart1
+            
+
+                    mouthStart.dateFormat = "yyyy"
+                    let mouthStringStart2 = mouthStart.string(from: date ?? Date())
+//                    cell.supportTime2.text = mouthStringStart2
+//                    (Int(mouthStringStart2 + Int(543) ) ?? 0)
+//                    print(mouthStringStart2)
+                    var num = Int(mouthStringStart2)
+                    num = num! + 543
+                    cell.supportTime2.text = "\(num ?? 0)"
+            
+            
+                    
                     cell.CheckPoint.isHidden = true
                     cell.decidePass.isHidden = true            
                     
@@ -78,6 +121,28 @@ class SubActivityTypeTableViewController: UITableViewController ,UINavigationCon
                             if let postImageURL = URL(string: postImagePath) {
                                 cell.bgActivitity.sd_setImage(with: postImageURL, completed: nil)
                     }
+            
+            
+            let parameters: Parameters = ["id": activity?.dataId ?? 0]
+                    let url = URL_CHECK_INVITE + "?id=\(activity?.dataId ?? 0)"
+                    Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
+                            if let user = resData.result.value as! [String: Any]? {
+                                if let yield = user["invaite"] as? Int {
+//                                    self?.joinAct.text = "ผู้เข้าร่วม \(yield) / \(self?.activityData?.join ?? 0) คน"
+                                    print(yield)
+                                    print(activity?.join ?? 0)
+                                    
+                                    if(yield >= activity?.join ?? 0){
+                                        cell.bgActivitityBg.isHidden = false
+                                        cell.fullActivity.isHidden = false
+                                    }else{
+                                        cell.bgActivitityBg.isHidden = true
+                                        cell.fullActivity.isHidden = true
+                                    }
+                                }
+                            }
+                    }
+            
  
                    cell.selectionStyle = .none
                    self.tableView.separatorStyle = .none
@@ -99,6 +164,12 @@ class SubActivityTypeTableViewController: UITableViewController ,UINavigationCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = "back"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        
+        
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         navigationItem.title = "Alder"
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: cellId)

@@ -76,6 +76,14 @@ class AcivityListTableViewCell: UITableViewCell{
            return label
     }()
     
+    lazy var timeTextLabel1: UILabel = {
+           let label = UILabel()
+           label.text = "9:34"
+           label.textColor = UIColor.blackAlpha(alpha: 0.5)
+           label.font = UIFont.BaiJamjureeRegular(size: 14)
+           label.numberOfLines = 0
+           return label
+    }()
    
     
     lazy var postImage: UIImageView = {
@@ -187,6 +195,7 @@ class AcivityListTableViewCell: UITableViewCell{
         addSubview(iconOther)
         addSubview(messageTextLabel)
         addSubview(timeTextLabel)
+        addSubview(timeTextLabel1)
         addSubview(postImage)
         addSubview(iconImageLike)
         addSubview(numCount)
@@ -205,13 +214,14 @@ class AcivityListTableViewCell: UITableViewCell{
         userFullname.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 160).isActive = true
         
         
-        iconOther.anchor(bgActivitity.topAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant:0, heightConstant: 0)
+        iconOther.anchor(bgActivitity.topAnchor, left: nil, right: bgActivitity.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 0, rightConstant: 20, widthConstant:50, heightConstant: 20)
 
             
         timeTextLabel.anchor(userFullname.bottomAnchor, left: profileImage.rightAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
             
+        timeTextLabel1.anchor(userFullname.bottomAnchor, left: timeTextLabel.rightAnchor, right: nil, bottom: nil, topConstant: 10, bottomConstant: 0, leftConstant: 5, rightConstant: 20, widthConstant: 0, heightConstant: 0)
             
-        messageTextLabel.anchor(timeTextLabel.bottomAnchor, left: safeAreaLayoutGuide.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 50, widthConstant: 0, heightConstant: 0)
+        messageTextLabel.anchor(timeTextLabel.bottomAnchor, left: safeAreaLayoutGuide.leftAnchor, right: nil, bottom: postImage.topAnchor, topConstant: 30, bottomConstant: 20, leftConstant: 20, rightConstant: 50, widthConstant: 0, heightConstant: 0)
 
         messageTextLabel.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 40).isActive = true
             

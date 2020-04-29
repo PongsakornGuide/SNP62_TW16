@@ -19,9 +19,10 @@
              $image = $_FILES['image']['name'];
              $image_temp = $_FILES['image']['tmp_name'];
              $id = isset($_POST['id']) ? $_POST['id'] : '';
-
+             $act_id = isset($_POST['act_id']) ? $_POST['act_id'] : '';
              $title = isset($_POST['title']) ? $_POST['title'] : '';
              $type = isset($_POST['type']) ? $_POST['type'] : '';
+             $center = isset($_POST['center']) ? $_POST['center'] : '';
              $content = isset($_POST['content']) ? $_POST['content'] : '';
              $objective = isset($_POST['objective']) ? $_POST['objective'] : '';
              $leaderActivity = isset($_POST['leaderActivity']) ? $_POST['leaderActivity'] : '';
@@ -41,7 +42,9 @@
 
              $sql = "UPDATE `post_timelines` SET
              title = '".$title."',
+             act_id = '".$act_id."',
              type = '".$type."',
+             center = '".$center."',
              content = '".$content."',
              objective = '".$objective."',
              leaderActivity = '".$leaderActivity."',
@@ -76,6 +79,8 @@
           $id = isset($_POST['id']) ? $_POST['id'] : '';
           $title = isset($_POST['title']) ? $_POST['title'] : '';
           $type = isset($_POST['type']) ? $_POST['type'] : '';
+          $act_id = isset($_POST['act_id']) ? $_POST['act_id'] : '';
+          $center = isset($_POST['center']) ? $_POST['center'] : '';
           $content = isset($_POST['content']) ? $_POST['content'] : '';
           $objective = isset($_POST['objective']) ? $_POST['objective'] : '';
           $leaderActivity = isset($_POST['leaderActivity']) ? $_POST['leaderActivity'] : '';
@@ -96,6 +101,8 @@
           $sql = "UPDATE `post_timelines` SET
           title = '".$title."',
           type = '".$type."',
+          act_id = '".$act_id."',
+          center = '".$center."',
           content = '".$content."',
           objective = '".$objective."',
           leaderActivity = '".$leaderActivity."',

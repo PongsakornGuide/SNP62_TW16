@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $response['error'] = true;
             $response['message'] = 'Invalid Join or Activity';
         }
-        
     } else {
         $response['error'] = true;
         $response['message'] = 'Parameters are missing';

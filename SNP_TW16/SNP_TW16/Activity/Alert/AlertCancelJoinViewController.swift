@@ -42,11 +42,24 @@ class AlertCancelJoinViewController: UIViewController {
     
     lazy var titleHeader : UILabel = {
             let label = UILabel()
-            let title = "ต้องการยกเลิกกิจกรรม"
+            let title = "ต้องการยกเลิก"
             let style = NSMutableParagraphStyle()
             style.alignment = NSTextAlignment.center
-            let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 23),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+            let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 24),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+            label.textAlignment = .center
             label.attributedText = attributedText
+            label.numberOfLines = 0
+            return label
+    }()
+    
+    lazy var titleHeader1 : UILabel = {
+            let label = UILabel()
+            let title = "ต้องการยกเลิก"
+            let style = NSMutableParagraphStyle()
+            style.alignment = NSTextAlignment.center
+            let attributedText = NSMutableAttributedString(string: title,attributes: [ NSAttributedString.Key.paragraphStyle : style,NSAttributedString.Key.font : UIFont.BaiJamjureeBold(size: 18),NSMutableAttributedString.Key.foregroundColor : UIColor.black])
+            label.attributedText = attributedText
+            
             label.numberOfLines = 0
             return label
     }()
@@ -58,7 +71,7 @@ class AlertCancelJoinViewController: UIViewController {
             submit.layer.borderWidth = 2
             submit.backgroundColor =  UIColor.rgb(red: 33, green: 64, blue: 154)
             submit.layer.cornerRadius = 10
-            submit.setTitle("ยกเลิกกิจกรรม", for: .normal)
+            submit.setTitle("ใช่", for: .normal)
             submit.setTitleColor(UIColor.white,for: .normal)
             submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 22)
             submit.addTarget(self, action: #selector(ContentActivityViewController.cancelJoin), for: .touchUpInside)
@@ -78,7 +91,7 @@ class AlertCancelJoinViewController: UIViewController {
             submit.layer.shadowRadius = 10
             submit.layer.borderWidth = 2
             submit.layer.cornerRadius = 10
-            submit.setTitle("ยกเลิก", for: .normal)
+            submit.setTitle("ไม่", for: .normal)
             submit.setTitleColor(UIColor.black,for: .normal)
             submit.titleLabel?.font = UIFont.BaiJamjureeBold(size: 22)
             submit.addTarget(self, action: #selector(cancelError), for: .touchUpInside)
@@ -120,22 +133,28 @@ class AlertCancelJoinViewController: UIViewController {
         showAlert()
         view.addSubview(bgImageProfile)
         view.addSubview(titleHeader)
+        view.addSubview(titleHeader1)
         view.addSubview(iconImage)
         view.addSubview(postUser)
         view.addSubview(cancel)
         
         
-        bgImageProfile.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 80, bottomConstant: 80, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 0)
+        bgImageProfile.anchor(nil, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: cancel.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
         
+        bgImageProfile.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        bgImageProfile.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+                  
         iconImage.anchor(bgImageProfile.topAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 40, bottomConstant: 40, leftConstant: 20, rightConstant: 20, widthConstant: 100, heightConstant: 100)
-        
         
         titleHeader.anchor(iconImage.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 30)
         
         titleHeader.centerXAnchor.constraint(equalTo: bgImageProfile.centerXAnchor).isActive = true
 
+        titleHeader1.anchor(titleHeader.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 30)
         
-        postUser.anchor(titleHeader.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 60)
+        titleHeader1.centerXAnchor.constraint(equalTo: bgImageProfile.centerXAnchor).isActive = true
+
+        postUser.anchor(titleHeader1.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 60)
         
         cancel.anchor(postUser.bottomAnchor, left: bgImageProfile.leftAnchor, right: bgImageProfile.rightAnchor, bottom: bgImageProfile.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 60)
 

@@ -25,7 +25,6 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             self.tabBarController?.tabBar.isHidden = true
-            reloadData()
         }
         
         lazy var bgView: UIView = {
@@ -45,6 +44,7 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
             view1.image = UIImage(named: "petr")
             view1.layer.masksToBounds = true
             view1.layer.cornerRadius = 80/2
+            view1.contentMode = .scaleAspectFill
             return view1
         }()
         
@@ -56,7 +56,6 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
             view2.font = UIFont.BaiJamjureeBold(size: 20)
             return view2
         }()
-        
         //-----------------------------------------------------------------------------------------------
             
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -156,7 +155,7 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
 
  
                                     if let yield = user["img"] as? String{
-                                        
+
                                         let profileImagePath = ("\(AppDelegate.link)alder_iosapp/" + yield)
                                                 if let postImageURL = URL(string: profileImagePath) {
                                                 self?.imageView.sd_setImage(with: postImageURL, completed: nil)
@@ -244,7 +243,7 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
         
         override func viewDidLoad() {
             super.viewDidLoad()
-            
+            reloadData()
             
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -287,23 +286,23 @@ class editPostUserViewController: UIViewController ,UINavigationControllerDelega
             view.addSubview(submitButton)
             view.addSubview(alertLabel)
             
-            bgView.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+           bgView.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, topConstant: 20, bottomConstant: 20, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 0)
             
-            Imagelabel.anchor(bgView.topAnchor, left: contentTextField.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 0, rightConstant: 30, widthConstant: 80, heightConstant: 80)
-            
+             Imagelabel.anchor(bgView.topAnchor, left: contentTextField.leftAnchor, right: nil, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 0, rightConstant: 30, widthConstant: 80, heightConstant: 80)
+                 
             namelabel.anchor(bgView.topAnchor, left: Imagelabel.rightAnchor, right: nil, bottom: nil, topConstant: 55, bottomConstant: 0, leftConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant: 0)
             
-            contentTextField.anchor(Imagelabel.bottomAnchor, left: view.leftAnchor, right:  view.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 30)
-            
+            contentTextField.anchor(Imagelabel.bottomAnchor, left: view.leftAnchor, right:  view.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 20, leftConstant: 40, rightConstant: 40, widthConstant: 0, heightConstant: 40)
+                  
             contentTextField.widthAnchor.constraint(lessThanOrEqualToConstant: screenSizeX - 40).isActive = true
-            
-            imageView.anchor(contentTextField.bottomAnchor, left: contentTextField.leftAnchor, right: contentTextField.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200)
-            
-            btn.anchor(imageView.topAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: imageView.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 200)
+                  
+            imageView.anchor(contentTextField.bottomAnchor, left: contentTextField.leftAnchor, right: contentTextField.rightAnchor, bottom: nil, topConstant: 20, bottomConstant: 10, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 280)
+                  
+            btn.anchor(imageView.topAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: imageView.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 250)
 
-            submitButton.anchor(imageView.bottomAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 20, rightConstant: 20, widthConstant: 0, heightConstant: 70)
 
-            alertLabel.anchor(submitButton.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: bgView.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 30)
-            
+            submitButton.anchor(btn.bottomAnchor, left: imageView.leftAnchor, right: imageView.rightAnchor, bottom: nil, topConstant: 30, bottomConstant: 0, leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 60)
+
+            alertLabel.anchor(submitButton.bottomAnchor, left: submitButton.leftAnchor, right: submitButton.rightAnchor, bottom: bgView.bottomAnchor, topConstant: 20, bottomConstant: 30, leftConstant: 20, rightConstant: 20 , widthConstant: 0, heightConstant: 30)
         }
 }

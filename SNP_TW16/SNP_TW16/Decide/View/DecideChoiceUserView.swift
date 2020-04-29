@@ -17,17 +17,6 @@ class DecideChoiceUserView: UITableViewCell,UITextFieldDelegate,UINavigationCont
            fatalError("init(coder:) has not been implemented")
        }
     
-     let bgCheck : UIView = {
-              let image = UIImageView()
-                   image.backgroundColor = UIColor.white
-                   image.layer.cornerRadius = 20
-                   image.layer.borderColor = UIColor.blackAlpha(alpha: 0.2).cgColor
-                   image.layer.shadowOpacity = 0.1
-                   image.layer.shadowOffset = CGSize(width: 0, height: 0)
-                   image.layer.shadowRadius = 10
-                   image.layer.shouldRasterize = true
-                return image
-      }()
       
       let bgImage : UIImageView = {
               let image = UIImageView()
@@ -50,12 +39,11 @@ class DecideChoiceUserView: UITableViewCell,UITextFieldDelegate,UINavigationCont
       }()
     
        func setLayout(){
-//           addSubview(bgCheck)
            addSubview(bgImage)
            addSubview(textHeader)
            backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
             bgImage.anchor(safeAreaLayoutGuide.topAnchor, left: safeAreaLayoutGuide.leftAnchor, right: nil, bottom: nil, topConstant: 20, bottomConstant: 0, leftConstant: 40, rightConstant: 0, widthConstant: 40, heightConstant:40)
         
-           textHeader.anchor(safeAreaLayoutGuide.topAnchor, left: bgImage.rightAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 40, widthConstant: 0, heightConstant:100)
+            textHeader.anchor(safeAreaLayoutGuide.topAnchor, left: bgImage.rightAnchor, right: safeAreaLayoutGuide.rightAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, topConstant: 0, bottomConstant: 0, leftConstant: 20, rightConstant: 40, widthConstant: 0, heightConstant:80)
        }
 }

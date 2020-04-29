@@ -11,7 +11,7 @@ import Alamofire
 import ObjectMapper
 import SDWebImage
 import PopupDialog
-class EmergencyViewController: UITableViewController {
+class EmergencyViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate {
     let defaultValues = UserDefaults.standard
     var user_id = String()
     let URL_GET_TEL = "\(AppDelegate.link)alder_iosapp/v1/emergency.php"
@@ -21,7 +21,13 @@ class EmergencyViewController: UITableViewController {
     var relativeList: [listRelative]?
     var emergencyList: [allListTel]?
     var userRelavite: [addRelative]?
+    var btnBarBadge : MJBadgeBarButton!
     
+    lazy var indexPathComment = Int()
+    lazy var indexPathComment2 = Int()
+    lazy var indexPathComment3 = Int()
+    lazy var indexPathComment4 = Int()
+    lazy var indexPathComment5 = Int()
     private var cellId = "Cell"
     private var cellId1 = "Cell1"
     private var cellId2 = "Cell2"
@@ -32,14 +38,16 @@ class EmergencyViewController: UITableViewController {
            getRelative()
            getList()
            getUserRelative()
-           self.tableView.reloadData()
+           self.tableview.reloadData()
+//          self.navigationController?.setNavigationBarHidden(false, animated: animated)
+//        self.navigationController?.isNavigationBarHidden = true
        }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
              
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
               if section == 0 {
                   return relativeList?.count ?? 0
               }else if section == 1{
@@ -51,10 +59,14 @@ class EmergencyViewController: UITableViewController {
               }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             
         if indexPath.section == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for: indexPath) as! EmergencyView
+//                cell.btnEmergency.tag = indexPath.row
+//            TextFieldTableViewCell.textView.text
+                
+            
                 cell.selectionStyle = .none
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
                 return cell
@@ -62,7 +74,9 @@ class EmergencyViewController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId1,for: indexPath) as! DetailEmergencyView
                 let Emergency = emergencyList?[indexPath.row]
                 cell.title.text = Emergency?.emergencyName ?? "5555"
-                
+            
+    
+            
                 let postImagePath = Emergency?.emergencyIcon ?? "0"
                     if let postImageURL = URL(string: postImagePath) {
                         cell.ImageView.sd_setImage(with: postImageURL, completed: nil)
@@ -70,7 +84,7 @@ class EmergencyViewController: UITableViewController {
             
                 cell.selectionStyle = .none
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
-                self.tableView.separatorStyle = .none
+                self.tableview.separatorStyle = .none
                 return cell
                 
         }else if indexPath.section == 2{
@@ -80,7 +94,7 @@ class EmergencyViewController: UITableViewController {
                 cell.title.text = "\(ListRelative?.username ?? "nil")"
                 cell.selectionStyle = .none
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
-                self.tableView.separatorStyle = .none
+                self.tableview.separatorStyle = .none
                 return cell
             }else{
                 
@@ -91,109 +105,136 @@ class EmergencyViewController: UITableViewController {
             }
         }
     
+    
+    @objc func actionDecide(_sender:UIButton){
+        indexPathComment2 = _sender.tag
+            print(indexPathComment2)
+        
+                    let callRelative = self.relativeList?[indexPathComment2]
+                            if let url = URL(string: "tel://\(0)\(callRelative?.relativeTel ?? 0)"), UIApplication.shared.canOpenURL(url) {
+                                 if #available(iOS 10, *) {
+                                     UIApplication.shared.open(url)
+                                              } else {
+                                     UIApplication.shared.openURL(url)
+                              }
+                    
+                }
+    }
+    
+    @objc func actionCall(_sender:UIButton){
+        indexPathComment = _sender.tag
+              print(indexPathComment)
+        
+            let callRelative = self.emergencyList?[indexPathComment]
+                    if let url = URL(string: "tel://\(callRelative?.emergencyCall ?? 0)"), UIApplication.shared.canOpenURL(url) {
+                         if #available(iOS 10, *) {
+                             UIApplication.shared.open(url)
+                                      } else {
+                             UIApplication.shared.openURL(url)
+                      }
+            
+        }
+    }
+    
+    @objc func actionCallUser(_sender:UIButton){
+            indexPathComment3 = _sender.tag
+                  print(indexPathComment3)
+                let callRelative = self.userRelavite?[indexPathComment3]
+                        if let url = URL(string: "tel://\(0)\(callRelative?.telphone ?? 0)"), UIApplication.shared.canOpenURL(url) {
+                             if #available(iOS 10, *) {
+                                 UIApplication.shared.open(url)
+                                          } else {
+                                 UIApplication.shared.openURL(url)
+                          }
+                
+            }
+    }
+    
+    
+    @objc func complete(){
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @objc func deleteUser(_sender:UIButton){
+            indexPathComment4 = _sender.tag
+            indexPathComment5 = _sender.titleLabel?.tag ?? 0
+        let parameters: Parameters = ["id":indexPathComment4,"user_id":self.user_id]
+            let url = self.URL_DELETE_TEL_RELATIVE
+            print(parameters)
+            Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
+                self?.userRelavite?.remove(at: self?.indexPathComment5 ?? 0)
+                self?.tableview.reloadData()
+                let popOverVC = AlertDelete()
+                self?.navigationController?.pushViewController(popOverVC, animated: true)
+            }
+    }
+    
     //Func call phone
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0{
+        
+            
             let callRelative = self.relativeList?[indexPath.row]
             let TelUser = "\(0)\(callRelative?.relativeTel ?? 0)"
             let TelnameUser = callRelative?.relativeName
-        
-            let title = "ติดต่อคุณ : \(TelnameUser ?? "x")"
-            let message = "ติดต่อเบอร์ : \(TelUser)"
-            let image = UIImage(named: "pexels-photo-103290")
-
-            // Create the dialog
-            let popup = PopupDialog(title: title, message: message, image: image)
-
-            // Create buttons
-            let buttonOne = CancelButton(title: "ยกเลิก") {
-                print("You canceled the car dialog.")
-            }
-
-            let buttonTwo = DefaultButton(title: "ต้องการโทร") {
-            let callRelative = self.relativeList?[indexPath.row]
-            let TelUser = "\(0)\(callRelative?.relativeTel ?? 0)"
-                if let url = URL(string: "tel://\(TelUser)"), UIApplication.shared.canOpenURL(url){
-                    if #available(iOS 10, *) {
-                        UIApplication.shared.open(url)
-                } else {
-                        UIApplication.shared.openURL(url)
-                }
-            }
-        }
-
-            popup.addButtons([buttonTwo,buttonOne])
-            self.present(popup, animated: true, completion: nil)
+            let popOverVC = AlertDecide()
+            self.addChild(popOverVC)
+            AlertDecide.callUser.tag = indexPath.row
+            popOverVC.titleHeader.text = "ติดต่อ : \(TelnameUser ?? "x")"
+            popOverVC.titleHeader1.text = "\(TelUser)"
+            popOverVC.titleHeader.font = UIFont.BaiJamjureeBold(size: 22)
+            popOverVC.titleHeader.textAlignment = .center
+            popOverVC.titleHeader1.font = UIFont.BaiJamjureeBold(size: 30)
+            popOverVC.titleHeader1.textAlignment = .center
+            popOverVC.view.frame = self.view.frame
+            self.view.addSubview(popOverVC.view)
+            popOverVC.didMove(toParent: self)
             
         }else if indexPath.section == 1{
-            let callRelative = self.emergencyList?[indexPath.row]
-            let TelUser = "\(callRelative?.emergencyCall ?? 0)"
-            let TelnameUser = callRelative?.emergencyName
-            let title = "ติดต่อ : \(TelnameUser ?? "x")"
-                   let message = "ติดต่อเบอร์ : \(TelUser)"
-                   let image = UIImage(named: "pexels-photo-103290")
-
-                   // Create the dialog
-                   let popup = PopupDialog(title: title, message: message, image: image)
-
-                   // Create buttons
-                   let buttonOne = CancelButton(title: "ยกเลิก") {
-                       print("You canceled the car dialog.")
-                   }
-
-                       let buttonTwo = DefaultButton(title: "ต้องการโทร") {
-                            let callEmergency = self.emergencyList?[indexPath.row]
-                              if let url = URL(string: "tel://\(callEmergency?.emergencyCall ?? 0)"), UIApplication.shared.canOpenURL(url) {
-                                        if #available(iOS 10, *) {
-                                            UIApplication.shared.open(url)
-                                        } else {
-                                            UIApplication.shared.openURL(url)
-                                }
-                        }
-                   }
-                   popup.addButtons([buttonTwo,buttonOne])
-
-                   self.present(popup, animated: true, completion: nil)
+//            print(indexPath.row)
+              let callRelative = self.emergencyList?[indexPath.row]
+              let TelUser = "\(callRelative?.emergencyCall ?? 0)"
+              let TelnameUser = callRelative?.emergencyName
+              let popOverVC = AlertofCall()
+              self.addChild(popOverVC)
+              popOverVC.titleHeader.text = "ติดต่อ : \(TelnameUser ?? "x")"
+              popOverVC.titleHeader1.text = "\(TelUser)"
+              popOverVC.titleHeader.font = UIFont.BaiJamjureeBold(size: 22)
+              popOverVC.titleHeader.textAlignment = .center
+              popOverVC.titleHeader1.font = UIFont.BaiJamjureeBold(size: 30)
+              popOverVC.titleHeader1.textAlignment = .center
+              AlertofCall.postUser.tag = indexPath.row
+          
             
+                      let postImagePath = (callRelative?.emergencyIcon ?? "0")
+                     
+                     if let postImageURL = URL(string: postImagePath) {
+                        popOverVC.iconImage.sd_setImage(with: postImageURL, completed: nil)
+                     }
+            
+              popOverVC.view.frame = self.view.frame
+              self.view.addSubview(popOverVC.view)
+              popOverVC.didMove(toParent: self)
             
         }else if indexPath.section == 2{
             let callRelative = self.userRelavite?[indexPath.row]
-            let callIdTel = callRelative?.idTel
-            let TelDecide = "\(0)\(callRelative?.telphone ?? 0)"
-                    let TelnameUser = callRelative?.username
-                    let title = "ติดต่อคุณ : \(TelnameUser ?? "x")"
-                           let message = "ติดต่อเบอร์ : \(TelDecide)"
-                           let image = UIImage(named: "pexels-photo-103290")
+            let TelUser = "\(callRelative?.username ?? "x")"
+            let TelnameUser = callRelative?.telphone
+            let popOverVC = AlertCallofUser()
+            self.addChild(popOverVC)
+            AlertCallofUser.postUser.tag = indexPath.row
+            popOverVC.titleHeader.text = "ติดต่อ : \(TelUser)"
+            popOverVC.titleHeader1.text = "\(0)\(TelnameUser ?? 0)"
+            popOverVC.titleHeader.font = UIFont.BaiJamjureeBold(size: 22)
+            popOverVC.titleHeader.textAlignment = .center
+            popOverVC.titleHeader1.font = UIFont.BaiJamjureeBold(size: 30)
+            popOverVC.titleHeader1.textAlignment = .center
+            popOverVC.view.frame = self.view.frame
+            self.view.addSubview(popOverVC.view)
+            popOverVC.didMove(toParent: self)
+            AlertCallofUser.deletebtn.tag = callRelative?.idTel ?? 0
+            AlertCallofUser.deletebtn.titleLabel?.tag = indexPath.row
 
-                           // Create the dialog
-                           let popup = PopupDialog(title: title, message: message, image: image)
-
-                           // Create buttons
-                           let buttonOne = CancelButton(title: "ยกเลิก") {
-                               print("You canceled the car dialog.")
-                           }
-
-                            let buttonTwo = DefaultButton(title: "ต้องการโทร") {
-                                if let url = URL(string: "tel://\(TelDecide)"), UIApplication.shared.canOpenURL(url) {
-                                          if #available(iOS 10, *) {
-                                              UIApplication.shared.open(url)
-                                          } else {
-                                              UIApplication.shared.openURL(url)
-                                          }
-                                }
-                           }
-                           let buttonThree = DestructiveButton(title: "ลบข้อมูล", height: 60) {
-                            let parameters: Parameters = ["id":"\(callIdTel ?? 0)","user_id":self.user_id]
-                                    let url = self.URL_DELETE_TEL_RELATIVE
-//                                  print(url)
-                            print(parameters)
-                                  Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
-                                    self?.userRelavite?.remove(at: indexPath.row)
-                                    self?.tableView.reloadData()
-                                  }
-                           }
-                           popup.addButtons([buttonTwo,buttonThree,buttonOne])
-                           self.present(popup, animated: true, completion: nil)
         }else{
             let createRelative = CreateRelativeTelView()
             navigationController?.pushViewController(createRelative, animated: true)
@@ -206,7 +247,7 @@ class EmergencyViewController: UITableViewController {
         print(url)
         Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](dataRes) in
              self?.relativeList = Mapper<listRelative>().mapArray(JSONObject: dataRes.result.value)
-             self?.tableView.reloadData()
+             self?.tableview.reloadData()
              print(dataRes)
         }
     }
@@ -214,7 +255,7 @@ class EmergencyViewController: UITableViewController {
     func getList(){
            Alamofire.request(URL_GET_TEL).responseJSON { [weak self](resData) in
             self?.emergencyList = Mapper<allListTel>().mapArray(JSONObject: resData.result.value)
-            self?.tableView.reloadData()
+            self?.tableview.reloadData()
             }
     }
     
@@ -224,14 +265,14 @@ class EmergencyViewController: UITableViewController {
         Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](TelData)
             in
             self?.userRelavite = Mapper<addRelative>().mapArray(JSONObject: TelData.result.value)
-            self?.tableView.reloadData()
+            self?.tableview.reloadData()
         }
     }
     
     func animateTable(){
-        tableView.reloadData()
-        let cells = tableView.visibleCells
-        let tableViewHeight = tableView.bounds.size.height
+        tableview.reloadData()
+        let cells = tableview.visibleCells
+        let tableViewHeight = tableview.bounds.size.height
         for cell in cells {
             cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
         }
@@ -264,27 +305,50 @@ class EmergencyViewController: UITableViewController {
     }
     
     
-    @objc func handelSetting(){
+    @objc func handelSettingNotification(){
         let notificaionView = NotificationTableView()
         navigationController?.pushViewController(notificaionView, animated: true)
     }
     
+    lazy var tableview : UITableView = {
+            let tableview = UITableView()
+            tableview.delegate = self
+            tableview.dataSource = self
+            tableview.tableFooterView = UIView()
+            tableview.showsVerticalScrollIndicator = false
+            tableview.backgroundColor = .none
+            return tableview
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableview.delegate = self
+        view.addSubview(tableview)
+        tableview.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor,  right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor ,topConstant: 0,  bottomConstant: 0,leftConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 
-    let settings = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(handelSetting))
-    settings.width = 0.5
-    settings.tintColor = UIColor.rgb(red: 253, green: 173, blue: 82)
-    navigationItem.rightBarButtonItem = settings
+         let customButton = UIButton(type: UIButton.ButtonType.custom)
+               customButton.frame = CGRect(x: 0, y: 0, width: 35.0, height: 35.0)
+               customButton.addTarget(self, action: #selector(self.handelSettingNotification), for: .touchUpInside)
+             customButton.setImage(UIImage(named: "bell"), for: .normal)
+             
+             self.btnBarBadge = MJBadgeBarButton()
+             self.btnBarBadge.setup(customButton: customButton)
+             self.btnBarBadge.badgeOriginX = 20.0
+             self.btnBarBadge.badgeOriginY = -4
+             self.navigationItem.rightBarButtonItem = self.btnBarBadge
+
+        
+        
+        
         
     navigationItem.title = "Alder"
     let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black,NSAttributedString.Key.font:UIFont.BaiJamjureeBold(size: 25)]
                 navigationController?.navigationBar.titleTextAttributes = textAttributes
         
         if #available(iOS 12.1 , *) {
-            tableView.refreshControl = refresher
+            tableview.refreshControl = refresher
         }else{
-            tableView.addSubview(refresher)
+            tableview.addSubview(refresher)
         }
         if let user = defaultValues.string(forKey: "userId") {
             user_id = user
@@ -292,12 +356,12 @@ class EmergencyViewController: UITableViewController {
             //send back to login view controller
         }
         
-        tableView.register(EmergencyView.self, forCellReuseIdentifier: cellId)
-        tableView.register(DetailEmergencyView.self, forCellReuseIdentifier: cellId1)
-        tableView.register(AddTelView.self, forCellReuseIdentifier: cellId2)
-        tableView.register(ListRelatuveView.self, forCellReuseIdentifier: cellId3)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 40
+        tableview.register(EmergencyView.self, forCellReuseIdentifier: cellId)
+        tableview.register(DetailEmergencyView.self, forCellReuseIdentifier: cellId1)
+        tableview.register(AddTelView.self, forCellReuseIdentifier: cellId2)
+        tableview.register(ListRelatuveView.self, forCellReuseIdentifier: cellId3)
+        tableview.rowHeight = UITableView.automaticDimension
+        tableview.estimatedRowHeight = 40
         view.backgroundColor = UIColor.rgb(red: 245, green: 246, blue: 250)
         animateTable()
     }

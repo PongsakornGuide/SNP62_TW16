@@ -60,6 +60,7 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
                     cell.selectionStyle = .none
 //                    cell.bgImage.image = UIImage(named: "bgMonday")
                     let parameters: Parameters = ["userId":typecheck]
+                
                                          let url = URL_GET_PROFILE + "?id=\(typecheck)"
                                          Alamofire.request(url, method: .post,parameters: parameters).responseJSON { [weak self](resData) in
                                              print(resData)
@@ -111,7 +112,10 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
                                                 cell.bgImage.image = UIImage(named: "bgSunday")
 
                                         }else if self?.day == "Monday"{
+                                                
                                                 cell.titleHeader.text = "สวัสดี วันจันทร์"
+                                                cell.titleHeader.textColor = UIColor.rgb(red: 27, green: 71, blue: 147)
+                                                cell.textHeader.textColor = UIColor.rgb(red: 27, green: 71, blue: 147)
                                                 cell.bgImage.image = UIImage(named: "bgMonday")
                                         }else if self?.day == "Tuesday"{
                                                 cell.titleHeader.text = "สวัสดี อังคาร"
@@ -120,7 +124,7 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
                                                 cell.titleHeader.text = "สวัสดี วันพุธ"
                                                 cell.bgImage.image = UIImage(named: "bgWednesday")
                                         }else if self?.day == "Thursday"{
-                                                cell.titleHeader.text = "สวัสดี วันพฤหัส"
+                                                cell.titleHeader.text = "สวัสดี วันพฤหัสบดี"
                                                 cell.bgImage.image = UIImage(named: "bgThursday")
                                         }else if self?.day == "Friday"{
                                                 cell.titleHeader.text = "สวัสดี วันศุกร์"
@@ -205,7 +209,8 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
             self.navigationController?.pushViewController(dvc, animated: true)
         }else if indexPath.section == 2{
             
-            let dvc = TitleStoryTableView()
+            let dvc =
+                TitleStoryTableView()
             self.navigationController?.pushViewController(dvc, animated: true)
             
         }else{
@@ -286,11 +291,9 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
         
         self.btnBarBadge = MJBadgeBarButton()
         self.btnBarBadge.setup(customButton: customButton)
-        self.btnBarBadge.badgeValue = "3"
+        self.btnBarBadge.badgeValue = ""
         self.btnBarBadge.badgeOriginX = 20.0
         self.btnBarBadge.badgeOriginY = -4
-        
-        
         self.navigationItem.rightBarButtonItem = self.btnBarBadge
         
         if let name = defaultValues.string(forKey: "userName") {
@@ -307,8 +310,8 @@ class MainActivityViewController: UIViewController,UITableViewDataSource, UITabl
         if let birthdayUser = defaultValues.string(forKey: "birthdayUser") {
                 brithday = birthdayUser
         }
-        
-        NotificaitonUser()
+//        
+//        NotificaitonUser()
         UNUserNotificationCenter.current().delegate = self
         
         let date = Date()

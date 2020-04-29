@@ -84,8 +84,8 @@ class TitleStoryTableView:  UITableViewController ,UINavigationControllerDelegat
                        let cell = tableView.dequeueReusableCell(withIdentifier: cellId3,for: indexPath) as! StroyTableView
                 
                         let storyUserRead = story?[indexPath.row]
-                        cell.titleFullname.text = storyUserRead?.title
-                        cell.detaillname.text = storyUserRead?.caption
+                cell.titleFullname.text = storyUserRead?.title
+                        cell.detaillname.text = "โดย : \(storyUserRead?.caption ?? "x")"
                 
                         let postImagePath = ("\(AppDelegate.link)alder_iosapp/" + (storyUserRead?.image ?? "0"))
                                      if let postImageURL = URL(string: postImagePath) {

@@ -28,6 +28,7 @@ if ($uploadOk == 0) {
          $title = $_POST["title"];
          $type = $_POST["type"];
          $content = $_POST["content"];
+         $center = $_POST["center"];
          $maxJoin = $_POST["maxJoin"];
          $objective = $_POST["objective"];
          $equipment = $_POST["equipment"];
@@ -40,8 +41,8 @@ if ($uploadOk == 0) {
          $act_id = $_POST["act_id"];
          $image_path = "/images/" . $image_name;
 
-        $sql = "INSERT INTO post_timelines (user_id,title,img,type,content,maxJoin,objective,equipment,leaderActivity,assistantActivity,startTime,endTime,startDate,endDate,act_id)
-        VALUES ('$user_id','$title','$image_path','$type','$content','$maxJoin','$objective','$equipment','$leaderActivity','$assistantActivity','$startTime','$endTime','$startDate','$endDate','$act_id')";
+        $sql = "INSERT INTO post_timelines (user_id,title,img,type,content,center,maxJoin,objective,equipment,leaderActivity,assistantActivity,startTime,endTime,startDate,endDate,act_id)
+        VALUES ('$user_id','$title','$image_path','$type','$content','$center','$maxJoin','$objective','$equipment','$leaderActivity','$assistantActivity','$startTime','$endTime','$startDate','$endDate','$act_id')";
 
         if ($conn->query($sql) === true){
             echo json_encode(['message' => "Created Article Successfully"]);
