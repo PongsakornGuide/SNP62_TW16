@@ -84,5 +84,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8166C3D0-10FA-4D39-9F22-80D037BE8A3B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SNP_TW16/Login/LoginViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "NotificaitonUser()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D4870DF6-63F0-423B-98C8-222E87A9EE9E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SNP_TW16/Login/LoginViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "NotificaitonUser()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D4870DF6-63F0-423B-98C8-222E87A9EE9E - 903be1d4a9203a5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SNP_TW16.LoginViewController.NotificaitonUser() -&gt; ()"
+                  moduleName = "SNP_TW16"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pongsakornpiya-ampornkul/Desktop/%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%94%E0%B9%88%E0%B8%A7%E0%B8%99%E0%B8%99%E0%B8%99%E0%B8%99/SNP62_TW16-master/SNP_TW16/SNP_TW16/Login/LoginViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "172"
+                  endingLineNumber = "172"
+                  offsetFromSymbolStart = "25">
+               </Location>
+               <Location
+                  uuid = "D4870DF6-63F0-423B-98C8-222E87A9EE9E - 4c347ff21fc81b78"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in SNP_TW16.LoginViewController.NotificaitonUser() -&gt; ()"
+                  moduleName = "SNP_TW16"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pongsakornpiya-ampornkul/Desktop/%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%94%E0%B9%88%E0%B8%A7%E0%B8%99%E0%B8%99%E0%B8%99%E0%B8%99/SNP62_TW16-master/SNP_TW16/SNP_TW16/Login/LoginViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "172"
+                  endingLineNumber = "172"
+                  offsetFromSymbolStart = "302">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
